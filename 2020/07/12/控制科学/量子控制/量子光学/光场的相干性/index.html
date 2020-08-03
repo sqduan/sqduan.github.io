@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="在经典理论中，光场的相干性表现为时间相干与空间相干。通俗来说，如果两束光在时间或空间尺度上满足一定约束条件，那么就会发生相干。对光场的时间与空间相干性的统一描述可以采用相干体积$\Delta V$表示：  \Delta V= \Delta A\tau_cc= \frac{c}{\Delta\nu }\cdot \frac{c^2}{\nu_{0}^{2}}\cdot\frac{R^2}{S}= \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="光场的相干性">
+<meta property="og:url" content="http://yoursite.com/2020/07/12/控制科学/量子控制/量子光学/光场的相干性/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="在经典理论中，光场的相干性表现为时间相干与空间相干。通俗来说，如果两束光在时间或空间尺度上满足一定约束条件，那么就会发生相干。对光场的时间与空间相干性的统一描述可以采用相干体积$\Delta V$表示：  \Delta V= \Delta A\tau_cc= \frac{c}{\Delta\nu }\cdot \frac{c^2}{\nu_{0}^{2}}\cdot\frac{R^2}{S}= \">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/2000px-Ebohr1_IP.svg.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/c3cs60330j-f9_hi-res.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E7%BB%98%E5%9B%BE2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E5%8A%9F%E7%8E%87%E8%B0%B1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/Non-steadystate%20correlation%20function.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/first-order%20optical%20coherence%20function.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/second-order%20optical%20coherence%20function.png">
+<meta property="og:updated_time" content="2020-07-12T01:05:50.792Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="光场的相干性">
+<meta name="twitter:description" content="在经典理论中，光场的相干性表现为时间相干与空间相干。通俗来说，如果两束光在时间或空间尺度上满足一定约束条件，那么就会发生相干。对光场的时间与空间相干性的统一描述可以采用相干体积$\Delta V$表示：  \Delta V= \Delta A\tau_cc= \frac{c}{\Delta\nu }\cdot \frac{c^2}{\nu_{0}^{2}}\cdot\frac{R^2}{S}= \">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/2000px-Ebohr1_IP.svg.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/07/12/控制科学/量子控制/量子光学/光场的相干性/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>光场的相干性 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/控制科学/量子控制/量子光学/光场的相干性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">光场的相干性
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/" itemprop="url" rel="index"><span itemprop="name">控制科学</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/量子控制/" itemprop="url" rel="index"><span itemprop="name">量子控制</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/量子控制/量子光学/" itemprop="url" rel="index"><span itemprop="name">量子光学</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在经典理论中，光场的相干性表现为时间相干与空间相干。通俗来说，如果两束光在时间或空间尺度上满足一定约束条件，那么就会发生相干。对光场的时间与空间相干性的统一描述可以采用相干体积$\Delta V$表示：</p>
+<script type="math/tex; mode=display">
+\Delta V=
+\Delta A\tau_cc=
+\frac{c}{\Delta\nu }\cdot \frac{c^2}{\nu_{0}^{2}}\cdot\frac{R^2}{S}=
+\frac{\lambda_0}{\Delta \lambda}\left ( \frac{R}{\Delta a} \right )^2\lambda_{0}^{3}</script><p>其意义为，在围绕着$O$点（双缝中心点）的体积$\Delta V$内任意两点光场都是完全相干或部分相干。</p>
+<a id="more"></a>
+<h3 id="经典理论中的一阶相关函数"><a href="#经典理论中的一阶相关函数" class="headerlink" title="经典理论中的一阶相关函数"></a>经典理论中的一阶相关函数</h3><p>考虑我们的双缝衍射实验，在点$d$处是对来自$b$和$c$两个时空点的光场叠加，所以$d$处的光场振幅函数$E(\boldsymbol{r},t)$为</p>
+<script type="math/tex; mode=display">
+E\left ( \boldsymbol{r},t \right )=
+K_1E\left ( \boldsymbol{r}_1,t-t_1 \right )+
+K_2E\left ( \boldsymbol{r}_2,t-t_2 \right )</script><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/2000px-Ebohr1_IP.svg.png" alt></p>
+<p>由于探测器响应时间限制，因此不能直接测量迅变场函数$E(\boldsymbol{r},t)$，只能测量场强平均值：</p>
+<script type="math/tex; mode=display">
+\left \langle I\left ( \boldsymbol{r},t \right ) \right \rangle=
+\left \langle E^{*}\left ( \boldsymbol{r},t \right )E\left ( \boldsymbol{r},t \right ) \right \rangle=
+\frac{1}{T}\int_{0}^{T}E^{*}\left ( \boldsymbol{r},t \right )E\left ( \boldsymbol{r},t \right )dt</script><p>经过各种化简及平稳、各态历经假设，并引入归一化函数，最终得到一阶复相干度为：</p>
+<script type="math/tex; mode=display">
+g^{\left ( 1 \right )}\left ( \boldsymbol{r}_1 ,\boldsymbol{r}_2,\tau\right )=\Gamma ^{\left ( 1 \right )}\left (  \boldsymbol{r}_1 ,\boldsymbol{r}_2,\tau\right )/\left [ \left \langle I\left ( \boldsymbol{r}_1 \right ) \right \rangle\left \langle I\left ( \boldsymbol{r}_2 \right ) \right \rangle \right ]^{1/2}</script><p>根据Cauchy-Schwartz不等式，一阶复相干函数模长总小于1。其大小可以通过测量干涉条纹可见度进行确定，因此一阶相干度描述了两个时空点之间光场叠加产生干涉的能力。</p>
+<h3 id="经典理论中的高阶相关函数"><a href="#经典理论中的高阶相关函数" class="headerlink" title="经典理论中的高阶相关函数"></a>经典理论中的高阶相关函数</h3><p>一阶光场强度描述了相位关联程度，并没有描述光场强度的关联，对光场的相干性的进一步描述需要高阶相关函数。下面我们将通过Hanbury Brown-Twiss实验对光场二阶相关函数进行推广。</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/c3cs60330j-f9_hi-res.gif" alt></p>
+<p>HBT实验装置如上图所示，激光光源发射一束准单色光束，经过一非线性晶体，例如BBO晶体，会使光束分束，分别进入两个光电探测器APD0与APD1，并产生电信号输入至相关器，相关器测量得到的物理量为：</p>
+<script type="math/tex; mode=display">
+\left \langle \left ( I_1\left ( \boldsymbol{r}_1,t \right )-
+\left \langle I_1 \right \rangle \right )\left ( I_2\left ( \boldsymbol{r}_2,t+\tau \right )-
+\left \langle I_2 \right \rangle \right ) \right \rangle\\
+=\left \langle I_1\left ( \boldsymbol{r}_1,t \right )I_2\left ( \boldsymbol{r}_2,t+\tau \right ) \right \rangle-
+\left \langle I_1 \right \rangle \left \langle I_2 \right \rangle</script><p>上面这个公式里尖括号表示均值，上式实际就是一个协方差公式。其中$I_1$及$I_2$分别表示探测器处的瞬时光强，而$\left \langle I_1 \right \rangle$和$ \left \langle I_2 \right \rangle$分别表示响应时间$T$内的$I_1$及$I_2$的平均强度。$\tau$是两路光的相对延迟时间</p>
+<p>上式中右边第一项为如下类型相关函数：</p>
+<script type="math/tex; mode=display">
+\Gamma ^{\left ( 2 \right )}\left ( \boldsymbol{r}_1,\boldsymbol{r}_2,t_1,t_2 \right )=
+\left \langle I_1\left ( \boldsymbol{r}_1,t_1 \right )I_2\left ( \boldsymbol{r}_2,t_2 \right ) \right \rangle\\
+=\left \langle E^{*}\left ( \boldsymbol{r}_1,t_1 \right )E^{*}\left ( \boldsymbol{r}_2,t_2 \right )E\left ( \boldsymbol{r}_2,t_2 \right )E\left ( \boldsymbol{r}_1,t_1 \right ) \right \rangle</script><p>同一阶相干度类似，二阶相干度可以定义为：</p>
+<script type="math/tex; mode=display">
+g^{\left ( 2 \right )}\left ( \boldsymbol{r}_1,\boldsymbol{r}_2,\tau \right )=
+\frac{\left \langle 
+E^{*}\left ( \boldsymbol{r}_1,t_1 \right )
+E^{*}\left ( \boldsymbol{r}_2,t_2 \right )
+E\left ( \boldsymbol{r}_2,t_2 \right )
+E\left ( \boldsymbol{r}_1,t_1 \right ) \right \rangle}
+{\left \langle I_1\left ( \boldsymbol{r}_1,t_1 \right ) \right \rangle
+ \left \langle I_2\left ( \boldsymbol{r}_2,t_2 \right ) \right \rangle}</script><p>高阶的推广与二阶的类似，因此不进行赘述。</p>
+<h3 id="量子关联函数"><a href="#量子关联函数" class="headerlink" title="量子关联函数"></a>量子关联函数</h3><h4 id="理想光电探测与一阶相干度"><a href="#理想光电探测与一阶相干度" class="headerlink" title="理想光电探测与一阶相干度"></a>理想光电探测与一阶相干度</h4><p>前文介绍了经典理论中的光场相干性，可以理解为将光视作连续波。而在量子场理论中，需要将光视为单个量子进行讨论。而光场量子特性可以通过光电效应进行体现。</p>
+<p>考虑一个理想的单光子探测器，它的尺寸非常小，灵敏度不依赖于光子频率。我们可以将单个原子选作这样一个探测器，这个由一个原子构成的理想探测器应具有以下特征：</p>
+<ol>
+<li>通常处于基态</li>
+<li>吸收一个光子即可跃迁至激发态</li>
+<li>跃迁至激发态后，可以极快地弛豫至基态，因而可以忽略受激辐射过程的影响。即不因为吸收光子而又发射与入射光相同频率和传播方向一致的光子。</li>
+</ol>
+<p>在电偶极近似条件下，探测原子与某时空点$\left(\boldsymbol{r}, t\right)$处的光场相互作用哈密顿量可以表示为：</p>
+<script type="math/tex; mode=display">
+H_r=-\boldsymbol{D}\cdot \boldsymbol{E}\left( \boldsymbol{r,}t \right)</script><p>其中，$\boldsymbol{D}$为偶极算符，$\boldsymbol{E}\left( \boldsymbol{r,}t \right) $为时空点$\left( \boldsymbol{r,}t \right) $处的电场强度算符，它可以表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{E}\left( \boldsymbol{r,}t \right) = 
+\boldsymbol{E}^{+}\left( \boldsymbol{r,}t \right) +
+\boldsymbol{E}^{-}\left( \boldsymbol{r,}t \right)\\
+\boldsymbol{E}^-\left( \boldsymbol{r,}t \right) =\left[ \boldsymbol{E}^+\left( \boldsymbol{r,}t \right) \right] ^{\dagger}</script><p>$\boldsymbol{E}^\left ( + \right )$是电场正频部分，<strong>只包含光场的湮灭算符</strong>；而$\boldsymbol{E}^\left ( - \right )$是电场的负频部分，<strong>只包含光场的产生算符</strong>。光产生过程中，场负频部分起作用，而光吸收过程则是场正频部分起作用。</p>
+<p>假设入射光场并不强，那么我们的探测器也就是这个原子，一次吸收一个光子，吸收光子后，将会产生如下状态转移：</p>
+<ol>
+<li>原子吸收光子，从基态$\mathinner{|g\rangle}$跃迁至激发态$\mathinner{|e\rangle}$</li>
+<li>光场湮灭一个光子，从初态$\mathinner{|i\rangle}$变为终态$\mathinner{|f\rangle}$</li>
+</ol>
+<p>用公式进行描述就是</p>
+<script type="math/tex; mode=display">
+\mathinner{\langle e}\mathinner{|\boldsymbol{D}|\ g\rangle}\\
+\mathinner{\langle f}\mathinner{|\boldsymbol{E^{\left(+\right)}}|\ i\rangle}</script><p>由微扰理论可知，在一级近似条件下，单位时间原子跃迁概率正比于跃迁矩阵单元</p>
+<script type="math/tex; mode=display">
+\left | \mathinner{\langle e}\mathinner{|\boldsymbol{D}|\ g\rangle} \right |^2
+\left | \mathinner{\langle f}\mathinner{|\boldsymbol{E^{\left(+\right)}}|\ i\rangle} \right |^2</script><p>而实际上由于场的终态$\mathinner{|f\rangle}$无法被探测，因此必须利用完备性关系</p>
+<script type="math/tex; mode=display">
+\sum_f \mathinner{|f\rangle} \mathinner{\langle f|}=1</script><p>得到单位时间跃迁至所有终态$\mathinner{|f\rangle}$的 总概率正比于</p>
+<script type="math/tex; mode=display">
+\left | \mathinner{\langle e}\mathinner{|\boldsymbol{D}|\ g\rangle} \right |^2
+\left | \mathinner{\langle i}
+\mathinner{|
+\boldsymbol{E^{\left(+\right)}}\cdot
+\boldsymbol{E^{\left(-\right)}}
+|\ i\rangle} \right |=
+\left | \mathinner{\langle e}\mathinner{|\boldsymbol{D}|\ g\rangle} \right |^2
+\textrm{Tr}\left [ 
+\boldsymbol{E^{\left(+\right)}}\cdot
+\boldsymbol{E^{\left(-\right)}} \right ]
+\mathinner{ |\ i\rangle}
+\mathinner{\langle i |}</script><p>而考虑到光场最初可能不处于纯态$\mathinner{ |\ i\rangle}$，因此<strong>需要使用场密度算符描述初态</strong>。此时单位时间内探测原子从从基态$\mathinner{|g\rangle}$跃迁至激发态$\mathinner{|e\rangle}$的概率为</p>
+<script type="math/tex; mode=display">
+P_{g \to e }=
+\alpha 
+\left | \mathinner{\langle e}\mathinner{|\boldsymbol{D}|\ g\rangle} \right |^2
+G^{\left ( 1 \right )\left ( \boldsymbol{r},\boldsymbol{r},t,t \right )}</script><p>$\alpha$是常数，这里</p>
+<script type="math/tex; mode=display">
+G^{\left ( 1 \right )}\left ( \boldsymbol{r},\boldsymbol{r},t,t \right )=
+\textrm{Tr}\left [ \rho
+\boldsymbol{E^{\left(+\right)}}\cdot
+\boldsymbol{E^{\left(-\right)}} \right ]</script><p>从上式可以看出，其与经典理论一阶相关函数相对应，因此，将该式作为量子理论中的一阶关联函数。则量子场理论中一阶相干度定义为：</p>
+<script type="math/tex; mode=display">
+g^{\left ( 1 \right )}\left ( \boldsymbol{r}_1,\boldsymbol{r}_2,t_1,t_2 \right )=
+\frac
+{\textrm{Tr}
+\left [ \rho
+\boldsymbol{E^{\left(+\right)}}
+\left ( \boldsymbol{r}_1,t_1 \right )
+\cdot
+\boldsymbol{E^{\left(-\right)}}
+\left ( \boldsymbol{r}_2,t_2 \right )
+ \right ]}
+
+{\left \{ 
+
+\textrm{Tr}
+\left [ \rho
+\boldsymbol{E^{\left(+\right)}}
+\left ( \boldsymbol{r}_1,t_1 \right )
+\cdot
+\boldsymbol{E^{\left(-\right)}}
+\left ( \boldsymbol{r}_1,t_1 \right )
+ \right ]
+
+\textrm{Tr}
+\left [ \rho
+\boldsymbol{E^{\left(+\right)}}
+\left ( \boldsymbol{r}_2,t_2 \right )
+\cdot
+\boldsymbol{E^{\left(-\right)}}
+\left ( \boldsymbol{r}_2,t_2 \right )
+ \right ]
+
+ \right \}^\frac{1}{2}}</script><p>此时我们讨论频率为$\omega$的单模光场，用产生算符$a^\dagger$和湮灭算符$a$替换电场负频及正频部分，可得单模态光场在时空点$\left ( \boldsymbol{r},t \right )$，$\left ( \boldsymbol{r},t+\tau \right )$的一阶相干度大小为</p>
+<script type="math/tex; mode=display">
+\left | g^{\left ( 1 \right )}\left ( \tau \right ) \right |=
+\left | 
+\frac
+{\mathinner{\langle a^\dagger a \rangle} 
+e^{-i\omega \tau}}
+{\left [ \mathinner{\langle a^\dagger a \rangle} \mathinner{\langle a^\dagger a \rangle}  \right ]^\frac{1}{2}} 
+\right | 
+=1</script><p>这说明任何单模光场均为一阶相干光场，这一点与经典理论结论一致。</p>
+<h4 id="二阶相干度"><a href="#二阶相干度" class="headerlink" title="二阶相干度"></a>二阶相干度</h4><p>这里直接给出二阶相干度简化后的定义式</p>
+<script type="math/tex; mode=display">
+ g^{\left ( 2 \right )}\left ( t,t+\tau \right ) =
+\frac
+{\mathinner{\langle a^\dagger \left ( t \right )
+a^\dagger\left ( t+\tau \right )
+a\left ( t+\tau \right )
+a\left ( t \right ) \rangle}}
+{\mathinner{\langle a^\dagger \left ( t \right )
+a\left ( t \right ) \rangle}
+\mathinner{\langle a^\dagger \left ( t+\tau \right )
+a\left ( t+\tau \right ) \rangle}}</script><p>它表示不同时刻$t$和$t+\tau$，空间中某点$r$处单模光场强度相干程度。</p>
+<h3 id="聚束与反聚束效应"><a href="#聚束与反聚束效应" class="headerlink" title="聚束与反聚束效应"></a>聚束与反聚束效应</h3><p>接下来，我们分别以相干态、粒子束态描述的光场及热光场的量子相干性质进行研究。相关的态函数解释参考另一篇文章：。</p>
+<h3 id="量子态关联函数仿真"><a href="#量子态关联函数仿真" class="headerlink" title="量子态关联函数仿真"></a>量子态关联函数仿真</h3><h4 id="稳态相关函数"><a href="#稳态相关函数" class="headerlink" title="稳态相关函数"></a>稳态相关函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> qutip <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">times = np.linspace(<span class="number">0</span>,<span class="number">10.0</span>,<span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">a = destroy(<span class="number">10</span>)      <span class="comment">#湮灭算符</span></span><br><span class="line">x = a.dag() + a      <span class="comment">#位置算符</span></span><br><span class="line">H = a.dag() * a      <span class="comment">#系统哈密顿量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#弛豫率为 0.5</span></span><br><span class="line">corr1 = correlation_2op_1t(H, <span class="literal">None</span> , times, [np.sqrt(<span class="number">0.5</span>) * a], x, x)  </span><br><span class="line">corr2 = correlation_2op_1t(H, <span class="literal">None</span> , times, [np.sqrt(<span class="number">1.0</span>) * a], x, x)  </span><br><span class="line">corr3 = correlation_2op_1t(H, <span class="literal">None</span> , times, [np.sqrt(<span class="number">2.0</span>) * a], x, x)  </span><br><span class="line"></span><br><span class="line">plt.figure()</span><br><span class="line">plt.plot(times, np.real(corr1), times, np.real(corr2), times, np.real(corr3))</span><br><span class="line">plt.legend([<span class="string">'0.5'</span>,<span class="string">'1.0'</span>,<span class="string">'2.0'</span>])</span><br><span class="line">plt.xlabel(<span class="string">r'Time $t$'</span>)</span><br><span class="line">plt.ylabel(<span class="string">r'Correlation $\left&lt;x(t)x(0)\right&gt;$'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E7%BB%98%E5%9B%BE2.png" alt></p>
+<h4 id="发射光谱"><a href="#发射光谱" class="headerlink" title="发射光谱"></a>发射光谱</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> qutip <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">N = <span class="number">4</span>                      <span class="comment"># number of cavity fock states</span></span><br><span class="line">wc = wa = <span class="number">1.0</span> * <span class="number">2</span> * np.pi  <span class="comment"># cavity and atom frequency</span></span><br><span class="line">g  = <span class="number">0.1</span> * <span class="number">2</span> * np.pi       <span class="comment"># coupling strength</span></span><br><span class="line">kappa = <span class="number">0.75</span>               <span class="comment"># cavity dissipation rate</span></span><br><span class="line">gamma = <span class="number">0.25</span>               <span class="comment"># atom dissipation rate</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Jaynes-Cummings Hamiltonian</span></span><br><span class="line">a  = tensor(destroy(N), qeye(<span class="number">2</span>))</span><br><span class="line">sm = tensor(qeye(N), destroy(<span class="number">2</span>))</span><br><span class="line">H = wc * a.dag() * a + wa * sm.dag() * sm + g * (a.dag() * sm + a * sm.dag())</span><br><span class="line"></span><br><span class="line"><span class="comment"># collapse operators</span></span><br><span class="line">n_th = <span class="number">0.25</span></span><br><span class="line">c_ops = [np.sqrt(kappa * (<span class="number">1</span> + n_th)) * a, np.sqrt(kappa * n_th) * a.dag(), np.sqrt(gamma) * sm]</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the correlation function using the mesolve solver, and then fft to</span></span><br><span class="line"><span class="comment"># obtain the spectrum. Here we need to make sure to evaluate the correlation</span></span><br><span class="line"><span class="comment"># function for a sufficient long time and sufficiently high sampling rate so</span></span><br><span class="line"><span class="comment"># that the discrete Fourier transform (FFT) captures all the features in the</span></span><br><span class="line"><span class="comment"># resulting spectrum.</span></span><br><span class="line">tlist = np.linspace(<span class="number">0</span>, <span class="number">100</span>, <span class="number">5000</span>)</span><br><span class="line">corr = correlation_2op_1t(H, <span class="literal">None</span>, tlist, c_ops, a.dag(), a)</span><br><span class="line">wlist1, spec1 = spectrum_correlation_fft(tlist, corr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the power spectrum using spectrum, which internally uses essolve</span></span><br><span class="line"><span class="comment"># to solve for the dynamics (by default)</span></span><br><span class="line">wlist2 = np.linspace(<span class="number">0.25</span>, <span class="number">1.75</span>, <span class="number">200</span>) * <span class="number">2</span> * np.pi</span><br><span class="line">spec2 = spectrum(H, wlist2, c_ops, a.dag(), a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot the spectra</span></span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">ax.plot(wlist1 / (<span class="number">2</span> * np.pi), spec1, <span class="string">'b'</span>, lw=<span class="number">2</span>, label=<span class="string">'eseries method'</span>)</span><br><span class="line">ax.plot(wlist2 / (<span class="number">2</span> * np.pi), spec2, <span class="string">'r--'</span>, lw=<span class="number">2</span>, label=<span class="string">'me+fft method'</span>)</span><br><span class="line">ax.legend()</span><br><span class="line">ax.set_xlabel(<span class="string">'Frequency'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'Power spectrum'</span>)</span><br><span class="line">ax.set_title(<span class="string">'Vacuum Rabi splitting'</span>)</span><br><span class="line">ax.set_xlim(wlist2[<span class="number">0</span>]/(<span class="number">2</span>*np.pi), wlist2[<span class="number">-1</span>]/(<span class="number">2</span>*np.pi))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E5%8A%9F%E7%8E%87%E8%B0%B1.png" alt></p>
+<h4 id="非稳态相关函数"><a href="#非稳态相关函数" class="headerlink" title="非稳态相关函数"></a>非稳态相关函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pylab <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> qutip <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">times = np.linspace(<span class="number">0</span>, <span class="number">10.0</span>, <span class="number">200</span>)</span><br><span class="line">a = destroy(<span class="number">10</span>)</span><br><span class="line">x = a.dag() + a</span><br><span class="line">H = a.dag() * a</span><br><span class="line">alpha = <span class="number">2.5</span></span><br><span class="line">rho0 = coherent_dm(<span class="number">10</span>, alpha)</span><br><span class="line">corr = correlation_2op_2t(H, rho0, times, times, [np.sqrt(<span class="number">0.25</span>) * a], x, x)</span><br><span class="line"></span><br><span class="line">plt.pcolor(np.real(corr))</span><br><span class="line">plt.xlabel(<span class="string">r'Time $t_2$'</span>)</span><br><span class="line">plt.ylabel(<span class="string">r'Time $t_1$'</span>)</span><br><span class="line">plt.title(<span class="string">r'Correlation $\left&lt;x(t)x(0)\right&gt;$'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/Non-steadystate%20correlation%20function.png" alt></p>
+<h4 id="一阶光学相关函数"><a href="#一阶光学相关函数" class="headerlink" title="一阶光学相关函数"></a>一阶光学相关函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pylab <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> qutip <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">N = <span class="number">15</span></span><br><span class="line">taus = np.linspace(<span class="number">0</span>,<span class="number">10.0</span>,<span class="number">200</span>)</span><br><span class="line">a = destroy(N)</span><br><span class="line">H = <span class="number">2</span> * np.pi * a.dag() * a</span><br><span class="line"></span><br><span class="line"><span class="comment"># collapse operator</span></span><br><span class="line">G1 = <span class="number">0.75</span></span><br><span class="line">n_th = <span class="number">2.00</span>  <span class="comment"># bath temperature in terms of excitation number</span></span><br><span class="line">c_ops = [np.sqrt(G1 * (<span class="number">1</span> + n_th)) * a, np.sqrt(G1 * n_th) * a.dag()]</span><br><span class="line"></span><br><span class="line"><span class="comment"># start with a coherent state</span></span><br><span class="line">rho0 = coherent_dm(N, <span class="number">2.0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># first calculate the occupation number as a function of time</span></span><br><span class="line">n = mesolve(H, rho0, taus, c_ops, [a.dag() * a]).expect[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the correlation function G1 and normalize with n to obtain g1</span></span><br><span class="line">G1 = correlation_2op_2t(H, rho0, <span class="literal">None</span>, taus, c_ops, a.dag(), a)</span><br><span class="line">g1 = G1 / np.sqrt(n[<span class="number">0</span>] * n)</span><br><span class="line"></span><br><span class="line">plt.plot(taus, np.real(g1), <span class="string">'b'</span>, lw=<span class="number">2</span>)</span><br><span class="line">plt.plot(taus, n, <span class="string">'r'</span>, lw=<span class="number">2</span>)</span><br><span class="line">plt.title(<span class="string">'Decay of a coherent state to an incoherent (thermal) state'</span>)</span><br><span class="line">plt.xlabel(<span class="string">r'$\tau$'</span>)</span><br><span class="line">plt.legend((<span class="string">r'First-order coherence function $g^&#123;(1)&#125;(\tau)$'</span>,</span><br><span class="line">        <span class="string">r'occupation number $n(\tau)$'</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/first-order%20optical%20coherence%20function.png" alt></p>
+<h4 id="二阶光学相关函数"><a href="#二阶光学相关函数" class="headerlink" title="二阶光学相关函数"></a>二阶光学相关函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pylab <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> qutip <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">N = <span class="number">25</span></span><br><span class="line">taus = np.linspace(<span class="number">0</span>, <span class="number">25.0</span>, <span class="number">200</span>)</span><br><span class="line">a = destroy(N)</span><br><span class="line">H = <span class="number">2</span> * np.pi * a.dag() * a</span><br><span class="line"></span><br><span class="line">kappa = <span class="number">0.25</span></span><br><span class="line">n_th = <span class="number">2.0</span>  <span class="comment"># bath temperature in terms of excitation number</span></span><br><span class="line">c_ops = [np.sqrt(kappa * (<span class="number">1</span> + n_th)) * a, np.sqrt(kappa * n_th) * a.dag()]</span><br><span class="line"></span><br><span class="line">states = [&#123;<span class="string">'state'</span>: coherent_dm(N, np.sqrt(<span class="number">2</span>)), <span class="string">'label'</span>: <span class="string">"coherent state"</span>&#125;,</span><br><span class="line">          &#123;<span class="string">'state'</span>: thermal_dm(N, <span class="number">2</span>), <span class="string">'label'</span>: <span class="string">"thermal state"</span>&#125;,</span><br><span class="line">          &#123;<span class="string">'state'</span>: fock_dm(N, <span class="number">2</span>), <span class="string">'label'</span>: <span class="string">"Fock state"</span>&#125;]</span><br><span class="line"></span><br><span class="line">fig, ax = plt.subplots(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> state <span class="keyword">in</span> states:</span><br><span class="line">    rho0 = state[<span class="string">'state'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># first calculate the occupation number as a function of time</span></span><br><span class="line">    n = mesolve(H, rho0, taus, c_ops, [a.dag() * a]).expect[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># calculate the correlation function G2 and normalize with n(0)n(t) to</span></span><br><span class="line">    <span class="comment"># obtain g2</span></span><br><span class="line">    G2 = correlation_3op_1t(H, rho0, taus, c_ops, a.dag(), a.dag()*a, a)</span><br><span class="line">    g2 = G2 / (n[<span class="number">0</span>] * n)</span><br><span class="line"></span><br><span class="line">    ax.plot(taus, np.real(g2), label=state[<span class="string">'label'</span>], lw=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">ax.legend(loc=<span class="number">0</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">r'$\tau$'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">r'$g^&#123;(2)&#125;(\tau)$'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/second-order%20optical%20coherence%20function.png" alt></p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">彭金生, 李高翔. 近代量子光学导论[M]. 科学出版社, 1996.</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="http://qutip.org/docs/latest/guide/guide-correlation.html">http://qutip.org/docs/latest/guide/guide-correlation.html</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="Shiqi Duan WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Shiqi Duan Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/12/控制科学/量子控制/量子光学/密度矩阵/" rel="next" title="密度矩阵">
+                <i class="fa fa-chevron-left"></i> 密度矩阵
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/12/控制科学/量子控制/量子光学/描述光场的态函数/" rel="prev" title="描述光场的态函数">
+                描述光场的态函数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDczMC8yMTI1NA"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#经典理论中的一阶相关函数"><span class="nav-number">1.</span> <span class="nav-text">经典理论中的一阶相关函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典理论中的高阶相关函数"><span class="nav-number">2.</span> <span class="nav-text">经典理论中的高阶相关函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#量子关联函数"><span class="nav-number">3.</span> <span class="nav-text">量子关联函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理想光电探测与一阶相干度"><span class="nav-number">3.1.</span> <span class="nav-text">理想光电探测与一阶相干度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二阶相干度"><span class="nav-number">3.2.</span> <span class="nav-text">二阶相干度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚束与反聚束效应"><span class="nav-number">4.</span> <span class="nav-text">聚束与反聚束效应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#量子态关联函数仿真"><span class="nav-number">5.</span> <span class="nav-text">量子态关联函数仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#稳态相关函数"><span class="nav-number">5.1.</span> <span class="nav-text">稳态相关函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发射光谱"><span class="nav-number">5.2.</span> <span class="nav-text">发射光谱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非稳态相关函数"><span class="nav-number">5.3.</span> <span class="nav-text">非稳态相关函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一阶光学相关函数"><span class="nav-number">5.4.</span> <span class="nav-text">一阶光学相关函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二阶光学相关函数"><span class="nav-number">5.5.</span> <span class="nav-text">二阶光学相关函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script>
+  window.livereOptions = {
+    refer: '2020/07/12/控制科学/量子控制/量子光学/光场的相干性/'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="摘要本文将针对基于雪崩二极管原理的单光子探测器（Single-Photon Avalanche Detector, SPAD）进行仿真，建立SPAD的物理模型，并在此基础上利用MATLAB对SPAD检测光子并进行计数的过程进行模拟。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单光子探测器仿真">
+<meta property="og:url" content="http://yoursite.com/2020/07/12/控制科学/系统仿真/单光子探测器仿真/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="摘要本文将针对基于雪崩二极管原理的单光子探测器（Single-Photon Avalanche Detector, SPAD）进行仿真，建立SPAD的物理模型，并在此基础上利用MATLAB对SPAD检测光子并进行计数的过程进行模拟。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/absorpt.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/Fully-integrated.jpg">
+<meta property="og:updated_time" content="2020-07-12T01:05:50.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单光子探测器仿真">
+<meta name="twitter:description" content="摘要本文将针对基于雪崩二极管原理的单光子探测器（Single-Photon Avalanche Detector, SPAD）进行仿真，建立SPAD的物理模型，并在此基础上利用MATLAB对SPAD检测光子并进行计数的过程进行模拟。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/absorpt.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/07/12/控制科学/系统仿真/单光子探测器仿真/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>单光子探测器仿真 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/控制科学/系统仿真/单光子探测器仿真/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">单光子探测器仿真
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/" itemprop="url" rel="index"><span itemprop="name">控制科学</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/系统仿真/" itemprop="url" rel="index"><span itemprop="name">系统仿真</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文将针对基于雪崩二极管原理的单光子探测器（Single-Photon Avalanche Detector, SPAD）进行仿真，建立SPAD的物理模型，并在此基础上利用MATLAB对SPAD检测光子并进行计数的过程进行模拟。</p>
+<a id="more"></a>
+<h2 id="光子检测效率模型建立"><a href="#光子检测效率模型建立" class="headerlink" title="光子检测效率模型建立"></a>光子检测效率模型建立</h2><h3 id="光子检测效率定义"><a href="#光子检测效率定义" class="headerlink" title="光子检测效率定义"></a>光子检测效率定义</h3><p>光子检测效率（Photon Detection Efficiency, PDE）是衡量雪崩型单光子探测器检测质量的重要指标，当外加电压$V_a$大于击穿电压$V_b$时，将会发生雪崩现象，定义过压差$V_e=V_a-V_b$。</p>
+<p>PDE的表达式为：</p>
+<script type="math/tex; mode=display">
+PDE(\lambda,V_e)=\eta(\lambda)\cdot P(V_e)</script><p>其中，$\lambda$为入射光波长，$\eta$为量子效率，$P$是击穿概率，其表达式为：</p>
+<script type="math/tex; mode=display">
+P(V_e)=1-\exp(-\frac{V_e}{V_0})</script><p>其中，$V_0$是一个归一化系数，对于半导体，该系数值为<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>。</p>
+<p>$\eta(\lambda)$的表达式为：</p>
+<script type="math/tex; mode=display">
+\eta(\lambda)=(1-R)\exp(-\alpha(\lambda)D)(1-\exp(-\alpha(\lambda)W))</script><p>其中，$\alpha(\lambda)$是半导体吸收系数，$W$是耗尽层区域厚度，$D$是结深度，$R$是功率反射因子<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>。</p>
+<p>这个公式还有一些问题，就是里面的参数还没有找到文章确定，因此直接设置PDE的值，根据试验结果，PDE的值一般不超过20%<sup id="fnref:7"><a href="#fn:7" rel="footnote">7</a></sup>。</p>
+<h3 id="半导体硅光吸收系数"><a href="#半导体硅光吸收系数" class="headerlink" title="半导体硅光吸收系数"></a>半导体硅光吸收系数</h3><p>本节将对实验条件下得到的半导体硅光吸收系数进行建模</p>
+<p>半导体硅吸收系数$\alpha(\lambda)$的表达式为<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>：</p>
+<script type="math/tex; mode=display">
+\alpha=\frac{4\pi k}{\lambda}</script><p>$k$是消光系数，波长的单位是$\textrm{nm}$，如果需要得到$\textrm{cm}^-1$为单位的吸收系数，需乘以$10^7$。下图是各个半导体的吸收曲线。</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/absorpt.png" alt></p>
+<h2 id="时间抖动模型建立"><a href="#时间抖动模型建立" class="headerlink" title="时间抖动模型建立"></a>时间抖动模型建立</h2><p>光子击中传感器到传感器记录到光子的这一段时间误差定义为单光子探测器的time jitter $t_j$。时间抖动曲线由两部分组成，一个高斯峰曲线跟随着一个指数衰减曲线：</p>
+<script type="math/tex; mode=display">
+t_j\sim G(\mu,\sigma)+\exp(\tau)</script><p>高斯部分被定义为$H_m$曲线的半高宽，就是光子数曲线，$\mu$是大多数光子击中传感器的平均时间，就是计数曲线的峰值。$\sigma$计算如下：</p>
+<script type="math/tex; mode=display">
+\sigma=\frac{H_m}{2\sqrt{2\ln(2)}}</script><p>指数衰减的时间常数为：</p>
+<script type="math/tex; mode=display">
+\tau=\frac{W^2_n}{\pi D_e}</script><p>其中，$W_n$是p-n结中p区域的厚度，$D_e$是电子扩散系数。</p>
+<h2 id="淬火与保持时间模型建立"><a href="#淬火与保持时间模型建立" class="headerlink" title="淬火与保持时间模型建立"></a>淬火与保持时间模型建立</h2><p>一旦单光子探测器被触发，那么在接下来的时间里，它均无法对光子进行检测，这一段时间被称为保持时间$t_o$。为了让单光子探测器能够恢复检测状态，需要进行淬火，使$V_e$降到偏压之下。常见的淬火方式有有源和无源两种，有源的保持时间更短，但是电路更复杂。</p>
+<h2 id="系统噪声模型建立"><a href="#系统噪声模型建立" class="headerlink" title="系统噪声模型建立"></a>系统噪声模型建立</h2><h3 id="内部噪声"><a href="#内部噪声" class="headerlink" title="内部噪声"></a>内部噪声</h3><h4 id="暗计数"><a href="#暗计数" class="headerlink" title="暗计数"></a>暗计数</h4><p>暗计数会随着环境温度及偏置电压而改变<sup id="fnref:8"><a href="#fn:8" rel="footnote">8</a></sup>，其服从泊松分布：<br><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/Fully-integrated.jpg" alt="暗计数曲线"></p>
+<script type="math/tex; mode=display">
+P_{dc}\sim \textrm{Pois}(k)=\frac{R^k_{dc}\exp(-R_{dc})}{k!}</script><p>其中，$R_{dc}$是暗计数率。</p>
+<h4 id="后脉冲"><a href="#后脉冲" class="headerlink" title="后脉冲"></a>后脉冲</h4><p>后脉冲定义为在保持时间（$t<em>o$）之后，前次雪崩触发另一次雪崩的概率，它是关于保持时间的函数，在仿真中由于保持时间已经确定，因此出于简化考虑，后脉冲发生概率$P</em>{ap}$设置为常数。</p>
+<h4 id="相邻阵列间干扰"><a href="#相邻阵列间干扰" class="headerlink" title="相邻阵列间干扰"></a>相邻阵列间干扰</h4><p>在1维或2维单光子探测阵列中，阵元可能发生相互干扰的情况，这里给出一个干扰概率$P_{ct}$，它取决于阵元间距和排布方式</p>
+<h3 id="外部噪声"><a href="#外部噪声" class="headerlink" title="外部噪声"></a>外部噪声</h3><p>外部噪声模型服从泊松分布，这里定义噪声分布均值$P_e=5×10^{11}\textrm{counts/s}$</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://arxiv.org/pdf/1703.02635.pdf">Hernandez Q, Gutierrez D, Jarabo A. A computational model of a single-photon avalanche diode sensor for transient imaging[J]. arXiv preprint arXiv:1703.02635, 2017.</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6412705">Savuskan V, Brouk I, Javitt M, et al. An estimation of single photon avalanche diode (SPAD) photon detection efficiency (PDE) nonuniformity[J]. IEEE Sensors Journal, 2013, 13(5): 1637-1640.</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdfs.semanticscholar.org/0407/9da40a7403d67cafaddbe5d472504ade62d1.pdf">H. Dautet, P. Deschamps, B. Dion, A. D. MacGregor, D. MacSween, R. J. McIntyre, C. Trottier, and P. P. Webb, “Photon counting techniques with silicon avalanche photodiodes,” Appl. Opt. vol. 32, no. 21, pp. 3894–3900, 1993.</a></span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdf.sciencedirectassets.com/271352/1-s2.0-S0924424707X02231/1-s2.0-S0924424707004967/main.pdf?x-amz-security-token=AgoJb3JpZ2luX2VjEB0aCXVzLWVhc3QtMSJHMEUCIC2XIuq0hB7%2FTPuXAWfyL3wYTb%2F5fn%2FE1AzDDSMujosIAiEAlo8XmyQoEkoZwpuBIvLKPosk66ktsU8%2FaH7pIpnr3vgq2gMIVhACGgwwNTkwMDM1NDY4NjUiDOwjCzFeVo2lBxQjvSq3A7M1n9kUoPUFd2gDkWd6%2B5qXTW1e5MJEgbsLjZgdb1pEaIzp27X2ayFeelZTUUOUNcL2u7hxwA1a3Fh6BgJ5khPZg9qWCqfS9FFabg9t%2B2GAKoTcytB%2FgMWK0wExLIMLy%2Bn59KtzwAMy4tk7WqeKUJh0hpRc8%2BoXU8%2BNDvholTZKxIU5lAKHn0j4ixVMbYHldz6tMgbJvlq103tybPLTZ%2Fe07V7JsnEq9qAEqK%2FWnZ7VNcnLHqVtuEAco8aM6BONI40zCCLfbU6%2FV3GjABqeaqfg%2B0aJDqsp75ORNsHeJiht16sPZCSN%2B8cX2fwwtFonGITVSOuYHkuGMVMvVpYn5iFt7pnZie5tTwqpRpWZWTwUItc%2F9KuMIiU6ZYsF4hvEmRFH6hrohscMGdZgXaVvx%2F13D6Qfw6lebTGJVa6V4rgp3sQxfG8jOoBWp1PeSC6xzDBxo5NpxpvfNe3GoRluWfBLbtcPhxPHqIAY5saL9WjsqY1QSLJoG77CTjVmdh%2B6YaeWrIeB0%2F%2FbZCUvuZ1TvFnVGNhmWQGIXmbXuSmq01K4LA7ATrgK0I5nKTOsK%2F9LkfDBN0%2B0wJwwk9mh6AU6tAG29lGZBYqHbRCzJhxEtKrDqh1BM4%2FDJrNA3Eu8nW%2FdizLygBh4JHJ65HoyaMw33jBILmW172pcXPRfM2IUgpu308pGhu7YdIMlV122Y8U9GutOSg9yBCz14%2BgJlnkQQnexjRNcpVjHKXWxWgoI7o%2B%2B41Kb7ovh%2BdpJJcwt00iv4rVJE8tLPdDRY2t0DEM9VwXk6h1s%2FO6zeTg9oJ7%2BiEgYJss4G35QTwVw1Mg7gyEqZz9B%2BRE%3D&amp;AWSAccessKeyId=ASIAQ3PHCVTYX7373NMU&amp;Expires=1560835034&amp;Signature=p%2FSWihkZks%2F6SY0epPUZ5LfnlCM%3D&amp;hash=4cc6bab04d729090b0d0fe23116d076e22182773655e083217a9c1f98fd213b9&amp;host=68042c943591013ac2b2430a89b270f6af2c76d8dfd086a07176afe7c76c2c61&amp;pii=S0924424707004967&amp;tid=spdf-498dff74-68fb-4f7a-89ad-a60b2830db8a&amp;sid=7b44dc8a501762426c39824097c7de1401e6gxrqb&amp;type=client">Zappa F, Tisa S, Tosi A, et al. Principles and features of single-photon avalanche diode arrays[J]. Sensors and Actuators A: Physical, 2007, 140(1): 103-112.</a></span><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">5.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.pveducation.org/pvcdrom/pn-junctions/absorption-coefficient">半导体硅光吸收系数</a></span><a href="#fnref:5" rev="footnote"> ↩</a></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">6.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.pveducation.org/pvcdrom/materials/optical-properties-of-silicon">Green, M.A. and Keevers, M. &quot;Optical properties of intrinsic silicon at 300 K &quot;, Progress in Photovoltaics, p.189-92, vol.3, no.3; (1995) 这篇文章列举了硅的吸收系数数据</a></span><a href="#fnref:6" rev="footnote"> ↩</a></li><li id="fn:7"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">7.</span><span style="display: inline-block; vertical-align: top;"><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6829689">Precision Measurement Technique of Photon Detection Efficiency of Silicon Photomultiplier</a></span><a href="#fnref:7" rev="footnote"> ↩</a></li><li id="fn:8"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">8.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.osapublishing.org/DirectPDFAccess/215E11E1-E661-F41F-AB35B0DF9D4329C2_131143/oe-15-6-2873.pdf?da=1&amp;id=131143&amp;seq=0&amp;mobile=no">Fully-integrated CMOS single photon counter</a></span><a href="#fnref:8" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="Shiqi Duan WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.png" alt="Shiqi Duan Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/12/控制科学/控制系统设计/控制系统设计流程/" rel="next" title="控制系统设计流程">
+                <i class="fa fa-chevron-left"></i> 控制系统设计流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/12/控制科学/系统仿真/PAT系统性能指标/" rel="prev" title="PAT系统性能指标">
+                PAT系统性能指标 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80NDczMC8yMTI1NA"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">42</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#摘要"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#光子检测效率模型建立"><span class="nav-number">2.</span> <span class="nav-text">光子检测效率模型建立</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#光子检测效率定义"><span class="nav-number">2.1.</span> <span class="nav-text">光子检测效率定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半导体硅光吸收系数"><span class="nav-number">2.2.</span> <span class="nav-text">半导体硅光吸收系数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间抖动模型建立"><span class="nav-number">3.</span> <span class="nav-text">时间抖动模型建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#淬火与保持时间模型建立"><span class="nav-number">4.</span> <span class="nav-text">淬火与保持时间模型建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统噪声模型建立"><span class="nav-number">5.</span> <span class="nav-text">系统噪声模型建立</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内部噪声"><span class="nav-number">5.1.</span> <span class="nav-text">内部噪声</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#暗计数"><span class="nav-number">5.1.1.</span> <span class="nav-text">暗计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后脉冲"><span class="nav-number">5.1.2.</span> <span class="nav-text">后脉冲</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相邻阵列间干扰"><span class="nav-number">5.1.3.</span> <span class="nav-text">相邻阵列间干扰</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部噪声"><span class="nav-number">5.2.</span> <span class="nav-text">外部噪声</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    <script>
+  window.livereOptions = {
+    refer: '2020/07/12/控制科学/系统仿真/单光子探测器仿真/'
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

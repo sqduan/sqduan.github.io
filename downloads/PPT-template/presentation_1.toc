@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Kalman filter}{3}{0}{1}
+\beamer@sectionintoc {2}{Learn MPC (1) -- what and why}{6}{0}{2}
+\beamer@sectionintoc {3}{Learn MPC (2) - Modelling}{13}{0}{3}
+\beamer@sectionintoc {4}{Prediction}{16}{0}{4}
+\beamer@subsectionintoc {4}{1}{Prediction with SS model}{16}{0}{4}
