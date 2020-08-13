@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hexo绘图教程]]></title>
+    <url>%2F2020%2F08%2F13%2F%E5%B7%A5%E5%85%B7%2FHexo%2FHexo%E7%BB%98%E5%9B%BE%E6%95%99%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[本文针对Hexo的Markdown写作中绘图教程进行讲解 PlantUML绘图介绍及安装PlantUML是一个脚本画图语言，能够快速生成各种UML及非UML图，比较好用，一个简单的实例如下： 123&#123;% plantuml %&#125; Bob-&gt;Alice : hello&#123;% endplantuml %&#125; 缺点是没办法在markdown中实时显示，但是可以在官网上进行绘制，然后将代码拷贝回来。安装方式也比较简单，执行下面语句即可 1npm install hexo-tag-plantuml --save 绘制类图使用PlantUML进行类图绘制的教程：类图绘制，常见的六种类间关系（泛化、实现、聚合、组合、关联、依赖）图及代码如下： 12345678910&#123;% plantuml %&#125; Car &lt;|--SUV //泛化Vehicle &lt;|.. Car //实现Class o-- Student //聚合Human *-- Heart //组合Human -- IDCard //关联Bike &lt;.. Student //依赖&#123;% endplantuml %&#125; 参考文献]]></content>
+      <categories>
+        <category>工具</category>
+        <category>Hexo</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[HTTP]]></title>
     <url>%2F2020%2F08%2F12%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%2FHTTP%2F</url>
     <content type="text"><![CDATA[HTTP/1.1 200 OK HTTP及其工作原理HTTP头HTTP头字段是HTTP的请求和响应消息中的消息头部分，它们定义了一个超文本传输协议事务中的操作参数，其头部字段可根据自己的需要定义。 请求头信息请求头组成例子：一个GET请求头123456789101112GET /home.html HTTP/1.1Host: developer.mozilla.orgUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8Accept-Language: en-US,en;q=0.5Accept-Encoding: gzip, deflate, brReferer: https://developer.mozilla.org/testpage.htmlConnection: keep-aliveUpgrade-Insecure-Requests: 1If-Modified-Since: Mon, 18 Jul 2016 02:36:04 GMTIf-None-Match: "c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"Cache-Control: max-age=0 响应头信息响应头组成 响应头 说明 Allow：支持的请求方法 服务器支持哪些请求方法（如GET、POST等）。 Content-Encoding：编码方法 文档的编码方法。只有解码才能正确得到Content-Type头指定的内容类型，一般的编码方式如gzip，通过压缩的方式使HTML文档下载时间显著减少。 Content-Length：内容长度 Content-Type：文档类型 表示后面的文档是什么类型，默认为text/plain，但一般会显式指定为text/html Date：时间 Last-Modified：最后改动日期 Server：服务器名字 Set-Cookie：设置关联Cookie 例子：一个GET响应头1234567891011121314151617200 OKAccess-Control-Allow-Origin: *Connection: Keep-AliveContent-Encoding: gzipContent-Type: text/html; charset=utf-8Date: Mon, 18 Jul 2016 16:06:00 GMTEtag: &quot;c561c68d0ba92bbeb8b0f612a9199f722e3a621a&quot;Keep-Alive: timeout=5, max=997Last-Modified: Mon, 18 Jul 2016 02:36:04 GMTServer: ApacheSet-Cookie: mykey=myvalue; expires=Mon, 17-Jul-2017 16:06:00 GMT; Max-Age=31449600; Path=/; secureTransfer-Encoding: chunkedVary: Cookie, Accept-EncodingX-Backend-Server: developer2.webapp.scl3.mozilla.comX-Cache-Info: not cacheable; meta data too largeX-kuma-revision: 1085259x-frame-options: DENY HTTP请求流程sequenceDiagram participant DNS服务器 participant 客户 participant 服务器 客户->>DNS服务器:DNS域名解析 DNS服务器->>客户:服务器IP地址 loop 尝试TCP连接 客户->>服务器: TCP三次握手 end 客户->>服务器: 发起HTTP请求 服务器->>客户: 响应HTTP请求，发送HTML代码 服务器->>客户: 四次挥手，断开连接 客户->>客户: 浏览器解析HTML代码获得资源 客户->>客户: 浏览器渲染页面并呈现 其他HTTP/HTTPS区别HTTP运行于TCP上，明文传输，C/S端均无法验证对方身份；HTTPS为身披SSL外壳的HTTP，运行于SSL（安全传输协议）上，而SSL运行于TCP上，架构如下： graph TD; A["HTTP: 80"] B["HTTPS: 443"] C["SSL"] D["TCP"] A-->D; B-->C; C-->D; 区别： 端口不同 开销不同，HTTPS由于要加密，需要更大开销 HTTPS需要购买证书 吃个甜点——Session/CookieSession是服务器对用户进行辨识的机制，由于HTTP是无状态协议，因此服务端在辨识用户时，需要一些记录，从而催生了Session，Session和Cookie的区别是Cookie一般保存在C端，当用户第二次发起请求时，会自动将上次存储的cookie发送至服务器，实现身份辨识。 而Session保存在服务器端，默认存放在服务器一个文件夹中，更加安全，但是占用服务器资源。 参考文献1.HTTP响应头 ↩]]></content>
@@ -1134,8 +1143,8 @@
   </entry>
   <entry>
     <title><![CDATA[UML类图]]></title>
-    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FUML%2FUML%E5%9F%BA%E7%A1%80%2F</url>
-    <content type="text"><![CDATA[本文将针对UML使用方法进行总结。 UML类及类间关系实例1classDiagram class 车辆 车辆 UML类图组成一个UML的类图如下图所示，包括属性与方法两个部分。 类间关系参考文献1.看懂UML类图和时序图 ↩]]></content>
+    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FUML%2FUML%E7%B1%BB%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[本文将针对UML使用方法进行总结。其中用到的plantUML绘图请详见使用plantUML进行绘图的教程。 UML类及类间关系实例1我们从一个具体的类图来表示UML类常见的一些关系： 在上面的图中，我们可以读出如下信息： 车的类图结构为&lt;&gt;，代表抽象类 有两个继承类，汽车和自行车；它们之间为实现关系 小汽车与SUV为继承关系，它们之间为泛化关系，使用带空心箭头的实线表示 小汽车与发动机和轮胎之间为组合关系，使用带实心菱形箭头的实线表示 学生对自行车是依赖关系，使用带箭头虚线表示 学生和身份证是强关联关系，使用一根实现表示 学生和班级是聚合关系，使用带空心菱形箭头的实线表示 UML类图组成一个由UML表示的类如下图所示，包括属性与方法两个部分。 类间关系类间常用关系一览1 泛化关系（继承非抽象类）如果一个模型元素（子代）基于另一个模型元素（父代），那么这两个元素之间就存在泛化关系，例如汽车是父类，而跑车作为汽车的一种，是汽车定义的具体的对象，两者之间为泛化关系，跑车继承自汽车。在最终代码中，泛化关系表示为继承非抽象类。 2 实现关系（继承抽象类）实现关系用于表示某物是另一物的具体实现，如果给定一个抽象概念，例如动物，现实中无法直接用动物定义对象，只有指明具体物种子类例如猫，才能进行定义。在上面的例子中动物是抽象类，猫是具体类，两者之间为实现关系，在代码中，实现关系表示为继承抽象类。 3 聚合关系（整体由部分构成）聚合关系用于表示实体对象间关系，例如班级是由学生组成的，与组合关系不同，聚合是一种弱组织，整体消失，个体依然存在，例如一个班级被撤销了，但是学生还是存在的，在代码中，聚合关系表示为采用某种数据结构对个体进行组织，例如可以定义一个班级类，其中由指针数组指向多个学生实体。 4 组合关系组合关系表示整体是由部分组成的，但是是一种强组织关系，一旦整体不存在，部分也就不存在。例如一个汽车是由发动机、轮胎等组成的，一旦汽车消失，这些部件也将消失。在代码中，组合关系可以表示为Has-a的关系，一般以成员变量的形式存在。 5 关联关系关联关系表示两者之间是一一对应的关系，用于描述对象间静态的，天然的关系，与运行状态无关。例如学生和学生证，天然构成了一种一一对应的关联关系。关联关系一般不强调方向，表示对象间互相关联，通常以成员变量的形式存在。 6 依赖关系依赖关系是一种很弱的关系，表示一个对象在运行期间可能会使用另一个对象，例如在一个游戏中，人使用自行车，两者就构成了依赖关系，但是人可以扔到自行车转而使用汽车，此时依赖关系就发生了改变。依赖关系应当尽可能保证单向性，避免双向依赖。在最终代码中，依赖关系体现为类方法的传入参数的。 参考文献1.看懂UML类图和时序图 ↩]]></content>
       <categories>
         <category>工具</category>
         <category>UML</category>

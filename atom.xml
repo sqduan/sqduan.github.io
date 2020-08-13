@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-12T15:38:31.341Z</updated>
+  <updated>2020-08-13T08:49:12.554Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hexo绘图教程</title>
+    <link href="http://yoursite.com/2020/08/13/%E5%B7%A5%E5%85%B7/Hexo/Hexo%E7%BB%98%E5%9B%BE%E6%95%99%E7%A8%8B/"/>
+    <id>http://yoursite.com/2020/08/13/工具/Hexo/Hexo绘图教程/</id>
+    <published>2020-08-13T03:26:50.280Z</published>
+    <updated>2020-08-13T08:49:12.554Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文针对Hexo的Markdown写作中绘图教程进行讲解</p><a id="more"></a><h2 id="PlantUML绘图"><a href="#PlantUML绘图" class="headerlink" title="PlantUML绘图"></a>PlantUML绘图</h2><h3 id="介绍及安装"><a href="#介绍及安装" class="headerlink" title="介绍及安装"></a>介绍及安装</h3><p>PlantUML是一个脚本画图语言，能够快速生成各种UML及非UML图，比较好用，一个简单的实例如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% plantuml %&#125;    </span><br><span class="line">Bob-&gt;Alice : hello</span><br><span class="line">&#123;% endplantuml %&#125;</span><br></pre></td></tr></table></figure><img  src=http://www.plantuml.com/plantuml/svg/Kr1Gu7BAJzArSyp9J4vLi5B8ICt9oGS0><p>缺点是没办法在markdown中实时显示，但是可以在<a href="https://plantuml.com/zh/">官网</a>上进行绘制，然后将代码拷贝回来。安装方式也比较简单，执行下面语句即可</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-tag-plantuml --save</span><br></pre></td></tr></table></figure><h3 id="绘制类图"><a href="#绘制类图" class="headerlink" title="绘制类图"></a>绘制类图</h3><p>使用PlantUML进行类图绘制的教程：<a href="https://plantuml.com/zh/class-diagram#9dd2a6eca0c2a0e7">类图绘制</a>，常见的六种类间关系（泛化、实现、聚合、组合、关联、依赖）图及代码如下：</p><img  src=http://www.plantuml.com/plantuml/svg/Kr1GKE3YSauiKh2fqTKD3WtZ2alDo4pEIGNozVGKW19SpZc9nSKA-Rgw2i4bfIcfUILS7gMvYNaAMa0HZzJ48XWVoFLq0Mf8uNBAp0Rg1sg7QG00><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;% plantuml %&#125;    </span><br><span class="line"></span><br><span class="line">Car &lt;|--SUV             //泛化</span><br><span class="line">Vehicle &lt;|.. Car        //实现</span><br><span class="line">Class o-- Student       //聚合</span><br><span class="line">Human *-- Heart         //组合</span><br><span class="line">Human -- IDCard         //关联</span><br><span class="line">Bike &lt;.. Student        //依赖</span><br><span class="line"></span><br><span class="line">&#123;% endplantuml %&#125;</span><br></pre></td></tr></table></figure><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文针对Hexo的Markdown写作中绘图教程进行讲解&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/Hexo/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>HTTP</title>
@@ -463,30 +485,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="硬件组成" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>线程池</title>
-    <link href="http://yoursite.com/2020/07/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
-    <id>http://yoursite.com/2020/07/13/计算机/操作系统/线程池/</id>
-    <published>2020-07-13T12:31:52.808Z</published>
-    <updated>2020-07-13T12:39:26.683Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>她轻轻地把鱼儿放在那池清水里，鱼儿摇了摇尾巴，游走了，只剩下她随风摇动的裙摆和水面微微泛起的涟漪</p></blockquote><a id="more"></a><h2 id="线程池基本知识"><a href="#线程池基本知识" class="headerlink" title="线程池基本知识"></a>线程池基本知识</h2><h3 id="什么是线程池"><a href="#什么是线程池" class="headerlink" title="什么是线程池"></a>什么是线程池</h3><p>线程池是一组提前准备好的、空闲的并随时准备工作的线程。</p><h3 id="线程池使用场景"><a href="#线程池使用场景" class="headerlink" title="线程池使用场景"></a>线程池使用场景</h3><p>当有大量短任务的情景下，我们一般会考虑使用线程池</p><h3 id="线程池的实施"><a href="#线程池的实施" class="headerlink" title="线程池的实施"></a>线程池的实施</h3><ul><li>创建多个线程，并令其保持在空闲态</li><li>一个用于保存多个线程的容器</li><li>一个接口或者抽象类用于使用空闲的线程</li></ul><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="http://115.78.133.167:81/bitstream/TVHG_07113876976/270/1/OReilly%20-%20Understanding%20The%20Linux%20Kernel.pdf">Bovet D P, Cesati M. Understanding the Linux Kernel: from I/O ports to process management[M]. &quot; O'Reilly Media, Inc.&quot;, 2005.</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;她轻轻地把鱼儿放在那池清水里，鱼儿摇了摇尾巴，游走了，只剩下她随风摇动的裙摆和水面微微泛起的涟漪&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
   </entry>
