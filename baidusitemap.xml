@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Socket%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/</loc>
+    <lastmod>2020-08-14</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/14/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCPIP/</loc>
+    <lastmod>2020-08-14</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/HTTP/</loc>
+    <lastmod>2020-08-14</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/</loc>
+    <lastmod>2020-08-14</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Git/Git%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2020-08-14</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/08/13/%E5%B7%A5%E5%85%B7/C++/%E5%86%85%E5%AD%98%E9%99%B7%E9%98%B1/</loc>
     <lastmod>2020-08-13</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2020-08-13</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/HTTP/</loc>
     <lastmod>2020-08-13</lastmod>
   </url>
   <url>
@@ -93,10 +109,6 @@
     <lastmod>2020-07-27</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Git/Git%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2020-07-20</lastmod>
-  </url>
-  <url>
     <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E4%BA%8C%E5%8F%89%E6%A0%91/</loc>
     <lastmod>2020-07-17</lastmod>
   </url>
@@ -119,10 +131,6 @@
   <url>
     <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2020-07-17</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Socket%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/</loc>
-    <lastmod>2020-07-16</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%93%88%E5%B8%8C/</loc>
@@ -206,10 +214,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%A4%9A%E5%8F%89%E6%A0%91/</loc>
-    <lastmod>2020-07-12</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E6%90%9C%E7%B4%A2/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>
   <url>

@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="众里寻她千百度">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.800Z">
+<meta property="og:updated_time" content="2020-08-14T06:06:31.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查找">
 <meta name="twitter:description" content="众里寻她千百度">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-14 14:06:31" itemprop="dateModified" datetime="2020-08-14T14:06:31+08:00">2020-08-14</time>
+              
+            
           </span>
 
           
@@ -666,9 +682,7 @@
 <p>由于我们不清楚起始位置在哪里，因此只能使用相对信息对位置坐标进行记录，令起始点坐标为(0,0)，然后实施dfs</p>
 <p>代码</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;F, S&gt; &#123;</span></span><br><span class="line">    <span class="keyword">public</span> F first;</span><br><span class="line">    <span class="keyword">public</span> S second;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(F first, S second)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.first = first;</span><br><span class="line">        <span class="keyword">this</span>.second = second;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> boolean <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        Pair&lt;F, S&gt; p = (Pair&lt;F, S&gt;) o;</span><br><span class="line">        <span class="keyword">return</span> Objects.equals(p.first, first) &amp;&amp; Objects.equals(p.second, second);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> first.hashCode() ^ second.hashCode();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="comment">// going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'</span></span><br><span class="line">    <span class="keyword">int</span>[][] directions = &#123;&#123;<span class="number">-1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">-1</span>&#125;&#125;;</span><br><span class="line">    Set&lt;Pair&lt;Integer, Integer&gt;&gt; visited = <span class="keyword">new</span> HashSet();</span><br><span class="line">    Robot robot;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">goBack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        robot.turnRight();</span><br><span class="line">        robot.turnRight();</span><br><span class="line">        robot.move();</span><br><span class="line">        robot.turnRight();</span><br><span class="line">        robot.turnRight();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">        visited.add(<span class="keyword">new</span> Pair(row, col));</span><br><span class="line">        robot.clean();</span><br><span class="line">        <span class="comment">// going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> newD = (d + i) % <span class="number">4</span>;</span><br><span class="line">            <span class="keyword">int</span> newRow = row + directions[newD][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> newCol = col + directions[newD][<span class="number">1</span>];</span><br><span class="line">			<span class="comment">// 当下一个点未访问过并且可以到达时，再进行dfs</span></span><br><span class="line">            <span class="keyword">if</span> (!visited.contains(<span class="keyword">new</span> Pair(newRow, newCol)) &amp;&amp; robot.move()) &#123;</span><br><span class="line">                backtrack(newRow, newCol, newD);</span><br><span class="line">                goBack();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// turn the robot following chosen direction : clockwise</span></span><br><span class="line">            robot.turnRight();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cleanRoom</span><span class="params">(Robot robot)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.robot = robot;</span><br><span class="line">        backtrack(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="二分查找（常常和二叉树一起出现）"><a href="#二分查找（常常和二叉树一起出现）" class="headerlink" title="二分查找（常常和二叉树一起出现）"></a>二分查找（常常和二叉树一起出现）</h3><h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><blockquote>
-<p>每一次循环都能排除掉一半以上的元素，最后把区间限定在一个元素，<strong>二分查找要求被查找的对象必须经过排序</strong></p>
-</blockquote>
+<h3 id="二分查找（常常和二叉树一起出现）"><a href="#二分查找（常常和二叉树一起出现）" class="headerlink" title="二分查找（常常和二叉树一起出现）"></a>二分查找（常常和二叉树一起出现）</h3><h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>每一次循环都能排除掉一半以上的元素，最后把区间限定在一个元素，<strong>二分查找要求被查找的对象必须经过排序</strong>。循环条件为left &lt; right，如果被查找元素未经排序，那么循环条件可能发生改变，例如<a href="https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/">LeetCode154旋转数组</a>。</p>
 <h4 id="算法要求"><a href="#算法要求" class="headerlink" title="算法要求"></a>算法要求</h4><ol>
 <li>必须采用顺序存储结构</li>
 <li>必须按照关键字大小有序排列</li>
@@ -911,7 +925,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-count">187</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
