@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/08/11/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E2%80%94%E2%80%94%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84%E4%BB%A3%E7%A0%81/</loc>
+    <lastmod>2020-08-16</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/16/%E5%B7%A5%E5%85%B7/C++/CPP%E9%9D%99%E6%80%81%E5%AE%A1%E6%9F%A5/</loc>
+    <lastmod>2020-08-16</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2020-08-16</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/15/%E5%B7%A5%E5%85%B7/C++/volatile/</loc>
+    <lastmod>2020-08-16</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/05/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A6%81%E8%AF%B4%E6%98%8E%E4%B9%A6/</loc>
+    <lastmod>2020-08-15</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/07/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/Socket%E5%A5%97%E6%8E%A5%E5%AD%97%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2020-08-14</lastmod>
   </url>
@@ -25,10 +45,6 @@
     <lastmod>2020-08-13</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2020-08-13</lastmod>
-  </url>
-  <url>
     <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</loc>
     <lastmod>2020-08-13</lastmod>
   </url>
@@ -41,15 +57,7 @@
     <lastmod>2020-08-13</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/2020/08/05/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%A6%81%E8%AF%B4%E6%98%8E%E4%B9%A6/</loc>
-    <lastmod>2020-08-13</lastmod>
-  </url>
-  <url>
     <loc>http://yoursite.com/2020/08/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E6%8E%A5%E5%8F%A3/</loc>
-    <lastmod>2020-08-12</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E6%A8%A1%E5%9D%97%E5%8C%96/</loc>
     <lastmod>2020-08-12</lastmod>
   </url>
   <url>
@@ -66,14 +74,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/08/03/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E8%AF%B4%E6%98%8E%E4%B9%A6/</loc>
-    <lastmod>2020-08-11</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/11/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E2%80%94%E2%80%94%E7%BC%96%E5%86%99%E9%AB%98%E8%B4%A8%E9%87%8F%E7%9A%84%E4%BB%A3%E7%A0%81/</loc>
-    <lastmod>2020-08-11</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/05/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E2%80%94%E2%80%94process/</loc>
     <lastmod>2020-08-11</lastmod>
   </url>
   <url>
@@ -118,10 +118,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/15/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/cache/</loc>
-    <lastmod>2020-07-17</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/15/%E5%B7%A5%E5%85%B7/C++/volatile/</loc>
     <lastmod>2020-07-17</lastmod>
   </url>
   <url>
