@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="HTTP/1.1 200 OK">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-13T13:32:05.524Z">
+<meta property="og:updated_time" content="2020-08-19T11:30:46.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络模型">
 <meta name="twitter:description" content="HTTP/1.1 200 OK">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-13 21:32:05" itemprop="dateModified" datetime="2020-08-13T21:32:05+08:00">2020-08-13</time>
+                <time title="Modified: 2020-08-19 19:30:46" itemprop="dateModified" datetime="2020-08-19T19:30:46+08:00">2020-08-19</time>
               
             
           </span>
@@ -578,7 +578,17 @@
 <p>第三次握手（客户到服务器）</p>
 <p><strong>客户进入Established状态</strong>，标志位为ACK，表示确认收到服务器端同意连接的信号，序号seq=x+1，表示收到服务端的确认号ack，并将其作为自己的序号值，确认号ack=y+1，表示收到服务器端序号seq，并将seq+1作为确认号。<strong>服务器在接收到信号后进入Established状态</strong>，双方开始进行数据收发。</p>
 <h5 id="为何进行三次握手"><a href="#为何进行三次握手" class="headerlink" title="为何进行三次握手"></a>为何进行三次握手</h5><p>为了防止服务器端开启一些无用连接增加开销，同时避免已经失效的连接请求报文段突然又传回服务端，产生错误响应。如果只有两次握手，那么服务器不知道客户端是否正确接收到了服务器端返回的消息。</p>
-<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><h5 id="为何等待2msl"><a href="#为何等待2msl" class="headerlink" title="为何等待2msl"></a>为何等待2msl</h5><p>为了确认服务器端收到了来自客户端发出的ACK确认报文，如果在2msl内，客户端又接收到了来自服务器端的FIN报文，说明服务器端没能接收到客户端发出的ACK确认。则客户端再次发送，并重置计时器。</p>
+<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><h5 id="四次挥手流程"><a href="#四次挥手流程" class="headerlink" title="四次挥手流程"></a>四次挥手流程</h5><p>第一次挥手：A发出FIN</p>
+<p>第二次挥手：B回复ACK</p>
+<p>第三次挥手：B发出FIN</p>
+<p>第四次挥手：A发出ACK，用于确认收到B的FIN</p>
+<p>当B接收到消息，认为双方达成同步，连接可以释放，此时B可以单方面释放端口号及内存等资源。但A不知道B是否接收到ACK，会有如下两种情况</p>
+<ol>
+<li>如果B未收到ACK，会超时重传FIN，那么A会再次接收到FIN，并发送ACK</li>
+<li>如果B接收到了ACK，那么不会回复任何消息</li>
+</ol>
+<p>无论是那种情况，都需要等待，那索性就等吧，等待两种情况的最坏值，即去向ACK和来向FIN的最大消息存活时间，这是一个被动等死的过程。</p>
+<h5 id="为何等待2msl"><a href="#为何等待2msl" class="headerlink" title="为何等待2msl"></a>为何等待2msl</h5><p>为了确认服务器端收到了来自客户端发出的ACK确认报文，如果在2msl内，客户端又接收到了来自服务器端的FIN报文，说明服务器端没能接收到客户端发出的ACK确认。则客户端再次发送，并重置计时器。</p>
 <h4 id="TCP协议传输可靠性"><a href="#TCP协议传输可靠性" class="headerlink" title="TCP协议传输可靠性"></a>TCP协议传输可靠性</h4><p>由于TCP是一种面向字节流的传输协议，因此必须有一套机制保证传输过程可靠性，方法如下：</p>
 <ul>
 <li><strong>字节流服务</strong>：</li>
@@ -738,7 +748,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">189</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -960,7 +970,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI模型及TCP-IP概念层模型总结及对比"><span class="nav-number">1.</span> <span class="nav-text">OSI模型及TCP/IP概念层模型总结及对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层"><span class="nav-number">2.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-HTTPS-超文本传输协议"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP/HTTPS(超文本传输协议)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">3.1.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三次握手"><span class="nav-number">3.1.1.</span> <span class="nav-text">三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#三次握手流程"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">三次握手流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为何进行三次握手"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">为何进行三次握手</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四次挥手"><span class="nav-number">3.1.2.</span> <span class="nav-text">四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#为何等待2msl"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">为何等待2msl</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP协议传输可靠性"><span class="nav-number">3.1.3.</span> <span class="nav-text">TCP协议传输可靠性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSI模型及TCP-IP概念层模型总结及对比"><span class="nav-number">1.</span> <span class="nav-text">OSI模型及TCP/IP概念层模型总结及对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层"><span class="nav-number">2.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-HTTPS-超文本传输协议"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP/HTTPS(超文本传输协议)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP"><span class="nav-number">3.1.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三次握手"><span class="nav-number">3.1.1.</span> <span class="nav-text">三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#三次握手流程"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">三次握手流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为何进行三次握手"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">为何进行三次握手</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四次挥手"><span class="nav-number">3.1.2.</span> <span class="nav-text">四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#四次挥手流程"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">四次挥手流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为何等待2msl"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">为何等待2msl</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP协议传输可靠性"><span class="nav-number">3.1.3.</span> <span class="nav-text">TCP协议传输可靠性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

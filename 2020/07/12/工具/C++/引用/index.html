@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="函数返回引用使用引用作为函数的返回值，效率更高，但是需要注意，返回引用需要保证对象存在，不允许返回局部变量的引用。下面是一个函数返回引用的例子：在使用链表构建堆栈的过程中，返回栈顶元素的函数可以返回引用，因为栈顶元素还在。 123T&amp;amp; top_element()&amp;#123;    return lst.back();&amp;#125; 但是pop函数就不能返回引用了，因为在弹出栈之后，该元素作">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.762Z">
+<meta property="og:updated_time" content="2020-08-19T10:31:36.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="引用">
 <meta name="twitter:description" content="函数返回引用使用引用作为函数的返回值，效率更高，但是需要注意，返回引用需要保证对象存在，不允许返回局部变量的引用。下面是一个函数返回引用的例子：在使用链表构建堆栈的过程中，返回栈顶元素的函数可以返回引用，因为栈顶元素还在。 123T&amp;amp; top_element()&amp;#123;    return lst.back();&amp;#125; 但是pop函数就不能返回引用了，因为在弹出栈之后，该元素作">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-19 18:31:36" itemprop="dateModified" datetime="2020-08-19T18:31:36+08:00">2020-08-19</time>
+              
+            
           </span>
 
           
@@ -482,7 +498,7 @@
 <h2 id="引用与指针的区别"><a href="#引用与指针的区别" class="headerlink" title="引用与指针的区别"></a>引用与指针的区别</h2><p>初学引用时，可能会与指针混淆，在此处总结二者区别：</p>
 <ol>
 <li>指针是一个变量，引用是一个对象的别名；（你在学校叫张含韵，在家叫二丫子）</li>
-<li>指针大小为4，引用大小为对象大小</li>
+<li>指针大小为4字节（32位）或8字节（64位），引用大小为对象大小</li>
 <li>指针可以为null，引用必须初始化</li>
 <li>指针修改对象需要解引用，而修改引用会直接修改变量</li>
 <li>指针可以指向别的对象（花心），引用只能是一个对象的引用（专一）</li>
@@ -641,7 +657,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">189</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

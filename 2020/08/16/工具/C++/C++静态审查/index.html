@@ -96,17 +96,19 @@
 
 
 
-  <meta name="description" content="God said, Let there be light: and there was light.">
+  <meta name="description" content="代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="类">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/C++/继承/index.html">
+<meta property="og:title" content="C++静态审查">
+<meta property="og:url" content="http://yoursite.com/2020/08/16/工具/C++/C++静态审查/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="God said, Let there be light: and there was light.">
+<meta property="og:description" content="代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.763Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/cppcheck.JPG">
+<meta property="og:updated_time" content="2020-08-19T06:50:02.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="类">
-<meta name="twitter:description" content="God said, Let there be light: and there was light.">
+<meta name="twitter:title" content="C++静态审查">
+<meta name="twitter:description" content="代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/cppcheck.JPG">
 
 
 
@@ -116,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/C++/继承/">
+  <link rel="canonical" href="http://yoursite.com/2020/08/16/工具/C++/C++静态审查/">
 
 
 
@@ -126,7 +128,7 @@
   };
 </script>
 
-  <title>类 | 一隅</title>
+  <title>C++静态审查 | 一隅</title>
   
 
 
@@ -358,7 +360,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/C++/继承/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/16/工具/C++/C++静态审查/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +377,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">类
+          <h1 class="post-title" itemprop="name headline">C++静态审查
 
               
             
@@ -401,9 +403,25 @@
                 
               
 
-              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+              <time title="Created: 2020-08-16 17:03:11" itemprop="dateCreated datePublished" datetime="2020-08-16T17:03:11+08:00">2020-08-16</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-19 14:50:02" itemprop="dateModified" datetime="2020-08-19T14:50:02+08:00">2020-08-19</time>
+              
             
           </span>
 
@@ -461,19 +479,13 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>God said, Let there be light: and there was light.</p>
-</blockquote>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。</p>
 <a id="more"></a>
-<p>作为一门面向对象语言，C++允许我们使用类进行自定义类型，本文将针对类中的一些问题进行相关总结。</p>
-<h2 id="静态类成员"><a href="#静态类成员" class="headerlink" title="静态类成员"></a>静态类成员</h2><p>有些情况下，某个数据成员应当属于类而非具体对象本身。例如我们说正常人都有两只眼睛，那么眼睛的数量应当是与人直接相关而非与特定个体相关。当我们更改了眼睛的数量，应当所有的个体眼睛数量都会被修改。那么此时我们需要定义类的静态成员，它属于类本身，而非某个个体。</p>
-<h3 id="声明及定义静态类成员"><a href="#声明及定义静态类成员" class="headerlink" title="声明及定义静态类成员"></a>声明及定义静态类成员</h3><h4 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Human</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> s_eye_num;     <span class="comment">//前面加上static即可，注意，此处只是声明，我们还未定义，不能直接使用，必须进行定义及初始化操作</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>通常情况下，我们将静态变量定义放在类外的cpp文件中进行定义，切记不要再头文件中对静态变量进行初始化。如果放在.h文件中，每一个包含该头文件的文件都会去重复定义类的静态变量，从而产生链接错误。<strong>正确的做法是对所有的类静态成员在类的实现cpp文件中进行统一定义及初始化管理。</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> Human::s_eye_num = <span class="number">0</span>;      <span class="comment">//定义及初始化，只能进行一次</span></span><br></pre></td></tr></table></figure>
-<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p>静态类成员可以设置为public或private的，当设置为public时，可以通过作用域方式访问，即：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Human duanshiqi;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; Human::s_eye_num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; duanshiqi.s_eye_num &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//正确！属于类的肯定也是属于每一个对象的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>而私有时则必须通过相应的get函数进行访问。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+<h2 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h2><h3 id="以目录为基准进行代码审查"><a href="#以目录为基准进行代码审查" class="headerlink" title="以目录为基准进行代码审查"></a>以目录为基准进行代码审查</h3><p>cppcheck使用过程非常简单，其界面如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/cppcheck.JPG" width="500" alt="图片名称" align="center"></p>
+<p>cppcheck可以对vs项目和cmake项目进行分析，工程类型比较少，实用性不高，因此建议还是以实际源代码的目录为基础，对代码进行分析。点击Analysis——目录或者Ctrl+D即可打开，然后自动对目录下所有代码进行审查。</p>
+<h2 id="常见问题总结"><a href="#常见问题总结" class="headerlink" title="常见问题总结"></a>常见问题总结</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://cppcheck.net/manual.pdf">cppcheck使用文档</a></p>
+
       
     </div>
 
@@ -536,8 +548,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/C++/测试框架/" rel="next" title="一些C++测试框架使用说明">
-                <i class="fa fa-chevron-left"></i> 一些C++测试框架使用说明
+              <a href="/2020/08/14/计算机/网络通信/TCPIP/" rel="next" title="TCP/IP">
+                <i class="fa fa-chevron-left"></i> TCP/IP
               </a>
             
           </div>
@@ -546,8 +558,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/工具/C++/智能指针/" rel="prev" title="智能指针">
-                智能指针 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/08/18/计算机/网络通信/网络硬件设备/" rel="prev" title="网络硬件设备">
+                网络硬件设备 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -624,7 +636,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">189</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -846,7 +858,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态类成员"><span class="nav-number">1.</span> <span class="nav-text">静态类成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明及定义静态类成员"><span class="nav-number">1.1.</span> <span class="nav-text">声明及定义静态类成员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明"><span class="nav-number">1.1.1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.1.2.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制"><span class="nav-number">1.2.</span> <span class="nav-text">访问控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用方法"><span class="nav-number">1.</span> <span class="nav-text">基本使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以目录为基准进行代码审查"><span class="nav-number">1.1.</span> <span class="nav-text">以目录为基准进行代码审查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题总结"><span class="nav-number">2.</span> <span class="nav-text">常见问题总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1034,7 +1046,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/工具/C++/继承/'
+    refer: '2020/08/16/工具/C++/C++静态审查/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

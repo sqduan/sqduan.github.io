@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文将针对C++中常见类型及其特点和应用场景进行总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.763Z">
+<meta property="og:updated_time" content="2020-08-19T08:55:26.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类型">
 <meta name="twitter:description" content="本文将针对C++中常见类型及其特点和应用场景进行总结。">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-19 16:55:26" itemprop="dateModified" datetime="2020-08-19T16:55:26+08:00">2020-08-19</time>
+              
+            
           </span>
 
           
@@ -468,6 +484,7 @@
 <h3 id="枚举的应用场景"><a href="#枚举的应用场景" class="headerlink" title="枚举的应用场景"></a>枚举的应用场景</h3><p>在使用常量的场合，我们可以广泛使用枚举类型，例如我们要去造一辆小汽车，这个汽车可以向前后左右四个方向行驶，那么我们可以定义如下枚举体：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> Movement &#123;</span><br><span class="line">    None = <span class="number">0</span>,</span><br><span class="line">    Left,</span><br><span class="line">    Right,</span><br><span class="line">    Forward,</span><br><span class="line">    Backward</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h2 id="类型处理"><a href="#类型处理" class="headerlink" title="类型处理"></a>类型处理</h2><h3 id="定义类型别名"><a href="#定义类型别名" class="headerlink" title="定义类型别名"></a>定义类型别名</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法1</span></span><br><span class="line"><span class="comment">// typedef 原在前，新在后，和define正好相反</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> wages;        <span class="comment">// wages 是 double同义词</span></span><br><span class="line"><span class="keyword">typedef</span> wages  base, *p;     <span class="comment">// base是double同义词，p是double* 同义词</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法2</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">uint32_t</span> = <span class="keyword">unsigned</span> <span class="keyword">int</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>C++提供了四种强制类型转换</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
@@ -619,7 +636,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">189</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -841,7 +858,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类型"><span class="nav-number">1.</span> <span class="nav-text">枚举类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限定与不限定作用域的枚举类型"><span class="nav-number">1.1.</span> <span class="nav-text">限定与不限定作用域的枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举的应用场景"><span class="nav-number">1.2.</span> <span class="nav-text">枚举的应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型处理"><span class="nav-number">2.</span> <span class="nav-text">类型处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义类型别名"><span class="nav-number">2.1.</span> <span class="nav-text">定义类型别名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类型"><span class="nav-number">1.</span> <span class="nav-text">枚举类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限定与不限定作用域的枚举类型"><span class="nav-number">1.1.</span> <span class="nav-text">限定与不限定作用域的枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举的应用场景"><span class="nav-number">1.2.</span> <span class="nav-text">枚举的应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型处理"><span class="nav-number">2.</span> <span class="nav-text">类型处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义类型别名"><span class="nav-number">2.1.</span> <span class="nav-text">定义类型别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换"><span class="nav-number">2.2.</span> <span class="nav-text">类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

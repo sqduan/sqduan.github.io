@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="hide, share and long live">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.761Z">
+<meta property="og:updated_time" content="2020-08-19T06:45:25.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="static关键字总结">
 <meta name="twitter:description" content="hide, share and long live">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-08-19 14:45:25" itemprop="dateModified" datetime="2020-08-19T14:45:25+08:00">2020-08-19</time>
+              
+            
           </span>
 
           
@@ -469,11 +485,14 @@
 <h3 id="局部静态变量"><a href="#局部静态变量" class="headerlink" title="局部静态变量"></a>局部静态变量</h3><p>在某个程序块中声明并初始化的全局变量，只初始化一次，在定义的程序块中可见，生命周期为整个对象周期。</p>
 <h3 id="静态函数"><a href="#静态函数" class="headerlink" title="静态函数"></a>静态函数</h3><p>静态函数只能在本文件中使用。</p>
 <h3 id="类的静态成员变量（一处变处处变）"><a href="#类的静态成员变量（一处变处处变）" class="headerlink" title="类的静态成员变量（一处变处处变）"></a>类的静态成员变量（一处变处处变）</h3><p>类的静态成员为类的所有对象共有，因此具有对象间通信、统计对象个数的作用。可以通过<code>classname.variable</code>直接引用，不需创造对象实例。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> s_value;      <span class="comment">// 一个私有的静态成员变量，这个是声明而非定义</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> Something::s_value&#123; <span class="number">1</span> &#125;; <span class="comment">// 初始化，只能进行一次，实际上是对变量的定义，所以可以访问，但是不能再次定义，否则出现重定义错误</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">// how do we access Something::s_value since it is private?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么我们应当如何访问静态成员变量呢？可以声明一个普通成员函数进行访问，但是这样需要构造具体对象，因此更好的方法是提供一个静态成员函数接口，专门用于访问静态成员变量。</p>
 <h3 id="类的静态成员函数（没有this指针）"><a href="#类的静态成员函数（没有this指针）" class="headerlink" title="类的静态成员函数（没有this指针）"></a>类的静态成员函数（没有this指针）</h3><p>有一些函数为类层面的方法，不属于任何一个对象，此时定义为静态成员函数，可以通过<code>类名::方法名</code>直接使用，而不需要创建类实例。</p>
 <ul>
 <li>非静态成员函数可以调用静态成员函数，反之不行。</li>
 <li>静态成员函数能访问静态成员变量，不能访问非静态的成员变量。</li>
 </ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span>&#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> s_value;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> s_value; &#125; <span class="comment">// static member function  专门用于访问静态成员变量，但是不能访问非静态的</span></span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> Something::s_value&#123; <span class="number">1</span> &#125;; <span class="comment">// initializer</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; Something::getValue() &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="声明为静态的作用"><a href="#声明为静态的作用" class="headerlink" title="声明为静态的作用"></a>声明为静态的作用</h2><h3 id="隐藏对象或函数"><a href="#隐藏对象或函数" class="headerlink" title="隐藏对象或函数"></a>隐藏对象或函数</h3><p>一个对象如果被声明为静态，那么只对本文件中的对象可见，因此如果另一个文件中声明了同样的对象和函数，那么不会造成命名冲突。<strong>不要在header中定义静态全局对象，因为每一个包含该header的文件都会创建一个对象实例，会导致奇怪的现象发生。</strong>我们一般在cpp文件中定义全局变量。同时，定义为全局变量时，优先考虑static。</p>
 <h3 id="延长对象的生命周期"><a href="#延长对象的生命周期" class="headerlink" title="延长对象的生命周期"></a>延长对象的生命周期</h3>
       
@@ -626,7 +645,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">189</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

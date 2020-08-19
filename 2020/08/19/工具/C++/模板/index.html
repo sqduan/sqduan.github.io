@@ -96,19 +96,17 @@
 
 
 
-  <meta name="description" content="代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。">
+  <meta name="description" content="那时我还年轻，没有意识到这个世界到底有多么深刻而复杂。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CPP静态审查">
-<meta property="og:url" content="http://yoursite.com/2020/08/16/工具/C++/CPP静态审查/index.html">
+<meta property="og:title" content="模板">
+<meta property="og:url" content="http://yoursite.com/2020/08/19/工具/C++/模板/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。">
+<meta property="og:description" content="那时我还年轻，没有意识到这个世界到底有多么深刻而复杂。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/cppcheck.JPG">
-<meta property="og:updated_time" content="2020-08-18T03:31:10.412Z">
+<meta property="og:updated_time" content="2020-08-19T06:49:50.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CPP静态审查">
-<meta name="twitter:description" content="代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/cppcheck.JPG">
+<meta name="twitter:title" content="模板">
+<meta name="twitter:description" content="那时我还年轻，没有意识到这个世界到底有多么深刻而复杂。">
 
 
 
@@ -118,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/08/16/工具/C++/CPP静态审查/">
+  <link rel="canonical" href="http://yoursite.com/2020/08/19/工具/C++/模板/">
 
 
 
@@ -128,7 +126,7 @@
   };
 </script>
 
-  <title>CPP静态审查 | 一隅</title>
+  <title>模板 | 一隅</title>
   
 
 
@@ -360,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/16/工具/C++/CPP静态审查/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/19/工具/C++/模板/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -377,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CPP静态审查
+          <h1 class="post-title" itemprop="name headline">模板
 
               
             
@@ -403,24 +401,12 @@
                 
               
 
-              <time title="Created: 2020-08-16 17:03:11" itemprop="dateCreated datePublished" datetime="2020-08-16T17:03:11+08:00">2020-08-16</time>
+              <time title="Created: 2020-08-19 14:45:43 / Modified: 14:49:50" itemprop="dateCreated datePublished" datetime="2020-08-19T14:45:43+08:00">2020-08-19</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-08-18 11:31:10" itemprop="dateModified" datetime="2020-08-18T11:31:10+08:00">2020-08-18</time>
               
             
           </span>
@@ -479,13 +465,12 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>代码静态审查指在不对代码进行运行的情况下，对源代码进行分析，找到一些可能存在的问题，本文将针对CPP中代码静态审查工具cppcheck及其使用进行一些总结。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>那时我还年轻，没有意识到这个世界到底有多么深刻而复杂。</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="基本使用方法"><a href="#基本使用方法" class="headerlink" title="基本使用方法"></a>基本使用方法</h2><h3 id="以目录为基准进行代码审查"><a href="#以目录为基准进行代码审查" class="headerlink" title="以目录为基准进行代码审查"></a>以目录为基准进行代码审查</h3><p>cppcheck使用过程非常简单，其界面如下：</p>
-<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/cppcheck.JPG" width="500" alt="图片名称" align="center"></p>
-<p>cppcheck可以对vs项目和cmake项目进行分析，工程类型比较少，实用性不高，因此建议还是以实际源代码的目录为基础，对代码进行分析。点击Analysis——目录或者Ctrl+D即可打开，然后自动对目录下所有代码进行审查。</p>
-<h2 id="常见问题总结"><a href="#常见问题总结" class="headerlink" title="常见问题总结"></a>常见问题总结</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="http://cppcheck.net/manual.pdf">cppcheck使用文档</a></p>
-
+<p>模板，可以理解为函数的函数，或类的类，当你学习过时变泛函这门课程之时，将会对模板有更为深入的理解。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://github.com/wuye9036/CppTemplateTutorial">C++模板</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -548,8 +533,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/08/14/计算机/网络通信/TCPIP/" rel="next" title="TCP/IP">
-                <i class="fa fa-chevron-left"></i> TCP/IP
+              <a href="/2020/08/18/计算机/算法/正则表达式/" rel="next" title="正则表达式">
+                <i class="fa fa-chevron-left"></i> 正则表达式
               </a>
             
           </div>
@@ -557,10 +542,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/08/18/计算机/网络通信/网络硬件设备/" rel="prev" title="网络硬件设备">
-                网络硬件设备 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -636,7 +617,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">188</span>
+                    <span class="site-state-item-count">189</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -858,7 +839,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用方法"><span class="nav-number">1.</span> <span class="nav-text">基本使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以目录为基准进行代码审查"><span class="nav-number">1.1.</span> <span class="nav-text">以目录为基准进行代码审查</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题总结"><span class="nav-number">2.</span> <span class="nav-text">常见问题总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1046,7 +1027,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/08/16/工具/C++/CPP静态审查/'
+    refer: '2020/08/19/工具/C++/模板/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
