@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-08-20T10:24:50.030Z</updated>
+  <updated>2020-08-21T07:15:12.324Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>IO与流</title>
+    <link href="http://yoursite.com/2020/08/21/%E5%B7%A5%E5%85%B7/C++/IO%E4%B8%8E%E6%B5%81/"/>
+    <id>http://yoursite.com/2020/08/21/工具/C++/IO与流/</id>
+    <published>2020-08-21T06:10:14.811Z</published>
+    <updated>2020-08-21T07:15:12.324Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span></span><br><span class="line">__libc_read (<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">return</span> SYSCALL_CANCEL (read, fd, buf, nbytes);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a><p>文件属于IO中的重要环节，本文将针对使用C++对文件处理的过程进行总结。</p><h2 id="文件相关的库和类及其使用方法"><a href="#文件相关的库和类及其使用方法" class="headerlink" title="文件相关的库和类及其使用方法"></a>文件相关的库和类及其使用方法</h2><h3 id="基本类库介绍"><a href="#基本类库介绍" class="headerlink" title="基本类库介绍"></a>基本类库介绍</h3><p>在介绍文件相关的类库前，我们先来看一下C++中关于IO的类库之间的相关关系</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/iostream.gif" width = "700" alt="uProf界面" align=center /></p><p>从这张图中可以看出，基于最基础的IOS类，C++标准库中又延伸出了一系列的关于IO的库，包括iostream（标准输入输出流）、fstream（文件流）、sstream（string流），这些库一同构成了C++的输入输出系统。从上面的图中我们可以看出，fstream中主要包含三个类：ofstream、ifstream、和fstream，其功能如下：</p><div class="table-container"><table><thead><tr><th>类名</th><th>功能</th></tr></thead><tbody><tr><td>ofstream</td><td>输出文件流，创建文件并向文件写入信息，流向为$文本 \rightarrow 文件$</td></tr><tr><td>ifstream</td><td>输入文件流，从文件中读取信息</td></tr><tr><td>fstream</td><td>同时具有ofstream和ifstream的功能，可以创建文件，并从文件中读写信息</td></tr></tbody></table></div><h3 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h3><h2 id="应用实例：词频分析器"><a href="#应用实例：词频分析器" class="headerlink" title="应用实例：词频分析器"></a>应用实例：词频分析器</h2><h3 id="条件与限制"><a href="#条件与限制" class="headerlink" title="条件与限制"></a>条件与限制</h3><ul><li>应当仅以<code>. ? ! ;</code>四个标点符号作为对句子进行划分</li><li>单词是指仅包含26个大小写英文字母的以空格进行区分的字符串</li></ul><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>文件处理模块</p><p>单句划分模块</p><p>词频统计模块</p><h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取文件</span></span><br></pre></td></tr></table></figure><pre class="mermaid"></pre><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;!--�7--&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>C++动态性能验证</title>
@@ -458,30 +480,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="软件工程" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>条件变量</title>
-    <link href="http://yoursite.com/2020/07/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%9D%A1%E4%BB%B6%E5%8F%98%E9%87%8F/"/>
-    <id>http://yoursite.com/2020/07/27/计算机/操作系统/条件变量/</id>
-    <published>2020-07-27T02:40:02.230Z</published>
-    <updated>2020-07-27T03:37:40.547Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>We’re going to make you an offer you can’t refuse.</p></blockquote><a id="more"></a><p>在多线程并发的程序中，我们有互斥锁的机制保证线程同步，但在有些情况下，仅仅依靠互斥锁是不够的，我们还需要使用条件变量对线程进行修饰，与互斥锁不同，条件变量的作用是自动阻塞一个线程，直到特殊情况发生为止。通常我们会同时使用条件变量和互斥锁来实现相应的功能。</p><h2 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h2><p>条件变量是多线程程序中用来实现“等待—&gt;唤醒”机制的手段，以两个线程为例，通常我们会执行如下动作：</p><ul><li>线程1等待条件变量指定的条件成立，如果不成立，则挂起</li><li>线程2使条件成立，从而使线程1从挂起状态转移至执行状态</li></ul><p>通常，条件变量指定的条件是一个全局变量，这样两个线程都可以进行访问，但是我们必须采用互斥锁对变量上锁，避免发生访问冲突。</p><h2 id="C-11中的条件变量"><a href="#C-11中的条件变量" class="headerlink" title="C++11中的条件变量"></a>C++11中的条件变量</h2><h3 id="创建条件变量"><a href="#创建条件变量" class="headerlink" title="创建条件变量"></a>创建条件变量</h3><p>C++11中的条件变量创建方法如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::condition_variable cond;//条件变量</span><br></pre></td></tr></table></figure><h3 id="wait方法"><a href="#wait方法" class="headerlink" title="wait方法"></a>wait方法</h3><p>wait会使当前线程阻塞，直到达到某种特定的条件将线程唤醒。其函数定义如下：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="class"><span class="keyword">class</span> <span class="title">Predicate</span> &gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">wait</span>( <span class="title">std</span>:</span>:unique_lock&lt;<span class="built_in">std</span>::mutex&gt;&amp; lock, Predicate pred );</span><br></pre></td></tr></table></figure><p>该函数包含两个参数，含义如下：</p><ul><li>lock - 一个<code>std::unique_lock&lt;std::mutex&gt;</code>对象，使用前必须上锁</li><li>pred - 一个返回bool类型的函数，如果返回<code>false</code>，代表线程需要继续挂起，返回true代表可以执行</li></ul><h3 id="notify-one-amp-notify-all"><a href="#notify-one-amp-notify-all" class="headerlink" title="notify_one &amp; notify_all"></a>notify_one &amp; notify_all</h3><h2 id="实例——两个线程交替打印"><a href="#实例——两个线程交替打印" class="headerlink" title="实例——两个线程交替打印"></a>实例——两个线程交替打印</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mutex&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;condition_variable&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::mutex lock;           <span class="comment">//互斥锁</span></span><br><span class="line"><span class="built_in">std</span>::condition_variable cv;<span class="comment">//条件变量</span></span><br><span class="line"><span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= <span class="number">100</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lck(lock);</span><br><span class="line">        cv.wait(lck,[]&#123;<span class="keyword">return</span> flag;&#125;);       <span class="comment">//等待flag==true才打印奇数</span></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"A "</span> &lt;&lt; i &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        i += <span class="number">2</span>;</span><br><span class="line">        flag = <span class="literal">false</span>;</span><br><span class="line">        cv.notify_one();         <span class="comment">//唤醒线程B，cv.wait 被唤醒，检查flag，发现可以执行</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= <span class="number">100</span>) &#123;</span><br><span class="line">        <span class="built_in">std</span>::unique_lock&lt;<span class="built_in">std</span>::mutex&gt; lck(lock);</span><br><span class="line">        cv.wait(lck,[]&#123;<span class="keyword">return</span> !flag;&#125;);      <span class="comment">//等待flag==false才打印偶数</span></span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"B "</span> &lt;&lt; i &lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        i += <span class="number">2</span>;</span><br><span class="line">        flag = <span class="literal">true</span>;</span><br><span class="line">        cv.notify_one();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">tA</span><span class="params">(printfA)</span></span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="function">thread <span class="title">tB</span><span class="params">(printfB)</span></span>;</span><br><span class="line">    tA.join();</span><br><span class="line">    tB.join();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href=""></a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;We’re going to make you an offer you can’t refuse.&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
   </entry>
