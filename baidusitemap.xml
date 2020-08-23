@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/08/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/HTTP/</loc>
+    <lastmod>2020-08-21</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/08/21/%E5%B7%A5%E5%85%B7/C++/IO%E4%B8%8E%E6%B5%81/</loc>
     <lastmod>2020-08-21</lastmod>
   </url>
@@ -86,10 +90,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/08/14/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/TCPIP/</loc>
-    <lastmod>2020-08-14</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/HTTP/</loc>
     <lastmod>2020-08-14</lastmod>
   </url>
   <url>
