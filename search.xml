@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[寄存器]]></title>
     <url>%2F2020%2F08%2F27%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90%2F%E5%AF%84%E5%AD%98%E5%99%A8%2F</url>
-    <content type="text"><![CDATA[CPU很快、内存很慢；内存很快、硬盘很慢；硬盘很快、网络很慢，这个世界总归是不完美的。 参考文献]]></content>
+    <content type="text"><![CDATA[参考文献]]></content>
       <categories>
         <category>计算机</category>
         <category>硬件组成</category>
@@ -1719,7 +1719,7 @@
   <entry>
     <title><![CDATA[STL——顺序容器操作]]></title>
     <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FC%2B%2B%2FSTL%E2%80%94%E2%80%94%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C%2F</url>
-    <content type="text"><![CDATA[本文将针对顺序容器的操作进行总结。 vector插入（insert）1infoVec.insert(infoVec.begin() + index[i], nums[i]); insert函数第一项为插入位置，输入类型为迭代器，第二项为插入值。插入完成后，被插入元素就处于index[i]所在位置，例如有vector [1,2,3,4,5]，调用insert(infoVec.begin() + 1)，vector变为[1,0,2,3,4,5]，0在1的位置处。尽量不要在vector中使用insert，效率不高 queue &amp; dequequeuedeque(双端队列)双端队列本质上是栈和队列的集合，如果需要 FIFO （先进先出）的顺序，则将新元素添加到队列尾部，后插入的元素就可以排在后面。如果需要 FILO （先进后出）的顺序，则将新元素添加到队列首部，后插入的元素就可以排在前面。 priority_queue在C++STL中，优先队列通过二叉堆实现，且为大根堆，即最大的元素总在最上面。]]></content>
+    <content type="text"><![CDATA[本文将针对顺序容器的操作进行总结。 vector大小和容量基本定义当我们使用顺序容器时，要注意区分其size和capacity，size表示的是vector中元素的个数即真实占用的大小，而capacity表示的是vector在realloc前允许的最大元素数目，二者之间的关系为： size \le capacity当我们初始化一个vector时，其size和capacity是相等的 1234vector&lt;int&gt; test(20,0);cout &lt;&lt; test.size() &lt;&lt; " " &lt;&lt; test.capacity() &lt;&lt; endl;//20 20 当我们添加或删除元素时，不仅size会变动，capacity也会。具体的增长策略详见插入删除元素的操作 修改size &amp; capacitysize和capacity的修改方法分别为resize和reserve，这里需要注意，reserve后多出的空间是不能直接进行访问的，属于非法空间。另外reserve只能往大修改，不能往小修改，如果当前capacity是四十，那么reserve只能比40大，不能比40小。 123456// a test vector which capacity is 40test.reserve(39);cout &lt;&lt; test.size() &lt;&lt; " " &lt;&lt; test.capacity() &lt;&lt; endl; // 20 40 reserve只能往大修改，不能往小 插入元素插入元素的方式有insert和push_back，insert是在任意位置插入，而push_back是在末尾插入。 insert1infoVec.insert(infoVec.begin() + index[i], nums[i]); insert函数第一项为插入位置，输入类型为迭代器，第二项为插入值。插入完成后，被插入元素就处于index[i]所在位置，例如有vector [1,2,3,4,5]，调用insert(infoVec.begin() + 1)，vector变为[1,0,2,3,4,5]，0在1的位置处。尽量不要在vector中使用insert，效率不高。时间复杂度为$O(n)$。 push_backpush_back直接在末尾进行元素插入，时间复杂度为$O(1)$，更加高效。 增长策略如果当前size比capacity小，那么直接将元素插入，否则capacity按照指数型递增，具体的幂次看不同编译器的实现 删除vector中涉及三种删除操作，即clear，erase和pop_back。 clearclear直接清空元素，但保持vector容量不变，即将size设为0，capacity不变 12345//一个size和capacity都为20的vectortest.clear();cout &lt;&lt; test.size() &lt;&lt; " " &lt;&lt; test.capacity() &lt;&lt; endl;// 0 20 eraseerase可以删除单个或指定范围内的元素，但保持容量不变，其时间复杂度为$O(n)$ 123456789101112for(int i=0;i&lt;20;i++)&#123; test.erase(test.begin()); cout &lt;&lt; test.size() &lt;&lt; " " &lt;&lt; test.capacity() &lt;&lt; endl;&#125;// 20 2019 20......2 201 200 20 pop_backpop_back用于删除尾部元素，容量也不变。 总结尽量用clear或pop_back，别用erase，此外删除操作不改变容量的大小。 queue &amp; dequequeuedeque(双端队列)双端队列本质上是栈和队列的集合，如果需要 FIFO （先进先出）的顺序，则将新元素添加到队列尾部，后插入的元素就可以排在后面。如果需要 FILO （先进后出）的顺序，则将新元素添加到队列首部，后插入的元素就可以排在前面。 priority_queue在C++STL中，优先队列通过二叉堆实现，且为大根堆，即最大的元素总在最上面。]]></content>
       <categories>
         <category>工具</category>
         <category>C++</category>

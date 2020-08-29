@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/STL%E2%80%94%E2%80%94%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C/</loc>
+    <lastmod>2020-08-28</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E5%AF%84%E5%AD%98%E5%99%A8/</loc>
-    <lastmod>2020-08-27</lastmod>
+    <lastmod>2020-08-28</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/A%E6%98%9F%E7%AE%97%E6%B3%95/</loc>
@@ -754,10 +758,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/STL%E2%80%94%E2%80%94%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2020-07-12</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/STL%E2%80%94%E2%80%94%E9%A1%BA%E5%BA%8F%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>
   <url>
