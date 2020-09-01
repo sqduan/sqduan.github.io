@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830212737.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png">
-<meta property="og:updated_time" content="2020-08-30T16:08:02.507Z">
+<meta property="og:updated_time" content="2020-09-01T11:43:46.611Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存管理">
 <meta name="twitter:description" content="计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。">
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-31 00:08:02" itemprop="dateModified" datetime="2020-08-31T00:08:02+08:00">2020-08-31</time>
+                <time title="Modified: 2020-09-01 19:43:46" itemprop="dateModified" datetime="2020-09-01T19:43:46+08:00">2020-09-01</time>
               
             
           </span>
@@ -489,7 +489,7 @@
 <p>碎片可以分为内部碎片和外部碎片：内部碎片是固定分区中浪费掉的内存，而外部碎片来自可变分区中进程和进程间空间特别小，但是没办法再利用的碎片。</p>
 <p>2 逻辑地址和物理地址的映射关系</p>
 <p>逻辑地址可以使我们屏蔽硬件，更具逻辑性，而不必关注底层的内存物理地址。</p>
-<h3 id="内存划分方式"><a href="#内存划分方式" class="headerlink" title="内存划分方式"></a>内存划分方式</h3><h4 id="连续分配管理"><a href="#连续分配管理" class="headerlink" title="连续分配管理"></a>连续分配管理</h4><h5 id="块式（已经被淘汰）"><a href="#块式（已经被淘汰）" class="headerlink" title="块式（已经被淘汰）"></a>块式（已经被淘汰）</h5><p>直接将内存分为固定的块，然后给每一个应用程序一块，这样带来的问题是如果应用程序所需要的内存很小，块中很多内存会被浪费，产生了内部碎片。</p>
+<h3 id="内存划分-方式"><a href="#内存划分-方式" class="headerlink" title="内存划分 方式"></a>内存划分 方式</h3><h4 id="连续分配管理"><a href="#连续分配管理" class="headerlink" title="连续分配管理"></a>连续分配管理</h4><h5 id="块式（已经被淘汰）"><a href="#块式（已经被淘汰）" class="headerlink" title="块式（已经被淘汰）"></a>块式（已经被淘汰）</h5><p>直接将内存分为固定的块，然后给每一个应用程序一块，这样带来的问题是如果应用程序所需要的内存很小，块中很多内存会被浪费，产生了内部碎片。</p>
 <h4 id="非连续分配管理"><a href="#非连续分配管理" class="headerlink" title="非连续分配管理"></a>非连续分配管理</h4><h5 id="页式管理"><a href="#页式管理" class="headerlink" title="页式管理"></a>页式管理</h5><p>把主存分为大小相等且固定的一页一页的形式，页较小，相对相比于块式管理的划分力度更大，提高了内存利用率，减少了碎片。页式管理通过页表对应逻辑地址和物理地址。</p>
 <h5 id="段式管理"><a href="#段式管理" class="headerlink" title="段式管理"></a>段式管理</h5><p>段式管理把主存分为一段段的，每一段的空间又要比一页的空间小很多 。但是，最重要的是段是有实际意义的，每个段定义了一组逻辑信息，例如堆段、栈段、代码段、数据段等。 段式管理通过段表对应逻辑地址和物理地址。</p>
 <p>以linux系统为例，内存的划分可以分为五个段，其相关属性如下：</p>
@@ -573,15 +573,53 @@
 <p>在32位系统中，内存地址为32位，分为两个部分，Page Number和Page Offset，由于偏移量位12位，因此页面大小为$2^{12}=4096=4K$。而页面数为$2^{20}=1K\times 1K=1M$，意味着我们需要$1M$的空间保存页面映射表，占用的空间比较多，因此我们采取了二级页表划分的方式，将Page Number进一步划分为两个10位的表，即构成多级页表的寻址方式。</p>
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png" width="250" alt="图片名称" align="center"></p>
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png" width="450" alt="图片名称" align="center"></p>
-<p>外部页表的大小是$1K$，而内部页表共$1K\times 1K=1M$个，每一个的大小是$1K$，当我们</p>
-<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><h3 id="虚拟地址、逻辑地址、物理地址"><a href="#虚拟地址、逻辑地址、物理地址" class="headerlink" title="虚拟地址、逻辑地址、物理地址"></a>虚拟地址、逻辑地址、物理地址</h3><p>物理地址是真实物理内存中的地址，即内存地址寄存器中的地址，而逻辑地址是由操作系统决定，和物理地址一一对应的地址，C语言中的指针即为逻辑地址。</p>
-<h4 id="CPU寻址方式"><a href="#CPU寻址方式" class="headerlink" title="CPU寻址方式"></a>CPU寻址方式</h4><p>现代CPU采用虚拟寻址的方式，需要将虚拟地址翻译成物理地址，这样才能访问真实的物理内存。完成虚拟地址转换为物理地址的的硬件是CPU中的MMU</p>
-<h4 id="虚拟地址的作用"><a href="#虚拟地址的作用" class="headerlink" title="虚拟地址的作用"></a>虚拟地址的作用</h4><ul>
+<p>外部页表的大小是$1K$，而内部页表共$1K\times 1K=1M$个，每一个的大小是$1K$。我们不一定把这些页表都保存起来，可以只保存一部分，这样就节约了资源。</p>
+<h3 id="多进程时的物理内存（DRAM）"><a href="#多进程时的物理内存（DRAM）" class="headerlink" title="多进程时的物理内存（DRAM）"></a>多进程时的物理内存（DRAM）</h3><p>当多个进程同时执行时，实际物理地址可能是如下情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">=====Memory=====</span><br><span class="line">    Process1</span><br><span class="line">----------------</span><br><span class="line">    Process2</span><br><span class="line">----------------</span><br><span class="line">    Process2</span><br><span class="line">----------------    =======Disk=======</span><br><span class="line">    Process1              </span><br><span class="line">----------------    ==================</span><br></pre></td></tr></table></figure>
+<p>物理内存中保存有进程1和2的内容，但是存储方式可能是不连续的，同时，可能也只是部分存储，然后通过Cache的方式从Disk中再读取进程中的数据。我们通过逻辑地址和物理地址的映射关系，从而实现寻址过程。</p>
+<h2 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h2><h3 id="逻辑地址、线性地址、物理地址"><a href="#逻辑地址、线性地址、物理地址" class="headerlink" title="逻辑地址、线性地址、物理地址"></a>逻辑地址、线性地址、物理地址</h3><h4 id="三种地址的比较"><a href="#三种地址的比较" class="headerlink" title="三种地址的比较"></a>三种地址的比较</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>逻辑地址</td>
+<td>程序产生的段内偏移，由段选择符和段内偏移组成的地址。由操作系统决定，和物理地址一一对应的地址，C语言中的指针即为逻辑地址</td>
+</tr>
+<tr>
+<td>线性地址</td>
+<td>段基址+段内偏移量构成的地址，如果未开启分页，那么线性地址就是物理地址，否则还需二次转换</td>
+</tr>
+<tr>
+<td>物理地址</td>
+<td>真实物理内存中的地址，即内存地址寄存器中的地址物理地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="CPU寻址方式"><a href="#CPU寻址方式" class="headerlink" title="CPU寻址方式"></a>CPU寻址方式</h4><p>现代CPU采用虚拟寻址的方式，需要将虚拟地址翻译成物理地址，这样才能访问真实的物理内存。完成虚拟地址转换为物理地址的的硬件是CPU中的MMU。转换过程为：</p>
+<pre class="mermaid">graph LR
+    node1["逻辑地址"]
+    node2["线性地址"]
+    node3["物理地址"]
+
+    node1-->node2
+    node2-->node3</pre>
+
+
+
+<h4 id="逻辑地址的作用"><a href="#逻辑地址的作用" class="headerlink" title="逻辑地址的作用"></a>逻辑地址的作用</h4><ul>
 <li>避免直接将物理地址暴露，从而导致访问任意内存程序崩溃</li>
 <li>可以用相邻的虚拟地址映射到不相邻的物理地址</li>
 <li>可以使用一系列的虚拟地址访问大于可用物理内存的内存缓冲区（虚拟内存）</li>
 <li>不同进程间使用虚拟地址相互隔离</li>
 </ul>
+<h4 id="问题：多进程逻辑地址"><a href="#问题：多进程逻辑地址" class="headerlink" title="问题：多进程逻辑地址"></a>问题：多进程逻辑地址</h4><p>如果同一时刻由两个进程P1和P2，那么两者的逻辑地址范围是多少？假设逻辑地址最大为65535。实际上，P1和P2可以有一样范围的地址，都为0-65535，操作系统会确保其逻辑地址指向不同的物理地址。</p>
+<p>从这个问题中我们也可以看出，操作系统帮我们屏蔽了底层的物理实现。</p>
 <h2 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>虚拟内存是指使用磁盘空间对内存进行扩展，当然其效率比不上真正的物理内存。虚拟内存采用连续完整的地址空间，对多个不连续的物理内存进行映射，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p>
 <h3 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h3><p>程序在执行时往往呈现局部性规律，在某个较短时间段内，程序执行局限在某一部分，访问的存储空间也局限在某一部分，这种局部体现在<strong>时间和空间</strong>两个方面。</p>
 <ul>
@@ -740,7 +778,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">199</span>
+                    <span class="site-state-item-count">202</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -964,7 +1002,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的主要目的"><span class="nav-number">1.</span> <span class="nav-text">内存管理的主要目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的机制"><span class="nav-number">2.</span> <span class="nav-text">内存管理的机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何要进行内存划分"><span class="nav-number">2.1.</span> <span class="nav-text">为何要进行内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存划分方式"><span class="nav-number">2.2.</span> <span class="nav-text">内存划分方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连续分配管理"><span class="nav-number">2.2.1.</span> <span class="nav-text">连续分配管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#块式（已经被淘汰）"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">块式（已经被淘汰）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非连续分配管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">非连续分配管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#页式管理"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">页式管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#段式管理"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">段式管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#段页式管理"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">段页式管理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页和分段的共同点和区别"><span class="nav-number">2.2.3.</span> <span class="nav-text">分页和分段的共同点和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#共同点"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">共同点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#区别"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">区别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页面置换算法"><span class="nav-number">2.2.4.</span> <span class="nav-text">页面置换算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快表和多级页表"><span class="nav-number">2.2.5.</span> <span class="nav-text">快表和多级页表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#快表（页表的Cache）"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">快表（页表的Cache）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多级页表"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">多级页表</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址"><span class="nav-number">3.</span> <span class="nav-text">地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟地址、逻辑地址、物理地址"><span class="nav-number">3.1.</span> <span class="nav-text">虚拟地址、逻辑地址、物理地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU寻址方式"><span class="nav-number">3.1.1.</span> <span class="nav-text">CPU寻址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟地址的作用"><span class="nav-number">3.1.2.</span> <span class="nav-text">虚拟地址的作用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟内存"><span class="nav-number">4.</span> <span class="nav-text">虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部性原理"><span class="nav-number">4.2.</span> <span class="nav-text">局部性原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟存储器"><span class="nav-number">4.3.</span> <span class="nav-text">虚拟存储器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的主要目的"><span class="nav-number">1.</span> <span class="nav-text">内存管理的主要目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的机制"><span class="nav-number">2.</span> <span class="nav-text">内存管理的机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何要进行内存划分"><span class="nav-number">2.1.</span> <span class="nav-text">为何要进行内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存划分-方式"><span class="nav-number">2.2.</span> <span class="nav-text">内存划分 方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#连续分配管理"><span class="nav-number">2.2.1.</span> <span class="nav-text">连续分配管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#块式（已经被淘汰）"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">块式（已经被淘汰）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非连续分配管理"><span class="nav-number">2.2.2.</span> <span class="nav-text">非连续分配管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#页式管理"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">页式管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#段式管理"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">段式管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#段页式管理"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">段页式管理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页和分段的共同点和区别"><span class="nav-number">2.2.3.</span> <span class="nav-text">分页和分段的共同点和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#共同点"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">共同点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#区别"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">区别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页面置换算法"><span class="nav-number">2.2.4.</span> <span class="nav-text">页面置换算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快表和多级页表"><span class="nav-number">2.2.5.</span> <span class="nav-text">快表和多级页表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#快表（页表的Cache）"><span class="nav-number">2.2.5.1.</span> <span class="nav-text">快表（页表的Cache）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多级页表"><span class="nav-number">2.2.5.2.</span> <span class="nav-text">多级页表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多进程时的物理内存（DRAM）"><span class="nav-number">2.3.</span> <span class="nav-text">多进程时的物理内存（DRAM）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址"><span class="nav-number">3.</span> <span class="nav-text">地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑地址、线性地址、物理地址"><span class="nav-number">3.1.</span> <span class="nav-text">逻辑地址、线性地址、物理地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三种地址的比较"><span class="nav-number">3.1.1.</span> <span class="nav-text">三种地址的比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU寻址方式"><span class="nav-number">3.1.2.</span> <span class="nav-text">CPU寻址方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑地址的作用"><span class="nav-number">3.1.3.</span> <span class="nav-text">逻辑地址的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题：多进程逻辑地址"><span class="nav-number">3.1.4.</span> <span class="nav-text">问题：多进程逻辑地址</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟内存"><span class="nav-number">4.</span> <span class="nav-text">虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">4.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部性原理"><span class="nav-number">4.2.</span> <span class="nav-text">局部性原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟存储器"><span class="nav-number">4.3.</span> <span class="nav-text">虚拟存储器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

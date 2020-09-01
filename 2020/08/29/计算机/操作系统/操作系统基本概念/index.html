@@ -103,10 +103,12 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-30T09:27:04.992Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901165336.png">
+<meta property="og:updated_time" content="2020-09-01T09:23:58.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统概述">
 <meta name="twitter:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901165336.png">
 
 
 
@@ -418,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-30 17:27:04" itemprop="dateModified" datetime="2020-08-30T17:27:04+08:00">2020-08-30</time>
+                <time title="Modified: 2020-09-01 17:23:58" itemprop="dateModified" datetime="2020-09-01T17:23:58+08:00">2020-09-01</time>
               
             
           </span>
@@ -481,8 +483,24 @@
 <p>HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="操作系统基础知识"><a href="#操作系统基础知识" class="headerlink" title="操作系统基础知识"></a>操作系统基础知识</h2><h3 id="什么是操作系统"><a href="#什么是操作系统" class="headerlink" title="什么是操作系统"></a>什么是操作系统</h3><p>操作系统实际是管理计算机软硬件资源的程序，使用户和硬件之间有了一个交互层，从而屏蔽了硬件的复杂性。</p>
-<h3 id="内核与用户态"><a href="#内核与用户态" class="headerlink" title="内核与用户态"></a>内核与用户态</h3><h4 id="为何要区分"><a href="#为何要区分" class="headerlink" title="为何要区分"></a>为何要区分</h4><p>限制不同程序间的访问能力，实际上就是进行了权限划分。</p>
+<h2 id="操作系统介绍"><a href="#操作系统介绍" class="headerlink" title="操作系统介绍"></a>操作系统介绍</h2><h3 id="什么是操作系统"><a href="#什么是操作系统" class="headerlink" title="什么是操作系统"></a>什么是操作系统</h3><p>操作系统实际是管理计算机软硬件资源的程序（CPU、内存、硬盘等）；使用户和硬件之间有了一个交互层，从而屏蔽了硬件的复杂性并保证硬件使用的安全性（通过系统调用）。同时，操作系统还负责协调多任务的调度。总结一下操作系统的特性</p>
+<ol>
+<li>直接访问硬件</li>
+<li>隐藏硬件复杂性</li>
+<li>管理软硬件</li>
+<li>协调、隔离并保护上层应用程序</li>
+</ol>
+<p>用两个词总结操作系统，就是<strong>抽象</strong>和<strong>仲裁</strong>，抽象使我们可以忽视底层硬件的区别，采用相同的方式对其进行调用，而仲裁使得我们不必理会资源调用与管理的方式和时间，这些操作系统会替我们完成。</p>
+<h3 id="操作系统组成"><a href="#操作系统组成" class="headerlink" title="操作系统组成"></a>操作系统组成</h3><p>我们可以按照抽象和机制和策略，对于操作系统进行分解。操作系统对所需要的功能进行抽象，采用不同的机制对抽象的模块进行控制，同时控制过程有具体的策略。</p>
+<h4 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h4><p>进程、线程、文件、内存管理等</p>
+<h4 id="机制"><a href="#机制" class="headerlink" title="机制"></a>机制</h4><p>创建、调度、读写、重分配等</p>
+<h4 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h4><p>最近最少使用、先入先出等</p>
+<h4 id="例子：内存管理"><a href="#例子：内存管理" class="headerlink" title="例子：内存管理"></a>例子：内存管理</h4><p>我们有一些内存页面，当有一个进程时，我们对内存进行分配，然后映射给指定的进程，这样进程就可以访问指定的内存。由于内存页面可能会满，所以我们需要一些策略对页面进行置换，例如FIFO，LRU等。</p>
+<h3 id="操作系统设计原则"><a href="#操作系统设计原则" class="headerlink" title="操作系统设计原则"></a>操作系统设计原则</h3><ol>
+<li>能够支持多种机制和策略，例如支持LRU、LFU和random。</li>
+<li>考虑OS使用场景、环境、用户等</li>
+</ol>
+<h3 id="内核与用户态（区分边界）"><a href="#内核与用户态（区分边界）" class="headerlink" title="内核与用户态（区分边界）"></a>内核与用户态（区分边界）</h3><h4 id="为何要区分"><a href="#为何要区分" class="headerlink" title="为何要区分"></a>为何要区分</h4><p>限制不同程序间的访问能力，实际上就是进行了权限划分。</p>
 <h4 id="用户态"><a href="#用户态" class="headerlink" title="用户态"></a>用户态</h4><p>只能受限的访问内存，且不允许访问外围设备，占用cpu的能力被剥夺，cpu资源可以被其他程序获取。</p>
 <h4 id="内核"><a href="#内核" class="headerlink" title="内核"></a>内核</h4><p>内核是操作系统的核心，负责内存、硬件、文件系统以及应用程序的管理，是连接应用程序和硬件的桥梁。在内核态中，cpu可以访问内存的所有数据，包括外围设备，例如硬盘，网卡，cpu也可以将自己从一个程序切换到另一个程序。</p>
 <pre class="mermaid">graph TB
@@ -497,13 +515,98 @@
     node1-->node22
     node1-->node23</pre>
 
-<h4 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h4><p>一般的应用程序都是运行在用户态，当需要调用操作系统的系统态级别的功能时，例如<strong>文件管理、进程控制、内存管理等</strong>，都必须通过系统调用的方式向操作系统提出请求。这些系统调用可以分为：</p>
+<h4 id="系统调用（用户和内核态间交互）"><a href="#系统调用（用户和内核态间交互）" class="headerlink" title="系统调用（用户和内核态间交互）"></a>系统调用（用户和内核态间交互）</h4><p>一般的应用程序都是运行在用户态，当需要调用操作系统的系统态级别的功能时，例如<strong>文件管理、进程控制、内存管理等</strong>，都必须通过系统调用的方式向操作系统提出请求。这些系统调用可以分为：</p>
 <ul>
 <li>设备管理：设备请求、启动、释放等</li>
 <li>文件管理：文件创建、读写、删除等</li>
 <li>进程控制：进程创建、撤销、阻塞、唤醒及进程间通信</li>
 <li>内存管理：内存获取、回收及获得内存大小和地址等功能</li>
 </ul>
+<h5 id="系统调用过程"><a href="#系统调用过程" class="headerlink" title="系统调用过程"></a>系统调用过程</h5><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901165336.png" width="400" alt="图片名称" align="center"></p>
+<h5 id="常见的系统调用（API）"><a href="#常见的系统调用（API）" class="headerlink" title="常见的系统调用（API）"></a>常见的系统调用（API）</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>API名称</th>
+<th>具体功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进程控制</td>
+<td>fork</td>
+<td>创建子进程</td>
+</tr>
+<tr>
+<td></td>
+<td>exit</td>
+<td>退出</td>
+</tr>
+<tr>
+<td></td>
+<td>wait</td>
+<td>等待</td>
+</tr>
+<tr>
+<td>文件管理</td>
+<td>open</td>
+<td>创建/打开文件</td>
+</tr>
+<tr>
+<td></td>
+<td>read</td>
+<td>读</td>
+</tr>
+<tr>
+<td></td>
+<td>write</td>
+<td>写</td>
+</tr>
+<tr>
+<td></td>
+<td>close</td>
+<td>关闭</td>
+</tr>
+<tr>
+<td>设备操作</td>
+<td>ioctl</td>
+<td>io控制</td>
+</tr>
+<tr>
+<td></td>
+<td>read</td>
+<td>读</td>
+</tr>
+<tr>
+<td></td>
+<td>write</td>
+<td>写</td>
+</tr>
+<tr>
+<td>通信</td>
+<td>pipe</td>
+<td>管道</td>
+</tr>
+<tr>
+<td></td>
+<td>shmget</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h4><p>除了系统调用，我们还可以通过信号的方式实现内核和用户态的交互。</p>
+<h2 id="操作系统架构"><a href="#操作系统架构" class="headerlink" title="操作系统架构"></a>操作系统架构</h2><h3 id="不同架构方式"><a href="#不同架构方式" class="headerlink" title="不同架构方式"></a>不同架构方式</h3><h4 id="宏操作系统"><a href="#宏操作系统" class="headerlink" title="宏操作系统"></a>宏操作系统</h4><h4 id="模块系统"><a href="#模块系统" class="headerlink" title="模块系统"></a>模块系统</h4><p>将不同功能划分为不同模块，并提供相应接口，可以启动各种模块实现不同的功能。这个是现今最常用的操作系统架构。</p>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>维护性好、系统资源占用少</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>通过模块访问功能增加了性能开销，模块间维护可能出现困难</p>
+<h4 id="微内核操作系统"><a href="#微内核操作系统" class="headerlink" title="微内核操作系统"></a>微内核操作系统</h4><p>微内核，顾名思义，其内核只掌控很少一部分功能，其他功能都交由上层用户态的程序。一般来说，微内核需要支持进程间通信、地址空间和线程。而文件、数据库、设备等交由上层管理。</p>
+<h3 id="linux架构方式"><a href="#linux架构方式" class="headerlink" title="linux架构方式"></a>linux架构方式</h3><p>linux架构可以分为三层</p>
+<h4 id="用户态-1"><a href="#用户态-1" class="headerlink" title="用户态"></a>用户态</h4><h5 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h5><h5 id="标准用户程序"><a href="#标准用户程序" class="headerlink" title="标准用户程序"></a>标准用户程序</h5><p>shell、编辑器及编译器等</p>
+<h5 id="系统调用接口"><a href="#系统调用接口" class="headerlink" title="系统调用接口"></a>系统调用接口</h5><p>系统调用相关API</p>
+<h4 id="内核态"><a href="#内核态" class="headerlink" title="内核态"></a>内核态</h4><p>进程管理、内存管理、文件系统</p>
+<h4 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h4><p>CPU、内存、硬盘、IO设备等</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="http://115.78.133.167:81/bitstream/TVHG_07113876976/270/1/OReilly%20-%20Understanding%20The%20Linux%20Kernel.pdf">Bovet D P, Cesati M. Understanding the Linux Kernel: from I/O ports to process management[M]. &quot; O'Reilly Media, Inc.&quot;, 2005.</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/operating-system/basis.md">操作系统面试指南</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -576,6 +679,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/01/计算机/操作系统/IO/" rel="prev" title="IO">
+                IO <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -651,7 +758,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">199</span>
+                    <span class="site-state-item-count">202</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -875,7 +982,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统基础知识"><span class="nav-number">1.</span> <span class="nav-text">操作系统基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">什么是操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核与用户态"><span class="nav-number">1.2.</span> <span class="nav-text">内核与用户态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为何要区分"><span class="nav-number">1.2.1.</span> <span class="nav-text">为何要区分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户态"><span class="nav-number">1.2.2.</span> <span class="nav-text">用户态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内核"><span class="nav-number">1.2.3.</span> <span class="nav-text">内核</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用"><span class="nav-number">1.2.4.</span> <span class="nav-text">系统调用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统介绍"><span class="nav-number">1.</span> <span class="nav-text">操作系统介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是操作系统"><span class="nav-number">1.1.</span> <span class="nav-text">什么是操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统组成"><span class="nav-number">1.2.</span> <span class="nav-text">操作系统组成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽象"><span class="nav-number">1.2.1.</span> <span class="nav-text">抽象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#机制"><span class="nav-number">1.2.2.</span> <span class="nav-text">机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#策略"><span class="nav-number">1.2.3.</span> <span class="nav-text">策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子：内存管理"><span class="nav-number">1.2.4.</span> <span class="nav-text">例子：内存管理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统设计原则"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核与用户态（区分边界）"><span class="nav-number">1.4.</span> <span class="nav-text">内核与用户态（区分边界）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为何要区分"><span class="nav-number">1.4.1.</span> <span class="nav-text">为何要区分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户态"><span class="nav-number">1.4.2.</span> <span class="nav-text">用户态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内核"><span class="nav-number">1.4.3.</span> <span class="nav-text">内核</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用（用户和内核态间交互）"><span class="nav-number">1.4.4.</span> <span class="nav-text">系统调用（用户和内核态间交互）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#系统调用过程"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">系统调用过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#常见的系统调用（API）"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">常见的系统调用（API）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号"><span class="nav-number">1.4.5.</span> <span class="nav-text">信号</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统架构"><span class="nav-number">2.</span> <span class="nav-text">操作系统架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不同架构方式"><span class="nav-number">2.1.</span> <span class="nav-text">不同架构方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#宏操作系统"><span class="nav-number">2.1.1.</span> <span class="nav-text">宏操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模块系统"><span class="nav-number">2.1.2.</span> <span class="nav-text">模块系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#微内核操作系统"><span class="nav-number">2.1.3.</span> <span class="nav-text">微内核操作系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux架构方式"><span class="nav-number">2.2.</span> <span class="nav-text">linux架构方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用户态-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">用户态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#UI"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">UI</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准用户程序"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">标准用户程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统调用接口"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">系统调用接口</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内核态"><span class="nav-number">2.2.2.</span> <span class="nav-text">内核态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#硬件"><span class="nav-number">2.2.3.</span> <span class="nav-text">硬件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
