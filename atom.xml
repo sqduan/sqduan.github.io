@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-01T11:30:49.917Z</updated>
+  <updated>2020-09-03T11:44:42.310Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>线程</title>
+    <link href="http://yoursite.com/2020/09/03/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B/"/>
+    <id>http://yoursite.com/2020/09/03/计算机/操作系统/线程/</id>
+    <published>2020-09-03T07:47:46.150Z</published>
+    <updated>2020-09-03T11:44:42.310Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>最后他的身躯一点点消散，留下了苍老的浮云和涛声，而他的血管，业已成为那条河的支流。</p></blockquote><a id="more"></a><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>线程是CPU进行调度和分配的基本方式，一个CPU在一个时间只能运行一个线程。我们要注意程序为何要设计成多线程的，在一开始CPU都是单核的，其实这种情况下程序执行的最快的方式就是单核单线程，但是这样会带来并发问题，例如当处理IO时，如果只是单线程的，就会导致阻塞，此时CPU无事可做，所以我们开始将程序设计为多线程，从而实现并发。给我们一种错觉，就是同一时间有多个程序在执行。</p><h3 id="线程的特点及优点"><a href="#线程的特点及优点" class="headerlink" title="线程的特点及优点"></a>线程的特点及优点</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>线程是轻量化的进程，其特点为：</p><ul><li>共享代码、数据、文件和内存地址</li><li>独有寄存器（程序计数器）和栈空间，因为每个线程执行速度是不一样的</li></ul><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><h5 id="单CPU"><a href="#单CPU" class="headerlink" title="单CPU"></a>单CPU</h5><p>充分利用CPU，令$t_i$为线程1的空闲时间，$t_s$为上下文切换时间，那么当满足下面公式时，进行多线程可以提高CPU利用率。一般来说，线程切换比进程切换开销小很多。</p><script type="math/tex; mode=display">t_i>2t_s</script><h5 id="多CPU"><a href="#多CPU" class="headerlink" title="多CPU"></a>多CPU</h5><ol><li>加速</li><li>专业化，每个线程做特定的工作，也可以保证hot cache</li></ol><h3 id="支持线程机制的要素"><a href="#支持线程机制的要素" class="headerlink" title="支持线程机制的要素"></a>支持线程机制的要素</h3><ul><li>thread data struct：和PCB一样，用于对线程进行描述。</li><li>创建和管理线程的机制</li><li>多线程合作的机制：由于多线程共享内存地址，所以会导致同步问题</li></ul><h4 id="Thread-data-structure"><a href="#Thread-data-structure" class="headerlink" title="Thread data structure"></a>Thread data structure</h4><p>一个完善的线程数据结构应包括：线程ID、程序计数器、栈顶指针（SP）、栈段以及其他的一些关键属性。</p><h4 id="线程创建和管理"><a href="#线程创建和管理" class="headerlink" title="线程创建和管理"></a>线程创建和管理</h4><h5 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h5><p>fork，创建一个线程而非进程，线程创建的同时，还会初始化线程数据结构。</p><h5 id="join"><a href="#join" class="headerlink" title="join"></a>join</h5><p>当父线程t0对子线程t1调用join时，<code>join(t1)</code>，那么父线程会被阻塞，直到子线程返回。同时，join将会返回子线程的计算结果。</p><h4 id="线程创建的例子（伪代码）"><a href="#线程创建的例子（伪代码）" class="headerlink" title="线程创建的例子（伪代码）"></a>线程创建的例子（伪代码）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Thread thread1;</span><br><span class="line">Shared_list list;</span><br><span class="line">thread1 = fork(safe_insert,4);</span><br><span class="line">safe_insert(6);</span><br><span class="line">join(thread1);   //这里join是一个非必须的语句，因为很有可能执行到这一步时，thread1已经执行完了，那么join会立刻返回</span><br></pre></td></tr></table></figure><p>这个代码没有考虑线程调用顺序，因此会导致结果的不确定性。</p><h2 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h2><ol><li>先来先服务：从就绪队列选择最早来到的任务</li><li>短作业优先：估计运行时间最短的任务</li><li>时间片轮转调度：最简单、最公平的方式</li><li>高响应比优先</li><li>优先权调度算法</li><li>多级队列调度：既能使高优先级的作业得到响应又能使短作业（进程）迅速完成，是比较好的调度策略</li></ol><h2 id="进程与线程的区别"><a href="#进程与线程的区别" class="headerlink" title="进程与线程的区别"></a>进程与线程的区别</h2><ol><li>进程是操作系统进行资源分配的最小单位，而线程是CPU进行任务调度的最小单位。一个进程至少包含一个线程</li><li>进程有独立的地址空间，每次启动一个进程，系统会分配地址空间，同时建立数据表维护代码、数据、堆栈段，开销很大。而线程共享代码段（代码与常量）、数据段（全局变量与静态变量）和堆段，开销小很多，但是每个线程有自己的栈段（局部变量和临时变量）。创建与切换线程的开销比创建切换线程大很多。</li><li>线程间通信更方便，同一进程下的线程共享全局变量、静态变量等数据，进程间通信需要以通信方式进行，但是多线程需要处理好同步与互斥。</li><li>多进程程序更健壮，一个进程的消亡不会影响另外的进程；而多线程的程序有一个线程死掉，整个进程就会死掉。</li></ol><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最后他的身躯一点点消散，留下了苍老的浮云和涛声，而他的血管，业已成为那条河的支流。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>内存</title>
@@ -45,7 +69,7 @@
     <link href="http://yoursite.com/2020/09/01/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8/"/>
     <id>http://yoursite.com/2020/09/01/计算机/操作系统/内核/</id>
     <published>2020-09-01T09:08:26.650Z</published>
-    <updated>2020-09-01T09:13:43.445Z</updated>
+    <updated>2020-09-03T07:47:52.800Z</updated>
     
     <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>Look, this is my heart</p></blockquote><a id="more"></a><h2 id="内核的架构模式"><a href="#内核的架构模式" class="headerlink" title="内核的架构模式"></a>内核的架构模式</h2><h3 id="宏内核（Monolithic-kernel）"><a href="#宏内核（Monolithic-kernel）" class="headerlink" title="宏内核（Monolithic kernel）"></a>宏内核（Monolithic kernel）</h3><p>也被称为集成式内核，用户态和内核态在同一空间中实现，管理的资源多</p><h3 id="微内核"><a href="#微内核" class="headerlink" title="微内核"></a>微内核</h3><h3 id="不同架构对比"><a href="#不同架构对比" class="headerlink" title="不同架构对比"></a>不同架构对比</h3><div class="table-container"><table><thead><tr><th></th><th>微内核</th><th>宏内核</th></tr></thead><tbody><tr><td>尺寸</td><td>小</td><td>大</td></tr><tr><td>执行速度</td><td>慢</td><td>快</td></tr><tr><td>扩展性</td><td>容易</td><td>不易</td></tr><tr><td>安全性</td><td>单个服务崩溃不影响全局</td><td>单个服务崩溃往往导致系统崩溃</td></tr><tr><td>例子</td><td>塞班、Mac OS</td><td>Linux、Windos</td></tr></tbody></table></div><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
     
@@ -458,28 +482,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="算法和数据结构" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>网络硬件设备</title>
-    <link href="http://yoursite.com/2020/08/18/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/%E7%BD%91%E7%BB%9C%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87/"/>
-    <id>http://yoursite.com/2020/08/18/计算机/网络通信/网络硬件设备/</id>
-    <published>2020-08-18T02:38:14.389Z</published>
-    <updated>2020-08-18T03:10:35.949Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>网络相关的硬件设备构成了现代网络的骨血，本文将针对网络中常见硬件设备的类型、功能、工作协议以及连接关系进行总结。</p><a id="more"></a><h2 id="常见的网络硬件"><a href="#常见的网络硬件" class="headerlink" title="常见的网络硬件"></a>常见的网络硬件</h2><p>常见网络硬件包括网卡、中继器、桥接器、交换机和路由器，本节将针对这些设备分别进行介绍。</p><h3 id="网卡（网络适配器）"><a href="#网卡（网络适配器）" class="headerlink" title="网卡（网络适配器）"></a>网卡（网络适配器）</h3><p>网卡工作在数据链路层，是连接计算机和传输介质的接口，其职责是局域网传输介质间物理及电气连接，在软件层面还涉及帧的发送接收、封装解封、数据编解码及缓存等。</p><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p>网卡上装有处理器和存储器（ROM和RAM），网卡与局域网的通信通过串行方式传输，而和计算机间的通信通过IO总线以并行方式传输，这个过程中会发生串/并行转换以及速率匹配。</p><h4 id="接口与协议"><a href="#接口与协议" class="headerlink" title="接口与协议"></a>接口与协议</h4><p>这里以瑞昱公司的RTL8821CE无线网络适配器为例，对其硬件配置及相关协议信息进行一个总结。</p><ul><li>接口：PCI-e 1.1接口</li><li>无线网络标准：IEEE 802.11ac</li></ul><h3 id="中继器"><a href="#中继器" class="headerlink" title="中继器"></a>中继器</h3><p>中继器起到远距离传输时信号放大的功能，但是噪声也会被放大，所以目前普遍已经被淘汰。</p><h3 id="桥接器（网桥）"><a href="#桥接器（网桥）" class="headerlink" title="桥接器（网桥）"></a>桥接器（网桥）</h3><p>网桥工作在OSI模型中的数据链路层，用于两个局域网进行连接，根据MAC地址实现存储转发，</p><h3 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h3><p>路由器工作在OSI第三层即网络层，负责在通信终端和互联网之间转发IP数据包。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://blog.csdn.net/u010757264/article/details/50748336">网络硬件设备</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;网络相关的硬件设备构成了现代网络的骨血，本文将针对网络中常见硬件设备的类型、功能、工作协议以及连接关系进行总结。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="网络通信" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/"/>
     
     
   </entry>

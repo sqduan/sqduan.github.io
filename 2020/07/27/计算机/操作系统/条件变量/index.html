@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="We’re going to make you an offer you can’t refuse.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-27T03:37:40.547Z">
+<meta property="og:updated_time" content="2020-09-03T11:35:53.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="条件变量">
 <meta name="twitter:description" content="We’re going to make you an offer you can’t refuse.">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-07-27 10:40:02 / Modified: 11:37:40" itemprop="dateCreated datePublished" datetime="2020-07-27T10:40:02+08:00">2020-07-27</time>
+              <time title="Created: 2020-07-27 10:40:02" itemprop="dateCreated datePublished" datetime="2020-07-27T10:40:02+08:00">2020-07-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-03 19:35:53" itemprop="dateModified" datetime="2020-09-03T19:35:53+08:00">2020-09-03</time>
               
             
           </span>
@@ -469,7 +481,7 @@
 <p>We’re going to make you an offer you can’t refuse.</p>
 </blockquote>
 <a id="more"></a>
-<p>在多线程并发的程序中，我们有互斥锁的机制保证线程同步，但在有些情况下，仅仅依靠互斥锁是不够的，我们还需要使用条件变量对线程进行修饰，与互斥锁不同，条件变量的作用是自动阻塞一个线程，直到特殊情况发生为止。通常我们会同时使用条件变量和互斥锁来实现相应的功能。</p>
+<p>在多线程并发的程序中，我们有互斥锁的机制保证线程同步，但在有些情况下，仅仅依靠互斥锁是不够的，我们有时还会遇到下面的情况：令一个线程等待，直到特殊情况发生为止。例如</p>
 <h2 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h2><p>条件变量是多线程程序中用来实现“等待—&gt;唤醒”机制的手段，以两个线程为例，通常我们会执行如下动作：</p>
 <ul>
 <li>线程1等待条件变量指定的条件成立，如果不成立，则挂起</li>
@@ -637,7 +649,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">202</span>
+                    <span class="site-state-item-count">203</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

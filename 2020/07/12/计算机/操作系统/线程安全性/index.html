@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="优先考虑安全，其次是性能">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-14T01:58:34.242Z">
+<meta property="og:updated_time" content="2020-09-03T08:51:09.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程安全性">
 <meta name="twitter:description" content="优先考虑安全，其次是性能">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-07-14 09:58:34" itemprop="dateModified" datetime="2020-07-14T09:58:34+08:00">2020-07-14</time>
+                <time title="Modified: 2020-09-03 16:51:09" itemprop="dateModified" datetime="2020-09-03T16:51:09+08:00">2020-09-03</time>
               
             
           </span>
@@ -493,9 +493,10 @@
 <li>线程同步即当有一个线程在对内存进行操作，其他线程都不可以对这个内存进行操作，只能等到该线程操作完成</li>
 <li>线程异步即所有线程均可对内存进行操作，这是线程不安全的</li>
 </ul>
+<h3 id="同步方式"><a href="#同步方式" class="headerlink" title="同步方式"></a>同步方式</h3><p>互斥量、读写锁、自旋锁（等待其他线程完成）、线程信号、条件变量（特定条件下唤醒线程）。这部分内容详见<a href="/2020/07/17/计算机/操作系统/锁/" title="线程锁">线程锁</a>和<a href="/2020/07/27/计算机/操作系统/条件变量/" title="条件变量">条件变量</a></p>
 <h2 id="可重入性与线程安全性"><a href="#可重入性与线程安全性" class="headerlink" title="可重入性与线程安全性"></a>可重入性与线程安全性</h2><h3 id="函数和类的可重入性与线程安全性"><a href="#函数和类的可重入性与线程安全性" class="headerlink" title="函数和类的可重入性与线程安全性"></a>函数和类的可重入性与线程安全性</h3><ul>
-<li>一个可重入的函数能同时被多个线程调用，但是函数只使用其内部的非静态局部变量</li>
-<li>一个线程安全的函数可以同时被多个线程调用，同时也可以使用共享内存空间，只要该内存空间具有保护措施</li>
+<li>一个可重入的函数：能同时被多个线程调用，但是函数只使用其内部的非静态局部变量</li>
+<li>一个线程安全的函数：能同时被多个线程调用，同时也可以使用共享内存空间，只要该内存空间具有保护措施</li>
 </ul>
 <p>一个线程安全的函数一定是可重入的，反之未必。</p>
 <p>类似地，一个类是可重入的是指该类的成员函数可以被多个线程同时调用，但是每个线程使用不同的类实例；而一个类是线程安全的是指该类的成员函数可以被多个线程同时调用，尽管所有的线程都使用一个类实例。</p>
@@ -654,7 +655,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">202</span>
+                    <span class="site-state-item-count">203</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -878,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#竞态条件与临界区"><span class="nav-number">1.</span> <span class="nav-text">竞态条件与临界区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步-amp-异步"><span class="nav-number">2.</span> <span class="nav-text">同步&amp;异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程同步与异步"><span class="nav-number">2.1.</span> <span class="nav-text">线程同步与异步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可重入性与线程安全性"><span class="nav-number">3.</span> <span class="nav-text">可重入性与线程安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数和类的可重入性与线程安全性"><span class="nav-number">3.1.</span> <span class="nav-text">函数和类的可重入性与线程安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可重入性"><span class="nav-number">3.2.</span> <span class="nav-text">可重入性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全"><span class="nav-number">3.3.</span> <span class="nav-text">线程安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#竞态条件与临界区"><span class="nav-number">1.</span> <span class="nav-text">竞态条件与临界区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步-amp-异步"><span class="nav-number">2.</span> <span class="nav-text">同步&amp;异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程同步与异步"><span class="nav-number">2.1.</span> <span class="nav-text">线程同步与异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步方式"><span class="nav-number">2.2.</span> <span class="nav-text">同步方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可重入性与线程安全性"><span class="nav-number">3.</span> <span class="nav-text">可重入性与线程安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数和类的可重入性与线程安全性"><span class="nav-number">3.1.</span> <span class="nav-text">函数和类的可重入性与线程安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可重入性"><span class="nav-number">3.2.</span> <span class="nav-text">可重入性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程安全"><span class="nav-number">3.3.</span> <span class="nav-text">线程安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
