@@ -96,19 +96,17 @@
 
 
 
-  <meta name="description" content="状态机在处理一些比较复杂的状态转移问题时往往非常有用。它能够较为清晰地列举出每种状态之间的关系，当给定某个输入时，能够给出输出的状态，本文将对状态机的知识及使用场景进行总结。">
+  <meta name="description" content="You are just a part of the machine, you have nothing special, now, get back to work.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="状态机">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/计算机/算法/状态机/index.html">
+<meta property="og:title" content="多线程并发">
+<meta property="og:url" content="http://yoursite.com/2020/09/03/计算机/操作系统/多线程并发/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="状态机在处理一些比较复杂的状态转移问题时往往非常有用。它能够较为清晰地列举出每种状态之间的关系，当给定某个输入时，能够给出输出的状态，本文将对状态机的知识及使用场景进行总结。">
+<meta property="og:description" content="You are just a part of the machine, you have nothing special, now, get back to work.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/statemachine.jpg">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.801Z">
+<meta property="og:updated_time" content="2020-09-04T07:36:50.064Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="状态机">
-<meta name="twitter:description" content="状态机在处理一些比较复杂的状态转移问题时往往非常有用。它能够较为清晰地列举出每种状态之间的关系，当给定某个输入时，能够给出输出的状态，本文将对状态机的知识及使用场景进行总结。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/statemachine.jpg">
+<meta name="twitter:title" content="多线程并发">
+<meta name="twitter:description" content="You are just a part of the machine, you have nothing special, now, get back to work.">
 
 
 
@@ -118,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/计算机/算法/状态机/">
+  <link rel="canonical" href="http://yoursite.com/2020/09/03/计算机/操作系统/多线程并发/">
 
 
 
@@ -128,7 +126,7 @@
   };
 </script>
 
-  <title>状态机 | 一隅</title>
+  <title>多线程并发 | 一隅</title>
   
 
 
@@ -360,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/计算机/算法/状态机/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/03/计算机/操作系统/多线程并发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -377,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">状态机
+          <h1 class="post-title" itemprop="name headline">多线程并发
 
               
             
@@ -403,9 +401,25 @@
                 
               
 
-              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+              <time title="Created: 2020-09-03 20:17:44" itemprop="dateCreated datePublished" datetime="2020-09-03T20:17:44+08:00">2020-09-03</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-04 15:36:50" itemprop="dateModified" datetime="2020-09-04T15:36:50+08:00">2020-09-04</time>
+              
             
           </span>
 
@@ -428,7 +442,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/算法和数据结构/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
 
                 
                 
@@ -463,154 +477,64 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>状态机在处理一些比较复杂的状态转移问题时往往非常有用。它能够较为清晰地列举出每种状态之间的关系，当给定某个输入时，能够给出输出的状态，本文将对状态机的知识及使用场景进行总结。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>You are just a part of the machine, you have nothing special, now, get back to work.</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="状态机定义及分类"><a href="#状态机定义及分类" class="headerlink" title="状态机定义及分类"></a>状态机定义及分类</h2><p>状态机由状态寄存器和组合逻辑电路构成，能够根据控制信号按照预先设定的状态进行状态转移，是协调相关信号动作、完成特定操作的控制中心。有限状态机简写为FSM（Finite State Machine），主要分为2大类：</p>
+<p>由于并发的复杂性，我们需要详细地针对并发进行设计，本文将针对多线程编程过程当中的一些并发设计及模式进行总结。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>在进行多线程编程时，我们需要注意以下几点：</p>
 <ul>
-<li><p>Moore机：若输出只和状态有关而与输入无关</p>
-</li>
-<li><p>Mealy状态机：输出不仅和状态有关而且和输入有关系</p>
-</li>
+<li>追踪锁保护的资源（变量、文件等）</li>
+<li>确保正确上锁、解锁配对</li>
+<li>不要对资源上多把锁</li>
+<li>确保发送正确的条件</li>
+<li>区分单播/广播的场景</li>
+<li>线程之间需要优先级吗？因为多线程可能很难控制哪一个线程先执行</li>
 </ul>
-<p>在算法中，状态机是一个有向图形，由一组节点和一组相应的转移函数组成。状态机通过响应一系列事件而“运行”。每个事件都在属于“当前” 节点的转移函数的控制范围内，其中函数的范围是节点的一个子集。函数返回“下一个”（也许是同一个）节点。<strong>这些节点中至少有一个必须是终态</strong>。当到达终态， 状态机停止。</p>
-<h2 id="状态机的组成"><a href="#状态机的组成" class="headerlink" title="状态机的组成"></a>状态机的组成</h2><ul>
-<li>状态集（states）</li>
-<li>一个起始状态（start state）</li>
-<li>一组输入符号集（alphabet）</li>
-<li>一个映射输入符号</li>
-<li>当前状态到下一状态的转换函数（transition function）的计算模型</li>
+<h2 id="生产者-消费者模式（P-C）"><a href="#生产者-消费者模式（P-C）" class="headerlink" title="生产者/消费者模式（P/C）"></a>生产者/消费者模式（P/C）</h2><p>生产者消费者模式也成为有限缓冲模式，是多进程同步的经典模式。这个模式很简单，有若干数据的生产者和消费者，共享固定宽度的缓冲区，生产者产生数据并填入缓冲区，消费者从缓冲区取出数据进行使用。</p>
+<pre class="mermaid">graph LR
+    node((生产者))
+    node1["缓冲区"]
+    node2((消费者))
+    node--生产数据-->node1
+    node1--消费数据-->node2</pre>
+
+<h3 id="P-C模式关键问题"><a href="#P-C模式关键问题" class="headerlink" title="P/C模式关键问题"></a>P/C模式关键问题</h3><p>PC模式的一个关键问题是，如何协调生产速度和消费速度，确保生产者不会在缓冲区满时加入数据，消费者也不会在缓冲区中空时消耗数据。那么如何保证上面这一点呢，我们可以采用如下手段：</p>
+<h4 id="轮询方式（低效）"><a href="#轮询方式（低效）" class="headerlink" title="轮询方式（低效）"></a>轮询方式（低效）</h4><p>在轮询方式中，生产者和消费者在执行操作前，先判断是否符合操作条件，如果符合，就执行操作，否则就不执行，这个过程是很低效的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// main</span><br><span class="line">for i=0..10</span><br><span class="line">    producers[i] = fork(insert_data, NULL)</span><br><span class="line">consumer = fork(get_data, my_list)</span><br><span class="line"></span><br><span class="line">//生产者: insert_data</span><br><span class="line">lock(m)</span><br><span class="line">    if my_list.not_full -&gt; insert data</span><br><span class="line">    else -&gt; 释放锁，然后过一会儿尝试插入数据</span><br><span class="line">unlock(m)</span><br><span class="line"></span><br><span class="line">// consumer: get_data</span><br><span class="line">lock(m)</span><br><span class="line">	if my_list.full -&gt; print and clean my_list</span><br><span class="line">	else -&gt; 释放锁，然后过一会儿等待buff满了再尝试 这个过程非常低效！！</span><br><span class="line">unlock(m)</span><br></pre></td></tr></table></figure>
+<h4 id="条件变量方式"><a href="#条件变量方式" class="headerlink" title="条件变量方式"></a>条件变量方式</h4><p>在条件变量方式中，生产者和消费者通过条件变量建立联系，消费者在buffer没有满时等待，如果满了就被唤醒，处理buffer数据并清空；而生产者插入数据，如果buffer满了，就唤醒消费者。具体的条件变量的使用请参考<a href="/2020/07/27/计算机/操作系统/条件变量/" title="条件变量">条件变量</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 消费者</span><br><span class="line">lock(m)</span><br><span class="line">	while(my_list.not_full)    //使用while防止虚假唤醒</span><br><span class="line">		wait(m, list_full)     //进入wait时自动释放锁，从wait中唤醒时自动获取锁</span><br><span class="line">	my_list.print and clear</span><br><span class="line">unlock(m)</span><br><span class="line"></span><br><span class="line">// 生产者</span><br><span class="line">lock(m)</span><br><span class="line"> 	my_list.insert()</span><br><span class="line"> 	if my_list is full</span><br><span class="line"> 		signal(list_full)      //发送唤醒信号 </span><br><span class="line"> unlock(m)</span><br></pre></td></tr></table></figure>
+<p>上面的代码中，我们使用了<code>while(my_list.not_full)</code>而不是<code>if(my_list.not_full)</code>，原因如下：</p>
+<p>为了支持多个消费者，当一个消费者被唤醒后到它实际获得锁的这个时间，可能有其他消费者先获得了锁，并处理清空了buff，如果此时不再判断buff是否为满，那么可能会出现处理空buff的情况。出现这个现象的根本原因是，我们无法保证被唤醒后的线程一定会抢到锁，也无法保证被唤醒后buff没有发生改变，所以我们需要while循环。这个现象叫做虚假唤醒。</p>
+<h2 id="读写模式"><a href="#读写模式" class="headerlink" title="读写模式"></a>读写模式</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在读写模式中，同一时间我们可以有多个读者读取一个空间，只能有0个或者1个写者对空间进行写入。如果我们采用互斥锁，那么空间是一个0或1的状态，要么可以访问，要么不能访问，且同一时间只能由一个线程访问，这个对于多个读者的情况是非常低效的。我们希望读线程都能同时访问这个空间。在读写模式中，我们会遇到三种情况：</p>
+<ol>
+<li>buff既没有读者也没有写者使用，这种情况读写均可（resource_counter：0）</li>
+<li>buff只有读者使用，这种情况buff可读（resource_counter：&gt;0）</li>
+<li>buff由写者占据，这种情况既不能读也不能由其他线程写（resource_counter：-1）</li>
+</ol>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>这部分需要多理解一下</p>
+<p>读者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//--------------进入临界区，下面这段代码实际上可以看作加一个大锁</span><br><span class="line">Lock(counter_mutex)                                  </span><br><span class="line">	while(resource_counter == -1)</span><br><span class="line">		Wait(counter_mutex, read_phase)</span><br><span class="line">	resource_counter++;   //增加读者，可以视为读者一个一个有序进入图书馆</span><br><span class="line">Unlock(counter_mutex)</span><br><span class="line">//--------------进入临界区，实际上可以看作加一个大锁</span><br><span class="line"></span><br><span class="line">// read data</span><br><span class="line"></span><br><span class="line">//--------------走出临界区，释放这个大锁</span><br><span class="line">Lock(counter_mutex)</span><br><span class="line">	resource_counter--;</span><br><span class="line">	if(resource_counter == 0)  // 没有读者也没有写者</span><br><span class="line">		Signal(write_phase)    // 只能通知一个写者进行写操作</span><br><span class="line">Unlock(counter_mutex)</span><br><span class="line">//--------------走出临界区，释放这个大锁</span><br></pre></td></tr></table></figure>
+<p>写者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//写前处理</span><br><span class="line">Lock(counter_mutex)</span><br><span class="line">	while(resource_counter != 0)</span><br><span class="line">		Wait(counter_mutex, write_phase) //等待write_phase 到来</span><br><span class="line">	resource_counter = -1;  //开始写</span><br><span class="line">Unlock(counter_mutex)</span><br><span class="line"></span><br><span class="line">// write data</span><br><span class="line"></span><br><span class="line">//写完后处理</span><br><span class="line">Lock(counter_mutex)</span><br><span class="line">	resource_counter = 0;  </span><br><span class="line">	Broadcast(read_phase)   // 通知所有读者进行读操作</span><br><span class="line">	Signal(write_phase)     // 通知其他某一个写者进行写操作</span><br><span class="line">	// 此处我们无法控制到底是读者先读还是写者先写</span><br><span class="line">Unlock(counter_mutex)</span><br></pre></td></tr></table></figure>
+<p>从上面的代码中我们可以看出，读写操作实际上不是在临界区进行的，而是依靠<code>resource_counter</code>这个变量进行辅助控制，同一时间只能有一个线程对<code>resource_counter</code>进行访问，但是有多个线程可以读取数据。</p>
+<h3 id="临界区结构"><a href="#临界区结构" class="headerlink" title="临界区结构"></a>临界区结构</h3><p>从读写模式中，我们可以抽象出基于代理变量的临界区保护结构，分别为进入临界区和退出临界区，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Enter critical section              |    Exit critical section</span><br><span class="line">Lock(mutex)&#123;                        |    Lock(mutex)&#123;</span><br><span class="line">	while(!predicate)               |        update predicate</span><br><span class="line">		wait(mutex, cond_var)       |        signal/broadcast</span><br><span class="line">	update predicate                |    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="老板-工人模式"><a href="#老板-工人模式" class="headerlink" title="老板/工人模式"></a>老板/工人模式</h2><p>在老板/工人模式中，有一个老板线程用于分配任务（指挥），多个工人线程用于执行具体的任务（执行）。在这种模式下，必须保证老板线程是高效的，如果老板的效率不高，那么有些工人就分配不到任务。在这个模式中，老板通过通信直接向工人们分发任务</p>
+<h3 id="不同的工作方式"><a href="#不同的工作方式" class="headerlink" title="不同的工作方式"></a>不同的工作方式</h3><h4 id="老板直接通知工人指派任务"><a href="#老板直接通知工人指派任务" class="headerlink" title="老板直接通知工人指派任务"></a>老板直接通知工人指派任务</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>工人不需要同步，因为任务是老板指派的。</p>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>老板必须跟踪每一个工人的进度</p>
+<h4 id="通过生产者-消费者模式指派任务"><a href="#通过生产者-消费者模式指派任务" class="headerlink" title="通过生产者/消费者模式指派任务"></a>通过生产者/消费者模式指派任务</h4><p>在这种方式中，老板是任务生产者，而工人是任务消费者，这样我们就将问题转换为了生产者/消费者问题。老板通过将任务放入固定空间的队列中，通知工人工作</p>
+<h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><p>老板不需要了解工人工作的细节</p>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><p>工人们需要自己去同步</p>
+<h3 id="工人数设置"><a href="#工人数设置" class="headerlink" title="工人数设置"></a>工人数设置</h3><p>在老板/工人模式中，一个重要的问题就是我们需要多少工人，来实现良好的运作。工人不能太少也不能太多，取决于我们的需求。一个解决方案是设置一个线程池，对工人数量进行动态调整。同时，池子的规模也可以随需求增长。例如，我们可以参考vector的增长方式，按照指数型扩增vector。</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><h4 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h4><p>简单</p>
+<h4 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>线程池管理比较困难</li>
+<li>忽视局部性，当一个工人完成一个任务时，如果又来了一个类似的任务，那么他可以充分利用缓存来完成这个任务，但是在老板/工人模式中，他可能没得选择，只能去做别的任务。</li>
 </ul>
-<h2 id="状态机的使用步骤"><a href="#状态机的使用步骤" class="headerlink" title="状态机的使用步骤"></a>状态机的使用步骤</h2><p>本节将对状态机使用步骤进行总结，具体使用案例参考本文状态机应用章节。</p>
-<h3 id="考虑所有可能的状态和状态转移方程"><a href="#考虑所有可能的状态和状态转移方程" class="headerlink" title="考虑所有可能的状态和状态转移方程"></a>考虑所有可能的状态和状态转移方程</h3><p>我们将初始状态设为状态0，非法状态设为-1，然后根据状态转移方程，可以获得中间状态。</p>
-<h3 id="列出状态转移图"><a href="#列出状态转移图" class="headerlink" title="列出状态转移图"></a>列出状态转移图</h3><p>状态机最关键的一个步骤就是列出状态转移图。首先由初始态开始，然后根据不同的状态转移方程，列举出状态转移图</p>
-<h3 id="列出状态转移表"><a href="#列出状态转移表" class="headerlink" title="列出状态转移表"></a>列出状态转移表</h3><p>根据状态转移图，列出状态转移表，其中行表示不同的状态，列表示状态转移方程。</p>
-<h3 id="列出有效状态"><a href="#列出有效状态" class="headerlink" title="列出有效状态"></a>列出有效状态</h3><p>在所有状态中，筛选出符合条件的状态，并保存至一个集合中</p>
-<h3 id="根据状态表和有效状态，编写程序"><a href="#根据状态表和有效状态，编写程序" class="headerlink" title="根据状态表和有效状态，编写程序"></a>根据状态表和有效状态，编写程序</h3><h2 id="状态机应用"><a href="#状态机应用" class="headerlink" title="状态机应用"></a>状态机应用</h2><h3 id="判断某个字符串是否合法"><a href="#判断某个字符串是否合法" class="headerlink" title="判断某个字符串是否合法"></a>判断某个字符串是否合法</h3><p>LeetCode <a href="https://leetcode-cn.com/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/">面试题20. 表示数值的字符串</a></p>
-<p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”、”5e2”、”-123”、”3.1416”、”0123”及”-1E-16”都表示数值，但”12e”、”1a3.14”、”1.2.3”、”+-5”及”12e+5.4”都不是。</p>
-<p><strong>思路</strong></p>
-<ul>
-<li><p>设置初始状态为状态0，那么字符串中共有6个状态转移方程，分别是数字、小数点、+-号，指数标志e或E、空格、其他字符。</p>
-</li>
-<li><p>根据状态转移方程，获得中间状态并绘制状态转移图</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/statemachine.jpg" width="650" alt="图片名称" align="center"></p>
-<ul>
-<li>根据状态转移图列出状态转移方程</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">num</th>
-<th style="text-align:center">dot</th>
-<th style="text-align:center">+-</th>
-<th style="text-align:center">e</th>
-<th style="text-align:center">空格</th>
-<th style="text-align:center">other</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">0</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">3</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">4</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">1</td>
-<td style="text-align:center">2</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">6</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">7</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">9</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">5</td>
-<td style="text-align:center">-1</td>
-</tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">8</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-<td style="text-align:center">-1</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>列出有效状态</li>
-</ul>
-<p>legal_state = {1,4,5,6,8}</p>
-<p>完整代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">get_col</span><span class="params">(<span class="built_in">string</span>&amp; str, <span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>) str = <span class="string">"number"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">'.'</span>) str = <span class="string">"dot"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">'+'</span> || c == <span class="string">'-'</span>) str = <span class="string">"sign"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">'e'</span> || c == <span class="string">'E'</span>) str = <span class="string">"exp"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(<span class="string">'\ '</span> == c) str = <span class="string">"space"</span>;</span><br><span class="line">        <span class="keyword">else</span> str = <span class="string">"other"</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;   <span class="comment">//获得状态转移方程</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isNumber</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.empty()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; trans_table&#123;&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">-1</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">6</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">6</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">5</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">6</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">8</span>,<span class="number">-1</span>,<span class="number">9</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">8</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">5</span>,<span class="number">-1</span>&#125;,</span><br><span class="line">                                        &#123;<span class="number">8</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>,<span class="number">-1</span>&#125;&#125;;  <span class="comment">//状态转移表</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">unordered_set</span>&lt;<span class="keyword">int</span>&gt; legal_state&#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>&#125;;  <span class="comment">//有效状态</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; cols&#123;</span><br><span class="line">            &#123;<span class="string">"number"</span>, <span class="number">0</span>&#125;,</span><br><span class="line">            &#123;<span class="string">"dot"</span>, <span class="number">1</span>&#125;,</span><br><span class="line">            &#123;<span class="string">"sign"</span>,<span class="number">2</span>&#125;,</span><br><span class="line">            &#123;<span class="string">"exp"</span>,<span class="number">3</span>&#125;,</span><br><span class="line">            &#123;<span class="string">"space"</span>,<span class="number">4</span>&#125;,</span><br><span class="line">            &#123;<span class="string">"other"</span>,<span class="number">5</span>&#125;</span><br><span class="line">        &#125;;    <span class="comment">//状态映射</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> state = <span class="number">0</span>;       <span class="comment">//初始状态</span></span><br><span class="line">        <span class="built_in">string</span> trans_fun; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.size();i++)&#123;</span><br><span class="line">            get_col(trans_fun, s[i]);</span><br><span class="line">            state = trans_table[state][cols[trans_fun]]; <span class="comment">//状态转移</span></span><br><span class="line">            <span class="keyword">if</span>(state == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(legal_state.find(state) != legal_state.end()) <span class="keyword">return</span> <span class="literal">true</span>;  <span class="comment">//终态在有效状态中</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="流水线模式"><a href="#流水线模式" class="headerlink" title="流水线模式"></a>流水线模式</h2><p>在流水线中，每个工人只做特定的事情，熟练度很高。所以我们仿照流水线设计了流水线模式的程序。将一个大任务分解为若干步骤，然后每一个步骤由一些工人完成。如果我们能够令每个工人线程做特定的任务，那么就可以充分利用局部性，加快效率。当然这种改进也带来了负载均衡的问题，我们需要考虑每个任务需要多少工人，才能达到良好的均衡。流水线的效率取决于流水线中执行最慢的线程，所以我们要确保每个任务的平均时间能够达到一个微妙的平衡。</p>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>在将大任务分解为小任务后，我们需要对每个任务进行负载均衡，一个方法是使用线程池，动态调整工人的数目。</p>
+<h3 id="老板-工人模式和流水线模式效率比较"><a href="#老板-工人模式和流水线模式效率比较" class="headerlink" title="老板/工人模式和流水线模式效率比较"></a>老板/工人模式和流水线模式效率比较</h3><p>在任务不多的情况下，老板/工人模式效率比流水线模式高，但是在任务很多的情况下，使用流水线的效率会大大增加。（小作坊VS大工厂）</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
@@ -674,8 +598,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/计算机/算法/数组/" rel="next" title="数组">
-                <i class="fa fa-chevron-left"></i> 数组
+              <a href="/2020/09/03/计算机/操作系统/线程/" rel="next" title="线程">
+                <i class="fa fa-chevron-left"></i> 线程
               </a>
             
           </div>
@@ -683,10 +607,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/12/计算机/网络通信/网络模型/" rel="prev" title="网络模型">
-                网络模型 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -986,7 +906,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#状态机定义及分类"><span class="nav-number">1.</span> <span class="nav-text">状态机定义及分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态机的组成"><span class="nav-number">2.</span> <span class="nav-text">状态机的组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态机的使用步骤"><span class="nav-number">3.</span> <span class="nav-text">状态机的使用步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#考虑所有可能的状态和状态转移方程"><span class="nav-number">3.1.</span> <span class="nav-text">考虑所有可能的状态和状态转移方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出状态转移图"><span class="nav-number">3.2.</span> <span class="nav-text">列出状态转移图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出状态转移表"><span class="nav-number">3.3.</span> <span class="nav-text">列出状态转移表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列出有效状态"><span class="nav-number">3.4.</span> <span class="nav-text">列出有效状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据状态表和有效状态，编写程序"><span class="nav-number">3.5.</span> <span class="nav-text">根据状态表和有效状态，编写程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态机应用"><span class="nav-number">4.</span> <span class="nav-text">状态机应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判断某个字符串是否合法"><span class="nav-number">4.1.</span> <span class="nav-text">判断某个字符串是否合法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意事项"><span class="nav-number">1.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者-消费者模式（P-C）"><span class="nav-number">2.</span> <span class="nav-text">生产者/消费者模式（P/C）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P-C模式关键问题"><span class="nav-number">2.1.</span> <span class="nav-text">P/C模式关键问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#轮询方式（低效）"><span class="nav-number">2.1.1.</span> <span class="nav-text">轮询方式（低效）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件变量方式"><span class="nav-number">2.1.2.</span> <span class="nav-text">条件变量方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读写模式"><span class="nav-number">3.</span> <span class="nav-text">读写模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍"><span class="nav-number">3.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#临界区结构"><span class="nav-number">3.3.</span> <span class="nav-text">临界区结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#老板-工人模式"><span class="nav-number">4.</span> <span class="nav-text">老板/工人模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的工作方式"><span class="nav-number">4.1.</span> <span class="nav-text">不同的工作方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#老板直接通知工人指派任务"><span class="nav-number">4.1.1.</span> <span class="nav-text">老板直接通知工人指派任务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过生产者-消费者模式指派任务"><span class="nav-number">4.1.2.</span> <span class="nav-text">通过生产者/消费者模式指派任务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点-1"><span class="nav-number">4.1.2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点-1"><span class="nav-number">4.1.2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工人数设置"><span class="nav-number">4.2.</span> <span class="nav-text">工人数设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">4.3.</span> <span class="nav-text">优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点-2"><span class="nav-number">4.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点-2"><span class="nav-number">4.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流水线模式"><span class="nav-number">5.</span> <span class="nav-text">流水线模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡"><span class="nav-number">5.1.</span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#老板-工人模式和流水线模式效率比较"><span class="nav-number">5.2.</span> <span class="nav-text">老板/工人模式和流水线模式效率比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1174,7 +1094,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/计算机/算法/状态机/'
+    refer: '2020/09/03/计算机/操作系统/多线程并发/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
