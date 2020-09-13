@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="You are just a part of the machine, you have nothing special, now, get back to work.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-05T07:12:25.623Z">
+<meta property="og:updated_time" content="2020-09-13T08:04:58.528Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程并发">
 <meta name="twitter:description" content="You are just a part of the machine, you have nothing special, now, get back to work.">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-05 15:12:25" itemprop="dateModified" datetime="2020-09-05T15:12:25+08:00">2020-09-05</time>
+                <time title="Modified: 2020-09-13 16:04:58" itemprop="dateModified" datetime="2020-09-13T16:04:58+08:00">2020-09-13</time>
               
             
           </span>
@@ -501,7 +501,7 @@
 
 <h3 id="P-C模式关键问题"><a href="#P-C模式关键问题" class="headerlink" title="P/C模式关键问题"></a>P/C模式关键问题</h3><p>PC模式的一个关键问题是，如何协调生产速度和消费速度，确保生产者不会在缓冲区满时加入数据，消费者也不会在缓冲区中空时消耗数据。那么如何保证上面这一点呢，我们可以采用如下手段：</p>
 <h4 id="轮询方式（低效）"><a href="#轮询方式（低效）" class="headerlink" title="轮询方式（低效）"></a>轮询方式（低效）</h4><p>在轮询方式中，生产者和消费者在执行操作前，先判断是否符合操作条件，如果符合，就执行操作，否则就不执行，这个过程是很低效的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// main</span><br><span class="line">for i=0..10</span><br><span class="line">    producers[i] = fork(insert_data, NULL)</span><br><span class="line">consumer = fork(get_data, my_list)</span><br><span class="line"></span><br><span class="line">//生产者: insert_data</span><br><span class="line">lock(m)</span><br><span class="line">    if my_list.not_full -&gt; insert data</span><br><span class="line">    else -&gt; 释放锁，然后过一会儿尝试插入数据</span><br><span class="line">unlock(m)</span><br><span class="line"></span><br><span class="line">// consumer: get_data</span><br><span class="line">lock(m)</span><br><span class="line">	if my_list.full -&gt; print and clean my_list</span><br><span class="line">	else -&gt; 释放锁，然后过一会儿等待buff满了再尝试 这个过程非常低效！！</span><br><span class="line">unlock(m)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// main</span><br><span class="line">for i=0..10</span><br><span class="line">    producers[i] = fork(insert_data, NULL)</span><br><span class="line">consumer = fork(get_data, my_list)</span><br><span class="line"></span><br><span class="line">//生产者: insert_data</span><br><span class="line">lock(m)</span><br><span class="line">    if my_list.not_full -&gt; insert data   //空间未满，插入数据</span><br><span class="line">    else -&gt; 释放锁，然后过一会儿尝试插入数据</span><br><span class="line">unlock(m)</span><br><span class="line"></span><br><span class="line">// consumer: get_data</span><br><span class="line">lock(m)</span><br><span class="line">	if my_list.full -&gt; print and clean my_list</span><br><span class="line">	else -&gt; 释放锁，然后过一会儿等待buff满了再尝试 这个过程非常低效！！</span><br><span class="line">unlock(m)</span><br></pre></td></tr></table></figure>
 <h4 id="条件变量方式"><a href="#条件变量方式" class="headerlink" title="条件变量方式"></a>条件变量方式</h4><p>在条件变量方式中，生产者和消费者通过条件变量建立联系，消费者在buffer没有满时等待，如果满了就被唤醒，处理buffer数据并清空；而生产者插入数据，如果buffer满了，就唤醒消费者。具体的条件变量的使用请参考<a href="/2020/07/27/计算机/操作系统/条件变量/" title="条件变量">条件变量</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 消费者</span><br><span class="line">lock(m)</span><br><span class="line">	while(my_list.not_full)    //使用while防止虚假唤醒</span><br><span class="line">		wait(m, list_full)     //进入wait时自动释放锁，从wait中唤醒时自动获取锁</span><br><span class="line">	my_list.print and clear</span><br><span class="line">unlock(m)</span><br><span class="line"></span><br><span class="line">// 生产者</span><br><span class="line">lock(m)</span><br><span class="line"> 	my_list.insert()</span><br><span class="line"> 	if my_list is full</span><br><span class="line"> 		signal(list_full)      //发送唤醒信号 </span><br><span class="line"> unlock(m)</span><br></pre></td></tr></table></figure>
 <p>上面的代码中，我们使用了<code>while(my_list.not_full)</code>而不是<code>if(my_list.not_full)</code>，原因如下：</p>
@@ -689,7 +689,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">205</span>
+                    <span class="site-state-item-count">206</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -794,7 +794,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">42</span>
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

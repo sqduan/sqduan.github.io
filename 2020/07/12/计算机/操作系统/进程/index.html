@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901172929.png">
 <meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/ioprocess.JPG?raw=true">
 <meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/processStateTrans.JPG?raw=true">
-<meta property="og:updated_time" content="2020-09-07T13:19:14.720Z">
+<meta property="og:updated_time" content="2020-09-13T08:38:58.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程">
 <meta name="twitter:description" content="Hi siri! Help me to copy a siri.">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-07 21:19:14" itemprop="dateModified" datetime="2020-09-07T21:19:14+08:00">2020-09-07</time>
+                <time title="Modified: 2020-09-13 16:38:58" itemprop="dateModified" datetime="2020-09-13T16:38:58+08:00">2020-09-13</time>
               
             
           </span>
@@ -527,8 +527,11 @@
 <li>阻塞（waiting）：正在执行的进程由于发生某事件（如I/O请求、申请缓冲区失败等）暂时无法继续执行的状态</li>
 <li>结束（end）：进程僵死或死亡</li>
 </ul>
-<h4 id="Linux上的进程状态"><a href="#Linux上的进程状态" class="headerlink" title="Linux上的进程状态"></a>Linux上的进程状态</h4><p>linux上的进程状态可以进一步细分为7个</p>
-<h4 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h4><h5 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h5><p>当一个子进程结束时，并没有真正被销毁，而是留下了一个成为僵尸进程的数据结构，包含退出码和CPU等待时间等数据，这些数据最终会被传递给父进程。而父进程会起到为其收尸的作用，收尸的情况可能有两种</p>
+<h4 id="Linux上的进程状态"><a href="#Linux上的进程状态" class="headerlink" title="Linux上的进程状态"></a>Linux上的进程状态</h4><p>linux上的进程状态可以进一步细分为7个：</p>
+<ul>
+<li><h4 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h4></li>
+</ul>
+<h5 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h5><p>当一个子进程结束时，并没有真正被销毁，而是留下了一个成为僵尸进程的数据结构，包含退出码和CPU等待时间等数据，这些数据最终会被传递给父进程。而父进程会起到为其收尸的作用，收尸的情况可能有两种</p>
 <ul>
 <li>父进程调用wait或waitpid等待子进程结束</li>
 <li>父进程结束后由init进程销毁</li>
@@ -797,7 +800,7 @@ r_e = t_p/T=\frac{t_p}{t_p+t_s}</script><p>其中$t_p$为进程工作时间，$T
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">205</span>
+                    <span class="site-state-item-count">206</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -902,7 +905,9 @@ r_e = t_p/T=\frac{t_p}{t_p+t_s}</script><p>其中$t_p$为进程工作时间，$T
                     
                       
                     
-                    <span class="site-state-item-count">42</span>
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
