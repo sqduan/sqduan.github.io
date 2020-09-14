@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[IO]]></title>
+    <title><![CDATA[中断]]></title>
     <url>%2F2020%2F09%2F13%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2F%E4%B8%AD%E6%96%AD%2F</url>
-    <content type="text"><![CDATA[“Let us build ourselves a city, with a tower that reaches to the heavens, so that we may make a name for ourselves; otherwise we will be scattered over the face of the whole earth.” IO 设备IO设备分类按照使用特性 人机交互 存储设备 网络通信 低速、中速和高速 按照信息交换单位 块设备：如磁盘等 字符设备：打印机等 参考文献]]></content>
+    <content type="text"><![CDATA[去做点别的事情吧，等天黑了再回来 Linux中断处理在linux中，中断被分为上半部分和下半部分 上下半部的理解上半部（top half）——紧急硬件操作下半部（buttom half）——非紧急的耗时操作参考文献]]></content>
       <categories>
         <category>计算机</category>
         <category>操作系统</category>
