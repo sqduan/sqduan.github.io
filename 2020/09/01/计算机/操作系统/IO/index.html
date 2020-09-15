@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="“Let us build ourselves a city, with a tower that reaches to the heavens, so that we may make a name for ourselves; otherwise we will be scattered over the face of the whole earth.”">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-01T08:21:27.556Z">
+<meta property="og:updated_time" content="2020-09-15T03:24:12.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO">
 <meta name="twitter:description" content="“Let us build ourselves a city, with a tower that reaches to the heavens, so that we may make a name for ourselves; otherwise we will be scattered over the face of the whole earth.”">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-09-01 16:00:40 / Modified: 16:21:27" itemprop="dateCreated datePublished" datetime="2020-09-01T16:00:40+08:00">2020-09-01</time>
+              <time title="Created: 2020-09-01 16:00:40" itemprop="dateCreated datePublished" datetime="2020-09-01T16:00:40+08:00">2020-09-01</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-15 11:24:12" itemprop="dateModified" datetime="2020-09-15T11:24:12+08:00">2020-09-15</time>
               
             
           </span>
@@ -479,6 +491,13 @@
 <li>块设备：如磁盘等</li>
 <li>字符设备：打印机等</li>
 </ul>
+<h2 id="IO使用"><a href="#IO使用" class="headerlink" title="IO使用"></a>IO使用</h2><h3 id="IO多路复用机制"><a href="#IO多路复用机制" class="headerlink" title="IO多路复用机制"></a>IO多路复用机制</h3><p>IO复用共有三种方式，即select、poll和epoll下面将针对这三种方式进行总结：</p>
+<p>(1) select：时间复杂度为$O(n)$</p>
+<p>select 仅仅知道有IO事件发生，但是不确定是哪几个流，我们只能无差别对所有流进行轮询，找出能读出数据或写入数据的流，对他们进行操作。</p>
+<p>(2) poll：时间复杂度为$O(n)$</p>
+<p>poll 本质和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态，但是他没有最大连接限制，原因是基于链表存储。</p>
+<p>(3) epoll：时间复杂度$O(1)$</p>
+<p>epoll会把哪个流发生了什么样的IO事件通知我们，所以epoll实际上是事件驱动的，此时我们对这些流的操作都是有意义的。epoll是一种通过函数回调进行通知的机制。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
@@ -630,7 +649,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">206</span>
+                    <span class="site-state-item-count">207</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -856,7 +875,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO-设备"><span class="nav-number">1.</span> <span class="nav-text">IO 设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO设备分类"><span class="nav-number">1.1.</span> <span class="nav-text">IO设备分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按照使用特性"><span class="nav-number">1.1.1.</span> <span class="nav-text">按照使用特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照信息交换单位"><span class="nav-number">1.1.2.</span> <span class="nav-text">按照信息交换单位</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IO-设备"><span class="nav-number">1.</span> <span class="nav-text">IO 设备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO设备分类"><span class="nav-number">1.1.</span> <span class="nav-text">IO设备分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#按照使用特性"><span class="nav-number">1.1.1.</span> <span class="nav-text">按照使用特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按照信息交换单位"><span class="nav-number">1.1.2.</span> <span class="nav-text">按照信息交换单位</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO使用"><span class="nav-number">2.</span> <span class="nav-text">IO使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IO多路复用机制"><span class="nav-number">2.1.</span> <span class="nav-text">IO多路复用机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
