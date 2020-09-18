@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-15T03:35:26.612Z</updated>
+  <updated>2020-09-17T12:37:10.774Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>极限</title>
+    <link href="http://yoursite.com/2020/09/17/%E6%95%B0%E5%AD%A6/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/%E6%9E%81%E9%99%90/"/>
+    <id>http://yoursite.com/2020/09/17/数学/高等数学/极限/</id>
+    <published>2020-09-17T12:22:12.949Z</published>
+    <updated>2020-09-17T12:37:10.774Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>文明不断增长和扩张，但宇宙中的物质总量保持不变</p></blockquote><a id="more"></a><h2 id="重要极限"><a href="#重要极限" class="headerlink" title="重要极限"></a>重要极限</h2><p>这里我们总结一下常用的一些极限：</p><ol><li>$\underset{x\rightarrow 0}{\lim}\frac{\sin{x}}{x}=1$</li><li>$\underset{x\rightarrow \infty }{\lim}(1+\frac{1}{x})^x=e$或者$\underset{x\rightarrow 0 }{\lim}(1+x)^{\frac{1}{x}}=e$</li></ol><h2 id="求极限的方法"><a href="#求极限的方法" class="headerlink" title="求极限的方法"></a>求极限的方法</h2><h3 id="洛必达法则"><a href="#洛必达法则" class="headerlink" title="洛必达法则"></a>洛必达法则</h3><p>洛必达法则主要用于求解$0/0$和$\infin / \infin$的情况，使用时需要满足如下条件：$f(x),g(x)$在$x_0$去心邻域内可导，且$g’(x)\ne 0$。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;文明不断增长和扩张，但宇宙中的物质总量保持不变&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数学" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="高等数学" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MIT 6006 Lecture 1——算法思维，峰值寻找</title>
+    <link href="http://yoursite.com/2020/09/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-1/"/>
+    <id>http://yoursite.com/2020/09/17/计算机/算法/课程/MIT6006-1/</id>
+    <published>2020-09-17T02:46:20.363Z</published>
+    <updated>2020-09-18T02:42:39.509Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>一个人思虑太多，就会失去做人的乐趣。</p></blockquote><a id="more"></a><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本课程中我们将考虑大规模问题的高效解法，即考虑<strong>规模性</strong>。本课程的结构如下：</p><ul><li>算法思想</li><li>排序/树</li><li>哈希</li><li>数论：加密解密算法</li><li>图</li><li>最短路径</li><li>动态规划：图像压缩</li><li>高级话题</li></ul><h2 id="峰值算法"><a href="#峰值算法" class="headerlink" title="峰值算法"></a>峰值算法</h2><h3 id="一维峰值算法"><a href="#一维峰值算法" class="headerlink" title="一维峰值算法"></a>一维峰值算法</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>考虑下面的一维数组，其中$a-i$为数字：</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/1dimdatastructure.JPG?raw=true" width = "380" alt="" align=center /></p><p>极值点的定义为：</p><script type="math/tex; mode=display">\textrm{if}\ \ \ \ b\ge a\ \ \ \ \textrm{and}\ \ \ \ b\ge c \\\textrm{then}\ b\ \textrm{is the peak point}</script><p>当然，如果在边界上，那么只需要大于一侧即可。我们的问题是：<strong>如果峰值点存在，找到峰值点</strong>。</p><h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>最直接的解法就是遍历每一个元素，然后根据定义看一下是否为峰值，其复杂度为$O(n)$，现在我们来看看一个更高效的解法：分治法。</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/2020917.JPG?raw=true" width = "380" alt="" align=center /></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a[n/<span class="number">2</span>] &lt; a[n/<span class="number">2</span><span class="number">-1</span>] </span><br><span class="line">在 <span class="number">1.</span>..n/<span class="number">2</span><span class="number">-1</span> 中寻找peak，一定会有</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> a[n/<span class="number">2</span>] &lt; a[n/<span class="number">2</span>+<span class="number">1</span>] </span><br><span class="line">在 n/<span class="number">2</span>+<span class="number">1.</span>..n 中寻找peak</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">a[n/<span class="number">2</span>] 是极值点</span><br></pre></td></tr></table></figure><h5 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h5><p>假设我们的算法是正确的，那么其时间复杂度为：</p><script type="math/tex; mode=display">\begin{align}T(n) =& T(n/2)+\Theta(1)\\T(1) =& \Theta(1)\end{align}</script><p>故：</p><script type="math/tex; mode=display">\begin{align}T(n) =& T(n/2)+\Theta(1)\\ =& T(n/4)+2\Theta(1)\\ ...&\\ =&T(n/2^{\log_2n})+(\log_2n)\Theta(1)\\ =&\Theta(\log _2n)\end{align}</script><h3 id="二维峰值算法"><a href="#二维峰值算法" class="headerlink" title="二维峰值算法"></a>二维峰值算法</h3><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>考虑下面的二维数组：</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/20209171535.JPG?raw=true" width = "280" alt="" align=center /></p><p>假定$a$为峰值点，那么$a\ge b, a\ge c, a\ge d,a\ge e$。</p><h4 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h4><h5 id="解法1：贪心"><a href="#解法1：贪心" class="headerlink" title="解法1：贪心"></a>解法1：贪心</h5><p>我们使用贪心算法解决这个问题，假设我们的矩阵为：</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/20209171544.JPG?raw=true" width = "240" alt="" align=center /></p><p>我们的策略是，总是沿着最大的路径走，例如从12开始，我们向13搜索，依次走过14-&gt;15-&gt;16…直到20为止。该算法的时间复杂度为$\Theta(nm)$。</p><h5 id="解法2：分治法"><a href="#解法2：分治法" class="headerlink" title="解法2：分治法"></a>解法2：分治法</h5><p>考虑这样的解法：我们先选取中间列，令$j=m/2$，找到一个位于$(i,j)$的一维峰值点，然后以$(i,j)$为基准，再找到这一行的一维峰值点，这样能找到二维的峰值点吗？</p><p>答案是不行，这个解法是错误的，以我们上面的图为例，假设12是该列的一个峰值点，而当我们搜索12所在的行时，最终找到的峰值点是14，但是14并不是一个二维峰值点，所以该算法是错的。我们给出正确的贪心规则：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">选取中间列 j=m/2</span><br><span class="line">找到该列的全局最大值 (i,j)</span><br><span class="line">比较(i,j-1), (i,j), (i,j+1)</span><br><span class="line">if (i,j-1) &gt; (i,j)</span><br><span class="line">    选择左半列</span><br><span class="line">if (i,j+1) &gt; (i,j)</span><br><span class="line">    选择右半列</span><br><span class="line">else </span><br><span class="line">    选择(i,j)</span><br></pre></td></tr></table></figure><p>在上面的伪代码中，else部分可以直接返回极值点，是因为$(i,j)$为该列的最大值，所以比$(i-1,j),(i+1,j)$都要大，而该点又比$(i,j-1),(i,j+1)$大，故符合峰值定义，可以直接返回。当只有一列时，最大值即峰值，这个是基例。</p><h6 id="时间复杂度分析-1"><a href="#时间复杂度分析-1" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h6><p>上面的算法时间复杂度计算如下：</p><script type="math/tex; mode=display">\begin{align}T(n,m) &= T(n,m/2)+\Theta(n)\\T(n,1) &=\Theta(n)\\T(n,m) &=\Theta(n)+...+\Theta(n) = \Theta(n\log_2m)\end{align}</script><h2 id="题目及题解"><a href="#题目及题解" class="headerlink" title="题目及题解"></a>题目及题解</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="一：将下列函数根据时间复杂度进行排序"><a href="#一：将下列函数根据时间复杂度进行排序" class="headerlink" title="一：将下列函数根据时间复杂度进行排序"></a>一：将下列函数根据时间复杂度进行排序</h4><h5 id="第一组"><a href="#第一组" class="headerlink" title="第一组"></a>第一组</h5><script type="math/tex; mode=display">\begin{aligned}f_1(n)&=n^{0.999999}\log n\\f_2(n)&=10000000n\\f_3(n)&=1.000001^n\\f_4(n)&=n^2\\\end{aligned}</script><h6 id="解"><a href="#解" class="headerlink" title="解"></a>解</h6><script type="math/tex; mode=display">\begin{aligned}\frac{f_1}{f_2}&=\frac{n^{1-0.0000001}\log n}{10000000n}\\&=C_1\frac{\log n}{n^{0.0000001}}\\\end{aligned}</script><p>由于$n\rightarrow \infin$时$\log n$与$n^{0.0000001}$趋近于无穷大，所以对上式使用洛必达法则：</p><script type="math/tex; mode=display">\begin{aligned}\underset{n\rightarrow \infin}{\lim}\frac{f_1}{f_2}&=\underset{n\rightarrow \infin}{\lim}\frac{f_1'}{f_2'}\\&=\underset{n\rightarrow \infin}{\lim}\frac{1}{n^{0.0000001}}\\&=0\end{aligned}</script><p>故$\Theta(f_1)\le\Theta(f_2)$。同理易得$\Theta(f_2)\le\Theta(f_3)$，$\Theta(f_2)\le\Theta(f_4)$，而$\Theta(f_4)\le\Theta(f_3)$，故上述公式时间复杂度排序为：$\Theta(f_1)\le\Theta(f_2)\le\Theta(f_4)\le\Theta(f3)$</p><h5 id="第二组"><a href="#第二组" class="headerlink" title="第二组"></a>第二组</h5><script type="math/tex; mode=display">\begin{aligned}f_1(n)&=2^{2^{1000000}}\\f_2(n)&=2^{100000n}\\f_3(n)&=C_n^2\\f_4(n)&=n\sqrt n\\\end{aligned}</script><h6 id="解-1"><a href="#解-1" class="headerlink" title="解"></a>解</h6><p>常数时间复杂度为$\Theta(1)$为最小，$f_2$时间复杂度最高，为$\Theta(2^n)$，现比较$f_3$和$f_4$，$f_3=\frac{n(n-1)}{2}$，故</p><script type="math/tex; mode=display">\begin{align}\underset{n\rightarrow \infin}{\lim}\frac{f_3}{f_4}&=\underset{n\rightarrow \infin}{\lim}\frac{n(n-1)}{2n\sqrt n}\\&=\frac{\sqrt n}{2}-\frac{1}{2\sqrt n}\\&=\infin\end{align}</script><p>所以排序结果为$\Theta(f_1)\le\Theta(f_4)\le\Theta(f_3)\le\Theta(f2)$.</p><h5 id="第三组"><a href="#第三组" class="headerlink" title="第三组"></a>第三组</h5><script type="math/tex; mode=display">\begin{aligned}f_1(n)&=n^{\sqrt n}\\f_2(n)&=2^{n}\\f_3(n)&=n^{10}2^{n/2}\\f_4(n)&=\sum_{i=1}^{n}(i+1)\\\end{aligned}</script><p>这个算极限比较麻烦，采用matlab求两两之间的极限，代码如下：</p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">syms n</span><br><span class="line">f1 = n^<span class="built_in">sqrt</span>(n)</span><br><span class="line">f2 = <span class="number">2</span>^n</span><br><span class="line">f3 = n^<span class="number">10</span>*<span class="number">2</span>^(n/<span class="number">2</span>)</span><br><span class="line">f4 = (<span class="number">1</span>+n)*n/<span class="number">2</span>+n</span><br><span class="line"></span><br><span class="line">f1_f2 = f1/f2</span><br><span class="line">f1_f3 = f1/f3</span><br><span class="line">f1_f4 = f1/f4</span><br><span class="line">f2_f3 = f2/f3</span><br><span class="line">f2_f4 = f2/f4</span><br><span class="line">f3_f4 = f3/f4</span><br><span class="line">limit(f1_f2, n, inf)   #对f1/f2求极限，结果为0，即O(f1) &lt;= O(f2)</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>最终结果为：$\Theta(f_4)\le\Theta(f_1)\le\Theta(f_3)\le\Theta(f_2)$</p><h4 id="二：递归复杂度求解"><a href="#二：递归复杂度求解" class="headerlink" title="二：递归复杂度求解"></a>二：递归复杂度求解</h4><h5 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h5><p>已知：</p><script type="math/tex; mode=display">\begin{aligned}T(x,c) &= \Theta(x)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\T(c,y) &= \Theta(y)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\T(x,y) &=\Theta(x+y)+T(x/2,y/2)\end{aligned}</script><p>求$T(n,n)$的时间复杂度</p><h6 id="解："><a href="#解：" class="headerlink" title="解："></a>解：</h6><script type="math/tex; mode=display">\begin{aligned}T(x,y)&=\Theta(x+y)+T(x/2,y/2)\\&=\Theta(x+y)+\Theta(x/2+y/2)+T(x/4,y/4)\\&=\Theta(x+y)+\Theta(x/2+y/2)+\Theta(x/4+y/4)+...\\&=\Theta(2x+2y)\end{aligned}</script><p>故$T(n,n)=\Theta(n)$。</p><h5 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h5><p>已知：</p><script type="math/tex; mode=display">\begin{aligned}T(x,c) &= \Theta(x)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\T(c,y) &= \Theta(y)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\T(x,y) &=\Theta(x)+T(x,y/2)\end{aligned}</script><h6 id="解：-1"><a href="#解：-1" class="headerlink" title="解："></a>解：</h6><script type="math/tex; mode=display">\begin{aligned}T(x,y)&=\Theta(x)+T(x,y/2)\\&=\Theta(x)+\Theta(x)+T(x,y/4)\\&=\underset{\log y个\Theta(x)}{\underbrace{\Theta(x)+\Theta(x)+...+\Theta(x)}}\\&=\Theta(x\log y)\end{aligned}</script><p>故$T(n,n)=\Theta(n\log n)$。</p><h5 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h5><script type="math/tex; mode=display">\begin{aligned}T(x,c) &= \Theta(x)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\T(x,y) &= \Theta(x)+S(x,y/2)\\S(c,y) &= \Theta(y)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\S(x,y) &= \Theta(y)+T(x/2,y)\end{aligned}</script><h6 id="解-2"><a href="#解-2" class="headerlink" title="解"></a>解</h6><script type="math/tex; mode=display">\begin{aligned}T(x,y)&=\Theta(x)+\Theta(y/2)+T(x/2,y/2)\\&=\Theta(x)+\Theta(y/2)+\Theta(x/2)+\Theta(y/4)+...\\&\le\Theta(2x+y)\end{aligned}</script><p>故$T(n,n)=\Theta(n)$</p><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="向量峰值搜索代码"><a href="#向量峰值搜索代码" class="headerlink" title="向量峰值搜索代码"></a>向量峰值搜索代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &gt; nums[mid + <span class="number">1</span>])     <span class="comment">//由于除法是向下取整，这意味着我们得到的mid都是左mid</span></span><br><span class="line">                                               <span class="comment">//因此mid+1一定是存在的</span></span><br><span class="line">                r = mid;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="矩阵峰值搜索代码"><a href="#矩阵峰值搜索代码" class="headerlink" title="矩阵峰值搜索代码"></a>矩阵峰值搜索代码</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/lecture-1-algorithmic-thinking-peak-finding/">第一课视频</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/assignments/MIT6_006F11_ps1.pdf">第一课作业</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;一个人思虑太多，就会失去做人的乐趣。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="算法和数据结构" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="课程" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>单例模式</title>
@@ -435,54 +485,6 @@
     
       &lt;blockquote&gt;
 &lt;p&gt;月亮和雪，是一样的颜色，一样的触感。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="UE4" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/UE4/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>模型</title>
-    <link href="http://yoursite.com/2020/08/26/%E5%B7%A5%E5%85%B7/UE4/%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://yoursite.com/2020/08/26/工具/UE4/模型/</id>
-    <published>2020-08-26T13:42:23.325Z</published>
-    <updated>2020-08-26T14:08:22.658Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>俗說天地開辟，未有人民，女媧搏黃土作人。 劇務，力不暇供，乃引繩於泥中，舉以為人。 </p></blockquote><a id="more"></a><h2 id="导入第三方模型"><a href="#导入第三方模型" class="headerlink" title="导入第三方模型"></a>导入第三方模型</h2><p>UE4支持ASCII Scene Export（*.ASE）格式文件的静态网格模型，以及AutoDesk的FBX格式文件。导入静态网格模型时，直接拖入UE4即可。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;俗說天地開辟，未有人民，女媧搏黃土作人。 劇務，力不暇供，乃引繩於泥中，舉以為人。 &lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="UE4" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/UE4/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>光照</title>
-    <link href="http://yoursite.com/2020/08/26/%E5%B7%A5%E5%85%B7/UE4/%E5%85%89%E7%85%A7/"/>
-    <id>http://yoursite.com/2020/08/26/工具/UE4/光照/</id>
-    <published>2020-08-26T08:53:12.252Z</published>
-    <updated>2020-08-26T15:36:45.048Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>神说，要有光，于是便有了光</p></blockquote><a id="more"></a><h2 id="光照基本介绍"><a href="#光照基本介绍" class="headerlink" title="光照基本介绍"></a>光照基本介绍</h2><p>光照是游戏的最基本且重要的效果之一，现代游戏其中一个特性就是对于光照的尽可能真实的模拟，本文将对UE4中的光照特性进行一些总结。</p><h3 id="光照类型"><a href="#光照类型" class="headerlink" title="光照类型"></a>光照类型</h3><ul><li>定向光源：模拟平行光或者阳光</li><li>点光源：模拟灯泡</li></ul><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200826170312.png" width = "400" alt="UE4界面" align=center /></p><ul><li>聚光源：模拟锥形光源</li><li>矩形光源</li><li>天光：模拟自然环境光线</li></ul><p>通过调节光源的细节，可以设置光照强度、范围、颜色等。</p><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>由于光源的渲染需要大量的运算，所以UE4项目在每次调整后如果有影响光效的改动，是需要重新进行编译的。我们也可以仅仅构建光源，点击构建，即可对光源单独进行构建。同时，也不允许太多光源靠的太近，否则会严重影响性能。</p><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><h3 id="反射捕获"><a href="#反射捕获" class="headerlink" title="反射捕获"></a>反射捕获</h3><p>反射捕获的作用是在反射捕获范围内对其中的静态网格等对象计算光线反射相互作用的影响，UE4中有静态反射捕获和实时反射捕获，反射捕获球和反射方块属于</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;神说，要有光，于是便有了光&lt;/p&gt;
 &lt;/blockquote&gt;
     
     </summary>
