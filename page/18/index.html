@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(5)——QML应用结构划分/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(4)——QML与C++交互/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -378,7 +378,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/07/12/工具/Qt/QML学习之路(5)——QML应用结构划分/" class="post-title-link" itemprop="url">QML学习之路(5)——QML应用结构划分</a>
+                <a href="/2020/07/12/工具/Qt/QML学习之路(4)——QML与C++交互/" class="post-title-link" itemprop="url">QML学习之路(4)——QML与C++交互</a>
               
             
           </h1>
@@ -464,11 +464,17 @@
 
       
         
-          <p>随着QML应用的复杂化，往往需要将复杂应用划分为小单元，本文将介绍对QML进行划分的方法。</p>
+          <p>在QML编程中，C++往往用于编写后台逻辑，而QML用于进行界面端编写，因此利用C++与QML进行交互就成为了重点。由于C++与QML交互具有灵活的方式，本文将针对其中一种方式进行讲解。该方式的基本思想为：</p>
+<ol>
+<li><strong>处理用户交互事件的逻辑在QML中进行</strong></li>
+<li><strong>接收到用户交互事件后，由QML发送信号至APP</strong></li>
+<li><strong>在负责业务逻辑的C++文件中找到QML中对应的QObject，并将其信号与指定槽函数绑定</strong></li>
+</ol>
+<p>在这个过程中，QML可以被视作一个黑盒子，通过属性、信号和函数与外界进行交互。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/07/12/工具/Qt/QML学习之路(5)——QML应用结构划分/#more" rel="contents">
+              <a class="btn" href="/2020/07/12/工具/Qt/QML学习之路(4)——QML与C++交互/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1398,7 +1404,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/OpenGL/OpenGL学习（一）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/OpenGL/Qt+Opengl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -1418,7 +1424,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/07/12/工具/OpenGL/OpenGL学习（一）/" class="post-title-link" itemprop="url">OpenGL学习（一）——简单图形绘制</a>
+                <a href="/2020/07/12/工具/OpenGL/Qt+Opengl/" class="post-title-link" itemprop="url">Qt+OpenGL开发环境配置</a>
               
             
           </h1>
@@ -1504,11 +1510,11 @@
 
       
         
-          <p>本文将介绍如何利用OpenGL绘制简单图形。</p>
+          <p>最近在使用Qt和OpenGL结合，写一个范例工程总结一下。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/07/12/工具/OpenGL/OpenGL学习（一）/#more" rel="contents">
+              <a class="btn" href="/2020/07/12/工具/OpenGL/Qt+Opengl/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1738,7 +1744,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/OpenGL/Qt+Opengl/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/OpenGL/OpenGL学习（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -1758,7 +1764,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/07/12/工具/OpenGL/Qt+Opengl/" class="post-title-link" itemprop="url">Qt+OpenGL开发环境配置</a>
+                <a href="/2020/07/12/工具/OpenGL/OpenGL学习（一）/" class="post-title-link" itemprop="url">OpenGL学习（一）——简单图形绘制</a>
               
             
           </h1>
@@ -1844,11 +1850,11 @@
 
       
         
-          <p>最近在使用Qt和OpenGL结合，写一个范例工程总结一下。</p>
+          <p>本文将介绍如何利用OpenGL绘制简单图形。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/07/12/工具/OpenGL/Qt+Opengl/#more" rel="contents">
+              <a class="btn" href="/2020/07/12/工具/OpenGL/OpenGL学习（一）/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
