@@ -105,7 +105,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/svg/Kr1Gu7BAJzArSyp9J4vLi5B8ICt9oGS0">
 <meta property="og:image" content="http://www.plantuml.com/plantuml/svg/Kr1GKE3YSauiKh2fqTKD3WtZ2alDo4pEIGNozVGKW19SpZc9nSKA-Rgw2i4bfIcfUILS7gMvYNaAMa0HZzJ48XWVoFLq0Mf8uNBAp0Rg1sg7QG00">
-<meta property="og:updated_time" content="2020-09-22T11:28:52.234Z">
+<meta property="og:updated_time" content="2020-09-22T12:11:27.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo绘图教程">
 <meta name="twitter:description" content="本文针对Hexo的Markdown写作中绘图教程进行讲解">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-22 19:28:52" itemprop="dateModified" datetime="2020-09-22T19:28:52+08:00">2020-09-22</time>
+                <time title="Modified: 2020-09-22 20:11:27" itemprop="dateModified" datetime="2020-09-22T20:11:27+08:00">2020-09-22</time>
               
             
           </span>
@@ -490,7 +490,7 @@
 <h3 id="绘制类图"><a href="#绘制类图" class="headerlink" title="绘制类图"></a>绘制类图</h3><p>使用PlantUML进行类图绘制的教程：<a href="https://plantuml.com/zh/class-diagram#9dd2a6eca0c2a0e7">类图绘制</a>，常见的六种类间关系（泛化、实现、聚合、组合、关联、依赖）图及代码如下：</p>
 <img src="http://www.plantuml.com/plantuml/svg/Kr1GKE3YSauiKh2fqTKD3WtZ2alDo4pEIGNozVGKW19SpZc9nSKA-Rgw2i4bfIcfUILS7gMvYNaAMa0HZzJ48XWVoFLq0Mf8uNBAp0Rg1sg7QG00">
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;% plantuml %&#125;    </span><br><span class="line"></span><br><span class="line">Car &lt;|--SUV             //泛化</span><br><span class="line">Vehicle &lt;|.. Car        //实现</span><br><span class="line">Class o-- Student       //聚合</span><br><span class="line">Human *-- Heart         //组合</span><br><span class="line">Human -- IDCard         //关联</span><br><span class="line">Bike &lt;.. Student        //依赖</span><br><span class="line"></span><br><span class="line">&#123;% endplantuml %&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h2><p>SVG指可缩放向量图，是一种不失真的网页图片，在Hexo中嵌入SVG的方式如下：</p>
+<h2 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h2><p>SVG指可缩放向量图，是一种不失真的网页图片，建议以后都使用SVG进行绘图，在Hexo中嵌入SVG的方式如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"text-align:center;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"100"</span> <span class="attr">height</span>=<span class="string">"100"</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">"50"</span> <span class="attr">cy</span>=<span class="string">"50"</span> <span class="attr">r</span>=<span class="string">"40"</span> <span class="attr">stroke</span>=<span class="string">"green"</span> <span class="attr">stroke-width</span>=<span class="string">"4"</span> <span class="attr">fill</span>=<span class="string">"yellow"</span> /&gt;</span></span><br><span class="line">   Sorry, your browser does not support inline SVG.</span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>效果如下图所示：</p>
 <div style="text-align:center;">
@@ -501,7 +501,7 @@
 </div>
 
 <h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p><strong><code>width</code></strong>：宽度</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.w3schools.com/graphics/svg_examples.asp">一些SVG实例</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 

@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文针对HTML内联框架元素 (&amp;lt;iframe&amp;gt;)进行讲解">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-22T11:24:40.608Z">
+<meta property="og:updated_time" content="2020-09-22T12:29:54.414Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iframe框架">
 <meta name="twitter:description" content="本文针对HTML内联框架元素 (&amp;lt;iframe&amp;gt;)进行讲解">
@@ -401,7 +401,7 @@
                 
               
 
-              <time title="Created: 2020-09-22 18:56:41 / Modified: 19:24:40" itemprop="dateCreated datePublished" datetime="2020-09-22T18:56:41+08:00">2020-09-22</time>
+              <time title="Created: 2020-09-22 18:56:41 / Modified: 20:29:54" itemprop="dateCreated datePublished" datetime="2020-09-22T18:56:41+08:00">2020-09-22</time>
             
 
             
@@ -472,7 +472,16 @@
 <iframe id="inlineFrameExample" title="Inline Frame Example" width="300" height="200" src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik">
 </iframe>
 
+
 <h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong><code>allow</code></strong>：用于为iframe指定特征策略</p>
+<h2 id="嵌入本地网页"><a href="#嵌入本地网页" class="headerlink" title="嵌入本地网页"></a>嵌入本地网页</h2><p>我将本地网页放在了<code>Blog\blog\source\webs</code>下，在嵌入本地网页时，要注意关闭网页渲染，在<code>blog/_config.yml</code>中<code>skip_render</code>字段下添加自定义的网页路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">skip_render:</span><br><span class="line">	- source/webs/helloworld/clock.html</span><br></pre></td></tr></table></figure>
+<p>
+    <div style="width:100%; height:350px;border:none;text-align:center">
+        <iframe allowtransparency="yes" frameborder="0" width="300" height="300" src="clock.html">
+    </iframe></div>
+</p>
+
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe">iframe</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -860,7 +869,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌入本地网页"><span class="nav-number">2.</span> <span class="nav-text">嵌入本地网页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
