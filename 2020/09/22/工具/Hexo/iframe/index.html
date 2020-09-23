@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文针对HTML内联框架元素 (&amp;lt;iframe&amp;gt;)进行讲解">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-22T13:45:56.448Z">
+<meta property="og:updated_time" content="2020-09-23T02:29:45.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iframe框架">
 <meta name="twitter:description" content="本文针对HTML内联框架元素 (&amp;lt;iframe&amp;gt;)进行讲解">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-09-22 18:56:41 / Modified: 21:45:56" itemprop="dateCreated datePublished" datetime="2020-09-22T18:56:41+08:00">2020-09-22</time>
+              <time title="Created: 2020-09-22 18:56:41" itemprop="dateCreated datePublished" datetime="2020-09-22T18:56:41+08:00">2020-09-22</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-09-23 10:29:45" itemprop="dateModified" datetime="2020-09-23T10:29:45+08:00">2020-09-23</time>
               
             
           </span>
@@ -479,7 +491,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">skip_render:</span><br><span class="line">	- webs\helloworld\clock.html</span><br></pre></td></tr></table></figure>
 <h3 id="插入自定义网页"><a href="#插入自定义网页" class="headerlink" title="插入自定义网页"></a>插入自定义网页</h3><p>插入自定义网页的代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;div style=<span class="string">"width:100%; height:350px;border:none;text-align:center"</span>&gt;</span><br><span class="line">		&lt;iframe allowtransparency=<span class="string">"yes"</span> frameborder=<span class="string">"0"</span> width=<span class="string">"300"</span> height=<span class="string">"300"</span> src=<span class="string">"/webs/helloworld/clock.html"</span>/&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>其中，src即为网页在source文件夹下的路径</p>
+<p>其中，src即为网页在source文件夹下的路径，style中的height和width为分配给网页的大小，而iframe中的width和height是网页的实际大小，使用时应保证分配大小大于实际大小</p>
 <p>
     <div style="width:100%; height:350px;border:none;text-align:center">
         <iframe allowtransparency="yes" frameborder="0" width="300" height="300" src="/webs/helloworld/clock.html">
