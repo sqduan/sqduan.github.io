@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-23T02:29:45.255Z</updated>
+  <updated>2020-09-26T09:30:07.358Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>素描基础</title>
+    <link href="http://yoursite.com/2020/09/26/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/%E7%B4%A0%E6%8F%8F/%E7%B4%A0%E6%8F%8F%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2020/09/26/生活/美术/素描/素描基础/</id>
+    <published>2020-09-26T08:45:20.736Z</published>
+    <updated>2020-09-26T09:30:07.358Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="https://images.uffizi.it/production/attachments/1537269300157660-tre-alberi.jpg?ixlib=rails-2.1.3&w=2500&h=2500&fit=unset&crop=center&fm=pjpg&auto=compress&mark=https%3A%2F%2Fimages.uffizi.it%2Fproduction%2Fattachments%2Flogo-watermark.png" width = 1000 alt="" align=center /></p><p>本文将针对素描中的一些基础概念进行总结</p><a id="more"></a><h2 id="明暗关系"><a href="#明暗关系" class="headerlink" title="明暗关系"></a>明暗关系</h2><p>物体受光照射后，会呈现出不同的明暗关系，这里我们针对描述明暗关系的三大面和五大调进行总结</p><h3 id="三大面"><a href="#三大面" class="headerlink" title="三大面"></a>三大面</h3><p>三大面即黑白灰三个面</p><ul><li>受光面：亮面</li><li>测光面：灰面</li><li>被光面：暗面</li></ul><p><img src="https://github.com/sqduan/hexoimg/blob/master/8df7b4fa7398f69272a85b3b93cd0201.jpg?raw=true" width = 500 alt="" align=center /></p><h3 id="五大调"><a href="#五大调" class="headerlink" title="五大调"></a>五大调</h3><p>而五大调是在三大面基础上分出的画面中的五种元素，分别为：</p><ul><li>受光面<ul><li>亮面</li><li>灰面</li></ul></li><li>被光面<ul><li>明暗交界线</li><li>反光</li><li>阴影</li></ul></li></ul><p><img src="https://github.com/sqduan/hexoimg/blob/master/news_1587878159958.jpeg?raw=true" width = 600 alt="" align=center /></p><p>在亮面中，还有高光的概念，就是光源最直接照射的关系，即垂直照射。下面是一个立方体的素描。比球体的亮暗关系更加锐利，它也有反光部分，一般来说暗面底部会比上部亮一些</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/20209261709.JPG?raw=true" width = 200 alt="" align=center /></p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=N4Z4MdZ1KWY&amp;list=PLR3Ra9cf8aV2Zl8LIqT93rsgnpkSvmevk&amp;index=2&amp;ab_channel=MortMort">Youtube 上关于Aseprite的教程</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.mortmort.net/">mortmort官网</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://images.uffizi.it/production/attachments/1537269300157660-tre-alberi.jpg?ixlib=rails-2.1.3&amp;w=2500&amp;h=2500&amp;fit=unset&amp;crop=center&amp;fm=pjpg&amp;auto=compress&amp;mark=https%3A%2F%2Fimages.uffizi.it%2Fproduction%2Fattachments%2Flogo-watermark.png&quot; width = 1000 alt=&quot;&quot; align=center /&gt;&lt;/p&gt;
+&lt;p&gt;本文将针对素描中的一些基础概念进行总结&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="美术" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/"/>
+    
+      <category term="素描" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/%E7%B4%A0%E6%8F%8F/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>iframe框架</title>
@@ -477,30 +502,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="组成原理" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Kernel</title>
-    <link href="http://yoursite.com/2020/09/01/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E6%A0%B8/"/>
-    <id>http://yoursite.com/2020/09/01/计算机/操作系统/内核/</id>
-    <published>2020-09-01T09:08:26.650Z</published>
-    <updated>2020-09-03T07:47:52.800Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>Look, this is my heart</p></blockquote><a id="more"></a><h2 id="内核的架构模式"><a href="#内核的架构模式" class="headerlink" title="内核的架构模式"></a>内核的架构模式</h2><h3 id="宏内核（Monolithic-kernel）"><a href="#宏内核（Monolithic-kernel）" class="headerlink" title="宏内核（Monolithic kernel）"></a>宏内核（Monolithic kernel）</h3><p>也被称为集成式内核，用户态和内核态在同一空间中实现，管理的资源多</p><h3 id="微内核"><a href="#微内核" class="headerlink" title="微内核"></a>微内核</h3><h3 id="不同架构对比"><a href="#不同架构对比" class="headerlink" title="不同架构对比"></a>不同架构对比</h3><div class="table-container"><table><thead><tr><th></th><th>微内核</th><th>宏内核</th></tr></thead><tbody><tr><td>尺寸</td><td>小</td><td>大</td></tr><tr><td>执行速度</td><td>慢</td><td>快</td></tr><tr><td>扩展性</td><td>容易</td><td>不易</td></tr><tr><td>安全性</td><td>单个服务崩溃不影响全局</td><td>单个服务崩溃往往导致系统崩溃</td></tr><tr><td>例子</td><td>塞班、Mac OS</td><td>Linux、Windos</td></tr></tbody></table></div><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Look, this is my heart&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
   </entry>
