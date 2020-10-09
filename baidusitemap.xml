@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/10/09/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-4/</loc>
+    <lastmod>2020-10-09</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/09/21/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-3/</loc>
+    <lastmod>2020-10-09</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/09/29/%E5%B7%A5%E5%85%B7/C++/%E5%BA%93/</loc>
+    <lastmod>2020-09-29</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/09/26/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/%E7%B4%A0%E6%8F%8F/%E7%B4%A0%E6%8F%8F%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-09-26</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E6%8E%A7%E5%88%B6%E7%A7%91%E5%AD%A6/%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA/controllability_and_observability/</loc>
     <lastmod>2020-09-25</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/09/21/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-3/</loc>
-    <lastmod>2020-09-23</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/08/13/%E5%B7%A5%E5%85%B7/Hexo/Hexo%E7%BB%98%E5%9B%BE%E6%95%99%E7%A8%8B/</loc>
