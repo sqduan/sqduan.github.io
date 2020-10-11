@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[进程位数判断]]></title>
     <url>%2F2020%2F10%2F10%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2F%E8%BF%9B%E7%A8%8B%E4%BD%8D%E6%95%B0%E5%88%A4%E6%96%AD%2F</url>
-    <content type="text"><![CDATA[$2^{64}=18446744073709551616$ 当我们编写与操作系统有关的代码时，有时要判断一个进程是32位还是64位，这种情况下我们需要一些代码来实现这种功能，本文将针对不同操作系统下实现进程位数的判断的过程进行总结。 Linux下进程位数判断使用file命令判断进程位数当我们知道进程的PID后，我们可以使用 参考文献1. ↩]]></content>
+    <content type="text"><![CDATA[$2^{64}=18446744073709551616$ 当我们编写与操作系统有关的代码时，有时要判断一个进程是32位还是64位，这种情况下我们需要一些代码来实现这种功能，本文将针对不同操作系统下实现进程位数的判断的过程进行总结。 Linux下进程位数判断使用file命令判断进程位数当我们知道进程的PID后，我们可以使用file命令对进程的信息进行判断，例如： 123456~$ ps PID TTY TIME CMD 325 pts/0 00:00:00 bash 360 pts/0 00:00:00 ps~$ file -L /proc/325/exe/proc/325/exe: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a6cb40078351e05121d46daa768e271846d5cc54, for GNU/Linux 3.2.0, stripped 从上面的结果中，我们可以看到这个进程是64位进程。 ELF文件在明确file命令的工作原理之前，我们先来看一下linux下可执行文件的格式，linux下的可执行文件是ELF格式，全称为可执行与可链接格式（Executable and Linkable Format），其实就是一种二进制可执行文件。ELF的header决定了该可执行文件采用32位还是64位的地址，所以我们通过ELF的相关信息即可判断可执行进程的位数。 C++判断进程位数代码Windows下判断进程位数代码参考文献1. ↩]]></content>
       <categories>
         <category>计算机</category>
         <category>操作系统</category>

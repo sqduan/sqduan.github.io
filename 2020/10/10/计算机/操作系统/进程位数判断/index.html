@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="$2^{64}=18446744073709551616$">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-10T08:49:34.705Z">
+<meta property="og:updated_time" content="2020-10-11T06:24:47.530Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程位数判断">
 <meta name="twitter:description" content="$2^{64}=18446744073709551616$">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-10-10 16:37:20 / Modified: 16:49:34" itemprop="dateCreated datePublished" datetime="2020-10-10T16:37:20+08:00">2020-10-10</time>
+              <time title="Created: 2020-10-10 16:37:20" itemprop="dateCreated datePublished" datetime="2020-10-10T16:37:20+08:00">2020-10-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-10-11 14:24:47" itemprop="dateModified" datetime="2020-10-11T14:24:47+08:00">2020-10-11</time>
               
             
           </span>
@@ -470,8 +482,11 @@
 </blockquote>
 <a id="more"></a>
 <p>当我们编写与操作系统有关的代码时，有时要判断一个进程是32位还是64位，这种情况下我们需要一些代码来实现这种功能，本文将针对不同操作系统下实现进程位数的判断的过程进行总结。</p>
-<h2 id="Linux下进程位数判断"><a href="#Linux下进程位数判断" class="headerlink" title="Linux下进程位数判断"></a>Linux下进程位数判断</h2><h3 id="使用file命令判断进程位数"><a href="#使用file命令判断进程位数" class="headerlink" title="使用file命令判断进程位数"></a>使用file命令判断进程位数</h3><p>当我们知道进程的PID后，我们可以使用</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="Linux下进程位数判断"><a href="#Linux下进程位数判断" class="headerlink" title="Linux下进程位数判断"></a>Linux下进程位数判断</h2><h3 id="使用file命令判断进程位数"><a href="#使用file命令判断进程位数" class="headerlink" title="使用file命令判断进程位数"></a>使用file命令判断进程位数</h3><p>当我们知道进程的PID后，我们可以使用file命令对进程的信息进行判断，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~$ ps</span><br><span class="line">    PID TTY          TIME CMD</span><br><span class="line">    325 pts/0    00:00:00 bash</span><br><span class="line">    360 pts/0    00:00:00 ps</span><br><span class="line">~$ file -L /proc/325/exe</span><br><span class="line">/proc/325/exe: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a6cb40078351e05121d46daa768e271846d5cc54, for GNU/Linux 3.2.0, stripped</span><br></pre></td></tr></table></figure>
+<p>从上面的结果中，我们可以看到这个进程是64位进程。</p>
+<h3 id="ELF文件"><a href="#ELF文件" class="headerlink" title="ELF文件"></a>ELF文件</h3><p>在明确file命令的工作原理之前，我们先来看一下linux下可执行文件的格式，linux下的可执行文件是ELF格式，全称为可执行与可链接格式（Executable and Linkable Format），其实就是一种二进制可执行文件。ELF的header决定了该可执行文件采用32位还是64位的地址，所以我们通过ELF的相关信息即可判断可执行进程的位数。</p>
+<h3 id="C-判断进程位数代码"><a href="#C-判断进程位数代码" class="headerlink" title="C++判断进程位数代码"></a>C++判断进程位数代码</h3><h2 id="Windows下判断进程位数代码"><a href="#Windows下判断进程位数代码" class="headerlink" title="Windows下判断进程位数代码"></a>Windows下判断进程位数代码</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -852,7 +867,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下进程位数判断"><span class="nav-number">1.</span> <span class="nav-text">Linux下进程位数判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用file命令判断进程位数"><span class="nav-number">1.1.</span> <span class="nav-text">使用file命令判断进程位数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下进程位数判断"><span class="nav-number">1.</span> <span class="nav-text">Linux下进程位数判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用file命令判断进程位数"><span class="nav-number">1.1.</span> <span class="nav-text">使用file命令判断进程位数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ELF文件"><span class="nav-number">1.2.</span> <span class="nav-text">ELF文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-判断进程位数代码"><span class="nav-number">1.3.</span> <span class="nav-text">C++判断进程位数代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows下判断进程位数代码"><span class="nav-number">2.</span> <span class="nav-text">Windows下判断进程位数代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
