@@ -103,16 +103,18 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="在对载具、飞行器等目标进行跟踪定位时，需要利用到规范的坐标系统，本文将针对常用的坐标系统及其变换过程进行总结。">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ellipsoid_revolution_oblate_aab_auxiliary_sphere.svg/300px-Ellipsoid_revolution_oblate_aab_auxiliary_sphere.svg.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/geocentricvsgeodetic.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/th.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/bodycs.gif">
-<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/geocentricvsgeodetic.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%B7%B1%E5%BA%A6%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20191108104623.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%B7%B1%E5%BA%A6%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20191108124904.png">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.789Z">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/202010141324.png?raw=true">
+<meta property="og:updated_time" content="2020-10-14T05:34:46.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="坐标系统及变换">
 <meta name="twitter:description" content="在对载具、飞行器等目标进行跟踪定位时，需要利用到规范的坐标系统，本文将针对常用的坐标系统及其变换过程进行总结。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/th.jpeg">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ellipsoid_revolution_oblate_aab_auxiliary_sphere.svg/300px-Ellipsoid_revolution_oblate_aab_auxiliary_sphere.svg.png">
 
 
 
@@ -411,6 +413,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-10-14 13:34:46" itemprop="dateModified" datetime="2020-10-14T13:34:46+08:00">2020-10-14</time>
+              
+            
           </span>
 
           
@@ -469,19 +487,53 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在对载具、飞行器等目标进行跟踪定位时，需要利用到规范的坐标系统，本文将针对常用的坐标系统及其变换过程进行总结。</p>
 <a id="more"></a>
-<h2 id="常用坐标系统"><a href="#常用坐标系统" class="headerlink" title="常用坐标系统"></a>常用坐标系统</h2><h3 id="地心惯性坐标系（Earth-centered-Inertial-Coordinate，-ECI）"><a href="#地心惯性坐标系（Earth-centered-Inertial-Coordinate，-ECI）" class="headerlink" title="地心惯性坐标系（Earth-centered Inertial Coordinate， ECI）"></a>地心惯性坐标系（Earth-centered Inertial Coordinate， ECI）</h3><h3 id="经纬坐标系（-Geographic-Coordinate-System-GCS）"><a href="#经纬坐标系（-Geographic-Coordinate-System-GCS）" class="headerlink" title="经纬坐标系（ Geographic Coordinate System, GCS）"></a>经纬坐标系（ Geographic Coordinate System, GCS）</h3><p>经纬坐标系是利用经度及纬度，在地球表面进行定位的坐标系统，度量单位为十进制，包括两个坐标分量：经度（longitude,$-90$ to $90$ degree）和纬度（latitude, $-180$ to $180$ degree）。经度0度位于格林尼治本初子午线。实际上经纬坐标系就是一个极坐标系。</p>
-<h3 id="局部切平面坐标系（Local-tangent-plane-LTP）"><a href="#局部切平面坐标系（Local-tangent-plane-LTP）" class="headerlink" title="局部切平面坐标系（Local tangent plane, LTP）"></a>局部切平面坐标系（Local tangent plane, LTP）</h3><p>这是一个基于局部垂直方向以及地球自转轴的坐标系族，包含有两个坐标系：</p>
-<ul>
-<li>北东天</li>
-<li>东北地</li>
+<h2 id="常用坐标系统"><a href="#常用坐标系统" class="headerlink" title="常用坐标系统"></a>常用坐标系统</h2><h3 id="地心惯性坐标系（Earth-centered-Inertial-Coordinate，-ECI）"><a href="#地心惯性坐标系（Earth-centered-Inertial-Coordinate，-ECI）" class="headerlink" title="地心惯性坐标系（Earth-centered Inertial Coordinate， ECI）"></a>地心惯性坐标系（Earth-centered Inertial Coordinate， ECI）</h3><p>所谓地心惯性坐标系，即坐标原点位于地球质心的坐标系，而地心惯性坐标系根据坐标轴方向的不同，又存在多种定义方法，常见的底薪惯性坐标系包括WGS84坐标系、CGCS2000坐标系和GRS80坐标系。</p>
+<h4 id="WGS84坐标系2"><a href="#WGS84坐标系2" class="headerlink" title="WGS84坐标系2"></a>WGS84坐标系<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h4><h5 id="坐标定义"><a href="#坐标定义" class="headerlink" title="坐标定义"></a>坐标定义</h5><ul>
+<li>原点：地球质心</li>
+<li>Z轴：指向由BIH在采用BIH站坐标基础上定义的极移的协议地球极（CTP）的方向</li>
+<li>X轴：WGS84基准子午面和CTP子午面的交线</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/th.jpeg" width="300" alt="LTP坐标系统" align="center"></p>
-<p>该坐标系主要用于描述基于观察者位置的周围物体的运动，例如地面对卫星激光通讯过程中，需要以地面站为中心，获取卫星的相对位置。那么我们可以以地面站为原点，建立北东天坐标系，获取卫星位置。</p>
-<h3 id="体坐标系（Body-Axis）"><a href="#体坐标系（Body-Axis）" class="headerlink" title="体坐标系（Body Axis）"></a>体坐标系（Body Axis）</h3><p>体坐标系与LTP相同的一点是都是基于观察者位置，所以两个坐标系原点相同。不同之处在于LTP以地球的地理北和地理东为轴，指向正上方。而载体坐标系以载体中轴线为$X$，在甲板平面内垂直于中轴线的轴为$Y$，垂直于甲板的轴为$Z$。体坐标系可以用来描述物体的旋转，如下图：</p>
-<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/bodycs.gif" width="300" alt="LTP坐标系统" align="center"></p>
-<p>描述物体的旋转需要用到三个角度，$\textrm{Roll}$，$\textrm{Yaw}$和$\textrm{Pitch}$，即上图中的$\phi,\psi,\theta$，它们分别是绕$x,z,y$三个轴旋转得到的。</p>
-<h3 id="WGS84-坐标系"><a href="#WGS84-坐标系" class="headerlink" title="WGS84 坐标系"></a>WGS84 坐标系</h3><p>WGS84坐标系全称世界大地测量系统，是GPS协议所使用的坐标系统，其原点位于地球质心</p>
-<h4 id="计算地球上任意纬度的半径"><a href="#计算地球上任意纬度的半径" class="headerlink" title="计算地球上任意纬度的半径"></a>计算地球上任意纬度的半径</h4><p>为了计算地球任意经度上的半径，我们首先定义半长轴$a$和半短轴$b$</p>
+<h5 id="具体参数"><a href="#具体参数" class="headerlink" title="具体参数"></a>具体参数</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>数值</th>
+<th>单位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Angular Unit（角度单位）</td>
+<td></td>
+<td>Degree</td>
+</tr>
+<tr>
+<td>Prime Meridian（本初子午线）</td>
+<td>格林尼治</td>
+<td></td>
+</tr>
+<tr>
+<td>Semimajor Axis（半长轴）</td>
+<td>6378137.0</td>
+<td>m</td>
+</tr>
+<tr>
+<td>Semiminor Axis（半短轴）</td>
+<td>6356752.314245179</td>
+<td>m</td>
+</tr>
+<tr>
+<td>Inverse Flattening（扁率）</td>
+<td>298.257223563</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>椭球的扁率定义为$f=a/(a-b)$。</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Ellipsoid_revolution_oblate_aab_auxiliary_sphere.svg/300px-Ellipsoid_revolution_oblate_aab_auxiliary_sphere.svg.png" width="200" alt="LTP坐标系统" align="center"></p>
+<h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><p>GPS上使用的坐标系就是WGS84坐标系统。</p>
+<h5 id="根据WGS坐标系计算任意经度半径"><a href="#根据WGS坐标系计算任意经度半径" class="headerlink" title="根据WGS坐标系计算任意经度半径"></a>根据WGS坐标系计算任意经度半径</h5><p>为了计算地球任意经度上的半径，我们首先定义半长轴$a$和半短轴$b$</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Semi-major axis a = 6378137.0 meters</span><br><span class="line">Semi-minor axis b = 6356752.3142 meters</span><br></pre></td></tr></table></figure>
 <p>椭圆上任意一点可以用参数方程表示为：</p>
 <script type="math/tex; mode=display">
@@ -496,7 +548,23 @@ R(t)^2=a^2\cos^2(t)+b^2\sin^2(t)</script><p>这里的$t$是地心纬度(geocentr
 R^2=a^2\frac{1}{1+\tan^2(\alpha)}+b^2\frac{1}{1+\frac{1}{\tan^2(\alpha)}}</script><p>经过一系列化简，最终我们得到下式</p>
 <script type="math/tex; mode=display">
 R=\sqrt{\frac{(a^2\cos(\beta))^2+(b^2\sin(\beta))^2}{(a\cos(\beta))^2+(b\sin(\beta))^2}}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#  earth_radius_at_latitude : calculate the earth radius by geocentric</span></span><br><span class="line"><span class="comment">#  latitude </span></span><br><span class="line"><span class="comment">#  </span></span><br><span class="line"><span class="comment">#  INPUT:  geocentric latitude</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  OUTPUT: Earth radius at that point</span></span><br><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">earth_radius_at_latitude</span><span class="params">(latitude)</span>:</span></span><br><span class="line">    latitude = radians(abs(latitude))</span><br><span class="line">    <span class="keyword">return</span> EARTH_RADIUS * sqrt(</span><br><span class="line">        <span class="number">1</span> -</span><br><span class="line">        (<span class="number">2</span> * EARTH_FLATTENING_COEFFICIENT -</span><br><span class="line">            (EARTH_FLATTENING_COEFFICIENT ** <span class="number">2</span>)</span><br><span class="line">        )</span><br><span class="line">        * (sin(latitude) ** <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line"><span class="comment">#  earth_radius_at_WGS84_latitude : calculate the earth radius by WGS84</span></span><br><span class="line"><span class="comment">#  latitude (geodetic latitude)</span></span><br><span class="line"><span class="comment">#  </span></span><br><span class="line"><span class="comment">#  INPUT:  latitude under WGS84 coordinate </span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#  OUTPUT: Earth radius at that point</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#----------------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">earth_radius_at_WGS84_latitude</span><span class="params">(latitude)</span>:</span></span><br><span class="line">    latitude = radians(abs(latitude))</span><br><span class="line">    <span class="keyword">return</span> sqrt( ((EARTH_SEMI_MAJOR_AXIS**<span class="number">2</span>*cos(latitude))**<span class="number">2</span> +</span><br><span class="line">                  (EARTH_SEMI_MINOR_AXIS**<span class="number">2</span>*sin(latitude))**<span class="number">2</span> ) /</span><br><span class="line">                 ((EARTH_SEMI_MAJOR_AXIS*cos(latitude))**<span class="number">2</span> +</span><br><span class="line">                  (EARTH_SEMI_MINOR_AXIS*sin(latitude))**<span class="number">2</span> ))</span><br></pre></td></tr></table></figure>
-<h3 id="GRS80坐标系"><a href="#GRS80坐标系" class="headerlink" title="GRS80坐标系"></a>GRS80坐标系</h3><h2 id="常用坐标系转换"><a href="#常用坐标系转换" class="headerlink" title="常用坐标系转换"></a>常用坐标系转换</h2><h3 id="坐标变换基本规则"><a href="#坐标变换基本规则" class="headerlink" title="坐标变换基本规则"></a>坐标变换基本规则</h3><p>坐标系变换可以分为两部分：平移与旋转。</p>
+<h3 id><a href="#" class="headerlink" title=" "></a> </h3><h3 id="地理坐标系（-Geographic-Coordinate-System-GCS）"><a href="#地理坐标系（-Geographic-Coordinate-System-GCS）" class="headerlink" title="地理坐标系（ Geographic Coordinate System, GCS）"></a>地理坐标系（ Geographic Coordinate System, GCS）</h3><p>地理坐标系是利用经度及纬度，在地球表面进行定位的坐标系统，度量单位为十进制，包括两个坐标分量：经度（longitude, $\lambda$ ,$-90$ to $90$ degree）和纬度（latitude, $\phi$, $-180$ to $180$ degree）。经度0度位于格林尼治本初子午线。实际上地理坐标系就是一个极坐标系。下面的网站直观地描述了地理坐标系：</p>
+<p align="center">
+<iframe id="inlineFrameExample" title="Inline Frame Example" width="1000" src="https://www.geoplaner.com/">
+</iframe>
+</p>
+
+<h3 id="局部切平面坐标系（Local-tangent-plane-LTP）"><a href="#局部切平面坐标系（Local-tangent-plane-LTP）" class="headerlink" title="局部切平面坐标系（Local tangent plane, LTP）"></a>局部切平面坐标系（Local tangent plane, LTP）</h3><p>这是一个基于局部垂直方向以及地球自转轴的坐标系族，包含有两个坐标系：</p>
+<ul>
+<li>北东天</li>
+<li>东北地</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/th.jpeg" width="300" alt="LTP坐标系统" align="center"></p>
+<p>该坐标系主要用于描述基于观察者位置的周围物体的运动，例如地面对卫星激光通讯过程中，需要以地面站为中心，获取卫星的相对位置。那么我们可以以地面站为原点，建立北东天坐标系，获取卫星位置。</p>
+<h3 id="体坐标系（Body-Axis）"><a href="#体坐标系（Body-Axis）" class="headerlink" title="体坐标系（Body Axis）"></a>体坐标系（Body Axis）</h3><p>体坐标系与LTP相同的一点是都是基于观察者位置，所以两个坐标系原点相同。不同之处在于LTP以地球的地理北和地理东为轴，指向正上方。而载体坐标系以载体中轴线为$X$，在甲板平面内垂直于中轴线的轴为$Y$，垂直于甲板的轴为$Z$。体坐标系可以用来描述物体的旋转，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/bodycs.gif" width="300" alt="LTP坐标系统" align="center"></p>
+<p>描述物体的旋转需要用到三个角度，$\textrm{Roll}$，$\textrm{Yaw}$和$\textrm{Pitch}$，即上图中的$\phi,\psi,\theta$，它们分别是绕$x,z,y$三个轴旋转得到的。</p>
+<h2 id="常用坐标系转换"><a href="#常用坐标系转换" class="headerlink" title="常用坐标系转换"></a>常用坐标系转换</h2><h3 id="坐标变换基本规则"><a href="#坐标变换基本规则" class="headerlink" title="坐标变换基本规则"></a>坐标变换基本规则</h3><p>坐标系变换可以分为两部分：平移与旋转。</p>
 <h3 id="LTP与体坐标系"><a href="#LTP与体坐标系" class="headerlink" title="LTP与体坐标系"></a>LTP与体坐标系</h3><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%B7%B1%E5%BA%A6%E6%88%AA%E5%9B%BE_%E9%80%89%E6%8B%A9%E5%8C%BA%E5%9F%9F_20191108104623.png" width="650" alt="LTP坐标系统" align="center"></p>
 <p>如上图，假设我们的目标为$M$，其向量为$L$，那么在北东天坐标系下，其坐标为：</p>
 <script type="math/tex; mode=display">
@@ -575,7 +643,16 @@ z
 \end{bmatrix}</script><p>式中$\Psi$就是GPS体坐标系到ATP系统体坐标系的变换，即我们所说的用于补偿安装误差的旋转矩阵，这是一个未知量，需要我们进行拟合获得，进一步地，上式可写为：</p>
 <script type="math/tex; mode=display">
 \Lambda_c = \Psi \xi \Lambda +\Delta</script><p>其中，$\Delta$是残差。实际过程中，$\Lambda_{c_i}$和$\Lambda_i$可以通过观测获得，那么$\Psi$可以通过最小二乘法拟合的方式获得。</p>
-<h3 id="GCS与LTP"><a href="#GCS与LTP" class="headerlink" title="GCS与LTP"></a>GCS与LTP</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.researchgate.net/publication/335939674_Shipborne_Acquisition_Tracking_and_Pointing_Experimental_Verifications_Towards_Satellite-to-Sea_Laser_Communication">Shipborne Acquisition, Tracking, and Pointing Experimental Verifications Towards Satellite-to-Sea Laser Communication</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<h3 id="地理坐标系（GCS）与地心坐标系（ECI）之间的变换"><a href="#地理坐标系（GCS）与地心坐标系（ECI）之间的变换" class="headerlink" title="地理坐标系（GCS）与地心坐标系（ECI）之间的变换"></a>地理坐标系（GCS）与地心坐标系（ECI）之间的变换</h3><p>地理坐标系与地心坐标系之间的变换是最为常用的一种变换，这里对变换的过程进行总结，并给出相应的MATLAB仿真代码。</p>
+<h4 id="GCS到ECI"><a href="#GCS到ECI" class="headerlink" title="GCS到ECI"></a>GCS到ECI</h4><h5 id="转换方法"><a href="#转换方法" class="headerlink" title="转换方法"></a>转换方法</h5><p><img src="https://github.com/sqduan/hexoimg/blob/master/202010141324.png?raw=true" width="300" alt="LTP坐标系统" align="center"></p>
+<p>给定经纬坐标系下的经度、纬度、高度以及ECI坐标的定义方法（参考椭球的参数），我们就可以根据经纬高计算出地心惯性坐标系下的模型</p>
+<h5 id="转换代码"><a href="#转换代码" class="headerlink" title="转换代码"></a>转换代码</h5><p>下面给出matlab下的GCS到ECI的转换过程，函数名称为geo2cart，输入参数为纬度、经度、高度和椭球模型名称</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[output_x,output_y,output_z]</span> = <span class="title">geo2cart</span><span class="params">(latitude,longitude,h,ellipsoid_name)</span></span></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"><span class="comment">% F_GEO2CART computes the cartesian coordinates of a set of points using </span></span><br><span class="line"><span class="comment">% the geodetic coordinates of the same set of points. The reference </span></span><br><span class="line"><span class="comment">% ellispoid should be defined.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% HOW: [x,y,z] = f_geo2cart(phi,lamda,h,ellipsoid_name)</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Input: latitude       [n x m] latitude in degrees.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%        longitude      [n x m] longitude in degrees.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%        h              [n x m] ellipsoidal height in meters.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%        ellispoid_name         string containing the name of the</span></span><br><span class="line"><span class="comment">%                               reference ellipsoid.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Output: x             [n x m] x coordinate in meters.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         y             [n x m] y coordinate in meters.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         z             [n x m] z coordinate in meters.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Dimitrios Piretzidis, Department of Rural and Surveying Engineering AUTh</span></span><br><span class="line"><span class="comment">% 2012</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% uses m-files: f_n, f_ellipsoid_properties</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Revision history</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Remarks</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Start the algorithm</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Input check</span></span><br><span class="line"><span class="keyword">if</span> nargin ~= <span class="number">4</span></span><br><span class="line">    error(<span class="string">'Wrong number of input arguments'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">max</span>(<span class="built_in">size</span>(latitude) ~= <span class="built_in">size</span>(longitude)) == <span class="number">1</span></span><br><span class="line">    error(<span class="string">'phi and lamda do not have the same dimensions'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">ell_par  = ellipsoid_properties(ellipsoid_name); <span class="comment">%Define the ellipsoid parameters</span></span><br><span class="line"></span><br><span class="line">n        = f_n(latitude,ellipsoid_name);</span><br><span class="line"></span><br><span class="line">output_x = (n+h).*<span class="built_in">cosd</span>(latitude).*<span class="built_in">cosd</span>(longitude); <span class="comment">%X-coordinate</span></span><br><span class="line">output_y = (n+h).*<span class="built_in">cosd</span>(latitude).*<span class="built_in">sind</span>(longitude); <span class="comment">%Y-coordinate</span></span><br><span class="line">output_z = ((<span class="number">1</span>-ell_par.e^<span class="number">2</span>).*n+h).*<span class="built_in">sind</span>(latitude); <span class="comment">%Z-coordinate</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+</div></div>
+<p>由于不同的地心惯性坐标系定义方法不同，所以椭球模型中的参数也不一样，故我们需要指定使用哪种参数，这里我们将不同坐标系的参数封装成了一个csv文件，使用时导入csv文件即可获得不同的椭球参数(<a href="/downloads/ellipsoid.m">点击这里下载椭球模型的参数文件</a>)，同时，我们需要一个解析csv的函数，</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.researchgate.net/publication/335939674_Shipborne_Acquisition_Tracking_and_Pointing_Experimental_Verifications_Towards_Satellite-to-Sea_Laser_Communication">Shipborne Acquisition, Tracking, and Pointing Experimental Verifications Towards Satellite-to-Sea Laser Communication</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://confluence.qps.nl/qinsy/9.1/en/world-geodetic-system-1984-wgs84-182618391.html">World Geodetic System 1984 (WGS84)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -726,7 +803,7 @@ z
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">222</span>
+                    <span class="site-state-item-count">223</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -960,7 +1037,7 @@ z
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用坐标系统"><span class="nav-number">1.</span> <span class="nav-text">常用坐标系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地心惯性坐标系（Earth-centered-Inertial-Coordinate，-ECI）"><span class="nav-number">1.1.</span> <span class="nav-text">地心惯性坐标系（Earth-centered Inertial Coordinate， ECI）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经纬坐标系（-Geographic-Coordinate-System-GCS）"><span class="nav-number">1.2.</span> <span class="nav-text">经纬坐标系（ Geographic Coordinate System, GCS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部切平面坐标系（Local-tangent-plane-LTP）"><span class="nav-number">1.3.</span> <span class="nav-text">局部切平面坐标系（Local tangent plane, LTP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#体坐标系（Body-Axis）"><span class="nav-number">1.4.</span> <span class="nav-text">体坐标系（Body Axis）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGS84-坐标系"><span class="nav-number">1.5.</span> <span class="nav-text">WGS84 坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#计算地球上任意纬度的半径"><span class="nav-number">1.5.1.</span> <span class="nav-text">计算地球上任意纬度的半径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GRS80坐标系"><span class="nav-number">1.6.</span> <span class="nav-text">GRS80坐标系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用坐标系转换"><span class="nav-number">2.</span> <span class="nav-text">常用坐标系转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标变换基本规则"><span class="nav-number">2.1.</span> <span class="nav-text">坐标变换基本规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LTP与体坐标系"><span class="nav-number">2.2.</span> <span class="nav-text">LTP与体坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#体坐标系之间的变换及误差补偿"><span class="nav-number">2.2.1.</span> <span class="nav-text">体坐标系之间的变换及误差补偿</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GCS与LTP"><span class="nav-number">2.3.</span> <span class="nav-text">GCS与LTP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用坐标系统"><span class="nav-number">1.</span> <span class="nav-text">常用坐标系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地心惯性坐标系（Earth-centered-Inertial-Coordinate，-ECI）"><span class="nav-number">1.1.</span> <span class="nav-text">地心惯性坐标系（Earth-centered Inertial Coordinate， ECI）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WGS84坐标系2"><span class="nav-number">1.1.1.</span> <span class="nav-text">WGS84坐标系2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#坐标定义"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">坐标定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#具体参数"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">具体参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用场景"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据WGS坐标系计算任意经度半径"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">根据WGS坐标系计算任意经度半径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text"> </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地理坐标系（-Geographic-Coordinate-System-GCS）"><span class="nav-number">1.3.</span> <span class="nav-text">地理坐标系（ Geographic Coordinate System, GCS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部切平面坐标系（Local-tangent-plane-LTP）"><span class="nav-number">1.4.</span> <span class="nav-text">局部切平面坐标系（Local tangent plane, LTP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#体坐标系（Body-Axis）"><span class="nav-number">1.5.</span> <span class="nav-text">体坐标系（Body Axis）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用坐标系转换"><span class="nav-number">2.</span> <span class="nav-text">常用坐标系转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标变换基本规则"><span class="nav-number">2.1.</span> <span class="nav-text">坐标变换基本规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LTP与体坐标系"><span class="nav-number">2.2.</span> <span class="nav-text">LTP与体坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#体坐标系之间的变换及误差补偿"><span class="nav-number">2.2.1.</span> <span class="nav-text">体坐标系之间的变换及误差补偿</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地理坐标系（GCS）与地心坐标系（ECI）之间的变换"><span class="nav-number">2.3.</span> <span class="nav-text">地理坐标系（GCS）与地心坐标系（ECI）之间的变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GCS到ECI"><span class="nav-number">2.3.1.</span> <span class="nav-text">GCS到ECI</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#转换方法"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">转换方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#转换代码"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">转换代码</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
