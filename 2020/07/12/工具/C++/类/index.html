@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="God said, Let there be light: and there was light.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.763Z">
+<meta property="og:updated_time" content="2020-10-18T14:06:35.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类">
 <meta name="twitter:description" content="God said, Let there be light: and there was light.">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-10-18 22:06:35" itemprop="dateModified" datetime="2020-10-18T22:06:35+08:00">2020-10-18</time>
+              
+            
           </span>
 
           
@@ -466,11 +482,80 @@
 </blockquote>
 <a id="more"></a>
 <p>作为一门面向对象语言，C++允许我们使用类进行自定义类型，本文将针对类中的一些问题进行相关总结。</p>
+<h2 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h2><p>封装是面向对象的一个重要特点，它对外部函数或对象访问类内部的成员的过程进行限制。C++提供了三种访问修饰符，分别是public，protected和private，本节将对这三种修饰符进行总结。</p>
+<h3 id="public"><a href="#public" class="headerlink" title="public"></a>public</h3><p>保密性最低，可以直接通过对象引用的方式访问，一般来说对外暴露的接口定义为<code>public</code></p>
+<h3 id="private"><a href="#private" class="headerlink" title="private"></a>private</h3><p>保密性最高，私有成员变量或函数在类外不可访问，甚至不能查看，只有类和友元函数能访问私有成员。</p>
+<h3 id="protected"><a href="#protected" class="headerlink" title="protected"></a>protected</h3><p>protected一般用在继承当中，它和private很相似，protected成员变量或函数在类外不能被访问，<strong>但是在派生类（子类）中是可以访问的</strong></p>
+<h3 id="继承中的特点"><a href="#继承中的特点" class="headerlink" title="继承中的特点"></a>继承中的特点</h3><p>在继承中有三种继承的方式，这里我们总结一下不同的访问修饰符在继承下的基类成员访问属性</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">继承方式</th>
+<th style="text-align:center">基类成员</th>
+<th style="text-align:center">在子类中的访问属性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">public</td>
+<td style="text-align:center">public（子类可访问，外部可访问）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">protected（子类可访问，外部不能访问）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">private</td>
+<td style="text-align:center">private（子类不能访问）</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">public</td>
+<td style="text-align:center">protected（子类可访问，外部不能）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">protected（子类可访问，外部不能）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">private</td>
+<td style="text-align:center">private（子类不能访问，外部不能）</td>
+</tr>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">public</td>
+<td style="text-align:center">private (子类可以访问，对外为private)</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">private（子类可以访问，对外为private）</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">private</td>
+<td style="text-align:center">private（子类不可访问）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>无论哪种继承，有两点没有变化</p>
+<ul>
+<li>private只能由本类或有源访问，子类也不能访问</li>
+<li>protected成员可以被子类访问</li>
+</ul>
+<p>这里其实挺迷惑的，从逻辑上讲，子类是包含在基类当中的，理应具有并且能够访问基类的所有属性，但是事实上，子类也可以视为基类的使用者，也是基类的客户代码，如果基类的方法是private，但是子类可以访问，那么完全可能发生下面的事情：我创建了一个子类，然后继承这个基类，这样我就可以访问基类中的private方法，其实这样就严重破坏了数据封装性的原则。</p>
 <h2 id="静态类成员"><a href="#静态类成员" class="headerlink" title="静态类成员"></a>静态类成员</h2><p>有些情况下，某个数据成员应当属于类而非具体对象本身。例如我们说正常人都有两只眼睛，那么眼睛的数量应当是与人直接相关而非与特定个体相关。当我们更改了眼睛的数量，应当所有的个体眼睛数量都会被修改。那么此时我们需要定义类的静态成员，它属于类本身，而非某个个体。</p>
 <h3 id="声明及定义静态类成员"><a href="#声明及定义静态类成员" class="headerlink" title="声明及定义静态类成员"></a>声明及定义静态类成员</h3><h4 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Human</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> s_eye_num;     <span class="comment">//前面加上static即可，注意，此处只是声明，我们还未定义，不能直接使用，必须进行定义及初始化操作</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>通常情况下，我们将静态变量定义放在类外的cpp文件中进行定义，切记不要再头文件中对静态变量进行初始化。如果放在.h文件中，每一个包含该头文件的文件都会去重复定义类的静态变量，从而产生链接错误。<strong>正确的做法是对所有的类静态成员在类的实现cpp文件中进行统一定义及初始化管理。</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> Human::s_eye_num = <span class="number">0</span>;      <span class="comment">//定义及初始化，只能进行一次</span></span><br></pre></td></tr></table></figure>
-<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p>静态类成员可以设置为public或private的，当设置为public时，可以通过作用域方式访问，即：</p>
+<h3 id="访问控制-1"><a href="#访问控制-1" class="headerlink" title="访问控制"></a>访问控制</h3><p>静态类成员可以设置为public或private的，当设置为public时，可以通过作用域方式访问，即：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Human duanshiqi;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; Human::s_eye_num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; duanshiqi.s_eye_num &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">//正确！属于类的肯定也是属于每一个对象的</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>而私有时则必须通过相应的get函数进行访问。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
@@ -624,7 +709,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">223</span>
+                    <span class="site-state-item-count">224</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -858,7 +943,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态类成员"><span class="nav-number">1.</span> <span class="nav-text">静态类成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明及定义静态类成员"><span class="nav-number">1.1.</span> <span class="nav-text">声明及定义静态类成员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明"><span class="nav-number">1.1.1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.1.2.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制"><span class="nav-number">1.2.</span> <span class="nav-text">访问控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#访问控制"><span class="nav-number">1.</span> <span class="nav-text">访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#public"><span class="nav-number">1.1.</span> <span class="nav-text">public</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#private"><span class="nav-number">1.2.</span> <span class="nav-text">private</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protected"><span class="nav-number">1.3.</span> <span class="nav-text">protected</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承中的特点"><span class="nav-number">1.4.</span> <span class="nav-text">继承中的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态类成员"><span class="nav-number">2.</span> <span class="nav-text">静态类成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#声明及定义静态类成员"><span class="nav-number">2.1.</span> <span class="nav-text">声明及定义静态类成员</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#声明"><span class="nav-number">2.1.1.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">2.1.2.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制-1"><span class="nav-number">2.2.</span> <span class="nav-text">访问控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

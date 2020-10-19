@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/10/18/%E5%B7%A5%E5%85%B7/C++/explicit/</loc>
+    <lastmod>2020-10-18</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/%E7%B1%BB/</loc>
+    <lastmod>2020-10-18</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/19/%E5%B7%A5%E5%85%B7/C++/%E6%A8%A1%E6%9D%BF/</loc>
+    <lastmod>2020-10-18</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/10/09/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-4/</loc>
     <lastmod>2020-10-18</lastmod>
   </url>
@@ -342,10 +354,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/08/16/%E5%B7%A5%E5%85%B7/C++/C++%E9%9D%99%E6%80%81%E5%AE%A1%E6%9F%A5/</loc>
-    <lastmod>2020-08-19</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/19/%E5%B7%A5%E5%85%B7/C++/%E6%A8%A1%E6%9D%BF/</loc>
     <lastmod>2020-08-19</lastmod>
   </url>
   <url>
@@ -842,10 +850,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6/</loc>
-    <lastmod>2020-07-12</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/%E7%B1%BB/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>
   <url>

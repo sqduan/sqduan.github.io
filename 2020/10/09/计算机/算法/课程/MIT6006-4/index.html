@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/e0935e68daece9ece9fe078e9ad65a80338fa2ba/20201091609.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/7da9f289ce229391f5cc595870006b8fb3e1daa4/202010162212.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/902d959e22cf3f027c292cc00fba57ceefa41794/202010162232.svg">
-<meta property="og:updated_time" content="2020-10-18T07:49:25.588Z">
+<meta property="og:updated_time" content="2020-10-18T12:50:41.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6006 Lecture 4——堆与堆排序">
 <meta name="twitter:description" content="堆：一种特殊的完全二叉树，其中父节点恒小于等于（大于等于）子节点的值，此堆称为小顶堆（大顶堆）。">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-10-18 15:49:25" itemprop="dateModified" datetime="2020-10-18T15:49:25+08:00">2020-10-18</time>
+                <time title="Modified: 2020-10-18 20:50:41" itemprop="dateModified" datetime="2020-10-18T20:50:41+08:00">2020-10-18</time>
               
             
           </span>
@@ -528,7 +528,12 @@
 <p>​        $\textrm{max_heapify}(A,i)$:</p>
 </blockquote>
 <p>为什么从$n/2$开始呢？因为$A[n/2+1,…,n]$全部都是叶子节点，而叶子节点已经是大顶堆了，所以自然满足假设，而从$n/2$到$1$，实际上是一个自底向上的过程。</p>
-<p>从直观上来看，这个操作的时间复杂度为$O(n\log(n))$，但是实际上这个时间复杂度要更低一些。当节点$i$比叶子节点高一层时，max_heapify需要1次操作，时间复杂度为$\Theta(1)$；而当节点$i$比叶子节点高$l$层时，max_heapify需要$l$次操作，时间复杂度为$\Theta(l)$</p>
+<p>从直观上来看，这个操作的时间复杂度为$O(n\log(n))$，但是实际上这个时间复杂度要更低一些。当节点$i$比叶子节点高一层时，max_heapify需要1次操作，时间复杂度为$\Theta(1)$；而当节点$i$比叶子节点高$l$层时，max_heapify需要$l$次操作，时间复杂度为$\Theta(l)$。我们令叶子层为第0层，那么第一层有$n/4$个节点，需要1次操作，第2层有$n/8$个节点，需要两次操作，第$\log(n)$层有1个节点，需要$\log(n)$次操作，所以时间复杂度为：</p>
+<script type="math/tex; mode=display">
+\Theta = \frac{n}{4}+\frac{n}{8}\times2+\frac{n}{16}\times3+...+\log(n)</script><p>令$n/4=2^k$，并提取公因式，那么上式可以写为</p>
+<script type="math/tex; mode=display">
+\Theta = 2^k(\frac{1}{2^0}+\frac{2}{2^1}+...+\frac{k+1}{2^k})=\sum_{i=0}^{k}\frac{i+1}{2^i}</script><p>后面的级数是一个收敛级数，所以实际上我们的时间复杂度为$\Theta(n)$</p>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>利用堆的特性，我们可以进行排序操作。</p>
 <h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="数字电路仿真"><a href="#数字电路仿真" class="headerlink" title="数字电路仿真"></a>数字电路仿真</h3><h4 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h4><p>组合逻辑电路是由门构成的，门以逻辑电平（真/1，假/0）作为输入信号，输出信号是输入信号的函数，逻辑门的计算是需要时间的，假设延迟时间为$\delta$，那么在$\tau$时刻的输出信号对应$\tau-\delta$时刻的输入信号。门的输出信号也是逻辑电平，可以通过电路与其他门相连，将输出信号作为下一个门的输入信号，例如，一个两输入、延迟时间为2ns的异或门的真值表如下：</p>
 <div class="table-container">
 <table>
@@ -750,7 +755,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">223</span>
+                    <span class="site-state-item-count">224</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -984,7 +989,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#优先队列（Priority-Queue）"><span class="nav-number">1.</span> <span class="nav-text">优先队列（Priority Queue）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优先队列的定义及基本操作"><span class="nav-number">1.1.</span> <span class="nav-text">优先队列的定义及基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆（Heap）"><span class="nav-number">2.</span> <span class="nav-text">堆（Heap）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将树堆化"><span class="nav-number">2.1.</span> <span class="nav-text">将树堆化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大（小）顶堆"><span class="nav-number">2.2.</span> <span class="nav-text">大（小）顶堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特性"><span class="nav-number">2.2.1.</span> <span class="nav-text">特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆的操作"><span class="nav-number">2.3.</span> <span class="nav-text">堆的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建大顶堆"><span class="nav-number">2.3.1.</span> <span class="nav-text">建大顶堆</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#大顶堆化"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">大顶堆化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据max-heapify创建堆"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">根据max_heapify创建堆</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业"><span class="nav-number">3.</span> <span class="nav-text">作业</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字电路仿真"><span class="nav-number">3.1.</span> <span class="nav-text">数字电路仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题背景"><span class="nav-number">3.1.1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目一"><span class="nav-number">3.1.2.</span> <span class="nav-text">题目一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目二"><span class="nav-number">3.1.3.</span> <span class="nav-text">题目二</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目三"><span class="nav-number">3.1.4.</span> <span class="nav-text">题目三</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#优先队列（Priority-Queue）"><span class="nav-number">1.</span> <span class="nav-text">优先队列（Priority Queue）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优先队列的定义及基本操作"><span class="nav-number">1.1.</span> <span class="nav-text">优先队列的定义及基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆（Heap）"><span class="nav-number">2.</span> <span class="nav-text">堆（Heap）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将树堆化"><span class="nav-number">2.1.</span> <span class="nav-text">将树堆化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大（小）顶堆"><span class="nav-number">2.2.</span> <span class="nav-text">大（小）顶堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特性"><span class="nav-number">2.2.1.</span> <span class="nav-text">特性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆的操作"><span class="nav-number">2.3.</span> <span class="nav-text">堆的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#建大顶堆"><span class="nav-number">2.3.1.</span> <span class="nav-text">建大顶堆</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#大顶堆化"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">大顶堆化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据max-heapify创建堆"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">根据max_heapify创建堆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">2.4.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业"><span class="nav-number">3.</span> <span class="nav-text">作业</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字电路仿真"><span class="nav-number">3.1.</span> <span class="nav-text">数字电路仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题背景"><span class="nav-number">3.1.1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目一"><span class="nav-number">3.1.2.</span> <span class="nav-text">题目一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目二"><span class="nav-number">3.1.3.</span> <span class="nav-text">题目二</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目三"><span class="nav-number">3.1.4.</span> <span class="nav-text">题目三</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="那时我还年轻，没有意识到这个世界到底有多么深刻而复杂。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-19T06:49:50.337Z">
+<meta property="og:updated_time" content="2020-10-18T13:17:14.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模板">
 <meta name="twitter:description" content="那时我还年轻，没有意识到这个世界到底有多么深刻而复杂。">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-08-19 14:45:43 / Modified: 14:49:50" itemprop="dateCreated datePublished" datetime="2020-08-19T14:45:43+08:00">2020-08-19</time>
+              <time title="Created: 2020-08-19 14:45:43" itemprop="dateCreated datePublished" datetime="2020-08-19T14:45:43+08:00">2020-08-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-10-18 21:17:14" itemprop="dateModified" datetime="2020-10-18T21:17:14+08:00">2020-10-18</time>
               
             
           </span>
@@ -470,6 +482,9 @@
 </blockquote>
 <a id="more"></a>
 <p>模板，可以理解为函数的函数，或类的类，当你学习过时变泛函这门课程之时，将会对模板有更为深入的理解。</p>
+<h2 id="模板基本语法总结"><a href="#模板基本语法总结" class="headerlink" title="模板基本语法总结"></a>模板基本语法总结</h2><h3 id="模板定义及嵌套模板"><a href="#模板定义及嵌套模板" class="headerlink" title="模板定义及嵌套模板"></a>模板定义及嵌套模板</h3><p>模板的定义以关键字<code>template</code>开始，后面跟一个模板参数列表，其实和函数列表差不多，也可以有默认的模板类型参数（C++11新增功能）。需要注意的是，如果有嵌套的模板参数列表，那么都需要添加<code>typename</code>关键字，因为如果把模板列表视为一个函数参数列表，那么这个参数列表中应该只是代表抽象的参数类型，而非具体的某个值，所以都要添加<code>typename</code>表示抽象的类型。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>, <span class="title">class</span> <span class="title">Sequence</span> = <span class="title">vector</span>&lt;T&gt;,      // 默认模板参数为<span class="title">vector</span>&lt;T&gt;类型</span></span><br><span class="line"><span class="class">         <span class="title">class</span> <span class="title">Compare</span> = <span class="title">less</span>&lt;typename Sequence::value_type&gt;&gt;   // 默认模板参数为<span class="title">Sequence</span>:</span>:value_type，必须加<span class="keyword">typename</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">priority_queue</span>&#123;</span>...&#125;;</span><br></pre></td></tr></table></figure>
+<p>在上面这个代码中，有一点很令人困惑，即<code>less&lt;typename Sequence::value_type&gt;&gt;</code>，为什么要加<code>typename</code>呢？不加可以吗？答案是不行，这里的一个原因是C++的编译器无法区分<code>Sequence::value_type</code>到底是一个类型，还是Sequence下的一个成员变量。实际上，<code>Sequence::value_type</code>是一个嵌套从属类型（从属于模板参数Sequence），为了消除二义性，我们必须明确告知编译器，这是一个模板类型，所以需要添加typename。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://github.com/wuye9036/CppTemplateTutorial">C++模板</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -621,7 +636,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">223</span>
+                    <span class="site-state-item-count">224</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -855,7 +870,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模板基本语法总结"><span class="nav-number">1.</span> <span class="nav-text">模板基本语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模板定义及嵌套模板"><span class="nav-number">1.1.</span> <span class="nav-text">模板定义及嵌套模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
