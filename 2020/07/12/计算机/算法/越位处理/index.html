@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="由于计算机硬件的限制，C++中具体类型的表示范围是有限制的，所以可能会在运算中出现溢出的情况，特别是在涉及负数运算的情况下，本文将对C++中溢出及负数等相关知识进行总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.801Z">
+<meta property="og:updated_time" content="2020-10-27T06:39:36.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="溢出处理及负数表示">
 <meta name="twitter:description" content="由于计算机硬件的限制，C++中具体类型的表示范围是有限制的，所以可能会在运算中出现溢出的情况，特别是在涉及负数运算的情况下，本文将对C++中溢出及负数等相关知识进行总结。">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-10-27 14:39:36" itemprop="dateModified" datetime="2020-10-27T14:39:36+08:00">2020-10-27</time>
+              
+            
           </span>
 
           
@@ -466,7 +482,7 @@
 <h2 id="常见类型范围"><a href="#常见类型范围" class="headerlink" title="常见类型范围"></a>常见类型范围</h2><h3 id="int类型"><a href="#int类型" class="headerlink" title="int类型"></a>int类型</h3><p>int类型范围是-2147483648~2147483647，表示为科学计数法为$-2^{31}$到$2^{31}-1$，在C++中，int的边界为宏定义INT_MIN与INT_MAX，特别注意INT_MIN不能取负值，否则会越界。所以在需要对一个负数进行取反之前，首先要判断是否大于INT_MIN，如果等于INT_MIN，那么取反的结果为INT_MAX</p>
 <p><code>(dividend == INT_MIN ? INT_MAX : -dividend);</code></p>
 <h3 id="long-long类型"><a href="#long-long类型" class="headerlink" title="long long类型"></a>long long类型</h3><p>long long范围是$-2^{63}$到$2^{63}-1$，两个int类型相乘是可以保证不会越过long long的类型范围的。</p>
-<h2 id="负数表示"><a href="#负数表示" class="headerlink" title="负数表示"></a>负数表示</h2><p>在计算机中，正数与负数均使用补码进行表示，有符号类型的最高位代表符号位。</p>
+<h2 id="数的表示"><a href="#数的表示" class="headerlink" title="数的表示"></a>数的表示</h2><p>在计算机中，正数与负数均使用补码进行表示，有符号类型的最高位代表符号位。</p>
 <h3 id="正数的表示"><a href="#正数的表示" class="headerlink" title="正数的表示"></a>正数的表示</h3><p>正数原码、反码与补码均相同，考虑8位的char类型，正数二进制表示范围是0000,0000-0111,1111，即$0$到$2^7-1$。</p>
 <h3 id="负数的表示"><a href="#负数的表示" class="headerlink" title="负数的表示"></a>负数的表示</h3><p>负数的补码可以表示为该数绝对值的原码的反码+1，以-127为例</p>
 <ul>
@@ -476,7 +492,7 @@
 </ul>
 <p>故-127补码为1000,0001</p>
 <p>那么问题来了，-128如何表示呢，这里直接规定<strong>-128的补码就是1000,0000</strong>，所以负数的表示范围为1000,0000到1111,1111，即从-128到-1。</p>
-
+<h3 id="为何要使用补码"><a href="#为何要使用补码" class="headerlink" title="为何要使用补码"></a>为何要使用补码</h3>
       
     </div>
 
@@ -627,7 +643,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">224</span>
+                    <span class="site-state-item-count">225</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -861,7 +877,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见类型范围"><span class="nav-number">1.</span> <span class="nav-text">常见类型范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int类型"><span class="nav-number">1.1.</span> <span class="nav-text">int类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#long-long类型"><span class="nav-number">1.2.</span> <span class="nav-text">long long类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负数表示"><span class="nav-number">2.</span> <span class="nav-text">负数表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正数的表示"><span class="nav-number">2.1.</span> <span class="nav-text">正数的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负数的表示"><span class="nav-number">2.2.</span> <span class="nav-text">负数的表示</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常见类型范围"><span class="nav-number">1.</span> <span class="nav-text">常见类型范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#int类型"><span class="nav-number">1.1.</span> <span class="nav-text">int类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#long-long类型"><span class="nav-number">1.2.</span> <span class="nav-text">long long类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数的表示"><span class="nav-number">2.</span> <span class="nav-text">数的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正数的表示"><span class="nav-number">2.1.</span> <span class="nav-text">正数的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负数的表示"><span class="nav-number">2.2.</span> <span class="nav-text">负数的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为何要使用补码"><span class="nav-number">2.3.</span> <span class="nav-text">为何要使用补码</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="在项目开发过程中，经常需要引入第三方库，因此需要一套合适的方法对于第三方库进行有效管理，本文将对利用git进行第三方库管理的方式进行总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.764Z">
+<meta property="og:updated_time" content="2020-10-27T06:36:10.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第三方库管理">
 <meta name="twitter:description" content="在项目开发过程中，经常需要引入第三方库，因此需要一套合适的方法对于第三方库进行有效管理，本文将对利用git进行第三方库管理的方式进行总结。">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-10-27 14:36:10" itemprop="dateModified" datetime="2020-10-27T14:36:10+08:00">2020-10-27</time>
+              
+            
           </span>
 
           
@@ -466,7 +482,12 @@
 <h2 id="子模块添加"><a href="#子模块添加" class="headerlink" title="子模块添加"></a>子模块添加</h2><p>一般会在自己的工程目录下建立一个third_party目录，专门进行第三方库的管理，进入third_party，通过<code>git submodule add</code>命令对第三方库进行添加，例如我想添加一个名为rack的库，相应命令为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule add git://github.com/chneukirchen/rack.git rack</span><br></pre></td></tr></table></figure></p>
 <p>那么在/third_party/rack下就有了rack项目。</p>
 <h2 id="子模块删除"><a href="#子模块删除" class="headerlink" title="子模块删除"></a>子模块删除</h2><p>当我们弃用某一个库时，可以在当前项目目录下执行如下操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git submodule deinit -f -- third_party/submodule_name</span><br><span class="line">rm -rf .git/modules/third_party/submodule_name</span><br><span class="line">git rm -f third_party/submodule_name</span><br></pre></td></tr></table></figure></p>
-<h2 id="Clone包含子模块的库"><a href="#Clone包含子模块的库" class="headerlink" title="Clone包含子模块的库"></a>Clone包含子模块的库</h2><p>我们可以给git clone 命令传递<code>--recurse-submodules</code>，从而自动初始化并更新仓库中的每一个子模块</p>
+<h2 id="Clone包含子模块的库"><a href="#Clone包含子模块的库" class="headerlink" title="Clone包含子模块的库"></a>Clone包含子模块的库</h2><p>当我们克隆一个含有子模块的项目时，默认会包含该子模块目录，但是其中没有任何文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git clone https://github.com/chaconinc/MainProject</span><br><span class="line">Cloning into 'MainProject'...</span><br><span class="line">remote: Counting objects: 14, done.</span><br><span class="line">remote: Compressing objects: 100% (13/13), done.</span><br><span class="line">remote: Total 14 (delta 1), reused 13 (delta 0)</span><br><span class="line">Unpacking objects: 100% (14/14), done.</span><br><span class="line">Checking connectivity... done.</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> cd MainProject</span><br><span class="line"><span class="meta">$</span> ls -la</span><br><span class="line">total 16</span><br><span class="line">drwxr-xr-x   9 schacon  staff  306 Sep 17 15:21 .</span><br><span class="line">drwxr-xr-x   7 schacon  staff  238 Sep 17 15:21 ..</span><br><span class="line">drwxr-xr-x  13 schacon  staff  442 Sep 17 15:21 .git</span><br><span class="line">-rw-r--r--   1 schacon  staff   92 Sep 17 15:21 .gitmodules</span><br><span class="line">drwxr-xr-x   2 schacon  staff   68 Sep 17 15:21 DbConnector</span><br><span class="line">-rw-r--r--   1 schacon  staff  756 Sep 17 15:21 Makefile</span><br><span class="line">drwxr-xr-x   3 schacon  staff  102 Sep 17 15:21 includes</span><br><span class="line">drwxr-xr-x   4 schacon  staff  136 Sep 17 15:21 scripts</span><br><span class="line">drwxr-xr-x   4 schacon  staff  136 Sep 17 15:21 src</span><br><span class="line"><span class="meta">$</span> cd DbConnector/</span><br><span class="line"><span class="meta">$</span> ls</span><br><span class="line"><span class="meta">$</span></span><br></pre></td></tr></table></figure>
+<p>其中，DbConnector是子模块目录，但是为空，我们要运行两个命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git submodule init</span><br><span class="line"><span class="meta">$</span> git submodule update</span><br></pre></td></tr></table></figure>
+<p>或者在运行clone时加入如下后缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --recurse-submodules https://github.com/chaconinc/MainProject</span><br></pre></td></tr></table></figure>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://git-scm.com/book/zh/v1/Git-%E5%B7%A5%E5%85%B7-%E5%AD%90%E6%A8%A1%E5%9D%97">git官方关于子模块管理的教程</a></p>
 
       
@@ -619,7 +640,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">224</span>
+                    <span class="site-state-item-count">225</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

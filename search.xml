@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[原码、反码与补码]]></title>
+    <url>%2F2020%2F10%2F27%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90%2F%E5%8E%9F%E3%80%81%E5%8F%8D%E3%80%81%E8%A1%A5%E7%A0%81%2F</url>
+    <content type="text"><![CDATA[困难的事情不是我们如何理解机器，而是机器如何理解我们 计算机依赖二进制进行运算，而为了配合二进制计算设计硬件电路，人们提出了原码、反码以及补码的概念。本文将针对这些概念及相互之间的转换进行总结。 原、反、补码的概念原码原码由两部分组成 符号位 真值的绝对值 原码的第一位为符号位，其余位为值位，例如： \begin{aligned} +1_{[原]}=0000 ,0001\\ -1_{[原]}=1000 ,0001 \end{aligned}其中符号位0为正，1为负。原码的表示范围为：[1111 1111, 0111 1111]，即-127到127。从形式上看，原码符合人类对于数字的认知，所以是人比较能理解的计数方式。 反码反码的表示方法为： 正数即本身 负数符号不变、其余取反 \begin{aligned} +1 = [0000 ,0001]_{原}= [0000,0001]_{反}\\ -1 = [1000 ,0001]_{原}= [1111,1110]_{反} \end{aligned}一会儿再讨论为什么要这样设计，先记住其定义。 补码补码的表示方法为： 正数即本身 负数在反码基础上+1 \begin{aligned} +1 = [0000 ,0001]_{原}= [0000,0001]_{反}= [0000,0001]_{补}\\ -1 = [1000 ,0001]_{原}= [1111,1110]_{反}= [1111,1111]_{补} \end{aligned}为何使用原码、反码与补码根本原因是为了简化电路设计，我们知道加法是很简单的，但是如果要在计算机中引入减法，就会导致电路设计的复杂，所以有没有一种方案能够将减法转换为加法呢？简单来说，减法可以表示为一个数加上另一个数的负数，而通过引入反码与补码的方式，我们可以让符号位也参与到运算中，从而只需要加法即可。我们以1-1=0为例，探讨反码与补码的运算过程。 如果我们使用原码计算1-1即1+(-1)，那么得到的结果是： 1 - 1 = 1 + (-1) = [00000001]_原 + [10000001]_原 = [10000010]_原 = -2显然结果不正确。如果我们使用反码计算，那么结果为： 1 - 1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原= [0000 0001]_反 + [1111 1110]_反 = [1111 1111]_反 = [1000 0000]_原 = -0我们发现结果的值部分虽然是正确的，但是问题就处在0上，0带符号是没有任何意义的，如果用反码，会出现两个0，即+0和-0，这显然不是我们想要的结果。于是人们提出了补码，解决了0的问题： 1-1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原 = [0000 0001]_补 + [1111 1111]_补 = [0000 0000]补=[0000 0000]原修复之后，0有了唯一的表示，同时，多出来的1000,0000还可以用来表示-128，但是由于实际上的-0表示了-128，所以-128并没有对应的原码和反码表示。 总之一句话：反码和补码是出于对计算机电路简化设计而引申出的定义。 参考文献]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>组成原理</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[explicit关键字总结]]></title>
     <url>%2F2020%2F10%2F18%2F%E5%B7%A5%E5%85%B7%2FC%2B%2B%2Fexplicit%2F</url>
     <content type="text"><![CDATA[一个明确禁止隐式类型转换的关键字]]></content>
@@ -719,7 +728,7 @@
   <entry>
     <title><![CDATA[溢出处理及负数表示]]></title>
     <url>%2F2020%2F07%2F12%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%AE%97%E6%B3%95%2F%E8%B6%8A%E4%BD%8D%E5%A4%84%E7%90%86%2F</url>
-    <content type="text"><![CDATA[由于计算机硬件的限制，C++中具体类型的表示范围是有限制的，所以可能会在运算中出现溢出的情况，特别是在涉及负数运算的情况下，本文将对C++中溢出及负数等相关知识进行总结。 常见类型范围int类型int类型范围是-2147483648~2147483647，表示为科学计数法为$-2^{31}$到$2^{31}-1$，在C++中，int的边界为宏定义INT_MIN与INT_MAX，特别注意INT_MIN不能取负值，否则会越界。所以在需要对一个负数进行取反之前，首先要判断是否大于INT_MIN，如果等于INT_MIN，那么取反的结果为INT_MAX (dividend == INT_MIN ? INT_MAX : -dividend); long long类型long long范围是$-2^{63}$到$2^{63}-1$，两个int类型相乘是可以保证不会越过long long的类型范围的。 负数表示在计算机中，正数与负数均使用补码进行表示，有符号类型的最高位代表符号位。 正数的表示正数原码、反码与补码均相同，考虑8位的char类型，正数二进制表示范围是0000,0000-0111,1111，即$0$到$2^7-1$。 负数的表示负数的补码可以表示为该数绝对值的原码的反码+1，以-127为例 127原码为0111,1111 127反码为1000,0000 127的反码加1: 1000,0001 故-127补码为1000,0001 那么问题来了，-128如何表示呢，这里直接规定-128的补码就是1000,0000，所以负数的表示范围为1000,0000到1111,1111，即从-128到-1。]]></content>
+    <content type="text"><![CDATA[由于计算机硬件的限制，C++中具体类型的表示范围是有限制的，所以可能会在运算中出现溢出的情况，特别是在涉及负数运算的情况下，本文将对C++中溢出及负数等相关知识进行总结。 常见类型范围int类型int类型范围是-2147483648~2147483647，表示为科学计数法为$-2^{31}$到$2^{31}-1$，在C++中，int的边界为宏定义INT_MIN与INT_MAX，特别注意INT_MIN不能取负值，否则会越界。所以在需要对一个负数进行取反之前，首先要判断是否大于INT_MIN，如果等于INT_MIN，那么取反的结果为INT_MAX (dividend == INT_MIN ? INT_MAX : -dividend); long long类型long long范围是$-2^{63}$到$2^{63}-1$，两个int类型相乘是可以保证不会越过long long的类型范围的。 数的表示在计算机中，正数与负数均使用补码进行表示，有符号类型的最高位代表符号位。 正数的表示正数原码、反码与补码均相同，考虑8位的char类型，正数二进制表示范围是0000,0000-0111,1111，即$0$到$2^7-1$。 负数的表示负数的补码可以表示为该数绝对值的原码的反码+1，以-127为例 127原码为0111,1111 127反码为1000,0000 127的反码加1: 1000,0001 故-127补码为1000,0001 那么问题来了，-128如何表示呢，这里直接规定-128的补码就是1000,0000，所以负数的表示范围为1000,0000到1111,1111，即从-128到-1。 为何要使用补码]]></content>
       <categories>
         <category>计算机</category>
         <category>算法和数据结构</category>
@@ -1803,7 +1812,7 @@
   <entry>
     <title><![CDATA[第三方库管理]]></title>
     <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FGit%2F%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%AE%A1%E7%90%86%2F</url>
-    <content type="text"><![CDATA[在项目开发过程中，经常需要引入第三方库，因此需要一套合适的方法对于第三方库进行有效管理，本文将对利用git进行第三方库管理的方式进行总结。 子模块添加一般会在自己的工程目录下建立一个third_party目录，专门进行第三方库的管理，进入third_party，通过git submodule add命令对第三方库进行添加，例如我想添加一个名为rack的库，相应命令为：1$ git submodule add git://github.com/chneukirchen/rack.git rack 那么在/third_party/rack下就有了rack项目。 子模块删除当我们弃用某一个库时，可以在当前项目目录下执行如下操作：123git submodule deinit -f -- third_party/submodule_namerm -rf .git/modules/third_party/submodule_namegit rm -f third_party/submodule_name Clone包含子模块的库我们可以给git clone 命令传递--recurse-submodules，从而自动初始化并更新仓库中的每一个子模块 参考文献git官方关于子模块管理的教程]]></content>
+    <content type="text"><![CDATA[在项目开发过程中，经常需要引入第三方库，因此需要一套合适的方法对于第三方库进行有效管理，本文将对利用git进行第三方库管理的方式进行总结。 子模块添加一般会在自己的工程目录下建立一个third_party目录，专门进行第三方库的管理，进入third_party，通过git submodule add命令对第三方库进行添加，例如我想添加一个名为rack的库，相应命令为：1$ git submodule add git://github.com/chneukirchen/rack.git rack 那么在/third_party/rack下就有了rack项目。 子模块删除当我们弃用某一个库时，可以在当前项目目录下执行如下操作：123git submodule deinit -f -- third_party/submodule_namerm -rf .git/modules/third_party/submodule_namegit rm -f third_party/submodule_name Clone包含子模块的库当我们克隆一个含有子模块的项目时，默认会包含该子模块目录，但是其中没有任何文件 1234567891011121314151617181920212223$ git clone https://github.com/chaconinc/MainProjectCloning into 'MainProject'...remote: Counting objects: 14, done.remote: Compressing objects: 100% (13/13), done.remote: Total 14 (delta 1), reused 13 (delta 0)Unpacking objects: 100% (14/14), done.Checking connectivity... done.$ cd MainProject$ ls -latotal 16drwxr-xr-x 9 schacon staff 306 Sep 17 15:21 .drwxr-xr-x 7 schacon staff 238 Sep 17 15:21 ..drwxr-xr-x 13 schacon staff 442 Sep 17 15:21 .git-rw-r--r-- 1 schacon staff 92 Sep 17 15:21 .gitmodulesdrwxr-xr-x 2 schacon staff 68 Sep 17 15:21 DbConnector-rw-r--r-- 1 schacon staff 756 Sep 17 15:21 Makefiledrwxr-xr-x 3 schacon staff 102 Sep 17 15:21 includesdrwxr-xr-x 4 schacon staff 136 Sep 17 15:21 scriptsdrwxr-xr-x 4 schacon staff 136 Sep 17 15:21 src$ cd DbConnector/$ ls$ 其中，DbConnector是子模块目录，但是为空，我们要运行两个命令： 12$ git submodule init$ git submodule update 或者在运行clone时加入如下后缀 1git clone --recurse-submodules https://github.com/chaconinc/MainProject 参考文献git官方关于子模块管理的教程]]></content>
       <categories>
         <category>工具</category>
         <category>Git</category>

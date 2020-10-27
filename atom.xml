@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-18T14:09:31.948Z</updated>
+  <updated>2020-10-27T07:04:01.100Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>原码、反码与补码</title>
+    <link href="http://yoursite.com/2020/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E5%8E%9F%E3%80%81%E5%8F%8D%E3%80%81%E8%A1%A5%E7%A0%81/"/>
+    <id>http://yoursite.com/2020/10/27/计算机/硬件组成/原、反、补码/</id>
+    <published>2020-10-27T06:43:42.554Z</published>
+    <updated>2020-10-27T07:04:01.100Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>困难的事情不是我们如何理解机器，而是机器如何理解我们</p></blockquote><a id="more"></a><p>计算机依赖二进制进行运算，而为了配合二进制计算设计硬件电路，人们提出了原码、反码以及补码的概念。本文将针对这些概念及相互之间的转换进行总结。</p><h2 id="原、反、补码的概念"><a href="#原、反、补码的概念" class="headerlink" title="原、反、补码的概念"></a>原、反、补码的概念</h2><h3 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h3><p>原码由两部分组成</p><ul><li>符号位</li><li>真值的绝对值</li></ul><p>原码的第一位为符号位，其余位为值位，例如：</p><script type="math/tex; mode=display">\begin{aligned}+1_{[原]}=0000 ,0001\\-1_{[原]}=1000 ,0001\end{aligned}</script><p>其中符号位0为正，1为负。原码的表示范围为：<code>[1111 1111, 0111 1111]</code>，即-127到127。从形式上看，原码符合人类对于数字的认知，所以是人比较能理解的计数方式。</p><h3 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h3><p>反码的表示方法为：</p><ul><li>正数即本身</li><li>负数符号不变、其余取反</li></ul><script type="math/tex; mode=display">\begin{aligned}+1 = [0000 ,0001]_{原}= [0000,0001]_{反}\\-1 = [1000 ,0001]_{原}= [1111,1110]_{反}\end{aligned}</script><p>一会儿再讨论为什么要这样设计，先记住其定义。</p><h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p>补码的表示方法为：</p><ul><li>正数即本身</li><li>负数在反码基础上+1</li></ul><script type="math/tex; mode=display">\begin{aligned}+1 = [0000 ,0001]_{原}= [0000,0001]_{反}= [0000,0001]_{补}\\-1 = [1000 ,0001]_{原}= [1111,1110]_{反}= [1111,1111]_{补}\end{aligned}</script><h2 id="为何使用原码、反码与补码"><a href="#为何使用原码、反码与补码" class="headerlink" title="为何使用原码、反码与补码"></a>为何使用原码、反码与补码</h2><p>根本原因是为了简化电路设计，我们知道加法是很简单的，但是如果要在计算机中引入减法，就会导致电路设计的复杂，所以有没有一种方案能够将减法转换为加法呢？简单来说，减法可以表示为一个数加上另一个数的负数，而通过引入反码与补码的方式，我们可以让符号位也参与到运算中，从而只需要加法即可。我们以1-1=0为例，探讨反码与补码的运算过程。</p><p>如果我们使用原码计算1-1即1+(-1)，那么得到的结果是：</p><script type="math/tex; mode=display">1 - 1 = 1 + (-1) = [00000001]_原 + [10000001]_原 = [10000010]_原 = -2</script><p>显然结果不正确。如果我们使用反码计算，那么结果为：</p><script type="math/tex; mode=display">1 - 1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原= [0000 0001]_反 + [1111 1110]_反 = [1111 1111]_反 = [1000 0000]_原 = -0</script><p>我们发现结果的值部分虽然是正确的，但是问题就处在0上，0带符号是没有任何意义的，如果用反码，会出现两个0，即+0和-0，这显然不是我们想要的结果。于是人们提出了补码，解决了0的问题：</p><script type="math/tex; mode=display">1-1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原 = [0000 0001]_补 + [1111 1111]_补 = [0000 0000]补=[0000 0000]原</script><p>修复之后，0有了唯一的表示，同时，多出来的1000,0000还可以用来表示-128，但是由于实际上的-0表示了-128，所以-128并没有对应的原码和反码表示。</p><p>总之一句话：<strong>反码和补码是出于对计算机电路简化设计而引申出的定义</strong>。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;困难的事情不是我们如何理解机器，而是机器如何理解我们&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="组成原理" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>explicit关键字总结</title>
@@ -474,32 +498,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式介绍</title>
-    <link href="http://yoursite.com/2020/09/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B/"/>
-    <id>http://yoursite.com/2020/09/13/计算机/设计模式/设计模式简介/</id>
-    <published>2020-09-13T07:19:50.347Z</published>
-    <updated>2020-09-13T07:47:12.351Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>“每一段故事诞生的地方，都有一种“美”存在。</p><p>我们与其邂逅，被其触动，心生涟漪。</p><p>新的故事便随之诞生。” —— 赤木明登</p></blockquote><a id="more"></a><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>对于工程学，我们有必要建立起一套成体系的设计模式，确保可复用性、可理解性以及可靠性。对于软件工程来说，设计模式使代码编制真正工程化，使我们周围不断重复发生的问题，以及该问题的核心解决方案得以被精确地描述。这里，我们以GOF的 Design Patterns - Elements of Reusable Object-Oriented Software<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>作为指导，对设计模式进行介绍。他们提出的设计模式主要基于以下原则：</p><ul><li>面向接口编程</li><li>优先使用对象组合</li></ul><h2 id="设计模式类型总结2"><a href="#设计模式类型总结2" class="headerlink" title="设计模式类型总结2"></a>设计模式类型总结<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h2><div class="table-container"><table><thead><tr><th style="text-align:left">序号</th><th style="text-align:left">模式 &amp; 描述</th><th style="text-align:left">包括</th></tr></thead><tbody><tr><td style="text-align:left">1</td><td style="text-align:left"><strong>创建型模式</strong> <br />这些设计模式提供了一种在创建对象的同时隐藏创建逻辑的方式，而不是使用 new 运算符直接实例化对象。这使得程序在判断针对某个给定实例需要创建哪些对象时更加灵活。</td><td style="text-align:left">工厂模式（Factory Pattern）<br />抽象工厂模式（Abstract Factory Pattern）<br />单例模式（Singleton Pattern）<br />建造者模式（Builder Pattern）<br />原型模式（Prototype Pattern）</td></tr><tr><td style="text-align:left">2</td><td style="text-align:left"><strong>结构型模式</strong> <br />这些设计模式关注类和对象的组合。继承的概念被用来组合接口和定义组合对象获得新功能的方式。</td><td style="text-align:left">适配器模式（Adapter Pattern）<br />桥接模式（Bridge Pattern）<br />过滤器模式（Filter、Criteria Pattern）<br />组合模式（Composite Pattern）<br />装饰器模式（Decorator Pattern）<br />外观模式（Facade Pattern）<br />享元模式（Flyweight Pattern）<br />代理模式（Proxy Pattern）<br /></td></tr><tr><td style="text-align:left">3</td><td style="text-align:left"><strong>行为型模式</strong> <br />这些设计模式特别关注对象之间的通信。</td><td style="text-align:left">责任链模式（Chain of Responsibility Pattern）<br />命令模式（Command Pattern）<br />解释器模式（Interpreter Pattern）<br />迭代器模式（Iterator Pattern）<br />中介者模式（Mediator Pattern）<br />备忘录模式（Memento Pattern）<br />观察者模式（Observer Pattern）<br />状态模式（State Pattern）<br />空对象模式（Null Object Pattern）<br />策略模式（Strategy Pattern）<br />模板模式（Template Pattern）<br />访问者模式（Visitor Pattern）</td></tr><tr><td style="text-align:left">4</td><td style="text-align:left"><strong>J2EE 模式</strong> <br />这些设计模式特别关注表示层。这些模式是由 Sun Java Center 鉴定的。</td><td style="text-align:left">MVC 模式（MVC Pattern）<br />业务代表模式（Business Delegate Pattern）<br />组合实体模式（Composite Entity Pattern）<br />数据访问对象模式（Data Access Object Pattern）<br />前端控制器模式（Front Controller Pattern）<br />拦截过滤器模式（Intercepting Filter Pattern）<br />服务定位器模式（Service Locator Pattern）<br />传输对象模式（Transfer Object Pattern）</td></tr></tbody></table></div><h2 id="设计六原则"><a href="#设计六原则" class="headerlink" title="设计六原则"></a>设计六原则</h2><h3 id="1-开闭原则"><a href="#1-开闭原则" class="headerlink" title="1 开闭原则"></a>1 开闭原则</h3><p>开放扩展，关闭修改，使用接口和抽象，使程序扩展性好</p><h3 id="2-里氏代换"><a href="#2-里氏代换" class="headerlink" title="2 里氏代换"></a>2 里氏代换</h3><p>任何基类可以出现的地方，子类一定可以出现</p><h3 id="3-依赖倒置"><a href="#3-依赖倒置" class="headerlink" title="3 依赖倒置"></a>3 依赖倒置</h3><p>针对接口编程，依赖于抽象而不依赖于具体</p><h3 id="4-接口隔离"><a href="#4-接口隔离" class="headerlink" title="4 接口隔离"></a>4 接口隔离</h3><p>降低类间耦合度，使用多个隔离接口比使用单个接口好</p><h3 id="5-最少相互作用"><a href="#5-最少相互作用" class="headerlink" title="5 最少相互作用"></a>5 最少相互作用</h3><p>系统功能模块应当尽可能独立</p><h3 id="合成复用"><a href="#合成复用" class="headerlink" title="合成复用"></a>合成复用</h3><p>尽量使用组合，而不是继承</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="http://asi.insa-rouen.fr/enseignement/siteUV/genie_logiciel/supports/ressources/exemples_de_la_vie_reelle_pour_illustrer_pattern.pdf">Gamma E. Design patterns: elements of reusable object-oriented software[M]. Pearson Education India, 1995.</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.runoob.com/design-pattern/design-pattern-intro.html">设计模式简介</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;“每一段故事诞生的地方，都有一种“美”存在。&lt;/p&gt;
-&lt;p&gt;我们与其邂逅，被其触动，心生涟漪。&lt;/p&gt;
-&lt;p&gt;新的故事便随之诞生。” —— 赤木明登&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
   </entry>
