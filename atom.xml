@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-27T07:04:01.100Z</updated>
+  <updated>2020-09-18T05:58:47.786Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>笛卡尔积</title>
+    <link href="http://yoursite.com/2020/10/28/%E7%94%9F%E6%B4%BB/%E5%91%A8%E6%8A%A5/2020%E5%B9%B4%E7%AC%AC/"/>
+    <id>http://yoursite.com/2020/10/28/生活/周报/2020年第/</id>
+    <published>2020-10-28T07:44:12.963Z</published>
+    <updated>2020-09-18T05:58:47.786Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>我思故我在</p></blockquote><a id="more"></a><p>笛卡尔积用于计算两个集合的排列组合情况，并生成一个有序对的集合。本文将对笛卡尔积的内容进行简单总结。</p><h2 id="定义及性质"><a href="#定义及性质" class="headerlink" title="定义及性质"></a>定义及性质</h2><p>笛卡尔积的定义如下：</p><script type="math/tex; mode=display">\pmb{A}\times \pmb{B}=\{(a,b)|a\in\pmb{A}\ \ \ \ \textrm{and}\ \ \ \ b\in\pmb{B}\}</script><p>例如$\pmb{A}={x,y,z},\pmb{B}={1,2,3}$，那么$\pmb{A}\times \pmb{B}={(x,1),(x,2),(x,3),(y,1),(y,2),(y,3),(z,1),(z,2),(z,3)}$</p><p>  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Cartesian_Product_qtl1.svg/330px-Cartesian_Product_qtl1.png" width = "250" align=center />  </p><p>要注意的是，笛卡尔积必须保证有序性，即不满足交换律。笛卡尔积的实质是对于元素进行排列组合。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献,"></a>参考文献,</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;我思故我在&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="数学" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="代数几何" scheme="http://yoursite.com/categories/%E6%95%B0%E5%AD%A6/%E4%BB%A3%E6%95%B0%E5%87%A0%E4%BD%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>原码、反码与补码</title>
@@ -474,30 +498,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>中断</title>
-    <link href="http://yoursite.com/2020/09/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E4%B8%AD%E6%96%AD/"/>
-    <id>http://yoursite.com/2020/09/13/计算机/操作系统/中断/</id>
-    <published>2020-09-13T08:39:02.543Z</published>
-    <updated>2020-09-13T15:45:50.992Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>去做点别的事情吧，等天黑了再回来</p></blockquote><a id="more"></a><h2 id="Linux中断处理"><a href="#Linux中断处理" class="headerlink" title="Linux中断处理"></a>Linux中断处理</h2><p>在linux中，中断被分为上半部分和下半部分</p><h3 id="上下半部的理解"><a href="#上下半部的理解" class="headerlink" title="上下半部的理解"></a>上下半部的理解</h3><h3 id="上半部（top-half）——紧急硬件操作"><a href="#上半部（top-half）——紧急硬件操作" class="headerlink" title="上半部（top half）——紧急硬件操作"></a>上半部（top half）——紧急硬件操作</h3><h3 id="下半部（buttom-half）——非紧急的耗时操作"><a href="#下半部（buttom-half）——非紧急的耗时操作" class="headerlink" title="下半部（buttom half）——非紧急的耗时操作"></a>下半部（buttom half）——非紧急的耗时操作</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;去做点别的事情吧，等天黑了再回来&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
   </entry>
