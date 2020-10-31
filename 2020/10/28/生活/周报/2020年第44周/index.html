@@ -104,7 +104,10 @@
 <meta property="og:description" content="After all, tomorrow is another day">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/20201029.JPG?raw=true">
-<meta property="og:updated_time" content="2020-10-29T05:50:22.453Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/e0935e68daece9ece9fe078e9ad65a80338fa2ba/20201091609.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/7da9f289ce229391f5cc595870006b8fb3e1daa4/202010162212.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/902d959e22cf3f027c292cc00fba57ceefa41794/202010162232.svg">
+<meta property="og:updated_time" content="2020-10-30T14:15:03.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2020年第44周">
 <meta name="twitter:description" content="After all, tomorrow is another day">
@@ -420,7 +423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-10-29 13:50:22" itemprop="dateModified" datetime="2020-10-29T13:50:22+08:00">2020-10-29</time>
+                <time title="Modified: 2020-10-30 22:15:03" itemprop="dateModified" datetime="2020-10-30T22:15:03+08:00">2020-10-30</time>
               
             
           </span>
@@ -526,7 +529,271 @@
 </table>
 </div>
 <h3 id="本周时间安排"><a href="#本周时间安排" class="headerlink" title="本周时间安排"></a>本周时间安排</h3><p><img src="https://github.com/sqduan/hexoimg/blob/master/20201029.JPG?raw=true" alt align="center"></p>
-<h2 id="上周回顾"><a href="#上周回顾" class="headerlink" title="上周回顾"></a>上周回顾</h2><h2 id="下周计划"><a href="#下周计划" class="headerlink" title="下周计划"></a>下周计划</h2>
+<h3 id="具体工作内容"><a href="#具体工作内容" class="headerlink" title="具体工作内容"></a>具体工作内容</h3><h4 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h4><h5 id="优先队列（Priority-Queue）"><a href="#优先队列（Priority-Queue）" class="headerlink" title="优先队列（Priority Queue）"></a>优先队列（Priority Queue）</h5><p>堆的一个很重要的应用就是作为优先队列的数据结构，所以本节我们以优先队列为引子，看一看堆的一些特性和使用方法。</p>
+<h5 id="优先队列的定义及基本操作"><a href="#优先队列的定义及基本操作" class="headerlink" title="优先队列的定义及基本操作"></a>优先队列的定义及基本操作</h5><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>给定一个集合$S$，集合中的每一个元素都与一个索引键值key对应，其中每个元素都有一个优先级，在优先队列中，我们希望能够快速找到最高优先级的对象。</p>
+<h5 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h5><p>这里我们定义一些基本操作：</p>
+<ul>
+<li>$\textrm{insert}(S,x)$：将$x$插入$S$中</li>
+<li>$\max(S)$：返回$S$中key最大的元素</li>
+<li>$\textrm{extract_max}(S)$：返回key最大的元素并将其移除</li>
+<li>$\textrm{increase_key}(S,x,k)$：将$x$的key的优先级更新为$k$</li>
+</ul>
+<h5 id="堆（Heap）"><a href="#堆（Heap）" class="headerlink" title="堆（Heap）"></a>堆（Heap）</h5><p>堆是一个完全二叉树，我们可以用数组对其进行表示，一个示意图如下，注意数组下标是从1开始的，这样比较好记：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/e0935e68daece9ece9fe078e9ad65a80338fa2ba/20201091609.svg" width="570" alt align="center"></p>
+<h5 id="将树堆化"><a href="#将树堆化" class="headerlink" title="将树堆化"></a>将树堆化</h5><ul>
+<li>root：第一个元素(i=1)</li>
+<li>父节点：i/2的节点</li>
+<li>左子节点：2i</li>
+<li>右子节点：2i+1</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/7da9f289ce229391f5cc595870006b8fb3e1daa4/202010162212.svg" width="570" alt align="center"></p>
+<h5 id="大（小）顶堆"><a href="#大（小）顶堆" class="headerlink" title="大（小）顶堆"></a>大（小）顶堆</h5><h5 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h5><p>父节点的值比子节点大（小），所以寻找最大元素是很方便的，只要返回堆顶元素即可。</p>
+<h5 id="堆的操作"><a href="#堆的操作" class="headerlink" title="堆的操作"></a>堆的操作</h5><p>将一个无序的数组转换成为一个大顶堆，为了实现这个过程，我们需要将数组“大顶堆化”：将一个不是大顶堆的树，通过某种变换，转换为一个大顶堆树，我们通过自下而上的递归方式进行（因为叶子节点一定是大顶堆），令大顶堆化的操作为$\textrm{max_heapify}(A,i)$，即对数组$A$在节点$i$处执行大顶堆化操作，同时，我们假设$i$的左子节点和右子节点已经完成了大顶堆化的操作，其左右子树为大顶堆。现在，我们以一个实例来看一看大顶堆化的具体过程。</p>
+<p>下图展示了一个堆，注意到在值为4的节点处出现了冲突，所以这个堆不是一个大顶堆，我们要在值为4的节点处执行$\textrm{max_heapify}$操作，根据我们上面的约定，4的节点编号为2，故我们需要执行$\textrm{max_heapify}(A,2)$。</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/902d959e22cf3f027c292cc00fba57ceefa41794/202010162232.svg" width="570" alt align="center"></p>
+<blockquote>
+<p>$\textrm{MAX_HEAPIFY}(A,2)$</p>
+<p>​    $\textrm{heap_size}(A)=10$</p>
+<p>​    $\textrm{exchange with bigger child: swap(A[2], A[4])}$</p>
+<p>​    $\textrm{call MAX_HEAPIFY}(A,4)$</p>
+</blockquote>
+<p>下面分析一下时间复杂度，首先树是一个几乎完全二叉树，以及根据限制，左子树和右子树已经是大顶堆，所以这个时间复杂度被限制在$\log(n)$。</p>
+<h5 id="根据max-heapify创建堆"><a href="#根据max-heapify创建堆" class="headerlink" title="根据max_heapify创建堆"></a>根据max_heapify创建堆</h5><p>下面我们利用上面的算法，将$A[1…n]$转换为一个大顶堆，我们的算法名称为build_max_heap，其逻辑如下：</p>
+<blockquote>
+<p>$\textrm{build_max_heap}(A)$:</p>
+<p>​    $\textrm{for  }\ i=n/2\ \ \textrm{ downto  }\ 1$</p>
+<p>​        $\textrm{max_heapify}(A,i)$:</p>
+</blockquote>
+<p>为什么从$n/2$开始呢？因为$A[n/2+1,…,n]$全部都是叶子节点，而叶子节点已经是大顶堆了，所以自然满足假设，而从$n/2$到$1$，实际上是一个自底向上的过程。</p>
+<p>从直观上来看，这个操作的时间复杂度为$O(n\log(n))$，但是实际上这个时间复杂度要更低一些。当节点$i$比叶子节点高一层时，max_heapify需要1次操作，时间复杂度为$\Theta(1)$；而当节点$i$比叶子节点高$l$层时，max_heapify需要$l$次操作，时间复杂度为$\Theta(l)$。我们令叶子层为第0层，那么第一层有$n/4$个节点，需要1次操作，第2层有$n/8$个节点，需要两次操作，第$\log(n)$层有1个节点，需要$\log(n)$次操作，所以时间复杂度为：</p>
+<script type="math/tex; mode=display">
+\Theta = \frac{n}{4}+\frac{n}{8}\times2+\frac{n}{16}\times3+...+\log(n)</script><p>令$n/4=2^k$，并提取公因式，那么上式可以写为</p>
+<script type="math/tex; mode=display">
+\Theta = 2^k(\frac{1}{2^0}+\frac{2}{2^1}+...+\frac{k+1}{2^k})=\sum_{i=0}^{k}\frac{i+1}{2^i}</script><p>后面的级数是一个收敛级数，所以实际上我们的时间复杂度为$\Theta(n)$</p>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>利用堆的特性，我们可以进行排序操作。</p>
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="数字电路仿真"><a href="#数字电路仿真" class="headerlink" title="数字电路仿真"></a>数字电路仿真</h3><h4 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h4><p>组合逻辑电路是由门构成的，门以逻辑电平（真/1，假/0）作为输入信号，输出信号是输入信号的函数，逻辑门的计算是需要时间的，假设延迟时间为$\delta$，那么在$\tau$时刻的输出信号对应$\tau-\delta$时刻的输入信号。门的输出信号也是逻辑电平，可以通过电路与其他门相连，将输出信号作为下一个门的输入信号，例如，一个两输入、延迟时间为2ns的异或门的真值表如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Time(ns)</th>
+<th style="text-align:center">Input A</th>
+<th style="text-align:center">Input B</th>
+<th style="text-align:center">Output O</th>
+<th style="text-align:center">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Inputs at time -2</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">Inputs at time -1</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0 XOR 0，在第0时刻输出</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0 XOR 1，在第1时刻输出</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1 XOR 0，在第2时刻输出</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">1 XOR 1，在第3时刻输出</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>电路模拟器通过一个输入文件描述电路的布局，包括门延迟时间、待监测的门以及输入信号。随后以时间序列的方式对整个电路的信号变换过程进行仿真并输出结果，同时也会输出待监测的门的信号变换情况。现在，给定一个仿真代码，然后你需要对代码进行测试，找到性能瓶颈及产生原因，并对性能瓶颈进行优化，<a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/assignments/ps2.zip">点击此处下载代码</a>。解压缩后进入<code>circuit/</code>文件夹，电路仿真文件为<code>circuit.py</code>，输入文件为<code>tests/5devadas13.in</code>，但是对这个文件的仿真时间过长。我们提供了测试文件，测试文件为<code>test-circuit.py</code>。</p>
+<h4 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h4><p>在python的代码性能分析器下运行仿真程序，找到最耗时的函数，请在cmd命令行下运行下面这行代码，并根据结果分析哪个函数运行时间最长，如果有多个函数执行时间相同，忽略简单的那个。注意，请不要使用powershell运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m cProfile -s time circuit.py &lt; tests/5devadas13.in</span><br></pre></td></tr></table></figure>
+<p>执行完上面这行命令大概需要一两分钟。运行完成后，我们得到的结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   Ordered by: internal time</span><br><span class="line"></span><br><span class="line">   ncalls  tottime  percall  cumtime  percall filename:lineno(function)</span><br><span class="line">625762426  102.299    0.000  102.299    0.000 circuit.py:286(__lt__)</span><br><span class="line">   259964  102.299    0.000  204.606    0.001 circuit.py:381(_find_min)</span><br><span class="line">    32768    4.087    0.000    4.087    0.000 &#123;method &apos;write&apos; of &apos;_io.TextIOWrapper&apos; objects&#125;</span><br><span class="line">    64400    0.591    0.000  206.397    0.003 circuit.py:423(step)</span><br><span class="line">828801/634389    0.229    0.000    0.286    0.000 &#123;built-in method builtins.len&#125;</span><br><span class="line">   194381    0.177    0.000  204.791    0.001 circuit.py:361(min)</span><br><span class="line">    65554    0.144    0.000    0.309    0.000 circuit.py:163(transition_output)</span><br><span class="line">    65583    0.119    0.000    0.176    0.000 circuit.py:268(__init__)</span><br><span class="line">        1    0.112    0.112  206.614  206.614 circuit.py:456(run)</span><br><span class="line">    65583    0.089    0.000    0.163    0.000 circuit.py:368(pop)</span><br><span class="line">    65554    0.063    0.000    0.079    0.000 circuit.py:33(output)</span><br></pre></td></tr></table></figure>
+<p>可以看出，忽略掉<code>__lt__</code>函数，那么性能的瓶颈为<code>_find_min</code>函数，一共被调用了255964次。</p>
+<h5 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h5><p>阅读<code>_find_min</code>的源代码，并指出<code>_find_min</code>实际是在执行哪种数据结构，假设一共有$n$个元素，时间复杂度是多少？</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_find_min</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="comment"># Computes the index of the minimum element in the queue.</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># This method may crash if called when the queue is empty.</span></span><br><span class="line">    <span class="keyword">if</span> self.min_index <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    min = self.queue[<span class="number">0</span>]</span><br><span class="line">    self.min_index = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">1</span>, len(self.queue)):</span><br><span class="line">        key = self.queue[i]</span><br><span class="line">        <span class="keyword">if</span> key &lt; min:</span><br><span class="line">            min = key</span><br><span class="line">            self.min_index = i</span><br></pre></td></tr></table></figure>
+<p>从上面的代码中我们可以看出，<code>_find_min</code>实际上是在一个数组中顺序查找最小的元素，即<strong>基于数组的优先队列</strong>。在最坏的情况下，需要遍历所有的$n$个元素，所以时间复杂度为$\Theta(n)$。</p>
+<h4 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">工作内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">算法第5课</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">算法课后作业</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">卫星实时仿真计时模块设计</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">卫星初始平近点角模块实现</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">和字节跳动HR进行讨论，制定学习计划</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">整理仿真软件开发文档</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">max_heapify实现</td>
+<td style="text-align:center">未完成</td>
+</tr>
+<tr>
+<td style="text-align:center">实验室讨论</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">锻炼</td>
+<td style="text-align:center">完成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="卫星初始平近点角模块实现"><a href="#卫星初始平近点角模块实现" class="headerlink" title="卫星初始平近点角模块实现"></a>卫星初始平近点角模块实现</h5><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Mt</span> = <span class="title">getMeanAnomalyAtT</span><span class="params">(t0,t,M0,GM,a)</span></span></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"><span class="comment">% GETMEANANOMALYATT get the mean anomaly Mt at time t with a initial mean </span></span><br><span class="line"><span class="comment">% anomaly M0 at t0</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% HOW: Mt = f_read_tle(t0,t,M0)</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Input:  t0            [1 x 1] epoch of reference in UTC Date.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         t             [1 x 1] epoch of computation in UTC Date.</span></span><br><span class="line"><span class="comment">%    </span></span><br><span class="line"><span class="comment">%         M0            [1 x 1] mean anomaly in degrees at epoch t_0. </span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         GM            [1 x 1] product of central body mass and </span></span><br><span class="line"><span class="comment">%                               gravitational constant in m^3/s^2.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         a             [1 x 1] semi-major axis in meters.      </span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Output: Mt            [1 x 1] mean anomaly in degrees at epoch t. </span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Shiqi Duan, USTC</span></span><br><span class="line"><span class="comment">% 20/10/28</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% uses m-files: none</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Determine the time difference in seconds</span></span><br><span class="line">dt = seconds(t - t0);</span><br><span class="line"></span><br><span class="line"><span class="comment">%Convert degrees to rad</span></span><br><span class="line">M0            = M0*<span class="built_in">pi</span>/<span class="number">180</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">%Calculate mean anomaly</span></span><br><span class="line">Mt  = M0 + dt*<span class="built_in">sqrt</span>(GM/(a^<span class="number">3</span>));</span><br><span class="line">Mt  = wrapTo2Pi(Mt);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h5 id="学习计划"><a href="#学习计划" class="headerlink" title="学习计划"></a>学习计划</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Mon</th>
+<th style="text-align:left">Tue</th>
+<th style="text-align:left">Wed</th>
+<th>Thur</th>
+<th>Fri</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Binary search trees, BST sort</td>
+<td style="text-align:left"><strong>LEC 1 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-overview.txt">Operating systems</a> (handouts: <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/xv6-rev11.pdf">xv6 source</a>, <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">xv6 book</a>) <strong>Preparation</strong>: <a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">Unix intro</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1/">Lab 1: C, Assembly, Tools, and Bootstrapping</a></td>
+<td style="text-align:left">AVL trees, AVL sort</td>
+<td><strong>LEC 2 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-x86.pdf">PC hardware and x86 programming slides</a>, <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-x86.html">notes</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Bootstrap/PC hardware appendices and the related xv6 source files</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-boot.html">HW: Boot xv6</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Counting sort, radix sort, lower bounds for sorting and searching</td>
+<td style="text-align:left"><strong>LEC 3 (TAs):</strong> C and <a href="https://pdos.csail.mit.edu/6.828/2018/lec/gdb_slides.pdf">gdb</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/pointers.c">pointers example</a>) <strong>Homework 1 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-boot.html">Boot xv6</a> <strong>Preparation</strong>: Read 2.9 (Bitwise operators), 5.1 (Pointers and Addresses) through 5.5(Character Pointers and Functions) and 6.4 (pointers to structures) in K&amp;R <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-shell.html">HW: shell</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab2/">Lab 2: Memory management</a></td>
+<td style="text-align:left">Hashing with chaining</td>
+<td><strong>DUE</strong>: Lab 1<strong>LEC 4 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-shell.txt">Shell &amp; OS organization</a> <strong>Preparation</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Read chapter 0 of the xv6 book</a>. <strong>Homework 2 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-shell.html">shell</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Table doubling, Karp-Rabin</td>
+<td style="text-align:left"><strong>LEC 5 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-internal.txt">Isolation mechanisms</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Chapter 1: Operating system organization” and the related xv6 source files</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-syscall.html">HW: system calls</a></td>
+<td style="text-align:left">Open addressing, cryptographic hashing</td>
+<td><strong>LEC 6 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm.md">Virtual memory (1)</a> (handouts: <a href="https://pdos.csail.mit.edu/6.828/2018/lec/x86_translation_and_registers.pdf">page table translation and registers</a>) (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Chapter 2: Page Tables”</a> <strong>Homework 3 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-syscall.html">system calls</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-zero-fill.html">HW lazy page allocation</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Quiz 1</td>
+<td style="text-align:left"><strong>LEC 7 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-usevm.md">Virtual memory (2)</a> (handout: <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-josmem.html">JOS virtual memory layout</a>) (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-usingvm.pdf">slides</a>) <strong>Homework 4 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-zero-fill.html">HW lazy page allocation</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-alarm.html">HW xv6 CPU alarm</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab 3: User-Level Environments</a></td>
+<td style="text-align:left">Integer arithmetic, Karatsuba multiplication</td>
+<td><strong>DUE</strong>: Lab 2 <strong>LEC 8 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-interrupt.txt">System calls, interrupts, exceptions</a> (handouts: <a href="https://pdos.csail.mit.edu/6.828/2018/lec/x86_idt.pdf">IDT</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Traps, interrupts, and drivers” and the related xv6 source files</a> <strong>Homework 5 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-alarm.html">HW xv6 CPU alarm</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/lock.html">HW multithreaded programming</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Square roots, Newton’s method</td>
+<td style="text-align:left"><strong>LEC 9 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-lockv2.txt">Multiprocessors and locking</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-locks.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Locking”</a> with spinlock.c and skim mp.c <strong>Homework 6 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/lock.html">HW multithreaded programming</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-lock.html">HW xv6 locks</a></td>
+<td style="text-align:left">Breadth-first search (BFS)</td>
+<td><strong>DUE</strong>: Lab 3 (Part A)oct 10 Hacking day <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab4/">Lab 4: Preemptive Multitasking</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Depth-first search (DFS), topological sorting</td>
+<td style="text-align:left"><strong>LEC 10 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-threads.txt">Processes and switching</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Scheduling”</a> up to “Sleep and wakeup” and proc.c, swtch.S <strong>Homework 7 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-lock.html">HW xv6 locks</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-uthread.html">HW uthreads</a></td>
+<td style="text-align:left">Single-source shortest paths problem</td>
+<td><strong>LEC 11 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-coordination.txt">sleep&amp;wakeup</a> <strong>Preparation</strong>: Read remainder of <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Scheduling”</a>, and corresponding parts of proc.c <strong>Homework 8 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-uthread.html">HW uthreads</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/barrier.html">HW barrier</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Dijkstra</td>
+<td style="text-align:left"><strong>LEC 12 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-fs.txt">File systems</a> <strong>Preparation</strong>: Read bio.c, fs.c, sysfile.c, file.c and “File system” except for the logging sections <strong>Homework 9 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/barrier.html">HW barrier</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-big-files.html">HW big files</a></td>
+<td style="text-align:left">Bellman-Ford</td>
+<td><strong>DUE</strong>: Lab 4 (Part A)oct 24 <strong>LEC 13 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-crash.txt">Crash recovery</a> <strong>Preparation</strong>: Read log.c and the logging sections of “File system” <strong>Homework 10 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-big-files.html">HW big files</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-new-log.html">HW crash</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab6/">Lab 6: Networking</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab7/">Lab 7: Final project</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Speeding up Dijkstra</td>
+<td style="text-align:left"><strong>Quiz #1</strong> <strong>open book and notes</strong> <strong>scope</strong>: Lectures 1 through 13, HW 1 through 10, labs 1 through 3 <strong>practice:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/quiz.html">previous years’ quizzes</a>.</td>
+<td style="text-align:left">Quiz 2</td>
+<td><strong>DUE</strong>: Lab 4 (Part B)oct 31 Hacking day <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab5/">Lab 5: File system, spawn, and sh</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Memoization, subproblems, guessing, bottom-up; Fibonacci, shortest paths</td>
+<td style="text-align:left"><strong>LEC 14 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-journal.txt">File system performance and fast crash recovery</a> <strong>Homework 11 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-new-log.html">HW crash</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/homework/journal-ext2fs.html">Journaling the Linux ext2fs Filesystem (1998)</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/mmap.html">mmap()</a></td>
+<td style="text-align:left">Parent pointers; text justification, perfect-information blackjack</td>
+<td><strong>DUE</strong>: Lab 4 (Part C)nov 7 <strong>LEC 15 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm-again.txt">Virtual Memory (3)</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm-again.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/appel-li.pdf">Virtual Memory Primitives for User Programs (1991)</a> <strong>Homework 12 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/mmap.html">mmap</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">String subproblems, psuedopolynomial time; parenthesization, edit distance, knapsack</td>
+<td style="text-align:left"><strong>LEC 16 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-organization.txt">OS Organization</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/engler95exokernel.pdf">Exokernel (1995)</a> <strong>Homework 13 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/exok.html">HW exokernel question</a></td>
+<td style="text-align:left">Two kinds of guessing; piano/guitar fingering, Tetris training, Super Mario Bros.</td>
+<td><strong>DUE</strong>: Final project proposal (if doing project)nov 19 <strong>LEC 17 (cc):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-biscuit.txt">Kernels and HLL</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/biscuit.pdf">the Biscuit paper (2018)</a> <strong>Homework 14 due:</strong> [HW Biscuit question</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Computational complexity</td>
+<td style="text-align:left"><strong>DROP DATE</strong> <strong>LEC 18 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-scalable-lock.md">Scalable locks</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-mcs.pdf">slides</a>) (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/scalable-lock-code.c">code</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/linux-lock.pdf">Non-scalable locks paper (2012)</a> <strong>Homework 15 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/ticketlock.html">ticket lock question</a></td>
+<td style="text-align:left">Algorithms research topics</td>
+<td><strong>DUE</strong>: Lab 5nov 26 <strong>LEC 19 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-rcu.pdf">Scaling OSes slides</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/rcu-decade-later.pdf">RCU (2013)</a> <strong>Homework 16 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/rcu.html">RCU question</a> <strong>DUE</strong>: Email us a status update on your final project (a paragraph)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><strong>LEC 20 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmware.txt">Virtual Machines (1)</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmware.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/adams06vmware.pdf">Software vs Hardware Virtualization (2006)</a> <strong>Homework 17 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/vmware.html">VM question</a></td>
+<td style="text-align:left"></td>
+<td><strong>LEC 21 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmm.md">Virtual Machines (2)</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-virt2.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/belay-dune.pdf">Dune: Safe User-level Access to Privileged CPU Features (2012)</a> <strong>Homework 18 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/dune.html">Dune question</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><strong>LEC 22 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-net.txt">High-performance networking</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/osdi14-paper-belay.pdf">IX: A Protected Dataplane Operating System for High Throughput and Low Latency (2014)</a> <strong>Homework 19 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/ix.html">IX question</a></td>
+<td style="text-align:left"></td>
+<td><strong>Quiz #2</strong> <strong>DUPONT-Gym, 9am-11pm</strong> <strong>open book, notes, and papers.</strong> <strong>scope</strong>: Lectures 14 through last lecture (dec 12), labs 4 and 5. <strong>practice:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/quiz.html">previous years’ quizzes</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="周五"><a href="#周五" class="headerlink" title="周五"></a>周五</h4><h5 id="卫星星下点仿真模块"><a href="#卫星星下点仿真模块" class="headerlink" title="卫星星下点仿真模块"></a>卫星星下点仿真模块</h5><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[phi_corr,lamda_corr]</span> = <span class="title">f_fix_lines</span><span class="params">(phi,lamda,ang_threshold)</span></span></span><br><span class="line"><span class="comment">%%</span></span><br><span class="line"><span class="comment">% F_FIX_LINES corrects the west-east line bug that appears when a line</span></span><br><span class="line"><span class="comment">% passes from eastern hemisphere to western hemisphere or the opposite.</span></span><br><span class="line"><span class="comment">% Longitude coordinated should be from 0 to 360.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% HOW: [phi_corr,lamda_corr] = f_fix_lines(phi,lamda,ang_threshold)</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Input: phi            [1 x n] latitude in degrees.</span></span><br><span class="line"><span class="comment">%                    or [n x 1]</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%        lamda          [1 x n] longitude in degrees.</span></span><br><span class="line"><span class="comment">%                    or [n x 1]</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%        ang_threshold  [1 x 1] angle difference threshold in degrees to</span></span><br><span class="line"><span class="comment">%                               apply the correction.</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% Output: phi_corr      [1 x n] corrected latitude in degrees.</span></span><br><span class="line"><span class="comment">%                    or [n x 1]</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">%         lamda_corr    [1 x n] longitude in degrees.</span></span><br><span class="line"><span class="comment">%                    or [n x 1]</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% SQ Duan, USTC</span></span><br><span class="line"><span class="comment">% 10/30/2020</span></span><br><span class="line"><span class="comment">%</span></span><br><span class="line"><span class="comment">% uses m-files: none</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Revision history</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Remarks</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%% Start the algorithm</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%Input check</span></span><br><span class="line"><span class="keyword">if</span> nargin ~= <span class="number">3</span></span><br><span class="line">    error(<span class="string">'Wrong number of input arguments'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">max</span>(<span class="built_in">size</span>(phi) ~= <span class="built_in">size</span>(lamda) ) == <span class="number">1</span></span><br><span class="line">    error(<span class="string">'Input coordinates do not have the same dimensions'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">max</span>(<span class="built_in">size</span>(ang_threshold)) ~= <span class="number">1</span></span><br><span class="line">    error(<span class="string">'Select only one angle threshold'</span>)</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">phi                                   = phi(:);</span><br><span class="line">lamda                                 = lamda(:);</span><br><span class="line"></span><br><span class="line">diff_lamda                            = diff(lamda);</span><br><span class="line">[rr,~]                                = <span class="built_in">find</span>(<span class="built_in">abs</span>(diff_lamda) &gt; ang_threshold);</span><br><span class="line">rr                                    = rr + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">phi_corr                              = <span class="built_in">nan</span>(<span class="built_in">size</span>(phi,<span class="number">1</span>) + <span class="number">3</span>*<span class="built_in">size</span>(rr,<span class="number">1</span>),<span class="number">1</span>);</span><br><span class="line">lamda_corr                            = <span class="built_in">nan</span>(<span class="built_in">size</span>(phi,<span class="number">1</span>) + <span class="number">3</span>*<span class="built_in">size</span>(rr,<span class="number">1</span>),<span class="number">1</span>);</span><br><span class="line">su                                    = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> kk = <span class="number">1</span>:<span class="built_in">size</span>(phi,<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">max</span>(kk == rr) == <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> diff_lamda(kk<span class="number">-1</span>,<span class="number">1</span>) &lt; ang_threshold</span><br><span class="line">            </span><br><span class="line">            phi_corr(kk + su,<span class="number">1</span>)       = phi(kk,<span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">max</span>(lamda_corr) &gt; <span class="number">180</span></span><br><span class="line">                </span><br><span class="line">                lamda_corr(kk + su,<span class="number">1</span>) = <span class="number">359.9999</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">elseif</span> diff_lamda(kk<span class="number">-1</span>,<span class="number">1</span>) &gt; ang_threshold</span><br><span class="line">            </span><br><span class="line">            phi_corr(kk + su,<span class="number">1</span>)       = phi(kk,<span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">max</span>(lamda_corr) &gt; <span class="number">180</span></span><br><span class="line">                </span><br><span class="line">                lamda_corr(kk + su,<span class="number">1</span>) = <span class="number">0</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">        su                            = su + <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        su                            = su + <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> diff_lamda(kk<span class="number">-1</span>,<span class="number">1</span>) &lt; ang_threshold</span><br><span class="line">            </span><br><span class="line">            phi_corr(kk + su,<span class="number">1</span>)       = phi(kk,<span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">max</span>(lamda_corr) &gt; <span class="number">180</span></span><br><span class="line">                </span><br><span class="line">                lamda_corr(kk + su,<span class="number">1</span>) = <span class="number">0</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">elseif</span> diff_lamda(kk<span class="number">-1</span>,<span class="number">1</span>) &gt; ang_threshold</span><br><span class="line">            </span><br><span class="line">            phi_corr(kk + su,<span class="number">1</span>)       = phi(kk,<span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">max</span>(lamda_corr) &gt; <span class="number">180</span></span><br><span class="line">                </span><br><span class="line">                lamda_corr(kk + su,<span class="number">1</span>) = <span class="number">359.9999</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        </span><br><span class="line">        su                            = su + <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">    phi_corr(kk + su,<span class="number">1</span>)               = phi(kk,<span class="number">1</span>);</span><br><span class="line">    lamda_corr(kk + su,<span class="number">1</span>)             = lamda(kk,<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">size</span>(phi,<span class="number">1</span>) == <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    phi_corr                          = phi_corr';</span><br><span class="line">    lamda_corr                        = lamda_corr';</span><br><span class="line">    </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -913,7 +1180,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周安排"><span class="nav-number">1.</span> <span class="nav-text">本周安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本周计划表"><span class="nav-number">1.1.</span> <span class="nav-text">本周计划表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本周时间安排"><span class="nav-number">1.2.</span> <span class="nav-text">本周时间安排</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上周回顾"><span class="nav-number">2.</span> <span class="nav-text">上周回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下周计划"><span class="nav-number">3.</span> <span class="nav-text">下周计划</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周安排"><span class="nav-number">1.</span> <span class="nav-text">本周安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本周计划表"><span class="nav-number">1.1.</span> <span class="nav-text">本周计划表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本周时间安排"><span class="nav-number">1.2.</span> <span class="nav-text">本周时间安排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体工作内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体工作内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#周三"><span class="nav-number">1.3.1.</span> <span class="nav-text">周三</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优先队列（Priority-Queue）"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">优先队列（Priority Queue）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#优先队列的定义及基本操作"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">优先队列的定义及基本操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#定义"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#操作"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆（Heap）"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">堆（Heap）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#将树堆化"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">将树堆化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#大（小）顶堆"><span class="nav-number">1.3.1.7.</span> <span class="nav-text">大（小）顶堆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特性"><span class="nav-number">1.3.1.8.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆的操作"><span class="nav-number">1.3.1.9.</span> <span class="nav-text">堆的操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#根据max-heapify创建堆"><span class="nav-number">1.3.1.10.</span> <span class="nav-text">根据max_heapify创建堆</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">1.4.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业"><span class="nav-number">2.</span> <span class="nav-text">作业</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字电路仿真"><span class="nav-number">2.1.</span> <span class="nav-text">数字电路仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题背景"><span class="nav-number">2.1.1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题目一"><span class="nav-number">2.1.2.</span> <span class="nav-text">题目一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目二"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">题目二</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周四"><span class="nav-number">2.1.3.</span> <span class="nav-text">周四</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#卫星初始平近点角模块实现"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">卫星初始平近点角模块实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#学习计划"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">学习计划</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周五"><span class="nav-number">2.1.4.</span> <span class="nav-text">周五</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#卫星星下点仿真模块"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">卫星星下点仿真模块</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
