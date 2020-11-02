@@ -96,17 +96,22 @@
 
 
 
-  <meta name="description" content="本文将针对C++中STL库的常用算法操作进行总结。">
+  <meta name="description" content="After all, tomorrow is another day">
 <meta property="og:type" content="article">
-<meta property="og:title" content="STL——常用算法">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/C++/STL——常用算法/index.html">
+<meta property="og:title" content="2020年第44周">
+<meta property="og:url" content="http://yoursite.com/2020/11/02/生活/周报/2020年第45周/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="本文将针对C++中STL库的常用算法操作进行总结。">
+<meta property="og:description" content="After all, tomorrow is another day">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.761Z">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/20201121547.JPG?raw=true">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/6aafc0cc5a4aa26c29a54dec2d37073509f12b89/20201121239.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/a456fd60f6446899a0571cde6bb3a49a3e077557/20201121342.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/5fd196cb6e388e819aebe0aca32e142d21eec15d/20201121346.svg">
+<meta property="og:updated_time" content="2020-11-02T08:41:26.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="STL——常用算法">
-<meta name="twitter:description" content="本文将针对C++中STL库的常用算法操作进行总结。">
+<meta name="twitter:title" content="2020年第44周">
+<meta name="twitter:description" content="After all, tomorrow is another day">
+<meta name="twitter:image" content="https://github.com/sqduan/hexoimg/blob/master/20201121547.JPG?raw=true">
 
 
 
@@ -116,7 +121,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/C++/STL——常用算法/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/02/生活/周报/2020年第45周/">
 
 
 
@@ -126,7 +131,7 @@
   };
 </script>
 
-  <title>STL——常用算法 | 一隅</title>
+  <title>2020年第44周 | 一隅</title>
   
 
 
@@ -358,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/C++/STL——常用算法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/02/生活/周报/2020年第45周/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">STL——常用算法
+          <h1 class="post-title" itemprop="name headline">2020年第44周
 
               
             
@@ -401,9 +406,13 @@
                 
               
 
-              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+              <time title="Created: 2020-11-02 15:36:50 / Modified: 16:41:26" itemprop="dateCreated datePublished" datetime="2020-11-02T15:36:50+08:00">2020-11-02</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -419,14 +428,14 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/生活/" itemprop="url" rel="index"><span itemprop="name">生活</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/生活/周报/" itemprop="url" rel="index"><span itemprop="name">周报</span></a></span>
 
                 
                 
@@ -461,10 +470,154 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对C++中STL库的常用算法操作进行总结。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>After all, tomorrow is another day</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="常用算法API"><a href="#常用算法API" class="headerlink" title="常用算法API"></a>常用算法API</h2><h3 id="count-if"><a href="#count-if" class="headerlink" title="count_if"></a>count_if</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">count_if(grid[i].begin(),grid[i].end(),[](<span class="keyword">int</span> x)&#123;<span class="keyword">return</span> x &lt; <span class="number">0</span>;&#125;); <span class="comment">//统计x小于0的个数</span></span><br></pre></td></tr></table></figure>
-<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sort(satisfaction.begin(),  satisfaction.end()); <span class="comment">//正向</span></span><br><span class="line">sort(satisfaction.rbegin(), satisfaction.rend()); <span class="comment">//逆向</span></span><br></pre></td></tr></table></figure>
+<h2 id="本周安排"><a href="#本周安排" class="headerlink" title="本周安排"></a>本周安排</h2><h3 id="本周计划表"><a href="#本周计划表" class="headerlink" title="本周计划表"></a>本周计划表</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目</th>
+<th style="text-align:center">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">课程学习</td>
+<td style="text-align:center">算法第5、6课</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">操作系统第1、2课程</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center">实验室研究</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="本周时间安排"><a href="#本周时间安排" class="headerlink" title="本周时间安排"></a>本周时间安排</h3><p><img src="https://github.com/sqduan/hexoimg/blob/master/20201121547.JPG?raw=true" alt align="center"></p>
+<h3 id="具体工作内容"><a href="#具体工作内容" class="headerlink" title="具体工作内容"></a>具体工作内容</h3><h4 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目</th>
+<th style="text-align:center">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">课程学习</td>
+<td style="text-align:center">Binary Search Trees， BST sort</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">STL库学习</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">实验室研究</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="BST学习"><a href="#BST学习" class="headerlink" title="BST学习"></a>BST学习</h5><p>跑道预留系统（Runway Reservation System）</p>
+<p>让我们先从机场跑道预留系统作为引子，引入二叉查找树的概念。</p>
+<h6 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h6><p>假设有一个机场只有一条跑道预留给飞机降落，这个系统有以下约束：</p>
+<ul>
+<li><p>预留的需求决定了降落时间$t$，$t$必须是未来的时间</p>
+</li>
+<li><p>如果在$k$分钟内没有规划其他的降落请求，那么就将$t$加入集合$R$中。</p>
+</li>
+<li><p>飞机降落后，将$t$从$R$中移出</p>
+</li>
+<li><p>对于规模为$n$的$R$，我们希望上述操作时间复杂度为$O(\lg n)$</p>
+</li>
+</ul>
+<h6 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h6><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/6aafc0cc5a4aa26c29a54dec2d37073509f12b89/20201121239.svg" width="500" alt align="center"></p>
+<p>假设降落规划的时间轴如上图，现在有三个规划请求，分别是在53、44和20秒降落，根据约束可知44和20是无效的请求。现在我们需要一个合适的数据结构描述规划。可选的数据结构包括：</p>
+<ul>
+<li>未排序的链表或数组：不符合时间复杂度，常规操作基本都是线性复杂度</li>
+<li>排序的数组：查找符合$O(\lg n)$的复杂度，但是插入的操作需要线性复杂度，因为需要移动</li>
+<li>排序的链表：链表做二分查找有难度</li>
+<li>堆：查找需要线性的时间，因为堆只提供了最大（最小）元素的$O(1)$时间查找</li>
+</ul>
+<p>从上面的数据结构可以看出，它们或多或少都有一些问题，所以我们需要一个新的结构解决上述问题，即我们今天要介绍的BST。</p>
+<h6 id="二叉查找树（BST）"><a href="#二叉查找树（BST）" class="headerlink" title="二叉查找树（BST）"></a>二叉查找树（BST）</h6><p>树的组成</p>
+<p>一个简单的二叉查找树如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    5</span><br><span class="line">   / \</span><br><span class="line">  2   6</span><br><span class="line"> / \</span><br><span class="line">1   3</span><br></pre></td></tr></table></figure>
+<p>树的组成为：</p>
+<ul>
+<li>节点$x$：key($x$)为该节点的值</li>
+<li>指针：parent($x$)，left($x$)，right($x$)，parent指向节点$x$的父节点，left指向左子节点，right指向右子节点</li>
+</ul>
+<p>性质</p>
+<p>二叉查找树的最重要的性质为：对于所有节点$x$，$x$左子树的节点值小于等于$x$的值；$x$右子树的节点值大于等于$x$的值。</p>
+<p>操作</p>
+<ul>
+<li>插入</li>
+</ul>
+<p>插入的时间复杂度取决于树的高度$h$，为$O(h)$。</p>
+<ul>
+<li>寻找最小值find_min()</li>
+</ul>
+<p>寻找最小值就是一路向左，寻找最大值就是一路向右，所以时间复杂度为$O(h)$。</p>
+<ul>
+<li>寻找下一个较大的值next_larger(x)</li>
+</ul>
+<p>时间复杂度也是$O(h)$</p>
+<ul>
+<li>寻找比某个节点小的所有节点的个数rank(x)</li>
+</ul>
+<p>时间复杂度也是$O(h)$，这个过程分为三步：</p>
+<ol>
+<li><p>第一步寻找插入点</p>
+</li>
+<li><p>第二步寻找过程中加上比该节点小的节点的个数</p>
+</li>
+<li><p>第三步加入该节点的左子树的所有节点</p>
+</li>
+</ol>
+<p>树的增长与收缩</p>
+<p>当插入或删除节点时，树会动态地调整大小，而我们也需要对树进行调整，从而使得树始终满足二叉搜索树的性质。我们有一个简单的二叉树如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/a456fd60f6446899a0571cde6bb3a49a3e077557/20201121342.svg" width="250" alt align="center"></p>
+<p>其中节点右侧的数表示以该节点为根节点的树的规模。现在，我们要往树中插入新的节点43，我们需要从49开始，依次向下遍历，每经过一个节点，就将节点的规模+1，得到的新树如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/5fd196cb6e388e819aebe0aca32e142d21eec15d/20201121346.svg" width="350" alt align="center"></p>
+<h5 id="堆复习"><a href="#堆复习" class="headerlink" title="堆复习"></a>堆复习</h5><h6 id="push-heap"><a href="#push-heap" class="headerlink" title="push_heap"></a>push_heap</h6><p>对于push_heap操作，我们先将元素插入底层的vector的end()位置，然后将该节点与父节点进行比较交换操作并重复这个上溯过程，最后将节点放置到正确的位置上。我们的函数接受两个迭代器，用来表示heap底部容器的头尾，需要注意的是头尾迭代器表示的范围是左闭右开的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator VectorIterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __push_heap(VectorIterator first, <span class="keyword">int</span> holeIndex, <span class="keyword">int</span> topIndex, <span class="keyword">int</span> value);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应当注意的是，当调用push_heap时，新元素应当已经位于底层容器的末尾</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_heap</span><span class="params">(VectorIterator first, VectorIterator last)</span></span>&#123;</span><br><span class="line">    __push_heap(first, (last-first)<span class="number">-1</span>, <span class="number">0</span>, *(last<span class="number">-1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __push_heap(VectorIterator first, <span class="keyword">int</span> holeIndex, <span class="keyword">int</span> topIndex, <span class="keyword">int</span> value)&#123;</span><br><span class="line">    <span class="comment">// first: 绝对坐标下容器的起始值</span></span><br><span class="line">    <span class="comment">// holeIndex: 相对坐标下容器的末位位置</span></span><br><span class="line">    <span class="comment">// topIndex: 相对坐标系下容器的起始位置</span></span><br><span class="line">    <span class="comment">// value: holeIndex的值</span></span><br><span class="line">    <span class="keyword">int</span> parent = (holeIndex - <span class="number">1</span>)/<span class="number">2</span>;   </span><br><span class="line">    <span class="keyword">while</span>(holeIndex &gt; topIndex &amp;&amp; *(first+parent) &lt; value)&#123;  <span class="comment">// 当尚未到堆顶且parent的值小于插入值</span></span><br><span class="line">        *(first + holeIndex) = *(first + parent);            <span class="comment">// 下放parent</span></span><br><span class="line">        holeIndex = parent;                                  <span class="comment">// 调整holeIndex和parent的index</span></span><br><span class="line">        parent = (holeIndex<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    *(first + holeIndex) = value;                            <span class="comment">// 最后在正确的位置插入值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -528,8 +681,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/C++/static关键字总结/" rel="next" title="static关键字总结">
-                <i class="fa fa-chevron-left"></i> static关键字总结
+              <a href="/2020/11/02/工具/C++/STL/heap/" rel="next" title="heap">
+                <i class="fa fa-chevron-left"></i> heap
               </a>
             
           </div>
@@ -537,10 +690,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/12/工具/C++/STL——顺序容器操作/" rel="prev" title="STL——顺序容器操作">
-                STL——顺序容器操作 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -616,7 +765,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">227</span>
+                    <span class="site-state-item-count">230</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -733,7 +882,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">50</span>
+                      
+                    
+                    <span class="site-state-item-count">51</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -852,7 +1003,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用算法API"><span class="nav-number">1.</span> <span class="nav-text">常用算法API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#count-if"><span class="nav-number">1.1.</span> <span class="nav-text">count_if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序算法"><span class="nav-number">1.2.</span> <span class="nav-text">排序算法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周安排"><span class="nav-number">1.</span> <span class="nav-text">本周安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本周计划表"><span class="nav-number">1.1.</span> <span class="nav-text">本周计划表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本周时间安排"><span class="nav-number">1.2.</span> <span class="nav-text">本周时间安排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体工作内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体工作内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#周三"><span class="nav-number">1.3.1.</span> <span class="nav-text">周三</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BST学习"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">BST学习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#问题定义"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例子"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">1.3.1.1.3.</span> <span class="nav-text">二叉查找树（BST）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆复习"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">堆复习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#push-heap"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">push_heap</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1040,7 +1191,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/工具/C++/STL——常用算法/'
+    refer: '2020/11/02/生活/周报/2020年第45周/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
