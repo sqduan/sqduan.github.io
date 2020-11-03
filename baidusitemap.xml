@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://yoursite.com/2020/10/09/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-4/</loc>
-    <lastmod>2020-11-02</lastmod>
+    <loc>http://yoursite.com/2020/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-5/</loc>
+    <lastmod>2020-11-03</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/11/02/%E7%94%9F%E6%B4%BB/%E5%91%A8%E6%8A%A5/2020%E5%B9%B4%E7%AC%AC45%E5%91%A8/</loc>
+    <lastmod>2020-11-03</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/10/09/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-4/</loc>
     <lastmod>2020-11-02</lastmod>
   </url>
   <url>
@@ -22,10 +26,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/STL/STL%E2%80%94%E2%80%94%E5%85%B3%E8%81%94%E5%AE%B9%E5%99%A8%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2020-11-02</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/11/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-5/</loc>
     <lastmod>2020-11-02</lastmod>
   </url>
   <url>

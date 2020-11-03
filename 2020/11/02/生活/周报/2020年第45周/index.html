@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/6aafc0cc5a4aa26c29a54dec2d37073509f12b89/20201121239.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/a456fd60f6446899a0571cde6bb3a49a3e077557/20201121342.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/5fd196cb6e388e819aebe0aca32e142d21eec15d/20201121346.svg">
-<meta property="og:updated_time" content="2020-11-02T08:41:26.784Z">
+<meta property="og:updated_time" content="2020-11-03T07:48:52.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2020年第44周">
 <meta name="twitter:description" content="After all, tomorrow is another day">
@@ -406,12 +406,24 @@
                 
               
 
-              <time title="Created: 2020-11-02 15:36:50 / Modified: 16:41:26" itemprop="dateCreated datePublished" datetime="2020-11-02T15:36:50+08:00">2020-11-02</time>
+              <time title="Created: 2020-11-02 15:36:50" itemprop="dateCreated datePublished" datetime="2020-11-02T15:36:50+08:00">2020-11-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-11-03 15:48:52" itemprop="dateModified" datetime="2020-11-03T15:48:52+08:00">2020-11-03</time>
               
             
           </span>
@@ -517,7 +529,7 @@
 </table>
 </div>
 <h3 id="本周时间安排"><a href="#本周时间安排" class="headerlink" title="本周时间安排"></a>本周时间安排</h3><p><img src="https://github.com/sqduan/hexoimg/blob/master/20201121547.JPG?raw=true" alt align="center"></p>
-<h3 id="具体工作内容"><a href="#具体工作内容" class="headerlink" title="具体工作内容"></a>具体工作内容</h3><h4 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h4><div class="table-container">
+<h3 id="具体工作内容"><a href="#具体工作内容" class="headerlink" title="具体工作内容"></a>具体工作内容</h3><h4 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h4><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -618,6 +630,77 @@
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/5fd196cb6e388e819aebe0aca32e142d21eec15d/20201121346.svg" width="350" alt align="center"></p>
 <h5 id="堆复习"><a href="#堆复习" class="headerlink" title="堆复习"></a>堆复习</h5><h6 id="push-heap"><a href="#push-heap" class="headerlink" title="push_heap"></a>push_heap</h6><p>对于push_heap操作，我们先将元素插入底层的vector的end()位置，然后将该节点与父节点进行比较交换操作并重复这个上溯过程，最后将节点放置到正确的位置上。我们的函数接受两个迭代器，用来表示heap底部容器的头尾，需要注意的是头尾迭代器表示的范围是左闭右开的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator VectorIterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __push_heap(VectorIterator first, <span class="keyword">int</span> holeIndex, <span class="keyword">int</span> topIndex, <span class="keyword">int</span> value);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 应当注意的是，当调用push_heap时，新元素应当已经位于底层容器的末尾</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_heap</span><span class="params">(VectorIterator first, VectorIterator last)</span></span>&#123;</span><br><span class="line">    __push_heap(first, (last-first)<span class="number">-1</span>, <span class="number">0</span>, *(last<span class="number">-1</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> __push_heap(VectorIterator first, <span class="keyword">int</span> holeIndex, <span class="keyword">int</span> topIndex, <span class="keyword">int</span> value)&#123;</span><br><span class="line">    <span class="comment">// first: 绝对坐标下容器的起始值</span></span><br><span class="line">    <span class="comment">// holeIndex: 相对坐标下容器的末位位置</span></span><br><span class="line">    <span class="comment">// topIndex: 相对坐标系下容器的起始位置</span></span><br><span class="line">    <span class="comment">// value: holeIndex的值</span></span><br><span class="line">    <span class="keyword">int</span> parent = (holeIndex - <span class="number">1</span>)/<span class="number">2</span>;   </span><br><span class="line">    <span class="keyword">while</span>(holeIndex &gt; topIndex &amp;&amp; *(first+parent) &lt; value)&#123;  <span class="comment">// 当尚未到堆顶且parent的值小于插入值</span></span><br><span class="line">        *(first + holeIndex) = *(first + parent);            <span class="comment">// 下放parent</span></span><br><span class="line">        holeIndex = parent;                                  <span class="comment">// 调整holeIndex和parent的index</span></span><br><span class="line">        parent = (holeIndex<span class="number">-1</span>)/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    *(first + holeIndex) = value;                            <span class="comment">// 最后在正确的位置插入值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目</th>
+<th style="text-align:center">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">课程学习</td>
+<td style="text-align:center">LEC 1 (fk): Operating systems (handouts: xv6 source, xv6 book) Preparation: Unix intro Assignment: Lab 1: C, Assembly, Tools, and Bootstrapping</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">实验室研究</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="操作系统第一课"><a href="#操作系统第一课" class="headerlink" title="操作系统第一课"></a>操作系统第一课</h5><p>看了看Unix操作系统的介绍，下载并整理了一下课程相关文件。包括如下四个：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">文件名</th>
+<th style="text-align:center">介绍</th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">LectureIntroduce</td>
+<td style="text-align:center">课程介绍</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">xv6Book</td>
+<td style="text-align:center">xv6系统介绍</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Lab1-Booting a PC.pdf</td>
+<td style="text-align:center">实验一：启动过程工作</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">xv6SourceCode</td>
+<td style="text-align:center">xv6系统源代码</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -1003,7 +1086,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周安排"><span class="nav-number">1.</span> <span class="nav-text">本周安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本周计划表"><span class="nav-number">1.1.</span> <span class="nav-text">本周计划表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本周时间安排"><span class="nav-number">1.2.</span> <span class="nav-text">本周时间安排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体工作内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体工作内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#周三"><span class="nav-number">1.3.1.</span> <span class="nav-text">周三</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BST学习"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">BST学习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#问题定义"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例子"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">1.3.1.1.3.</span> <span class="nav-text">二叉查找树（BST）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆复习"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">堆复习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#push-heap"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">push_heap</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周安排"><span class="nav-number">1.</span> <span class="nav-text">本周安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本周计划表"><span class="nav-number">1.1.</span> <span class="nav-text">本周计划表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本周时间安排"><span class="nav-number">1.2.</span> <span class="nav-text">本周时间安排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体工作内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体工作内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#周一"><span class="nav-number">1.3.1.</span> <span class="nav-text">周一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BST学习"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">BST学习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#问题定义"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例子"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">1.3.1.1.3.</span> <span class="nav-text">二叉查找树（BST）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆复习"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">堆复习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#push-heap"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">push_heap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周二"><span class="nav-number">1.3.2.</span> <span class="nav-text">周二</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#操作系统第一课"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">操作系统第一课</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
