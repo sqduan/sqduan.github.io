@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/6aafc0cc5a4aa26c29a54dec2d37073509f12b89/20201121239.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/a456fd60f6446899a0571cde6bb3a49a3e077557/20201121342.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/5fd196cb6e388e819aebe0aca32e142d21eec15d/20201121346.svg">
-<meta property="og:updated_time" content="2020-11-03T07:58:58.131Z">
+<meta property="og:updated_time" content="2020-11-04T05:14:24.945Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT 6006 Lecture 5——二叉查找树（Binary search tree, BST）">
 <meta name="twitter:description" content="二叉查找树：左子节点小于根节点，右子节点大于根节点">
@@ -422,7 +422,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-03 15:58:58" itemprop="dateModified" datetime="2020-11-03T15:58:58+08:00">2020-11-03</time>
+                <time title="Modified: 2020-11-04 13:14:24" itemprop="dateModified" datetime="2020-11-04T13:14:24+08:00">2020-11-04</time>
               
             
           </span>
@@ -520,8 +520,8 @@
 <li>节点$x$：key($x$)为该节点的值</li>
 <li>指针：parent($x$)，left($x$)，right($x$)，parent指向节点$x$的父节点，left指向左子节点，right指向右子节点</li>
 </ul>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>二叉查找树的最重要的性质为：对于所有节点$x$，$x$左子树的节点值小于等于$x$的值；$x$右子树的节点值大于等于$x$的值。</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>插入的时间复杂度取决于树的高度$h$，为$O(h)$。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>二叉查找树的最重要的性质为：对于所有节点$x$，$x$左子树的节点值小于等于$x$的值；$x$右子树的节点值大于等于$x$的值。根据这个特性，BST的中序遍历是一个有序数列</p>
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><h4 id="插入删除"><a href="#插入删除" class="headerlink" title="插入删除"></a>插入删除</h4><p>插入删除的时间复杂度取决于树的高度$h$，为$O(h)$。</p>
 <h4 id="寻找最小值find-min"><a href="#寻找最小值find-min" class="headerlink" title="寻找最小值find_min()"></a>寻找最小值find_min()</h4><p>寻找最小值就是一路向左，寻找最大值就是一路向右，所以时间复杂度为$O(h)$。</p>
 <h4 id="寻找下一个较大的值next-larger-x"><a href="#寻找下一个较大的值next-larger-x" class="headerlink" title="寻找下一个较大的值next_larger(x)"></a>寻找下一个较大的值next_larger(x)</h4><p>时间复杂度也是$O(h)$</p>
 <h4 id="寻找比某个节点小的所有节点的个数rank-x-2"><a href="#寻找比某个节点小的所有节点的个数rank-x-2" class="headerlink" title="寻找比某个节点小的所有节点的个数rank(x)2"></a>寻找比某个节点小的所有节点的个数rank(x)<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h4><p>时间复杂度也是$O(h)$，这个过程分为三步：</p>
@@ -694,7 +694,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">230</span>
+                    <span class="site-state-item-count">232</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -932,7 +932,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#跑道预留系统（Runway-Reservation-System）"><span class="nav-number">1.</span> <span class="nav-text">跑道预留系统（Runway Reservation System）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题定义"><span class="nav-number">1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.2.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">2.</span> <span class="nav-text">二叉查找树（BST）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的组成"><span class="nav-number">2.1.</span> <span class="nav-text">树的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">2.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">2.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">2.3.1.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找最小值find-min"><span class="nav-number">2.3.2.</span> <span class="nav-text">寻找最小值find_min()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找下一个较大的值next-larger-x"><span class="nav-number">2.3.3.</span> <span class="nav-text">寻找下一个较大的值next_larger(x)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找比某个节点小的所有节点的个数rank-x-2"><span class="nav-number">2.3.4.</span> <span class="nav-text">寻找比某个节点小的所有节点的个数rank(x)2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的增长与收缩"><span class="nav-number">2.4.</span> <span class="nav-text">树的增长与收缩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST实现"><span class="nav-number">3.</span> <span class="nav-text">BST实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#跑道预留系统（Runway-Reservation-System）"><span class="nav-number">1.</span> <span class="nav-text">跑道预留系统（Runway Reservation System）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题定义"><span class="nav-number">1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例子"><span class="nav-number">1.2.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">2.</span> <span class="nav-text">二叉查找树（BST）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的组成"><span class="nav-number">2.1.</span> <span class="nav-text">树的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质"><span class="nav-number">2.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">2.3.</span> <span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入删除"><span class="nav-number">2.3.1.</span> <span class="nav-text">插入删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找最小值find-min"><span class="nav-number">2.3.2.</span> <span class="nav-text">寻找最小值find_min()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找下一个较大的值next-larger-x"><span class="nav-number">2.3.3.</span> <span class="nav-text">寻找下一个较大的值next_larger(x)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找比某个节点小的所有节点的个数rank-x-2"><span class="nav-number">2.3.4.</span> <span class="nav-text">寻找比某个节点小的所有节点的个数rank(x)2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的增长与收缩"><span class="nav-number">2.4.</span> <span class="nav-text">树的增长与收缩</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BST实现"><span class="nav-number">3.</span> <span class="nav-text">BST实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
