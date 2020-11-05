@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="Penguin, Boot">
+  <meta name="description" content=".LC0:  .string “Helloworld”">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux启动过程">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/Archlinux/linux启动过程/index.html">
+<meta property="og:title" content="AT&amp;T汇编基本语法">
+<meta property="og:url" content="http://yoursite.com/2020/11/05/工具/Assembly/AT&T汇编语法/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="Penguin, Boot">
+<meta property="og:description" content=".LC0:  .string “Helloworld”">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.760Z">
+<meta property="og:updated_time" content="2020-11-05T05:52:58.008Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux启动过程">
-<meta name="twitter:description" content="Penguin, Boot">
+<meta name="twitter:title" content="AT&amp;T汇编基本语法">
+<meta name="twitter:description" content=".LC0:  .string “Helloworld”">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/Archlinux/linux启动过程/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/05/工具/Assembly/AT&T汇编语法/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>Linux启动过程 | 一隅</title>
+  <title>AT&T汇编基本语法 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Archlinux/linux启动过程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/05/工具/Assembly/AT&T汇编语法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linux启动过程
+          <h1 class="post-title" itemprop="name headline">AT&T汇编基本语法
 
               
             
@@ -401,9 +401,13 @@
                 
               
 
-              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+              <time title="Created: 2020-11-05 11:53:00 / Modified: 13:52:58" itemprop="dateCreated datePublished" datetime="2020-11-05T11:53:00+08:00">2020-11-05</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -426,7 +430,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Archlinux/" itemprop="url" rel="index"><span itemprop="name">Archlinux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Assembly/" itemprop="url" rel="index"><span itemprop="name">Assembly</span></a></span>
 
                 
                 
@@ -462,27 +466,27 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p><em>Penguin, Boot</em></p>
+<p>.LC0:<br>  .string “Helloworld”</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="启动过程概述"><a href="#启动过程概述" class="headerlink" title="启动过程概述"></a>启动过程概述</h2><p>Linux的启动过程可以简单分为如下四步：</p>
-<ul>
-<li>BIOS POST</li>
-<li>Boot loader</li>
-<li>Kernel initialization</li>
-<li>Start systemd, the parent of all processes.</li>
-</ul>
-<h2 id="BIOS-POST-（Basic-IO-system-Power-On-Self-Test）"><a href="#BIOS-POST-（Basic-IO-system-Power-On-Self-Test）" class="headerlink" title="BIOS POST （Basic IO system Power On Self Test）"></a>BIOS POST （Basic IO system Power On Self Test）</h2><p>当电脑开机供电时，最先进行的就是BIOS POST，即基本IO系统上电自检，确保硬件系统工作正常。他会触发一个BIOS中断，确定Boot的分区，第一个找到的boot分区将会被载入RAM，随后控制权移交给boot sector（Boot Loader的第一阶段）。</p>
-<h2 id="Boot-Loader"><a href="#Boot-Loader" class="headerlink" title="Boot Loader"></a>Boot Loader</h2><h3 id="GRUB2"><a href="#GRUB2" class="headerlink" title="GRUB2"></a>GRUB2</h3><p>GRUB2全称为GRand Unified Bootloader, version 2，是现今主流Linux普遍采用的Boot Loader。其基本功能是找到linux内核，然后载入到内存中并运行。</p>
-<h3 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h3><p>在POST结束时，BIOS会寻找到第一个Boot分区，加载bootstrap code，即GRUB2 Stage 1，这段代码非常小，因为必须适配前512字节的扇区。因为这个代码太小了，做不到太多有意义的工作，唯一的目的是定位下一个阶段并进行跳转</p>
-<h3 id="第1-5阶段"><a href="#第1-5阶段" class="headerlink" title="第1.5阶段"></a>第1.5阶段</h3><p>GRUB2 的1.5阶段位于boot record和第一块硬盘分区之间，这一段空间因为一些原因没有被使用。这一段有62 512-byte的空间存放core.img文件，这个文件的大小是25,389 Bytes，足够放下一些文件系统的驱动，例如标准EXT、FAT及NTFS等。这意味着GRUB第二阶段可以位于标准的EXT文件系统内。第二阶段实际位于/boot下，即/boot/grub2。</p>
-<h3 id="第2阶段"><a href="#第2阶段" class="headerlink" title="第2阶段"></a>第2阶段</h3><p>第二阶段位于/boot/grub2和其子文件夹下，它将运行期内核模块放置在了/boot/grub2/i386-pc文件夹下。第2阶段的作用是定位并载入所选择的Linux内核，内核和相关文件在/boot文件夹下。</p>
-<h4 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h4><p>所有的kernel都经过了压缩并可自解压，从而节省空间，kernel和初始的RAM镜像以及设备映射位于/boot文件夹下。当内核被载入后，它会进行自解压，并载入systemd，并将控制权移交。至此，Boot阶段结束。</p>
-<h2 id="启动阶段"><a href="#启动阶段" class="headerlink" title="启动阶段"></a>启动阶段</h2><h3 id="systemd"><a href="#systemd" class="headerlink" title="systemd"></a>systemd</h3><p>systemd是所有进程的父进程，它将会使linux正式进入可工作状态。systemd将会完成如下工作：</p>
-<ul>
-<li>挂载由/etc/fstab定义的文件系统，从而可以获取/etc下的配置文件</li>
-</ul>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://opensource.com/article/17/2/linux-boot-and-startup">Linux启动过程</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<p>由于最近做一个操作系统的项目，需要用到AT&amp;T的汇编，这里简单总结一下AT&amp;T汇编中的一些知识。</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><p>和Intel的汇编不同，AT&amp;T的汇编是源在前，目的地在后，更加直观，写为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mnemonic	source, destination</span><br></pre></td></tr></table></figure>
+<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>寄存器由前缀%进行标识</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov	%ax, %bx</span><br></pre></td></tr></table></figure>
+<p>上面这个数将ax寄存器中的值移动到bx中</p>
+<h3 id="立即数"><a href="#立即数" class="headerlink" title="立即数"></a>立即数</h3><p>立即数以$进行标识</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov	$100,	%bx</span><br></pre></td></tr></table></figure>
+<h3 id="内存地址"><a href="#内存地址" class="headerlink" title="内存地址"></a>内存地址</h3><p>在AT&amp;T中，内存地址表示方法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">segment-override:signed-offset(base,index,scale)</span><br></pre></td></tr></table></figure>
+<p>根据寻址方式的不同，里面的内容可以省略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%es:100(%eax,%ebx,2)</span><br></pre></td></tr></table></figure>
+<p>这里列出AT&amp;T和NASM的比较</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GAS memory operand			NASM memory operand</span><br><span class="line">------------------			-------------------</span><br><span class="line"></span><br><span class="line">100					        [100]</span><br><span class="line">%es:100					    [es:100]</span><br><span class="line">(%eax)					    [eax]</span><br><span class="line">(%eax,%ebx)				    [eax+ebx]</span><br><span class="line">(%ecx,%ebx,2)				[ecx+ebx*2]</span><br><span class="line">(,%ebx,2)				    [ebx*2]</span><br><span class="line">-10(%eax)				    [eax-10]</span><br><span class="line">%ds:-10(%ebp)				[ds:ebp-10]</span><br></pre></td></tr></table></figure>
+<p>需要注意的是offset和scale前不应加$</p>
+<h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="中断控制类"><a href="#中断控制类" class="headerlink" title="中断控制类"></a>中断控制类</h3><h4 id="中断屏蔽指令cli"><a href="#中断屏蔽指令cli" class="headerlink" title="中断屏蔽指令cli"></a>中断屏蔽指令cli</h4><p>cli会屏蔽中断，在一些关键的操作点上，如果有中断干扰，会导致出错，此时需要关闭中断，只需要输入命令cli即可</p>
+<h3 id="方向控制类"><a href="#方向控制类" class="headerlink" title="方向控制类"></a>方向控制类</h3><h4 id="清空方向flag指令cld"><a href="#清空方向flag指令cld" class="headerlink" title="清空方向flag指令cld"></a>清空方向flag指令cld</h4><p>cld将direction flag（DF）设置为0，而DF会影响一些指令的方向，如果DF为0，这些指令每次执行完后，指针递增；否则递减。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -545,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/C++/C++多线程/" rel="next" title="C++多线程">
-                <i class="fa fa-chevron-left"></i> C++多线程
+              <a href="/2020/11/05/工具/Archlinux/Archlinux桌面环境/" rel="next" title="Archlinux桌面环境">
+                <i class="fa fa-chevron-left"></i> Archlinux桌面环境
               </a>
             
           </div>
@@ -554,10 +558,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/12/工具/Assembly/X86-64汇编基本语法/" rel="prev" title="X86-64汇编基本语法">
-                X86-64汇编基本语法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -633,7 +633,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">232</span>
+                    <span class="site-state-item-count">234</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -871,7 +871,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动过程概述"><span class="nav-number">1.</span> <span class="nav-text">启动过程概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIOS-POST-（Basic-IO-system-Power-On-Self-Test）"><span class="nav-number">2.</span> <span class="nav-text">BIOS POST （Basic IO system Power On Self Test）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boot-Loader"><span class="nav-number">3.</span> <span class="nav-text">Boot Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GRUB2"><span class="nav-number">3.1.</span> <span class="nav-text">GRUB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一阶段"><span class="nav-number">3.2.</span> <span class="nav-text">第一阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第1-5阶段"><span class="nav-number">3.3.</span> <span class="nav-text">第1.5阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2阶段"><span class="nav-number">3.4.</span> <span class="nav-text">第2阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kernel"><span class="nav-number">3.4.1.</span> <span class="nav-text">Kernel</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动阶段"><span class="nav-number">4.</span> <span class="nav-text">启动阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#systemd"><span class="nav-number">4.1.</span> <span class="nav-text">systemd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">1.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法格式"><span class="nav-number">1.1.</span> <span class="nav-text">语法格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器"><span class="nav-number">1.2.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#立即数"><span class="nav-number">1.3.</span> <span class="nav-text">立即数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存地址"><span class="nav-number">1.4.</span> <span class="nav-text">内存地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">2.</span> <span class="nav-text">基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中断控制类"><span class="nav-number">2.1.</span> <span class="nav-text">中断控制类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#中断屏蔽指令cli"><span class="nav-number">2.1.1.</span> <span class="nav-text">中断屏蔽指令cli</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方向控制类"><span class="nav-number">2.2.</span> <span class="nav-text">方向控制类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#清空方向flag指令cld"><span class="nav-number">2.2.1.</span> <span class="nav-text">清空方向flag指令cld</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1059,7 +1059,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/工具/Archlinux/linux启动过程/'
+    refer: '2020/11/05/工具/Assembly/AT&T汇编语法/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

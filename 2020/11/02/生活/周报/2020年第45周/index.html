@@ -107,7 +107,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/6aafc0cc5a4aa26c29a54dec2d37073509f12b89/20201121239.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/a456fd60f6446899a0571cde6bb3a49a3e077557/20201121342.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/5fd196cb6e388e819aebe0aca32e142d21eec15d/20201121346.svg">
-<meta property="og:updated_time" content="2020-11-03T13:29:36.021Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/f919d793ef66610c862d9682432e298df156cc17/20201141422.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/1fa088e9e4c41e31f477bed63a28f08174c56560/20201141514.svg">
+<meta property="og:updated_time" content="2020-11-05T06:23:16.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2020年第44周">
 <meta name="twitter:description" content="After all, tomorrow is another day">
@@ -423,7 +425,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-03 21:29:36" itemprop="dateModified" datetime="2020-11-03T21:29:36+08:00">2020-11-03</time>
+                <time title="Modified: 2020-11-05 14:23:16" itemprop="dateModified" datetime="2020-11-05T14:23:16+08:00">2020-11-05</time>
               
             
           </span>
@@ -701,6 +703,168 @@
 </table>
 </div>
 <h5 id="编写一个STL库"><a href="#编写一个STL库" class="headerlink" title="编写一个STL库"></a>编写一个STL库</h5><p>今天看了看heap_pop的操作，熟悉了一下基本的算法代码，相比插入过程，由于pop过程为自上而下的操作，这个过程中会对堆的形状产生较大影响，所以操作比较复杂。</p>
+<h4 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目</th>
+<th style="text-align:center">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">课程学习</td>
+<td style="text-align:center">AVL trees, AVL sort</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">Lab 1: C, Assembly, Tools, and Bootstrapping</td>
+<td style="text-align:center">完成了开发环境的基本配置</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="学习了AVL树"><a href="#学习了AVL树" class="headerlink" title="学习了AVL树"></a>学习了AVL树</h5><p>树的平衡性是很重要的，在BST中，查找的时间复杂度为$O(h)$，其中$h$为树高，如果树不平衡，树可能会退化为一个链表，此时时间复杂度会变为$O(n)$。普通的BST不具有平衡的特性，所以我们需要对其进行改进。平衡的二叉树高度为$\lg (n)$，而不平衡的二叉树，高度最坏情况下为$O(n)$。其中，树的高度的定义为：从根节点到叶子节点的最长路径的长度。</p>
+<ul>
+<li>平衡：$h=\lg n$</li>
+<li>不平衡：$h=n$</li>
+</ul>
+<p>我们先定义节点的高度，一个节点的高度为从该节点到一个叶子节点的最长路径，即：</p>
+<script type="math/tex; mode=display">
+h_n=\max(path)=\max\{height(left), height(right)\}+1</script><p>我们规定叶子节点的高度为0，空节点的高度为-1。而AVL树的目标就是使节点高度尽可能小。</p>
+<h6 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h6><p>AVL树的性质：每一个节点的左右子节点的高度差最大为1，即：</p>
+<script type="math/tex; mode=display">
+|h_r-h_l|\leq1</script><p>根据这个性质，AVL树是一种平衡树，最坏情况下，每一个右子树都比左子树高1。</p>
+<p>令$N<em>h$为一棵高度为$h$的AVL树的最小节点数，现在我们来证明最坏情况下$N_h$和$h$之间的关系。根据AVL树高的定义，我们规定$N</em>{O(1)}=O(1)$，而$N_h$为：</p>
+<script type="math/tex; mode=display">
+N_h=1+N_{h-1}+N_{h-2}</script><p>其中1为根节点，$N<em>{h-1}$为右子树节点，$N</em>{h-2}$为左子树节点。由这个公式可以推导出，$h&lt;1.44\lg n$。所以高度被限制在了$O(\lg n)$。</p>
+<h6 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h6><ul>
+<li>插入</li>
+</ul>
+<ol>
+<li>做一个基本的BST操作</li>
+<li>调整树，使得其符合AVL的性质</li>
+</ol>
+<p>在操作过程中我们做如下假设</p>
+<ol>
+<li><p>假设$x$是最低的违背AVL性质的节点</p>
+</li>
+<li><p>假设right$(x)$是更高的子树</p>
+</li>
+</ol>
+<p>如果$x$的右子节点的右子树是平衡的或者right-heavy的，那么就右旋转$x$</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/f919d793ef66610c862d9682432e298df156cc17/20201141422.svg" width="1000" alt align="center"></p>
+<p>如果$x$的右子节点的左子树是left-heavy的，那么先RR(z)，在LR(x)</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/1fa088e9e4c41e31f477bed63a28f08174c56560/20201141514.svg" width="1000" alt align="center"></p>
+<h5 id="操作系统第一个实验的实验准备：完成如下工作"><a href="#操作系统第一个实验的实验准备：完成如下工作" class="headerlink" title="操作系统第一个实验的实验准备：完成如下工作"></a>操作系统第一个实验的实验准备：完成如下工作</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容</th>
+<th>完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>准备工作</td>
+<td>qemu安装及配置</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>课程注册</td>
+<td>完成</td>
+</tr>
+<tr>
+<td>具体实验</td>
+<td>x86模拟——使用qemu和gdb搭建基本的操作系统调试环境</td>
+<td>完成</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在上面的具体实验中，遇到了包括ssh server配置错误、qemu版本设置错误以及gdb architecture设置错误等问题尚未解决。</p>
+<h4 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目</th>
+<th style="text-align:center">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">课程学习</td>
+<td style="text-align:center">AVL trees, AVL sort</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">Lab 1: C, Assembly, Tools, and Bootstrapping</td>
+<td style="text-align:center">完成了Part1</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="Lab-1-C-Assembly-Tools-and-Bootstrapping-Part1"><a href="#Lab-1-C-Assembly-Tools-and-Bootstrapping-Part1" class="headerlink" title="Lab 1: C, Assembly, Tools, and Bootstrapping Part1"></a>Lab 1: C, Assembly, Tools, and Bootstrapping Part1</h5><h6 id="启动过程调试"><a href="#启动过程调试" class="headerlink" title="启动过程调试"></a>启动过程调试</h6><p>至此，我们终于可以使用qemu启动我们的程序，并观察启动的过程。在lab文件夹下，执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make qemu-gdb</span><br></pre></td></tr></table></figure>
+<p>即可令qemu运行在调试模式下，此时qemu作为一个虚拟远程机进入调试模式，打开另一个终端，输入<code>make gdb</code>，即可看到下面的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Type "apropos word" to search for commands related to "word".</span><br><span class="line">+ target remote localhost:26000</span><br><span class="line">warning: No executable has been specified and target does not support</span><br><span class="line">determining executable automatically.  Try using the "file" command.</span><br><span class="line">The target architecture is set to "i8086".</span><br><span class="line">[f000:fff0]    0xffff0:	ljmp   $0x3630,$0xf000e05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br><span class="line">warning: A handler for the OS ABI "GNU/Linux" is not built into this configuration</span><br><span class="line">of GDB.  Attempting to continue with the default i8086 settings.</span><br></pre></td></tr></table></figure>
+<p>这里又遇到了一个坑，gdb反汇编的结果是有问题的，按照16位汇编的结果，应当CS=0xf000，而IP=0xe05b，但是这里gdb是用32位的模式进行的反汇编，结果就是CS=0x3630，而IP=$0xf000e05b，这不是我们想要的，解决方法如下：</p>
+<ul>
+<li>在lab文件夹下执行如下命令：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> echo '&lt;?xml version="1.0"?&gt;&lt;!DOCTYPE target SYSTEM "gdb-target.dtd"&gt;&lt;target&gt;&lt;architecture&gt;i8086&lt;/architecture&gt;&lt;xi:include href="i386-32bit.xml"/&gt;&lt;/target&gt;' &gt; target.xml</span><br><span class="line"><span class="meta">$</span> wget https://raw.githubusercontent.com/qemu/qemu/master/gdb-xml/i386-32bit.xml</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后修改<code>gdbinit.tmpl</code>文件，将</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">12     if $lastcs == -1 || $lastcs == 8 || $lastcs == 27                           </span><br><span class="line">13       set architecture i8086                                                                             </span><br><span class="line">14     end</span><br></pre></td></tr></table></figure>
+<p>修改为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">12     if $lastcs == -1 || $lastcs == 8 || $lastcs == 27                           </span><br><span class="line">13       set architecture i8086                                                    </span><br><span class="line">14       set tdesc filename target.xml                                             </span><br><span class="line">15     end</span><br></pre></td></tr></table></figure>
+<ul>
+<li>重新make</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> make clean</span><br><span class="line"><span class="meta">$</span> make</span><br></pre></td></tr></table></figure>
+<p>再次执行<code>make gdb</code>，我们得到了下面的结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[f000:fff0]    0xffff0:	ljmp   $0xf000,$0xe05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br></pre></td></tr></table></figure>
+<p>这次的结果就很完美，是我们想要的，解释一下几个参数</p>
+<ul>
+<li>系统开始执行的物理地址为[CS:IP]=[f000:fff0]，这个区域位于内存的BIOS区域上部，实际物理地址为16*CS+IP=0xffff0（实模式寻址）</li>
+<li>第一条指令为一个ljmp指令，跳转至CS=0xf000, IP=0xe05b</li>
+</ul>
+<p>这样启动后系统进入了BIOS区，可以确保上电后由BIOS接管机器，此时CPU处在实模式（所谓实模式，就是其地址采用真实的物理地址）。0xffff0是BIOS末尾（0x100000）的前16位，所以机器一上电，位于0xffff0，然后赶紧往回跳转，跳到0xfe05b，毕竟16byte什么都做不了。</p>
 
       
     </div>
@@ -852,7 +1016,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">232</span>
+                    <span class="site-state-item-count">234</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1090,7 +1254,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周安排"><span class="nav-number">1.</span> <span class="nav-text">本周安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本周计划表"><span class="nav-number">1.1.</span> <span class="nav-text">本周计划表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本周时间安排"><span class="nav-number">1.2.</span> <span class="nav-text">本周时间安排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体工作内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体工作内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#周一"><span class="nav-number">1.3.1.</span> <span class="nav-text">周一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BST学习"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">BST学习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#问题定义"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例子"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">1.3.1.1.3.</span> <span class="nav-text">二叉查找树（BST）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆复习"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">堆复习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#push-heap"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">push_heap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周二"><span class="nav-number">1.3.2.</span> <span class="nav-text">周二</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#操作系统第一课"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">操作系统第一课</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写一个STL库"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">编写一个STL库</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本周安排"><span class="nav-number">1.</span> <span class="nav-text">本周安排</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本周计划表"><span class="nav-number">1.1.</span> <span class="nav-text">本周计划表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本周时间安排"><span class="nav-number">1.2.</span> <span class="nav-text">本周时间安排</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体工作内容"><span class="nav-number">1.3.</span> <span class="nav-text">具体工作内容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#周一"><span class="nav-number">1.3.1.</span> <span class="nav-text">周一</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BST学习"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">BST学习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#问题定义"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#例子"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#二叉查找树（BST）"><span class="nav-number">1.3.1.1.3.</span> <span class="nav-text">二叉查找树（BST）</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆复习"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">堆复习</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#push-heap"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">push_heap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周二"><span class="nav-number">1.3.2.</span> <span class="nav-text">周二</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#操作系统第一课"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">操作系统第一课</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写一个STL库"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">编写一个STL库</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周三"><span class="nav-number">1.3.3.</span> <span class="nav-text">周三</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#学习了AVL树"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">学习了AVL树</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义"><span class="nav-number">1.3.3.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#操作"><span class="nav-number">1.3.3.1.2.</span> <span class="nav-text">操作</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#操作系统第一个实验的实验准备：完成如下工作"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">操作系统第一个实验的实验准备：完成如下工作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#周四"><span class="nav-number">1.3.4.</span> <span class="nav-text">周四</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Lab-1-C-Assembly-Tools-and-Bootstrapping-Part1"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">Lab 1: C, Assembly, Tools, and Bootstrapping Part1</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#启动过程调试"><span class="nav-number">1.3.4.1.1.</span> <span class="nav-text">启动过程调试</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
