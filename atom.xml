@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-05T05:52:58.008Z</updated>
+  <updated>2020-11-11T08:56:48.271Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,129 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>反编译基本方法</title>
+    <link href="http://yoursite.com/2020/11/11/%E5%B7%A5%E5%85%B7/GDB/%E5%8F%8D%E7%BC%96%E8%AF%91/"/>
+    <id>http://yoursite.com/2020/11/11/工具/GDB/反编译/</id>
+    <published>2020-11-11T08:31:02.074Z</published>
+    <updated>2020-11-11T08:56:48.271Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>8010717f:    5b                        pop    %ebx<br>80107180:    5e                       pop    %esi<br>80107181:    5f                        pop    %edi<br>80107182:    5d                       pop    %ebp</p></blockquote><a id="more"></a><p>为了配合GDB进行调试，有时我们需要将源码进行反编译，从而得到汇编代码，查看对应的地址上的语句。</p><h2 id="一些常用命令"><a href="#一些常用命令" class="headerlink" title="一些常用命令"></a>一些常用命令</h2><h3 id="objdump：反编译"><a href="#objdump：反编译" class="headerlink" title="objdump：反编译"></a>objdump：反编译</h3><p>使用objdump命令配合<code>-d</code>后缀可以比较轻松地对源码实现反编译，同时，配合grep命令，可以找到对应的汇编语句，命令使用方法如下：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">objdump -d kernel | grep %cr4  # 将kernel进行反编译，然后查看cr4寄存器所在的所有命令</span><br><span class="line"></span><br><span class="line">8010000c:0f 20 e0             mov    %cr4,%eax</span><br><span class="line">80100012:0f 22 e0             mov    %eax,%cr4</span><br></pre></td></tr></table></figure><h3 id="nm：显示文件中的符号"><a href="#nm：显示文件中的符号" class="headerlink" title="nm：显示文件中的符号"></a>nm：显示文件中的符号</h3><p>nm命令用于显示文件中的符号，对于一般的文件，我们能够直接读，而对于二进制可执行文件以及一些动态链接库，我们有必要通过nm命令查看其中的一些符号。相当于是将二进制转换为汇编，然后读取其中的符号内容。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nm kernel | grep _start</span><br><span class="line">8010a48c D _binary_entryother_start</span><br><span class="line">8010a460 D _binary_initcode_start</span><br><span class="line">0010000c T _start</span><br></pre></td></tr></table></figure><p>上面的命令查看了一个kernel可执行文件，然后抓取_start关键字，得到三行结果。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;8010717f:    5b                        pop    %ebx&lt;br&gt;80107180:    5e                       pop    %esi&lt;br&gt;80107181:    5f                        pop    %edi&lt;br&gt;80107182:    5d                       pop    %ebp&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="GDB" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/GDB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>GDB基本使用方法</title>
+    <link href="http://yoursite.com/2020/11/11/%E5%B7%A5%E5%85%B7/GDB/GDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2020/11/11/工具/GDB/GDB基本使用方法/</id>
+    <published>2020-11-11T06:51:35.132Z</published>
+    <updated>2020-11-11T07:44:31.347Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>while(i &gt; 0)</p><p>​    i++;</p></blockquote><a id="more"></a><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="调试类操作"><a href="#调试类操作" class="headerlink" title="调试类操作"></a>调试类操作</h3><h4 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h4><p>在指定的地址设置断点的语句如下，其中0x0010000c为程序执行的断点</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) br * 0x0010000c</span><br><span class="line">Breakpoint 1 at 0x10000c</span><br></pre></td></tr></table></figure><h4 id="继续执行"><a href="#继续执行" class="headerlink" title="继续执行"></a>继续执行</h4><p>继续执行命令为<code>c</code>，程序会执行至下一个断点处</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">The target architecture is assumed to be i386</span><br><span class="line">=&gt; 0x10000c:mov    %cr4,%eax</span><br></pre></td></tr></table></figure><h3 id="寄存器类操作"><a href="#寄存器类操作" class="headerlink" title="寄存器类操作"></a>寄存器类操作</h3><h4 id="查看寄存器的值"><a href="#查看寄存器的值" class="headerlink" title="查看寄存器的值"></a>查看寄存器的值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info reg</span><br><span class="line">eax            0x0                 0</span><br><span class="line">ecx            0x0                 0</span><br><span class="line">edx            0x663               1635</span><br><span class="line">ebx            0x0                 0</span><br><span class="line">esp            0x0                 0x0</span><br><span class="line">ebp            0x0                 0x0</span><br><span class="line">esi            0x0                 0</span><br><span class="line">edi            0x0                 0</span><br><span class="line">eip            0xfff0              0xfff0</span><br><span class="line">eflags         0x2                 [ IOPL=0 ]</span><br><span class="line">cs             0xf000              61440</span><br><span class="line">ss             0x0                 0</span><br><span class="line">ds             0x0                 0</span><br><span class="line">es             0x0                 0</span><br><span class="line">fs             0x0                 0</span><br><span class="line">gs             0x0                 0</span><br><span class="line">fs_base        0x0                 0</span><br><span class="line">gs_base        0x0                 0</span><br><span class="line">k_gs_base      0x0                 0</span><br><span class="line">cr0            0x60000010          [ CD NW ET ]</span><br><span class="line">cr2            0x0                 0</span><br><span class="line">cr3            0x0                 [ PDBR=0 PCID=0 ]</span><br><span class="line">cr4            0x0                 [ ]</span><br><span class="line">cr8            0x0                 0</span><br><span class="line">efer           0x0                 [ ]</span><br></pre></td></tr></table></figure><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;while(i &amp;gt; 0)&lt;/p&gt;
+&lt;p&gt;​    i++;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="GDB" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/GDB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>查并集</title>
+    <link href="http://yoursite.com/2020/11/10/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90/"/>
+    <id>http://yoursite.com/2020/11/10/计算机/算法/复杂度分析/</id>
+    <published>2020-11-10T06:55:57.382Z</published>
+    <updated>2020-11-10T07:02:37.366Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>$O$ or $\Theta$ or $\Omega$</p></blockquote><a id="more"></a><h2 id="不同的表示法"><a href="#不同的表示法" class="headerlink" title="不同的表示法"></a>不同的表示法</h2><h3 id="大-O-表示法"><a href="#大-O-表示法" class="headerlink" title="大$O$表示法"></a>大$O$表示法</h3><p>大$O$表示法是最常使用的描述渐进复杂度的方法，给定两个正值函数$f$和$g$，考虑下列定义：‘</p><blockquote><p>如果存在正数$c$和$N$，对于所有$n\ge N$，有$f(n)\le cg(n)$，则$f(n)=O(g(n))$。</p></blockquote><p>从定义可以看出，大$O$表示法表示的是一个算法的上界，$f$至多和$g$增长的一样快。</p><h3 id="Omega-表示法"><a href="#Omega-表示法" class="headerlink" title="$\Omega$表示法"></a>$\Omega$表示法</h3><p>对应于大$O$表示法，大$\Omega$表示下界，其定义为：</p><blockquote><p>如果存在正数$c$和$N$，对于所有$n\ge N$，有$f(n)\ge cg(n)$，则$f(n)=\Omega (g(n))$。</p></blockquote><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.geeksforgeeks.org/union-find/">geeksforgeeks上关于查并集的介绍</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://leetcode-cn.com/problems/evaluate-division/">LeetCode399</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;"><a href="https://leetcode-cn.com/problems/surrounded-regions/solution/bfsdi-gui-dfsfei-di-gui-dfsbing-cha-ji-by-ac_pipe/">查并集应用</a></span><a href="#fnref:3" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;$O$ or $\Theta$ or $\Omega$&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="算法和数据结构" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MIT 6006 Lecture 7——计数排序，基数排序，排序的时间复杂度下界</title>
+    <link href="http://yoursite.com/2020/11/10/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E8%AF%BE%E7%A8%8B/MIT6006-7/"/>
+    <id>http://yoursite.com/2020/11/10/计算机/算法/课程/MIT6006-7/</id>
+    <published>2020-11-10T06:52:42.939Z</published>
+    <updated>2020-11-10T16:23:44.534Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>AVL树——一种平衡的BST</p></blockquote><a id="more"></a><h2 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h2><ul><li>比较模型</li><li>时间复杂度下界<ul><li>搜索：$\Omega(\lg n)$</li><li>排序：$\Omega(n\lg n)$</li></ul></li><li>$O(n)$时间复杂度的排序<ul><li>计数排序</li><li>基数排序</li></ul></li></ul><h2 id="比较模型"><a href="#比较模型" class="headerlink" title="比较模型"></a>比较模型</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul><li>所有输入对象均为黑盒（抽象数据结构）</li><li>唯一允许的操作是比较操作（$&lt;,\le,&gt;,\ge,=$）</li><li>时间损耗只和比较操作的次数有关</li></ul><h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3><p>任何的比较操作，实际上都可以视为一棵树，这棵树由可能的路径和结果构成。例如，二分查找可以被视为一颗二分查找树。下面给出了一个二分查找的过程，在长度$n=3$的数组里进行二分查找：</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/5a0630f895a79490c92f7e194be22e42f03977c3/202011101603.svg" width = "550" alt="" align = center /></p><p>算法和树的对应关系如下：</p><div class="table-container"><table><thead><tr><th style="text-align:center">决策树</th><th style="text-align:center">算法</th></tr></thead><tbody><tr><td style="text-align:center">内部节点</td><td style="text-align:center">二分决策（比较）</td></tr><tr><td style="text-align:center">叶节点</td><td style="text-align:center">结果</td></tr><tr><td style="text-align:center">根到叶的路径</td><td style="text-align:center">一次算法的执行</td></tr><tr><td style="text-align:center">路径长度</td><td style="text-align:center">算法的执行时间</td></tr><tr><td style="text-align:center">树高</td><td style="text-align:center">最坏执行时间</td></tr></tbody></table></div><h2 id="时间复杂度下界"><a href="#时间复杂度下界" class="headerlink" title="时间复杂度下界"></a>时间复杂度下界</h2><h3 id="搜索的时间复杂度下界"><a href="#搜索的时间复杂度下界" class="headerlink" title="搜索的时间复杂度下界"></a>搜索的时间复杂度下界</h3><p>在$n$个<strong>经过处理</strong>（排序或其他操作）的对象中，根据比较模型找到一个指定的目标，最坏情况下时间复杂度下界为$\Omega(\lg n)$。</p><h4 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h4><ul><li>首先，我们的决策树是一个二叉树，同时，这棵树至少有$n$个节点，每个节点对应一个解</li><li>所以树的高度$h\ge \lg n$，证明完毕</li></ul><h3 id="排序的时间复杂度下界"><a href="#排序的时间复杂度下界" class="headerlink" title="排序的时间复杂度下界"></a>排序的时间复杂度下界</h3><p>在搜索算法中，我们证明了$\Omega = \lg n$，即从$n$个对象中找到一个解的时间复杂度下界为$\lg n$，那么直观来看，如果我们要排序，就是从$n$个元素中找到$n$个解，这$n$个解分别为第一大元素、第二大元素、…、第$n$大元素，所以时间复杂度应为$n\lg n$。</p><h4 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h4><p>首先，对于这个排序问题，我们的决策树依旧是一个二叉树，所以我们要看一下这个树有多少个节点。对于排序问题，我们的一个节点也是一个解，这个解是一个排序序列，例如：</p><script type="math/tex; mode=display">A[5]\le A[7]\le A[10]\le A[2]\le...\le A[3]</script><p>那么有多少个节点呢，根据排列组合，所有可能的情况为$A_n^n=n!$（$n$ factorial），则树高$h$满足</p><script type="math/tex; mode=display">h\ge \lg (n!)</script><p>我们现在要证明$\lg(n!)\ge n\lg n$，证明过程如下：</p><script type="math/tex; mode=display">\begin{equation}\begin{aligned}\lg(n!)&=\lg(n(n-1)(n-2)...(2)(1)) \\&=\lg(n)+\lg(n-1)+...+\lg(2)+\lg(1) \\&\ge \sum_{i=n/2}^{n}\lg(i) \\&\ge \sum_{i=n/2}^{n}\lg \frac{n}{2} \\&=\sum_{i=n/2}^{n}(\lg n-1) \\&=\frac{n}{2}(\lg n-1) \\ &=\Omega(n\lg n)\end{aligned}\end{equation}</script><h2 id="线性时间排序"><a href="#线性时间排序" class="headerlink" title="线性时间排序"></a>线性时间排序</h2><p>假设我们的待排序的对象是整数，那么我们可以制造出一些整数排序的结果，我们先进行一些假设：</p><ul><li>假设key是整数，且$key\in{0,1,2,…,k-1}$，同时一个key的长度小于计算机的一个字</li><li>不止可以进行比较操作，还可以进行别的操作</li><li>对于$k$，可以在$O(n)$时间复杂度下进行排序</li></ul><p>目前来说，最好的排序算法能够达到的时间复杂度为$O(n\sqrt{(\lg n\lg n)})$</p><h3 id="计数排序"><a href="#计数排序" class="headerlink" title="计数排序"></a>计数排序</h3><p>配置一个计数器，然后遍历数组，每遇到一个元素，就将对应的$key$所在的位置+1，然后遍历计数器，进行排序。计数排序中一个比较重要的问题是考虑排序的稳定性，如果我们要保证相同元素排序后位次不变，那么可以使用如下算法：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">L = array of k empty lists      O(k)</span><br><span class="line">for i in range(n):              O(n)</span><br><span class="line">    L[key(A[j])].append(A[j])   O(1)</span><br><span class="line">output = []</span><br><span class="line">for i in range(k)               O(n+k)</span><br><span class="line">output.extend(L[i])         O(|li|)</span><br></pre></td></tr></table></figure><p>所以计数排序的时间复杂度为$O(n+k)$，如果$k$很大，那么性能很差。</p><h3 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h3><p>基数排序基于计数排序，其基本原理是使用对数缩小数的范围，然后再利用计数排序进行排序</p><ul><li>同样假设key为整数，令其表示为以$b$为底的对数，即$d=\log_bk$</li><li>然后我们的key的范围变成了$0-d$</li></ul><p>实际上是进行了一次分组操作，对于一组进行计数排序，需要$O(n+b)$次操作；而对于全部，则需要$O((n+b)d)=O((n+b)\log_bk)$</p><p>可以证明，当$b=n$时，时间复杂度最小，为$O(n\log_nk)=O(nc)$</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><iframe src="https://www.youtube.com/v/Nz1KZXbghj8" height=325 width=545 frameborder=0></iframe><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/lecture-7-counting-sort-radix-sort-lower-bounds-for-sorting/">第七课视频</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;AVL树——一种平衡的BST&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="算法和数据结构" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="课程" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E8%AF%BE%E7%A8%8B/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2020年第44周</title>
+    <link href="http://yoursite.com/2020/11/10/%E7%94%9F%E6%B4%BB/%E5%91%A8%E6%8A%A5/2020%E5%B9%B4%E7%AC%AC46%E5%91%A8/"/>
+    <id>http://yoursite.com/2020/11/10/生活/周报/2020年第46周/</id>
+    <published>2020-11-10T06:47:18.226Z</published>
+    <updated>2020-11-10T06:52:40.176Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>After all, tomorrow is another day</p></blockquote><a id="more"></a><h2 id="本周安排"><a href="#本周安排" class="headerlink" title="本周安排"></a>本周安排</h2><h3 id="本周计划表"><a href="#本周计划表" class="headerlink" title="本周计划表"></a>本周计划表</h3><div class="table-container"><table><thead><tr><th style="text-align:center">项目</th><th style="text-align:center">内容</th><th style="text-align:center">完成情况</th></tr></thead><tbody><tr><td style="text-align:center">课程学习</td><td style="text-align:center">算法第7、8课</td><td style="text-align:center">完成</td></tr><tr><td style="text-align:center"></td><td style="text-align:center">操作系统第3、4课程</td><td style="text-align:center">完成</td></tr><tr><td style="text-align:center">实验室研究</td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td></tr></tbody></table></div><h3 id="本周时间安排"><a href="#本周时间安排" class="headerlink" title="本周时间安排"></a>本周时间安排</h3><p><img src="https://github.com/sqduan/hexoimg/blob/master/20201121547.JPG?raw=true" alt="" align=center /></p><h3 id="具体工作内容"><a href="#具体工作内容" class="headerlink" title="具体工作内容"></a>具体工作内容</h3><h4 id="周一"><a href="#周一" class="headerlink" title="周一"></a>周一</h4><div class="table-container"><table><thead><tr><th style="text-align:center">项目</th><th style="text-align:center">内容</th><th style="text-align:center">完成情况</th></tr></thead><tbody><tr><td style="text-align:center">实验室研究</td><td style="text-align:center">制作组会ppt</td><td style="text-align:center">完成</td></tr></tbody></table></div><h4 id="周二"><a href="#周二" class="headerlink" title="周二"></a>周二</h4><div class="table-container"><table><thead><tr><th style="text-align:center">项目</th><th style="text-align:center">内容</th><th style="text-align:center">完成情况</th></tr></thead><tbody><tr><td style="text-align:center">课程学习</td><td style="text-align:center">LEC 1 (fk): Operating systems (handouts: xv6 source, xv6 book) Preparation: Unix intro Assignment: Lab 1: C, Assembly, Tools, and Bootstrapping</td><td style="text-align:center">完成</td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center">完成</td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">实验室研究</td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td></tr></tbody></table></div><h5 id="操作系统第一课"><a href="#操作系统第一课" class="headerlink" title="操作系统第一课"></a>操作系统第一课</h5><p>看了看Unix操作系统的介绍，下载并整理了一下课程相关文件。包括如下四个：</p><div class="table-container"><table><thead><tr><th style="text-align:center">文件名</th><th style="text-align:center">介绍</th><th style="text-align:center"></th></tr></thead><tbody><tr><td style="text-align:center">LectureIntroduce</td><td style="text-align:center">课程介绍</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">xv6Book</td><td style="text-align:center">xv6系统介绍</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">Lab1-Booting a PC.pdf</td><td style="text-align:center">实验一：启动过程工作</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">xv6SourceCode</td><td style="text-align:center">xv6系统源代码</td></tr></tbody></table></div><h5 id="编写一个STL库"><a href="#编写一个STL库" class="headerlink" title="编写一个STL库"></a>编写一个STL库</h5><p>今天看了看heap_pop的操作，熟悉了一下基本的算法代码，相比插入过程，由于pop过程为自上而下的操作，这个过程中会对堆的形状产生较大影响，所以操作比较复杂。</p><h4 id="周三"><a href="#周三" class="headerlink" title="周三"></a>周三</h4><div class="table-container"><table><thead><tr><th style="text-align:center">项目</th><th style="text-align:center">内容</th><th style="text-align:center">完成情况</th></tr></thead><tbody><tr><td style="text-align:center">课程学习</td><td style="text-align:center">AVL trees, AVL sort</td><td style="text-align:center">完成</td></tr><tr><td style="text-align:center"></td><td style="text-align:center">Lab 1: C, Assembly, Tools, and Bootstrapping</td><td style="text-align:center">完成了开发环境的基本配置</td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td></tr></tbody></table></div><h5 id="学习了AVL树"><a href="#学习了AVL树" class="headerlink" title="学习了AVL树"></a>学习了AVL树</h5><p>树的平衡性是很重要的，在BST中，查找的时间复杂度为$O(h)$，其中$h$为树高，如果树不平衡，树可能会退化为一个链表，此时时间复杂度会变为$O(n)$。普通的BST不具有平衡的特性，所以我们需要对其进行改进。平衡的二叉树高度为$\lg (n)$，而不平衡的二叉树，高度最坏情况下为$O(n)$。其中，树的高度的定义为：从根节点到叶子节点的最长路径的长度。</p><ul><li>平衡：$h=\lg n$</li><li>不平衡：$h=n$</li></ul><p>我们先定义节点的高度，一个节点的高度为从该节点到一个叶子节点的最长路径，即：</p><script type="math/tex; mode=display">h_n=\max(path)=\max\{height(left), height(right)\}+1</script><p>我们规定叶子节点的高度为0，空节点的高度为-1。而AVL树的目标就是使节点高度尽可能小。</p><h6 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h6><p>AVL树的性质：每一个节点的左右子节点的高度差最大为1，即：</p><script type="math/tex; mode=display">|h_r-h_l|\leq1</script><p>根据这个性质，AVL树是一种平衡树，最坏情况下，每一个右子树都比左子树高1。</p><p>令$N<em>h$为一棵高度为$h$的AVL树的最小节点数，现在我们来证明最坏情况下$N_h$和$h$之间的关系。根据AVL树高的定义，我们规定$N</em>{O(1)}=O(1)$，而$N_h$为：</p><script type="math/tex; mode=display">N_h=1+N_{h-1}+N_{h-2}</script><p>其中1为根节点，$N<em>{h-1}$为右子树节点，$N</em>{h-2}$为左子树节点。由这个公式可以推导出，$h&lt;1.44\lg n$。所以高度被限制在了$O(\lg n)$。</p><h6 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h6><ul><li>插入</li></ul><ol><li>做一个基本的BST操作</li><li>调整树，使得其符合AVL的性质</li></ol><p>在操作过程中我们做如下假设</p><ol><li><p>假设$x$是最低的违背AVL性质的节点</p></li><li><p>假设right$(x)$是更高的子树</p></li></ol><p>如果$x$的右子节点的右子树是平衡的或者right-heavy的，那么就右旋转$x$</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/f919d793ef66610c862d9682432e298df156cc17/20201141422.svg" width = "1000" alt="" align = center /></p><p>如果$x$的右子节点的左子树是left-heavy的，那么先RR(z)，在LR(x)</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/1fa088e9e4c41e31f477bed63a28f08174c56560/20201141514.svg" width = "1000" alt="" align = center /></p><h5 id="操作系统第一个实验的实验准备：完成如下工作"><a href="#操作系统第一个实验的实验准备：完成如下工作" class="headerlink" title="操作系统第一个实验的实验准备：完成如下工作"></a>操作系统第一个实验的实验准备：完成如下工作</h5><div class="table-container"><table><thead><tr><th>名称</th><th>内容</th><th>完成情况</th></tr></thead><tbody><tr><td>准备工作</td><td>qemu安装及配置</td><td>完成</td></tr><tr><td></td><td>课程注册</td><td>完成</td></tr><tr><td>具体实验</td><td>x86模拟——使用qemu和gdb搭建基本的操作系统调试环境</td><td>完成</td></tr></tbody></table></div><p>在上面的具体实验中，遇到了包括ssh server配置错误、qemu版本设置错误以及gdb architecture设置错误等问题尚未解决。</p><h4 id="周四"><a href="#周四" class="headerlink" title="周四"></a>周四</h4><div class="table-container"><table><thead><tr><th style="text-align:center">项目</th><th style="text-align:center">内容</th><th style="text-align:center">完成情况</th></tr></thead><tbody><tr><td style="text-align:center">课程学习</td><td style="text-align:center">AVL trees, AVL sort</td><td style="text-align:center">完成</td></tr><tr><td style="text-align:center"></td><td style="text-align:center">Lab 1: C, Assembly, Tools, and Bootstrapping</td><td style="text-align:center">完成了Part1</td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center"></td><td style="text-align:center"></td></tr></tbody></table></div><h5 id="Lab-1-C-Assembly-Tools-and-Bootstrapping-Part1"><a href="#Lab-1-C-Assembly-Tools-and-Bootstrapping-Part1" class="headerlink" title="Lab 1: C, Assembly, Tools, and Bootstrapping Part1"></a>Lab 1: C, Assembly, Tools, and Bootstrapping Part1</h5><h6 id="启动过程调试"><a href="#启动过程调试" class="headerlink" title="启动过程调试"></a>启动过程调试</h6><p>至此，我们终于可以使用qemu启动我们的程序，并观察启动的过程。在lab文件夹下，执行</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make qemu-gdb</span><br></pre></td></tr></table></figure><p>即可令qemu运行在调试模式下，此时qemu作为一个虚拟远程机进入调试模式，打开另一个终端，输入<code>make gdb</code>，即可看到下面的内容</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Type "apropos word" to search for commands related to "word".</span><br><span class="line">+ target remote localhost:26000</span><br><span class="line">warning: No executable has been specified and target does not support</span><br><span class="line">determining executable automatically.  Try using the "file" command.</span><br><span class="line">The target architecture is set to "i8086".</span><br><span class="line">[f000:fff0]    0xffff0:ljmp   $0x3630,$0xf000e05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br><span class="line">warning: A handler for the OS ABI "GNU/Linux" is not built into this configuration</span><br><span class="line">of GDB.  Attempting to continue with the default i8086 settings.</span><br></pre></td></tr></table></figure><p>这里又遇到了一个坑，gdb反汇编的结果是有问题的，按照16位汇编的结果，应当CS=0xf000，而IP=0xe05b，但是这里gdb是用32位的模式进行的反汇编，结果就是CS=0x3630，而IP=$0xf000e05b，这不是我们想要的，解决方法如下：</p><ul><li>在lab文件夹下执行如下命令：</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> echo '&lt;?xml version="1.0"?&gt;&lt;!DOCTYPE target SYSTEM "gdb-target.dtd"&gt;&lt;target&gt;&lt;architecture&gt;i8086&lt;/architecture&gt;&lt;xi:include href="i386-32bit.xml"/&gt;&lt;/target&gt;' &gt; target.xml</span><br><span class="line"><span class="meta">$</span> wget https://raw.githubusercontent.com/qemu/qemu/master/gdb-xml/i386-32bit.xml</span><br></pre></td></tr></table></figure><ul><li>然后修改<code>gdbinit.tmpl</code>文件，将</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">12     if $lastcs == -1 || $lastcs == 8 || $lastcs == 27                           </span><br><span class="line">13       set architecture i8086                                                                             </span><br><span class="line">14     end</span><br></pre></td></tr></table></figure><p>修改为</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">12     if $lastcs == -1 || $lastcs == 8 || $lastcs == 27                           </span><br><span class="line">13       set architecture i8086                                                    </span><br><span class="line">14       set tdesc filename target.xml                                             </span><br><span class="line">15     end</span><br></pre></td></tr></table></figure><ul><li>重新make</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> make clean</span><br><span class="line"><span class="meta">$</span> make</span><br></pre></td></tr></table></figure><p>再次执行<code>make gdb</code>，我们得到了下面的结果：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[f000:fff0]    0xffff0:ljmp   $0xf000,$0xe05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br></pre></td></tr></table></figure><p>这次的结果就很完美，是我们想要的，解释一下几个参数</p><ul><li>系统开始执行的物理地址为[CS:IP]=[f000:fff0]，这个区域位于内存的BIOS区域上部，实际物理地址为16*CS+IP=0xffff0（实模式寻址）</li><li>第一条指令为一个ljmp指令，跳转至CS=0xf000, IP=0xe05b</li></ul><p>这样启动后系统进入了BIOS区，可以确保上电后由BIOS接管机器，此时CPU处在实模式（所谓实模式，就是其地址采用真实的物理地址）。0xffff0是BIOS末尾（0x100000）的前16位，所以机器一上电，位于0xffff0，然后赶紧往回跳转，跳到0xfe05b，毕竟16byte什么都做不了。</p><h5 id="科研"><a href="#科研" class="headerlink" title="科研"></a>科研</h5><p>科研方面，本周没有太多进展，主要是针对卫星仿真模块的部分进行了整理，针对卫星仿真的功能进行了一些完善。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;After all, tomorrow is another day&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+      <category term="周报" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E5%91%A8%E6%8A%A5/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>AT&amp;T汇编基本语法</title>
@@ -372,127 +495,6 @@
       <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>素描基础</title>
-    <link href="http://yoursite.com/2020/09/26/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/%E7%B4%A0%E6%8F%8F/%E7%B4%A0%E6%8F%8F%E5%9F%BA%E7%A1%80/"/>
-    <id>http://yoursite.com/2020/09/26/生活/美术/素描/素描基础/</id>
-    <published>2020-09-26T08:45:20.736Z</published>
-    <updated>2020-09-26T09:30:07.358Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="https://images.uffizi.it/production/attachments/1537269300157660-tre-alberi.jpg?ixlib=rails-2.1.3&w=2500&h=2500&fit=unset&crop=center&fm=pjpg&auto=compress&mark=https%3A%2F%2Fimages.uffizi.it%2Fproduction%2Fattachments%2Flogo-watermark.png" width = 1000 alt="" align=center /></p><p>本文将针对素描中的一些基础概念进行总结</p><a id="more"></a><h2 id="明暗关系"><a href="#明暗关系" class="headerlink" title="明暗关系"></a>明暗关系</h2><p>物体受光照射后，会呈现出不同的明暗关系，这里我们针对描述明暗关系的三大面和五大调进行总结</p><h3 id="三大面"><a href="#三大面" class="headerlink" title="三大面"></a>三大面</h3><p>三大面即黑白灰三个面</p><ul><li>受光面：亮面</li><li>测光面：灰面</li><li>被光面：暗面</li></ul><p><img src="https://github.com/sqduan/hexoimg/blob/master/8df7b4fa7398f69272a85b3b93cd0201.jpg?raw=true" width = 500 alt="" align=center /></p><h3 id="五大调"><a href="#五大调" class="headerlink" title="五大调"></a>五大调</h3><p>而五大调是在三大面基础上分出的画面中的五种元素，分别为：</p><ul><li>受光面<ul><li>亮面</li><li>灰面</li></ul></li><li>被光面<ul><li>明暗交界线</li><li>反光</li><li>阴影</li></ul></li></ul><p><img src="https://github.com/sqduan/hexoimg/blob/master/news_1587878159958.jpeg?raw=true" width = 600 alt="" align=center /></p><p>在亮面中，还有高光的概念，就是光源最直接照射的关系，即垂直照射。下面是一个立方体的素描。比球体的亮暗关系更加锐利，它也有反光部分，一般来说暗面底部会比上部亮一些</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/20209261709.JPG?raw=true" width = 200 alt="" align=center /></p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=N4Z4MdZ1KWY&amp;list=PLR3Ra9cf8aV2Zl8LIqT93rsgnpkSvmevk&amp;index=2&amp;ab_channel=MortMort">Youtube 上关于Aseprite的教程</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.mortmort.net/">mortmort官网</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;https://images.uffizi.it/production/attachments/1537269300157660-tre-alberi.jpg?ixlib=rails-2.1.3&amp;w=2500&amp;h=2500&amp;fit=unset&amp;crop=center&amp;fm=pjpg&amp;auto=compress&amp;mark=https%3A%2F%2Fimages.uffizi.it%2Fproduction%2Fattachments%2Flogo-watermark.png&quot; width = 1000 alt=&quot;&quot; align=center /&gt;&lt;/p&gt;
-&lt;p&gt;本文将针对素描中的一些基础概念进行总结&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-      <category term="美术" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/"/>
-    
-      <category term="素描" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/%E7%B4%A0%E6%8F%8F/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>iframe框架</title>
-    <link href="http://yoursite.com/2020/09/22/%E5%B7%A5%E5%85%B7/Hexo/iframe/"/>
-    <id>http://yoursite.com/2020/09/22/工具/Hexo/iframe/</id>
-    <published>2020-09-22T10:56:41.456Z</published>
-    <updated>2020-10-14T04:30:35.425Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文针对HTML内联框架元素 (<code>&lt;iframe&gt;</code>)进行讲解</p><a id="more"></a><p>Hexo 是静态网页渲染工具，有些情况我们想要动态网页，那么可以采用iframe框架嵌套另一个HTML实现一种伪动态网页的效果，例如，我们这里嵌入一个谷歌地图：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;p align=&quot;center&quot;&gt;</span><br><span class="line">&lt;iframe id=&quot;inlineFrameExample&quot;</span><br><span class="line">    title=&quot;Inline Frame Example&quot;</span><br><span class="line">    width=&quot;300&quot;</span><br><span class="line">    height=&quot;200&quot;</span><br><span class="line">    src=&quot;https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&amp;layer=mapnik&quot;&gt;</span><br><span class="line">&lt;/iframe&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure><iframe id="inlineFrameExample"    title="Inline Frame Example"    width="300"    height="200"    src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik"></iframe><h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p><strong><code>allow</code></strong>：用于为iframe指定特征策略</p><h2 id="嵌入自定义网页"><a href="#嵌入自定义网页" class="headerlink" title="嵌入自定义网页"></a>嵌入自定义网页</h2><h3 id="在source文件夹下创建保存网页的文件夹"><a href="#在source文件夹下创建保存网页的文件夹" class="headerlink" title="在source文件夹下创建保存网页的文件夹"></a>在source文件夹下创建保存网页的文件夹</h3><p>我们在source文件夹下创建一个webs文件夹，专门用于保存自定义的网页。</p><h3 id="跳过网页渲染"><a href="#跳过网页渲染" class="headerlink" title="跳过网页渲染"></a>跳过网页渲染</h3><p>为了使我们能够正确嵌入自定义网页，我们需要跳过自定义网页的渲染，方式如下，在<code>_config.yml</code>下添加不需要渲染的网页的相对路径：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">skip_render:</span><br><span class="line">- webs\helloworld\clock.html</span><br></pre></td></tr></table></figure><h3 id="插入自定义网页"><a href="#插入自定义网页" class="headerlink" title="插入自定义网页"></a>插入自定义网页</h3><p>插入自定义网页的代码如下：</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;div style=<span class="string">"width:100%; height:350px;border:none;text-align:center"</span>&gt;</span><br><span class="line">&lt;iframe allowtransparency=<span class="string">"yes"</span> frameborder=<span class="string">"0"</span> width=<span class="string">"300"</span> height=<span class="string">"300"</span> src=<span class="string">"/webs/helloworld/clock.html"</span>/&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure><p>其中，src即为网页在source文件夹下的路径，style中的height和width为分配给网页的大小，而iframe中的width和height是网页的实际大小，使用时应保证分配大小大于实际大小</p><p>    <div style="width:100%; height:350px;border:none;text-align:center">        <iframe allowtransparency="yes" frameborder="0" width="300" height="300" src="/webs/helloworld/clock.html"/>    </div></p><p>这里插入一个HTML的时钟作为展示：</p><p>    <div style="width:100%; height:350px;border:none;text-align:center">        <iframe allowtransparency="yes" frameborder="0" width="300" height="300" src="/webs/helloworld/clock2.html"/>    </div></p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe">iframe</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文针对HTML内联框架元素 (&lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt;)进行讲解&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="Hexo" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/Hexo/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Aseprite资源站</title>
-    <link href="http://yoursite.com/2020/09/21/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/%E8%B5%84%E6%BA%90%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://yoursite.com/2020/09/21/生活/美术/资源介绍/</id>
-    <published>2020-09-21T13:13:41.982Z</published>
-    <updated>2020-09-21T13:21:39.670Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/41694069/original/66a90c41f4dbbe1fcbfe6c4a4a4f03dc5ebea34b/create-a-pixel-art-background-and-scenery.png" alt="" align=center /></p><p>本文将总结一些常用的Aseprite的资源。</p><a id="more"></a><h2 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h2><h3 id="字符字体"><a href="#字符字体" class="headerlink" title="字符字体"></a>字符字体</h3><p><a href="https://www.dafont.com/bitmap.php">像素字符网站</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/41694069/original/66a90c41f4dbbe1fcbfe6c4a4a4f03dc5ebea34b/create-a-pixel-art-background-and-scenery.png&quot; alt=&quot;&quot; align=center /&gt;&lt;/p&gt;
-&lt;p&gt;本文将总结一些常用的Aseprite的资源。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-      <category term="美术" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/"/>
-    
-      <category term="Aseprite" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/Aseprite/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>CPU</title>
-    <link href="http://yoursite.com/2020/09/21/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/CPU/"/>
-    <id>http://yoursite.com/2020/09/21/计算机/硬件组成/CPU/</id>
-    <published>2020-09-21T12:23:06.060Z</published>
-    <updated>2020-09-21T12:33:18.469Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了</p></blockquote><a id="more"></a><h2 id="CPU组成部分"><a href="#CPU组成部分" class="headerlink" title="CPU组成部分"></a>CPU组成部分</h2><p>CPU由<strong>控制器</strong>和<strong>运算器</strong>两个部分组成。其逻辑结构图如下所示：</p><p><img src="https://software.intel.com/content/dam/develop/external/us/en/images/3-2-257071.jpg" width = "480" alt="图片名称" align=center /></p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="组成原理" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Aseprite 动画制作</title>
-    <link href="http://yoursite.com/2020/09/21/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/%E5%8A%A8%E7%94%BB/"/>
-    <id>http://yoursite.com/2020/09/21/生活/美术/动画/</id>
-    <published>2020-09-21T09:21:00.618Z</published>
-    <updated>2020-09-22T08:13:19.653Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="https://github.com/sqduan/hexoimg/blob/master/65c256a3ef12d23439db6f0816b92e60.gif?raw=true" alt="" align=center /></p><p>本文将针对Pixel动画制作工具Asprite制作动画的教程进行讲解。</p><a id="more"></a><h2 id="按键和时间轴"><a href="#按键和时间轴" class="headerlink" title="按键和时间轴"></a>按键和时间轴</h2><p>Aseprite中与动画制作相关的按键和时间轴如下图所示：</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/20209211728.JPG?raw=true" alt="" align=center /></p><p>具体按键形状为：</p><p><img src="https://github.com/sqduan/hexoimg/blob/master/20209211911.JPG?raw=true" width="400" alt="" align=center /></p><p>按键相关功能为：</p><ul><li>眼睛：显示/隐藏图层</li><li>锁：锁定图层后，不能对图层中的内容进行移动或编辑</li><li><p>元：元就是每一帧中的画面内容，元有独立和链接两种状态，独立的就是单独的图片；链接的就会在所有帧中出现，同时对一帧的修改会体现在所有帧中，一些背景可以作为链接的，因为是固定不变的，而一般的人物就作为独立的动元即可</p></li><li><p>设置：对于时间轴进行设置，在设置中建议打开Thumbnails（使时间轴显示某一帧具体内容），然后将洋葱皮肤设置为Red/Blue Tine从而区分前后帧</p></li><li>洋葱皮肤：两个小方块的是洋葱皮肤，洋葱皮肤的作用是查看某一帧的前后几帧，作为做动画时的参考，可以通过调节滑轨确定要查看的前后的帧数</li></ul><h2 id="相关设置"><a href="#相关设置" class="headerlink" title="相关设置"></a>相关设置</h2><p>在菜单栏上可以点击Frame对帧进行设置，一些常用的设置如下：</p><ul><li><p>帧设置（P）：可以设置每一帧的持续时间，默认100ms</p></li><li><p>元设置：设置元的透明度</p></li><li>标签：为帧添加相关标签，确定一些帧的内容，例如静止、跑动或跳跃等，选中相应的帧，然后右键添加tag即可</li></ul><p><img src="https://github.com/sqduan/hexoimg/blob/master/20209211918.JPG?raw=true" width="400" alt="" align=center /></p><p>tag中可以设置帧的播放动作，有从前向后、从后向前和前后反复等。</p><h2 id="Preview"><a href="#Preview" class="headerlink" title="Preview"></a>Preview</h2><p>在时间轴右侧有一个1：1的按钮，点击可以显示Preview窗口，预览整体画面以及动画效果。Preview只播放选中的标签中的帧，右键可以调节播放速度，或者选择播放所有帧。</p><h2 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h2><h3 id="移动多个cell中的对象"><a href="#移动多个cell中的对象" class="headerlink" title="移动多个cell中的对象"></a>移动多个cell中的对象</h3><p>当我们绘制动画时，有时候需要移动多个cell，方法如下：</p><ul><li>选中需要移动的cell</li><li>按v或按住ctrl，将鼠标切换至选择模式，移动cell中的对象</li></ul><p><img src="https://www.aseprite.org/docs/move-tool/move-multiple-cels.gif" width="200" alt="" align=center /></p><p>需要注意的是，由于图层的遮挡关系，所以一般先将要移动的图层可见，而不移动的图层不可见，否则可能会移动错误的对象</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=N4Z4MdZ1KWY&amp;list=PLR3Ra9cf8aV2Zl8LIqT93rsgnpkSvmevk&amp;index=2&amp;ab_channel=MortMort">Youtube 上关于Aseprite的教程</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.mortmort.net/">mortmort官网</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;https://github.com/sqduan/hexoimg/blob/master/65c256a3ef12d23439db6f0816b92e60.gif?raw=true&quot; alt=&quot;&quot; align=center /&gt;&lt;/p&gt;
-&lt;p&gt;本文将针对Pixel动画制作工具Asprite制作动画的教程进行讲解。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-      <category term="美术" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/"/>
-    
-      <category term="Aseprite" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E7%BE%8E%E6%9C%AF/Aseprite/"/>
     
     
   </entry>
