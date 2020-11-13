@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Assembly/X86-64%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2020-11-13</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E5%AF%84%E5%AD%98%E5%99%A8/</loc>
+    <lastmod>2020-11-13</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</loc>
+    <lastmod>2020-11-13</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/11/11/%E5%B7%A5%E5%85%B7/GDB/GDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2020-11-13</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/09/01/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E5%86%85%E5%AD%98/</loc>
+    <lastmod>2020-11-13</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E7%A1%AC%E7%9B%98/</loc>
+    <lastmod>2020-11-13</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/09/21/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/CPU/</loc>
+    <lastmod>2020-11-13</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Archlinux/Archlinux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2020-11-11</lastmod>
   </url>
@@ -14,10 +42,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/08/10/%E5%B7%A5%E5%85%B7/Archlinux/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2020-11-11</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/11/11/%E5%B7%A5%E5%85%B7/GDB/GDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2020-11-11</lastmod>
   </url>
   <url>
@@ -37,10 +61,6 @@
     <lastmod>2020-11-05</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Assembly/X86-64%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</loc>
-    <lastmod>2020-11-05</lastmod>
-  </url>
-  <url>
     <loc>http://yoursite.com/2020/11/04/%E5%B7%A5%E5%85%B7/Archlinux/Archlinux%E4%BD%9C%E4%B8%BAssh%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
     <lastmod>2020-11-05</lastmod>
   </url>
@@ -50,10 +70,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/11/05/%E5%B7%A5%E5%85%B7/Assembly/AT&T%E6%B1%87%E7%BC%96%E8%AF%AD%E6%B3%95/</loc>
-    <lastmod>2020-11-05</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E5%AF%84%E5%AD%98%E5%99%A8/</loc>
     <lastmod>2020-11-05</lastmod>
   </url>
   <url>
@@ -201,15 +217,7 @@
     <lastmod>2020-09-21</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/2020/09/01/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E5%86%85%E5%AD%98/</loc>
-    <lastmod>2020-09-21</lastmod>
-  </url>
-  <url>
     <loc>http://yoursite.com/2020/07/15/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/cache/</loc>
-    <lastmod>2020-09-21</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/09/21/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/CPU/</loc>
     <lastmod>2020-09-21</lastmod>
   </url>
   <url>
@@ -950,10 +958,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/C++%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83/</loc>
-    <lastmod>2020-07-12</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/linux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</loc>
     <lastmod>2020-07-12</lastmod>
   </url>
 </urlset> 

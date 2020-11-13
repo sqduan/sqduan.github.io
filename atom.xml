@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-11T08:56:48.271Z</updated>
+  <updated>2020-11-13T10:16:48.519Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>硬盘</title>
+    <link href="http://yoursite.com/2020/11/13/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E7%A1%AC%E7%9B%98/"/>
+    <id>http://yoursite.com/2020/11/13/计算机/硬件组成/硬盘/</id>
+    <published>2020-11-13T07:05:04.902Z</published>
+    <updated>2020-11-13T10:16:48.519Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”</p></blockquote><a id="more"></a><h2 id="划分单元"><a href="#划分单元" class="headerlink" title="划分单元"></a>划分单元</h2><p>在存储设备中，为了方便IO操作，我们一般会将其分为若干个单元，从小到大分别为Sector、Block、Page和Chunk，下面的表格列举了不同单元的一些属性：</p><div class="table-container"><table><thead><tr><th style="text-align:center">名称</th><th style="text-align:center">大小</th><th style="text-align:center">备注</th></tr></thead><tbody><tr><td style="text-align:center">Sector</td><td style="text-align:center">512Byte</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">Block</td><td style="text-align:center"></td><td style="text-align:center"></td></tr><tr><td style="text-align:center">Page</td><td style="text-align:center">2048 or 4096 Byte，4 or 8 Sector</td><td style="text-align:center">一般来说，页是为了方便RAM读取设置的，所以大小要和内存单元匹配</td></tr><tr><td style="text-align:center">Chunk</td><td style="text-align:center"></td></tr></tbody></table></div><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Bhttps://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8%5D(https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)">维基百科对于DRAM的解释</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=x3jGqOrXXc8">DRAM读写循环</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="组成原理" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>反编译基本方法</title>
@@ -45,9 +69,9 @@
     <link href="http://yoursite.com/2020/11/11/%E5%B7%A5%E5%85%B7/GDB/GDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2020/11/11/工具/GDB/GDB基本使用方法/</id>
     <published>2020-11-11T06:51:35.132Z</published>
-    <updated>2020-11-11T07:44:31.347Z</updated>
+    <updated>2020-11-13T11:04:21.138Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>while(i &gt; 0)</p><p>​    i++;</p></blockquote><a id="more"></a><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="调试类操作"><a href="#调试类操作" class="headerlink" title="调试类操作"></a>调试类操作</h3><h4 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h4><p>在指定的地址设置断点的语句如下，其中0x0010000c为程序执行的断点</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) br * 0x0010000c</span><br><span class="line">Breakpoint 1 at 0x10000c</span><br></pre></td></tr></table></figure><h4 id="继续执行"><a href="#继续执行" class="headerlink" title="继续执行"></a>继续执行</h4><p>继续执行命令为<code>c</code>，程序会执行至下一个断点处</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">The target architecture is assumed to be i386</span><br><span class="line">=&gt; 0x10000c:mov    %cr4,%eax</span><br></pre></td></tr></table></figure><h3 id="寄存器类操作"><a href="#寄存器类操作" class="headerlink" title="寄存器类操作"></a>寄存器类操作</h3><h4 id="查看寄存器的值"><a href="#查看寄存器的值" class="headerlink" title="查看寄存器的值"></a>查看寄存器的值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info reg</span><br><span class="line">eax            0x0                 0</span><br><span class="line">ecx            0x0                 0</span><br><span class="line">edx            0x663               1635</span><br><span class="line">ebx            0x0                 0</span><br><span class="line">esp            0x0                 0x0</span><br><span class="line">ebp            0x0                 0x0</span><br><span class="line">esi            0x0                 0</span><br><span class="line">edi            0x0                 0</span><br><span class="line">eip            0xfff0              0xfff0</span><br><span class="line">eflags         0x2                 [ IOPL=0 ]</span><br><span class="line">cs             0xf000              61440</span><br><span class="line">ss             0x0                 0</span><br><span class="line">ds             0x0                 0</span><br><span class="line">es             0x0                 0</span><br><span class="line">fs             0x0                 0</span><br><span class="line">gs             0x0                 0</span><br><span class="line">fs_base        0x0                 0</span><br><span class="line">gs_base        0x0                 0</span><br><span class="line">k_gs_base      0x0                 0</span><br><span class="line">cr0            0x60000010          [ CD NW ET ]</span><br><span class="line">cr2            0x0                 0</span><br><span class="line">cr3            0x0                 [ PDBR=0 PCID=0 ]</span><br><span class="line">cr4            0x0                 [ ]</span><br><span class="line">cr8            0x0                 0</span><br><span class="line">efer           0x0                 [ ]</span><br></pre></td></tr></table></figure><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>while(i &gt; 0)</p><p>​    i++;</p></blockquote><a id="more"></a><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="调试类操作"><a href="#调试类操作" class="headerlink" title="调试类操作"></a>调试类操作</h3><h4 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h4><p>在指定的地址设置断点的语句如下，其中0x0010000c为程序执行的断点</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) br * 0x0010000c</span><br><span class="line">Breakpoint 1 at 0x10000c</span><br></pre></td></tr></table></figure><h4 id="继续执行"><a href="#继续执行" class="headerlink" title="继续执行"></a>继续执行</h4><p>继续执行命令为<code>c</code>，程序会执行至下一个断点处</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(gdb) c</span><br><span class="line">Continuing.</span><br><span class="line">The target architecture is assumed to be i386</span><br><span class="line">=&gt; 0x10000c:mov    %cr4,%eax</span><br></pre></td></tr></table></figure><h4 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h4><p>反汇编指令为<code>x/N addr</code>，该指令可以将addr开始的N个连续指令进行反汇编</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/10 0x7c00</span><br><span class="line">=&gt; 0x7c00:cli    </span><br><span class="line">   0x7c01:cld    </span><br><span class="line">   0x7c02:xor    %ax,%ax</span><br><span class="line">   0x7c04:mov    %ax,%ds</span><br><span class="line">   0x7c06:mov    %ax,%es</span><br><span class="line">   0x7c08:mov    %ax,%ss</span><br><span class="line">   0x7c0a:in     $0x64,%al</span><br><span class="line">   0x7c0c:test   $0x2,%al</span><br><span class="line">   0x7c0e:jne    0x7c0a</span><br><span class="line">   0x7c10:mov    $0xd1,%al</span><br></pre></td></tr></table></figure><h3 id="寄存器类操作"><a href="#寄存器类操作" class="headerlink" title="寄存器类操作"></a>寄存器类操作</h3><h4 id="查看寄存器的值"><a href="#查看寄存器的值" class="headerlink" title="查看寄存器的值"></a>查看寄存器的值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 查看所有寄存器</span><br><span class="line">(gdb) info reg</span><br><span class="line">eax            0x0                 0</span><br><span class="line">ecx            0x0                 0</span><br><span class="line">edx            0x663               1635</span><br><span class="line">ebx            0x0                 0</span><br><span class="line">esp            0x0                 0x0</span><br><span class="line">ebp            0x0                 0x0</span><br><span class="line">esi            0x0                 0</span><br><span class="line">edi            0x0                 0</span><br><span class="line">eip            0xfff0              0xfff0</span><br><span class="line">eflags         0x2                 [ IOPL=0 ]</span><br><span class="line">cs             0xf000              61440</span><br><span class="line">ss             0x0                 0</span><br><span class="line">ds             0x0                 0</span><br><span class="line">es             0x0                 0</span><br><span class="line">fs             0x0                 0</span><br><span class="line">gs             0x0                 0</span><br><span class="line">fs_base        0x0                 0</span><br><span class="line">gs_base        0x0                 0</span><br><span class="line">k_gs_base      0x0                 0</span><br><span class="line">cr0            0x60000010          [ CD NW ET ]</span><br><span class="line">cr2            0x0                 0</span><br><span class="line">cr3            0x0                 [ PDBR=0 PCID=0 ]</span><br><span class="line">cr4            0x0                 [ ]</span><br><span class="line">cr8            0x0                 0</span><br><span class="line">efer           0x0                 [ ]</span><br><span class="line"></span><br><span class="line">// 查看某个寄存器</span><br><span class="line">(gdb) info reg eax</span><br></pre></td></tr></table></figure><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
     
     <summary type="html">
     
@@ -471,30 +495,6 @@
       <category term="算法和数据结构" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="课程" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E8%AF%BE%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>库</title>
-    <link href="http://yoursite.com/2020/09/29/%E5%B7%A5%E5%85%B7/C++/%E5%BA%93/"/>
-    <id>http://yoursite.com/2020/09/29/工具/C++/库/</id>
-    <published>2020-09-29T15:22:39.042Z</published>
-    <updated>2020-09-29T15:42:14.023Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>书籍的出现，让知识得以传承</p></blockquote><a id="more"></a><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;书籍的出现，让知识得以传承&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
     
     
   </entry>

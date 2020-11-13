@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Penguin, Boot">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.760Z">
+<meta property="og:updated_time" content="2020-11-13T11:26:40.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux启动过程">
 <meta name="twitter:description" content="Penguin, Boot">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-11-13 19:26:40" itemprop="dateModified" datetime="2020-11-13T19:26:40+08:00">2020-11-13</time>
+              
+            
           </span>
 
           
@@ -482,6 +498,9 @@
 <ul>
 <li>挂载由/etc/fstab定义的文件系统，从而可以获取/etc下的配置文件</li>
 </ul>
+<h2 id="实模式VS保护模式"><a href="#实模式VS保护模式" class="headerlink" title="实模式VS保护模式"></a>实模式VS保护模式</h2><h3 id="实模式"><a href="#实模式" class="headerlink" title="实模式"></a>实模式</h3><h4 id="地址表示"><a href="#地址表示" class="headerlink" title="地址表示"></a>地址表示</h4><p>在实模式下，CPU通过直接访问实际的物理地址对内存进行访问，此时地址格式为[CS:IP]，物理地址为：</p>
+<script type="math/tex; mode=display">
+physical\_address : = segment\_part × 16 + offset</script><h3 id="保护模式"><a href="#保护模式" class="headerlink" title="保护模式"></a>保护模式</h3><p>在保护模式下，segment_part由一个16位的选择器代替，高13位为描述表的入口；而第2位表示使用GDT或LDT，最低两位表示优先级，0-3分别代表最高优先级和最低优先级</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://opensource.com/article/17/2/linux-boot-and-startup">Linux启动过程</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -633,7 +652,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">239</span>
+                    <span class="site-state-item-count">240</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -873,7 +892,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动过程概述"><span class="nav-number">1.</span> <span class="nav-text">启动过程概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIOS-POST-（Basic-IO-system-Power-On-Self-Test）"><span class="nav-number">2.</span> <span class="nav-text">BIOS POST （Basic IO system Power On Self Test）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boot-Loader"><span class="nav-number">3.</span> <span class="nav-text">Boot Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GRUB2"><span class="nav-number">3.1.</span> <span class="nav-text">GRUB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一阶段"><span class="nav-number">3.2.</span> <span class="nav-text">第一阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第1-5阶段"><span class="nav-number">3.3.</span> <span class="nav-text">第1.5阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2阶段"><span class="nav-number">3.4.</span> <span class="nav-text">第2阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kernel"><span class="nav-number">3.4.1.</span> <span class="nav-text">Kernel</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动阶段"><span class="nav-number">4.</span> <span class="nav-text">启动阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#systemd"><span class="nav-number">4.1.</span> <span class="nav-text">systemd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动过程概述"><span class="nav-number">1.</span> <span class="nav-text">启动过程概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIOS-POST-（Basic-IO-system-Power-On-Self-Test）"><span class="nav-number">2.</span> <span class="nav-text">BIOS POST （Basic IO system Power On Self Test）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Boot-Loader"><span class="nav-number">3.</span> <span class="nav-text">Boot Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GRUB2"><span class="nav-number">3.1.</span> <span class="nav-text">GRUB2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一阶段"><span class="nav-number">3.2.</span> <span class="nav-text">第一阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第1-5阶段"><span class="nav-number">3.3.</span> <span class="nav-text">第1.5阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2阶段"><span class="nav-number">3.4.</span> <span class="nav-text">第2阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kernel"><span class="nav-number">3.4.1.</span> <span class="nav-text">Kernel</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动阶段"><span class="nav-number">4.</span> <span class="nav-text">启动阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#systemd"><span class="nav-number">4.1.</span> <span class="nav-text">systemd</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实模式VS保护模式"><span class="nav-number">5.</span> <span class="nav-text">实模式VS保护模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实模式"><span class="nav-number">5.1.</span> <span class="nav-text">实模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#地址表示"><span class="nav-number">5.1.1.</span> <span class="nav-text">地址表示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保护模式"><span class="nav-number">5.2.</span> <span class="nav-text">保护模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

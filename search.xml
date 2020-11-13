@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[硬盘]]></title>
+    <url>%2F2020%2F11%2F13%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90%2F%E7%A1%AC%E7%9B%98%2F</url>
+    <content type="text"><![CDATA[罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!” 划分单元在存储设备中，为了方便IO操作，我们一般会将其分为若干个单元，从小到大分别为Sector、Block、Page和Chunk，下面的表格列举了不同单元的一些属性： 名称 大小 备注 Sector 512Byte Block Page 2048 or 4096 Byte，4 or 8 Sector 一般来说，页是为了方便RAM读取设置的，所以大小要和内存单元匹配 Chunk 参考文献1.维基百科对于DRAM的解释 ↩2.DRAM读写循环 ↩]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>组成原理</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[反编译基本方法]]></title>
     <url>%2F2020%2F11%2F11%2F%E5%B7%A5%E5%85%B7%2FGDB%2F%E5%8F%8D%E7%BC%96%E8%AF%91%2F</url>
     <content type="text"><![CDATA[8010717f: 5b pop %ebx80107180: 5e pop %esi80107181: 5f pop %edi80107182: 5d pop %ebp 为了配合GDB进行调试，有时我们需要将源码进行反编译，从而得到汇编代码，查看对应的地址上的语句。 一些常用命令objdump：反编译使用objdump命令配合-d后缀可以比较轻松地对源码实现反编译，同时，配合grep命令，可以找到对应的汇编语句，命令使用方法如下： 1234objdump -d kernel | grep %cr4 # 将kernel进行反编译，然后查看cr4寄存器所在的所有命令8010000c: 0f 20 e0 mov %cr4,%eax80100012: 0f 22 e0 mov %eax,%cr4 nm：显示文件中的符号nm命令用于显示文件中的符号，对于一般的文件，我们能够直接读，而对于二进制可执行文件以及一些动态链接库，我们有必要通过nm命令查看其中的一些符号。相当于是将二进制转换为汇编，然后读取其中的符号内容。 1234nm kernel | grep _start8010a48c D _binary_entryother_start8010a460 D _binary_initcode_start0010000c T _start 上面的命令查看了一个kernel可执行文件，然后抓取_start关键字，得到三行结果。 参考文献]]></content>
@@ -12,7 +21,7 @@
   <entry>
     <title><![CDATA[GDB基本使用方法]]></title>
     <url>%2F2020%2F11%2F11%2F%E5%B7%A5%E5%85%B7%2FGDB%2FGDB%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[while(i &gt; 0) ​ i++; 基本操作调试类操作设置断点在指定的地址设置断点的语句如下，其中0x0010000c为程序执行的断点 12(gdb) br * 0x0010000cBreakpoint 1 at 0x10000c 继续执行继续执行命令为c，程序会执行至下一个断点处 1234(gdb) cContinuing.The target architecture is assumed to be i386=&gt; 0x10000c: mov %cr4,%eax 寄存器类操作查看寄存器的值1234567891011121314151617181920212223242526(gdb) info regeax 0x0 0ecx 0x0 0edx 0x663 1635ebx 0x0 0esp 0x0 0x0ebp 0x0 0x0esi 0x0 0edi 0x0 0eip 0xfff0 0xfff0eflags 0x2 [ IOPL=0 ]cs 0xf000 61440ss 0x0 0ds 0x0 0es 0x0 0fs 0x0 0gs 0x0 0fs_base 0x0 0gs_base 0x0 0k_gs_base 0x0 0cr0 0x60000010 [ CD NW ET ]cr2 0x0 0cr3 0x0 [ PDBR=0 PCID=0 ]cr4 0x0 [ ]cr8 0x0 0efer 0x0 [ ] 参考文献]]></content>
+    <content type="text"><![CDATA[while(i &gt; 0) ​ i++; 基本操作调试类操作设置断点在指定的地址设置断点的语句如下，其中0x0010000c为程序执行的断点 12(gdb) br * 0x0010000cBreakpoint 1 at 0x10000c 继续执行继续执行命令为c，程序会执行至下一个断点处 1234(gdb) cContinuing.The target architecture is assumed to be i386=&gt; 0x10000c: mov %cr4,%eax 反汇编反汇编指令为x/N addr，该指令可以将addr开始的N个连续指令进行反汇编 1234567891011(gdb) x/10 0x7c00=&gt; 0x7c00: cli 0x7c01: cld 0x7c02: xor %ax,%ax 0x7c04: mov %ax,%ds 0x7c06: mov %ax,%es 0x7c08: mov %ax,%ss 0x7c0a: in $0x64,%al 0x7c0c: test $0x2,%al 0x7c0e: jne 0x7c0a 0x7c10: mov $0xd1,%al 寄存器类操作查看寄存器的值123456789101112131415161718192021222324252627282930// 查看所有寄存器(gdb) info regeax 0x0 0ecx 0x0 0edx 0x663 1635ebx 0x0 0esp 0x0 0x0ebp 0x0 0x0esi 0x0 0edi 0x0 0eip 0xfff0 0xfff0eflags 0x2 [ IOPL=0 ]cs 0xf000 61440ss 0x0 0ds 0x0 0es 0x0 0fs 0x0 0gs 0x0 0fs_base 0x0 0gs_base 0x0 0k_gs_base 0x0 0cr0 0x60000010 [ CD NW ET ]cr2 0x0 0cr3 0x0 [ PDBR=0 PCID=0 ]cr4 0x0 [ ]cr8 0x0 0efer 0x0 [ ]// 查看某个寄存器(gdb) info reg eax 参考文献]]></content>
       <categories>
         <category>工具</category>
         <category>GDB</category>
@@ -217,7 +226,7 @@
   <entry>
     <title><![CDATA[CPU]]></title>
     <url>%2F2020%2F09%2F21%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90%2FCPU%2F</url>
-    <content type="text"><![CDATA[虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了 CPU组成部分CPU由控制器和运算器两个部分组成。其逻辑结构图如下所示： 参考文献]]></content>
+    <content type="text"><![CDATA[虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了 CPU组成部分CPU由控制器和运算器两个部分组成。其逻辑结构图如下所示： 8086CPU介绍本文以经典的x86系列CPU的鼻祖8086CPU为例，详细介绍一下CPU的系统结构 CPU引脚及其功能8086CPU的外部引脚图如下所示： 地址线地址线为AD0-AD19共20条，其中AD0-AD15为16条地址/数据总线，而AD16-AD19为地址/数据/状态三态输出、分时复用。 数据线数据线为AD0-AD15共16条 参考文献]]></content>
       <categories>
         <category>计算机</category>
         <category>组成原理</category>
@@ -366,7 +375,7 @@
   <entry>
     <title><![CDATA[内存]]></title>
     <url>%2F2020%2F09%2F01%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90%2F%E5%86%85%E5%AD%98%2F</url>
-    <content type="text"><![CDATA[C1103A-2 H9971S500 DRAM，全称为动态随机存取存储器，被广泛应用作为电脑的内存，本文将对内存的相关知识进行总结。 DRAM工作原理及特性基本工作原理DRAM实际就是一个电容和二极管组成的二维矩阵，下图展示了DRAM的电气结构，一个4*4的矩阵。矩阵的每一个节点代表一个二进制bit。具体表示如下 当电容充电，代表1 当电容未充电，代表0 由于晶体管有漏电电流，因此DRAM需要动态刷新，且掉电后数据挥发，所以被成为动态存储。 读写操作2由于DRAM电路是矩阵形式，所以操作也是二维操作，先定位行，再定位列，接下来我们针对内存中的读写操作进行总结。 读操作DRAM相关特性优点与SRAM相比，DRAM结构简单，一个bit需要一个二极管一个电容进行表示，所以存储密度高，成本较低。 缺点访问速度慢，耗电量大 参考文献1.维基百科对于DRAM的解释 ↩2.DRAM读写循环 ↩]]></content>
+    <content type="text"><![CDATA[C1103A-2 H9971S500 内存分为只读存储器（ROM）、随机读写存储器（RAM）以及高速缓冲存储器（Cache），本文将针对内存的相关原理进行总结 ROMROM工作原理及特性ROM是非易失的存储器，掉电后不丢失，但是一旦存储资料便无法改变或删除。经常存放一些比较关键的内容，例如BIOS 不同的ROM这里对于常见的一些ROM及特性进行总结。 名称 原理 特性 PROM 行列式熔丝，熔断熔丝写入 无法恢复和更改 EPROM 利用高压电写入，可被紫外线清空 曝光可清空 EEPROM 原理类似EPROM，可用高压电抹除 高压电可清空 RAMDRAM工作原理及特性基本工作原理DRAM实际就是一个电容和二极管组成的二维矩阵，下图展示了DRAM的电气结构，一个4*4的矩阵。矩阵的每一个节点代表一个二进制bit。具体表示如下 当电容充电，代表1 当电容未充电，代表0 由于晶体管有漏电电流，因此DRAM需要动态刷新，且掉电后数据挥发，所以被成为动态存储。 读写操作2由于DRAM电路是矩阵形式，所以操作也是二维操作，先定位行，再定位列，接下来我们针对内存中的读写操作进行总结。 读操作DRAM相关特性优点与SRAM相比，DRAM结构简单，一个bit需要一个二极管一个电容进行表示，所以存储密度高，成本较低。 缺点访问速度慢，耗电量大 参考文献1.维基百科对于DRAM的解释 ↩2.DRAM读写循环 ↩]]></content>
       <categories>
         <category>计算机</category>
         <category>组成原理</category>
@@ -402,7 +411,7 @@
   <entry>
     <title><![CDATA[寄存器]]></title>
     <url>%2F2020%2F08%2F27%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90%2F%E5%AF%84%E5%AD%98%E5%99%A8%2F</url>
-    <content type="text"><![CDATA[If I can only remember one thing, I will remember your name 寄存器就是CPU中的一些时序逻辑电路，属于暂时存放参与运算的数据和结果。速度非常快，容量非常小。 常用寄存器通用寄存器组数据寄存器DX数据寄存器用于存放数据，长度为16，高八位为DH，第八位为DL，完整的32位数据寄存器为EDX。 指针和变址寄存器段寄存器段寄存器给出了当前段的基地址，配合IP指令寄存器，可以实现基址+偏移地址的寻址过程 代码段寄存器CS数据段寄存器DS堆栈段寄存器SS堆栈段寄存器和堆栈段指针寄存器SP共同构成了堆栈段的地址[SS:SP] 附加段寄存器ES指令指针寄存器IP8086设置了一个16位指令指针寄存器IP，用于存放下一条指令的偏移地址 寄存器计算寻址过程计算假设我们有一条地址，其表示为[CS:IP]，而计算机的位数为16位，那么这条指令的实际物理地址计算为： addr = 16\times \textrm{segment}+\textrm{offset}=16\times\textrm{CS}+\textrm{IP}例如有一个指令执行的地址为[f000:fff0]，那么其实际物理地址为： \textrm{0xf000}\times10+\textrm{0xfff0}=\textrm{0xffff0}参考文献]]></content>
+    <content type="text"><![CDATA[If I can only remember one thing, I will remember your name 寄存器就是CPU中的一些时序逻辑电路，属于暂时存放参与运算的数据和结果。速度非常快，容量非常小。 常用寄存器通用寄存器组数据寄存器DX数据寄存器用于存放数据，长度为16，高八位为DH，第八位为DL，完整的32位数据寄存器为EDX。 指针和变址寄存器段寄存器段寄存器给出了当前段的基地址，配合IP指令寄存器，可以实现基址+偏移地址的寻址过程 代码段寄存器CS数据段寄存器DS堆栈段寄存器SS堆栈段寄存器和堆栈段指针寄存器SP共同构成了堆栈段的地址[SS:SP] 附加段寄存器ES指令指针寄存器IP8086设置了一个16位指令指针寄存器IP，用于存放下一条指令的偏移地址 栈寄存器栈指针寄存器ESP其内部存放指向系统栈栈顶的指针，PUSH时减小（栈向下生长） 基址指针寄存器EBP其内部存放指向系统栈栈底的指针，调用子程序时第一句都是push EBP，就是为了保存栈基址，因为ESP总是会变化的 123=&gt; 0x7cda: push %ebp # 保存栈基址=&gt; 0x7cdb: mov %esp,%ebp # 将当前栈顶指针作为栈基址，相当于创建了一个新栈=&gt; 0x7ce0: sub $0xc,%esp # 在栈中预分配空间 源/目标索引寄存器x86提供了源/目标索引寄存器ESI和EDI，在很多字符串操作指令中，DS:ESI指向源串，ES:EDI指向目标串 内存管理寄存器x86提供了四个内存管理计算器，分别为GDTR、LDTR、IDTR和TR，用于指定内存分段管理所用系统表的基地址 全局描述表寄存器GDTRGDTR寄存器用于存放全局描述表GDT的32位线性基地址和16位表限长值，基地址指明表中字节0在线性地址空间中的地址，而表长度指明GDT表的字节长度值。由于机器刚上电或复位后基地址默认为0，而长度被设置为0xFFFF，所以在保护模式初始化过程中必须给GDTR一个新值 控制类寄存器共有5个控制类寄存器CR0-CR4，可以控制CPU的特性 CR01CR0寄存器位描述如下： Bit Name Full Name Description 0 PE Protected Mode Enable（保护模式和实模式切换） If 1, system is in protected mode, else system is in real mode 1 MP Monitor co-processor Controls interaction of WAIT/FWAIT instructions with TS flag in CR0 2 EM Emulation If set, no x87 floating-point unit present, if clear, x87 FPU present 3 TS Task switched Allows saving x87 task context upon a task switch only after x87 instruction used 4 ET Extension type On the 386, it allowed to specify whether the external math coprocessor was an 80287 or 80387 5 NE Numeric error Enable internal x87 floating point error reporting when set, else enables PC style x87 error detection 16 WP Write protect When set, the CPU can’t write to read-only pages when privilege level is 0 18 AM Alignment mask Alignment check enabled if AM set, AC flag (in EFLAGS register) set, and privilege level is 3 29 NW Not-write through Globally enables/disable write-through caching 30 CD Cache disable Globally enables/disable the memory cache 31 PG Paging If 1, enable paging and use the § CR3 register, else disable paging. 寄存器计算寻址过程计算假设我们有一条地址，其表示为[CS:IP]，而计算机的位数为16位，那么这条指令的实际物理地址计算为： addr = 16\times \textrm{segment}+\textrm{offset}=16\times\textrm{CS}+\textrm{IP}例如有一个指令执行的地址为[f000:fff0]，那么其实际物理地址为： \textrm{0xf000}\times10+\textrm{0xfff0}=\textrm{0xffff0}参考文献1.CR0寄存器描述 ↩]]></content>
       <categories>
         <category>计算机</category>
         <category>组成原理</category>
@@ -2143,7 +2152,7 @@
   <entry>
     <title><![CDATA[X86-64汇编基本语法]]></title>
     <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FAssembly%2FX86-64%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[.LC0: .string “Helloworld” 指令助记符号与伪操作伪操作在汇编程序中，以’.’开头的名称并不是指令助记符，不会被翻译为机器码，而是给汇编器的特殊指令，叫做伪操作，常见伪操作及其含义如下： .section及常用段.section 用于把代码划分为若干段，每个段会被加载至不同地址，同时不同的页面会有相应的操作权限，常见段包括： 名称 作用 读写/可执行性 .text 保存代码 只读可执行 .data 全局数据段 可读可写 .rodata 常量数据段 只读 .global该伪操作的作用是声明全局变量/标号，可供其他源文件在链接时访问，当汇编器编译汇编代码时，会将改变量进行记录，知道其是一个全局变量，当其他文件使用该全局变量时即可提供访问，类似于C语言中的extern语句作用。 .code*这个操作表示程序要在位平台上运行，\可以是16、32或64 常用寄存器及功能对于x86-64架构，共有16个64位通用寄存器，名称及用途如下： 名称 作用 解释 rbp 栈基地址寄存器，保存当前帧的栈底地址。 rbp和rsp两个指针可以刻画一个完整的函数栈帧 rsp 栈指针寄存器，保存当前栈顶。 .rodata 常量数据段 只读 常用命令数据移动类movpushpop计算类addtestshl控制类转移命令ljmp长转移命令，使用格式为： 1ljmp addr16 系统相关iretint参考文献]]></content>
+    <content type="text"><![CDATA[.LC0: .string “Helloworld” 指令助记符号与伪操作伪操作在汇编程序中，以’.’开头的名称并不是指令助记符，不会被翻译为机器码，而是给汇编器的特殊指令，叫做伪操作（实际上是汇编会执行的操作，同时也辅助人们阅读），常见伪操作及其含义如下： .section及常用段.section 用于把代码划分为若干段，每个段会被加载至不同地址，同时不同的页面会有相应的操作权限，常见段包括： 名称 作用 读写/可执行性 .text 保存代码 只读可执行 .data 全局数据段 可读可写 .rodata 常量数据段 只读 .global该伪操作的作用是声明全局变量/标号，可供其他源文件在链接时访问，当汇编器编译汇编代码时，会将改变量进行记录，知道其是一个全局变量，当其他文件使用该全局变量时即可提供访问，类似于C语言中的extern语句作用。 .code*这个操作表示程序要在位模式下运行，\可以是16、32或64，当使用GDB进行调试时，遇到.code会发生架构的切换 123(gdb) siThe target arghitecture is set to &quot;i386&quot; # .code32=&gt; 0x7c32: mov &amp;0x10, %ax .set设置变量，例如下面的语句将PROT_MODE_CSEG的值设置为0x8 1.set PROT_MODE_CSEG, 0x8 常用寄存器及功能对于x86-64架构，共有16个64位通用寄存器，名称及用途如下： 名称 作用 解释 rbp 栈基地址寄存器，保存当前帧的栈底地址。 rbp和rsp两个指针可以刻画一个完整的函数栈帧 rsp 栈指针寄存器，保存当前栈顶。 .rodata 常量数据段 只读 常用命令数据移动类mov push只要有PUSH的动作，ESP寄存器自动减小 pop计算类addtestshl控制类转移命令ljmp长转移命令，使用格式为： 1ljmp addr16 系统相关iretintIO类inb从一个端口读数，读至寄存器 1inb $0x64, %al 从0x64 port读取一个数，然后读至al寄存器中。 参考文献1.伪指令索引 ↩]]></content>
       <categories>
         <category>工具</category>
         <category>Assembly</category>
@@ -2179,7 +2188,7 @@
   <entry>
     <title><![CDATA[Linux启动过程]]></title>
     <url>%2F2020%2F07%2F12%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2Flinux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[Penguin, Boot 启动过程概述Linux的启动过程可以简单分为如下四步： BIOS POST Boot loader Kernel initialization Start systemd, the parent of all processes. BIOS POST （Basic IO system Power On Self Test）当电脑开机供电时，最先进行的就是BIOS POST，即基本IO系统上电自检，确保硬件系统工作正常。他会触发一个BIOS中断，确定Boot的分区，第一个找到的boot分区将会被载入RAM，随后控制权移交给boot sector（Boot Loader的第一阶段）。 Boot LoaderGRUB2GRUB2全称为GRand Unified Bootloader, version 2，是现今主流Linux普遍采用的Boot Loader。其基本功能是找到linux内核，然后载入到内存中并运行。 第一阶段在POST结束时，BIOS会寻找到第一个Boot分区，加载bootstrap code，即GRUB2 Stage 1，这段代码非常小，因为必须适配前512字节的扇区。因为这个代码太小了，做不到太多有意义的工作，唯一的目的是定位下一个阶段并进行跳转 第1.5阶段GRUB2 的1.5阶段位于boot record和第一块硬盘分区之间，这一段空间因为一些原因没有被使用。这一段有62 512-byte的空间存放core.img文件，这个文件的大小是25,389 Bytes，足够放下一些文件系统的驱动，例如标准EXT、FAT及NTFS等。这意味着GRUB第二阶段可以位于标准的EXT文件系统内。第二阶段实际位于/boot下，即/boot/grub2。 第2阶段第二阶段位于/boot/grub2和其子文件夹下，它将运行期内核模块放置在了/boot/grub2/i386-pc文件夹下。第2阶段的作用是定位并载入所选择的Linux内核，内核和相关文件在/boot文件夹下。 Kernel所有的kernel都经过了压缩并可自解压，从而节省空间，kernel和初始的RAM镜像以及设备映射位于/boot文件夹下。当内核被载入后，它会进行自解压，并载入systemd，并将控制权移交。至此，Boot阶段结束。 启动阶段systemdsystemd是所有进程的父进程，它将会使linux正式进入可工作状态。systemd将会完成如下工作： 挂载由/etc/fstab定义的文件系统，从而可以获取/etc下的配置文件 参考文献1.Linux启动过程 ↩]]></content>
+    <content type="text"><![CDATA[Penguin, Boot 启动过程概述Linux的启动过程可以简单分为如下四步： BIOS POST Boot loader Kernel initialization Start systemd, the parent of all processes. BIOS POST （Basic IO system Power On Self Test）当电脑开机供电时，最先进行的就是BIOS POST，即基本IO系统上电自检，确保硬件系统工作正常。他会触发一个BIOS中断，确定Boot的分区，第一个找到的boot分区将会被载入RAM，随后控制权移交给boot sector（Boot Loader的第一阶段）。 Boot LoaderGRUB2GRUB2全称为GRand Unified Bootloader, version 2，是现今主流Linux普遍采用的Boot Loader。其基本功能是找到linux内核，然后载入到内存中并运行。 第一阶段在POST结束时，BIOS会寻找到第一个Boot分区，加载bootstrap code，即GRUB2 Stage 1，这段代码非常小，因为必须适配前512字节的扇区。因为这个代码太小了，做不到太多有意义的工作，唯一的目的是定位下一个阶段并进行跳转 第1.5阶段GRUB2 的1.5阶段位于boot record和第一块硬盘分区之间，这一段空间因为一些原因没有被使用。这一段有62 512-byte的空间存放core.img文件，这个文件的大小是25,389 Bytes，足够放下一些文件系统的驱动，例如标准EXT、FAT及NTFS等。这意味着GRUB第二阶段可以位于标准的EXT文件系统内。第二阶段实际位于/boot下，即/boot/grub2。 第2阶段第二阶段位于/boot/grub2和其子文件夹下，它将运行期内核模块放置在了/boot/grub2/i386-pc文件夹下。第2阶段的作用是定位并载入所选择的Linux内核，内核和相关文件在/boot文件夹下。 Kernel所有的kernel都经过了压缩并可自解压，从而节省空间，kernel和初始的RAM镜像以及设备映射位于/boot文件夹下。当内核被载入后，它会进行自解压，并载入systemd，并将控制权移交。至此，Boot阶段结束。 启动阶段systemdsystemd是所有进程的父进程，它将会使linux正式进入可工作状态。systemd将会完成如下工作： 挂载由/etc/fstab定义的文件系统，从而可以获取/etc下的配置文件 实模式VS保护模式实模式地址表示在实模式下，CPU通过直接访问实际的物理地址对内存进行访问，此时地址格式为[CS:IP]，物理地址为： physical\_address : = segment\_part × 16 + offset保护模式在保护模式下，segment_part由一个16位的选择器代替，高13位为描述表的入口；而第2位表示使用GDT或LDT，最低两位表示优先级，0-3分别代表最高优先级和最低优先级 参考文献1.Linux启动过程 ↩]]></content>
       <categories>
         <category>工具</category>
         <category>Archlinux</category>

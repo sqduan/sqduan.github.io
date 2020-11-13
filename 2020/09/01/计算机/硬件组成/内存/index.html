@@ -104,7 +104,7 @@
 <meta property="og:description" content="C1103A-2 H9971S500">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Square_array_of_mosfet_cells_read.png/375px-Square_array_of_mosfet_cells_read.png">
-<meta property="og:updated_time" content="2020-09-21T12:33:31.271Z">
+<meta property="og:updated_time" content="2020-11-13T10:42:42.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存">
 <meta name="twitter:description" content="C1103A-2 H9971S500">
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-21 20:33:31" itemprop="dateModified" datetime="2020-09-21T20:33:31+08:00">2020-09-21</time>
+                <time title="Modified: 2020-11-13 18:42:42" itemprop="dateModified" datetime="2020-11-13T18:42:42+08:00">2020-11-13</time>
               
             
           </span>
@@ -483,17 +483,47 @@
 <p>C1103A-2 H9971S500</p>
 </blockquote>
 <a id="more"></a>
-<p>DRAM，全称为动态随机存取存储器，被广泛应用作为电脑的内存，本文将对内存的相关知识进行总结。</p>
-<h2 id="DRAM工作原理及特性"><a href="#DRAM工作原理及特性" class="headerlink" title="DRAM工作原理及特性"></a>DRAM工作原理及特性</h2><h3 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h3><p>DRAM实际就是一个电容和二极管组成的二维矩阵，下图展示了DRAM的电气结构，一个4*4的矩阵。矩阵的每一个节点代表一个二进制bit。具体表示如下</p>
+<p>内存分为只读存储器（ROM）、随机读写存储器（RAM）以及高速缓冲存储器（Cache），本文将针对内存的相关原理进行总结</p>
+<h2 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h2><h3 id="ROM工作原理及特性"><a href="#ROM工作原理及特性" class="headerlink" title="ROM工作原理及特性"></a>ROM工作原理及特性</h3><p>ROM是非易失的存储器，掉电后不丢失，但是一旦存储资料便无法改变或删除。经常存放一些比较关键的内容，例如BIOS</p>
+<h3 id="不同的ROM"><a href="#不同的ROM" class="headerlink" title="不同的ROM"></a>不同的ROM</h3><p>这里对于常见的一些ROM及特性进行总结。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">原理</th>
+<th style="text-align:center">特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">PROM</td>
+<td style="text-align:center">行列式熔丝，熔断熔丝写入</td>
+<td style="text-align:center">无法恢复和更改</td>
+</tr>
+<tr>
+<td style="text-align:center">EPROM</td>
+<td style="text-align:center">利用高压电写入，可被紫外线清空</td>
+<td style="text-align:center">曝光可清空</td>
+</tr>
+<tr>
+<td style="text-align:center">EEPROM</td>
+<td style="text-align:center">原理类似EPROM，可用高压电抹除</td>
+<td style="text-align:center">高压电可清空</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="RAM"><a href="#RAM" class="headerlink" title="RAM"></a>RAM</h2><h3 id="DRAM工作原理及特性"><a href="#DRAM工作原理及特性" class="headerlink" title="DRAM工作原理及特性"></a>DRAM工作原理及特性</h3><h4 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h4><p>DRAM实际就是一个电容和二极管组成的二维矩阵，下图展示了DRAM的电气结构，一个4*4的矩阵。矩阵的每一个节点代表一个二进制bit。具体表示如下</p>
 <ul>
 <li>当电容充电，代表1</li>
 <li>当电容未充电，代表0</li>
 </ul>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Square_array_of_mosfet_cells_read.png/375px-Square_array_of_mosfet_cells_read.png" width="280" alt="图片名称" align="center"></p>
 <p>由于晶体管有漏电电流，因此DRAM需要动态刷新，且掉电后数据挥发，所以被成为动态存储。</p>
-<h3 id="读写操作2"><a href="#读写操作2" class="headerlink" title="读写操作2"></a>读写操作<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h3><p>由于DRAM电路是矩阵形式，所以操作也是二维操作，先定位行，再定位列，接下来我们针对内存中的读写操作进行总结。</p>
-<h4 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h4><h3 id="DRAM相关特性"><a href="#DRAM相关特性" class="headerlink" title="DRAM相关特性"></a>DRAM相关特性</h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>与SRAM相比，DRAM结构简单，一个bit需要一个二极管一个电容进行表示，所以存储密度高，成本较低。</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>访问速度慢，耗电量大</p>
+<h4 id="读写操作2"><a href="#读写操作2" class="headerlink" title="读写操作2"></a>读写操作<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h4><p>由于DRAM电路是矩阵形式，所以操作也是二维操作，先定位行，再定位列，接下来我们针对内存中的读写操作进行总结。</p>
+<h5 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h5><h4 id="DRAM相关特性"><a href="#DRAM相关特性" class="headerlink" title="DRAM相关特性"></a>DRAM相关特性</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>与SRAM相比，DRAM结构简单，一个bit需要一个二极管一个电容进行表示，所以存储密度高，成本较低。</p>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>访问速度慢，耗电量大</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Bhttps://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8%5D(https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)">维基百科对于DRAM的解释</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=x3jGqOrXXc8">DRAM读写循环</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -645,7 +675,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">239</span>
+                    <span class="site-state-item-count">240</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -885,7 +915,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DRAM工作原理及特性"><span class="nav-number">1.</span> <span class="nav-text">DRAM工作原理及特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本工作原理"><span class="nav-number">1.1.</span> <span class="nav-text">基本工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读写操作2"><span class="nav-number">1.2.</span> <span class="nav-text">读写操作2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读操作"><span class="nav-number">1.2.1.</span> <span class="nav-text">读操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DRAM相关特性"><span class="nav-number">1.3.</span> <span class="nav-text">DRAM相关特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">1.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">1.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROM"><span class="nav-number">1.</span> <span class="nav-text">ROM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROM工作原理及特性"><span class="nav-number">1.1.</span> <span class="nav-text">ROM工作原理及特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的ROM"><span class="nav-number">1.2.</span> <span class="nav-text">不同的ROM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM"><span class="nav-number">2.</span> <span class="nav-text">RAM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DRAM工作原理及特性"><span class="nav-number">2.1.</span> <span class="nav-text">DRAM工作原理及特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本工作原理"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读写操作2"><span class="nav-number">2.1.2.</span> <span class="nav-text">读写操作2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#读操作"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">读操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DRAM相关特性"><span class="nav-number">2.1.3.</span> <span class="nav-text">DRAM相关特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
