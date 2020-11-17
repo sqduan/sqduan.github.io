@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/11/11/%E5%B7%A5%E5%85%B7/GDB/%E5%8F%8D%E7%BC%96%E8%AF%91/</loc>
+    <lastmod>2020-11-17</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
+    <lastmod>2020-11-17</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/11/17/%E5%B7%A5%E5%85%B7/C++/%E6%99%AE%E9%80%9A%E6%8C%87%E9%92%88/</loc>
+    <lastmod>2020-11-17</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Assembly/X86-64%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</loc>
     <lastmod>2020-11-13</lastmod>
   </url>
@@ -34,10 +46,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Vim/vim%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2020-11-11</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/11/11/%E5%B7%A5%E5%85%B7/GDB/%E5%8F%8D%E7%BC%96%E8%AF%91/</loc>
     <lastmod>2020-11-11</lastmod>
   </url>
   <url>
@@ -79,10 +87,6 @@
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Archlinux/Archlinux%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4/</loc>
     <lastmod>2020-11-05</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2020-11-04</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Git/Git%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>

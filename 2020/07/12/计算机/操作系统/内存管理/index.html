@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830212737.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png">
-<meta property="og:updated_time" content="2020-11-04T13:03:52.007Z">
+<meta property="og:updated_time" content="2020-11-17T11:15:21.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存管理">
 <meta name="twitter:description" content="计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。">
@@ -423,7 +423,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-04 21:03:52" itemprop="dateModified" datetime="2020-11-04T21:03:52+08:00">2020-11-04</time>
+                <time title="Modified: 2020-11-17 19:15:21" itemprop="dateModified" datetime="2020-11-17T19:15:21+08:00">2020-11-17</time>
               
             
           </span>
@@ -506,7 +506,7 @@
 <tbody>
 <tr>
 <td>BSS段  .bss</td>
-<td>存放未初始化的全局变量，体现为一个占位符，只记录所需空间大小</td>
+<td>存放未初始化的全局变量，体现为一个占位符，只记录所需空间大小，而不记录具体的值，一般bss初始化为0</td>
 <td></td>
 <td>静态</td>
 </tr>
@@ -517,8 +517,8 @@
 <td>静态</td>
 </tr>
 <tr>
-<td>代码段  .rodata</td>
-<td>存放程序执行代码以及一些常量</td>
+<td>代码段 .text <br>常量段 .rodata</td>
+<td>存放程序执行代码以及一些常量，一般存放在ROM中</td>
 <td>只读（一些OS可写）</td>
 <td>静态</td>
 </tr>
@@ -781,7 +781,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">240</span>
+                    <span class="site-state-item-count">241</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
