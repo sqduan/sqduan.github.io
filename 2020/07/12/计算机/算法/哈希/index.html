@@ -495,7 +495,7 @@
 <li>目录项翻倍即将原有目录复制产生一个新目录，然后调整目录编号，新目录与旧目录在新扩展的比特位上取值不同，新旧目录指向同一个桶，只是在桶分裂后，新旧目录分别指向原桶和分裂桶。</li>
 </ul>
 <h3 id="线性散列"><a href="#线性散列" class="headerlink" title="线性散列"></a>线性散列</h3><p>线性散列可扩展，且不需要目录项，允许灵活地选择分裂时机，但缺点是如果数据项键值散列后分布不均匀的倾斜度大，导致的问题可能比扩展散列还严重。</p>
-<h2 id="Hash实现"><a href="#Hash实现" class="headerlink" title="Hash实现"></a>Hash实现</h2><p>本节请参考<a href="/2020/07/12/工具/C++/STL——关联容器操作/" title="C++关联容器操作">C++关联容器操作</a></p>
+<h2 id="Hash实现"><a href="#Hash实现" class="headerlink" title="Hash实现"></a>Hash实现</h2><p>本节请参考</p>
 <h2 id="Hash常见应用场景"><a href="#Hash常见应用场景" class="headerlink" title="Hash常见应用场景"></a>Hash常见应用场景</h2><h3 id="O-1-时间检索"><a href="#O-1-时间检索" class="headerlink" title="O(1)时间检索"></a>O(1)时间检索</h3><p>由于哈希搜索的高效性，一般看到需要常数时间内的索引时，都会考虑使用哈希表。</p>
 <h3 id="变位映射"><a href="#变位映射" class="headerlink" title="变位映射"></a>变位映射</h3><p>变位映射（LeetCode760）给定两个列表 <code>A</code>and <code>B</code>，并且 <code>B</code> 是 <code>A</code> 的变位（即 <code>B</code> 是由 <code>A</code> 中的元素随机排列后组成的新列表）。我们希望找出一个从 <code>A</code> 到 <code>B</code> 的索引映射 <code>P</code> 。一个映射 <code>P[i] = j</code> 指的是列表 <code>A</code> 中的第 <code>i</code> 个元素出现于列表 <code>B</code> 中的第 <code>j</code> 个元素上。<strong>即寻找A中某个元素在B中位置</strong></p>
 <h3 id="双向映射"><a href="#双向映射" class="headerlink" title="双向映射"></a>双向映射</h3><p>在有些问题中，我们需要找到一一对应的双向映射，即不仅能从A搜索到B，还要能从B搜索到A，此时我们采用两个哈希表分别记录字典，然后依次检索，模板如下：</p>
@@ -578,8 +578,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/计算机/算法/搜索/" rel="prev" title="查找">
-                查找 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/计算机/算法/数学/" rel="prev" title="数学">
+                数学 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
