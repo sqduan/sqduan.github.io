@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-11-25T02:36:38.525Z</updated>
+  <updated>2020-11-25T13:16:37.270Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Travis CI自动管理Git库</title>
+    <link href="http://yoursite.com/2020/11/25/%E5%B7%A5%E5%85%B7/Git/%E4%BD%BF%E7%94%A8Travis%20CI%E8%87%AA%E5%8A%A8%E7%AE%A1%E7%90%86git%E5%BA%93/"/>
+    <id>http://yoursite.com/2020/11/25/工具/Git/使用Travis CI自动管理git库/</id>
+    <published>2020-11-25T12:48:17.681Z</published>
+    <updated>2020-11-25T13:16:37.270Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>有时候我们希望有一个工具能够自动帮我们管理Git库，每当有commit后，能够自动进行发布，这样可以帮助我们节约很多操作。</p><a id="more"></a><h2 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h2><h3 id="1-申请Travis-CI账号"><a href="#1-申请Travis-CI账号" class="headerlink" title="1 申请Travis CI账号"></a>1 申请Travis CI账号</h3><p>在<a href="https://travis-ci.com/">Travis CI - Test and Deploy with Confidence (travis-ci.com)</a>这个网站申请一个账号和自己的git账号关联。</p><h3 id="2-在Travis-CI上选择需要托管的project"><a href="#2-在Travis-CI上选择需要托管的project" class="headerlink" title="2 在Travis CI上选择需要托管的project"></a>2 在Travis CI上选择需要托管的project</h3><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201125205458.png" width = "380" alt="图片名称" align=center /></p><p>注册登录后，在用户中心处点击Setting，再点击” Manage repositories on GitHub”，选择待托管的库。</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201125205710.png" width = "480" alt="图片名称" align=center /></p><h3 id="3-申请Github-Access-Token"><a href="#3-申请Github-Access-Token" class="headerlink" title="3 申请Github Access Token"></a>3 申请Github Access Token</h3><p>申请一个github access token，权限视情况而定：</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201125210122.png" width = "680" alt="图片名称" align=center /></p><p>然后将这个token放到Travis CI需要托管的仓库中，方式如下：</p><p>1 点击想要托管的仓库的Settings：</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201125210459.png" width = "680" alt="图片名称" align=center /></p><p>2 在下面的环境变量这一栏中，填写token，名称随便写，value写token，branch看你想要托管哪一个分支而定。</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201125210411.png" width = "780" alt="图片名称" align=center /></p><h3 id="4-在project中加入Travis-CI的配置"><a href="#4-在project中加入Travis-CI的配置" class="headerlink" title="4 在project中加入Travis CI的配置"></a>4 在project中加入Travis CI的配置</h3><p>这里以我的hexo博客为例，在其根目录下添加一个<code>.travis.yml</code>文件，内容如下：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"></span><br><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line"><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">master</span></span><br><span class="line"></span><br><span class="line"><span class="attr">cache:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">npm</span></span><br><span class="line"></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">"12"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">before_script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">npm</span> <span class="string">install</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">hexo</span> <span class="string">cl</span></span><br><span class="line"></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">hexo</span> <span class="string">generate</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  provider:</span> <span class="string">pages</span></span><br><span class="line"><span class="attr">  skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  github-token:</span> <span class="string">$github_token</span></span><br><span class="line"><span class="attr">  local-dir:</span> <span class="string">public</span></span><br><span class="line"><span class="attr">  keep-history:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  on:</span></span><br><span class="line"><span class="attr">    branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure><p>需要注意的是这里要修改node js的版本为你电脑上的版本，然后 github-token也要和你设置的环境变量一致，最后script和before_script换成你需要执行的命令。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.slmt.tw/blog/2019/04/26/hexo-auto-deploy/">SLMT's Blog | 使用 Travis CI 來自動發布 Hexo Blog</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有时候我们希望有一个工具能够自动帮我们管理Git库，每当有commit后，能够自动进行发布，这样可以帮助我们节约很多操作。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/Git/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>MATLAB输入验证</title>
@@ -469,30 +491,6 @@
       <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
     
       <category term="周报" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/%E5%91%A8%E6%8A%A5/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>heap</title>
-    <link href="http://yoursite.com/2020/11/02/%E5%B7%A5%E5%85%B7/C++/STL/heap/"/>
-    <id>http://yoursite.com/2020/11/02/工具/C++/STL/heap/</id>
-    <published>2020-11-02T06:26:12.692Z</published>
-    <updated>2020-11-02T07:50:25.831Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在STL中，heap并不是一个容器组件，而是一组算法，使给定的容器堆化。同时，heap的算法也是实现priority_queue的底层机制，本文将针对heap的源码进行整理与总结</p><a id="more"></a><h2 id="heap算法"><a href="#heap算法" class="headerlink" title="heap算法"></a>heap算法</h2><h3 id="push-heap"><a href="#push-heap" class="headerlink" title="push_heap"></a>push_heap</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在STL中，heap并不是一个容器组件，而是一组算法，使给定的容器堆化。同时，heap的算法也是实现priority_queue的底层机制，本文将针对heap的源码进行整理与总结&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
-    
-      <category term="STL" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/STL/"/>
     
     
   </entry>
