@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文将针对C++中常见类型及其特点和应用场景进行总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-18T06:35:16.885Z">
+<meta property="og:updated_time" content="2020-11-26T05:47:13.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类型">
 <meta name="twitter:description" content="本文将针对C++中常见类型及其特点和应用场景进行总结。">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-18 14:35:16" itemprop="dateModified" datetime="2020-11-18T14:35:16+08:00">2020-11-18</time>
+                <time title="Modified: 2020-11-26 13:47:13" itemprop="dateModified" datetime="2020-11-26T13:47:13+08:00">2020-11-26</time>
               
             
           </span>
@@ -479,6 +479,10 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对C++中常见类型及其特点和应用场景进行总结。</p>
 <a id="more"></a>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是C/C++中非常常见的一种类型，这里总结一些常见的比较容易出错的数组相关知识。</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><h4 id="一种不太常见的初始化方式"><a href="#一种不太常见的初始化方式" class="headerlink" title="一种不太常见的初始化方式"></a>一种不太常见的初始化方式</h4><p>在阅读xv6操作系统源码时，看到了这样一种数组初始化方式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">char</span> * <span class="keyword">const</span> error_string[MAXERROR] = &#123;</span><br><span class="line">    [E_UNSPECIFIED] = <span class="string">"unspecified error"</span>,</span><br><span class="line">    [E_BAD_ENV] = <span class="string">"bad environment"</span>,</span><br><span class="line">    ...</span><br><span class="line">    [E_FAULT] = <span class="string">"segmentation fault"</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>里面的大写都是宏定义，即具体的数字，实际跑了一下，发现可以部分初始化，而且最后加不加逗号均可以编译通过，这里进行一下记录。</p>
 <h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><p>枚举类型属于字面值常量，它使我们可以将一组整型常量组织在一起，C++11后，我们有了两种枚举类型：限定作用域与不限定作用域的枚举类型</p>
 <h3 id="限定与不限定作用域的枚举类型"><a href="#限定与不限定作用域的枚举类型" class="headerlink" title="限定与不限定作用域的枚举类型"></a>限定与不限定作用域的枚举类型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> color &#123;red, yellow, green&#125;;   <span class="comment">//不限定作用域</span></span><br><span class="line"><span class="keyword">enum</span> stoplight &#123;red, yellow, green&#125;; <span class="comment">//错误，重复定义枚举成员</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="class"><span class="keyword">class</span> <span class="title">peppers</span> &#123;</span>red, yellow, green&#125;; <span class="comment">//正确，限定作用域，枚举成员被隐藏</span></span><br><span class="line"></span><br><span class="line">color hair = red; <span class="comment">//正确，使用不限定作用域的枚举成员</span></span><br><span class="line">peppers p2 = peppers::red; <span class="comment">//正确，使用限定作用域的枚举成员</span></span><br></pre></td></tr></table></figure>
 <h3 id="枚举的应用场景"><a href="#枚举的应用场景" class="headerlink" title="枚举的应用场景"></a>枚举的应用场景</h3><p>在使用常量的场合，我们可以广泛使用枚举类型，例如我们要去造一辆小汽车，这个汽车可以向前后左右四个方向行驶，那么我们可以定义如下枚举体：</p>
@@ -644,7 +648,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">249</span>
+                    <span class="site-state-item-count">251</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -886,7 +890,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类型"><span class="nav-number">1.</span> <span class="nav-text">枚举类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限定与不限定作用域的枚举类型"><span class="nav-number">1.1.</span> <span class="nav-text">限定与不限定作用域的枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举的应用场景"><span class="nav-number">1.2.</span> <span class="nav-text">枚举的应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些特殊的类型"><span class="nav-number">2.</span> <span class="nav-text">一些特殊的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#size-t"><span class="nav-number">2.1.</span> <span class="nav-text">size_t</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型处理"><span class="nav-number">3.</span> <span class="nav-text">类型处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义类型别名（typedef）"><span class="nav-number">3.1.</span> <span class="nav-text">定义类型别名（typedef）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些比较复杂的typedef理解"><span class="nav-number">3.1.1.</span> <span class="nav-text">一些比较复杂的typedef理解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换"><span class="nav-number">3.2.</span> <span class="nav-text">类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组"><span class="nav-number">1.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">1.1.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一种不太常见的初始化方式"><span class="nav-number">1.1.1.</span> <span class="nav-text">一种不太常见的初始化方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类型"><span class="nav-number">2.</span> <span class="nav-text">枚举类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限定与不限定作用域的枚举类型"><span class="nav-number">2.1.</span> <span class="nav-text">限定与不限定作用域的枚举类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举的应用场景"><span class="nav-number">2.2.</span> <span class="nav-text">枚举的应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些特殊的类型"><span class="nav-number">3.</span> <span class="nav-text">一些特殊的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#size-t"><span class="nav-number">3.1.</span> <span class="nav-text">size_t</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型处理"><span class="nav-number">4.</span> <span class="nav-text">类型处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义类型别名（typedef）"><span class="nav-number">4.1.</span> <span class="nav-text">定义类型别名（typedef）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一些比较复杂的typedef理解"><span class="nav-number">4.1.1.</span> <span class="nav-text">一些比较复杂的typedef理解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换"><span class="nav-number">4.2.</span> <span class="nav-text">类型转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
