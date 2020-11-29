@@ -98,7 +98,7 @@
 
   <meta name="description" content="After all, tomorrow is another day">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2020年第44周">
+<meta property="og:title" content="2020年第47周">
 <meta property="og:url" content="http://yoursite.com/2020/11/20/生活/周报/2020年第47周/index.html">
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="After all, tomorrow is another day">
@@ -107,9 +107,9 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/b02ecf1495d9667a683f9ea346554310593aabc3/202011202210.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/f919d793ef66610c862d9682432e298df156cc17/20201141422.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/1fa088e9e4c41e31f477bed63a28f08174c56560/20201141514.svg">
-<meta property="og:updated_time" content="2020-11-20T14:28:11.551Z">
+<meta property="og:updated_time" content="2020-11-27T09:49:18.472Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2020年第44周">
+<meta name="twitter:title" content="2020年第47周">
 <meta name="twitter:description" content="After all, tomorrow is another day">
 <meta name="twitter:image" content="https://github.com/sqduan/hexoimg/blob/master/202011202215.JPG?raw=true">
 
@@ -131,7 +131,7 @@
   };
 </script>
 
-  <title>2020年第44周 | 一隅</title>
+  <title>2020年第47周 | 一隅</title>
   
 
 
@@ -380,7 +380,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2020年第44周
+          <h1 class="post-title" itemprop="name headline">2020年第47周
 
               
             
@@ -406,12 +406,24 @@
                 
               
 
-              <time title="Created: 2020-11-20 22:13:54 / Modified: 22:28:11" itemprop="dateCreated datePublished" datetime="2020-11-20T22:13:54+08:00">2020-11-20</time>
+              <time title="Created: 2020-11-20 22:13:54" itemprop="dateCreated datePublished" datetime="2020-11-20T22:13:54+08:00">2020-11-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-11-27 17:49:18" itemprop="dateModified" datetime="2020-11-27T17:49:18+08:00">2020-11-27</time>
               
             
           </span>
@@ -722,7 +734,7 @@ N_h=1+N_{h-1}+N_{h-2}</script><p>其中1为根节点，$N<em>{h-1}$为右子树�
 <ul>
 <li>在lab文件夹下执行如下命令：</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'&lt;?xml version="1.0"?&gt;&lt;!DOCTYPE target SYSTEM "gdb-target.dtd"&gt;&lt;target&gt;&lt;architecture&gt;i8086&lt;/architecture&gt;&lt;xi:include href="i386-32bit.xml"/&gt;&lt;/target&gt;'</span> &gt; target.xml</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wget https://raw.githubusercontent.com/qemu/qemu/master/gdb-xml/i386-32bit.xml</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> echo '&lt;?xml version="1.0"?&gt;&lt;!DOCTYPE target SYSTEM "gdb-target.dtd"&gt;&lt;target&gt;&lt;architecture&gt;i8086&lt;/architecture&gt;&lt;xi:include href="i386-32bit.xml"/&gt;&lt;/target&gt;' &gt; target.xml</span><br><span class="line"><span class="meta">$</span> wget https://raw.githubusercontent.com/qemu/qemu/master/gdb-xml/i386-32bit.xml</span><br></pre></td></tr></table></figure>
 <ul>
 <li>然后修改<code>gdbinit.tmpl</code>文件，将</li>
 </ul>
@@ -732,7 +744,7 @@ N_h=1+N_{h-1}+N_{h-2}</script><p>其中1为根节点，$N<em>{h-1}$为右子树�
 <ul>
 <li>重新make</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> make clean</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> make clean</span><br><span class="line"><span class="meta">$</span> make</span><br></pre></td></tr></table></figure>
 <p>再次执行<code>make gdb</code>，我们得到了下面的结果：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[f000:fff0]    0xffff0:	ljmp   $0xf000,$0xe05b</span><br><span class="line">0x0000fff0 in ?? ()</span><br><span class="line">+ symbol-file obj/kern/kernel</span><br></pre></td></tr></table></figure>
 <p>这次的结果就很完美，是我们想要的，解释一下几个参数</p>
@@ -894,7 +906,7 @@ N_h=1+N_{h-1}+N_{h-2}</script><p>其中1为根节点，$N<em>{h-1}$为右子树�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">251</span>
+                    <span class="site-state-item-count">253</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
