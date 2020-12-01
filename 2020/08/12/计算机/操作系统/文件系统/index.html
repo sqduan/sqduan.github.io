@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Mere data makes a man. A and C and T and G. The alphabet of you. All from four symbols. I am only two: 1 and 0.  We have no difference">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-03T11:52:45.984Z">
+<meta property="og:updated_time" content="2020-12-01T07:46:47.026Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件系统">
 <meta name="twitter:description" content="Mere data makes a man. A and C and T and G. The alphabet of you. All from four symbols. I am only two: 1 and 0.  We have no difference">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-03 19:52:45" itemprop="dateModified" datetime="2020-09-03T19:52:45+08:00">2020-09-03</time>
+                <time title="Modified: 2020-12-01 15:46:47" itemprop="dateModified" datetime="2020-12-01T15:46:47+08:00">2020-12-01</time>
               
             
           </span>
@@ -482,6 +482,24 @@
 <p>We have no difference</p>
 </blockquote>
 <a id="more"></a>
+<p>文件系统是系统对文件的存放排列方式，不同的文件系统关系到数据如何在磁盘进行存储，本文将针对文件系统相关内容进行总结。</p>
+<h2 id="不同文件系统"><a href="#不同文件系统" class="headerlink" title="不同文件系统"></a>不同文件系统</h2><h3 id="Windows支持的文件系统"><a href="#Windows支持的文件系统" class="headerlink" title="Windows支持的文件系统"></a>Windows支持的文件系统</h3><p>win支持三种文件系统，分别是NTFS、FAT32以及exFAT，下面将对其进行一些总结 </p>
+<h4 id="NTFS"><a href="#NTFS" class="headerlink" title="NTFS"></a>NTFS</h4><h5 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h5><ul>
+<li>使用最广泛</li>
+<li>具有日志功能</li>
+<li>无文件大小限制</li>
+<li>兼容性较差</li>
+</ul>
+<h4 id="FAT32"><a href="#FAT32" class="headerlink" title="FAT32"></a>FAT32</h4><h5 id="特性-1"><a href="#特性-1" class="headerlink" title="特性"></a>特性</h5><ul>
+<li>比较老，但是兼容性比较好</li>
+<li>只支持最大单文件大小容量4GB</li>
+</ul>
+<h4 id="文件系统比较"><a href="#文件系统比较" class="headerlink" title="文件系统比较"></a>文件系统比较</h4><h3 id="Linux支持的文件系统"><a href="#Linux支持的文件系统" class="headerlink" title="Linux支持的文件系统"></a>Linux支持的文件系统</h3><p>linux的文件系统一般为ext2、ext3以及最新的ext4</p>
+<h4 id="ext3"><a href="#ext3" class="headerlink" title="ext3"></a>ext3</h4><h5 id="特性-2"><a href="#特性-2" class="headerlink" title="特性"></a>特性</h5><ul>
+<li>允许日志</li>
+</ul>
+<h3 id="双系统相互访问"><a href="#双系统相互访问" class="headerlink" title="双系统相互访问"></a>双系统相互访问</h3><p>如果电脑上安装了双系统，那么意味着磁盘将会以不同的文件系统进行划分，有时我们会有跨系统访问硬盘的需求，本节将解决双系统相互访问不同文件系统的硬盘的问题。</p>
+<h4 id="Windows下访问EXT2-3-4"><a href="#Windows下访问EXT2-3-4" class="headerlink" title="Windows下访问EXT2/3/4"></a>Windows下访问EXT2/3/4</h4><p>下载Linux Reader，直接即可访问linux的硬盘</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
@@ -633,7 +651,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">259</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -756,7 +774,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">53</span>
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -875,7 +895,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同文件系统"><span class="nav-number">1.</span> <span class="nav-text">不同文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows支持的文件系统"><span class="nav-number">1.1.</span> <span class="nav-text">Windows支持的文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NTFS"><span class="nav-number">1.1.1.</span> <span class="nav-text">NTFS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#特性"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">特性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FAT32"><span class="nav-number">1.1.2.</span> <span class="nav-text">FAT32</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#特性-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">特性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件系统比较"><span class="nav-number">1.1.3.</span> <span class="nav-text">文件系统比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux支持的文件系统"><span class="nav-number">1.2.</span> <span class="nav-text">Linux支持的文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ext3"><span class="nav-number">1.2.1.</span> <span class="nav-text">ext3</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#特性-2"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">特性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双系统相互访问"><span class="nav-number">1.3.</span> <span class="nav-text">双系统相互访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Windows下访问EXT2-3-4"><span class="nav-number">1.3.1.</span> <span class="nav-text">Windows下访问EXT2/3/4</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

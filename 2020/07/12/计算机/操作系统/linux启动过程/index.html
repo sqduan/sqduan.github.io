@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Penguin, Boot">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-13T11:26:40.188Z">
+<meta property="og:updated_time" content="2020-12-01T06:39:46.526Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux启动过程">
 <meta name="twitter:description" content="Penguin, Boot">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-13 19:26:40" itemprop="dateModified" datetime="2020-11-13T19:26:40+08:00">2020-11-13</time>
+                <time title="Modified: 2020-12-01 14:39:46" itemprop="dateModified" datetime="2020-12-01T14:39:46+08:00">2020-12-01</time>
               
             
           </span>
@@ -490,7 +490,7 @@
 </ul>
 <h2 id="BIOS-POST-（Basic-IO-system-Power-On-Self-Test）"><a href="#BIOS-POST-（Basic-IO-system-Power-On-Self-Test）" class="headerlink" title="BIOS POST （Basic IO system Power On Self Test）"></a>BIOS POST （Basic IO system Power On Self Test）</h2><p>当电脑开机供电时，最先进行的就是BIOS POST，即基本IO系统上电自检，确保硬件系统工作正常。他会触发一个BIOS中断，确定Boot的分区，第一个找到的boot分区将会被载入RAM，随后控制权移交给boot sector（Boot Loader的第一阶段）。</p>
 <h2 id="Boot-Loader"><a href="#Boot-Loader" class="headerlink" title="Boot Loader"></a>Boot Loader</h2><h3 id="GRUB2"><a href="#GRUB2" class="headerlink" title="GRUB2"></a>GRUB2</h3><p>GRUB2全称为GRand Unified Bootloader, version 2，是现今主流Linux普遍采用的Boot Loader。其基本功能是找到linux内核，然后载入到内存中并运行。</p>
-<h3 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h3><p>在POST结束时，BIOS会寻找到第一个Boot分区，加载bootstrap code，即GRUB2 Stage 1，这段代码非常小，因为必须适配前512字节的扇区。因为这个代码太小了，做不到太多有意义的工作，唯一的目的是定位下一个阶段并进行跳转</p>
+<h3 id="第一阶段"><a href="#第一阶段" class="headerlink" title="第一阶段"></a>第一阶段</h3><p>在POST结束时，BIOS会寻找到第一个Boot分区，加载bootstrap code，即GRUB2 Stage 1，这段代码非常小，因为必须适配前512字节的扇区（统一规定）。因为这个代码太小了，做不到太多有意义的工作，唯一的目的是定位下一个阶段并进行跳转</p>
 <h3 id="第1-5阶段"><a href="#第1-5阶段" class="headerlink" title="第1.5阶段"></a>第1.5阶段</h3><p>GRUB2 的1.5阶段位于boot record和第一块硬盘分区之间，这一段空间因为一些原因没有被使用。这一段有62 512-byte的空间存放core.img文件，这个文件的大小是25,389 Bytes，足够放下一些文件系统的驱动，例如标准EXT、FAT及NTFS等。这意味着GRUB第二阶段可以位于标准的EXT文件系统内。第二阶段实际位于/boot下，即/boot/grub2。</p>
 <h3 id="第2阶段"><a href="#第2阶段" class="headerlink" title="第2阶段"></a>第2阶段</h3><p>第二阶段位于/boot/grub2和其子文件夹下，它将运行期内核模块放置在了/boot/grub2/i386-pc文件夹下。第2阶段的作用是定位并载入所选择的Linux内核，内核和相关文件在/boot文件夹下。</p>
 <h4 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h4><p>所有的kernel都经过了压缩并可自解压，从而节省空间，kernel和初始的RAM镜像以及设备映射位于/boot文件夹下。当内核被载入后，它会进行自解压，并载入systemd，并将控制权移交。至此，Boot阶段结束。</p>
@@ -564,8 +564,8 @@ physical\_address : = segment\_part × 16 + offset</script><h3 id="保护模式"
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/Archlinux/Archlinux网络配置/" rel="next" title="Archlinux网络配置">
-                <i class="fa fa-chevron-left"></i> Archlinux网络配置
+              <a href="/2020/07/12/工具/Linux/Archlinux系统运维/" rel="next" title="Archlinux系统运维">
+                <i class="fa fa-chevron-left"></i> Archlinux系统运维
               </a>
             
           </div>
@@ -652,7 +652,7 @@ physical\_address : = segment\_part × 16 + offset</script><h3 id="保护模式"
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">259</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -775,7 +775,9 @@ physical\_address : = segment\_part × 16 + offset</script><h3 id="保护模式"
                     
                       
                     
-                    <span class="site-state-item-count">53</span>
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

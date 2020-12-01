@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="port: 22">
+  <meta name="description" content="And God said, Let us make a man">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Archlinux作为ssh服务器">
-<meta property="og:url" content="http://yoursite.com/2020/11/04/工具/Archlinux/Archlinux作为ssh服务器/index.html">
+<meta property="og:title" content="Linux常用命令总结">
+<meta property="og:url" content="http://yoursite.com/2020/08/10/工具/Linux/Linux常用命令总结/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="port: 22">
+<meta property="og:description" content="And God said, Let us make a man">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-05T09:02:48.671Z">
+<meta property="og:updated_time" content="2020-12-01T07:11:05.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Archlinux作为ssh服务器">
-<meta name="twitter:description" content="port: 22">
+<meta name="twitter:title" content="Linux常用命令总结">
+<meta name="twitter:description" content="And God said, Let us make a man">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/11/04/工具/Archlinux/Archlinux作为ssh服务器/">
+  <link rel="canonical" href="http://yoursite.com/2020/08/10/工具/Linux/Linux常用命令总结/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>Archlinux作为ssh服务器 | 一隅</title>
+  <title>Linux常用命令总结 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/04/工具/Archlinux/Archlinux作为ssh服务器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/10/工具/Linux/Linux常用命令总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Archlinux作为ssh服务器
+          <h1 class="post-title" itemprop="name headline">Linux常用命令总结
 
               
             
@@ -401,7 +401,7 @@
                 
               
 
-              <time title="Created: 2020-11-04 17:09:06" itemprop="dateCreated datePublished" datetime="2020-11-04T17:09:06+08:00">2020-11-04</time>
+              <time title="Created: 2020-08-10 20:40:23" itemprop="dateCreated datePublished" datetime="2020-08-10T20:40:23+08:00">2020-08-10</time>
             
 
             
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-05 17:02:48" itemprop="dateModified" datetime="2020-11-05T17:02:48+08:00">2020-11-05</time>
+                <time title="Modified: 2020-12-01 15:11:05" itemprop="dateModified" datetime="2020-12-01T15:11:05+08:00">2020-12-01</time>
               
             
           </span>
@@ -442,7 +442,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Archlinux/" itemprop="url" rel="index"><span itemprop="name">Archlinux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
                 
                 
@@ -478,26 +478,24 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>port: 22</p>
+<p>And God said, Let us make a man</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="安装必要软件"><a href="#安装必要软件" class="headerlink" title="安装必要软件"></a>安装必要软件</h2><p>archlinux 使用OpenSSH作为ssh通讯的软件，运行如下命令安装openssh</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S openssh</span><br></pre></td></tr></table></figure>
-<h2 id="ssh服务端配置"><a href="#ssh服务端配置" class="headerlink" title="ssh服务端配置"></a>ssh服务端配置</h2><p>安装完成后，我们可以用如下命令查看openssh server运行状态</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl status sshd</span><br></pre></td></tr></table></figure>
-<p>由于还未启动服务，所以Active状态为inactive。为了使archlinux作为ssh服务器，我们要开启这个服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl start sshd</span><br></pre></td></tr></table></figure>
-<p>再一次查看状态，就能发现服务已经启动。为了使archlinux每次开机后自动运行该服务，我们需要执行下列命令进行enable</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl enable sshd</span><br></pre></td></tr></table></figure>
-<p>至此我们的服务已经打开，如果需要关闭，执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl end sshd</span><br><span class="line"><span class="meta">$</span> sudo systemctl disable sshd</span><br></pre></td></tr></table></figure>
-<p>到目前为止，我们已经打开了SSH server的守护进程，现在客户端应该可以通过ssh命令进行连接，当然，现在还存在一些问题。当我们尝试连接服务器时，会发现服务器在连接后会立刻断开，我们还需要对sshd进行一些配置，配置文件为<code>etc/ssh/sshd_config</code>。打开后配置如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Port 888</span><br><span class="line">AddressFamily any</span><br><span class="line">ListenAddress 0.0.0.0</span><br><span class="line"></span><br><span class="line">PermitRootLogin yes</span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure>
-<p>然后重启服务器即可连接。</p>
-<h2 id="连接ssh服务器"><a href="#连接ssh服务器" class="headerlink" title="连接ssh服务器"></a>连接ssh服务器</h2><h3 id="查询ssh服务器的地址"><a href="#查询ssh服务器的地址" class="headerlink" title="查询ssh服务器的地址"></a>查询ssh服务器的地址</h3><p>为了连接ssh服务器，我们需要知道ssh服务器的hostname和IP地址，运行如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ip a</span><br><span class="line"></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp0s31f6: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc fq_codel state DOWN group default qlen 1000</span><br><span class="line">    link/ether a6:1e:84:b7:1d:06 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">3: wlp3s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000</span><br><span class="line">    link/ether 3c:f7:62:09:99:76 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet xxx.xxx.85.194/22 brd 222.195.87.255 scope global dynamic noprefixroute wlp3s0</span><br><span class="line">       valid_lft 2766sec preferred_lft 2766sec</span><br><span class="line">    inet6 2001:da8:d880:199:b698:1f99:37fe:b408/64 scope global dynamic noprefixroute</span><br><span class="line">       valid_lft 253084sec preferred_lft 166684sec</span><br><span class="line">    inet6 fe80::f15d:42c:011:d6ee/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
-<p>可以看到SSH的IP地址为xxx.xxx.85.194</p>
-
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道是一种通信机制，通常用于进程间的通信（也可通过socket进行网络通信），它表现出来的形式将前面每一个进程的输出（stdout）直接作为下一个进程的输入（stdin）。在linux命令行中，管道命令使用<code>|</code>作为界定符号，将第一个命令的输入作为下一个命令的输出，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ls -al /etc | less</span><br></pre></td></tr></table></figure>
+<h2 id="字符串处理类命令"><a href="#字符串处理类命令" class="headerlink" title="字符串处理类命令"></a>字符串处理类命令</h2><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>分析一行信息，如果其中有我们需要的信息，就将该行拿出来</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><blockquote>
+<p><strong>-a 或 —text</strong> : 不要忽略二进制的数据。</p>
+<p><strong>-c 或 —count</strong> : 计算符合样式的列数。</p>
+<p><strong>-i 或 —ignore-case</strong> : 忽略字符大小写的差别。</p>
+</blockquote>
+<h4 id="用例"><a href="#用例" class="headerlink" title="用例"></a>用例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat /proc/cpuinfo | grep -c 'physical id'   #查看有几个物理CPU</span><br><span class="line"><span class="meta">$</span> cat /proc/cpuinfo | grep -c 'processor'     #查看cpu核心数</span><br></pre></td></tr></table></figure>
+<h2 id="文件查看类命令"><a href="#文件查看类命令" class="headerlink" title="文件查看类命令"></a>文件查看类命令</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>查看指定文件下内容 </p>
+<h2 id="系统相关命令"><a href="#系统相关命令" class="headerlink" title="系统相关命令"></a>系统相关命令</h2><h3 id="系统负载查询命令"><a href="#系统负载查询命令" class="headerlink" title="系统负载查询命令"></a>系统负载查询命令</h3><h4 id="w-amp-uptime"><a href="#w-amp-uptime" class="headerlink" title="w &amp; uptime"></a>w &amp; uptime</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~ 10:56 #37]# w</span><br><span class="line">10:57:38 up 14 min,  1 user,  load average: 0.00, 0.00, 0.00  </span><br><span class="line">USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">root     pts/0    192.168.147.1    18:44    0.00s  0.10s  0.00s w</span><br><span class="line"></span><br><span class="line">[root@centos6 ~ 10:56 #37]# uptime</span><br><span class="line">10:57:47 up 14 min,  1 user,  load average: 0.00, 0.00, 0.00</span><br></pre></td></tr></table></figure>
+<p>load average即系统负载，三个数值分别表示一分钟、五分钟、十五分钟内系统的平均负载，即平均任务数。</p>
+<h3 id="系统资源查询命令"><a href="#系统资源查询命令" class="headerlink" title="系统资源查询命令"></a>系统资源查询命令</h3><h4 id="top：查询"><a href="#top：查询" class="headerlink" title="top：查询"></a>top：查询</h4><h4 id="free：查询内存使用情况"><a href="#free：查询内存使用情况" class="headerlink" title="free：查询内存使用情况"></a>free：查询内存使用情况</h4><h3 id="系统任务查询命令"><a href="#系统任务查询命令" class="headerlink" title="系统任务查询命令"></a>系统任务查询命令</h3><h4 id="ps：查看当前系统进程"><a href="#ps：查看当前系统进程" class="headerlink" title="ps：查看当前系统进程"></a>ps：查看当前系统进程</h4><h2 id="网络相关命令"><a href="#网络相关命令" class="headerlink" title="网络相关命令"></a>网络相关命令</h2><h3 id="netstat：网络状态查询"><a href="#netstat：网络状态查询" class="headerlink" title="netstat：网络状态查询"></a>netstat：网络状态查询</h3><h2 id="硬盘相关命令"><a href="#硬盘相关命令" class="headerlink" title="硬盘相关命令"></a>硬盘相关命令</h2><h3 id="挂载与卸载操作"><a href="#挂载与卸载操作" class="headerlink" title="挂载与卸载操作"></a>挂载与卸载操作</h3><h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><p>linux下只有一个根目录，在装系统时，我们分配给linux的所有区都在<code>/</code>下的某个位置，所以linux下mount挂载的作用，就是将一个设备（一般为块设备）挂载到一个已存在的目录上，这样访问这个目录就是访问这个块设备（通过文件的方式使用该设备）。</p>
+<p>虽然我们可以在<code>/dev</code>下找到硬盘的盘符比如<code>/dev/sdb1</code>，但是这个并不是他的目录，而是一个类似指针的东西，指向分区的原始数据块，在挂载之前，系统并不知道这个数据块代表什么，所以也就无法对其进行操作。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://zhuanlan.zhihu.com/p/32250942">Linux39条常用命令</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -560,8 +558,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/04/计算机/操作系统/课程/MIT6828-Lab1/" rel="next" title="MIT6828-Lab1-启动一个PC">
-                <i class="fa fa-chevron-left"></i> MIT6828-Lab1-启动一个PC
+              <a href="/2020/08/10/计算机/软件工程/软件设计详细说明书/" rel="next" title="软件设计详细说明书">
+                <i class="fa fa-chevron-left"></i> 软件设计详细说明书
               </a>
             
           </div>
@@ -570,8 +568,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/11/05/工具/Archlinux/Archlinux桌面环境/" rel="prev" title="Archlinux桌面环境">
-                Archlinux桌面环境 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/08/11/计算机/软件工程/软件工程——编写高质量的代码/" rel="prev" title="软件工程——编写高质量的代码">
+                软件工程——编写高质量的代码 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -648,7 +646,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">259</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -771,7 +769,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">53</span>
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -890,7 +890,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装必要软件"><span class="nav-number">1.</span> <span class="nav-text">安装必要软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ssh服务端配置"><span class="nav-number">2.</span> <span class="nav-text">ssh服务端配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接ssh服务器"><span class="nav-number">3.</span> <span class="nav-text">连接ssh服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查询ssh服务器的地址"><span class="nav-number">3.1.</span> <span class="nav-text">查询ssh服务器的地址</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">1.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串处理类命令"><span class="nav-number">2.</span> <span class="nav-text">字符串处理类命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#grep"><span class="nav-number">2.1.</span> <span class="nav-text">grep</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">2.1.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用例"><span class="nav-number">2.1.2.</span> <span class="nav-text">用例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件查看类命令"><span class="nav-number">3.</span> <span class="nav-text">文件查看类命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cat"><span class="nav-number">3.1.</span> <span class="nav-text">cat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统相关命令"><span class="nav-number">4.</span> <span class="nav-text">系统相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统负载查询命令"><span class="nav-number">4.1.</span> <span class="nav-text">系统负载查询命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#w-amp-uptime"><span class="nav-number">4.1.1.</span> <span class="nav-text">w &amp; uptime</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统资源查询命令"><span class="nav-number">4.2.</span> <span class="nav-text">系统资源查询命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#top：查询"><span class="nav-number">4.2.1.</span> <span class="nav-text">top：查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#free：查询内存使用情况"><span class="nav-number">4.2.2.</span> <span class="nav-text">free：查询内存使用情况</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统任务查询命令"><span class="nav-number">4.3.</span> <span class="nav-text">系统任务查询命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ps：查看当前系统进程"><span class="nav-number">4.3.1.</span> <span class="nav-text">ps：查看当前系统进程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络相关命令"><span class="nav-number">5.</span> <span class="nav-text">网络相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#netstat：网络状态查询"><span class="nav-number">5.1.</span> <span class="nav-text">netstat：网络状态查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘相关命令"><span class="nav-number">6.</span> <span class="nav-text">硬盘相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载与卸载操作"><span class="nav-number">6.1.</span> <span class="nav-text">挂载与卸载操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载"><span class="nav-number">6.1.1.</span> <span class="nav-text">挂载</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1078,7 +1078,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/11/04/工具/Archlinux/Archlinux作为ssh服务器/'
+    refer: '2020/08/10/工具/Linux/Linux常用命令总结/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

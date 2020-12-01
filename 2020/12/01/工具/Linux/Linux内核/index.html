@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="本文将针对Archlinux下的系统运维进行介绍。">
+  <meta name="description" content="Look, this is my heart">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Archlinux系统运维">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/Archlinux/Archlinux系统运维/index.html">
+<meta property="og:title" content="Linux内核">
+<meta property="og:url" content="http://yoursite.com/2020/12/01/工具/Linux/Linux内核/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="本文将针对Archlinux下的系统运维进行介绍。">
+<meta property="og:description" content="Look, this is my heart">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-05T01:23:11.371Z">
+<meta property="og:updated_time" content="2020-12-01T08:07:58.970Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Archlinux系统运维">
-<meta name="twitter:description" content="本文将针对Archlinux下的系统运维进行介绍。">
+<meta name="twitter:title" content="Linux内核">
+<meta name="twitter:description" content="Look, this is my heart">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/Archlinux/Archlinux系统运维/">
+  <link rel="canonical" href="http://yoursite.com/2020/12/01/工具/Linux/Linux内核/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>Archlinux系统运维 | 一隅</title>
+  <title>Linux内核 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Archlinux/Archlinux系统运维/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/01/工具/Linux/Linux内核/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Archlinux系统运维
+          <h1 class="post-title" itemprop="name headline">Linux内核
 
               
             
@@ -401,24 +401,12 @@
                 
               
 
-              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+              <time title="Created: 2020-12-01 14:41:03 / Modified: 16:07:58" itemprop="dateCreated datePublished" datetime="2020-12-01T14:41:03+08:00">2020-12-01</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-11-05 09:23:11" itemprop="dateModified" datetime="2020-11-05T09:23:11+08:00">2020-11-05</time>
               
             
           </span>
@@ -442,7 +430,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Archlinux/" itemprop="url" rel="index"><span itemprop="name">Archlinux</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
                 
                 
@@ -477,49 +465,21 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对Archlinux下的系统运维进行介绍。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>Look, this is my heart</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="内核相关"><a href="#内核相关" class="headerlink" title="内核相关"></a>内核相关</h2><h3 id="查看当前内核版本"><a href="#查看当前内核版本" class="headerlink" title="查看当前内核版本"></a>查看当前内核版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> uname -r</span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line">4.19.67-1-lts</span><br></pre></td></tr></table></figure>
-<h3 id="内核版本更换"><a href="#内核版本更换" class="headerlink" title="内核版本更换"></a>内核版本更换</h3><p>最新的内核版本滚动过于频繁，新增的许多特性也不稳定，因此将archlinux运行在稳定版本的内核上，即lts kernel</p>
-<p>直接用pacman进行安装即可</p>
-<h3 id="旧内核删除"><a href="#旧内核删除" class="headerlink" title="旧内核删除"></a>旧内核删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -f /boot/vmlinuz-kernel_3.xxx</span><br><span class="line">sudo rm -f /boot/initrd.img-kernel_3.xxx</span><br><span class="line">sudo rm -rf /lib/modules/kernel_3.xxx</span><br></pre></td></tr></table></figure>
-<h2 id="systemctl命令"><a href="#systemctl命令" class="headerlink" title="systemctl命令"></a>systemctl命令</h2><h3 id="检查运行失败的service"><a href="#检查运行失败的service" class="headerlink" title="检查运行失败的service"></a>检查运行失败的service</h3><ol>
-<li>找到运行失败的service</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> systemctl --failed  </span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line">systemd-modules-load.service   loaded failed failed  Load Kernel Modules</span><br></pre></td></tr></table></figure>
-<ol>
-<li>查看运行失败的原因</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> systemctl status systemd-modules-load.service</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">● systemd-modules-load.service - Load Kernel Modules</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/systemd-modules-load.service; static; vendor preset: dis&gt;</span><br><span class="line">   Active: failed (Result: exit-code) since Fri 2019-08-23 12:16:54 CST; 6min ago</span><br><span class="line">     Docs: man:systemd-modules-load.service(8)</span><br><span class="line">           man:modules-load.d(5)</span><br><span class="line">  Process: 190 ExecStart=/usr/lib/systemd/systemd-modules-load (code=exited, status=1/FAILURE)</span><br><span class="line"> Main PID: 190 (code=exited, status=1/FAILURE)</span><br></pre></td></tr></table></figure>
-<ol>
-<li>根据Main PID查看对应的问题</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> journalctl _PID=190</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">-- Logs begin at Thu 2019-04-25 23:48:52 CST, end at Fri 2019-08-23 12:24:50 CST. --</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vfs_monitor'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxdrv'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxpci'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetadp'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetflt'</span><br></pre></td></tr></table></figure>
-<ol>
-<li>我们有一些module系统没有找到，因此在<code>/etc/modules-load.d/</code>下查看对应设置</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ls -Al /etc/modules-load.d </span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">总用量 0</span><br></pre></td></tr></table></figure>
-<p>结果发现什么都没有，通过<code>modinfo</code>命令检查对应模块，发现找不到对应的模块</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">modinfo vfs_monitor</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">modinfo: ERROR: Module vfs_monitor not found.</span><br></pre></td></tr></table></figure>
-<h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>有些情况下，我们需要查看系统发生了哪些动作，此时需要命令<code>journalctl</code>，当不带任何选项时，该命令将会无脑输出所有日志记录，基本没什么用，我们要进行一些筛选。</p>
-<h2 id="清理文件系统"><a href="#清理文件系统" class="headerlink" title="清理文件系统"></a>清理文件系统</h2><h2 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h2><h3 id="官方包管理-pacman"><a href="#官方包管理-pacman" class="headerlink" title="官方包管理 pacman"></a>官方包管理 pacman</h3><p>archlinux下的包管理软件为pacman（吃豆人），这个软件非常好用，能够有效解决不同包之间的依赖问题。</p>
-<h4 id="搜索包"><a href="#搜索包" class="headerlink" title="搜索包"></a>搜索包</h4><p>搜索包的命令为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Ss pacname</span><br></pre></td></tr></table></figure>
-<p>其中pacname为待搜索的包的名称</p>
-<h4 id="安装包"><a href="#安装包" class="headerlink" title="安装包"></a>安装包</h4><p>安装包的命令为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S pacname</span><br></pre></td></tr></table></figure>
-<h4 id="删除包"><a href="#删除包" class="headerlink" title="删除包"></a>删除包</h4><p>删除包的命令为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Rs pacname</span><br></pre></td></tr></table></figure>
-<p>其中s表示没有被其他已经安装的软件包使用的依赖关系。</p>
-<h3 id="非官方包管理"><a href="#非官方包管理" class="headerlink" title="非官方包管理"></a>非官方包管理</h3><p>对于一些非官方包，我们可以使用AUR（Archlinux user repository）进行管理。AUR是一个社区驱动的软件仓库，包含了非官方的软件或包</p>
-<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><p>我们使用yay对AUR中的包进行管理，下载命令如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://aur.archlinux.org/yay.git</span><br><span class="line">cd yay</span><br><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
-<h4 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h4><h2 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h2><p>Archlinux是滚动更新的系统，不支持局部更新，所以尽可能定期更新系统。更新系统的命令为</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Syu</span><br></pre></td></tr></table></figure>
-<h3 id="文件损坏处理"><a href="#文件损坏处理" class="headerlink" title="文件损坏处理"></a>文件损坏处理</h3><p>在有一些情况下，无效的或者已经损坏的文件可能会导致签名错误，从而使更新失败，这种情况的处理过程如下：</p>
-<ol>
-<li>安装archlinux-keyring，这个包用于</li>
-</ol>
+<h2 id="内核运维"><a href="#内核运维" class="headerlink" title="内核运维"></a>内核运维</h2><h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><h4 id="查看内核版本"><a href="#查看内核版本" class="headerlink" title="查看内核版本"></a>查看内核版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br><span class="line">linux 5.9.8.arch1-1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 或者在archlinux下</span><br><span class="line"><span class="meta">$</span> pacman -Q linux </span><br><span class="line"><span class="meta">$</span> pacman -Q | grep linux</span><br><span class="line"></span><br><span class="line">archlinux-keyring 20201028-1</span><br><span class="line">lib32-util-linux 2.36-1</span><br><span class="line">linux 5.9.8.arch1-1                      #内核版本</span><br><span class="line">linux-api-headers 5.8-1</span><br><span class="line">linux-firmware 20201023.dae4b4c-1</span><br><span class="line">linux-lts 5.4.77-1                       #安装的某个内核</span><br><span class="line">linux-lts-headers 5.4.77-1</span><br><span class="line">util-linux 2.36-4</span><br><span class="line">util-linux-libs 2.36-4</span><br></pre></td></tr></table></figure>
+<h4 id="卸载旧内核-危险操作，请谨慎进行"><a href="#卸载旧内核-危险操作，请谨慎进行" class="headerlink" title="卸载旧内核(危险操作，请谨慎进行)"></a>卸载旧内核(危险操作，请谨慎进行)</h4><p>进入<code>/boot/</code>中，然后</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm vmlinuz-linux-lts</span><br><span class="line">sudo rm initramfs-linux-lts*</span><br></pre></td></tr></table></figure>
+<p>重启后可以发现只剩下最新的内核了。</p>
+<h4 id="内核恢复"><a href="#内核恢复" class="headerlink" title="内核恢复"></a>内核恢复</h4><p>有一次手贱不小心把grub引导的内核删掉了，但好在还有一个非引导的内核，这里讲一下如何对grub进行修改从而引导非引导内核。进入系统后选择内核，发现错误信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Loading Linux linux-lts ...</span><br><span class="line">错误：file `vmlinuz-linux-lts` not found</span><br></pre></td></tr></table></figure>
+<p>这个时候按任意键退出，然后按<code>e</code>进行编辑，发现此处可以使用emacs临时进行内核更换，将命令中的vmlinuz-linux-lts换成非引导内核，按下Ctrl+x进行引导，然后就可以利用非引导内核进入系统。这个时候再进行内核更换即可。</p>
+<h4 id="安装内核"><a href="#安装内核" class="headerlink" title="安装内核"></a>安装内核</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S linux-lts</span><br></pre></td></tr></table></figure>
+<p>安装某个版本的新内核</p>
+<h4 id="更新grub"><a href="#更新grub" class="headerlink" title="更新grub"></a>更新grub</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p>每次安装了新内核后，都要执行一次这个命令，否则进入grub加载系统界面后，将看不到新安装的内核。</p>
 
       
     </div>
@@ -583,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/Archlinux/Tmux快捷键/" rel="next" title="Tmux快捷键">
-                <i class="fa fa-chevron-left"></i> Tmux快捷键
+              <a href="/2020/11/30/计算机/操作系统/BIOS/" rel="next" title="BIOS">
+                <i class="fa fa-chevron-left"></i> BIOS
               </a>
             
           </div>
@@ -592,10 +552,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/12/工具/Archlinux/Archlinux网络配置/" rel="prev" title="Archlinux网络配置">
-                Archlinux网络配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -671,7 +627,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">258</span>
+                    <span class="site-state-item-count">259</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -794,7 +750,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">53</span>
+                      
+                    
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -913,7 +871,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核相关"><span class="nav-number">1.</span> <span class="nav-text">内核相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看当前内核版本"><span class="nav-number">1.1.</span> <span class="nav-text">查看当前内核版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核版本更换"><span class="nav-number">1.2.</span> <span class="nav-text">内核版本更换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#旧内核删除"><span class="nav-number">1.3.</span> <span class="nav-text">旧内核删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl命令"><span class="nav-number">2.</span> <span class="nav-text">systemctl命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检查运行失败的service"><span class="nav-number">2.1.</span> <span class="nav-text">检查运行失败的service</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看日志"><span class="nav-number">3.</span> <span class="nav-text">查看日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清理文件系统"><span class="nav-number">4.</span> <span class="nav-text">清理文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包管理"><span class="nav-number">5.</span> <span class="nav-text">包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方包管理-pacman"><span class="nav-number">5.1.</span> <span class="nav-text">官方包管理 pacman</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索包"><span class="nav-number">5.1.1.</span> <span class="nav-text">搜索包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装包"><span class="nav-number">5.1.2.</span> <span class="nav-text">安装包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除包"><span class="nav-number">5.1.3.</span> <span class="nav-text">删除包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非官方包管理"><span class="nav-number">5.2.</span> <span class="nav-text">非官方包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工具"><span class="nav-number">5.2.1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装包-1"><span class="nav-number">5.2.2.</span> <span class="nav-text">安装包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统更新"><span class="nav-number">6.</span> <span class="nav-text">系统更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件损坏处理"><span class="nav-number">6.1.</span> <span class="nav-text">文件损坏处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内核运维"><span class="nav-number">1.</span> <span class="nav-text">内核运维</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关命令"><span class="nav-number">1.1.</span> <span class="nav-text">相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看内核版本"><span class="nav-number">1.1.1.</span> <span class="nav-text">查看内核版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卸载旧内核-危险操作，请谨慎进行"><span class="nav-number">1.1.2.</span> <span class="nav-text">卸载旧内核(危险操作，请谨慎进行)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内核恢复"><span class="nav-number">1.1.3.</span> <span class="nav-text">内核恢复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装内核"><span class="nav-number">1.1.4.</span> <span class="nav-text">安装内核</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新grub"><span class="nav-number">1.1.5.</span> <span class="nav-text">更新grub</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1101,7 +1059,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/工具/Archlinux/Archlinux系统运维/'
+    refer: '2020/12/01/工具/Linux/Linux内核/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

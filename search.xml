@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux内核]]></title>
+    <url>%2F2020%2F12%2F01%2F%E5%B7%A5%E5%85%B7%2FLinux%2FLinux%E5%86%85%E6%A0%B8%2F</url>
+    <content type="text"><![CDATA[Look, this is my heart 内核运维相关命令查看内核版本12345678910111213141516uname -rlinux 5.9.8.arch1-1# 或者在archlinux下$ pacman -Q linux $ pacman -Q | grep linuxarchlinux-keyring 20201028-1lib32-util-linux 2.36-1linux 5.9.8.arch1-1 #内核版本linux-api-headers 5.8-1linux-firmware 20201023.dae4b4c-1linux-lts 5.4.77-1 #安装的某个内核linux-lts-headers 5.4.77-1util-linux 2.36-4util-linux-libs 2.36-4 卸载旧内核(危险操作，请谨慎进行)进入/boot/中，然后 12sudo rm vmlinuz-linux-ltssudo rm initramfs-linux-lts* 重启后可以发现只剩下最新的内核了。 内核恢复有一次手贱不小心把grub引导的内核删掉了，但好在还有一个非引导的内核，这里讲一下如何对grub进行修改从而引导非引导内核。进入系统后选择内核，发现错误信息如下： 12Loading Linux linux-lts ...错误：file `vmlinuz-linux-lts` not found 这个时候按任意键退出，然后按e进行编辑，发现此处可以使用emacs临时进行内核更换，将命令中的vmlinuz-linux-lts换成非引导内核，按下Ctrl+x进行引导，然后就可以利用非引导内核进入系统。这个时候再进行内核更换即可。 安装内核1pacman -S linux-lts 安装某个版本的新内核 更新grub1sudo grub-mkconfig -o /boot/grub/grub.cfg 每次安装了新内核后，都要执行一次这个命令，否则进入grub加载系统界面后，将看不到新安装的内核。]]></content>
+      <categories>
+        <category>工具</category>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[BIOS]]></title>
     <url>%2F2020%2F11%2F30%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2FBIOS%2F</url>
     <content type="text"><![CDATA[Heart Beat : 76 bit/min Body Temperature : 36.4C Mental Status : normal 严格来说，BIOS并不属于操作系统，而是计算机写死在ROM上的一段程序，负责硬件检测与控制权移交。 参考文献]]></content>
@@ -221,20 +230,20 @@
   </entry>
   <entry>
     <title><![CDATA[Archlinux桌面环境]]></title>
-    <url>%2F2020%2F11%2F05%2F%E5%B7%A5%E5%85%B7%2FArchlinux%2FArchlinux%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%2F</url>
+    <url>%2F2020%2F11%2F05%2F%E5%B7%A5%E5%85%B7%2FLinux%2FArchlinux%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[本文将针对Archlinux下的桌面环境相关配置进行介绍。 常用命令查看当前桌面环境1$ echo $XDG_CURRENT_DESKTOP 查看已经安装的桌面环境1$ ls /usr/share/xsession/ 删除Deepin桌面环境首先卸载deepin 1sudo pacman -Rs deepin deepin-extra 然后修改下列文件 1sudo vim /etc/lightdm/lightdm.conf]]></content>
       <categories>
         <category>工具</category>
-        <category>Archlinux</category>
+        <category>Linux</category>
       </categories>
   </entry>
   <entry>
     <title><![CDATA[Archlinux作为ssh服务器]]></title>
-    <url>%2F2020%2F11%2F04%2F%E5%B7%A5%E5%85%B7%2FArchlinux%2FArchlinux%E4%BD%9C%E4%B8%BAssh%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+    <url>%2F2020%2F11%2F04%2F%E5%B7%A5%E5%85%B7%2FLinux%2FArchlinux%E4%BD%9C%E4%B8%BAssh%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
     <content type="text"><![CDATA[port: 22 安装必要软件archlinux 使用OpenSSH作为ssh通讯的软件，运行如下命令安装openssh 1sudo pacman -S openssh ssh服务端配置安装完成后，我们可以用如下命令查看openssh server运行状态 1$ sudo systemctl status sshd 由于还未启动服务，所以Active状态为inactive。为了使archlinux作为ssh服务器，我们要开启这个服务 1$ sudo systemctl start sshd 再一次查看状态，就能发现服务已经启动。为了使archlinux每次开机后自动运行该服务，我们需要执行下列命令进行enable 1$ sudo systemctl enable sshd 至此我们的服务已经打开，如果需要关闭，执行 12$ sudo systemctl end sshd$ sudo systemctl disable sshd 到目前为止，我们已经打开了SSH server的守护进程，现在客户端应该可以通过ssh命令进行连接，当然，现在还存在一些问题。当我们尝试连接服务器时，会发现服务器在连接后会立刻断开，我们还需要对sshd进行一些配置，配置文件为etc/ssh/sshd_config。打开后配置如下： 123456Port 888AddressFamily anyListenAddress 0.0.0.0PermitRootLogin yesPasswordAuthentication yes 然后重启服务器即可连接。 连接ssh服务器查询ssh服务器的地址为了连接ssh服务器，我们需要知道ssh服务器的hostname和IP地址，运行如下命令： 12345678910111213141516$ ip a1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000 link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo valid_lft forever preferred_lft forever2: enp0s31f6: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc fq_codel state DOWN group default qlen 1000 link/ether a6:1e:84:b7:1d:06 brd ff:ff:ff:ff:ff:ff3: wlp3s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000 link/ether 3c:f7:62:09:99:76 brd ff:ff:ff:ff:ff:ff inet xxx.xxx.85.194/22 brd 222.195.87.255 scope global dynamic noprefixroute wlp3s0 valid_lft 2766sec preferred_lft 2766sec inet6 2001:da8:d880:199:b698:1f99:37fe:b408/64 scope global dynamic noprefixroute valid_lft 253084sec preferred_lft 166684sec inet6 fe80::f15d:42c:011:d6ee/64 scope link noprefixroute valid_lft forever preferred_lft forever 可以看到SSH的IP地址为xxx.xxx.85.194]]></content>
       <categories>
         <category>工具</category>
-        <category>Archlinux</category>
+        <category>Linux</category>
       </categories>
   </entry>
   <entry>
@@ -765,7 +774,7 @@
   <entry>
     <title><![CDATA[文件系统]]></title>
     <url>%2F2020%2F08%2F12%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%2F</url>
-    <content type="text"><![CDATA[Mere data makes a man. A and C and T and G. The alphabet of you. All from four symbols. I am only two: 1 and 0. We have no difference 参考文献]]></content>
+    <content type="text"><![CDATA[Mere data makes a man. A and C and T and G. The alphabet of you. All from four symbols. I am only two: 1 and 0. We have no difference 文件系统是系统对文件的存放排列方式，不同的文件系统关系到数据如何在磁盘进行存储，本文将针对文件系统相关内容进行总结。 不同文件系统Windows支持的文件系统win支持三种文件系统，分别是NTFS、FAT32以及exFAT，下面将对其进行一些总结 NTFS特性 使用最广泛 具有日志功能 无文件大小限制 兼容性较差 FAT32特性 比较老，但是兼容性比较好 只支持最大单文件大小容量4GB 文件系统比较Linux支持的文件系统linux的文件系统一般为ext2、ext3以及最新的ext4 ext3特性 允许日志 双系统相互访问如果电脑上安装了双系统，那么意味着磁盘将会以不同的文件系统进行划分，有时我们会有跨系统访问硬盘的需求，本节将解决双系统相互访问不同文件系统的硬盘的问题。 Windows下访问EXT2/3/4下载Linux Reader，直接即可访问linux的硬盘 参考文献]]></content>
       <categories>
         <category>计算机</category>
         <category>操作系统</category>
@@ -782,11 +791,11 @@
   </entry>
   <entry>
     <title><![CDATA[Linux常用命令总结]]></title>
-    <url>%2F2020%2F08%2F10%2F%E5%B7%A5%E5%85%B7%2FArchlinux%2FLinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[And God said, Let us make a man 管道管道是一种通信机制，通常用于进程间的通信（也可通过socket进行网络通信），它表现出来的形式将前面每一个进程的输出（stdout）直接作为下一个进程的输入（stdin）。在linux命令行中，管道命令使用|作为界定符号，将第一个命令的输入作为下一个命令的输出，例如： 1$ ls -al /etc | less 字符串处理类命令grep分析一行信息，如果其中有我们需要的信息，就将该行拿出来 参数 -a 或 —text : 不要忽略二进制的数据。 -c 或 —count : 计算符合样式的列数。 -i 或 —ignore-case : 忽略字符大小写的差别。 用例12$ cat /proc/cpuinfo | grep -c 'physical id' #查看有几个物理CPU$ cat /proc/cpuinfo | grep -c 'processor' #查看cpu核心数 文件查看类命令cat查看指定文件下内容 系统相关命令系统负载查询命令w &amp; uptime1234567[root@centos6 ~ 10:56 #37]# w10:57:38 up 14 min, 1 user, load average: 0.00, 0.00, 0.00 USER TTY FROM LOGIN@ IDLE JCPU PCPU WHATroot pts/0 192.168.147.1 18:44 0.00s 0.10s 0.00s w[root@centos6 ~ 10:56 #37]# uptime10:57:47 up 14 min, 1 user, load average: 0.00, 0.00, 0.00 load average即系统负载，三个数值分别表示一分钟、五分钟、十五分钟内系统的平均负载，即平均任务数。 系统资源查询命令top：查询free：查询内存使用情况系统任务查询命令ps：查看当前系统进程网络相关命令netstat：网络状态查询参考文献1.Linux39条常用命令 ↩]]></content>
+    <url>%2F2020%2F08%2F10%2F%E5%B7%A5%E5%85%B7%2FLinux%2FLinux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[And God said, Let us make a man 管道管道是一种通信机制，通常用于进程间的通信（也可通过socket进行网络通信），它表现出来的形式将前面每一个进程的输出（stdout）直接作为下一个进程的输入（stdin）。在linux命令行中，管道命令使用|作为界定符号，将第一个命令的输入作为下一个命令的输出，例如： 1$ ls -al /etc | less 字符串处理类命令grep分析一行信息，如果其中有我们需要的信息，就将该行拿出来 参数 -a 或 —text : 不要忽略二进制的数据。 -c 或 —count : 计算符合样式的列数。 -i 或 —ignore-case : 忽略字符大小写的差别。 用例12$ cat /proc/cpuinfo | grep -c 'physical id' #查看有几个物理CPU$ cat /proc/cpuinfo | grep -c 'processor' #查看cpu核心数 文件查看类命令cat查看指定文件下内容 系统相关命令系统负载查询命令w &amp; uptime1234567[root@centos6 ~ 10:56 #37]# w10:57:38 up 14 min, 1 user, load average: 0.00, 0.00, 0.00 USER TTY FROM LOGIN@ IDLE JCPU PCPU WHATroot pts/0 192.168.147.1 18:44 0.00s 0.10s 0.00s w[root@centos6 ~ 10:56 #37]# uptime10:57:47 up 14 min, 1 user, load average: 0.00, 0.00, 0.00 load average即系统负载，三个数值分别表示一分钟、五分钟、十五分钟内系统的平均负载，即平均任务数。 系统资源查询命令top：查询free：查询内存使用情况系统任务查询命令ps：查看当前系统进程网络相关命令netstat：网络状态查询硬盘相关命令挂载与卸载操作挂载linux下只有一个根目录，在装系统时，我们分配给linux的所有区都在/下的某个位置，所以linux下mount挂载的作用，就是将一个设备（一般为块设备）挂载到一个已存在的目录上，这样访问这个目录就是访问这个块设备（通过文件的方式使用该设备）。 虽然我们可以在/dev下找到硬盘的盘符比如/dev/sdb1，但是这个并不是他的目录，而是一个类似指针的东西，指向分区的原始数据块，在挂载之前，系统并不知道这个数据块代表什么，所以也就无法对其进行操作。 参考文献1.Linux39条常用命令 ↩]]></content>
       <categories>
         <category>工具</category>
-        <category>Archlinux</category>
+        <category>Linux</category>
       </categories>
   </entry>
   <entry>
@@ -2353,16 +2362,7 @@
   <entry>
     <title><![CDATA[Linux启动过程]]></title>
     <url>%2F2020%2F07%2F12%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2Flinux%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[Penguin, Boot 启动过程概述Linux的启动过程可以简单分为如下四步： BIOS POST Boot loader Kernel initialization Start systemd, the parent of all processes. BIOS POST （Basic IO system Power On Self Test）当电脑开机供电时，最先进行的就是BIOS POST，即基本IO系统上电自检，确保硬件系统工作正常。他会触发一个BIOS中断，确定Boot的分区，第一个找到的boot分区将会被载入RAM，随后控制权移交给boot sector（Boot Loader的第一阶段）。 Boot LoaderGRUB2GRUB2全称为GRand Unified Bootloader, version 2，是现今主流Linux普遍采用的Boot Loader。其基本功能是找到linux内核，然后载入到内存中并运行。 第一阶段在POST结束时，BIOS会寻找到第一个Boot分区，加载bootstrap code，即GRUB2 Stage 1，这段代码非常小，因为必须适配前512字节的扇区。因为这个代码太小了，做不到太多有意义的工作，唯一的目的是定位下一个阶段并进行跳转 第1.5阶段GRUB2 的1.5阶段位于boot record和第一块硬盘分区之间，这一段空间因为一些原因没有被使用。这一段有62 512-byte的空间存放core.img文件，这个文件的大小是25,389 Bytes，足够放下一些文件系统的驱动，例如标准EXT、FAT及NTFS等。这意味着GRUB第二阶段可以位于标准的EXT文件系统内。第二阶段实际位于/boot下，即/boot/grub2。 第2阶段第二阶段位于/boot/grub2和其子文件夹下，它将运行期内核模块放置在了/boot/grub2/i386-pc文件夹下。第2阶段的作用是定位并载入所选择的Linux内核，内核和相关文件在/boot文件夹下。 Kernel所有的kernel都经过了压缩并可自解压，从而节省空间，kernel和初始的RAM镜像以及设备映射位于/boot文件夹下。当内核被载入后，它会进行自解压，并载入systemd，并将控制权移交。至此，Boot阶段结束。 启动阶段systemdsystemd是所有进程的父进程，它将会使linux正式进入可工作状态。systemd将会完成如下工作： 挂载由/etc/fstab定义的文件系统，从而可以获取/etc下的配置文件 实模式VS保护模式实模式地址表示在实模式下，CPU通过直接访问实际的物理地址对内存进行访问，此时地址格式为[CS:IP]，物理地址为： physical\_address : = segment\_part × 16 + offset保护模式在保护模式下，segment_part由一个16位的选择器代替，高13位为描述表的入口；而第2位表示使用GDT或LDT，最低两位表示优先级，0-3分别代表最高优先级和最低优先级 参考文献1.Linux启动过程 ↩]]></content>
-      <categories>
-        <category>工具</category>
-        <category>Archlinux</category>
-      </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[Archlinux网络配置]]></title>
-    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FArchlinux%2FArchlinux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%2F</url>
-    <content type="text"><![CDATA[本文将针对Archlinux下的网络配置进行介绍。 无线网络配置无线网络的配置分为两个步骤：硬件驱动配置及网络接口配置 检查设备状态12345$ lspci -k 03:00.0 Network controller: Intel Corporation Dual Band Wireless-AC 3165 Plus Bluetooth (rev 99) Subsystem: Intel Corporation Dual Band Wireless-AC 3165 Plus Bluetooth Kernel driver in use: iwlwifi Kernel modules: iwlwifi 科学上网配置代理配置这里科学上网使用v2ray协议（虽然可能有一天也要被封了），首先下载Qv2ray，AUR地址为： 1https://aur.archlinux.org/qv2ray.git 下载并安装这个软件，如果不想用GUI，也可以直接使用命令行，就是服务器配置文件的更新麻烦一些。打开config.json，查看v2ray服务的本地端口： 123456789101112&#123; "tag": "proxy", "port": 10808, "listen": "127.0.0.1", "protocol": "socks", "sniffing": &#123; "enabled": true, "destOverride": [ "http", "tls" ] &#125;, 我这里是127.0.0.1:10808，记下这个端口 代理软件安装及配置安装代理软件选择proxychains4，这个软件可以进行局部代理，即每个命令之前如果加上proxychains4，就会走代理，否则不会。 配置编辑/usr/local/etc/proxychains.conf，修改代理地址及端口为上面的config.json中的端口 12345# meanwile # defaults set to "tor" #socks4 127.0.0.1 9050 socks5 127.0.0.1 10808 #proxy_dns 8.8.8.8 然后保存即可。 使用使用方法为在要代理的命令前加上proxychains4 12345678proxychains4 wget https://www.google.com[proxychains] preloading /usr/lib/libproxychains4.so[proxychains] DLL init: proxychains-ng 4.14--2020-11-11 19:48:33-- https://www.google.com/已载入 CA 证书“/etc/ssl/certs/ca-certificates.crt”正在解析主机 www.google.com (www.google.com)... 64.13.192.74, 2001::6ca0:a9ab正在连接 www.google.com (www.google.com)|64.13.192.74|:443... [proxychains] Strict chain ... 127.0.0.1:10808 ... 64.13.192.74:443 ... OK已连接。]]></content>
+    <content type="text"><![CDATA[Penguin, Boot 启动过程概述Linux的启动过程可以简单分为如下四步： BIOS POST Boot loader Kernel initialization Start systemd, the parent of all processes. BIOS POST （Basic IO system Power On Self Test）当电脑开机供电时，最先进行的就是BIOS POST，即基本IO系统上电自检，确保硬件系统工作正常。他会触发一个BIOS中断，确定Boot的分区，第一个找到的boot分区将会被载入RAM，随后控制权移交给boot sector（Boot Loader的第一阶段）。 Boot LoaderGRUB2GRUB2全称为GRand Unified Bootloader, version 2，是现今主流Linux普遍采用的Boot Loader。其基本功能是找到linux内核，然后载入到内存中并运行。 第一阶段在POST结束时，BIOS会寻找到第一个Boot分区，加载bootstrap code，即GRUB2 Stage 1，这段代码非常小，因为必须适配前512字节的扇区（统一规定）。因为这个代码太小了，做不到太多有意义的工作，唯一的目的是定位下一个阶段并进行跳转 第1.5阶段GRUB2 的1.5阶段位于boot record和第一块硬盘分区之间，这一段空间因为一些原因没有被使用。这一段有62 512-byte的空间存放core.img文件，这个文件的大小是25,389 Bytes，足够放下一些文件系统的驱动，例如标准EXT、FAT及NTFS等。这意味着GRUB第二阶段可以位于标准的EXT文件系统内。第二阶段实际位于/boot下，即/boot/grub2。 第2阶段第二阶段位于/boot/grub2和其子文件夹下，它将运行期内核模块放置在了/boot/grub2/i386-pc文件夹下。第2阶段的作用是定位并载入所选择的Linux内核，内核和相关文件在/boot文件夹下。 Kernel所有的kernel都经过了压缩并可自解压，从而节省空间，kernel和初始的RAM镜像以及设备映射位于/boot文件夹下。当内核被载入后，它会进行自解压，并载入systemd，并将控制权移交。至此，Boot阶段结束。 启动阶段systemdsystemd是所有进程的父进程，它将会使linux正式进入可工作状态。systemd将会完成如下工作： 挂载由/etc/fstab定义的文件系统，从而可以获取/etc下的配置文件 实模式VS保护模式实模式地址表示在实模式下，CPU通过直接访问实际的物理地址对内存进行访问，此时地址格式为[CS:IP]，物理地址为： physical\_address : = segment\_part × 16 + offset保护模式在保护模式下，segment_part由一个16位的选择器代替，高13位为描述表的入口；而第2位表示使用GDT或LDT，最低两位表示优先级，0-3分别代表最高优先级和最低优先级 参考文献1.Linux启动过程 ↩]]></content>
       <categories>
         <category>工具</category>
         <category>Archlinux</category>
@@ -2370,20 +2370,29 @@
   </entry>
   <entry>
     <title><![CDATA[Archlinux系统运维]]></title>
-    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FArchlinux%2FArchlinux%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4%2F</url>
+    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FLinux%2FArchlinux%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4%2F</url>
     <content type="text"><![CDATA[本文将针对Archlinux下的系统运维进行介绍。 内核相关查看当前内核版本123$ uname -r------------------------------------------------------------------------4.19.67-1-lts 内核版本更换最新的内核版本滚动过于频繁，新增的许多特性也不稳定，因此将archlinux运行在稳定版本的内核上，即lts kernel 直接用pacman进行安装即可 旧内核删除123sudo rm -f /boot/vmlinuz-kernel_3.xxxsudo rm -f /boot/initrd.img-kernel_3.xxxsudo rm -rf /lib/modules/kernel_3.xxx systemctl命令检查运行失败的service 找到运行失败的service 123$ systemctl --failed ------------------------------------------------------------------------systemd-modules-load.service loaded failed failed Load Kernel Modules 查看运行失败的原因 123456789$ systemctl status systemd-modules-load.service-----------------------------------------------------------------------● systemd-modules-load.service - Load Kernel Modules Loaded: loaded (/usr/lib/systemd/system/systemd-modules-load.service; static; vendor preset: dis&gt; Active: failed (Result: exit-code) since Fri 2019-08-23 12:16:54 CST; 6min ago Docs: man:systemd-modules-load.service(8) man:modules-load.d(5) Process: 190 ExecStart=/usr/lib/systemd/systemd-modules-load (code=exited, status=1/FAILURE) Main PID: 190 (code=exited, status=1/FAILURE) 根据Main PID查看对应的问题 12345678910111213$ journalctl _PID=190------------------------------------------------------------------------- Logs begin at Thu 2019-04-25 23:48:52 CST, end at Fri 2019-08-23 12:24:50 CST. --8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vfs_monitor'8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxdrv'8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxpci'8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetadp'8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetflt' 我们有一些module系统没有找到，因此在/etc/modules-load.d/下查看对应设置 123ls -Al /etc/modules-load.d -----------------------------------------------------------------------总用量 0 结果发现什么都没有，通过modinfo命令检查对应模块，发现找不到对应的模块 123modinfo vfs_monitor-----------------------------------------------------------------------modinfo: ERROR: Module vfs_monitor not found. 查看日志有些情况下，我们需要查看系统发生了哪些动作，此时需要命令journalctl，当不带任何选项时，该命令将会无脑输出所有日志记录，基本没什么用，我们要进行一些筛选。 清理文件系统包管理官方包管理 pacmanarchlinux下的包管理软件为pacman（吃豆人），这个软件非常好用，能够有效解决不同包之间的依赖问题。 搜索包搜索包的命令为： 1pacman -Ss pacname 其中pacname为待搜索的包的名称 安装包安装包的命令为： 1sudo pacman -S pacname 删除包删除包的命令为： 1sudo pacman -Rs pacname 其中s表示没有被其他已经安装的软件包使用的依赖关系。 非官方包管理对于一些非官方包，我们可以使用AUR（Archlinux user repository）进行管理。AUR是一个社区驱动的软件仓库，包含了非官方的软件或包 工具我们使用yay对AUR中的包进行管理，下载命令如下： 123git clone https://aur.archlinux.org/yay.gitcd yaymakepkg -si 安装包系统更新Archlinux是滚动更新的系统，不支持局部更新，所以尽可能定期更新系统。更新系统的命令为 1pacman -Syu 文件损坏处理在有一些情况下，无效的或者已经损坏的文件可能会导致签名错误，从而使更新失败，这种情况的处理过程如下： 安装archlinux-keyring，这个包用于]]></content>
       <categories>
         <category>工具</category>
-        <category>Archlinux</category>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Archlinux网络配置]]></title>
+    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FLinux%2FArchlinux%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[本文将针对Archlinux下的网络配置进行介绍。 无线网络配置无线网络的配置分为两个步骤：硬件驱动配置及网络接口配置 检查设备状态12345$ lspci -k 03:00.0 Network controller: Intel Corporation Dual Band Wireless-AC 3165 Plus Bluetooth (rev 99) Subsystem: Intel Corporation Dual Band Wireless-AC 3165 Plus Bluetooth Kernel driver in use: iwlwifi Kernel modules: iwlwifi 科学上网配置代理配置这里科学上网使用v2ray协议（虽然可能有一天也要被封了），首先下载Qv2ray，AUR地址为： 1https://aur.archlinux.org/qv2ray.git 下载并安装这个软件，如果不想用GUI，也可以直接使用命令行，就是服务器配置文件的更新麻烦一些。打开config.json，查看v2ray服务的本地端口： 123456789101112&#123; "tag": "proxy", "port": 10808, "listen": "127.0.0.1", "protocol": "socks", "sniffing": &#123; "enabled": true, "destOverride": [ "http", "tls" ] &#125;, 我这里是127.0.0.1:10808，记下这个端口 代理软件安装及配置安装代理软件选择proxychains4，这个软件可以进行局部代理，即每个命令之前如果加上proxychains4，就会走代理，否则不会。 配置编辑/usr/local/etc/proxychains.conf，修改代理地址及端口为上面的config.json中的端口 12345# meanwile # defaults set to "tor" #socks4 127.0.0.1 9050 socks5 127.0.0.1 10808 #proxy_dns 8.8.8.8 然后保存即可。 使用使用方法为在要代理的命令前加上proxychains4 12345678proxychains4 wget https://www.google.com[proxychains] preloading /usr/lib/libproxychains4.so[proxychains] DLL init: proxychains-ng 4.14--2020-11-11 19:48:33-- https://www.google.com/已载入 CA 证书“/etc/ssl/certs/ca-certificates.crt”正在解析主机 www.google.com (www.google.com)... 64.13.192.74, 2001::6ca0:a9ab正在连接 www.google.com (www.google.com)|64.13.192.74|:443... [proxychains] Strict chain ... 127.0.0.1:10808 ... 64.13.192.74:443 ... OK已连接。]]></content>
+      <categories>
+        <category>工具</category>
+        <category>Linux</category>
       </categories>
   </entry>
   <entry>
     <title><![CDATA[Tmux快捷键]]></title>
-    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FArchlinux%2FTmux%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
+    <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FLinux%2FTmux%E5%BF%AB%E6%8D%B7%E9%94%AE%2F</url>
     <content type="text"><![CDATA[本文将针对linux中多终端控制命令Tmux常用快捷键进行总结。 CTRL+a: 自定义的Tmux命令前缀，默认是ctrl-b，这里缩写为Ca Ca + c 创建新window Ca + , 重命名window Ca + w 选择window，p和n可以选择window Ca + | 垂直分解 Ca + - 水平分解]]></content>
       <categories>
         <category>工具</category>
-        <category>Archlinux</category>
+        <category>Linux</category>
       </categories>
   </entry>
 </search>
