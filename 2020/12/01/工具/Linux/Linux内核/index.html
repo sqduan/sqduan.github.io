@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Look, this is my heart">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-01T08:07:58.970Z">
+<meta property="og:updated_time" content="2020-12-01T12:11:33.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核">
 <meta name="twitter:description" content="Look, this is my heart">
@@ -401,7 +401,7 @@
                 
               
 
-              <time title="Created: 2020-12-01 14:41:03 / Modified: 16:07:58" itemprop="dateCreated datePublished" datetime="2020-12-01T14:41:03+08:00">2020-12-01</time>
+              <time title="Created: 2020-12-01 14:41:03 / Modified: 20:11:33" itemprop="dateCreated datePublished" datetime="2020-12-01T14:41:03+08:00">2020-12-01</time>
             
 
             
@@ -477,7 +477,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Loading Linux linux-lts ...</span><br><span class="line">错误：file `vmlinuz-linux-lts` not found</span><br></pre></td></tr></table></figure>
 <p>这个时候按任意键退出，然后按<code>e</code>进行编辑，发现此处可以使用emacs临时进行内核更换，将命令中的vmlinuz-linux-lts换成非引导内核，按下Ctrl+x进行引导，然后就可以利用非引导内核进入系统。这个时候再进行内核更换即可。</p>
 <h4 id="安装内核"><a href="#安装内核" class="headerlink" title="安装内核"></a>安装内核</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S linux-lts</span><br></pre></td></tr></table></figure>
-<p>安装某个版本的新内核</p>
+<p>安装某个版本的新内核。</p>
 <h4 id="更新grub"><a href="#更新grub" class="headerlink" title="更新grub"></a>更新grub</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
 <p>每次安装了新内核后，都要执行一次这个命令，否则进入grub加载系统界面后，将看不到新安装的内核。</p>
 

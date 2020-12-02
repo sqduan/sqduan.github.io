@@ -103,10 +103,12 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文将针对保护模式与实模式相关内容进行总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-20T14:04:14.363Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201201205149.png">
+<meta property="og:updated_time" content="2020-12-01T12:58:17.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实模式与保护模式">
 <meta name="twitter:description" content="本文将针对保护模式与实模式相关内容进行总结。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201201205149.png">
 
 
 
@@ -418,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-20 22:04:14" itemprop="dateModified" datetime="2020-11-20T22:04:14+08:00">2020-11-20</time>
+                <time title="Modified: 2020-12-01 20:58:17" itemprop="dateModified" datetime="2020-12-01T20:58:17+08:00">2020-12-01</time>
               
             
           </span>
@@ -479,6 +481,27 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对保护模式与实模式相关内容进行总结。</p>
 <a id="more"></a>
+<h2 id="实模式"><a href="#实模式" class="headerlink" title="实模式"></a>实模式</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>对于8088的实模式，包含如下特性：</p>
+<ul>
+<li><p>8个16bit通用寄存器</p>
+</li>
+<li><p>处理器向内存发送20位地址，其中4位地址由%cs/%ds/%es/%ss提供，指令段使用%cs、数据读写使用%ds、栈读写使用%ss。例如，一条指令位于[cs:ip]，其寻址方式为：</p>
+<script type="math/tex; mode=display">
+addr = 16\times \textrm{segment}+\textrm{offset}=16\times\textrm{CS}+\textrm{IP}</script></li>
+</ul>
+<ul>
+<li>寻址范围很小（$2^{16}=65536$bytes）</li>
+</ul>
+<h2 id="保护模式"><a href="#保护模式" class="headerlink" title="保护模式"></a>保护模式</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>在保护模式下，由一个段选择符和一个指定段内相对地址的偏移量构成逻辑地址，其结构如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201201205149.png" width="480" alt="图片名称" align="center"></p>
+<p>其中：</p>
+<ul>
+<li>Selector叫段选择符，高13位为描述表的入口；而第2位表示使用GDT或LDT，最低两位表示优先级，0-3分别代表最高优先级和最低优先级，段选择符保存在段寄存器（cs/ss/es/fs/ds）中</li>
+<li>GDT/LDT位全局/局部描述符表，保存段描述符，其中Base包含段首字节线性地址，Limit存放段中最后一个内存单元偏移量（就是某个段的长度），Flags决定段的一些特征。</li>
+</ul>
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>寻址范围大</li>
+</ul>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href></a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -874,7 +897,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实模式"><span class="nav-number">1.</span> <span class="nav-text">实模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">1.1.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护模式"><span class="nav-number">2.</span> <span class="nav-text">保护模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">2.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点-1"><span class="nav-number">2.2.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
