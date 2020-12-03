@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content=".LC0:  .string “Helloworld”">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-01T14:21:00.878Z">
+<meta property="og:updated_time" content="2020-12-03T07:23:42.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="X86-64汇编基本语法">
 <meta name="twitter:description" content=".LC0:  .string “Helloworld”">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-01 22:21:00" itemprop="dateModified" datetime="2020-12-01T22:21:00+08:00">2020-12-01</time>
+                <time title="Modified: 2020-12-03 15:23:42" itemprop="dateModified" datetime="2020-12-03T15:23:42+08:00">2020-12-03</time>
               
             
           </span>
@@ -550,14 +550,20 @@
 </div>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="数据移动类"><a href="#数据移动类" class="headerlink" title="数据移动类"></a>数据移动类</h3><h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>一下列举了一些mov的使用方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov    0x10(%ebp),%edi  # ebp+10 --&gt; edi</span><br></pre></td></tr></table></figure>
-<h4 id="push"><a href="#push" class="headerlink" title="push"></a>push</h4><p>只要有PUSH的动作，ESP寄存器自动减小</p>
+<h4 id="push"><a href="#push" class="headerlink" title="push"></a>push</h4><p>只要有PUSH的动作，ESP寄存器自动减小，push命令使用格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">push %eax</span><br></pre></td></tr></table></figure>
+<p>等价于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subl $4, %esp </span><br><span class="line">movl %eax, (%esp)</span><br></pre></td></tr></table></figure>
+<p>先减小esp，再移动数据。</p>
 <h4 id="pop"><a href="#pop" class="headerlink" title="pop"></a>pop</h4><h3 id="计算类"><a href="#计算类" class="headerlink" title="计算类"></a>计算类</h3><h4 id="add"><a href="#add" class="headerlink" title="add"></a>add</h4><h4 id="sub"><a href="#sub" class="headerlink" title="sub"></a>sub</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sub $0x1c, %esp  #  %esp = %esp - 0x1c</span><br></pre></td></tr></table></figure>
 <p>这个语句用于为栈分配空间</p>
 <h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><h4 id="shl"><a href="#shl" class="headerlink" title="shl"></a>shl</h4><h3 id="控制类"><a href="#控制类" class="headerlink" title="控制类"></a>控制类</h3><h4 id="转移命令"><a href="#转移命令" class="headerlink" title="转移命令"></a>转移命令</h4><h5 id="ljmp"><a href="#ljmp" class="headerlink" title="ljmp"></a>ljmp</h5><p>长转移命令，使用格式为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ljmp addr16</span><br></pre></td></tr></table></figure>
 <h5 id="call"><a href="#call" class="headerlink" title="call"></a>call</h5><p>调用命令，使用方式为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call addr</span><br></pre></td></tr></table></figure>
-<p>x86架构规定栈向下生长，一个使用call指令的例子如下：</p>
+<p>等价于</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pushl %eip</span><br><span class="line">movl $addr, %eip</span><br></pre></td></tr></table></figure>
+<p>所以每次调用call，会导致esp减小，因为要将返回地址进行保存。x86架构规定栈向下生长，一个使用call指令的例子如下：</p>
 <div class="table-container">
 <table>
 <thead>

@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="while(i &amp;gt; 0) ​    i++;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-02T08:19:01.628Z">
+<meta property="og:updated_time" content="2020-12-02T12:24:36.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GDB基本使用方法">
 <meta name="twitter:description" content="while(i &amp;gt; 0) ​    i++;">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-02 16:19:01" itemprop="dateModified" datetime="2020-12-02T16:19:01+08:00">2020-12-02</time>
+                <time title="Modified: 2020-12-02 20:24:36" itemprop="dateModified" datetime="2020-12-02T20:24:36+08:00">2020-12-02</time>
               
             
           </span>
@@ -536,7 +536,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) list 123   # 打印源文件123行开始的几行代码</span><br></pre></td></tr></table></figure>
 <h4 id="查看函数调用栈"><a href="#查看函数调用栈" class="headerlink" title="查看函数调用栈"></a>查看函数调用栈</h4><p>使用bt命令可以查看函数的调用栈</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(gdb) bt</span><br><span class="line">#0 readseg (pa=65536, count=4096,offset=0) at boot/main.c:73</span><br><span class="line">#1 0x00007d26 in bootmain() at boot/main.c:44</span><br><span class="line">#2 0x00007c4a in protcseg() at boot/boot.S:69</span><br></pre></td></tr></table></figure>
-<p>每调用一个函数，则压入现在所在的函数，同时前面的序号依次递增，最上面的就是当前所在的函数</p>
+<p>每调用一个函数，则压入现在所在的函数，同时前面的序号依次递增，最上面的就是当前所在的函数，其中，序号后面的0x00007d26为函数栈中函数的返回地址，即被保存的eip值</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
