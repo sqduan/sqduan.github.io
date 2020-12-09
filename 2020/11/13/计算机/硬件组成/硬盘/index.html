@@ -103,10 +103,12 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-13T10:16:48.519Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201208195238.png">
+<meta property="og:updated_time" content="2020-12-08T13:21:57.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="硬盘">
 <meta name="twitter:description" content="罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201208195238.png">
 
 
 
@@ -401,12 +403,24 @@
                 
               
 
-              <time title="Created: 2020-11-13 15:05:04 / Modified: 18:16:48" itemprop="dateCreated datePublished" datetime="2020-11-13T15:05:04+08:00">2020-11-13</time>
+              <time title="Created: 2020-11-13 15:05:04" itemprop="dateCreated datePublished" datetime="2020-11-13T15:05:04+08:00">2020-11-13</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-12-08 21:21:57" itemprop="dateModified" datetime="2020-12-08T21:21:57+08:00">2020-12-08</time>
               
             
           </span>
@@ -502,7 +516,19 @@
 </tbody>
 </table>
 </div>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Bhttps://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8%5D(https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)">维基百科对于DRAM的解释</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=x3jGqOrXXc8">DRAM读写循环</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p> 硬盘在使用前会进行分区操作，从而使其具有不同的功能，本节将分别讨论windows和linux下的分区。</p>
+<h3 id="windows分区"><a href="#windows分区" class="headerlink" title="windows分区"></a>windows分区</h3><h4 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h4><p>使用创建并格式化磁盘分区软件，可以看到windows分区情况如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201208195238.png" width="680" alt="图片名称" align="center"></p>
+<p>可以看到，除了用户自定义的分区以及用于保存系统的C盘外，还有若干个分区，其功能分别如下：</p>
+<ul>
+<li>260MB：EFI系统分区，存储已安装系统的EFI引导加载程序，类型是FAT32</li>
+<li>恢复分区：用于恢复系统的分区</li>
+<li>OEM分区：装有厂商的还原程序</li>
+</ul>
+<p>对于NTFS格式的分区，我们可以进行压缩，从而得到一些未经分配的空间</p>
+<h3 id="linux分区"><a href="#linux分区" class="headerlink" title="linux分区"></a>linux分区</h3><p>linux的设计原则为一切皆文件，我们将硬盘设备挂载到某个文件夹下，通过访问文件夹的方式就可以对硬盘进行操作，所以所谓的分区实际是一种挂载操作，将某个文件夹映射至磁盘。一般来说，将<code>/</code>映射至一个大的磁盘，而将<code>boot/efi</code>映射至<code>efi</code>启动盘，完成分区的操作。文件<code>/etc/fstab</code>记录了linux下的分区情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -653,7 +679,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">259</span>
+                    <span class="site-state-item-count">266</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -778,7 +804,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">54</span>
+                      
+                    
+                    <span class="site-state-item-count">55</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -897,7 +925,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#划分单元"><span class="nav-number">1.</span> <span class="nav-text">划分单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#划分单元"><span class="nav-number">1.</span> <span class="nav-text">划分单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区"><span class="nav-number">2.</span> <span class="nav-text">分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows分区"><span class="nav-number">2.1.</span> <span class="nav-text">windows分区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看分区"><span class="nav-number">2.1.1.</span> <span class="nav-text">查看分区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux分区"><span class="nav-number">2.2.</span> <span class="nav-text">linux分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
