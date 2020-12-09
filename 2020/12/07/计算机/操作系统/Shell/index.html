@@ -104,7 +104,7 @@
 <meta property="og:description" content="$ ls">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201271951.svg">
-<meta property="og:updated_time" content="2020-12-07T12:07:44.243Z">
+<meta property="og:updated_time" content="2020-12-09T03:48:06.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell">
 <meta name="twitter:description" content="$ ls">
@@ -403,12 +403,24 @@
                 
               
 
-              <time title="Created: 2020-12-07 09:29:40 / Modified: 20:07:44" itemprop="dateCreated datePublished" datetime="2020-12-07T09:29:40+08:00">2020-12-07</time>
+              <time title="Created: 2020-12-07 09:29:40" itemprop="dateCreated datePublished" datetime="2020-12-07T09:29:40+08:00">2020-12-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-12-09 11:48:06" itemprop="dateModified" datetime="2020-12-09T11:48:06+08:00">2020-12-09</time>
               
             
           </span>
@@ -474,7 +486,36 @@
 <p>Shell本质上是一个用户态程序，运行于内核之上，可以与用户进行交互。当用户输入一些命令后，shell会对这个输入进行解析，找到对应的可执行文件并执行，然后显示输出。</p>
 <h2 id="shell基本工作原理"><a href="#shell基本工作原理" class="headerlink" title="shell基本工作原理"></a>shell基本工作原理</h2><h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>shell的基本工作原理可以用下图概括：当shell运行后，会处在一个死循环中，等待用户输入命令；而一旦用户有命令输入，会调用fork产生一个子进程，父进程等待子进程完成，子进程调用exec替换内核镜像执行用户命令，结束后执行exit。</p>
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201271951.svg" width="580" alt="图片名称" align="center"></p>
-<h3 id="IO重定向"><a href="#IO重定向" class="headerlink" title="IO重定向"></a>IO重定向</h3><p>shell保证总有三个文件描述符是打开的，分别为标准输入0、标准输出1和标准错误2</p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><h2 id="IO重定向"><a href="#IO重定向" class="headerlink" title="IO重定向"></a>IO重定向</h2><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>在解释IO重定向前，我们先了解一下shell中最终要的三个文件描述符:</p>
+<ul>
+<li>标准输入：stdin 0</li>
+<li>标准输出：stdout 1</li>
+<li>标准错误：stderr 2</li>
+</ul>
+<p>shell一般从标准输入获取命令，然后将运行结果发送至标准输出或错误，而一般标准输出就是终端。shell一般保证这三个描述符总是打开的。现在我们想要重定向输入输出，从其他的文件中读取，再发送到普通文件，这就需要进行IO重定向。</p>
+<h3 id="命令列表"><a href="#命令列表" class="headerlink" title="命令列表"></a>命令列表</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>command &gt; file</td>
+<td>将输出重定向至file</td>
+</tr>
+<tr>
+<td>command &lt; file</td>
+<td>将输入重定向至file</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.bilibili.com/video/av15896196/">MIT6828第四课</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -626,7 +667,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">266</span>
+                    <span class="site-state-item-count">267</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -872,7 +913,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#shell基本工作原理"><span class="nav-number">1.</span> <span class="nav-text">shell基本工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">1.1.</span> <span class="nav-text">命令执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO重定向"><span class="nav-number">1.2.</span> <span class="nav-text">IO重定向</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#shell基本工作原理"><span class="nav-number">1.</span> <span class="nav-text">shell基本工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">1.1.</span> <span class="nav-text">命令执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">2.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO重定向"><span class="nav-number">3.</span> <span class="nav-text">IO重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释"><span class="nav-number">3.1.</span> <span class="nav-text">解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令列表"><span class="nav-number">3.2.</span> <span class="nav-text">命令列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="$ ls">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-07T12:39:00.478Z">
+<meta property="og:updated_time" content="2020-12-09T09:07:25.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-HW2-shell">
 <meta name="twitter:description" content="$ ls">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-12-07 20:32:15 / Modified: 20:39:00" itemprop="dateCreated datePublished" datetime="2020-12-07T20:32:15+08:00">2020-12-07</time>
+              <time title="Created: 2020-12-07 20:32:15" itemprop="dateCreated datePublished" datetime="2020-12-07T20:32:15+08:00">2020-12-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-12-09 17:07:25" itemprop="dateModified" datetime="2020-12-09T17:07:25+08:00">2020-12-09</time>
               
             
           </span>
@@ -477,13 +489,44 @@
 </blockquote>
 <a id="more"></a>
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>阅读文献<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>第0章，完成作业<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，下载<a href="https://pdos.csail.mit.edu/6.828/2018/homework/sh.c">sh.c</a>，然后编译：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> gcc sh.c</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> gcc sh.c</span></span><br></pre></td></tr></table></figure>
 <p>产生<code>a.out</code>文件，写一个脚本<code>t.sh</code>，内容如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ls &gt; y</span><br><span class="line">cat &lt; y | sort | uniq | wc &gt; y1</span><br><span class="line">cat y1</span><br><span class="line">rm y1</span><br><span class="line">ls |  sort | uniq | wc</span><br><span class="line">rm y</span><br></pre></td></tr></table></figure>
 <p>执行命令：<code>./a.out &lt; t.sh</code>，得到如下结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">redir not implemented</span><br><span class="line">exec not implemented</span><br><span class="line">pipe not implemented</span><br><span class="line">exec not implemented</span><br><span class="line">exec not implemented</span><br><span class="line">pipe not implemented</span><br><span class="line">exec not implemented</span><br></pre></td></tr></table></figure>
 <p>有一些函数尚未实现，所以会打印错误信息。</p>
-<h2 id="执行简单的命令"><a href="#执行简单的命令" class="headerlink" title="执行简单的命令"></a>执行简单的命令</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="http://web.mit.edu/6.033/2004/wwwdocs/handouts/handson/unix.html">6.033: Hands-on Assignment (UNIX) (mit.edu)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/homework/sh.c">sh.c</a></span><a href="#fnref:3" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="执行简单的命令"><a href="#执行简单的命令" class="headerlink" title="执行简单的命令"></a>执行简单的命令</h2><p>命令解析的代码文件已经提供了，我们要做的事情就是根据解析的命令，调用exec函数，从而执行特定的命令。这里需要对exec函数有一些了解，输入命令<code>man 3 exec</code>查看execv相关的描述，函数原型为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;unistd.h&gt;</span><br><span class="line">int execv(const char *path, char *constargv[]);</span><br></pre></td></tr></table></figure>
+<p>具体使用方法参考手册，总之我们只需要在runcmd对应的<code>case &#39; &#39;</code>处添加如下代码即可;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">' '</span>:</span><br><span class="line">  ecmd = (struct execcmd*)cmd;</span><br><span class="line">  <span class="keyword">if</span>(ecmd-&gt;argv[<span class="number">0</span>] == <span class="number">0</span>)</span><br><span class="line">    _exit(<span class="number">0</span>);</span><br><span class="line">  <span class="comment">// Your code here ...</span></span><br><span class="line">  execv(ecmd-&gt;argv[<span class="number">0</span>], ecmd-&gt;argv);      <span class="comment">//如果命令执行正确，exec会从另一个入口退出，因此后面的语句不应该被打印</span></span><br><span class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"cmd not find!\n"</span>);</span><br><span class="line">  <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<p>编译并执行<code>sh.c</code>，输入命令<code>ls</code>，会提示<code>cmd not find!</code>，这是因为<code>exec</code>会在当前文件夹下寻找可执行文件<code>ls</code>，然而并找不到这个文件，所以我们要输入绝对路径<code>/bin/ls</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">6.828$ /bin/ls</span><br><span class="line">a.out  sh.c  t.sh  test_execv  test_execv.c</span><br></pre></td></tr></table></figure>
+<h3 id="改进：添加环境变量"><a href="#改进：添加环境变量" class="headerlink" title="改进：添加环境变量"></a>改进：添加环境变量</h3><p>从上面的程序中我们可以看到，必须在<code>sh</code>中输入绝对路径，才能找到文件名，那么我们能不能设计环境变量机制，只需要输入命令就能找到特定的文件？</p>
+<p>TODO：为sh添加环境变量</p>
+<h2 id="IO重定向"><a href="#IO重定向" class="headerlink" title="IO重定向"></a>IO重定向</h2><p>现在我们进行IO重定向，使我们的shell可以执行如下语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;6.828 is cool&quot; &gt; x.txt</span><br><span class="line">cat &lt; x.txt</span><br></pre></td></tr></table></figure>
+<p>即将IO重定向至一个文件。这里我们需要对文件进行操作，所以需要<code>open</code>和<code>close</code>操作；此外，为了将文件描述符进行重定向，我们还需要用到<code>dup2</code>函数</p>
+<h3 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h3><ul>
+<li><code>dup2</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">int dup2(int oldfd, int newfd);  //将oldfd重定向到newfd</span><br></pre></td></tr></table></figure>
+<ul>
+<li>open</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int open (const char* Path, int flags [, int mode ]);   // flags表示了文件处理方式</span><br></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>命令解析已经帮帮我们做好了，我们只需要做下面几件事：</p>
+<ul>
+<li>以特定的<code>cmd-&gt;flags</code>打开文件</li>
+<li>对文件进行重定向</li>
+<li>关闭文件</li>
+<li>exec()</li>
+</ul>
+<p>所以我们的代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">'&gt;'</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="string">'&lt;'</span>:</span><br><span class="line">    rcmd = (struct redircmd*)cmd;</span><br><span class="line">    <span class="comment">// fprintf(stderr, "redir not implemented\n");</span></span><br><span class="line">    <span class="comment">// Your code here ...</span></span><br><span class="line">    <span class="keyword">int</span> fd = open(rcmd-&gt;file, rcmd-&gt;flags, <span class="number">0666</span>);    <span class="comment">//修改文件权限，否则打不开</span></span><br><span class="line">    <span class="keyword">if</span>(fd &lt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="number">2</span>, <span class="string">"open %s failed\n"</span>, rcmd-&gt;file);</span><br><span class="line">        <span class="built_in">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    dup2(fd,rcmd-&gt;fd);</span><br><span class="line">    close(fd);</span><br><span class="line">    runcmd(rcmd-&gt;cmd);</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<p>现在当我们执行下面语句是，就会将给定文件重定向至标准输入/输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">6.828$ /bin/echo &quot;Helloworld&quot; &gt; result  </span><br><span class="line">6.828$ /bin/cat &lt; result</span><br><span class="line">&quot;Helloworld&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="执行管道命令"><a href="#执行管道命令" class="headerlink" title="执行管道命令"></a>执行管道命令</h2><p>在执行管道命令前，我们先要明确管道的机制</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="http://web.mit.edu/6.033/2004/wwwdocs/handouts/handson/unix.html">6.033: Hands-on Assignment (UNIX) (mit.edu)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/homework/sh.c">sh.c</a></span><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">4.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-shell.html">HW2</a></span><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -634,7 +677,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">266</span>
+                    <span class="site-state-item-count">267</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -880,7 +923,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行简单的命令"><span class="nav-number">2.</span> <span class="nav-text">执行简单的命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行简单的命令"><span class="nav-number">2.</span> <span class="nav-text">执行简单的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#改进：添加环境变量"><span class="nav-number">2.1.</span> <span class="nav-text">改进：添加环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO重定向"><span class="nav-number">3.</span> <span class="nav-text">IO重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数原型"><span class="nav-number">3.1.</span> <span class="nav-text">函数原型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行管道命令"><span class="nav-number">4.</span> <span class="nav-text">执行管道命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
