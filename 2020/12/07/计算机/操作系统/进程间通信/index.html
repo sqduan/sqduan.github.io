@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="不要回答！不要回答！不要回答！">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-09T03:41:32.733Z">
+<meta property="og:updated_time" content="2020-12-10T07:54:29.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程间通信">
 <meta name="twitter:description" content="不要回答！不要回答！不要回答！">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-09 11:41:32" itemprop="dateModified" datetime="2020-12-09T11:41:32+08:00">2020-12-09</time>
+                <time title="Modified: 2020-12-10 15:54:29" itemprop="dateModified" datetime="2020-12-10T15:54:29+08:00">2020-12-10</time>
               
             
           </span>
@@ -481,10 +481,23 @@
 <p>不要回答！不要回答！不要回答！</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>在linux下创建pipe命令为<code>|</code>，可以进行进程间通信，它是进程间的一个单向数据流，一个写入一个读取。</p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><h3 id="管道命令"><a href="#管道命令" class="headerlink" title="管道命令"></a>管道命令</h3><p>在linux下创建pipe命令为<code>|</code>，可以进行进程间通信，它是进程间的一个单向数据流，一个写入一个读取。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls | more</span><br></pre></td></tr></table></figure>
 <p>第一个进程的标准输出被重定向到管道中；第二个进程从这个管道中读取输入。管道可以看作一个打开的文件。</p>
-<h3 id="管道工作过程"><a href="#管道工作过程" class="headerlink" title="管道工作过程"></a>管道工作过程</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<h3 id="管道工作过程"><a href="#管道工作过程" class="headerlink" title="管道工作过程"></a>管道工作过程</h3><h4 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h4><h5 id="pipe"><a href="#pipe" class="headerlink" title="pipe"></a>pipe</h5><p>pipe的头文件和函数原型如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> filedes[<span class="number">2</span>])</span></span>;</span><br></pre></td></tr></table></figure>
+<p>输入为一个文件描述符数组，大小为2，保存两个文件描述符：</p>
+<ul>
+<li>filedes[0]：管道读取端，一般为3</li>
+<li>filedes[1]：管道写入端，一般为4</li>
+</ul>
+<p>所以linux下的管道实际上是半双工的。如果创建管道失败，返回<code>-1</code>，否则返回<code>0</code>。</p>
+<h3 id="管道的一些属性"><a href="#管道的一些属性" class="headerlink" title="管道的一些属性"></a>管道的一些属性</h3><h4 id="大小"><a href="#大小" class="headerlink" title="大小"></a>大小</h4><p>管道的大小不同的机器可能不同，下面是一个测试的脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">test $# -ge 1 || &#123; echo "usage: $0 write-size [wait-time]"; exit 1; &#125;</span><br><span class="line">test $# -ge 2 || set -- "$@" 1</span><br><span class="line">bytes_written=$(</span><br><span class="line">&#123;</span><br><span class="line">    exec 3&gt;&amp;1</span><br><span class="line">    &#123;</span><br><span class="line">        perl -e '</span><br><span class="line">            $size = $ARGV[0];</span><br><span class="line">            $block = q(a) x $size;</span><br><span class="line">            $num_written = 0;</span><br><span class="line">            sub report &#123; print STDERR $num_written * $size, qq(\n); &#125;</span><br><span class="line">            report; while (defined syswrite STDOUT, $block) &#123;</span><br><span class="line">                $num_written++; report;</span><br><span class="line">            &#125;</span><br><span class="line">        ' "$1" 2&gt;&amp;3</span><br><span class="line">    &#125; | (sleep "$2"; exec 0&lt;&amp;-);</span><br><span class="line">&#125; | tail -1</span><br><span class="line">)</span><br><span class="line">printf "write size: %10d; bytes successfully before error: %d\n" \</span><br><span class="line">    "$1" "$bytes_written"</span><br></pre></td></tr></table></figure>
+<p>输入测试命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c &apos;for p in &#123;0..18&#125;; do ts.sh $((2 ** $p)) 0.5; done&apos;</span><br></pre></td></tr></table></figure>
+<p>在我这里是65536个byte。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -881,7 +894,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">1.</span> <span class="nav-text">管道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管道工作过程"><span class="nav-number">1.1.</span> <span class="nav-text">管道工作过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">1.</span> <span class="nav-text">管道</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管道命令"><span class="nav-number">1.1.</span> <span class="nav-text">管道命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道工作过程"><span class="nav-number">1.2.</span> <span class="nav-text">管道工作过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用"><span class="nav-number">1.2.1.</span> <span class="nav-text">系统调用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#pipe"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">pipe</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道的一些属性"><span class="nav-number">1.3.</span> <span class="nav-text">管道的一些属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大小"><span class="nav-number">1.3.1.</span> <span class="nav-text">大小</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
