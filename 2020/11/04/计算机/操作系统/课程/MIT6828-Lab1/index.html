@@ -105,7 +105,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/390px-Elf-layout--en.png?raw=true">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201231600.svg">
-<meta property="og:updated_time" content="2020-12-09T01:23:46.015Z">
+<meta property="og:updated_time" content="2020-12-10T14:01:15.119Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-Lab1-启动一个PC">
 <meta name="twitter:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-09 09:23:46" itemprop="dateModified" datetime="2020-12-09T09:23:46+08:00">2020-12-09</time>
+                <time title="Modified: 2020-12-10 22:01:15" itemprop="dateModified" datetime="2020-12-10T22:01:15+08:00">2020-12-10</time>
               
             
           </span>
@@ -726,7 +726,7 @@
 <p>为了更细致地分析函数调用栈的行为，我们进一步使用gdb进行分析，首先我们分析栈指针%ebp的情况：</p>
 <h5 id="栈指针-ebp的情况"><a href="#栈指针-ebp的情况" class="headerlink" title="栈指针%ebp的情况"></a>栈指针%ebp的情况</h5><p>在我们进入到test_backtrace函数前，即在<code>enter.S</code>中，我们能够看到这样一行代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Clear the frame pointer register (EBP)                                                                     # so that once we get into debugging C code,                                                                 # stack backtraces will be terminated properly.                                                             </span><br><span class="line">movl    $0x0,%ebp                       # nuke frame pointer  </span><br><span class="line"></span><br><span class="line"># Set the stack pointer</span><br><span class="line">movl    $(bootstacktop), %esp           # bootstacktop为f0100000</span><br><span class="line"></span><br><span class="line">call    i386_init</span><br></pre></td></tr></table></figure>
-<p>将栈基底设置为0x0，然后将栈顶指针设置为bootstacktop，然后下面一句开始调用i386_init函数，将eip压栈，则f010effc保存着返回地址eip的值，为<code>0xf010003e</code>，进入函数后，首先要进行栈分配，保存前一栈帧的栈底，即<code>push %ebp</code>，故<code>0xf010eff8</code>保存的内容为<code>0x00000000</code>，即最一开始栈的栈底，然后执行<code>mov %esp, %ebp</code>，所以从这里我们得到一个关键信息：<strong>ebp保存着前一个调用栈的栈底ebp’</strong>，用数学语言描述如下：</p>
+<p>将栈基底设置为0x0，然后将栈顶指针设置为bootstacktop，然后下面一句开始调用i386_init函数，将eip压栈，则f010effc保存着返回地址eip的值，为<code>0xf010003e</code>，进入函数后，首先要进行栈分配，保存前一栈帧的栈底，即<code>push %ebp</code>，故<code>0xf010eff8</code>保存的内容为<code>0x00000000</code>，即最开始栈的栈底，然后执行<code>mov %esp, %ebp</code>，所以从这里我们得到一个关键信息：<strong>ebp保存着前一个调用栈的栈底ebp’</strong>，用数学语言描述如下：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 \textrm{ebp}_n&=\&\textrm{(ebp)}_{n-1}\\
@@ -1084,7 +1084,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">267</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
