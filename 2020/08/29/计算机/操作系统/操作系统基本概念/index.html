@@ -104,7 +104,7 @@
 <meta property="og:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901165336.png">
-<meta property="og:updated_time" content="2020-09-13T08:03:54.272Z">
+<meta property="og:updated_time" content="2020-12-17T02:46:50.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统概述">
 <meta name="twitter:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-13 16:03:54" itemprop="dateModified" datetime="2020-09-13T16:03:54+08:00">2020-09-13</time>
+                <time title="Modified: 2020-12-17 10:46:50" itemprop="dateModified" datetime="2020-12-17T10:46:50+08:00">2020-12-17</time>
               
             
           </span>
@@ -497,8 +497,9 @@
 <h4 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h4><p>最近最少使用、先入先出等</p>
 <h4 id="例子：内存管理"><a href="#例子：内存管理" class="headerlink" title="例子：内存管理"></a>例子：内存管理</h4><p>我们有一些内存页面，当有一个进程时，我们对内存进行分配，然后映射给指定的进程，这样进程就可以访问指定的内存。由于内存页面可能会满，所以我们需要一些策略对页面进行置换，例如FIFO，LRU等。</p>
 <h3 id="操作系统设计原则"><a href="#操作系统设计原则" class="headerlink" title="操作系统设计原则"></a>操作系统设计原则</h3><ol>
-<li>能够支持多种机制和策略，例如支持LRU、LFU和random。</li>
-<li>考虑OS使用场景、环境、用户等</li>
+<li>隔离性（isolation）：不同的应用相互不能影响，用户态不能影响内核态，即禁止直接的硬件访问，只能通过系统调用实现。</li>
+<li>复用性（multiplexing）：对硬件资源进行规划，分时复用；软件具有共享性，一个库可以为多个应用使用</li>
+<li>交互性（interaction）：不同应用可以通过通信手段进行交互</li>
 </ol>
 <h3 id="内核与用户态（区分边界）"><a href="#内核与用户态（区分边界）" class="headerlink" title="内核与用户态（区分边界）"></a>内核与用户态（区分边界）</h3><h4 id="为何要区分"><a href="#为何要区分" class="headerlink" title="为何要区分"></a>为何要区分</h4><p>限制不同程序间的访问能力，实际上就是进行了权限划分。</p>
 <h4 id="用户态"><a href="#用户态" class="headerlink" title="用户态"></a>用户态</h4><p>只能受限的访问内存，且不允许访问外围设备，占用cpu的能力被剥夺，cpu资源可以被其他程序获取。</p>
@@ -758,7 +759,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">270</span>
+                    <span class="site-state-item-count">272</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
