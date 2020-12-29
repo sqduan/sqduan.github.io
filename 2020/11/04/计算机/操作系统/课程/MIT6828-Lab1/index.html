@@ -105,7 +105,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/390px-Elf-layout--en.png?raw=true">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201231600.svg">
-<meta property="og:updated_time" content="2020-12-18T12:23:04.372Z">
+<meta property="og:updated_time" content="2020-12-28T14:34:07.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-Lab1-启动一个PC">
 <meta name="twitter:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
@@ -421,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-18 20:23:04" itemprop="dateModified" datetime="2020-12-18T20:23:04+08:00">2020-12-18</time>
+                <time title="Modified: 2020-12-28 22:34:07" itemprop="dateModified" datetime="2020-12-28T22:34:07+08:00">2020-12-28</time>
               
             
           </span>
@@ -803,7 +803,9 @@
 <p>还需要对符号表进行更深入的了解。总之这里我们知道，kernel加载过程中符号表也被载入，根据符号表，我们能够解析出<code>eip</code>保存的指令所在文件、行号、参数等相关信息。现在我们来对<code>mon_backtrace</code>进行改进。</p>
 <h5 id="改进mon-backtrace"><a href="#改进mon-backtrace" class="headerlink" title="改进mon_backtrace"></a>改进mon_backtrace</h5><p>首先，我们需要改进<code>kern/kdebug.c</code>中的<code>debuginfo_eip</code>函数，添加行号搜索功能，根据提示添加如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Search within [lline, rline] for the line number stab.</span></span><br><span class="line"><span class="comment">// If found, set info-&gt;eip_line to the right line number.</span></span><br><span class="line"><span class="comment">// If not found, return -1.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Hint:</span></span><br><span class="line"><span class="comment">//	There's a particular stabs type used for line numbers.</span></span><br><span class="line"><span class="comment">//	Look at the STABS documentation and &lt;inc/stab.h&gt; to find</span></span><br><span class="line"><span class="comment">//	which one.</span></span><br><span class="line"><span class="comment">// Your code here.</span></span><br><span class="line">stab_binsearch(stabs, &amp;lline, &amp;rline, N_SLINE, addr);</span><br><span class="line"><span class="keyword">if</span> (lline &lt;= rline)&#123;</span><br><span class="line">    info-&gt;eip_line = rline;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后修改<code>mon_backtrace</code>，调用<code>debuginfo_eip</code>并按照格式输出相关信息。</p>
+<p>然后修改<code>mon_backtrace</code>，调用<code>debuginfo_eip</code>并按照格式输出相关信息。修改后的<code>mon_backtrace</code>如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mon_backtrace(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv, struct Trapframe *tf)                      </span><br><span class="line">&#123;                                                                               </span><br><span class="line">    cprintf(<span class="string">"Stack backtrace:\n"</span>);                                              </span><br><span class="line">                                                                                 </span><br><span class="line">    <span class="comment">// Your code here.                                                          </span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> *ebp = (<span class="keyword">unsigned</span> <span class="keyword">int</span> *)read_ebp();   <span class="comment">//get the frame base of backtrace</span></span><br><span class="line">    <span class="keyword">while</span>(*ebp != <span class="number">0x0</span>)&#123;                                                         </span><br><span class="line">        cprintf(<span class="string">"ebp %x  eip %x  args %08x %08x %08x %08x %08x\n"</span>, *ebp, ebp[<span class="number">1</span>], ebp[<span class="number">2</span>], ebp[<span class="number">3</span>], ebp[<span class="number">4</span>], ebp[<span class="number">5</span>], ebp[<span class="number">6</span>]);</span><br><span class="line">        debuginfo_eip(eip[<span class="number">1</span>], &amp;info);</span><br><span class="line">        cprintf(<span class="string">"%s:%d: %.*s+%u\n"</span>, info.eip_file, info.eip_line, info.eip_fn_namelen, info.eip_fn_name, ebp[<span class="number">1</span>]-info.eip_fn_addr); </span><br><span class="line">        <span class="comment">//由于info.eip_fn_name并不是以0结尾，所以我们需要输出指定长度的函数名info.eip_fn_namelen</span></span><br><span class="line">        ebp =(<span class="keyword">unsigned</span> <span class="keyword">int</span> *) (*ebp);                 </span><br><span class="line">    &#125;                                                                           </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;                                                                   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，Lab1的内容就全部完成了。</p>
 <h2 id="阅读材料"><a href="#阅读材料" class="headerlink" title="阅读材料"></a>阅读材料</h2><h3 id="Selection-of-Operating-System-Papers"><a href="#Selection-of-Operating-System-Papers" class="headerlink" title="Selection of Operating System Papers"></a>Selection of Operating System Papers</h3><p>Available on <a href="https://pdos.csail.mit.edu/6.828/2018/schedule.html">the 6.828 schedule</a>.</p>
 <h3 id="UNIX"><a href="#UNIX" class="headerlink" title="UNIX"></a>UNIX</h3><ul>
 <li><a href="https://www.youtube.com/watch?v=tc4ROCJYbm0">Youtube Unix intro</a></li>
@@ -1117,7 +1119,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">273</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1244,7 +1246,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">55</span>
+                      
+                    
+                    <span class="site-state-item-count">56</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

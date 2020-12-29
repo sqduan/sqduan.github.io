@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文将针对C++中动态内存管理的方式进行总结">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-16T09:16:02.135Z">
+<meta property="og:updated_time" content="2020-12-28T14:29:06.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态内存管理">
 <meta name="twitter:description" content="本文将针对C++中动态内存管理的方式进行总结">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-16 17:16:02" itemprop="dateModified" datetime="2020-08-16T17:16:02+08:00">2020-08-16</time>
+                <time title="Modified: 2020-12-28 22:29:06" itemprop="dateModified" datetime="2020-12-28T22:29:06+08:00">2020-12-28</time>
               
             
           </span>
@@ -482,7 +482,8 @@
 <p>首先说明一点，动态内存管理在堆上进行，其生存周期为分配内存至手动释放内存的时间段，我们应当尽量避免手动进行内存管理。</p>
 <h2 id="C-动态内存管理的方式"><a href="#C-动态内存管理的方式" class="headerlink" title="C++动态内存管理的方式"></a>C++动态内存管理的方式</h2><h4 id="new-and-delete"><a href="#new-and-delete" class="headerlink" title="new and delete"></a>new and delete</h4><h5 id="new-delete的基本用法"><a href="#new-delete的基本用法" class="headerlink" title="new/delete的基本用法"></a>new/delete的基本用法</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> size = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> *a = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line"><span class="keyword">delete</span> []a;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> &#123;</span>...&#125;   <span class="comment">//声明一个类 A</span></span><br><span class="line">A *obj = <span class="keyword">new</span> A();  <span class="comment">//使用 new 创建对象</span></span><br><span class="line"><span class="keyword">delete</span> obj;</span><br></pre></td></tr></table></figure>
 <h5 id="new-delete底层实现"><a href="#new-delete底层实现" class="headerlink" title="new /delete底层实现"></a>new /delete底层实现</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局 operator new</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="built_in">std</span>::<span class="keyword">size_t</span> size)</span> <span class="title">throw</span><span class="params">(<span class="built_in">std</span>::bad_alloc)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (size == <span class="number">0</span>)</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">void</span>* p;</span><br><span class="line">    <span class="keyword">while</span> ((p = ::<span class="built_in">malloc</span>(size)) == <span class="number">0</span>) &#123; <span class="comment">//采用 malloc 分配空间</span></span><br><span class="line">        <span class="built_in">std</span>::new_handler nh = <span class="built_in">std</span>::get_new_handler();   <span class="comment">//std::new_handler 是函数指针类型（指向不接收参数并返回 void 的指针）</span></span><br><span class="line">        <span class="keyword">if</span> (nh)</span><br><span class="line">            nh();</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="built_in">std</span>::bad_alloc();  <span class="comment">//分配失败，抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对应的全局 operator delete 采用 free 释放空间</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="keyword">void</span>* ptr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ptr)</span><br><span class="line">        ::<span class="built_in">free</span>(ptr); <span class="comment">//采用 free 释放空间。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="malloc-and-free"><a href="#malloc-and-free" class="headerlink" title="malloc and free"></a>malloc and free</h4><p>传统的C语言式内存管理，不建议在C++中使用</p>
+<h4 id="malloc-and-free"><a href="#malloc-and-free" class="headerlink" title="malloc and free"></a>malloc and free</h4><p>传统的C语言式内存管理，不建议在C++中使用，使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char *str;</span><br><span class="line">str = (char *) malloc(15);</span><br><span class="line">strcpy(str, &quot;tutorialspoint&quot;);</span><br></pre></td></tr></table></figure>
 <h4 id="两者比较"><a href="#两者比较" class="headerlink" title="两者比较"></a>两者比较</h4><p>在C++中，如果不是必须，那么尽可能使用new和delete，因为new、delete可以确保对象的构造函数和析构函数被调用，是类型安全的。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
@@ -635,7 +636,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">273</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -762,7 +763,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">55</span>
+                      
+                    
+                    <span class="site-state-item-count">56</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
