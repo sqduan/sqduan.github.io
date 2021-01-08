@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-12-31T14:27:54.480Z</updated>
+  <updated>2021-01-08T04:57:31.709Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>异常</title>
+    <link href="http://yoursite.com/2021/01/08/%E5%B7%A5%E5%85%B7/C++/%E5%BC%82%E5%B8%B8/"/>
+    <id>http://yoursite.com/2021/01/08/工具/C++/异常/</id>
+    <published>2021-01-08T03:04:42.105Z</published>
+    <updated>2021-01-08T04:57:31.709Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>谎言的代价是什么<br>并不是它会被错当成真相<br>真正的危险是 如果我们听了太多谎言<br>会再无法分辨出真相</p></blockquote><a id="more"></a><h2 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h2><p>异常允许我们将问题检测与解决过程分离</p><h2 id="异常使用准则"><a href="#异常使用准则" class="headerlink" title="异常使用准则"></a>异常使用准则</h2><h3 id="何时使用异常"><a href="#何时使用异常" class="headerlink" title="何时使用异常"></a>何时使用异常</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;谎言的代价是什么&lt;br&gt;并不是它会被错当成真相&lt;br&gt;真正的危险是 如果我们听了太多谎言&lt;br&gt;会再无法分辨出真相&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>2020年年末总结</title>
@@ -467,32 +491,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>IO设备</title>
-    <link href="http://yoursite.com/2020/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90/%E5%A4%96%E8%AE%BE/"/>
-    <id>http://yoursite.com/2020/11/30/计算机/硬件组成/外设/</id>
-    <published>2020-11-30T01:59:32.524Z</published>
-    <updated>2020-11-30T03:54:09.051Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>若吾起舞时，丽人皆沉醉。</p><p>若吾起舞时，皓月亦鸣音。</p><p>神降合婚夜，破晓鸫鸟啼。</p></blockquote><a id="more"></a><p>外设分为字符设备和块设备，通过IO接口与CPU相连，本文将对外设相关的知识进行总结。</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="什么是外设"><a href="#什么是外设" class="headerlink" title="什么是外设"></a>什么是外设</h3><h3 id="外设特点"><a href="#外设特点" class="headerlink" title="外设特点"></a>外设特点</h3><ul><li>种类多</li><li>工作速度比CPU慢，且速度分布宽</li><li>信号类型与信息格式多样化</li></ul><h2 id="IO接口"><a href="#IO接口" class="headerlink" title="IO接口"></a>IO接口</h2><h3 id="定义及组成"><a href="#定义及组成" class="headerlink" title="定义及组成"></a>定义及组成</h3><p>IO接口是一个电子电路，内部有若干寄存器和相应控制逻辑电路。</p><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>作为CPU和IO设备交换信息的媒介，IO接口基本功能如下：</p><ul><li>速度匹配</li><li>信号形式匹配（AD/DA/串并/并串）</li><li>电平转换及驱动能力增加</li><li>信息格式及时序匹配</li></ul><h3 id="IO端口"><a href="#IO端口" class="headerlink" title="IO端口"></a>IO端口</h3><p>IO端口是IO接口中的一组能和处理器交换信息的寄存器，CPU对外设的访问实际是通过对IO端口的访问实现的。IO端口一般包含如下几个部分：</p><ul><li>数据端口：存放数据</li><li>控制端口：存放控制指令</li><li>状态端口：存放状态信息</li></ul><h4 id="IO端口编址方式"><a href="#IO端口编址方式" class="headerlink" title="IO端口编址方式"></a>IO端口编址方式</h4><h5 id="传统电脑：采用专用的IO地址"><a href="#传统电脑：采用专用的IO地址" class="headerlink" title="传统电脑：采用专用的IO地址"></a>传统电脑：采用专用的IO地址</h5><ul><li>和访问内存的方式类似</li><li>有1024个IO地址</li><li>通过IN、OUT命令访问</li></ul><p>下面的代码展示了一个向打印设备写入一个byte的过程</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DATA_PORT    0x378</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_PORT  0x379</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   BUSY 0x80</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONTROL_PORT 0x37A</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   STROBE 0x01</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">lpt_putc(<span class="keyword">int</span> c)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* wait for printer to consume previous byte */</span></span><br><span class="line">  <span class="keyword">while</span>((inb(STATUS_PORT) &amp; BUSY) == <span class="number">0</span>)</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* put the byte on the parallel lines */</span></span><br><span class="line">  outb(DATA_PORT, c);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* tell the printer to look at the data */</span></span><br><span class="line">  outb(CONTROL_PORT, STROBE);</span><br><span class="line">  outb(CONTROL_PORT, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h5 id="内存映射IO（现代计算机常用）"><a href="#内存映射IO（现代计算机常用）" class="headerlink" title="内存映射IO（现代计算机常用）"></a>内存映射IO（现代计算机常用）</h5><p>这种情况下外设接口与内存进行了统一编址，其优缺点如下：</p><ul><li>优点<ul><li>不需要额外指令</li><li>访问控制信号统一</li><li>IO地址空间扩展</li></ul></li><li>缺点<ul><li>访问类似内存，但是工作行为不是</li><li>会占用内存的一部分地址</li></ul></li></ul><h2 id="数据传输方式"><a href="#数据传输方式" class="headerlink" title="数据传输方式"></a>数据传输方式</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;若吾起舞时，丽人皆沉醉。&lt;/p&gt;
-&lt;p&gt;若吾起舞时，皓月亦鸣音。&lt;/p&gt;
-&lt;p&gt;神降合婚夜，破晓鸫鸟啼。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="组成原理" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
     
     
   </entry>
