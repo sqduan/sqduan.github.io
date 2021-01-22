@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-01-13T13:16:17.636Z</updated>
+  <updated>2021-01-22T05:23:21.376Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>符号表</title>
+    <link href="http://yoursite.com/2021/01/22/%E5%B7%A5%E5%85%B7/GDB/%E7%AC%A6%E5%8F%B7%E8%A1%A8/"/>
+    <id>http://yoursite.com/2021/01/22/工具/GDB/符号表/</id>
+    <published>2021-01-22T05:22:24.202Z</published>
+    <updated>2021-01-22T05:23:21.376Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>符号表是很重要的调试信息，在Debug模式编译下会将符号表载入内存中，从而方便调试，本文将对符号表相关内容进行总结。</p><a id="more"></a><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://unix.stackexchange.com/questions/243350/why-does-using-yes-on-bash-pipelines-not-cause-infinite-loops">shell - Why does using <code>yes</code> on bash pipelines <em>not</em> cause infinite loops? - Unix &amp; Linux Stack Exchange</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;符号表是很重要的调试信息，在Debug模式编译下会将符号表载入内存中，从而方便调试，本文将对符号表相关内容进行总结。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="GDB" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/GDB/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>接口</title>
@@ -465,30 +487,6 @@
       <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
     
       <category term="编译原理" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux内核</title>
-    <link href="http://yoursite.com/2020/12/01/%E5%B7%A5%E5%85%B7/Linux/Linux%E5%86%85%E6%A0%B8/"/>
-    <id>http://yoursite.com/2020/12/01/工具/Linux/Linux内核/</id>
-    <published>2020-12-01T06:41:03.143Z</published>
-    <updated>2020-12-01T12:11:33.596Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>Look, this is my heart</p></blockquote><a id="more"></a><h2 id="内核运维"><a href="#内核运维" class="headerlink" title="内核运维"></a>内核运维</h2><h3 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h3><h4 id="查看内核版本"><a href="#查看内核版本" class="headerlink" title="查看内核版本"></a>查看内核版本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br><span class="line">linux 5.9.8.arch1-1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者在archlinux下</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pacman -Q linux </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> pacman -Q | grep linux</span></span><br><span class="line"></span><br><span class="line">archlinux-keyring 20201028-1</span><br><span class="line">lib32-util-linux 2.36-1</span><br><span class="line">linux 5.9.8.arch1-1                      #内核版本</span><br><span class="line">linux-api-headers 5.8-1</span><br><span class="line">linux-firmware 20201023.dae4b4c-1</span><br><span class="line">linux-lts 5.4.77-1                       #安装的某个内核</span><br><span class="line">linux-lts-headers 5.4.77-1</span><br><span class="line">util-linux 2.36-4</span><br><span class="line">util-linux-libs 2.36-4</span><br></pre></td></tr></table></figure><h4 id="卸载旧内核-危险操作，请谨慎进行"><a href="#卸载旧内核-危险操作，请谨慎进行" class="headerlink" title="卸载旧内核(危险操作，请谨慎进行)"></a>卸载旧内核(危险操作，请谨慎进行)</h4><p>进入<code>/boot/</code>中，然后</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm vmlinuz-linux-lts</span><br><span class="line">sudo rm initramfs-linux-lts*</span><br></pre></td></tr></table></figure><p>重启后可以发现只剩下最新的内核了。</p><h4 id="内核恢复"><a href="#内核恢复" class="headerlink" title="内核恢复"></a>内核恢复</h4><p>有一次手贱不小心把grub引导的内核删掉了，但好在还有一个非引导的内核，这里讲一下如何对grub进行修改从而引导非引导内核。进入系统后选择内核，发现错误信息如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Loading Linux linux-lts ...</span><br><span class="line">错误：file `vmlinuz-linux-lts` not found</span><br></pre></td></tr></table></figure><p>这个时候按任意键退出，然后按<code>e</code>进行编辑，发现此处可以使用emacs临时进行内核更换，将命令中的vmlinuz-linux-lts换成非引导内核，按下Ctrl+x进行引导，然后就可以利用非引导内核进入系统。这个时候再进行内核更换即可。</p><h4 id="安装内核"><a href="#安装内核" class="headerlink" title="安装内核"></a>安装内核</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S linux-lts</span><br></pre></td></tr></table></figure><p>安装某个版本的新内核。</p><h4 id="更新grub"><a href="#更新grub" class="headerlink" title="更新grub"></a>更新grub</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure><p>每次安装了新内核后，都要执行一次这个命令，否则进入grub加载系统界面后，将看不到新安装的内核。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Look, this is my heart&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="Linux" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/Linux/"/>
     
     
   </entry>
