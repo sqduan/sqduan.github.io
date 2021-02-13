@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="困难的事情不是我们如何理解机器，而是机器如何理解我们">
+  <meta name="description" content="Electronic Numerical Integrator And Computer">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原码、反码与补码">
-<meta property="og:url" content="http://yoursite.com/2020/10/27/计算机/硬件组成/原、反、补码/index.html">
+<meta property="og:title" content="整体架构">
+<meta property="og:url" content="http://yoursite.com/2020/11/30/计算机/组成原理/整体架构/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="困难的事情不是我们如何理解机器，而是机器如何理解我们">
+<meta property="og:description" content="Electronic Numerical Integrator And Computer">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-27T07:04:01.100Z">
+<meta property="og:updated_time" content="2020-11-30T01:35:10.179Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原码、反码与补码">
-<meta name="twitter:description" content="困难的事情不是我们如何理解机器，而是机器如何理解我们">
+<meta name="twitter:title" content="整体架构">
+<meta name="twitter:description" content="Electronic Numerical Integrator And Computer">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/10/27/计算机/硬件组成/原、反、补码/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/30/计算机/组成原理/整体架构/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>原码、反码与补码 | 一隅</title>
+  <title>整体架构 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/27/计算机/硬件组成/原、反、补码/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/30/计算机/组成原理/整体架构/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">原码、反码与补码
+          <h1 class="post-title" itemprop="name headline">整体架构
 
               
             
@@ -401,7 +401,7 @@
                 
               
 
-              <time title="Created: 2020-10-27 14:43:42 / Modified: 15:04:01" itemprop="dateCreated datePublished" datetime="2020-10-27T14:43:42+08:00">2020-10-27</time>
+              <time title="Created: 2020-11-30 09:32:31 / Modified: 09:35:10" itemprop="dateCreated datePublished" datetime="2020-11-30T09:32:31+08:00">2020-11-30</time>
             
 
             
@@ -466,50 +466,11 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>困难的事情不是我们如何理解机器，而是机器如何理解我们</p>
+<p>Electronic Numerical Integrator And Computer</p>
 </blockquote>
 <a id="more"></a>
-<p>计算机依赖二进制进行运算，而为了配合二进制计算设计硬件电路，人们提出了原码、反码以及补码的概念。本文将针对这些概念及相互之间的转换进行总结。</p>
-<h2 id="原、反、补码的概念"><a href="#原、反、补码的概念" class="headerlink" title="原、反、补码的概念"></a>原、反、补码的概念</h2><h3 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h3><p>原码由两部分组成</p>
-<ul>
-<li>符号位</li>
-<li>真值的绝对值</li>
-</ul>
-<p>原码的第一位为符号位，其余位为值位，例如：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-+1_{[原]}=0000 ,0001\\
--1_{[原]}=1000 ,0001
-\end{aligned}</script><p>其中符号位0为正，1为负。原码的表示范围为：<code>[1111 1111, 0111 1111]</code>，即-127到127。从形式上看，原码符合人类对于数字的认知，所以是人比较能理解的计数方式。</p>
-<h3 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h3><p>反码的表示方法为：</p>
-<ul>
-<li>正数即本身</li>
-<li>负数符号不变、其余取反</li>
-</ul>
-<script type="math/tex; mode=display">
-\begin{aligned}
-+1 = [0000 ,0001]_{原}= [0000,0001]_{反}\\
--1 = [1000 ,0001]_{原}= [1111,1110]_{反}
-\end{aligned}</script><p>一会儿再讨论为什么要这样设计，先记住其定义。</p>
-<h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p>补码的表示方法为：</p>
-<ul>
-<li>正数即本身</li>
-<li>负数在反码基础上+1</li>
-</ul>
-<script type="math/tex; mode=display">
-\begin{aligned}
-+1 = [0000 ,0001]_{原}= [0000,0001]_{反}= [0000,0001]_{补}\\
--1 = [1000 ,0001]_{原}= [1111,1110]_{反}= [1111,1111]_{补}
-\end{aligned}</script><h2 id="为何使用原码、反码与补码"><a href="#为何使用原码、反码与补码" class="headerlink" title="为何使用原码、反码与补码"></a>为何使用原码、反码与补码</h2><p>根本原因是为了简化电路设计，我们知道加法是很简单的，但是如果要在计算机中引入减法，就会导致电路设计的复杂，所以有没有一种方案能够将减法转换为加法呢？简单来说，减法可以表示为一个数加上另一个数的负数，而通过引入反码与补码的方式，我们可以让符号位也参与到运算中，从而只需要加法即可。我们以1-1=0为例，探讨反码与补码的运算过程。</p>
-<p>如果我们使用原码计算1-1即1+(-1)，那么得到的结果是：</p>
-<script type="math/tex; mode=display">
-1 - 1 = 1 + (-1) = [00000001]_原 + [10000001]_原 = [10000010]_原 = -2</script><p>显然结果不正确。如果我们使用反码计算，那么结果为：</p>
-<script type="math/tex; mode=display">
-1 - 1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原= [0000 0001]_反 + [1111 1110]_反 = [1111 1111]_反 = [1000 0000]_原 = -0</script><p>我们发现结果的值部分虽然是正确的，但是问题就处在0上，0带符号是没有任何意义的，如果用反码，会出现两个0，即+0和-0，这显然不是我们想要的结果。于是人们提出了补码，解决了0的问题：</p>
-<script type="math/tex; mode=display">
-1-1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原 = [0000 0001]_补 + [1111 1111]_补 = [0000 0000]补=[0000 0000]原</script><p>修复之后，0有了唯一的表示，同时，多出来的1000,0000还可以用来表示-128，但是由于实际上的-0表示了-128，所以-128并没有对应的原码和反码表示。</p>
-<p>总之一句话：<strong>反码和补码是出于对计算机电路简化设计而引申出的定义</strong>。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+<p>本文将针对计算机的整体架构进行讲解。</p>
+<h2 id="整体架构图"><a href="#整体架构图" class="headerlink" title="整体架构图"></a>整体架构图</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -572,8 +533,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/10/18/工具/C++/explicit/" rel="next" title="explicit关键字总结">
-                <i class="fa fa-chevron-left"></i> explicit关键字总结
+              <a href="/2020/11/29/计算机/操作系统/课程/MIT6828课程大纲/" rel="next" title="MIT6828课程大纲">
+                <i class="fa fa-chevron-left"></i> MIT6828课程大纲
               </a>
             
           </div>
@@ -582,8 +543,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/11/02/计算机/算法/课程/MIT6006-5/" rel="prev" title="MIT 6006 Lecture 5——二叉查找树（Binary search tree, BST）">
-                MIT 6006 Lecture 5——二叉查找树（Binary search tree, BST） <i class="fa fa-chevron-right"></i>
+              <a href="/2020/11/30/计算机/组成原理/外设/" rel="prev" title="IO设备">
+                IO设备 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -660,7 +621,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -906,7 +867,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原、反、补码的概念"><span class="nav-number">1.</span> <span class="nav-text">原、反、补码的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原码"><span class="nav-number">1.1.</span> <span class="nav-text">原码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反码"><span class="nav-number">1.2.</span> <span class="nav-text">反码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码"><span class="nav-number">1.3.</span> <span class="nav-text">补码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为何使用原码、反码与补码"><span class="nav-number">2.</span> <span class="nav-text">为何使用原码、反码与补码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体架构图"><span class="nav-number">1.</span> <span class="nav-text">整体架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1094,7 +1055,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/10/27/计算机/硬件组成/原、反、补码/'
+    refer: '2020/11/30/计算机/组成原理/整体架构/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

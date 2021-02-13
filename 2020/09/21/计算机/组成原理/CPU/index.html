@@ -96,17 +96,20 @@
 
 
 
-  <meta name="description" content="Electronic Numerical Integrator And Computer">
+  <meta name="description" content="虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了">
 <meta property="og:type" content="article">
-<meta property="og:title" content="整体架构">
-<meta property="og:url" content="http://yoursite.com/2020/11/30/计算机/硬件组成/整体架构/index.html">
+<meta property="og:title" content="CPU">
+<meta property="og:url" content="http://yoursite.com/2020/09/21/计算机/组成原理/CPU/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="Electronic Numerical Integrator And Computer">
+<meta property="og:description" content="虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-30T01:35:10.179Z">
+<meta property="og:image" content="https://examradar.com/wp-content/uploads/2016/10/Block-Diagram-of-8086.png">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/8086-pin-diagram.png?raw=true">
+<meta property="og:updated_time" content="2020-11-30T01:32:27.646Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="整体架构">
-<meta name="twitter:description" content="Electronic Numerical Integrator And Computer">
+<meta name="twitter:title" content="CPU">
+<meta name="twitter:description" content="虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了">
+<meta name="twitter:image" content="https://examradar.com/wp-content/uploads/2016/10/Block-Diagram-of-8086.png">
 
 
 
@@ -116,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/11/30/计算机/硬件组成/整体架构/">
+  <link rel="canonical" href="http://yoursite.com/2020/09/21/计算机/组成原理/CPU/">
 
 
 
@@ -126,7 +129,7 @@
   };
 </script>
 
-  <title>整体架构 | 一隅</title>
+  <title>CPU | 一隅</title>
   
 
 
@@ -358,7 +361,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/30/计算机/硬件组成/整体架构/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/计算机/组成原理/CPU/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +378,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">整体架构
+          <h1 class="post-title" itemprop="name headline">CPU
 
               
             
@@ -401,12 +404,24 @@
                 
               
 
-              <time title="Created: 2020-11-30 09:32:31 / Modified: 09:35:10" itemprop="dateCreated datePublished" datetime="2020-11-30T09:32:31+08:00">2020-11-30</time>
+              <time title="Created: 2020-09-21 20:23:06" itemprop="dateCreated datePublished" datetime="2020-09-21T20:23:06+08:00">2020-09-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-11-30 09:32:27" itemprop="dateModified" datetime="2020-11-30T09:32:27+08:00">2020-11-30</time>
               
             
           </span>
@@ -466,11 +481,46 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>Electronic Numerical Integrator And Computer</p>
+<p>虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了</p>
 </blockquote>
 <a id="more"></a>
-<p>本文将针对计算机的整体架构进行讲解。</p>
-<h2 id="整体架构图"><a href="#整体架构图" class="headerlink" title="整体架构图"></a>整体架构图</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+<h2 id="CPU组成部分"><a href="#CPU组成部分" class="headerlink" title="CPU组成部分"></a>CPU组成部分</h2><p>CPU由<strong>控制器</strong>和<strong>运算器</strong>两个部分组成。其逻辑结构图如下所示：</p>
+<p><img src="https://examradar.com/wp-content/uploads/2016/10/Block-Diagram-of-8086.png" width="580" alt="图片名称" align="center"></p>
+<p>上面的图中，左半部分为指令执行单元（EU），右半部分为总线接口单元（BIU），下面针对这两个单元分别介绍：</p>
+<h3 id="总线接口单元BIU"><a href="#总线接口单元BIU" class="headerlink" title="总线接口单元BIU"></a>总线接口单元BIU</h3><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p>作为CPU与外部（存储器和IO）的接口，提供16位双向数据线和20位地址线，完成所有外部总线操作，包括地址形成、取指令、指令排队、读写操作数和总线控制。</p>
+<h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul>
+<li>16位段寄存器：CS/DS/ES/SS</li>
+<li>16位指令指针寄存器IP</li>
+<li>20位物理地址加法器（图中的$\sum$）：将16位逻辑地址变为20位物理地址</li>
+<li>六字节指令队列：存放6字节指令代码</li>
+<li>总线控制逻辑电路：发出总线控制信号</li>
+</ul>
+<h4 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h4><ol>
+<li>CS+IP进行20位寻址，送往地址总线，总线控制逻辑发出存储器读信号$\overline{\textrm{RD}}$，按给定地址从存储器中取出指令，送到指令队列中。</li>
+<li>指令队列可以存储六字节指令，当指令队列空余时，BIU自动取指令；指令队列已满并且EU未申请读写存储器操作时，BIU空闲。</li>
+<li>EU从指令队列取走指令，经过译码后向BIU申请从存储器或IO端口读写操作。只要收到EU送来的逻辑地址，BIU将通过地址加法器转换成物理地址，在读写周期访问存储器或IO完成IO操作。（EU执行指令，BIU传输运算结果）</li>
+<li>BIU控制指令指针寄存器IP自动指向下一条待执行指令，并从后续地址存放的指令序列中取指令填充指令队列</li>
+</ol>
+<h3 id="指令执行部件EU"><a href="#指令执行部件EU" class="headerlink" title="指令执行部件EU"></a>指令执行部件EU</h3><h4 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h4><p>完成译码和执行指令的功能</p>
+<h4 id="组成-1"><a href="#组成-1" class="headerlink" title="组成"></a>组成</h4><ul>
+<li>算术逻辑单元ALU：完成8位或16位二进制运算</li>
+<li>标志寄存器：保存ALU运算结果特征</li>
+<li>寄存器组：4个通用16位寄存器（AX为累加器），4个专用16位寄存器</li>
+<li>EU控制器：从指令队列取指令、指令译码和时序控制部件</li>
+</ul>
+<h4 id="工作过程-1"><a href="#工作过程-1" class="headerlink" title="工作过程"></a>工作过程</h4><ol>
+<li>EU从指令队列取指令并译码，如果指令需要访问存储器或IO，则EU通过内部16位总线将逻辑地址送给BIU，BIU访问存储器或IO，获得操作数发送给EU，EU执行指令</li>
+<li>ALU完成各种算数及逻辑运算，运算操作数可以从存储器或寄存器组取得，运算结果由内部总线送至寄存器组或BIU的内部寄存器。运算后结果的特征改变标志寄存器flags的某些状态位，可供测试或判断及转移指令之用。</li>
+<li>一般情况下EU从指令队列而非存储器中取指令，所以取指令和执行可以并行操作。但如果有转移、调用或返回指令，会导致指令队列失效，这时必须新取得指令后才可以继续执行，但是这种情况比较少见，所以EU和BIU相互配合的非同步并行提高了效率。</li>
+</ol>
+<h2 id="CPU工作过程"><a href="#CPU工作过程" class="headerlink" title="CPU工作过程"></a>CPU工作过程</h2><p>一般来说，CPU的工作过程可以概括为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(;;)&#123;</span><br><span class="line">	run next instruction</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="8086CPU介绍"><a href="#8086CPU介绍" class="headerlink" title="8086CPU介绍"></a>8086CPU介绍</h2><p>本文以经典的x86系列CPU的鼻祖8086CPU为例，详细介绍一下CPU的系统结构</p>
+<h3 id="CPU引脚及其功能"><a href="#CPU引脚及其功能" class="headerlink" title="CPU引脚及其功能"></a>CPU引脚及其功能</h3><p>8086CPU的外部引脚图如下所示：</p>
+<p><img src="https://github.com/sqduan/hexoimg/blob/master/8086-pin-diagram.png?raw=true" width="350" alt="图片名称" align="center"></p>
+<h4 id="地址线"><a href="#地址线" class="headerlink" title="地址线"></a>地址线</h4><p>地址线为AD0-AD19共20条，其中AD0-AD15为16条地址/数据总线，而AD16-AD19为地址/数据/状态三态输出、分时复用。</p>
+<h4 id="数据线"><a href="#数据线" class="headerlink" title="数据线"></a>数据线</h4><p>数据线为AD0-AD15共16条</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -533,8 +583,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/11/29/计算机/操作系统/课程/MIT6828课程大纲/" rel="next" title="MIT6828课程大纲">
-                <i class="fa fa-chevron-left"></i> MIT6828课程大纲
+              <a href="/2020/09/21/生活/美术/动画/" rel="next" title="Aseprite 动画制作">
+                <i class="fa fa-chevron-left"></i> Aseprite 动画制作
               </a>
             
           </div>
@@ -543,8 +593,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/11/30/计算机/硬件组成/外设/" rel="prev" title="IO设备">
-                IO设备 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/09/21/生活/美术/资源介绍/" rel="prev" title="Aseprite资源站">
+                Aseprite资源站 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -621,7 +671,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -867,7 +917,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体架构图"><span class="nav-number">1.</span> <span class="nav-text">整体架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU组成部分"><span class="nav-number">1.</span> <span class="nav-text">CPU组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总线接口单元BIU"><span class="nav-number">1.1.</span> <span class="nav-text">总线接口单元BIU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">1.1.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组成"><span class="nav-number">1.1.2.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工作过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">工作过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令执行部件EU"><span class="nav-number">1.2.</span> <span class="nav-text">指令执行部件EU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组成-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工作过程-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">工作过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU工作过程"><span class="nav-number">2.</span> <span class="nav-text">CPU工作过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8086CPU介绍"><span class="nav-number">3.</span> <span class="nav-text">8086CPU介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU引脚及其功能"><span class="nav-number">3.1.</span> <span class="nav-text">CPU引脚及其功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#地址线"><span class="nav-number">3.1.1.</span> <span class="nav-text">地址线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据线"><span class="nav-number">3.1.2.</span> <span class="nav-text">数据线</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1055,7 +1105,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/11/30/计算机/硬件组成/整体架构/'
+    refer: '2020/09/21/计算机/组成原理/CPU/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

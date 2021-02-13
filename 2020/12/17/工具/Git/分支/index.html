@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Listen, a tree is growing">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-17T09:28:41.069Z">
+<meta property="og:updated_time" content="2021-02-11T10:35:41.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分支">
 <meta name="twitter:description" content="Listen, a tree is growing">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-12-17 11:39:04 / Modified: 17:28:41" itemprop="dateCreated datePublished" datetime="2020-12-17T11:39:04+08:00">2020-12-17</time>
+              <time title="Created: 2020-12-17 11:39:04" itemprop="dateCreated datePublished" datetime="2020-12-17T11:39:04+08:00">2020-12-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-02-11 18:35:41" itemprop="dateModified" datetime="2021-02-11T18:35:41+08:00">2021-02-11</time>
               
             
           </span>
@@ -470,15 +482,16 @@
 </blockquote>
 <a id="more"></a>
 <h2 id="分支介绍"><a href="#分支介绍" class="headerlink" title="分支介绍"></a>分支介绍</h2><h3 id="分支及其作用"><a href="#分支及其作用" class="headerlink" title="分支及其作用"></a>分支及其作用</h3><p>当我们开发主线时，如果要添加新的功能，我们一般不会直接在主线上改动，而是创建分支并修改分支，以免影响主线开发。所以分支的作用就是创建副本，使我们能够在副本上添加功能，而不影响主线。git采用指针的方式管理分支，速度非常快。</p>
-<h2 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h2><h3 id="分支创建与切换"><a href="#分支创建与切换" class="headerlink" title="分支创建与切换"></a>分支创建与切换</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev /origin/dev</span><br></pre></td></tr></table></figure>
+<h2 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h2><h3 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a           #列举出所有分支以及当前分支</span><br></pre></td></tr></table></figure>
+<h3 id="分支创建"><a href="#分支创建" class="headerlink" title="分支创建"></a>分支创建</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev /origin/dev</span><br></pre></td></tr></table></figure>
 <p>这个命令做了下面两件事：</p>
 <ul>
 <li>创建一个名为dev的基于远程/origin/dev的本地分支</li>
 <li>将当前分支切换为dev</li>
 </ul>
-<p>如果要切换到一个已经存在的分支，可以使用如下命令：</p>
+<h3 id="分支切换"><a href="#分支切换" class="headerlink" title="分支切换"></a>分支切换</h3><p>如果要切换到一个已经存在的分支，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev   # 将分支切换为dev</span><br></pre></td></tr></table></figure>
-<h3 id="版本切换"><a href="#版本切换" class="headerlink" title="版本切换"></a>版本切换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a           //列举出所有分支以及当前分支</span><br></pre></td></tr></table></figure>
+<p>有些时候，我们需要切换到历史版本，也可以使用checkout，我们可以利用<code>git log</code>查看历史提交记录，然后使用<code>git checkout xxxxxxxxxxxxxx</code>的方式切换到指定版本号对应的分支，其中xxxxxxxxxxxxxx是版本号。</p>
 <h3 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h3><p>假设我们的当前分支为master，那么如果我们要将分支dev合并至master，可以执行下面的命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
 <h3 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h3><p>使用分支开发过程中一个很大的问题就是解决冲突，当多个开发者试图编辑相同文件的同一行时，就可能发生冲突。Git对冲突的解决方式是：保留多个分支中的冲突的内容，然后人工进行冲突处理后再允许合并。冲突只影响合并过程</p>
@@ -640,7 +653,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -886,7 +899,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分支介绍"><span class="nav-number">1.</span> <span class="nav-text">分支介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支及其作用"><span class="nav-number">1.1.</span> <span class="nav-text">分支及其作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关操作"><span class="nav-number">2.</span> <span class="nav-text">相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支创建与切换"><span class="nav-number">2.1.</span> <span class="nav-text">分支创建与切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#版本切换"><span class="nav-number">2.2.</span> <span class="nav-text">版本切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支合并"><span class="nav-number">2.3.</span> <span class="nav-text">分支合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突解决"><span class="nav-number">2.4.</span> <span class="nav-text">冲突解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的引起冲突的情况"><span class="nav-number">2.4.1.</span> <span class="nav-text">常见的引起冲突的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字符集错误"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">字符集错误</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分支介绍"><span class="nav-number">1.</span> <span class="nav-text">分支介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支及其作用"><span class="nav-number">1.1.</span> <span class="nav-text">分支及其作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关操作"><span class="nav-number">2.</span> <span class="nav-text">相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看分支"><span class="nav-number">2.1.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支创建"><span class="nav-number">2.2.</span> <span class="nav-text">分支创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支切换"><span class="nav-number">2.3.</span> <span class="nav-text">分支切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支合并"><span class="nav-number">2.4.</span> <span class="nav-text">分支合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突解决"><span class="nav-number">2.5.</span> <span class="nav-text">冲突解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的引起冲突的情况"><span class="nav-number">2.5.1.</span> <span class="nav-text">常见的引起冲突的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字符集错误"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">字符集错误</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

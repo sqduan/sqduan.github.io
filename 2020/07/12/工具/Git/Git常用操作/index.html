@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="在项目开发过程中，经常需要引入第三方库，因此需要一套合适的方法对于第三方库进行有效管理，本文将对利用git进行第三方库管理的方式进行总结。 本文将针对Git中常用操作进行总结">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-17T03:39:43.374Z">
+<meta property="og:updated_time" content="2021-02-11T10:19:03.288Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用操作">
 <meta name="twitter:description" content="在项目开发过程中，经常需要引入第三方库，因此需要一套合适的方法对于第三方库进行有效管理，本文将对利用git进行第三方库管理的方式进行总结。 本文将针对Git中常用操作进行总结">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-17 11:39:43" itemprop="dateModified" datetime="2020-12-17T11:39:43+08:00">2020-12-17</time>
+                <time title="Modified: 2021-02-11 18:19:03" itemprop="dateModified" datetime="2021-02-11T18:19:03+08:00">2021-02-11</time>
               
             
           </span>
@@ -490,6 +490,8 @@
 <p>有可能是又被ban了，或者代理配置不正确，这种情况下可以尝试换个网试一试。或者直接重启，目前还掌握配置代理的方法，这里挖个坑</p>
 <h5 id="代理设置"><a href="#代理设置" class="headerlink" title="代理设置"></a>代理设置</h5><p>通过<code>git config --global http.proxy</code>命令，我们可以查询git当前使用的代理。</p>
 <h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h3><p>diff可以对于commits进行比较</p>
+<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><h3 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h3><p>使用<code>git log</code>命令可以回顾提交历史，在一个项目下我们运行<code>git log</code>命令，可以得到如下输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git log</span><br><span class="line">commit ca82a6dff817ec66f44342007202690a93763949</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Mon Mar 17 21:52:11 2008 -0700</span><br><span class="line"></span><br><span class="line">    changed the version number</span><br><span class="line"></span><br><span class="line">commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Sat Mar 15 16:40:33 2008 -0700</span><br><span class="line"></span><br><span class="line">    removed unnecessary test</span><br><span class="line"></span><br><span class="line">commit a11bef06a3f659402fe7563abf99ad00de2209e6</span><br><span class="line">Author: Scott Chacon &lt;schacon@gee-mail.com&gt;</span><br><span class="line">Date:   Sat Mar 15 10:31:28 2008 -0700</span><br><span class="line"></span><br><span class="line">    first commit</span><br></pre></td></tr></table></figure>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
@@ -641,7 +643,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -887,7 +889,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git最常用的操作"><span class="nav-number">1.1.</span> <span class="nav-text">git最常用的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#push"><span class="nav-number">1.2.</span> <span class="nav-text">push</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见问题及解决"><span class="nav-number">1.2.1.</span> <span class="nav-text">常见问题及解决</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh权限异常"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">ssh权限异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代理设置"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">代理设置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff"><span class="nav-number">1.3.</span> <span class="nav-text">diff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">1.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git最常用的操作"><span class="nav-number">1.1.</span> <span class="nav-text">git最常用的操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#push"><span class="nav-number">1.2.</span> <span class="nav-text">push</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见问题及解决"><span class="nav-number">1.2.1.</span> <span class="nav-text">常见问题及解决</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh权限异常"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">ssh权限异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代理设置"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">代理设置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff"><span class="nav-number">1.3.</span> <span class="nav-text">diff</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志"><span class="nav-number">2.</span> <span class="nav-text">日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看提交历史"><span class="nav-number">2.1.</span> <span class="nav-text">查看提交历史</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

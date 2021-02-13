@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="$\pi=3.14159265358$">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-18T03:17:54.078Z">
+<meta property="og:updated_time" content="2021-02-11T03:51:46.540Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用数学符号总结">
 <meta name="twitter:description" content="$\pi=3.14159265358$">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2020-09-18 11:05:26 / Modified: 11:17:54" itemprop="dateCreated datePublished" datetime="2020-09-18T11:05:26+08:00">2020-09-18</time>
+              <time title="Created: 2020-09-18 11:05:26" itemprop="dateCreated datePublished" datetime="2020-09-18T11:05:26+08:00">2020-09-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-02-11 11:51:46" itemprop="dateModified" datetime="2021-02-11T11:51:46+08:00">2021-02-11</time>
               
             
           </span>
@@ -469,7 +481,17 @@
 <p>$\pi=3.14159265358$</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="矩阵类"><a href="#矩阵类" class="headerlink" title="矩阵类"></a>矩阵类</h2><div class="table-container">
+<h2 id="矩阵代数"><a href="#矩阵代数" class="headerlink" title="矩阵代数"></a>矩阵代数</h2><h3 id="otimes-张量积2"><a href="#otimes-张量积2" class="headerlink" title="$\otimes$ 张量积2"></a>$\otimes$ 张量积<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h3><h4 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h4><p>$\otimes$ （圈叉）</p>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><p>  $A\otimes B$表示$A$和$B$之间的张量积</p>
+<h4 id="运算规则"><a href="#运算规则" class="headerlink" title="运算规则"></a>运算规则</h4><p>给定一个大小为$m_1\times m_2$的矩阵$A$和一个大小为$n_1\times n_2$的矩阵$B$，则矩阵$A\otimes$B为：</p>
+<script type="math/tex; mode=display">
+A \otimes B=\left[\begin{array}{cccc}
+a_{11} B & a_{12} B & \cdots & a_{1 m_{2}} B \\
+a_{21} B & a_{22} B & \cdots & a_{2 m_{2}} B \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m_{1} 1} B & a_{m_{1} 2} B & \cdots & a_{m_{1} m_{2}} B
+\end{array}\right]_{m_1n_1\times m_2n_2}</script><h4 id="运算实例（基于python）"><a href="#运算实例（基于python）" class="headerlink" title="运算实例（基于python）"></a>运算实例（基于python）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([[<span class="number">1</span>], [<span class="number">2</span>]])</span><br><span class="line">b = np.array([[<span class="number">3</span>], [<span class="number">4</span>]])</span><br><span class="line">np.kron(a, b)</span><br></pre></td></tr></table></figure>
+<h3 id="符号表"><a href="#符号表" class="headerlink" title="符号表"></a>符号表</h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -504,7 +526,7 @@
 </tbody>
 </table>
 </div>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://en.wikipedia.org/wiki/List_of_mathematical_symbols">数学符号列表</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="矩阵微积分"><a href="#矩阵微积分" class="headerlink" title="矩阵微积分"></a>矩阵微积分</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://en.wikipedia.org/wiki/List_of_mathematical_symbols">数学符号列表</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://zhuanlan.zhihu.com/p/26774182">关于张量积的运算</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -655,7 +677,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -901,7 +923,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵类"><span class="nav-number">1.</span> <span class="nav-text">矩阵类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵代数"><span class="nav-number">1.</span> <span class="nav-text">矩阵代数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#otimes-张量积2"><span class="nav-number">1.1.</span> <span class="nav-text">$\otimes$ 张量积2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#符号"><span class="nav-number">1.1.1.</span> <span class="nav-text">符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用"><span class="nav-number">1.1.2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算规则"><span class="nav-number">1.1.3.</span> <span class="nav-text">运算规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算实例（基于python）"><span class="nav-number">1.1.4.</span> <span class="nav-text">运算实例（基于python）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号表"><span class="nav-number">1.2.</span> <span class="nav-text">符号表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵微积分"><span class="nav-number">2.</span> <span class="nav-text">矩阵微积分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

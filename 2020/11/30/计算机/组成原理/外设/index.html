@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="CPU很快、内存很慢；内存很快、硬盘很慢；硬盘很快、网络很慢，这个世界总归是不完美的。">
+  <meta name="description" content="若吾起舞时，丽人皆沉醉。 若吾起舞时，皓月亦鸣音。 神降合婚夜，破晓鸫鸟啼。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cache">
-<meta property="og:url" content="http://yoursite.com/2020/07/15/计算机/硬件组成/cache/index.html">
+<meta property="og:title" content="IO设备">
+<meta property="og:url" content="http://yoursite.com/2020/11/30/计算机/组成原理/外设/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="CPU很快、内存很慢；内存很快、硬盘很慢；硬盘很快、网络很慢，这个世界总归是不完美的。">
+<meta property="og:description" content="若吾起舞时，丽人皆沉醉。 若吾起舞时，皓月亦鸣音。 神降合婚夜，破晓鸫鸟啼。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-21T12:33:25.238Z">
+<meta property="og:updated_time" content="2020-11-30T03:54:09.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cache">
-<meta name="twitter:description" content="CPU很快、内存很慢；内存很快、硬盘很慢；硬盘很快、网络很慢，这个世界总归是不完美的。">
+<meta name="twitter:title" content="IO设备">
+<meta name="twitter:description" content="若吾起舞时，丽人皆沉醉。 若吾起舞时，皓月亦鸣音。 神降合婚夜，破晓鸫鸟啼。">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/15/计算机/硬件组成/cache/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/30/计算机/组成原理/外设/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>cache | 一隅</title>
+  <title>IO设备 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/15/计算机/硬件组成/cache/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/30/计算机/组成原理/外设/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">cache
+          <h1 class="post-title" itemprop="name headline">IO设备
 
               
             
@@ -401,24 +401,12 @@
                 
               
 
-              <time title="Created: 2020-07-15 11:10:10" itemprop="dateCreated datePublished" datetime="2020-07-15T11:10:10+08:00">2020-07-15</time>
+              <time title="Created: 2020-11-30 09:59:32 / Modified: 11:54:09" itemprop="dateCreated datePublished" datetime="2020-11-30T09:59:32+08:00">2020-11-30</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-09-21 20:33:25" itemprop="dateModified" datetime="2020-09-21T20:33:25+08:00">2020-09-21</time>
               
             
           </span>
@@ -478,33 +466,53 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>CPU很快、内存很慢；内存很快、硬盘很慢；硬盘很快、网络很慢，这个世界总归是不完美的。</p>
+<p>若吾起舞时，丽人皆沉醉。</p>
+<p>若吾起舞时，皓月亦鸣音。</p>
+<p>神降合婚夜，破晓鸫鸟啼。</p>
 </blockquote>
 <a id="more"></a>
-<p>Cache的作用是位于速度较快和较慢的两种硬件中，用于协调数据传输的速度差异。本文主要以CPU和内存间的cache为例进行讲解。</p>
-<h2 id="缓存命中问题"><a href="#缓存命中问题" class="headerlink" title="缓存命中问题"></a>缓存命中问题</h2><p>当CPU申请访问数据，我们要考虑该数据是否已经缓存至cache中，这就是缓存的命中问题。缓存不命中会导致CPU直接访问内存数据，降低运行效率。</p>
-<pre class="mermaid">graph LR
-    node1[Memory]
-    node2[Cache]
-    node3[CPU]
-
-    node3--hit-->node2
-    node3--miss-->node1</pre>
-
-<h3 id="缓存不命中发生条件"><a href="#缓存不命中发生条件" class="headerlink" title="缓存不命中发生条件"></a>缓存不命中发生条件</h3><p>当发生以下情况时，缓存不命中</p>
-<ul>
-<li>数据不在cache中</li>
-<li>数据在cache中，但是被移除</li>
+<p>外设分为字符设备和块设备，通过IO接口与CPU相连，本文将对外设相关的知识进行总结。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="什么是外设"><a href="#什么是外设" class="headerlink" title="什么是外设"></a>什么是外设</h3><h3 id="外设特点"><a href="#外设特点" class="headerlink" title="外设特点"></a>外设特点</h3><ul>
+<li>种类多</li>
+<li>工作速度比CPU慢，且速度分布宽</li>
+<li>信号类型与信息格式多样化</li>
 </ul>
-<h3 id="如何提高缓存命中率"><a href="#如何提高缓存命中率" class="headerlink" title="如何提高缓存命中率"></a>如何提高缓存命中率</h3><p>通过采用一些缓存管理策略，常见缓存管理策略如下：</p>
+<h2 id="IO接口"><a href="#IO接口" class="headerlink" title="IO接口"></a>IO接口</h2><h3 id="定义及组成"><a href="#定义及组成" class="headerlink" title="定义及组成"></a>定义及组成</h3><p>IO接口是一个电子电路，内部有若干寄存器和相应控制逻辑电路。</p>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>作为CPU和IO设备交换信息的媒介，IO接口基本功能如下：</p>
 <ul>
-<li>FIFO：先进先出</li>
-<li>LIFO：后进先出</li>
-<li>LRU：最近最少使用</li>
-<li>MRU：最近最多使用</li>
+<li>速度匹配</li>
+<li>信号形式匹配（AD/DA/串并/并串）</li>
+<li>电平转换及驱动能力增加</li>
+<li>信息格式及时序匹配</li>
 </ul>
-<h2 id="关于Cache的一些术语"><a href="#关于Cache的一些术语" class="headerlink" title="关于Cache的一些术语"></a>关于Cache的一些术语</h2><h3 id="冷热缓存"><a href="#冷热缓存" class="headerlink" title="冷热缓存"></a>冷热缓存</h3><p>冷缓存代表当前Cache没有保存任何有价值的值，不能提供性能加速；而热缓存代表已经存有一些有用的值，可以提高性能。相应地，我们向缓存中添加数据，就是预热的过程；而从缓存中清理数据，就是冷却的过程。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+<h3 id="IO端口"><a href="#IO端口" class="headerlink" title="IO端口"></a>IO端口</h3><p>IO端口是IO接口中的一组能和处理器交换信息的寄存器，CPU对外设的访问实际是通过对IO端口的访问实现的。IO端口一般包含如下几个部分：</p>
+<ul>
+<li>数据端口：存放数据</li>
+<li>控制端口：存放控制指令</li>
+<li>状态端口：存放状态信息</li>
+</ul>
+<h4 id="IO端口编址方式"><a href="#IO端口编址方式" class="headerlink" title="IO端口编址方式"></a>IO端口编址方式</h4><h5 id="传统电脑：采用专用的IO地址"><a href="#传统电脑：采用专用的IO地址" class="headerlink" title="传统电脑：采用专用的IO地址"></a>传统电脑：采用专用的IO地址</h5><ul>
+<li>和访问内存的方式类似</li>
+<li>有1024个IO地址</li>
+<li>通过IN、OUT命令访问</li>
+</ul>
+<p>下面的代码展示了一个向打印设备写入一个byte的过程</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DATA_PORT    0x378</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_PORT  0x379</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   BUSY 0x80</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CONTROL_PORT 0x37A</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>   STROBE 0x01</span></span><br><span class="line"><span class="keyword">void</span></span><br><span class="line">lpt_putc(<span class="keyword">int</span> c)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* wait for printer to consume previous byte */</span></span><br><span class="line">  <span class="keyword">while</span>((inb(STATUS_PORT) &amp; BUSY) == <span class="number">0</span>)</span><br><span class="line">    ;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* put the byte on the parallel lines */</span></span><br><span class="line">  outb(DATA_PORT, c);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* tell the printer to look at the data */</span></span><br><span class="line">  outb(CONTROL_PORT, STROBE);</span><br><span class="line">  outb(CONTROL_PORT, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="内存映射IO（现代计算机常用）"><a href="#内存映射IO（现代计算机常用）" class="headerlink" title="内存映射IO（现代计算机常用）"></a>内存映射IO（现代计算机常用）</h5><p>这种情况下外设接口与内存进行了统一编址，其优缺点如下：</p>
+<ul>
+<li>优点<ul>
+<li>不需要额外指令</li>
+<li>访问控制信号统一</li>
+<li>IO地址空间扩展</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>访问类似内存，但是工作行为不是</li>
+<li>会占用内存的一部分地址</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据传输方式"><a href="#数据传输方式" class="headerlink" title="数据传输方式"></a>数据传输方式</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -567,8 +575,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/13/计算机/操作系统/线程池/" rel="next" title="线程池">
-                <i class="fa fa-chevron-left"></i> 线程池
+              <a href="/2020/11/30/计算机/组成原理/整体架构/" rel="next" title="整体架构">
+                <i class="fa fa-chevron-left"></i> 整体架构
               </a>
             
           </div>
@@ -577,8 +585,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/15/工具/C++/volatile/" rel="prev" title="volatile关键字总结">
-                volatile关键字总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/11/30/计算机/操作系统/虚拟化/" rel="prev" title="虚拟化">
+                虚拟化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -655,7 +663,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -901,7 +909,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存命中问题"><span class="nav-number">1.</span> <span class="nav-text">缓存命中问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存不命中发生条件"><span class="nav-number">1.1.</span> <span class="nav-text">缓存不命中发生条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何提高缓存命中率"><span class="nav-number">1.2.</span> <span class="nav-text">如何提高缓存命中率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Cache的一些术语"><span class="nav-number">2.</span> <span class="nav-text">关于Cache的一些术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#冷热缓存"><span class="nav-number">2.1.</span> <span class="nav-text">冷热缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是外设"><span class="nav-number">1.1.</span> <span class="nav-text">什么是外设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外设特点"><span class="nav-number">1.2.</span> <span class="nav-text">外设特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO接口"><span class="nav-number">2.</span> <span class="nav-text">IO接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义及组成"><span class="nav-number">2.1.</span> <span class="nav-text">定义及组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用"><span class="nav-number">2.2.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO端口"><span class="nav-number">2.3.</span> <span class="nav-text">IO端口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IO端口编址方式"><span class="nav-number">2.3.1.</span> <span class="nav-text">IO端口编址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#传统电脑：采用专用的IO地址"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">传统电脑：采用专用的IO地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内存映射IO（现代计算机常用）"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">内存映射IO（现代计算机常用）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据传输方式"><span class="nav-number">3.</span> <span class="nav-text">数据传输方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1089,7 +1097,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/15/计算机/硬件组成/cache/'
+    refer: '2020/11/30/计算机/组成原理/外设/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

@@ -96,20 +96,19 @@
 
 
 
-  <meta name="description" content="虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了">
+  <meta name="description" content="罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CPU">
-<meta property="og:url" content="http://yoursite.com/2020/09/21/计算机/硬件组成/CPU/index.html">
+<meta property="og:title" content="硬盘">
+<meta property="og:url" content="http://yoursite.com/2020/11/13/计算机/组成原理/硬盘/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了">
+<meta property="og:description" content="罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://examradar.com/wp-content/uploads/2016/10/Block-Diagram-of-8086.png">
-<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/8086-pin-diagram.png?raw=true">
-<meta property="og:updated_time" content="2020-11-30T01:32:27.646Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201208195238.png">
+<meta property="og:updated_time" content="2021-02-12T05:11:44.451Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CPU">
-<meta name="twitter:description" content="虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了">
-<meta name="twitter:image" content="https://examradar.com/wp-content/uploads/2016/10/Block-Diagram-of-8086.png">
+<meta name="twitter:title" content="硬盘">
+<meta name="twitter:description" content="罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201208195238.png">
 
 
 
@@ -119,7 +118,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/09/21/计算机/硬件组成/CPU/">
+  <link rel="canonical" href="http://yoursite.com/2020/11/13/计算机/组成原理/硬盘/">
 
 
 
@@ -129,7 +128,7 @@
   };
 </script>
 
-  <title>CPU | 一隅</title>
+  <title>硬盘 | 一隅</title>
   
 
 
@@ -361,7 +360,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/计算机/硬件组成/CPU/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/13/计算机/组成原理/硬盘/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -378,7 +377,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CPU
+          <h1 class="post-title" itemprop="name headline">硬盘
 
               
             
@@ -404,7 +403,7 @@
                 
               
 
-              <time title="Created: 2020-09-21 20:23:06" itemprop="dateCreated datePublished" datetime="2020-09-21T20:23:06+08:00">2020-09-21</time>
+              <time title="Created: 2020-11-13 15:05:04" itemprop="dateCreated datePublished" datetime="2020-11-13T15:05:04+08:00">2020-11-13</time>
             
 
             
@@ -421,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-30 09:32:27" itemprop="dateModified" datetime="2020-11-30T09:32:27+08:00">2020-11-30</time>
+                <time title="Modified: 2021-02-12 13:11:44" itemprop="dateModified" datetime="2021-02-12T13:11:44+08:00">2021-02-12</time>
               
             
           </span>
@@ -481,45 +480,62 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>虚拟体验也好，梦也罢，这个世上的信息，既现实也虚幻；无论如何，人一生所能接触的事物也只是沧海一粟罢了</p>
+<p>罗辑把拐杖高举过头，白发长须舞动着，看上去像分开红海的摩西，庄严地喊道：“把字刻在石头上!”</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="CPU组成部分"><a href="#CPU组成部分" class="headerlink" title="CPU组成部分"></a>CPU组成部分</h2><p>CPU由<strong>控制器</strong>和<strong>运算器</strong>两个部分组成。其逻辑结构图如下所示：</p>
-<p><img src="https://examradar.com/wp-content/uploads/2016/10/Block-Diagram-of-8086.png" width="580" alt="图片名称" align="center"></p>
-<p>上面的图中，左半部分为指令执行单元（EU），右半部分为总线接口单元（BIU），下面针对这两个单元分别介绍：</p>
-<h3 id="总线接口单元BIU"><a href="#总线接口单元BIU" class="headerlink" title="总线接口单元BIU"></a>总线接口单元BIU</h3><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p>作为CPU与外部（存储器和IO）的接口，提供16位双向数据线和20位地址线，完成所有外部总线操作，包括地址形成、取指令、指令排队、读写操作数和总线控制。</p>
-<h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul>
-<li>16位段寄存器：CS/DS/ES/SS</li>
-<li>16位指令指针寄存器IP</li>
-<li>20位物理地址加法器（图中的$\sum$）：将16位逻辑地址变为20位物理地址</li>
-<li>六字节指令队列：存放6字节指令代码</li>
-<li>总线控制逻辑电路：发出总线控制信号</li>
+<h2 id="划分单元"><a href="#划分单元" class="headerlink" title="划分单元"></a>划分单元</h2><p>在存储设备中，为了方便IO操作，我们一般会将其分为若干个单元，从小到大分别为Sector、Block、Page和Chunk，下面的表格列举了不同单元的一些属性：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">大小</th>
+<th style="text-align:center">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Sector</td>
+<td style="text-align:center">512Byte</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Block</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">Page</td>
+<td style="text-align:center">2048 or 4096 Byte，4 or 8 Sector</td>
+<td style="text-align:center">一般来说，页是为了方便RAM读取设置的，所以大小要和内存单元匹配</td>
+</tr>
+<tr>
+<td style="text-align:center">Chunk</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p> 硬盘在使用前会进行分区操作，从而使其具有不同的功能，本节将分别讨论windows和linux下的分区。</p>
+<h3 id="windows分区"><a href="#windows分区" class="headerlink" title="windows分区"></a>windows分区</h3><h4 id="查看分区"><a href="#查看分区" class="headerlink" title="查看分区"></a>查看分区</h4><p>使用创建并格式化磁盘分区软件，可以看到windows分区情况如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201208195238.png" width="680" alt="图片名称" align="center"></p>
+<p>可以看到，除了用户自定义的分区以及用于保存系统的C盘外，还有若干个分区，其功能分别如下：</p>
+<ul>
+<li>260MB：EFI系统分区，存储已安装系统的EFI引导加载程序，类型是FAT32</li>
+<li>恢复分区：用于恢复系统的分区</li>
+<li>OEM分区：装有厂商的还原程序</li>
 </ul>
-<h4 id="工作过程"><a href="#工作过程" class="headerlink" title="工作过程"></a>工作过程</h4><ol>
-<li>CS+IP进行20位寻址，送往地址总线，总线控制逻辑发出存储器读信号$\overline{\textrm{RD}}$，按给定地址从存储器中取出指令，送到指令队列中。</li>
-<li>指令队列可以存储六字节指令，当指令队列空余时，BIU自动取指令；指令队列已满并且EU未申请读写存储器操作时，BIU空闲。</li>
-<li>EU从指令队列取走指令，经过译码后向BIU申请从存储器或IO端口读写操作。只要收到EU送来的逻辑地址，BIU将通过地址加法器转换成物理地址，在读写周期访问存储器或IO完成IO操作。（EU执行指令，BIU传输运算结果）</li>
-<li>BIU控制指令指针寄存器IP自动指向下一条待执行指令，并从后续地址存放的指令序列中取指令填充指令队列</li>
+<p>对于NTFS格式的分区，我们可以进行压缩，从而得到一些未经分配的空间</p>
+<h3 id="linux分区"><a href="#linux分区" class="headerlink" title="linux分区"></a>linux分区</h3><p>linux的设计原则为一切皆文件，我们将硬盘设备挂载到某个文件夹下，通过访问文件夹的方式就可以对硬盘进行操作，所以所谓的分区实际是一种挂载操作，将某个文件夹映射至磁盘。一般来说，将<code>/</code>映射至一个大的磁盘，而将<code>boot/efi</code>映射至<code>efi</code>启动盘，完成分区的操作。文件<code>/etc/fstab</code>记录了linux下的分区情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="存储单位"><a href="#存储单位" class="headerlink" title="存储单位"></a>存储单位</h2><p>这里对计算机常用的存储单位及换算方式进行总结，存储单位从小到大分别为：</p>
+<ol>
+<li>位（bit）</li>
+<li>字节（Byte）：1Byte = 8bits</li>
+<li>千字节（KB）：1KB = 1024B</li>
+<li>兆字节（MB）：1MB = 1024KB</li>
+<li>吉字节（GB）：1GB = 1024MB</li>
 </ol>
-<h3 id="指令执行部件EU"><a href="#指令执行部件EU" class="headerlink" title="指令执行部件EU"></a>指令执行部件EU</h3><h4 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h4><p>完成译码和执行指令的功能</p>
-<h4 id="组成-1"><a href="#组成-1" class="headerlink" title="组成"></a>组成</h4><ul>
-<li>算术逻辑单元ALU：完成8位或16位二进制运算</li>
-<li>标志寄存器：保存ALU运算结果特征</li>
-<li>寄存器组：4个通用16位寄存器（AX为累加器），4个专用16位寄存器</li>
-<li>EU控制器：从指令队列取指令、指令译码和时序控制部件</li>
-</ul>
-<h4 id="工作过程-1"><a href="#工作过程-1" class="headerlink" title="工作过程"></a>工作过程</h4><ol>
-<li>EU从指令队列取指令并译码，如果指令需要访问存储器或IO，则EU通过内部16位总线将逻辑地址送给BIU，BIU访问存储器或IO，获得操作数发送给EU，EU执行指令</li>
-<li>ALU完成各种算数及逻辑运算，运算操作数可以从存储器或寄存器组取得，运算结果由内部总线送至寄存器组或BIU的内部寄存器。运算后结果的特征改变标志寄存器flags的某些状态位，可供测试或判断及转移指令之用。</li>
-<li>一般情况下EU从指令队列而非存储器中取指令，所以取指令和执行可以并行操作。但如果有转移、调用或返回指令，会导致指令队列失效，这时必须新取得指令后才可以继续执行，但是这种情况比较少见，所以EU和BIU相互配合的非同步并行提高了效率。</li>
-</ol>
-<h2 id="CPU工作过程"><a href="#CPU工作过程" class="headerlink" title="CPU工作过程"></a>CPU工作过程</h2><p>一般来说，CPU的工作过程可以概括为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(;;)&#123;</span><br><span class="line">	run next instruction</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="8086CPU介绍"><a href="#8086CPU介绍" class="headerlink" title="8086CPU介绍"></a>8086CPU介绍</h2><p>本文以经典的x86系列CPU的鼻祖8086CPU为例，详细介绍一下CPU的系统结构</p>
-<h3 id="CPU引脚及其功能"><a href="#CPU引脚及其功能" class="headerlink" title="CPU引脚及其功能"></a>CPU引脚及其功能</h3><p>8086CPU的外部引脚图如下所示：</p>
-<p><img src="https://github.com/sqduan/hexoimg/blob/master/8086-pin-diagram.png?raw=true" width="350" alt="图片名称" align="center"></p>
-<h4 id="地址线"><a href="#地址线" class="headerlink" title="地址线"></a>地址线</h4><p>地址线为AD0-AD19共20条，其中AD0-AD15为16条地址/数据总线，而AD16-AD19为地址/数据/状态三态输出、分时复用。</p>
-<h4 id="数据线"><a href="#数据线" class="headerlink" title="数据线"></a>数据线</h4><p>数据线为AD0-AD15共16条</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
@@ -583,8 +599,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/21/生活/美术/动画/" rel="next" title="Aseprite 动画制作">
-                <i class="fa fa-chevron-left"></i> Aseprite 动画制作
+              <a href="/2020/11/11/工具/GDB/反编译/" rel="next" title="反编译基本方法">
+                <i class="fa fa-chevron-left"></i> 反编译基本方法
               </a>
             
           </div>
@@ -593,8 +609,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/09/21/生活/美术/资源介绍/" rel="prev" title="Aseprite资源站">
-                Aseprite资源站 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/11/17/工具/C++/普通指针/" rel="prev" title="指针">
+                指针 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -671,7 +687,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -917,7 +933,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU组成部分"><span class="nav-number">1.</span> <span class="nav-text">CPU组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总线接口单元BIU"><span class="nav-number">1.1.</span> <span class="nav-text">总线接口单元BIU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">1.1.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组成"><span class="nav-number">1.1.2.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工作过程"><span class="nav-number">1.1.3.</span> <span class="nav-text">工作过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令执行部件EU"><span class="nav-number">1.2.</span> <span class="nav-text">指令执行部件EU</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#功能-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组成-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工作过程-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">工作过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU工作过程"><span class="nav-number">2.</span> <span class="nav-text">CPU工作过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8086CPU介绍"><span class="nav-number">3.</span> <span class="nav-text">8086CPU介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU引脚及其功能"><span class="nav-number">3.1.</span> <span class="nav-text">CPU引脚及其功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#地址线"><span class="nav-number">3.1.1.</span> <span class="nav-text">地址线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据线"><span class="nav-number">3.1.2.</span> <span class="nav-text">数据线</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#划分单元"><span class="nav-number">1.</span> <span class="nav-text">划分单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分区"><span class="nav-number">2.</span> <span class="nav-text">分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows分区"><span class="nav-number">2.1.</span> <span class="nav-text">windows分区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看分区"><span class="nav-number">2.1.1.</span> <span class="nav-text">查看分区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux分区"><span class="nav-number">2.2.</span> <span class="nav-text">linux分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储单位"><span class="nav-number">3.</span> <span class="nav-text">存储单位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1105,7 +1121,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/09/21/计算机/硬件组成/CPU/'
+    refer: '2020/11/13/计算机/组成原理/硬盘/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

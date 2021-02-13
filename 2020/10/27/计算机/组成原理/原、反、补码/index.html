@@ -96,19 +96,17 @@
 
 
 
-  <meta name="description" content="C1103A-2 H9971S500">
+  <meta name="description" content="困难的事情不是我们如何理解机器，而是机器如何理解我们">
 <meta property="og:type" content="article">
-<meta property="og:title" content="内存">
-<meta property="og:url" content="http://yoursite.com/2020/09/01/计算机/硬件组成/内存/index.html">
+<meta property="og:title" content="原码、反码与补码">
+<meta property="og:url" content="http://yoursite.com/2020/10/27/计算机/组成原理/原、反、补码/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="C1103A-2 H9971S500">
+<meta property="og:description" content="困难的事情不是我们如何理解机器，而是机器如何理解我们">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Square_array_of_mosfet_cells_read.png/375px-Square_array_of_mosfet_cells_read.png">
-<meta property="og:updated_time" content="2020-11-13T10:42:42.910Z">
+<meta property="og:updated_time" content="2020-10-27T07:04:01.100Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="内存">
-<meta name="twitter:description" content="C1103A-2 H9971S500">
-<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Square_array_of_mosfet_cells_read.png/375px-Square_array_of_mosfet_cells_read.png">
+<meta name="twitter:title" content="原码、反码与补码">
+<meta name="twitter:description" content="困难的事情不是我们如何理解机器，而是机器如何理解我们">
 
 
 
@@ -118,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/09/01/计算机/硬件组成/内存/">
+  <link rel="canonical" href="http://yoursite.com/2020/10/27/计算机/组成原理/原、反、补码/">
 
 
 
@@ -128,7 +126,7 @@
   };
 </script>
 
-  <title>内存 | 一隅</title>
+  <title>原码、反码与补码 | 一隅</title>
   
 
 
@@ -360,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/01/计算机/硬件组成/内存/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/27/计算机/组成原理/原、反、补码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -377,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">内存
+          <h1 class="post-title" itemprop="name headline">原码、反码与补码
 
               
             
@@ -403,24 +401,12 @@
                 
               
 
-              <time title="Created: 2020-09-01 19:09:14" itemprop="dateCreated datePublished" datetime="2020-09-01T19:09:14+08:00">2020-09-01</time>
+              <time title="Created: 2020-10-27 14:43:42 / Modified: 15:04:01" itemprop="dateCreated datePublished" datetime="2020-10-27T14:43:42+08:00">2020-10-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-11-13 18:42:42" itemprop="dateModified" datetime="2020-11-13T18:42:42+08:00">2020-11-13</time>
               
             
           </span>
@@ -480,51 +466,50 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>C1103A-2 H9971S500</p>
+<p>困难的事情不是我们如何理解机器，而是机器如何理解我们</p>
 </blockquote>
 <a id="more"></a>
-<p>内存分为只读存储器（ROM）、随机读写存储器（RAM）以及高速缓冲存储器（Cache），本文将针对内存的相关原理进行总结</p>
-<h2 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h2><h3 id="ROM工作原理及特性"><a href="#ROM工作原理及特性" class="headerlink" title="ROM工作原理及特性"></a>ROM工作原理及特性</h3><p>ROM是非易失的存储器，掉电后不丢失，但是一旦存储资料便无法改变或删除。经常存放一些比较关键的内容，例如BIOS</p>
-<h3 id="不同的ROM"><a href="#不同的ROM" class="headerlink" title="不同的ROM"></a>不同的ROM</h3><p>这里对于常见的一些ROM及特性进行总结。</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">原理</th>
-<th style="text-align:center">特性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">PROM</td>
-<td style="text-align:center">行列式熔丝，熔断熔丝写入</td>
-<td style="text-align:center">无法恢复和更改</td>
-</tr>
-<tr>
-<td style="text-align:center">EPROM</td>
-<td style="text-align:center">利用高压电写入，可被紫外线清空</td>
-<td style="text-align:center">曝光可清空</td>
-</tr>
-<tr>
-<td style="text-align:center">EEPROM</td>
-<td style="text-align:center">原理类似EPROM，可用高压电抹除</td>
-<td style="text-align:center">高压电可清空</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="RAM"><a href="#RAM" class="headerlink" title="RAM"></a>RAM</h2><h3 id="DRAM工作原理及特性"><a href="#DRAM工作原理及特性" class="headerlink" title="DRAM工作原理及特性"></a>DRAM工作原理及特性</h3><h4 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h4><p>DRAM实际就是一个电容和二极管组成的二维矩阵，下图展示了DRAM的电气结构，一个4*4的矩阵。矩阵的每一个节点代表一个二进制bit。具体表示如下</p>
+<p>计算机依赖二进制进行运算，而为了配合二进制计算设计硬件电路，人们提出了原码、反码以及补码的概念。本文将针对这些概念及相互之间的转换进行总结。</p>
+<h2 id="原、反、补码的概念"><a href="#原、反、补码的概念" class="headerlink" title="原、反、补码的概念"></a>原、反、补码的概念</h2><h3 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h3><p>原码由两部分组成</p>
 <ul>
-<li>当电容充电，代表1</li>
-<li>当电容未充电，代表0</li>
+<li>符号位</li>
+<li>真值的绝对值</li>
 </ul>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Square_array_of_mosfet_cells_read.png/375px-Square_array_of_mosfet_cells_read.png" width="280" alt="图片名称" align="center"></p>
-<p>由于晶体管有漏电电流，因此DRAM需要动态刷新，且掉电后数据挥发，所以被成为动态存储。</p>
-<h4 id="读写操作2"><a href="#读写操作2" class="headerlink" title="读写操作2"></a>读写操作<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h4><p>由于DRAM电路是矩阵形式，所以操作也是二维操作，先定位行，再定位列，接下来我们针对内存中的读写操作进行总结。</p>
-<h5 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h5><h4 id="DRAM相关特性"><a href="#DRAM相关特性" class="headerlink" title="DRAM相关特性"></a>DRAM相关特性</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>与SRAM相比，DRAM结构简单，一个bit需要一个二极管一个电容进行表示，所以存储密度高，成本较低。</p>
-<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>访问速度慢，耗电量大</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Bhttps://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8%5D(https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)">维基百科对于DRAM的解释</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=x3jGqOrXXc8">DRAM读写循环</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<p>原码的第一位为符号位，其余位为值位，例如：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
++1_{[原]}=0000 ,0001\\
+-1_{[原]}=1000 ,0001
+\end{aligned}</script><p>其中符号位0为正，1为负。原码的表示范围为：<code>[1111 1111, 0111 1111]</code>，即-127到127。从形式上看，原码符合人类对于数字的认知，所以是人比较能理解的计数方式。</p>
+<h3 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h3><p>反码的表示方法为：</p>
+<ul>
+<li>正数即本身</li>
+<li>负数符号不变、其余取反</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
++1 = [0000 ,0001]_{原}= [0000,0001]_{反}\\
+-1 = [1000 ,0001]_{原}= [1111,1110]_{反}
+\end{aligned}</script><p>一会儿再讨论为什么要这样设计，先记住其定义。</p>
+<h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p>补码的表示方法为：</p>
+<ul>
+<li>正数即本身</li>
+<li>负数在反码基础上+1</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
++1 = [0000 ,0001]_{原}= [0000,0001]_{反}= [0000,0001]_{补}\\
+-1 = [1000 ,0001]_{原}= [1111,1110]_{反}= [1111,1111]_{补}
+\end{aligned}</script><h2 id="为何使用原码、反码与补码"><a href="#为何使用原码、反码与补码" class="headerlink" title="为何使用原码、反码与补码"></a>为何使用原码、反码与补码</h2><p>根本原因是为了简化电路设计，我们知道加法是很简单的，但是如果要在计算机中引入减法，就会导致电路设计的复杂，所以有没有一种方案能够将减法转换为加法呢？简单来说，减法可以表示为一个数加上另一个数的负数，而通过引入反码与补码的方式，我们可以让符号位也参与到运算中，从而只需要加法即可。我们以1-1=0为例，探讨反码与补码的运算过程。</p>
+<p>如果我们使用原码计算1-1即1+(-1)，那么得到的结果是：</p>
+<script type="math/tex; mode=display">
+1 - 1 = 1 + (-1) = [00000001]_原 + [10000001]_原 = [10000010]_原 = -2</script><p>显然结果不正确。如果我们使用反码计算，那么结果为：</p>
+<script type="math/tex; mode=display">
+1 - 1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原= [0000 0001]_反 + [1111 1110]_反 = [1111 1111]_反 = [1000 0000]_原 = -0</script><p>我们发现结果的值部分虽然是正确的，但是问题就处在0上，0带符号是没有任何意义的，如果用反码，会出现两个0，即+0和-0，这显然不是我们想要的结果。于是人们提出了补码，解决了0的问题：</p>
+<script type="math/tex; mode=display">
+1-1 = 1 + (-1) = [0000 0001]_原 + [1000 0001]_原 = [0000 0001]_补 + [1111 1111]_补 = [0000 0000]补=[0000 0000]原</script><p>修复之后，0有了唯一的表示，同时，多出来的1000,0000还可以用来表示-128，但是由于实际上的-0表示了-128，所以-128并没有对应的原码和反码表示。</p>
+<p>总之一句话：<strong>反码和补码是出于对计算机电路简化设计而引申出的定义</strong>。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -587,8 +572,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/09/01/计算机/操作系统/内核/" rel="next" title="Kernel">
-                <i class="fa fa-chevron-left"></i> Kernel
+              <a href="/2020/10/18/工具/C++/explicit/" rel="next" title="explicit关键字总结">
+                <i class="fa fa-chevron-left"></i> explicit关键字总结
               </a>
             
           </div>
@@ -597,8 +582,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/09/03/计算机/操作系统/线程/" rel="prev" title="线程">
-                线程 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/11/02/计算机/算法/课程/MIT6006-5/" rel="prev" title="MIT 6006 Lecture 5——二叉查找树（Binary search tree, BST）">
+                MIT 6006 Lecture 5——二叉查找树（Binary search tree, BST） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -675,7 +660,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">269</span>
+                    <span class="site-state-item-count">270</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -921,7 +906,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROM"><span class="nav-number">1.</span> <span class="nav-text">ROM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROM工作原理及特性"><span class="nav-number">1.1.</span> <span class="nav-text">ROM工作原理及特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的ROM"><span class="nav-number">1.2.</span> <span class="nav-text">不同的ROM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM"><span class="nav-number">2.</span> <span class="nav-text">RAM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DRAM工作原理及特性"><span class="nav-number">2.1.</span> <span class="nav-text">DRAM工作原理及特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本工作原理"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读写操作2"><span class="nav-number">2.1.2.</span> <span class="nav-text">读写操作2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#读操作"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">读操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DRAM相关特性"><span class="nav-number">2.1.3.</span> <span class="nav-text">DRAM相关特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原、反、补码的概念"><span class="nav-number">1.</span> <span class="nav-text">原、反、补码的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原码"><span class="nav-number">1.1.</span> <span class="nav-text">原码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反码"><span class="nav-number">1.2.</span> <span class="nav-text">反码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补码"><span class="nav-number">1.3.</span> <span class="nav-text">补码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为何使用原码、反码与补码"><span class="nav-number">2.</span> <span class="nav-text">为何使用原码、反码与补码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1109,7 +1094,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/09/01/计算机/硬件组成/内存/'
+    refer: '2020/10/27/计算机/组成原理/原、反、补码/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
