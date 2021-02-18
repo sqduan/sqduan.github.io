@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-12T05:21:43.490Z</updated>
+  <updated>2021-02-15T15:53:48.724Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>宏定义</title>
+    <link href="http://yoursite.com/2021/02/15/%E5%B7%A5%E5%85%B7/C++/%E5%AE%8F/"/>
+    <id>http://yoursite.com/2021/02/15/工具/C++/宏/</id>
+    <published>2021-02-15T04:59:03.562Z</published>
+    <updated>2021-02-15T15:53:48.724Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><h1 id="define"><a href="#define" class="headerlink" title="define :-)"></a>define :-)</h1></blockquote><a id="more"></a><p>宏定义是C/C++系中的重要组成部分，一般在一些底层框架性代码中起着非常重要的作用，本文将以循序渐进的方式，对宏的使用进行一些总结。</p><h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><h3 id="宏的基本规则"><a href="#宏的基本规则" class="headerlink" title="宏的基本规则"></a>宏的基本规则</h3><p>宏定义可以理解为简单地对于文本进行替换，宏的替换发生在预编译的阶段，编译器根据语义分析，将宏替换为原有的字符，这个过程称为宏的展开。也正因为宏是简单的进行文本替换，所以可能会发生许多意想不到的情况，在Effective C++中，其实作者并不建议我们滥用宏定义。</p><h3 id="宏的分类"><a href="#宏的分类" class="headerlink" title="宏的分类"></a>宏的分类</h3><p>我们可以按照功能将宏进行分类，分为对象宏和函数宏两种，对象宏一般用于定义一些常数，例如：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> M_PI 3.</span></span><br></pre></td></tr></table></figure><p>这一句将<code>M_PI</code>定义为了圆周率，那么程序在预编译过程中就会将<code>M_PI</code>替换为魔数。</p><p>而函数宏，就是行为类似函数，可以接收参数的宏，当我们定义宏的时候在宏名字后加一对括号，就创建了函数宏：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MIN(A,B) A &lt; B ? A : B</span></span><br><span class="line"><span class="comment">// 一个漏洞百出的函数宏</span></span><br></pre></td></tr></table></figure><p>上面这个函数宏接受两个参数，返回较小的那个值.当然这个宏函数存在非常大的问题，因为宏是文本替换，而这个宏非常粗糙 ，甚至不能进行下面的计算。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">2</span> * MIN(<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"><span class="comment">// =&gt; int a = 2 * 3 &lt; 4 ? 3 : 4;</span></span><br><span class="line"><span class="comment">// =&gt; int a = 6 &lt; 4 ? 3 : 4;</span></span><br><span class="line"><span class="comment">// =&gt; int a = 4; 错误结果</span></span><br></pre></td></tr></table></figure><h3 id="为何要使用宏"><a href="#为何要使用宏" class="headerlink" title="为何要使用宏"></a>为何要使用宏</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://onevcat.com/2014/01/black-magic-in-macro/">宏定义的黑魔法</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;h1 id=&quot;define&quot;&gt;&lt;a href=&quot;#define&quot; class=&quot;headerlink&quot; title=&quot;define :-)&quot;&gt;&lt;/a&gt;define :-)&lt;/h1&gt;&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>TUI调试模式</title>
@@ -459,32 +482,6 @@
       <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="Linux" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/Linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>BIOS</title>
-    <link href="http://yoursite.com/2020/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/BIOS/"/>
-    <id>http://yoursite.com/2020/11/30/计算机/操作系统/BIOS/</id>
-    <published>2020-11-30T03:54:11.653Z</published>
-    <updated>2020-12-08T11:50:20.812Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>Heart Beat : 76 bit/min</p><p>Body Temperature : 36.4C</p><p>Mental Status : normal</p></blockquote><a id="more"></a><p>严格来说，BIOS并不属于操作系统，而是计算机写死在ROM上的一段程序，负责硬件检测与控制权移交。</p><h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Heart Beat : 76 bit/min&lt;/p&gt;
-&lt;p&gt;Body Temperature : 36.4C&lt;/p&gt;
-&lt;p&gt;Mental Status : normal&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
     
   </entry>

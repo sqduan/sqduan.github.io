@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[宏定义]]></title>
+    <url>%2F2021%2F02%2F15%2F%E5%B7%A5%E5%85%B7%2FC%2B%2B%2F%E5%AE%8F%2F</url>
+    <content type="text"><![CDATA[define :-) 宏定义是C/C++系中的重要组成部分，一般在一些底层框架性代码中起着非常重要的作用，本文将以循序渐进的方式，对宏的使用进行一些总结。 基本使用宏的基本规则宏定义可以理解为简单地对于文本进行替换，宏的替换发生在预编译的阶段，编译器根据语义分析，将宏替换为原有的字符，这个过程称为宏的展开。也正因为宏是简单的进行文本替换，所以可能会发生许多意想不到的情况，在Effective C++中，其实作者并不建议我们滥用宏定义。 宏的分类我们可以按照功能将宏进行分类，分为对象宏和函数宏两种，对象宏一般用于定义一些常数，例如： 1#define M_PI 3. 这一句将M_PI定义为了圆周率，那么程序在预编译过程中就会将M_PI替换为魔数。 而函数宏，就是行为类似函数，可以接收参数的宏，当我们定义宏的时候在宏名字后加一对括号，就创建了函数宏： 12#define MIN(A,B) A &lt; B ? A : B// 一个漏洞百出的函数宏 上面这个函数宏接受两个参数，返回较小的那个值.当然这个宏函数存在非常大的问题，因为宏是文本替换，而这个宏非常粗糙 ，甚至不能进行下面的计算。 1234int a = 2 * MIN(3, 4);// =&gt; int a = 2 * 3 &lt; 4 ? 3 : 4;// =&gt; int a = 6 &lt; 4 ? 3 : 4;// =&gt; int a = 4; 错误结果 为何要使用宏参考文献1.宏定义的黑魔法 ↩]]></content>
+      <categories>
+        <category>工具</category>
+        <category>C++</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[TUI调试模式]]></title>
     <url>%2F2021%2F02%2F11%2F%E5%B7%A5%E5%85%B7%2FGDB%2FTUI%2F</url>
     <content type="text"><![CDATA[GDB text user interface（TUI）是GDB的一个多窗口的符号终端，能够同时显示源文件、汇编输出、寄存器等情况，本文将针对tui的使用进行一些总结。 基本命令在GDB中激活TUI在使用GDB时，可以通过gdb -tui的方式打开tui，也可以打开gdb后，输入tui enable/disable激活、关闭TUI，TUI的界面如下所示： 上中下分别为源代码窗口、汇编代码窗口和命令行窗口 不同的窗口在TUI中，一共可以显示如下四种窗口： 命令窗口：用于GDB调试时命令输入 源代码窗口：显示程序源代码，当前行及断点等信息，（命令窗口中输入layout src） 汇编窗口：显示程序汇编代码，（命令窗口中输入layout asm） 寄存器窗口：显示寄存器中的内容，（命令行窗口中输入layout regs） 参考文献1.shell - Why does using yes on bash pipelines not cause infinite loops? - Unix &amp; Linux Stack Exchange ↩]]></content>
@@ -1990,9 +1999,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[Qt Widget程序布局]]></title>
+    <title><![CDATA[Qt Widget多窗口互动]]></title>
     <url>%2F2020%2F07%2F12%2F%E5%B7%A5%E5%85%B7%2FQt%2FQt%20Widget%20%E5%A4%9A%E7%AA%97%E5%8F%A3%E4%BA%92%E5%8A%A8%2F</url>
-    <content type="text"><![CDATA[本文将针对Qt Widget程序的布局进行讲解 参考文献]]></content>
+    <content type="text"><![CDATA[本文将针对Qt Widget程序的多窗口互动实现进行讲解 参考文献]]></content>
       <categories>
         <category>工具</category>
         <category>Qt</category>
