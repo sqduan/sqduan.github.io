@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="指针就像陷阱，你得主动跳进去">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-02T03:11:27.847Z">
+<meta property="og:updated_time" content="2021-02-23T06:32:30.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指针">
 <meta name="twitter:description" content="指针就像陷阱，你得主动跳进去">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-02 11:11:27" itemprop="dateModified" datetime="2020-12-02T11:11:27+08:00">2020-12-02</time>
+                <time title="Modified: 2021-02-23 14:32:30" itemprop="dateModified" datetime="2021-02-23T14:32:30+08:00">2021-02-23</time>
               
             
           </span>
@@ -485,8 +485,11 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">4</span>];              <span class="comment">// a: 0x7ffc2a11b080</span></span><br><span class="line"><span class="keyword">char</span> *c = (<span class="keyword">char</span> *) a;  <span class="comment">// c: 0x7ffc2a11b080</span></span><br></pre></td></tr></table></figure>
 <p>但是需要注意的是，不同类型的指针做偏移运算时，偏移的大小是不同的，一个int指针的偏移量为4byte，但是一个char指针偏移量为1byte。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int *d = a;</span><br><span class="line"></span><br><span class="line">// d+1 = 0x7ffc2a11b080+0x4 = 0x7ffc2a11b084</span><br><span class="line">// c+1 = 0x7ffc2a11b080+0x1 = 0x7ffc2a11b081</span><br></pre></td></tr></table></figure>
-<h3 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h3><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><h5 id="指针不能想加，但能相减"><a href="#指针不能想加，但能相减" class="headerlink" title="指针不能想加，但能相减"></a>指针不能想加，但能相减</h5><p>两个指针相加是没有任何意义的，一个指针和一个偏移量相加，可以代表将这个指针偏移某个位置，但是两个指针相加能代表什么呢？nothing。但是<strong>两个指针相减是有意义的</strong>，代表两个指针之间的距离，我们可以借此得到两个指针中间的位置</p>
+<h3 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h3><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><h5 id="指针不能想加，但能相减"><a href="#指针不能想加，但能相减" class="headerlink" title="指针不能想加，但能相减"></a>指针不能想加，但能相减</h5><p>两个指针相加是没有任何意义的，一个指针和一个偏移量相加，可以代表将这个指针偏移某个位置，但是两个指针相加能代表什么呢？nothing。但是<strong>两个指针相减是有意义的</strong>，代表两个指针之间的距离，例如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p1 = &amp;a;</span><br><span class="line"><span class="keyword">int</span> *p2 = &amp;b;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> distance = p1 - p2;</span><br></pre></td></tr></table></figure>
+<p>如果打印的distace值为5，代表p1和p2之间间隔着能够容纳5个int的空间，我们可以借此得到两个指针中间的位置。</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mid = (low+high)/<span class="number">2</span>;     <span class="comment">//Error</span></span><br><span class="line">mid = low+(high-low)/<span class="number">2</span>  <span class="comment">//OK</span></span><br></pre></td></tr></table></figure>
+<p>需要注意的是，指针相减必须是相同类型的。</p>
 <h2 id="地址表示"><a href="#地址表示" class="headerlink" title="地址表示"></a>地址表示</h2><p>在64位的PC上，指针所占的长度为8个字节，但是如果实际打印会发现输出只有6个字节，这是因为6字节寻址范围已经非常大了，基本上没有什么软件能够使用6个字节寻址的空间。</p>
 <h2 id="不同类型在内存中的表示"><a href="#不同类型在内存中的表示" class="headerlink" title="不同类型在内存中的表示"></a>不同类型在内存中的表示</h2><h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><p>整型的表示方式为：先计算整型的补码，然后按照低地址放低位，高地址放高位的方式，将整型进行存储，以int类型为例，该类型占据4个byte。</p>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><blockquote>
@@ -660,7 +663,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">272</span>
+                    <span class="site-state-item-count">273</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -787,7 +790,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">55</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">56</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

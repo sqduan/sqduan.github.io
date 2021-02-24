@@ -107,7 +107,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830212737.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png">
-<meta property="og:updated_time" content="2020-12-17T03:16:16.699Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224747.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/addresstrans.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224451.png">
+<meta property="og:updated_time" content="2021-02-23T15:19:14.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存管理">
 <meta name="twitter:description" content="计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。">
@@ -423,7 +426,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-17 11:16:16" itemprop="dateModified" datetime="2020-12-17T11:16:16+08:00">2020-12-17</time>
+                <time title="Modified: 2021-02-23 23:19:14" itemprop="dateModified" datetime="2021-02-23T23:19:14+08:00">2021-02-23</time>
               
             
           </span>
@@ -573,10 +576,17 @@
 </ol>
 <h5 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h5><p>下面以实际的计算演示多级页表所占用的大小</p>
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830212737.png" width="250" alt="图片名称" align="center"></p>
-<p>在32位系统中，内存地址为32位，分为两个部分，Page Number和Page Offset，由于偏移量位12位，因此页面大小为$2^{12}=4096=4K$。而页面数为$2^{20}=1K\times 1K=1M$，意味着我们需要$1M$的空间保存页面映射表，占用的空间比较多，因此我们采取了二级页表划分的方式，将Page Number进一步划分为两个10位的表，即构成多级页表的寻址方式。</p>
+<p>在32位系统中，内存地址为32位，分为两个部分，Page Number和Page Offset，由于offset即为页面大小，因此页面大小为$2^{12}=4096=4K$。而页面数为$2^{20}=1K\times 1K=1M$，意味着我们需要$1M$的空间保存页面映射表，占用的空间比较多，因此我们采取了二级页表划分的方式，将Page Number进一步划分为两个10位的表，即构成多级页表的寻址方式。</p>
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png" width="250" alt="图片名称" align="center"></p>
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png" width="450" alt="图片名称" align="center"></p>
-<p>外部页表的大小是$1K$，而内部页表共$1K\times 1K=1M$个，每一个的大小是$1K$。我们不一定把这些页表都保存起来，可以只保存一部分，这样就节约了资源。</p>
+<p>外部页表的大小是$1K$，而内部页表共$1K$个，每一个的大小是$1K$，故总大小也为$1M$。但是我们不一定把这些页表都保存起来，可以只保存一部分，这样就节约了资源。</p>
+<p>下面以一个完整的例子展示多级页表的计算过程<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，一个多级页表的结构如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224747.png" width="550" alt="图片名称" align="center"></p>
+<p>令$S<em>m$为虚拟地址能表示的最大内存大小，$S_P$为页面大小，$S</em>{PTE}$为保存每个页表项（PTE）的大小。考虑一个内存大小为8GB，一个页大小为8KB（即offset为$2^{13}B$），虚拟地址长度为46bit的计算机，计算需要几级页表。</p>
+<p>首先考虑不进行分级，那么只有一级页表，那么PTE的数量$N_{PTE}$（即所需的页数）计算公式为：</p>
+<script type="math/tex; mode=display">
+N_{PTE}=S_{m}/S_{p}=2^{46}B/2^{13}B=2^{33}</script><p>所以如果只有一级页表，需要$2^{33}$个PTE，每个PTE大小为32bit，那么$S<em>{PTE}=2^{2}B$，所以页表占用的空间为$S</em>{T}=N<em>{PTE}\times S</em>{PTE}=2^{35}B$。</p>
+<p>现在考虑二级分页，在二级分页下，我们用一级页表指向二级页表，而二级页表的空间大小为$2^{35}B$，为了保存这么多的空间，我们需要$2^{35} B / 2^{13}B=2^{22}$个页面存放二级页表，所以一级页表的大小为$2^{22}$。</p>
 <h3 id="多进程时的物理内存（DRAM）"><a href="#多进程时的物理内存（DRAM）" class="headerlink" title="多进程时的物理内存（DRAM）"></a>多进程时的物理内存（DRAM）</h3><p>当多个进程同时执行时，实际物理地址可能是如下情况：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">=====Memory=====</span><br><span class="line">    Process1</span><br><span class="line">----------------</span><br><span class="line">    Process2</span><br><span class="line">----------------</span><br><span class="line">    Process2</span><br><span class="line">----------------    =======Disk=======</span><br><span class="line">    Process1              </span><br><span class="line">----------------    ==================</span><br></pre></td></tr></table></figure>
 <p>物理内存中保存有进程1和2的内容，但是存储方式可能是不连续的，同时，可能也只是部分存储，然后通过Cache的方式从Disk中再读取进程中的数据。我们通过逻辑地址和物理地址的映射关系，从而实现寻址过程。</p>
@@ -591,11 +601,11 @@
 <tbody>
 <tr>
 <td>逻辑地址</td>
-<td>程序产生的段内偏移，由段选择符和段内偏移组成的地址。由操作系统决定，和物理地址一一对应的地址，C语言中的指针即为逻辑地址</td>
+<td>程序产生的段内偏移，由段选择符和段内偏移组成的地址。由操作系统决定，和物理地址一一对应的地址，C语言中的指针即为逻辑地址<br>逻辑地址就是段+页偏移</td>
 </tr>
 <tr>
 <td>线性地址</td>
-<td>段基址+段内偏移量构成的地址，如果未开启分页，那么线性地址就是物理地址，否则还需二次转换</td>
+<td>段基址+段内偏移量构成的地址，如果未开启分页，那么线性地址就是物理地址，否则还需二次转换。<br>线性地址就是段偏移，但是还未进行页转换的地址</td>
 </tr>
 <tr>
 <td>物理地址</td>
@@ -605,16 +615,9 @@
 </table>
 </div>
 <h4 id="CPU寻址方式"><a href="#CPU寻址方式" class="headerlink" title="CPU寻址方式"></a>CPU寻址方式</h4><p>现代CPU采用虚拟寻址的方式，需要将虚拟地址翻译成物理地址，这样才能访问真实的物理内存。完成虚拟地址转换为物理地址的的硬件是CPU中的MMU。转换过程为：</p>
-<pre class="mermaid">graph LR
-    node1["逻辑地址"]
-    node2["线性地址"]
-    node3["物理地址"]
-
-    node1-->node2
-    node2-->node3</pre>
-
-
-
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/addresstrans.svg" width="550" alt="图片名称" align="center"></p>
+<p>其中，C语言中的指针就是虚拟地址中的Offset部分，如果关闭了段选，那么线性地址就是虚拟地址。更具体的带有多级页表的转换方式如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224451.png" width="650" alt="图片名称" align="center"></p>
 <h4 id="逻辑地址的作用"><a href="#逻辑地址的作用" class="headerlink" title="逻辑地址的作用"></a>逻辑地址的作用</h4><ul>
 <li>避免直接将物理地址暴露，从而导致访问任意内存程序崩溃</li>
 <li>可以用相邻的虚拟地址映射到不相邻的物理地址</li>
@@ -633,7 +636,7 @@
 <h2 id="附录：一些简单的计算"><a href="#附录：一些简单的计算" class="headerlink" title="附录：一些简单的计算"></a>附录：一些简单的计算</h2><h3 id="16进制到KB、MB、GB的换算"><a href="#16进制到KB、MB、GB的换算" class="headerlink" title="16进制到KB、MB、GB的换算"></a>16进制到KB、MB、GB的换算</h3><p>我们一般用16进制表示地址位，那么16进制如何与KB、MB和GB这些单位进行换算呢？例如给定地址位为0xFFFFFFFF，其表示的是4GB所在的地址，计算过程如下：</p>
 <script type="math/tex; mode=display">
 {0\mathrm{xFFFFFFFF}}_{16}=4,294,967,295_{10}=\frac{4,294,967,295}{1024}KB</script><p>而1GB=1024MB=1024*1024KB，这样我们就实现了从16进制到KB、MB、GB的换算</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="http://115.78.133.167:81/bitstream/TVHG_07113876976/270/1/OReilly%20-%20Understanding%20The%20Linux%20Kernel.pdf">Bovet D P, Cesati M. Understanding the Linux Kernel: from I/O ports to process management[M]. &quot; O'Reilly Media, Inc.&quot;, 2005.</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="http://115.78.133.167:81/bitstream/TVHG_07113876976/270/1/OReilly%20-%20Understanding%20The%20Linux%20Kernel.pdf">Bovet D P, Cesati M. Understanding the Linux Kernel: from I/O ports to process management[M]. &quot; O'Reilly Media, Inc.&quot;, 2005.</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.geeksforgeeks.org/multilevel-paging-in-operating-system/">Multilevel Paging in Operating System - GeeksforGeeks</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -706,8 +709,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/计算机/数据库/关系数据模型/" rel="prev" title="关系数据模型">
-                关系数据模型 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/数学/概率论/贝叶斯决策论/" rel="prev" title="贝叶斯决策论">
+                贝叶斯决策论 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -784,7 +787,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">272</span>
+                    <span class="site-state-item-count">273</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -911,7 +914,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">55</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">56</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
