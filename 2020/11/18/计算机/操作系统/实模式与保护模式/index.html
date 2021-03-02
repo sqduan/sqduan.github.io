@@ -104,7 +104,7 @@
 <meta property="og:description" content="本文将针对保护模式与实模式相关内容进行总结。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201201205149.png">
-<meta property="og:updated_time" content="2020-12-01T12:58:17.719Z">
+<meta property="og:updated_time" content="2021-03-02T02:56:52.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实模式与保护模式">
 <meta name="twitter:description" content="本文将针对保护模式与实模式相关内容进行总结。">
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-01 20:58:17" itemprop="dateModified" datetime="2020-12-01T20:58:17+08:00">2020-12-01</time>
+                <time title="Modified: 2021-03-02 10:56:52" itemprop="dateModified" datetime="2021-03-02T10:56:52+08:00">2021-03-02</time>
               
             
           </span>
@@ -488,9 +488,8 @@
 <li><p>处理器向内存发送20位地址，其中4位地址由%cs/%ds/%es/%ss提供，指令段使用%cs、数据读写使用%ds、栈读写使用%ss。例如，一条指令位于[cs:ip]，其寻址方式为：</p>
 <script type="math/tex; mode=display">
 addr = 16\times \textrm{segment}+\textrm{offset}=16\times\textrm{CS}+\textrm{IP}</script></li>
-</ul>
-<ul>
-<li>寻址范围很小（$2^{16}=65536$bytes）</li>
+<li><p>寻址范围很小（$2^{16}=65536$bytes）</p>
+</li>
 </ul>
 <h2 id="保护模式"><a href="#保护模式" class="headerlink" title="保护模式"></a>保护模式</h2><h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>在保护模式下，由一个段选择符和一个指定段内相对地址的偏移量构成逻辑地址，其结构如下：</p>
 <p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201201205149.png" width="480" alt="图片名称" align="center"></p>
@@ -501,6 +500,7 @@ addr = 16\times \textrm{segment}+\textrm{offset}=16\times\textrm{CS}+\textrm{IP}
 </ul>
 <h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ul>
 <li>寻址范围大</li>
+<li>仅能访问虚拟地址</li>
 </ul>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href></a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
@@ -653,7 +653,7 @@ addr = 16\times \textrm{segment}+\textrm{offset}=16\times\textrm{CS}+\textrm{IP}
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">273</span>
+                    <span class="site-state-item-count">276</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -786,7 +786,9 @@ addr = 16\times \textrm{segment}+\textrm{offset}=16\times\textrm{CS}+\textrm{IP}
                     
                       
                     
-                    <span class="site-state-item-count">56</span>
+                      
+                    
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
