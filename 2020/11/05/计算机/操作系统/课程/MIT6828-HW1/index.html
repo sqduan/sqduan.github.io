@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-06T09:11:52.607Z">
+<meta property="og:updated_time" content="2021-03-10T07:30:57.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-HW1-boot xv6">
 <meta name="twitter:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-06 17:11:52" itemprop="dateModified" datetime="2020-12-06T17:11:52+08:00">2020-12-06</time>
+                <time title="Modified: 2021-03-10 15:30:57" itemprop="dateModified" datetime="2021-03-10T15:30:57+08:00">2021-03-10</time>
               
             
           </span>
@@ -491,14 +491,14 @@
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>作业准备请参考文献<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>和文献<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
 <h2 id="启动xv6"><a href="#启动xv6" class="headerlink" title="启动xv6"></a>启动xv6</h2><h3 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h3><p>进入<code>xv6-public</code>文件夹后，修改一些脚本的执行权限，然后make一下，即可编译内核。</p>
 <h3 id="设置断点调试"><a href="#设置断点调试" class="headerlink" title="设置断点调试"></a>设置断点调试</h3><p>使用nm命令在可执行文件kernel中寻找_start地址。执行下列命令，抓取_start关键字，得到如下结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> nm kernel | grep _start</span></span><br><span class="line">8010a48c D _binary_entryother_start</span><br><span class="line">8010a460 D _binary_initcode_start</span><br><span class="line">0010000c T _start</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> nm kernel | grep _start</span><br><span class="line">8010a48c D _binary_entryother_start</span><br><span class="line">8010a460 D _binary_initcode_start</span><br><span class="line">0010000c T _start</span><br></pre></td></tr></table></figure>
 <p>在这个内核中，_start地址为0x0010000c。在该位置设置断点，然后继续执行，程序会在此处停下（但是我的gdb不行，不知道是哪里的问题，程序停不下来，会一直执行）。这里总结一下解决方案：</p>
 <h4 id="断点不停止BUG解决"><a href="#断点不停止BUG解决" class="headerlink" title="断点不停止BUG解决"></a>断点不停止BUG解决</h4><h5 id="更换GDB版本（没用）"><a href="#更换GDB版本（没用）" class="headerlink" title="更换GDB版本（没用）"></a>更换GDB版本（没用）</h5><p>下载该课程指定的GDB版本，<a href="http://ftpmirror.gnu.org/gdb/gdb-7.3.1.tar.bz2">点击此处下载gdb-7.3.1</a>。</p>
 <h5 id="安装指定版本的binutils（没用）"><a href="#安装指定版本的binutils（没用）" class="headerlink" title="安装指定版本的binutils（没用）"></a>安装指定版本的binutils（没用）</h5><p>下载该课程指定的binutils版本，<a href="http://ftpmirror.gnu.org/binutils/binutils-2.21.1.tar.bz2">点击此处下载binutils-2.21.1</a>。</p>
 <h5 id="更换GCC版本（没用）"><a href="#更换GCC版本（没用）" class="headerlink" title="更换GCC版本（没用）"></a>更换GCC版本（没用）</h5><p>下载该课程指定的GCC版本，<a href="http://ftpmirror.gnu.org/gcc/gcc-4.6.4/gcc-core-4.6.4.tar.bz2">点击此处下载GCC4.6.4</a>。</p>
 <h5 id="更换QEMU"><a href="#更换QEMU" class="headerlink" title="更换QEMU"></a>更换QEMU</h5><p>下载该课程指定的QEMU版本</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/mit-pdos/6.828-qemu.git qemu</span><br></pre></td></tr></table></figure>
-<h5 id="下载最新版本xv6-public（问题已解决）"><a href="#下载最新版本xv6-public（问题已解决）" class="headerlink" title="下载最新版本xv6-public（问题已解决）"></a>下载最新版本xv6-public（问题已解决）</h5><p>粗略看了下好像是链接文件出了问题，导致链接后实际物理地址错误，总之前面的都没用，就下载最新的xv6即可。</p>
+<h5 id="下载最新版本xv6-public（问题已解决）"><a href="#下载最新版本xv6-public（问题已解决）" class="headerlink" title="下载最新版本xv6-public（问题已解决）"></a>下载最新版本xv6-public（问题已解决）</h5><p>粗略看了下好像是链接文件出了问题，导致链接后实际物理地址错误，总之前面的都没用，就下载最新的xv6即可。下载地址为：<a href="https://github.com/mit-pdos/xv6-public.git">xv6-public</a></p>
 <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="问题1：栈中有什么？"><a href="#问题1：栈中有什么？" class="headerlink" title="问题1：栈中有什么？"></a>问题1：栈中有什么？</h3><p>现在我们处在程序执行的开始阶段，我们需要看一下寄存器和栈中的内容，在gdb界面执行如下命令查看寄存器的值</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info reg</span><br><span class="line">eax            0x0                 0</span><br><span class="line">ecx            0x0                 0</span><br><span class="line">edx            0x663               1635</span><br><span class="line">ebx            0x0                 0</span><br><span class="line">esp            0x0                 0x0</span><br><span class="line">ebp            0x0                 0x0</span><br><span class="line">esi            0x0                 0</span><br><span class="line">edi            0x0                 0</span><br><span class="line">eip            0xfff0              0xfff0</span><br><span class="line">eflags         0x2                 [ IOPL=0 ]</span><br><span class="line">cs             0xf000              61440</span><br><span class="line">ss             0x0                 0</span><br><span class="line">ds             0x0                 0</span><br><span class="line">es             0x0                 0</span><br><span class="line">fs             0x0                 0</span><br><span class="line">gs             0x0                 0</span><br><span class="line">fs_base        0x0                 0</span><br><span class="line">gs_base        0x0                 0</span><br><span class="line">k_gs_base      0x0                 0</span><br><span class="line">cr0            0x60000010          [ CD NW ET ]</span><br><span class="line">cr2            0x0                 0</span><br><span class="line">cr3            0x0                 [ PDBR=0 PCID=0 ]</span><br><span class="line">cr4            0x0                 [ ]</span><br><span class="line">cr8            0x0                 0</span><br><span class="line">efer           0x0                 [ ]</span><br></pre></td></tr></table></figure>
 <p>kongzhitai我们得到了各个寄存器中的值。然后执行下列命令查看esp寄存器中的内容：</p>
@@ -654,7 +654,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">276</span>
+                    <span class="site-state-item-count">277</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
