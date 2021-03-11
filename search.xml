@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[MIT6828实验环境配置指南]]></title>
+    <url>%2F2021%2F03%2F10%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2F%E8%AF%BE%E7%A8%8B%2FMIT6828-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97%2F</url>
+    <content type="text"><![CDATA[本文将针对MIT6828的实验环境配置进行讲解。 首先，建议使用32位ubuntu虚拟机作为实验环境，不建议自己配置，因为会遇到各种坑。我们的主要目的是学习操作系统，不是安装各种环境及工具，下载一个32位的ubuntu桌面镜像，然后配置一个虚拟机即可。我这里使用的是16.04版本的32位ubuntu镜像，使用的虚拟机是vmware。 工具配置在安装完成后，执行下面两个命令 参考文献1.xv6 book ↩2.Homework: xv6 system calls (mit.edu) ↩]]></content>
+      <categories>
+        <category>计算机</category>
+        <category>操作系统</category>
+        <category>课程</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[MIT6828-HW3-xv6 system calls]]></title>
     <url>%2F2021%2F03%2F10%2F%E8%AE%A1%E7%AE%97%E6%9C%BA%2F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%2F%E8%AF%BE%E7%A8%8B%2FMIT6828-HW3%2F</url>
     <content type="text"><![CDATA[系统调用是内核中的一系列实现系统功能的子函数，本文将针对XV6中的一些系统调用进行管理。本章的配置过程如：作业1：XV6启动 第一部分：系统调用追踪修改xv6内核，对于每一个系统调用，打印函数名和返回值以及参数，当xv6启动时，可以看到如下内容： 1234567...fork -&gt; 2exec -&gt; 0open -&gt; 3close -&gt; 0$write -&gt; 1 write -&gt; 1 这个是init fork，并执行了sh，sh确保只有两个文件描述符被打开，然后sh写了$，修改syscall.c下的syscall()，实现这个功能，syscall()原型如下： 123456789101112131415voidsyscall(void)&#123; int num; struct proc *curproc = myproc(); num = curproc-&gt;tf-&gt;eax; if(num &gt; 0 &amp;&amp; num &lt; NELEM(syscalls) &amp;&amp; syscalls[num]) &#123; curproc-&gt;tf-&gt;eax = syscalls[num](); //调用函数 &#125; else &#123; cprintf("%d %s: unknown sys call %d\n", curproc-&gt;pid, curproc-&gt;name, num); curproc-&gt;tf-&gt;eax = -1; &#125;&#125; 我们需要打印系统调用名称、返回值及参数，struct proc结构体描述了进程的信息，具体如下： 123456789101112131415struct proc &#123; uint sz; // Size of process memory (bytes) pde_t* pgdir; // Page table char *kstack; // Bottom of kernel stack for this process enum procstate state; // Process state int pid; // Process ID struct proc *parent; // Parent process struct trapframe *tf; // Trap frame for current syscall struct context *context; // swtch() here to run process void *chan; // If non-zero, sleeping on chan int killed; // If non-zero, have been killed struct file *ofile[NOFILE]; // Open files struct inode *cwd; // Current directory char name[16]; // Process name (debugging)&#125;; 从这个结构体中，我们能够得到进程的名称 参考文献1.xv6 book ↩2.Homework: xv6 system calls (mit.edu) ↩]]></content>
