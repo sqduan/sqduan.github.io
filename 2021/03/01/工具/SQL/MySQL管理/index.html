@@ -468,7 +468,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对MySQL管理的一些相关操作进行总结。</p>
 <a id="more"></a>
 <h2 id="服务器管理1"><a href="#服务器管理1" class="headerlink" title="服务器管理1"></a>服务器管理<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></h2><h3 id="启动及关闭服务器"><a href="#启动及关闭服务器" class="headerlink" title="启动及关闭服务器"></a>启动及关闭服务器</h3><h4 id="Windows下"><a href="#Windows下" class="headerlink" title="Windows下"></a>Windows下</h4><p>在windows系统下，使用命令行进行MySQL的启动与关闭操作如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 启动操作</span><br><span class="line">mysqld --console</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 关闭操作</span><br><span class="line">mysqladmin -uroot shutdown</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 启动操作</span></span><br><span class="line">mysqld --console</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭操作</span></span><br><span class="line">mysqladmin -uroot shutdown</span><br></pre></td></tr></table></figure>
 <h3 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h3><p>在安装完MySQL后，可以使用如下语句修改root用户密码：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqladmin -u root password "password";</span><br></pre></td></tr></table></figure>
 <p>在创建root用户密码后，可以使用如下命令连接服务器，登录SQL服务</p>
@@ -642,10 +642,6 @@
                     
                   
                     
-                    
-                      
-                    
-                      
                     
                       
                     

@@ -491,7 +491,7 @@
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>作业准备请参考文献<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>和文献<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>。</p>
 <h2 id="启动xv6"><a href="#启动xv6" class="headerlink" title="启动xv6"></a>启动xv6</h2><h3 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h3><p>进入<code>xv6-public</code>文件夹后，修改一些脚本的执行权限，然后make一下，即可编译内核。</p>
 <h3 id="设置断点调试"><a href="#设置断点调试" class="headerlink" title="设置断点调试"></a>设置断点调试</h3><p>使用nm命令在可执行文件kernel中寻找_start地址。执行下列命令，抓取_start关键字，得到如下结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> nm kernel | grep _start</span><br><span class="line">8010a48c D _binary_entryother_start</span><br><span class="line">8010a460 D _binary_initcode_start</span><br><span class="line">0010000c T _start</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> nm kernel | grep _start</span></span><br><span class="line">8010a48c D _binary_entryother_start</span><br><span class="line">8010a460 D _binary_initcode_start</span><br><span class="line">0010000c T _start</span><br></pre></td></tr></table></figure>
 <p>在这个内核中，_start地址为0x0010000c。在该位置设置断点，然后继续执行，程序会在此处停下（但是我的gdb不行，不知道是哪里的问题，程序停不下来，会一直执行）。这里总结一下解决方案：</p>
 <h4 id="断点不停止BUG解决"><a href="#断点不停止BUG解决" class="headerlink" title="断点不停止BUG解决"></a>断点不停止BUG解决</h4><h5 id="更换GDB版本（没用）"><a href="#更换GDB版本（没用）" class="headerlink" title="更换GDB版本（没用）"></a>更换GDB版本（没用）</h5><p>下载该课程指定的GDB版本，<a href="http://ftpmirror.gnu.org/gdb/gdb-7.3.1.tar.bz2">点击此处下载gdb-7.3.1</a>。</p>
 <h5 id="安装指定版本的binutils（没用）"><a href="#安装指定版本的binutils（没用）" class="headerlink" title="安装指定版本的binutils（没用）"></a>安装指定版本的binutils（没用）</h5><p>下载该课程指定的binutils版本，<a href="http://ftpmirror.gnu.org/binutils/binutils-2.21.1.tar.bz2">点击此处下载binutils-2.21.1</a>。</p>
@@ -670,10 +670,6 @@
                     
                   
                     
-                    
-                      
-                    
-                      
                     
                       
                     
