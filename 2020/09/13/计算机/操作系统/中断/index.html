@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="去做点别的事情吧，等天黑了再回来">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-02-25T04:52:54.764Z">
+<meta property="og:updated_time" content="2021-03-22T07:36:00.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中断、异常和系统调用">
 <meta name="twitter:description" content="去做点别的事情吧，等天黑了再回来">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-02-25 12:52:54" itemprop="dateModified" datetime="2021-02-25T12:52:54+08:00">2021-02-25</time>
+                <time title="Modified: 2021-03-22 15:36:00" itemprop="dateModified" datetime="2021-03-22T15:36:00+08:00">2021-03-22</time>
               
             
           </span>
@@ -481,8 +481,28 @@
 <p>去做点别的事情吧，等天黑了再回来</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="Linux中断处理"><a href="#Linux中断处理" class="headerlink" title="Linux中断处理"></a>Linux中断处理</h2><p>在linux中，中断被分为上半部分和下半部分</p>
-<h3 id="上下半部的理解"><a href="#上下半部的理解" class="headerlink" title="上下半部的理解"></a>上下半部的理解</h3><h3 id="上半部（top-half）——紧急硬件操作"><a href="#上半部（top-half）——紧急硬件操作" class="headerlink" title="上半部（top half）——紧急硬件操作"></a>上半部（top half）——紧急硬件操作</h3><h3 id="下半部（buttom-half）——非紧急的耗时操作"><a href="#下半部（buttom-half）——非紧急的耗时操作" class="headerlink" title="下半部（buttom half）——非紧急的耗时操作"></a>下半部（buttom half）——非紧急的耗时操作</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+<h2 id="中断处理"><a href="#中断处理" class="headerlink" title="中断处理"></a>中断处理</h2><p>在linux中，中断被分为上半部分和下半部分</p>
+<h3 id="上下半部的理解"><a href="#上下半部的理解" class="headerlink" title="上下半部的理解"></a>上下半部的理解</h3><h4 id="上半部（top-half）——紧急硬件操作"><a href="#上半部（top-half）——紧急硬件操作" class="headerlink" title="上半部（top half）——紧急硬件操作"></a>上半部（top half）——紧急硬件操作</h4><h4 id="下半部（buttom-half）——非紧急的耗时操作"><a href="#下半部（buttom-half）——非紧急的耗时操作" class="headerlink" title="下半部（buttom half）——非紧急的耗时操作"></a>下半部（buttom half）——非紧急的耗时操作</h4><h3 id="中断向量"><a href="#中断向量" class="headerlink" title="中断向量"></a>中断向量</h3><p>中断向量的地址是中断服务例程的入口地址</p>
+<h3 id="中断和子程序调用的比较"><a href="#中断和子程序调用的比较" class="headerlink" title="中断和子程序调用的比较"></a>中断和子程序调用的比较</h3><h4 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h4><p>都需要压栈保护现场</p>
+<h4 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h4><p>中断处理程序会保存程序状态字（PSW）寄存器，记录处理器状态和控制指令执行顺序，从而实现现场保护与恢复；而子程序调用在进程内执行，不需要更改PSW</p>
+<h2 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h2><p>系统调用是内核对外实现服务的接口，类似于用户和银行柜员，用户可以发起取钱的服务，由银行柜员处理，但用户不能直接到银行中拿钱。</p>
+<h3 id="系统调用实现机制"><a href="#系统调用实现机制" class="headerlink" title="系统调用实现机制"></a>系统调用实现机制</h3><p>首先，内核对系统调用的处理是给所有系统调用一个中断向量号，将其视为一个软中断，然后再根据系统调用编号，在系统调用表中进行寻找。</p>
+<h3 id="系统调用与函数调用的区别"><a href="#系统调用与函数调用的区别" class="headerlink" title="系统调用与函数调用的区别"></a>系统调用与函数调用的区别</h3><h4 id="指令集不同"><a href="#指令集不同" class="headerlink" title="指令集不同"></a>指令集不同</h4><p>系统调用时使用<code>INT</code>和<code>IRET</code>指令（中断指令），产生堆栈切换和特权级切换（用户态和内核态堆栈不同，用户不能访问内核态堆栈）；而常规函数调用采用<code>CALL</code>和<code>RET</code>，没有发生堆栈切换。</p>
+<h4 id="开销不同"><a href="#开销不同" class="headerlink" title="开销不同"></a>开销不同</h4><p>系统调用由于发生了堆栈切换，因此开销更大</p>
+<ul>
+<li>中断引导</li>
+<li>建立内核堆栈</li>
+<li>验证参数有效性</li>
+<li>内核态映射到用户态的地址空间，使得<ul>
+<li>更新页面映射权限</li>
+</ul>
+</li>
+<li>内核态独立地址空间<ul>
+<li>TLB（页表缓存）内容更新</li>
+</ul>
+</li>
+</ul>
+<h3 id="系统调用实例"><a href="#系统调用实例" class="headerlink" title="系统调用实例"></a>系统调用实例</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -633,7 +653,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">278</span>
+                    <span class="site-state-item-count">279</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -883,7 +903,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux中断处理"><span class="nav-number">1.</span> <span class="nav-text">Linux中断处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下半部的理解"><span class="nav-number">1.1.</span> <span class="nav-text">上下半部的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上半部（top-half）——紧急硬件操作"><span class="nav-number">1.2.</span> <span class="nav-text">上半部（top half）——紧急硬件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下半部（buttom-half）——非紧急的耗时操作"><span class="nav-number">1.3.</span> <span class="nav-text">下半部（buttom half）——非紧急的耗时操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#中断处理"><span class="nav-number">1.</span> <span class="nav-text">中断处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下半部的理解"><span class="nav-number">1.1.</span> <span class="nav-text">上下半部的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#上半部（top-half）——紧急硬件操作"><span class="nav-number">1.1.1.</span> <span class="nav-text">上半部（top half）——紧急硬件操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下半部（buttom-half）——非紧急的耗时操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">下半部（buttom half）——非紧急的耗时操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断向量"><span class="nav-number">1.2.</span> <span class="nav-text">中断向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中断和子程序调用的比较"><span class="nav-number">1.3.</span> <span class="nav-text">中断和子程序调用的比较</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相同点"><span class="nav-number">1.3.1.</span> <span class="nav-text">相同点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同点"><span class="nav-number">1.3.2.</span> <span class="nav-text">不同点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统调用"><span class="nav-number">2.</span> <span class="nav-text">系统调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用实现机制"><span class="nav-number">2.1.</span> <span class="nav-text">系统调用实现机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用与函数调用的区别"><span class="nav-number">2.2.</span> <span class="nav-text">系统调用与函数调用的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指令集不同"><span class="nav-number">2.2.1.</span> <span class="nav-text">指令集不同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#开销不同"><span class="nav-number">2.2.2.</span> <span class="nav-text">开销不同</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统调用实例"><span class="nav-number">2.3.</span> <span class="nav-text">系统调用实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>

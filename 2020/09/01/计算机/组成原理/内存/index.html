@@ -104,7 +104,8 @@
 <meta property="og:description" content="C1103A-2 H9971S500">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Square_array_of_mosfet_cells_read.png/375px-Square_array_of_mosfet_cells_read.png">
-<meta property="og:updated_time" content="2021-02-13T00:50:18.496Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210323095938.png">
+<meta property="og:updated_time" content="2021-03-23T02:11:16.011Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存">
 <meta name="twitter:description" content="C1103A-2 H9971S500">
@@ -420,7 +421,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-02-13 08:50:18" itemprop="dateModified" datetime="2021-02-13T08:50:18+08:00">2021-02-13</time>
+                <time title="Modified: 2021-03-23 10:11:16" itemprop="dateModified" datetime="2021-03-23T10:11:16+08:00">2021-03-23</time>
               
             
           </span>
@@ -484,8 +485,8 @@
 </blockquote>
 <a id="more"></a>
 <p>内存分为只读存储器（ROM）、随机读写存储器（RAM）以及高速缓冲存储器（Cache），本文将针对内存的相关原理进行总结</p>
-<h2 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h2><h3 id="ROM工作原理及特性"><a href="#ROM工作原理及特性" class="headerlink" title="ROM工作原理及特性"></a>ROM工作原理及特性</h3><p>ROM是非易失的存储器，掉电后不丢失，但是一旦存储资料便无法改变或删除。经常存放一些比较关键的内容，例如BIOS</p>
-<h3 id="不同的ROM"><a href="#不同的ROM" class="headerlink" title="不同的ROM"></a>不同的ROM</h3><p>这里对于常见的一些ROM及特性进行总结。</p>
+<h2 id="内存的种类"><a href="#内存的种类" class="headerlink" title="内存的种类"></a>内存的种类</h2><h3 id="ROM"><a href="#ROM" class="headerlink" title="ROM"></a>ROM</h3><h4 id="ROM工作原理及特性"><a href="#ROM工作原理及特性" class="headerlink" title="ROM工作原理及特性"></a>ROM工作原理及特性</h4><p>ROM是非易失的存储器，掉电后不丢失，但是一旦存储资料便无法改变或删除。经常存放一些比较关键的内容，例如BIOS</p>
+<h4 id="不同的ROM"><a href="#不同的ROM" class="headerlink" title="不同的ROM"></a>不同的ROM</h4><p>这里对于常见的一些ROM及特性进行总结。</p>
 <div class="table-container">
 <table>
 <thead>
@@ -514,16 +515,28 @@
 </tbody>
 </table>
 </div>
-<h2 id="RAM"><a href="#RAM" class="headerlink" title="RAM"></a>RAM</h2><h3 id="DRAM工作原理及特性"><a href="#DRAM工作原理及特性" class="headerlink" title="DRAM工作原理及特性"></a>DRAM工作原理及特性</h3><h4 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h4><p>DRAM实际就是一个电容和二极管组成的二维矩阵，下图展示了DRAM的电气结构，一个4*4的矩阵。矩阵的每一个节点代表一个二进制bit。具体表示如下</p>
+<h3 id="RAM"><a href="#RAM" class="headerlink" title="RAM"></a>RAM</h3><h4 id="DRAM工作原理及特性"><a href="#DRAM工作原理及特性" class="headerlink" title="DRAM工作原理及特性"></a>DRAM工作原理及特性</h4><h5 id="基本工作原理"><a href="#基本工作原理" class="headerlink" title="基本工作原理"></a>基本工作原理</h5><p>DRAM实际就是一个电容和二极管组成的二维矩阵，下图展示了DRAM的电气结构，一个4*4的矩阵。矩阵的每一个节点代表一个二进制bit。具体表示如下</p>
 <ul>
 <li>当电容充电，代表1</li>
 <li>当电容未充电，代表0</li>
 </ul>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Square_array_of_mosfet_cells_read.png/375px-Square_array_of_mosfet_cells_read.png" width="280" alt="图片名称" align="center"></p>
 <p>由于晶体管有漏电电流，因此DRAM需要动态刷新，且掉电后数据挥发，所以被成为动态存储。</p>
-<h4 id="读写操作2"><a href="#读写操作2" class="headerlink" title="读写操作2"></a>读写操作<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h4><p>由于DRAM电路是矩阵形式，所以操作也是二维操作，先定位行，再定位列，接下来我们针对内存中的读写操作进行总结。</p>
-<h5 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h5><h4 id="DRAM相关特性"><a href="#DRAM相关特性" class="headerlink" title="DRAM相关特性"></a>DRAM相关特性</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>与SRAM相比，DRAM结构简单，一个bit需要一个二极管一个电容进行表示，所以存储密度高，成本较低。</p>
-<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>访问速度慢，耗电量大</p>
+<h5 id="读写操作2"><a href="#读写操作2" class="headerlink" title="读写操作2"></a>读写操作<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></h5><p>由于DRAM电路是矩阵形式，所以操作也是二维操作，先定位行，再定位列，接下来我们针对内存中的读写操作进行总结。</p>
+<h6 id="读操作"><a href="#读操作" class="headerlink" title="读操作"></a>读操作</h6><h5 id="DRAM相关特性"><a href="#DRAM相关特性" class="headerlink" title="DRAM相关特性"></a>DRAM相关特性</h5><h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><p>与SRAM相比，DRAM结构简单，一个bit需要一个二极管一个电容进行表示，所以存储密度高，成本较低。</p>
+<h6 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h6><p>访问速度慢，耗电量大</p>
+<h2 id="内存结构3"><a href="#内存结构3" class="headerlink" title="内存结构3"></a>内存结构<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h2><p>这里我们以2GB的DDR3内存为例，对内存结构进行讲解，内存结构图如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210323095938.png" width="480" alt="图片名称" align="center"></p>
+<ul>
+<li><code>Rank</code>：内存的一排，上面的内存由两个rank组成，每个rank有8个clip</li>
+<li><code>Clip</code>：颗粒，一个rank包含8个颗粒，每个128MB，共提供1GB内存</li>
+<li><code>Bank</code>：存储数据的矩阵单元，一个颗粒8个bank，根据行列定位随机存储的数据块</li>
+<li><code>Cell</code>：单元，用于存储一个数据单位，DDR3为8bit，如果CPU是32位，那么可以一次读写4个cell</li>
+</ul>
+<h2 id="内存特点"><a href="#内存特点" class="headerlink" title="内存特点"></a>内存特点</h2><ul>
+<li>速度较快（1.3GHz左右）</li>
+<li>价格较高</li>
+</ul>
 <h2 id="内存单元"><a href="#内存单元" class="headerlink" title="内存单元"></a>内存单元</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>如果我们把内存看作是一个大的存储箱，那么内存单元就是这个存储箱中一个个小隔间，内存单元是我们唯一的一种使用内存的方式。内存单元是可以寻址的，我们在计算机中的地址实际就是指向一个内存单元。一般来说，内存单元是字节寻址的，即内存的划分粒度为字节，一个内存单元的大小是一个字节，我们可以访问内存中单个的字节。这个是由计算机的硬件决定的，你可以将内存想象为一个$n\times 8$的矩阵电路，$n$代表的是地址数，根据CPU总线数决定；而$8$代表一次能够读取8个位，即一个字节。字节寻址的机器又叫做“字节机”。对于字节寻址的内存，我们需要注意如下两点：</p>
 <ul>
 <li>一个地址总是指向一个字节的空间</li>
@@ -533,7 +546,7 @@
 <p>答：由于一个内存单元大小为一个字节，而一个地址指向一个内存单元大小的空间，那么我们的计算非常简单，公式如下：</p>
 <script type="math/tex; mode=display">
 \textrm{nextfree} = \textrm{nextfree}+\textrm{size}</script><p>所以$\textrm{nextfree}=\textrm{0xff105000}<em>{H}+4096</em>{D}=\textrm{0xff106000}$</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Bhttps://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8%5D(https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)">维基百科对于DRAM的解释</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=x3jGqOrXXc8">DRAM读写循环</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Bhttps://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8%5D(https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%9A%8F%E6%9C%BA%E5%AD%98%E5%8F%96%E5%AD%98%E5%82%A8%E5%99%A8)">维基百科对于DRAM的解释</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.youtube.com/watch?v=x3jGqOrXXc8">DRAM读写循环</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.derror.com/p/memory-physical-structure/">内存结构</a></span><a href="#fnref:3" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -684,7 +697,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">278</span>
+                    <span class="site-state-item-count">279</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -934,7 +947,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROM"><span class="nav-number">1.</span> <span class="nav-text">ROM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROM工作原理及特性"><span class="nav-number">1.1.</span> <span class="nav-text">ROM工作原理及特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的ROM"><span class="nav-number">1.2.</span> <span class="nav-text">不同的ROM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RAM"><span class="nav-number">2.</span> <span class="nav-text">RAM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DRAM工作原理及特性"><span class="nav-number">2.1.</span> <span class="nav-text">DRAM工作原理及特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本工作原理"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读写操作2"><span class="nav-number">2.1.2.</span> <span class="nav-text">读写操作2</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#读操作"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">读操作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DRAM相关特性"><span class="nav-number">2.1.3.</span> <span class="nav-text">DRAM相关特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存单元"><span class="nav-number">3.</span> <span class="nav-text">内存单元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算"><span class="nav-number">3.2.</span> <span class="nav-text">计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#内存的种类"><span class="nav-number">1.</span> <span class="nav-text">内存的种类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ROM"><span class="nav-number">1.1.</span> <span class="nav-text">ROM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ROM工作原理及特性"><span class="nav-number">1.1.1.</span> <span class="nav-text">ROM工作原理及特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不同的ROM"><span class="nav-number">1.1.2.</span> <span class="nav-text">不同的ROM</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RAM"><span class="nav-number">1.2.</span> <span class="nav-text">RAM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DRAM工作原理及特性"><span class="nav-number">1.2.1.</span> <span class="nav-text">DRAM工作原理及特性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本工作原理"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">基本工作原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#读写操作2"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">读写操作2</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#读操作"><span class="nav-number">1.2.1.2.1.</span> <span class="nav-text">读操作</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DRAM相关特性"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">DRAM相关特性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#优点"><span class="nav-number">1.2.1.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#缺点"><span class="nav-number">1.2.1.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存结构3"><span class="nav-number">2.</span> <span class="nav-text">内存结构3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存特点"><span class="nav-number">3.</span> <span class="nav-text">内存特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存单元"><span class="nav-number">4.</span> <span class="nav-text">内存单元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算"><span class="nav-number">4.2.</span> <span class="nav-text">计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
