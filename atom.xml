@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-03-15T13:10:16.921Z</updated>
+  <updated>2020-07-12T01:05:50.795Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>概率密度</title>
+    <link href="http://yoursite.com/2021/03/27/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/"/>
+    <id>http://yoursite.com/2021/03/27/数学/概率论/极大似然估计/</id>
+    <published>2021-03-27T07:05:34.934Z</published>
+    <updated>2020-07-12T01:05:50.795Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>贝叶斯决策，从名字上看，就可以理解为利用贝叶斯理论进行决策的过程。本文将对贝叶斯决策论进行一个总结，并给出相应的代码。</p><p>概率密度函数用于描述随机变量的输出值在某个确定取值点附近的可能性，本文将针对概率密度的一些常见定义及性质进行总结。</p><a id="more"></a><h2 id="定义及性质"><a href="#定义及性质" class="headerlink" title="定义及性质"></a>定义及性质</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>对于一维随机变量$X$，设其累计分布函数为$F_X(x)$，如果存在可测函数$f_X(x)$，满足：</p><script type="math/tex; mode=display">\forall-\infty<a<\infty, \quad F_{X}(a)=\int_{-\infty}^{a} f_{X}(x) d x</script><p>那么$X$是连续型随机变量，并且$f_X(x)$是其概率密度函数。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;贝叶斯决策，从名字上看，就可以理解为利用贝叶斯理论进行决策的过程。本文将对贝叶斯决策论进行一个总结，并给出相应的代码。&lt;/p&gt;
+&lt;p&gt;概率密度函数用于描述随机变量的输出值在某个确定取值点附近的可能性，本文将针对概率密度的一些常见定义及性质进行总结。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>MIT6828-HW3-xv6 system calls</title>
@@ -459,28 +482,6 @@
       <category term="操作系统" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
       <category term="课程" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>内存管理单元</title>
-    <link href="http://yoursite.com/2020/12/10/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E5%8D%95%E5%85%83/"/>
-    <id>http://yoursite.com/2020/12/10/计算机/组成原理/内存管理单元/</id>
-    <published>2020-12-10T14:07:48.399Z</published>
-    <updated>2021-03-02T03:31:50.055Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20201210220955.png" width = "280" alt="图片名称" align=center /></p><a id="more"></a><p>内存管理单元（Memory Management Unit, MMU）负责虚拟内存到物理内存的映射，一般会集成在CPU当中，本文单独对MMU进行介绍。</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="MMU的本质"><a href="#MMU的本质" class="headerlink" title="MMU的本质"></a>MMU的本质</h3><p>MMU的本质是一张表，由内核告诉MMU如何进行虚拟地址到物理地址的转换，转换过程实际就是查表的过程。</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/sqduan/hexoimg/master/20201210220955.png&quot; width = &quot;280&quot; alt=&quot;图片名称&quot; align=center /&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="计算机" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
-    
-      <category term="组成原理" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
     
     
   </entry>
