@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Kalman filter is an optimal estimation algorithm. It can help us to estimate a system state when it cannot be measured directly. This blog discusses the Kalman Filter which is widely used to filtering">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.773Z">
+<meta property="og:updated_time" content="2021-03-27T03:01:38.076Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kalman Filter">
 <meta name="twitter:description" content="Kalman filter is an optimal estimation algorithm. It can help us to estimate a system state when it cannot be measured directly. This blog discusses the Kalman Filter which is widely used to filtering">
@@ -406,6 +406,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-03-27 11:01:38" itemprop="dateModified" datetime="2021-03-27T11:01:38+08:00">2021-03-27</time>
+              
+            
           </span>
 
           
@@ -486,9 +502,7 @@
 \min E\left \| x-\hat{x} \right \|^{2}</script><p>So now, let’s give out the basic dynamic system model we are going to deal with and the mathematical description about Kalman filter.</p>
 <h3 id="Basic-dynamic-system"><a href="#Basic-dynamic-system" class="headerlink" title="Basic dynamic system"></a>Basic dynamic system</h3><p>In a Kalman filter, we assume that the real state at time $k$ is determined by last time $k-1$:</p>
 <script type="math/tex; mode=display">
-\begin{equation}
-\mathbf{x}_{k}=\mathbf{F}_{k} \mathbf{x}_{k-1}+\mathbf{B}_{k} \mathbf{u}_{k}+\mathbf{w}_{k}
-\end{equation}</script><p>where </p>
+\mathbf{x}_{k}=\mathbf{F}_{k} \mathbf{x}_{k-1}+\mathbf{B}_{k} \mathbf{u}_{k}+\mathbf{w}_{k}</script><p>where </p>
 <ul>
 <li>$\mathbf{F}_{k}$ is the transfer matrix</li>
 <li>$\mathbf{B}_{k}$ is the input matrix</li>
@@ -499,7 +513,7 @@
 \mathbf{z}_{k}=\mathbf{H}_{k} \mathbf{x}_{k}+\mathbf{v}_{k}</script><p>where</p>
 <ul>
 <li>$\mathbf{H}_{k}$ is the observation matrix</li>
-<li>$\mathbf{v}<em>{k}$ is the measurement noise satisfies $\mathbf{v}</em>{k} \sim N\left(0, \mathbf{R}_{k}\right)$.</li>
+<li>$ \mathbf{v}<em>{k} $ is the measurement noise satisfies $ \mathbf{v}</em>{k} \sim N\left(0, \mathbf{R}_{k}\right) $.</li>
 </ul>
 <h3 id="Mathematical-description"><a href="#Mathematical-description" class="headerlink" title="Mathematical description"></a>Mathematical description</h3><p>The state of a Kalman filter can be represented by the following two variables:</p>
 <ul>
