@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="贝叶斯决策，从名字上看，就可以理解为利用贝叶斯理论进行决策的过程。本文将对贝叶斯决策论进行一个总结，并给出相应的代码。 概率密度函数用于描述随机变量的输出值在某个确定取值点附近的可能性，本文将针对概率密度的一些常见定义及性质进行总结。">
+  <meta name="description" content="根据已知的样本结果信息，反推最有可能导致该结果的模型参数。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="概率密度">
+<meta property="og:title" content="极大似然估计">
 <meta property="og:url" content="http://yoursite.com/2021/03/27/数学/概率论/极大似然估计/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="贝叶斯决策，从名字上看，就可以理解为利用贝叶斯理论进行决策的过程。本文将对贝叶斯决策论进行一个总结，并给出相应的代码。 概率密度函数用于描述随机变量的输出值在某个确定取值点附近的可能性，本文将针对概率密度的一些常见定义及性质进行总结。">
+<meta property="og:description" content="根据已知的样本结果信息，反推最有可能导致该结果的模型参数。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.795Z">
+<meta property="og:updated_time" content="2021-03-27T07:51:50.495Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="概率密度">
-<meta name="twitter:description" content="贝叶斯决策，从名字上看，就可以理解为利用贝叶斯理论进行决策的过程。本文将对贝叶斯决策论进行一个总结，并给出相应的代码。 概率密度函数用于描述随机变量的输出值在某个确定取值点附近的可能性，本文将针对概率密度的一些常见定义及性质进行总结。">
+<meta name="twitter:title" content="极大似然估计">
+<meta name="twitter:description" content="根据已知的样本结果信息，反推最有可能导致该结果的模型参数。">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>概率密度 | 一隅</title>
+  <title>极大似然估计 | 一隅</title>
   
 
 
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">概率密度
+          <h1 class="post-title" itemprop="name headline">极大似然估计
 
               
             
@@ -401,24 +401,12 @@
                 
               
 
-              <time title="Created: 2021-03-27 15:05:34" itemprop="dateCreated datePublished" datetime="2021-03-27T15:05:34+08:00">2021-03-27</time>
+              <time title="Created: 2021-03-27 15:05:34 / Modified: 15:51:50" itemprop="dateCreated datePublished" datetime="2021-03-27T15:05:34+08:00">2021-03-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-07-12 09:05:50" itemprop="dateModified" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
               
             
           </span>
@@ -477,12 +465,18 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>贝叶斯决策，从名字上看，就可以理解为利用贝叶斯理论进行决策的过程。本文将对贝叶斯决策论进行一个总结，并给出相应的代码。</p>
-<p>概率密度函数用于描述随机变量的输出值在某个确定取值点附近的可能性，本文将针对概率密度的一些常见定义及性质进行总结。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>根据已知的样本结果信息，反推最有可能导致该结果的模型参数。</p>
 <a id="more"></a>
-<h2 id="定义及性质"><a href="#定义及性质" class="headerlink" title="定义及性质"></a>定义及性质</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>对于一维随机变量$X$，设其累计分布函数为$F_X(x)$，如果存在可测函数$f_X(x)$，满足：</p>
+<h2 id="什么是极大似然估计"><a href="#什么是极大似然估计" class="headerlink" title="什么是极大似然估计"></a>什么是极大似然估计</h2><p>一句话，一个参数估计方法，就是确定了模型（比如正态分布），但是参数未知（正态分布的均值和方差未知），有了数据，我需要计算均值$\mu$和方差$\theta$。为了求极大似然估计，我们先要了解似然函数</p>
+<h3 id="似然（likelihood）函数"><a href="#似然（likelihood）函数" class="headerlink" title="似然（likelihood）函数"></a>似然（likelihood）函数</h3><p>考虑函数$P(x|\theta)$，这个函数有两个输入，$x$表示具体样本，$\theta$表示模型参数，那么</p>
+<ul>
+<li>当$\theta$已知，该函数退化为概率函数，即样本$x$出现的概率</li>
+<li>当$x$已知，该函数退化为似然函数，即对于不同模型参数，出现$x$这个样本的概率</li>
+</ul>
+<p>最大似然估计就是第二个问题，已知$x$，求$\theta$，使$P(x|\theta)$最大</p>
+<h3 id="极大似然估计的特点"><a href="#极大似然估计的特点" class="headerlink" title="极大似然估计的特点"></a>极大似然估计的特点</h3><h2 id="极大似然估计的例子"><a href="#极大似然估计的例子" class="headerlink" title="极大似然估计的例子"></a>极大似然估计的例子</h2><p>假设一个袋子里有黑球和白球，现在往出放回地摸球，一共摸了十次，有7次黑球3次白球，问黑球所占比例最有可能是多少？如果我们将这个事件视为二项分布，且假设黑球出现的概率为$\theta$，那么现在模型已知（二项分布）、样本已知（10次里7次黑球），求模型参数（$\theta$的值）。假设样本$x_0={1,1,1,0,1,1,0,1,0,1}$。那么似然函数可以写为：</p>
 <script type="math/tex; mode=display">
-\forall-\infty<a<\infty, \quad F_{X}(a)=\int_{-\infty}^{a} f_{X}(x) d x</script><p>那么$X$是连续型随机变量，并且$f_X(x)$是其概率密度函数。</p>
+f(x_0|\theta)=\theta^3(1-\theta)\theta^2(1-\theta)\theta(1-\theta)\theta=\theta^7(1-\theta)^3=f(\theta)</script><p>上面的$f(\theta)$就是我们的似然函数，最大似然估计就是求这个函数的最大值，即$\frac{\textrm{d}f(\theta)}{\textrm{d}\theta}=0$。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
@@ -880,7 +874,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义及性质"><span class="nav-number">1.</span> <span class="nav-text">定义及性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是极大似然估计"><span class="nav-number">1.</span> <span class="nav-text">什么是极大似然估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#似然（likelihood）函数"><span class="nav-number">1.1.</span> <span class="nav-text">似然（likelihood）函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#极大似然估计的特点"><span class="nav-number">1.2.</span> <span class="nav-text">极大似然估计的特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极大似然估计的例子"><span class="nav-number">2.</span> <span class="nav-text">极大似然估计的例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
