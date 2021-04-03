@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828-Lab2/</loc>
+    <lastmod>2021-04-03</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2021/04/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828-Lab3/</loc>
+    <lastmod>2021-04-02</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/11/29/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828%E8%AF%BE%E7%A8%8B%E5%A4%A7%E7%BA%B2/</loc>
+    <lastmod>2021-04-02</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2021/04/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828-HW5/</loc>
+    <lastmod>2021-04-02</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Latex/%E5%85%AC%E5%BC%8F/</loc>
+    <lastmod>2021-03-31</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2021-03-30</lastmod>
   </url>
@@ -9,16 +29,8 @@
     <lastmod>2021-03-30</lastmod>
   </url>
   <url>
-    <loc>http://yoursite.com/2020/11/29/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828%E8%AF%BE%E7%A8%8B%E5%A4%A7%E7%BA%B2/</loc>
-    <lastmod>2021-03-30</lastmod>
-  </url>
-  <url>
     <loc>http://yoursite.com/2020/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2021-03-29</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828-Lab2/</loc>
-    <lastmod>2021-03-28</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2021/03/27/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA/%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/</loc>
@@ -502,10 +514,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/07/12/%E6%95%B0%E5%AD%A6/%E4%BB%A3%E6%95%B0/%E5%A4%96%E7%A7%AF%E3%80%81Kronecker%E7%A7%AF%E5%8F%8ATensor%E7%A7%AF/</loc>
-    <lastmod>2020-09-18</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/Latex/%E5%85%AC%E5%BC%8F/</loc>
     <lastmod>2020-09-18</lastmod>
   </url>
   <url>
