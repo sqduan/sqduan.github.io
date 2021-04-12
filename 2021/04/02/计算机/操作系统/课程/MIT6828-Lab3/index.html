@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="且将杯酒对星河">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-02T13:27:38.541Z">
+<meta property="og:updated_time" content="2021-04-11T15:54:08.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-Lab3-用户环境">
 <meta name="twitter:description" content="且将杯酒对星河">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2021-04-02 21:16:08 / Modified: 21:27:38" itemprop="dateCreated datePublished" datetime="2021-04-02T21:16:08+08:00">2021-04-02</time>
+              <time title="Created: 2021-04-02 21:16:08" itemprop="dateCreated datePublished" datetime="2021-04-02T21:16:08+08:00">2021-04-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-04-11 23:54:08" itemprop="dateModified" datetime="2021-04-11T23:54:08+08:00">2021-04-11</time>
               
             
           </span>
@@ -484,9 +496,138 @@
 <li>让程序运行</li>
 <li>处理进程的系统调用</li>
 </ul>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">athena% cd ~/<span class="number">6.828</span>/lab</span><br><span class="line">athena% add git</span><br><span class="line">athena% git commit -am 'changes to lab2 after handin'</span><br><span class="line">Created commit <span class="number">734f</span>ab7: changes to lab2 after handin</span><br><span class="line"> <span class="number">4</span> files changed, <span class="number">42</span> insertions(+), <span class="number">9</span> deletions(-)</span><br><span class="line">athena% git pull</span><br><span class="line">Already up-to-date.</span><br><span class="line">athena% git checkout -b lab3 origin/lab3</span><br><span class="line">Branch lab3 <span class="built_in">set</span> up to track remote branch refs/remotes/origin/lab3.</span><br><span class="line">Switched to a <span class="keyword">new</span> branch <span class="string">"lab3"</span></span><br><span class="line">athena% git merge lab2</span><br><span class="line">Merge made by recursive.</span><br><span class="line"> kern/pmap.c |   <span class="number">42</span> +++++++++++++++++++</span><br><span class="line"> <span class="number">1</span> files changed, <span class="number">42</span> insertions(+), <span class="number">0</span> deletions(-)</span><br><span class="line">athena%</span><br></pre></td></tr></table></figure>
-<p>首先，合并lab2，然后切换至lab3</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab2/">Lab2</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">athena% cd ~/<span class="number">6.828</span>/lab</span><br><span class="line">athena% add git</span><br><span class="line">athena% git commit -am 'changes to lab2 after handin'</span><br><span class="line">Created commit <span class="number">734f</span>ab7: changes to lab2 after handin</span><br><span class="line"> <span class="number">4</span> files changed, <span class="number">42</span> insertions(+), <span class="number">9</span> deletions(-)</span><br><span class="line">athena% git pull</span><br><span class="line">Already up-to-date.</span><br><span class="line">athena% git checkout -b lab3 origin/lab3</span><br><span class="line">Branch lab3 <span class="built_in">set</span> up to track remote branch refs/remotes/origin/lab3.</span><br><span class="line">Switched to a <span class="keyword">new</span> branch <span class="string">"lab3"</span></span><br><span class="line">athena% git merge lab2</span><br><span class="line">Merge made by recursive.</span><br><span class="line"> kern/pmap.c |   <span class="number">42</span> +++++++++++++++++++</span><br><span class="line"> <span class="number">1</span> files changed, <span class="number">42</span> insertions(+), <span class="number">0</span> deletions(-)</span><br><span class="line">athena%</span><br></pre></td></tr></table></figure>
+<p>首先，合并lab2，然后切换至lab3，在lab3中，你需要参考及阅读的源码如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>文件</th>
+<th>功能</th>
+<th>进度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>inc/</code></td>
+<td><code>env.h</code></td>
+<td>Public definitions for user-mode environments</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td><code>trap.h</code></td>
+<td>Public definitions for trap handling</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td><code>syscall.h</code></td>
+<td>Public definitions for system calls from user environments to the kernel</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>lib.h</code></td>
+<td>Public definitions for the user-mode support library</td>
+<td></td>
+</tr>
+<tr>
+<td><code>kern/</code></td>
+<td><code>env.h</code></td>
+<td>Kernel-private definitions for user-mode environments</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>env.c</code></td>
+<td>Kernel code implementing user-mode environments</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>trap.h</code></td>
+<td>Kernel-private trap handling definitions</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>trap.c</code></td>
+<td>Trap handling code</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>trapentry.S</code></td>
+<td>Assembly-language trap handler entry-points</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>syscall.h</code></td>
+<td>Kernel-private definitions for system call handling</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>syscall.c</code></td>
+<td>System call implementation code</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lib/</code></td>
+<td><code>Makefrag</code></td>
+<td>Makefile fragment to build user-mode library, <code>obj/lib/libjos.a</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>entry.S</code></td>
+<td>Assembly-language entry-point for user environments</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>libmain.c</code></td>
+<td>User-mode library setup code called from <code>entry.S</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>syscall.c</code></td>
+<td>User-mode system call stub functions</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>console.c</code></td>
+<td>User-mode implementations of <code>putchar</code> and <code>getchar</code>, providing console I/O</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>exit.c</code></td>
+<td>User-mode implementation of <code>exit</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>panic.c</code></td>
+<td>User-mode implementation of <code>panic</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>user/</code></td>
+<td><code>*</code></td>
+<td>Various test programs to check kernel lab 3 code</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="实验需求"><a href="#实验需求" class="headerlink" title="实验需求"></a>实验需求</h3><p>本次实验有AB两个部分，你需要分别完成，并至少完成一个挑战实验</p>
+<h3 id="内联汇编"><a href="#内联汇编" class="headerlink" title="内联汇编"></a>内联汇编</h3><p>GCC提供了内联汇编功能</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab3</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -887,7 +1028,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验需求"><span class="nav-number">1.2.</span> <span class="nav-text">实验需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联汇编"><span class="nav-number">1.3.</span> <span class="nav-text">内联汇编</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
