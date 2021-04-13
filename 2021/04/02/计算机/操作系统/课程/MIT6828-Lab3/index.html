@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="且将杯酒对星河">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-11T15:54:08.758Z">
+<meta property="og:updated_time" content="2021-04-12T14:25:14.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-Lab3-用户环境">
 <meta name="twitter:description" content="且将杯酒对星河">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-11 23:54:08" itemprop="dateModified" datetime="2021-04-11T23:54:08+08:00">2021-04-11</time>
+                <time title="Modified: 2021-04-12 22:25:14" itemprop="dateModified" datetime="2021-04-12T22:25:14+08:00">2021-04-12</time>
               
             
           </span>
@@ -626,8 +626,14 @@
 </table>
 </div>
 <h3 id="实验需求"><a href="#实验需求" class="headerlink" title="实验需求"></a>实验需求</h3><p>本次实验有AB两个部分，你需要分别完成，并至少完成一个挑战实验</p>
-<h3 id="内联汇编"><a href="#内联汇编" class="headerlink" title="内联汇编"></a>内联汇编</h3><p>GCC提供了内联汇编功能</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab3</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<h3 id="内联汇编"><a href="#内联汇编" class="headerlink" title="内联汇编"></a>内联汇编</h3><p>GCC提供了内联汇编功能，参考<a href="https://pdos.csail.mit.edu/6.828/2018/reference.html">该网站获得内联汇编讲解</a></p>
+<h2 id="第一部分：进程和异常处理"><a href="#第一部分：进程和异常处理" class="headerlink" title="第一部分：进程和异常处理"></a>第一部分：进程和异常处理</h2><p><code>inc/env.h</code>包含了进程的一些定义，内核使用<code>Env</code>追踪进程，在<code>kern/env.c</code>中，包含如下全局变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Env</span> *<span class="title">envs</span> = <span class="title">NULL</span>;</span>		    <span class="comment">// All environments，指向一个进程array</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Env</span> *<span class="title">curenv</span> = <span class="title">NULL</span>;</span>		    <span class="comment">// The current env，正在运行的进程，在第一个进程执行前为NULL</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">Env</span> *<span class="title">env_free_list</span>;</span>	<span class="comment">// Free environment list</span></span><br></pre></td></tr></table></figure>
+<p>JOS允许的最大活动线程数定义在<code>inc/env.h</code>中，为<code>1&lt;&lt;10</code>即1024个。<code>env_free_list</code>为不活跃的Env链表，在表中添加或删除Env，即可分配或释放进程。</p>
+<h3 id="进程状态"><a href="#进程状态" class="headerlink" title="进程状态"></a>进程状态</h3><p><code>Env</code>结构体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">struct Env &#123;</span><br><span class="line">	struct Trapframe env_tf;	// Saved registers</span><br><span class="line">	struct Env *env_link;		// Next free Env</span><br><span class="line">	envid_t env_id;			// Unique environment identifier</span><br><span class="line">	envid_t env_parent_id;		// env_id of this env&apos;s parent</span><br><span class="line">	enum EnvType env_type;		// Indicates special system environments</span><br><span class="line">	unsigned env_status;		// Status of the environment</span><br><span class="line">	uint32_t env_runs;		// Number of times environment has run</span><br><span class="line"></span><br><span class="line">	// Address space</span><br><span class="line">	pde_t *env_pgdir;		// Kernel virtual address of page dir</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>结构体成员功能如下：</p>
+<h3 id="进程Array分配"><a href="#进程Array分配" class="headerlink" title="进程Array分配"></a>进程Array分配</h3><h3 id="进程创建及运行"><a href="#进程创建及运行" class="headerlink" title="进程创建及运行"></a>进程创建及运行</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab3</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -1028,7 +1034,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验需求"><span class="nav-number">1.2.</span> <span class="nav-text">实验需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联汇编"><span class="nav-number">1.3.</span> <span class="nav-text">内联汇编</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始"><span class="nav-number">1.1.</span> <span class="nav-text">开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验需求"><span class="nav-number">1.2.</span> <span class="nav-text">实验需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联汇编"><span class="nav-number">1.3.</span> <span class="nav-text">内联汇编</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一部分：进程和异常处理"><span class="nav-number">2.</span> <span class="nav-text">第一部分：进程和异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程状态"><span class="nav-number">2.1.</span> <span class="nav-text">进程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程Array分配"><span class="nav-number">2.2.</span> <span class="nav-text">进程Array分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程创建及运行"><span class="nav-number">2.3.</span> <span class="nav-text">进程创建及运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
