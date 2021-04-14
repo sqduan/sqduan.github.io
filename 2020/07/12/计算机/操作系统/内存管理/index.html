@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224747.png">
-<meta property="og:updated_time" content="2021-04-12T14:08:56.620Z">
+<meta property="og:updated_time" content="2021-04-14T11:40:18.081Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存管理">
 <meta name="twitter:description" content="计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。">
@@ -424,7 +424,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-12 22:08:56" itemprop="dateModified" datetime="2021-04-12T22:08:56+08:00">2021-04-12</time>
+                <time title="Modified: 2021-04-14 19:40:18" itemprop="dateModified" datetime="2021-04-14T19:40:18+08:00">2021-04-14</time>
               
             
           </span>
@@ -506,7 +506,12 @@
 <p>2 逻辑地址和物理地址的映射关系</p>
 <p>逻辑地址可以使我们屏蔽硬件，更具逻辑性，而不必关注底层的内存物理地址。</p>
 <h3 id="内存划分方式"><a href="#内存划分方式" class="headerlink" title="内存划分方式"></a>内存划分方式</h3><h4 id="连续分配管理"><a href="#连续分配管理" class="headerlink" title="连续分配管理"></a>连续分配管理</h4><h5 id="块式（已经被淘汰）"><a href="#块式（已经被淘汰）" class="headerlink" title="块式（已经被淘汰）"></a>块式（已经被淘汰）</h5><p>直接将内存分为固定的块，然后给每一个应用程序一块，这样带来的问题是如果应用程序所需要的内存很小，块中很多内存会被浪费，产生了内部碎片。</p>
-<h4 id="非连续分配管理"><a href="#非连续分配管理" class="headerlink" title="非连续分配管理"></a>非连续分配管理</h4><h5 id="页式管理"><a href="#页式管理" class="headerlink" title="页式管理"></a>页式管理</h5><p>把主存分为大小相等且固定的一页一页的形式，页较小，相对相比于块式管理的划分力度更大，提高了内存利用率，减少了碎片。页式管理通过页表对应逻辑地址和物理地址。</p>
+<h4 id="非连续分配管理"><a href="#非连续分配管理" class="headerlink" title="非连续分配管理"></a>非连续分配管理</h4><h5 id="页式管理"><a href="#页式管理" class="headerlink" title="页式管理"></a>页式管理</h5><p>把主存分为大小相等且固定（2的n次幂，如512，4096等）的一页一页的形式，页较小，相对相比于块式管理的划分力度更大，提高了内存利用率，减少了碎片。页式管理通过页表对应逻辑地址和物理地址。</p>
+<ul>
+<li>页帧：物理地址划分为大小相同的基本分配单位</li>
+<li>页面：逻辑地址划分为大小相同的基本分配单位，页帧和页面大小必须相等</li>
+</ul>
+<p>页管理就是找到页面到页帧之间的转换，依靠页表进行（找到逻辑页号和物理帧号之间的对应关系）。逻辑地址中的页号是连续的，物理地址中的帧号一般是不连续的。</p>
 <h5 id="段式管理"><a href="#段式管理" class="headerlink" title="段式管理"></a>段式管理</h5><p>段式管理把主存分为一段段的，每一段访问方式和数据属性相同，段的空间又要比一页的空间小很多 。但是，最重要的是段是有实际意义的，每个段定义了一组逻辑信息，例如堆段、栈段、代码段、数据段等。 若干段组成了进程逻辑地址空间。段式管理通过段表对应逻辑地址和物理地址（逻辑连续，物理不连续）。</p>
 <p>以linux系统为例，内存的划分可以分为五个段，其相关属性如下：</p>
 <div class="table-container">
