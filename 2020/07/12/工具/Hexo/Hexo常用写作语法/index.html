@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文针对Hexo中常用写作的功能及语法进行总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-22T10:56:38.260Z">
+<meta property="og:updated_time" content="2021-04-15T03:30:19.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown常用写作语法及功能">
 <meta name="twitter:description" content="本文针对Hexo中常用写作的功能及语法进行总结。">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-22 18:56:38" itemprop="dateModified" datetime="2020-09-22T18:56:38+08:00">2020-09-22</time>
+                <time title="Modified: 2021-04-15 11:30:19" itemprop="dateModified" datetime="2021-04-15T11:30:19+08:00">2021-04-15</time>
               
             
           </span>
@@ -520,7 +520,50 @@ T(x,c) &= \Theta(x)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
 T(c,y) &= \Theta(y)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
 T(x,y) &=\Theta(x+y)+T(x/2,y/2)
 \end{aligned}
-\end{equation}</script><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.jianshu.com/p/191d1e21f7ed">Markdown 语法</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://blog.csdn.net/u010177286/article/details/50358720">markdown 字体颜色</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+\end{equation}</script><h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><p>标签的语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note class_name %&#125; </span><br><span class="line">xxxxxxxxxxxxxxxxxxx </span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<div class="note default">
+            <p>内容内容内容内容</p>
+          </div>
+<p>其中，class_name的值可以有如下几种：</p>
+<ul>
+<li>default</li>
+</ul>
+<div class="note default">
+            <p>xxxxxxxxxxxxxxxxxxx </p>
+          </div>
+<ul>
+<li>primary</li>
+</ul>
+<div class="note primary">
+            <p>xxxxxxxxxxxxxxxxxxx </p>
+          </div>
+<ul>
+<li>success</li>
+</ul>
+<div class="note success">
+            <p>xxxxxxxxxxxxxxxxxxx </p>
+          </div>
+<ul>
+<li>info</li>
+</ul>
+<div class="note info">
+            <p>xxxxxxxxxxxxxxxxxxx </p>
+          </div>
+<ul>
+<li>warning</li>
+</ul>
+<div class="note warning">
+            <p>xxxxxxxxxxxxxxxxxxx </p>
+          </div>
+<ul>
+<li>danger</li>
+</ul>
+<div class="note danger">
+            <p>xxxxxxxxxxxxxxxxxxx </p>
+          </div>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.jianshu.com/p/191d1e21f7ed">Markdown 语法</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://blog.csdn.net/u010177286/article/details/50358720">markdown 字体颜色</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -583,8 +626,8 @@ T(x,y) &=\Theta(x+y)+T(x/2,y/2)
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/Latex/TIKZ绘图指南——3D绘图/" rel="next" title="TIKZ绘图指南——3D绘图">
-                <i class="fa fa-chevron-left"></i> TIKZ绘图指南——3D绘图
+              <a href="/2020/07/12/工具/Git/第三方库管理/" rel="next" title="第三方库管理">
+                <i class="fa fa-chevron-left"></i> 第三方库管理
               </a>
             
           </div>
@@ -921,7 +964,7 @@ T(x,y) &=\Theta(x+y)+T(x/2,y/2)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#站内引用"><span class="nav-number">1.</span> <span class="nav-text">站内引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码折叠"><span class="nav-number">2.</span> <span class="nav-text">代码折叠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-number">3.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#章节跳转"><span class="nav-number">4.</span> <span class="nav-text">章节跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件下载"><span class="nav-number">5.</span> <span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字体2"><span class="nav-number">6.</span> <span class="nav-text">字体2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景颜色"><span class="nav-number">6.1.</span> <span class="nav-text">背景颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体、颜色及大小"><span class="nav-number">6.2.</span> <span class="nav-text">字体、颜色及大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用mermaid进行绘图"><span class="nav-number">7.</span> <span class="nav-text">使用mermaid进行绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">8.</span> <span class="nav-text">公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多行公式"><span class="nav-number">8.1.</span> <span class="nav-text">多行公式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">9.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#站内引用"><span class="nav-number">1.</span> <span class="nav-text">站内引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码折叠"><span class="nav-number">2.</span> <span class="nav-text">代码折叠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-number">3.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#章节跳转"><span class="nav-number">4.</span> <span class="nav-text">章节跳转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件下载"><span class="nav-number">5.</span> <span class="nav-text">文件下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字体2"><span class="nav-number">6.</span> <span class="nav-text">字体2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景颜色"><span class="nav-number">6.1.</span> <span class="nav-text">背景颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体、颜色及大小"><span class="nav-number">6.2.</span> <span class="nav-text">字体、颜色及大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用mermaid进行绘图"><span class="nav-number">7.</span> <span class="nav-text">使用mermaid进行绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式"><span class="nav-number">8.</span> <span class="nav-text">公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多行公式"><span class="nav-number">8.1.</span> <span class="nav-text">多行公式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签"><span class="nav-number">9.</span> <span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">10.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
