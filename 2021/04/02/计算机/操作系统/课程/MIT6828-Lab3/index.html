@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="且将杯酒对星河">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-17T07:50:20.682Z">
+<meta property="og:updated_time" content="2021-04-17T15:09:59.123Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-Lab3-用户环境">
 <meta name="twitter:description" content="且将杯酒对星河">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-17 15:50:20" itemprop="dateModified" datetime="2021-04-17T15:50:20+08:00">2021-04-17</time>
+                <time title="Modified: 2021-04-17 23:09:59" itemprop="dateModified" datetime="2021-04-17T23:09:59+08:00">2021-04-17</time>
               
             
           </span>
@@ -668,7 +668,9 @@
 <h5 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span></span><br><span class="line">env_setup_vm(struct Env *e)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">PageInfo</span> *<span class="title">p</span> = <span class="title">NULL</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!(p = page_alloc(ALLOC_ZERO)))  <span class="comment">//分配一个物理页</span></span><br><span class="line">		<span class="keyword">return</span> -E_NO_MEM;</span><br><span class="line"></span><br><span class="line">    p-&gt;pp_ref++;</span><br><span class="line">	e-&gt;env_pgdir = (<span class="keyword">pde_t</span> *) page2kva(p);  <span class="comment">//刚分配的物理页作为页目录使用</span></span><br><span class="line">    </span><br><span class="line">	e-&gt;env_pgdir[PDX(UVPT)] = PADDR(e-&gt;env_pgdir) | PTE_P | PTE_U;  </span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="改进-1"><a href="#改进-1" class="headerlink" title="改进"></a>改进</h5><p>在上面的实现中，我们还需要对<code>env_pgdir</code>指向的页进行初始化，初始化内核部分，因此还需要下面一句</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memcpy(e-&gt;env_pgdir, kern_pgdir, PGSIZE);</span><br></pre></td></tr></table></figure>
-<h4 id="region-alloc"><a href="#region-alloc" class="headerlink" title="region_alloc()"></a>region_alloc()</h4><h4 id="load-icode"><a href="#load-icode" class="headerlink" title="load_icode()"></a>load_icode()</h4><h4 id="env-create"><a href="#env-create" class="headerlink" title="env_create()"></a>env_create()</h4><h4 id="env-run"><a href="#env-run" class="headerlink" title="env_run()"></a>env_run()</h4><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab3</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<p>这一句说明，每个进程都了解内核的页目录。</p>
+<h4 id="region-alloc"><a href="#region-alloc" class="headerlink" title="region_alloc()"></a>region_alloc()</h4><p>为进程分配长度为len的</p>
+<h4 id="load-icode"><a href="#load-icode" class="headerlink" title="load_icode()"></a>load_icode()</h4><h4 id="env-create"><a href="#env-create" class="headerlink" title="env_create()"></a>env_create()</h4><h4 id="env-run"><a href="#env-run" class="headerlink" title="env_run()"></a>env_run()</h4><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab3</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
