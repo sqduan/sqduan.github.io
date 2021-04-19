@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/11/29/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828%E8%AF%BE%E7%A8%8B%E5%A4%A7%E7%BA%B2/</loc>
+    <lastmod>2021-04-19</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B/</loc>
+    <lastmod>2021-04-19</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/29/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</loc>
+    <lastmod>2021-04-19</lastmod>
+  </url>
+  <url>
+    <loc>http://yoursite.com/2020/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C/</loc>
+    <lastmod>2021-04-19</lastmod>
+  </url>
+  <url>
     <loc>http://yoursite.com/2020/12/17/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828-Lab2/</loc>
     <lastmod>2021-04-18</lastmod>
   </url>
@@ -11,14 +27,6 @@
   <url>
     <loc>http://yoursite.com/2020/09/03/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B/</loc>
     <lastmod>2021-04-17</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/11/29/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828%E8%AF%BE%E7%A8%8B%E5%A4%A7%E7%BA%B2/</loc>
-    <lastmod>2021-04-16</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/07/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B/</loc>
-    <lastmod>2021-04-16</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2020/11/17/%E5%B7%A5%E5%85%B7/C++/%E6%99%AE%E9%80%9A%E6%8C%87%E9%92%88/</loc>
@@ -163,10 +171,6 @@
   <url>
     <loc>http://yoursite.com/2020/07/12/%E5%B7%A5%E5%85%B7/C++/%E7%B1%BB/</loc>
     <lastmod>2021-02-26</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/29/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</loc>
-    <lastmod>2021-02-25</lastmod>
   </url>
   <url>
     <loc>http://yoursite.com/2021/02/23/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/%E8%AF%BE%E7%A8%8B/CornellCS5150/</loc>
@@ -322,10 +326,6 @@
   </url>
   <url>
     <loc>http://yoursite.com/2020/11/30/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%99%9A%E6%8B%9F%E5%8C%96/</loc>
-    <lastmod>2020-11-30</lastmod>
-  </url>
-  <url>
-    <loc>http://yoursite.com/2020/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%89%A7%E8%A1%8C/</loc>
     <lastmod>2020-11-30</lastmod>
   </url>
   <url>
