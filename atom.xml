@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-04-05T06:58:21.566Z</updated>
+  <updated>2021-04-20T09:01:51.158Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何成为一名优秀的软件工程师</title>
+    <link href="http://yoursite.com/2021/04/20/%E5%B7%A5%E5%85%B7/C++/%E8%A7%84%E8%8C%83/%E4%BB%A3%E7%A0%81%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/"/>
+    <id>http://yoursite.com/2021/04/20/工具/C++/规范/代码简洁之道/</id>
+    <published>2021-04-20T08:38:14.310Z</published>
+    <updated>2021-04-20T09:01:51.158Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>普天之下，哪怕有一个也好，必须寻找出能俘获自己这颗心的伟大的东西，美丽的东西，或是慈祥的东西。</p></blockquote><a id="more"></a><h2 id="重构的作用"><a href="#重构的作用" class="headerlink" title="重构的作用"></a>重构的作用</h2><p>绝大多数的人，都无法做到一下就写出漂亮、完美的代码，因此我们才需要重构，重构使得我们能够逐步地对代码进行反省，从而令其更加简洁，逐渐趋于完美。可以把代码创造比作雕刻的过程，如果第一次的编写是开模，那么后续的重构就是一点点地精细化，最终创造出精美的艺术品。</p><h2 id="优秀特质"><a href="#优秀特质" class="headerlink" title="优秀特质"></a>优秀特质</h2><h3 id="良好习惯"><a href="#良好习惯" class="headerlink" title="良好习惯"></a>良好习惯</h3><p>作为一个工程师，我们需要保持如下良好的习惯：</p><ul><li>专注可用性：以代码功能作为终极追求，最终软件是给用户使用的，一定要将用户放在心中</li><li>善用现有的好代码，一个好的工程师，会专注于三种基本重用，不要重复造轮子，除非以学习为目的<ul><li>内部基础架构重用</li><li>第三方函数库</li><li>大型软件服务商提供的服务</li></ul></li><li>代码高可维护性，代码每一行都必须恰如其分地展现其目的，不要写糟糕的代码，哪怕时间再紧张</li><li>编写测试：测试的目的就是为了创建能够正常工作的系统</li></ul><h3 id="持续学习"><a href="#持续学习" class="headerlink" title="持续学习"></a>持续学习</h3><p>愿意学习新语言、新函数库和新方法，用最新的武器武装自己。</p><h3 id="如何变得优秀"><a href="#如何变得优秀" class="headerlink" title="如何变得优秀"></a>如何变得优秀</h3><ul><li>精益求精：不要妥协，写烂代码</li><li>甘于磨练：自己解决一个问题，不要一开始就求助别人，反复磨练，不断提升自己的能力</li><li>不断学习</li><li>分享知识：</li><li>乐于助人：</li><li>从容耐心：欲速则不达，成神之路是一条漫长的路</li></ul><h2 id="扩展学习资料"><a href="#扩展学习资料" class="headerlink" title="扩展学习资料"></a>扩展学习资料</h2><p>C++程序设计语言</p><p>C++ primer</p><p>C++语言的设计和演化</p><p>C++编程思想</p><p>More Effective C++</p><p>C++编程艺术</p><p>A philosophy of software design</p><p>设计原则&amp;设计模式</p><p>重构：改善既有代码的设计</p><p>零信任架构</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;普天之下，哪怕有一个也好，必须寻找出能俘获自己这颗心的伟大的东西，美丽的东西，或是慈祥的东西。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
+    
+      <category term="规范" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/%E8%A7%84%E8%8C%83/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>C++注释规范</title>
+    <link href="http://yoursite.com/2021/04/20/%E5%B7%A5%E5%85%B7/C++/%E8%A7%84%E8%8C%83/C++%E5%A4%B4%E6%96%87%E4%BB%B6%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2021/04/20/工具/C++/规范/C++头文件规范/</id>
+    <published>2021-04-20T08:17:56.340Z</published>
+    <updated>2021-04-20T08:38:11.735Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote><p>如果脏了还用，就莫不如一开始就用带颜色的。白的就要纯白才行。</p></blockquote><a id="more"></a><h2 id="QT下自动注释生成"><a href="#QT下自动注释生成" class="headerlink" title="QT下自动注释生成"></a>QT下自动注释生成</h2><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://developer.ibm.com/articles/au-learningdoxygen/">Learning doxygen</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;如果脏了还用，就莫不如一开始就用带颜色的。白的就要纯白才行。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>MIT 6006 课程大纲</title>
@@ -121,13 +171,13 @@
     <link href="http://yoursite.com/2021/04/02/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B/MIT6828-HW5/"/>
     <id>http://yoursite.com/2021/04/02/计算机/操作系统/课程/MIT6828-HW5/</id>
     <published>2021-04-02T13:08:19.920Z</published>
-    <updated>2021-04-04T14:39:27.746Z</updated>
+    <updated>2021-04-20T09:45:56.208Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>懒分配是物理内存管理的一种策略，其基本思想是直到进程真正使用内存时，才进行内存的分配。本文将对xv6中懒分配的实现进行总结。</p><a id="more"></a><p>xv6的应用通过<code>sbrk()</code>系统调用来获取堆上分配的内存，有些进程申请了内存，但是一直没用，如果给他们分配了内存，就会导致有一部分内存一直被站着不用（占着茅坑不拉*），所以机智的内核就想出了一个策略，直到内存真正被使用，才进行分配。</p><h2 id="第一部分：删除sbrk中分配内存的部分"><a href="#第一部分：删除sbrk中分配内存的部分" class="headerlink" title="第一部分：删除sbrk中分配内存的部分"></a>第一部分：删除<code>sbrk</code>中分配内存的部分</h2><p>首先我们要修改<code>sbrk</code>系统调用，即<code>sysproc.c</code>下的<code>sys_sbrk()</code>函数，删除其中的内存分配部分。<code>sbrk</code>的功能如下：首先，它将进程的内存大小增长<code>n</code>字节，然后返回新分配的空间的起始地址（即进程原来的内存大小）。改进后的<code>sbrk</code>只增加进程的大小，不分配内存。改进后的<code>sbrk</code>如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span></span><br><span class="line">sys_sbrk(<span class="keyword">void</span>)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> addr;</span><br><span class="line">  <span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(argint(<span class="number">0</span>, &amp;n) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  addr = myproc()-&gt;sz;</span><br><span class="line">  <span class="comment">//if(growproc(n) &lt; 0)    //分配内存</span></span><br><span class="line">    <span class="comment">//return -1;</span></span><br><span class="line">  myproc()-&gt;sz += n;       <span class="comment">// 修改进程size大小</span></span><br><span class="line">  <span class="keyword">return</span> addr;             <span class="comment">// 返回起始地址</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>修改后会发生什么现象呢？进程如果试图获取堆内存，那么其大小会增加，但是并没有真的给它分配内存，如果试图去写入新内存，会触发page fault</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> hi</span></span><br><span class="line">pid 3 sh: trap 14 err 6 on cpu 0 eip 0x111c addr 0x4004--kill proc</span><br></pre></td></tr></table></figure><p>运行操作系统，输入上面的命令，弹出提示，这个提示来自<code>trap.c</code>中的trap handler，表示捕获到了页错误（trap 14 T_PGFLT），0x4004表示造成PGFLT的虚拟地址为4004</p><h2 id="第二部分：Lazy-allocation"><a href="#第二部分：Lazy-allocation" class="headerlink" title="第二部分：Lazy allocation"></a>第二部分：Lazy allocation</h2><p>修改<code>trap.c</code>，当用户空间发生缺页错误后，分配一块新内存，然后让用户进程继续执行，暂时不需要考虑临界情况。这里给了若干个提示，分别如下：</p><ol><li>查看打印语句中的参数，看看如何找到触发页错误的虚拟地址：使用<code>rcr2()</code>函数</li><li>从<code>allocuvm()</code>函数中找到分配空间的方法</li><li>使用<code>PGROUNDDOWN(va)</code>这个宏函数，从引发页错误的地址va找到一个页边界</li><li>分配内存后记得使用<code>return</code>返回，要不然会错误执行杀死进程的指令</li><li>使用<code>mappages</code>完成地址的映射，在<code>trap.c</code>中调用<code>mappages</code>之前添加如下声明：<code>int mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm)</code></li><li>通过<code>tf-&gt;trapno==T_PGFLT</code>检查是否为页面错误</li></ol><p>首先我们看看<code>trap</code>是如何找到虚拟地址的</p><p>这个lazy allocation机制实际上是不完善的，还需要解决如下问题：</p><ul><li>分配内存如果是负数怎么办？</li><li>如果太大了怎么办？</li><li>确保<code>fork</code>和<code>exit</code>在没有被分配内存的情况下也能正确工作</li><li>如果堆覆盖栈该怎么办？</li><li>如果内核要使用<code>sbrk()</code>分配的空内存该怎么办？</li></ul><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-syscall.html">Homework: xv6 system calls (mit.edu)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本作业将实现对使用CPU的进程进行周期性提醒，通过该练习，我们可以实现一个基础的用户层面的中断/错误处理机制。</p><a id="more"></a><p>添加一个新的<code>alarm(interval, handler)</code>系统调用</p><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-syscall.html">Homework: xv6 system calls (mit.edu)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;懒分配是物理内存管理的一种策略，其基本思想是直到进程真正使用内存时，才进行内存的分配。本文将对xv6中懒分配的实现进行总结。&lt;/p&gt;
+      &lt;p&gt;本作业将实现对使用CPU的进程进行周期性提醒，通过该练习，我们可以实现一个基础的用户层面的中断/错误处理机制。&lt;/p&gt;
     
     </summary>
     
@@ -440,50 +490,6 @@
       <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
     
       <category term="C++" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/C/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>TUI调试模式</title>
-    <link href="http://yoursite.com/2021/02/11/%E5%B7%A5%E5%85%B7/GDB/TUI/"/>
-    <id>http://yoursite.com/2021/02/11/工具/GDB/TUI/</id>
-    <published>2021-02-11T09:53:31.386Z</published>
-    <updated>2021-02-12T05:21:43.490Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>GDB text user interface（TUI）是GDB的一个多窗口的符号终端，能够同时显示源文件、汇编输出、寄存器等情况，本文将针对tui的使用进行一些总结。</p><a id="more"></a><h2 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h2><h3 id="在GDB中激活TUI"><a href="#在GDB中激活TUI" class="headerlink" title="在GDB中激活TUI"></a>在GDB中激活TUI</h3><p>在使用GDB时，可以通过<code>gdb -tui</code>的方式打开tui，也可以打开gdb后，输入<code>tui enable/disable</code>激活、关闭TUI，TUI的界面如下所示：</p><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210211184604.png" width = "550" alt="图片名称" align=center /></p><p>上中下分别为源代码窗口、汇编代码窗口和命令行窗口</p><h3 id="不同的窗口"><a href="#不同的窗口" class="headerlink" title="不同的窗口"></a>不同的窗口</h3><p>在TUI中，一共可以显示如下四种窗口：</p><ul><li>命令窗口：用于GDB调试时命令输入</li><li>源代码窗口：显示程序源代码，当前行及断点等信息，（命令窗口中输入<code>layout src</code>）</li><li>汇编窗口：显示程序汇编代码，（命令窗口中输入<code>layout asm</code>）</li><li>寄存器窗口：显示寄存器中的内容，（命令行窗口中输入<code>layout regs</code>）</li></ul><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://unix.stackexchange.com/questions/243350/why-does-using-yes-on-bash-pipelines-not-cause-infinite-loops">shell - Why does using <code>yes</code> on bash pipelines <em>not</em> cause infinite loops? - Unix &amp; Linux Stack Exchange</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;GDB text user interface（TUI）是GDB的一个多窗口的符号终端，能够同时显示源文件、汇编输出、寄存器等情况，本文将针对tui的使用进行一些总结。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="GDB" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/GDB/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>实体和实体关系</title>
-    <link href="http://yoursite.com/2021/02/04/%E5%B7%A5%E5%85%B7/UML/%E5%AE%9E%E4%BD%93%E5%92%8C%E5%AE%9E%E4%BD%93%E5%85%B3%E7%B3%BB/"/>
-    <id>http://yoursite.com/2021/02/04/工具/UML/实体和实体关系/</id>
-    <published>2021-02-04T03:09:00.024Z</published>
-    <updated>2021-02-22T14:06:19.412Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对UML中的实体和实体关系进行总结</p><a id="more"></a><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://design-patterns.readthedocs.io/zh_CN/latest/read_uml.html">看懂UML类图和时序图</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文将针对UML中的实体和实体关系进行总结&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-      <category term="UML" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/UML/"/>
     
     
   </entry>

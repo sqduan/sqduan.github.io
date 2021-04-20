@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="本文将利用OpenGL实现一个三维太阳系简单模拟。">
+  <meta name="description" content="普天之下，哪怕有一个也好，必须寻找出能俘获自己这颗心的伟大的东西，美丽的东西，或是慈祥的东西。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenGL实现太阳系模拟">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/OpenGL/OpenGL实现太阳系模拟/index.html">
+<meta property="og:title" content="如何成为一名优秀的软件工程师">
+<meta property="og:url" content="http://yoursite.com/2021/04/20/工具/C++/规范/代码简洁之道/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="本文将利用OpenGL实现一个三维太阳系简单模拟。">
+<meta property="og:description" content="普天之下，哪怕有一个也好，必须寻找出能俘获自己这颗心的伟大的东西，美丽的东西，或是慈祥的东西。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.767Z">
+<meta property="og:updated_time" content="2021-04-20T09:01:51.158Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenGL实现太阳系模拟">
-<meta name="twitter:description" content="本文将利用OpenGL实现一个三维太阳系简单模拟。">
+<meta name="twitter:title" content="如何成为一名优秀的软件工程师">
+<meta name="twitter:description" content="普天之下，哪怕有一个也好，必须寻找出能俘获自己这颗心的伟大的东西，美丽的东西，或是慈祥的东西。">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/OpenGL/OpenGL实现太阳系模拟/">
+  <link rel="canonical" href="http://yoursite.com/2021/04/20/工具/C++/规范/代码简洁之道/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>OpenGL实现太阳系模拟 | 一隅</title>
+  <title>如何成为一名优秀的软件工程师 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/OpenGL/OpenGL实现太阳系模拟/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/04/20/工具/C++/规范/代码简洁之道/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">OpenGL实现太阳系模拟
+          <h1 class="post-title" itemprop="name headline">如何成为一名优秀的软件工程师
 
               
             
@@ -401,9 +401,13 @@
                 
               
 
-              <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
+              <time title="Created: 2021-04-20 16:38:14 / Modified: 17:01:51" itemprop="dateCreated datePublished" datetime="2021-04-20T16:38:14+08:00">2021-04-20</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -426,7 +430,14 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/OpenGL/" itemprop="url" rel="index"><span itemprop="name">OpenGL</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/C/规范/" itemprop="url" rel="index"><span itemprop="name">规范</span></a></span>
 
                 
                 
@@ -461,45 +472,42 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将利用OpenGL实现一个三维太阳系简单模拟。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>普天之下，哪怕有一个也好，必须寻找出能俘获自己这颗心的伟大的东西，美丽的东西，或是慈祥的东西。</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="工程创建"><a href="#工程创建" class="headerlink" title="工程创建"></a>工程创建</h3><p>工程的建立请参考另外一篇文章：</p>
-<h3 id="绘制对象"><a href="#绘制对象" class="headerlink" title="绘制对象"></a>绘制对象</h3><p>待绘制的对象有三个：太阳、地球和月球</p>
-<h3 id="动画效果及对象动作"><a href="#动画效果及对象动作" class="headerlink" title="动画效果及对象动作"></a>动画效果及对象动作</h3><ul>
-<li>太阳进行自转运动</li>
-<li>地球进行自转及公转运动</li>
-<li>月球进行自转及公转运动</li>
+<h2 id="重构的作用"><a href="#重构的作用" class="headerlink" title="重构的作用"></a>重构的作用</h2><p>绝大多数的人，都无法做到一下就写出漂亮、完美的代码，因此我们才需要重构，重构使得我们能够逐步地对代码进行反省，从而令其更加简洁，逐渐趋于完美。可以把代码创造比作雕刻的过程，如果第一次的编写是开模，那么后续的重构就是一点点地精细化，最终创造出精美的艺术品。</p>
+<h2 id="优秀特质"><a href="#优秀特质" class="headerlink" title="优秀特质"></a>优秀特质</h2><h3 id="良好习惯"><a href="#良好习惯" class="headerlink" title="良好习惯"></a>良好习惯</h3><p>作为一个工程师，我们需要保持如下良好的习惯：</p>
+<ul>
+<li>专注可用性：以代码功能作为终极追求，最终软件是给用户使用的，一定要将用户放在心中</li>
+<li>善用现有的好代码，一个好的工程师，会专注于三种基本重用，不要重复造轮子，除非以学习为目的<ul>
+<li>内部基础架构重用</li>
+<li>第三方函数库</li>
+<li>大型软件服务商提供的服务</li>
 </ul>
-<h3 id="摄像机位置"><a href="#摄像机位置" class="headerlink" title="摄像机位置"></a>摄像机位置</h3><p>固定摄像机坐标系，并令摄像机看向太阳中心</p>
-<h3 id="遮挡关系"><a href="#遮挡关系" class="headerlink" title="遮挡关系"></a>遮挡关系</h3><p>使能遮挡</p>
-<h3 id="贴图"><a href="#贴图" class="headerlink" title="贴图"></a>贴图</h3><p>使能贴图</p>
-<h3 id="相关参数"><a href="#相关参数" class="headerlink" title="相关参数"></a>相关参数</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数名</th>
-<th style="text-align:center">类型</th>
-<th style="text-align:center">取值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">窗口大小</td>
-<td style="text-align:center">int</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-</div>
+</li>
+<li>代码高可维护性，代码每一行都必须恰如其分地展现其目的，不要写糟糕的代码，哪怕时间再紧张</li>
+<li>编写测试：测试的目的就是为了创建能够正常工作的系统</li>
+</ul>
+<h3 id="持续学习"><a href="#持续学习" class="headerlink" title="持续学习"></a>持续学习</h3><p>愿意学习新语言、新函数库和新方法，用最新的武器武装自己。</p>
+<h3 id="如何变得优秀"><a href="#如何变得优秀" class="headerlink" title="如何变得优秀"></a>如何变得优秀</h3><ul>
+<li>精益求精：不要妥协，写烂代码</li>
+<li>甘于磨练：自己解决一个问题，不要一开始就求助别人，反复磨练，不断提升自己的能力</li>
+<li>不断学习</li>
+<li>分享知识：</li>
+<li>乐于助人：</li>
+<li>从容耐心：欲速则不达，成神之路是一条漫长的路</li>
+</ul>
+<h2 id="扩展学习资料"><a href="#扩展学习资料" class="headerlink" title="扩展学习资料"></a>扩展学习资料</h2><p>C++程序设计语言</p>
+<p>C++ primer</p>
+<p>C++语言的设计和演化</p>
+<p>C++编程思想</p>
+<p>More Effective C++</p>
+<p>C++编程艺术</p>
+<p>A philosophy of software design</p>
+<p>设计原则&amp;设计模式</p>
+<p>重构：改善既有代码的设计</p>
+<p>零信任架构</p>
 
       
     </div>
@@ -563,8 +571,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/OpenGL/Qt+Opengl/" rel="next" title="Qt+OpenGL开发环境配置">
-                <i class="fa fa-chevron-left"></i> Qt+OpenGL开发环境配置
+              <a href="/2021/04/20/工具/C++/规范/C++头文件规范/" rel="next" title="C++注释规范">
+                <i class="fa fa-chevron-left"></i> C++注释规范
               </a>
             
           </div>
@@ -572,10 +580,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/07/12/工具/OpenGL/OpenGL学习（一）/" rel="prev" title="OpenGL学习（一）——简单图形绘制">
-                OpenGL学习（一）——简单图形绘制 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -651,7 +655,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-count">288</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -782,7 +786,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">57</span>
+                      
+                    
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -901,7 +907,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工程创建"><span class="nav-number">1.1.</span> <span class="nav-text">工程创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制对象"><span class="nav-number">1.2.</span> <span class="nav-text">绘制对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动画效果及对象动作"><span class="nav-number">1.3.</span> <span class="nav-text">动画效果及对象动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#摄像机位置"><span class="nav-number">1.4.</span> <span class="nav-text">摄像机位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遮挡关系"><span class="nav-number">1.5.</span> <span class="nav-text">遮挡关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贴图"><span class="nav-number">1.6.</span> <span class="nav-text">贴图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关参数"><span class="nav-number">1.7.</span> <span class="nav-text">相关参数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#重构的作用"><span class="nav-number">1.</span> <span class="nav-text">重构的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优秀特质"><span class="nav-number">2.</span> <span class="nav-text">优秀特质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#良好习惯"><span class="nav-number">2.1.</span> <span class="nav-text">良好习惯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持续学习"><span class="nav-number">2.2.</span> <span class="nav-text">持续学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何变得优秀"><span class="nav-number">2.3.</span> <span class="nav-text">如何变得优秀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展学习资料"><span class="nav-number">3.</span> <span class="nav-text">扩展学习资料</span></a></li></ol></div>
             
 
           </div>
@@ -1089,7 +1095,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/工具/OpenGL/OpenGL实现太阳系模拟/'
+    refer: '2021/04/20/工具/C++/规范/代码简洁之道/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
