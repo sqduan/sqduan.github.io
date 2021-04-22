@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content=".LC0:  .string “Helloworld”">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-03T07:23:42.452Z">
+<meta property="og:updated_time" content="2021-04-22T03:00:20.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="X86-64汇编基本语法">
 <meta name="twitter:description" content=".LC0:  .string “Helloworld”">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-03 15:23:42" itemprop="dateModified" datetime="2020-12-03T15:23:42+08:00">2020-12-03</time>
+                <time title="Modified: 2021-04-22 11:00:20" itemprop="dateModified" datetime="2021-04-22T11:00:20+08:00">2021-04-22</time>
               
             
           </span>
@@ -519,35 +519,7 @@
 <h3 id="com"><a href="#com" class="headerlink" title=".com"></a>.com</h3><p>分配空间，在数据段中分配指定空间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.comm stack, KSTACKSIZE</span><br></pre></td></tr></table></figure>
 <p>在数据段中分配KSTACKSIZE长度的空间，这段空间用符号stack来表示</p>
-<h2 id="常用寄存器及功能"><a href="#常用寄存器及功能" class="headerlink" title="常用寄存器及功能"></a>常用寄存器及功能</h2><p>对于x86-64架构，共有16个64位通用寄存器，名称及用途如下：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">作用</th>
-<th style="text-align:center">解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">rbp</td>
-<td style="text-align:center">栈基地址寄存器，保存当前帧的栈底地址。</td>
-<td style="text-align:center">rbp和rsp两个指针可以刻画一个完整的函数栈帧</td>
-</tr>
-<tr>
-<td style="text-align:center">rsp</td>
-<td style="text-align:center">栈指针寄存器，保存当前栈顶。</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">.rodata</td>
-<td style="text-align:center">常量数据段</td>
-<td style="text-align:center">只读</td>
-</tr>
-</tbody>
-</table>
-</div>
+<h2 id="常用寄存器及功能"><a href="#常用寄存器及功能" class="headerlink" title="常用寄存器及功能"></a>常用寄存器及功能</h2><p>此部分请参考<a href="/2020/08/27/计算机/组成原理/寄存器/" title="关于寄存器的讲解">关于寄存器的讲解</a></p>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="数据移动类"><a href="#数据移动类" class="headerlink" title="数据移动类"></a>数据移动类</h3><h4 id="mov"><a href="#mov" class="headerlink" title="mov"></a>mov</h4><p>一下列举了一些mov的使用方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov    0x10(%ebp),%edi  # ebp+10 --&gt; edi</span><br></pre></td></tr></table></figure>
 <h4 id="push"><a href="#push" class="headerlink" title="push"></a>push</h4><p>只要有PUSH的动作，ESP寄存器自动减小，push命令使用格式如下：</p>
@@ -746,7 +718,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">289</span>
+                    <span class="site-state-item-count">290</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
