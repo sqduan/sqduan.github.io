@@ -39,9 +39,9 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[C++注释规范]]></title>
+    <title><![CDATA[C++命名规范]]></title>
     <url>%2F2021%2F04%2F20%2F%E5%B7%A5%E5%85%B7%2FC%2B%2B%2F%E8%A7%84%E8%8C%83%2FC%2B%2B%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%2F</url>
-    <content type="text"><![CDATA[如果脏了还用，就莫不如一开始就用带颜色的。白的就要纯白才行。 QT下自动注释生成reference1.Learning doxygen ↩]]></content>
+    <content type="text"><![CDATA[如果脏了还用，就莫不如一开始就用带颜色的。白的就要纯白才行。 本文根据Google C++ Style Guide，对其中相关命名规范进行总结。 基本的命名规则为： 尽量不要用缩写，除非人尽皆知 变量和类型用名词，函数用动词 尽量使用描述性词语，做到见名知意 项目 子项目 命名方式 例子 头文件宏定义 全部大写，PROJECTPATH_FILE_H JOSKERN_ENV_H 命名空间 用小写，且基于项目进行命名 文件 文件名全部小写，且用_分割 url_table 类型 类名采用每个单词首字母大写的方式 MyClass 变量 普通变量 变量名全部小写，且用_分割 table_name 类成员变量 变量名全部小写，且用_分割，最后加一个下划线 tablename 全局变量 在变量名前加g_ g_table_name 常量 k起头，后面为每个单词首字母大写 kDaysInAWeek 函数 普通函数 每个单词首字母大写 AddTableEntry() getter/setter函数 与要获得的变量名相匹配 get_num_entries/set_num_entries reference1.Google C++ Style Guide ↩]]></content>
       <categories>
         <category>工具</category>
         <category>C++</category>
