@@ -103,10 +103,12 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="去做点别的事情吧，等天黑了再回来">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-26T09:09:49.338Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/trapframelayout.svg">
+<meta property="og:updated_time" content="2021-04-27T06:08:38.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中断、异常和系统调用">
 <meta name="twitter:description" content="去做点别的事情吧，等天黑了再回来">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/trapframelayout.svg">
 
 
 
@@ -418,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-26 17:09:49" itemprop="dateModified" datetime="2021-04-26T17:09:49+08:00">2021-04-26</time>
+                <time title="Modified: 2021-04-27 14:08:38" itemprop="dateModified" datetime="2021-04-27T14:08:38+08:00">2021-04-27</time>
               
             
           </span>
@@ -503,8 +505,11 @@
 </ul>
 </li>
 </ul>
-<h3 id="系统调用实例"><a href="#系统调用实例" class="headerlink" title="系统调用实例"></a>系统调用实例</h3><h2 id="现场保护"><a href="#现场保护" class="headerlink" title="现场保护"></a>现场保护</h2><h3 id="trapframe"><a href="#trapframe" class="headerlink" title="trapframe"></a>trapframe</h3><p>trapframe 保存了中断发生时需要保存的相关寄存器，这个数据结构很重要，现在对其进行一些总结。</p>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+<h3 id="系统调用实例"><a href="#系统调用实例" class="headerlink" title="系统调用实例"></a>系统调用实例</h3><h2 id="现场保护"><a href="#现场保护" class="headerlink" title="现场保护"></a>现场保护</h2><h3 id="trapframe"><a href="#trapframe" class="headerlink" title="trapframe"></a>trapframe</h3><p>trapframe 保存了中断发生时需要保存的相关寄存器，这个数据结构很重要，现在对其进行一些总结。一个完整的Trapframe，其布局如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/trapframelayout.svg" width="380" alt="图片名称" align="center"></p>
+<p>可以看到trapframe被分为了三个部分，有一部分由<code>int</code>指令保存，即硬件实现，其余部分由软件实现。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>:</p>
+
       
     </div>
 
@@ -655,7 +660,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">291</span>
+                    <span class="site-state-item-count">294</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1001,6 +1006,13 @@
 
     
 
+    
+      <div>
+        <div class="addthis_inline_share_toolbox">
+  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6087b6b97c33631c" async="async"></script>
+</div>
+
+      </div>
     
   </div>
 

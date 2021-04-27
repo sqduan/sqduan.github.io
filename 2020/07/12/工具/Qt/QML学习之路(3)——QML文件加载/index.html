@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="本文将针对QML基本元素">
+  <meta name="description" content="QML文件有两种加载方式：QQmlApplicationEngine 和 QQuickView，QQmlApplicationEngine的方式更新，且功能更强大，因此本文重点针对使用QQmlApplicationEngine加载QML文件的方式进行讲解。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QML学习之路(2)——QML基本元素和自定义元素">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(2)——QML基本元素和自定义元素/index.html">
+<meta property="og:title" content="QML学习之路(3)——QML文件加载">
+<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(3)——QML文件加载/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="本文将针对QML基本元素">
+<meta property="og:description" content="QML文件有两种加载方式：QQmlApplicationEngine 和 QQuickView，QQmlApplicationEngine的方式更新，且功能更强大，因此本文重点针对使用QQmlApplicationEngine加载QML文件的方式进行讲解。">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-07-12T01:05:50.769Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QML学习之路(2)——QML基本元素和自定义元素">
-<meta name="twitter:description" content="本文将针对QML基本元素">
+<meta name="twitter:title" content="QML学习之路(3)——QML文件加载">
+<meta name="twitter:description" content="QML文件有两种加载方式：QQmlApplicationEngine 和 QQuickView，QQmlApplicationEngine的方式更新，且功能更强大，因此本文重点针对使用QQmlApplicationEngine加载QML文件的方式进行讲解。">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(2)——QML基本元素和自定义元素/">
+  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(3)——QML文件加载/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>QML学习之路(2)——QML基本元素和自定义元素 | 一隅</title>
+  <title>QML学习之路(3)——QML文件加载 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(2)——QML基本元素和自定义元素/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(3)——QML文件加载/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">QML学习之路(2)——QML基本元素和自定义元素
+          <h1 class="post-title" itemprop="name headline">QML学习之路(3)——QML文件加载
 
               
             
@@ -461,23 +461,25 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对QML基本元素</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>QML文件有两种加载方式：QQmlApplicationEngine 和 QQuickView，QQmlApplicationEngine的方式更新，且功能更强大，因此本文重点针对使用QQmlApplicationEngine加载QML文件的方式进行讲解。</p>
 <a id="more"></a>
-<h2 id="常用基本元素"><a href="#常用基本元素" class="headerlink" title="常用基本元素"></a>常用基本元素</h2><h3 id="Item"><a href="#Item" class="headerlink" title="Item"></a>Item</h3><p>Item是Qt Quick中所有可视化物体的基本类型，所有可视化物体均继承自该类型。Item不可见，但是他定义了其他可视化物体的基本属性，例如坐标<code>x,y</code>，<code>anchor</code>等等。Item最大的作用就是对对象进行分组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"><span class="comment">// 下面的Item包含了3个Image 对象 和一个用于给Item添加背景的Rectangle对象</span></span><br><span class="line">Item &#123;</span><br><span class="line">    </span><br><span class="line">    width = <span class="number">400</span></span><br><span class="line">    height = <span class="number">300</span></span><br><span class="line">    </span><br><span class="line">    Rectangle&#123;</span><br><span class="line">        anchors.fill: parent</span><br><span class="line">        color : <span class="string">"blue"</span></span><br><span class="line">        border.color: <span class="string">"black"</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Image &#123;</span><br><span class="line">        source: <span class="string">"tile.png"</span></span><br><span class="line">    &#125;</span><br><span class="line">    Image &#123;</span><br><span class="line">        x: <span class="number">80</span></span><br><span class="line">        width: <span class="number">100</span></span><br><span class="line">        height: <span class="number">100</span></span><br><span class="line">        source: <span class="string">"tile.png"</span></span><br><span class="line">    &#125;</span><br><span class="line">    Image &#123;</span><br><span class="line">        x: <span class="number">190</span></span><br><span class="line">        width: <span class="number">100</span></span><br><span class="line">        height: <span class="number">100</span></span><br><span class="line">        fillMode: Image.Tile</span><br><span class="line">        source: <span class="string">"tile.png"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="font"><a href="#font" class="headerlink" title="font"></a>font</h3><p>QML中的字体类型，用于定义字体</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Text&#123;</span><br><span class="line">	x : <span class="number">100</span></span><br><span class="line">    y : <span class="number">100</span></span><br><span class="line">    id: mTextId</span><br><span class="line">    font&#123;</span><br><span class="line">        family: <span class="string">"Helvetica"</span></span><br><span class="line">        pointSize: <span class="number">13</span></span><br><span class="line">        bold: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h3><p>用于显示图片的element</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Image &#123;</span><br><span class="line">    id: image1Id</span><br><span class="line">    x: <span class="number">10</span></span><br><span class="line">    y: <span class="number">10</span></span><br><span class="line">    width: <span class="number">100</span></span><br><span class="line">    height: <span class="number">100</span></span><br><span class="line">    source: <span class="string">"image/bullet.png"</span>   <span class="comment">//也可以使用网页URL</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="自定义元素"><a href="#自定义元素" class="headerlink" title="自定义元素"></a>自定义元素</h2><h3 id="Column-amp-Row"><a href="#Column-amp-Row" class="headerlink" title="Column &amp; Row"></a>Column &amp; Row</h3><p>Column和Row的作用是将元素按列和按行排布</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Row&#123;</span><br><span class="line">	spacing: 20</span><br><span class="line">	Rectangle&#123;</span><br><span class="line">		width: 300</span><br><span class="line">		height:100</span><br><span class="line">		color: &quot;red&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	Rectangle&#123;</span><br><span class="line">		width: 300</span><br><span class="line">		height: 100</span><br><span class="line">		color: &quot;blue&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="利用Rectangle创建自定义元素"><a href="#利用Rectangle创建自定义元素" class="headerlink" title="利用Rectangle创建自定义元素"></a>利用Rectangle创建自定义元素</h3><p>最常用的用于自定义元素的基本元素就是Rectangle，一个功能完善的使用rectangle制作的按钮如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Rectangle&#123;</span><br><span class="line">    x: <span class="number">200</span></span><br><span class="line">    y:<span class="number">200</span></span><br><span class="line">    height: buttonTextId.implicitHeight + <span class="number">20</span></span><br><span class="line">    width: buttonTextId.implicitWidth + <span class="number">20</span></span><br><span class="line">    color: <span class="string">"green"</span></span><br><span class="line">    boarder&#123;<span class="attr">color</span>: blue; width: <span class="number">3</span>&#125;</span><br><span class="line">    Text &#123;</span><br><span class="line">        id: buttonTextId</span><br><span class="line">        anchors.centerIn: parent</span><br><span class="line">        text: qsTr(<span class="string">"This is a button"</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    MouseArea&#123;</span><br><span class="line">        anchors.fill: parent</span><br><span class="line">        onClicked: &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"clicked On:"</span> + buttonTextId.text)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="自定义元素的封装"><a href="#自定义元素的封装" class="headerlink" title="自定义元素的封装"></a>自定义元素的封装</h3><p>在我们设计好了自定义元素后，我们可以将其封装至一个独立的文件中，方便下次使用。同时，我们可以对外提供一些接口，方便我们对自定义元素进行配置。我们对上面的按钮进行封装，将其放入一个MButton.qml文件中。同时，我们将其放入一个Item中，可以向用户隐藏一些属性，例如此时用户无法修改MButton的颜色</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">// MButton.qml</span><br><span class="line">import QtQuick 2.11</span><br><span class="line"></span><br><span class="line">Item&#123;</span><br><span class="line">	id: rootId</span><br><span class="line">	// 提供接口，方便外部使用者修改元素，例如我们将buttonText和buttonTextId.text进行绑定，从而可以修改button的文本</span><br><span class="line">	width: containerRectId.width</span><br><span class="line">	height: containerRectId.height</span><br><span class="line">    property alias buttonText: buttonTextId.text</span><br><span class="line">    signal buttonClicked     //通过信号让用户自定义button的行为</span><br><span class="line">	</span><br><span class="line">	Rectangle&#123;</span><br><span class="line">		</span><br><span class="line">		id: containerRectId</span><br><span class="line">        height: buttonTextId.implicitHeight + 20</span><br><span class="line">        width: buttonTextId.implicitWidth + 20</span><br><span class="line">        color: &quot;green&quot;</span><br><span class="line">        boarder&#123;color: blue; width: 3&#125;</span><br><span class="line">        Text &#123;</span><br><span class="line">            id: buttonTextId</span><br><span class="line">            anchors.centerIn: parent</span><br><span class="line">            text: qsTr(&quot;This is a button&quot;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        MouseArea&#123;</span><br><span class="line">            anchors.fill: parent</span><br><span class="line">            onClicked: &#123;</span><br><span class="line">                rootId.buttonClicked()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>现在我们可以在其他的qml中调用MButton，需要注意要正确提供MButton的路径，使用方式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MButton&#123;</span><br><span class="line">    buttonText: <span class="string">"Button1"</span></span><br><span class="line">    onButtonClicked: &#123;    <span class="comment">//触发signal</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"clicked on button 1 from main qml"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="QQmlApplicationEngine"><a href="#QQmlApplicationEngine" class="headerlink" title="QQmlApplicationEngine"></a>QQmlApplicationEngine</h2><h3 id="QQmlApplicationEngine特点"><a href="#QQmlApplicationEngine特点" class="headerlink" title="QQmlApplicationEngine特点"></a>QQmlApplicationEngine特点</h3><ul>
+<li>使QQuickView  APP可以由C++进行控制</li>
+<li>将Qt.quit()和QCoreApplication::quit()进行了connect</li>
+<li>自动从mail QML文件的相邻i18n文件夹中读取翻译文件</li>
+<li>如果场景包含QQuickWindow，则自动设置孵化控制器。</li>
+<li>自动将QQmlFileSelector设置为url解析器</li>
+</ul>
+<h3 id="engine方式加载qml的方法"><a href="#engine方式加载qml的方法" class="headerlink" title="engine方式加载qml的方法"></a>engine方式加载qml的方法</h3><p>使用QMl加载时，我们要保证以下几点：</p>
+<ul>
+<li>加载的qml文件为一个Window而非item</li>
+<li><code>visible</code>必须为<code>true</code>，否则无法显示</li>
+</ul>
+<p>qml文件如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.6</span>             <span class="comment">// Text</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Window <span class="number">2.2</span>      <span class="comment">// Window</span></span><br><span class="line"></span><br><span class="line">Window &#123;                          <span class="comment">//parent</span></span><br><span class="line">    visible: <span class="literal">true</span>                 <span class="comment">//是否可见</span></span><br><span class="line">    width: <span class="number">640</span>                    </span><br><span class="line">    height: <span class="number">480</span></span><br><span class="line">    title: qsTr(<span class="string">"Hello World"</span>)    <span class="comment">// title of your gui</span></span><br><span class="line"></span><br><span class="line">    Text&#123;</span><br><span class="line">        anchors.centerIn: parent  <span class="comment">// center</span></span><br><span class="line">        text : <span class="string">"Hello World"</span>;</span><br><span class="line">        color: <span class="string">"red"</span>;</span><br><span class="line">        font.pointSize: <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>engine方式加载qml文件非常简单，只要定义一个engine，同时加载对应的qml文件即可。</p>
+<h2 id="QQuickView"><a href="#QQuickView" class="headerlink" title="QQuickView"></a>QQuickView</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line">Item &#123;             <span class="comment">//Item可以被视作是包含其他组件的容器</span></span><br><span class="line">    id: container</span><br><span class="line">    property alias cellColor: rectangle.color    <span class="comment">//属性，可以被外界访问 alias代表别名</span></span><br><span class="line">    signal clicked(color cellColor)</span><br><span class="line"></span><br><span class="line">    width: <span class="number">40</span>; height: <span class="number">25</span></span><br><span class="line"></span><br><span class="line">    Rectangle &#123;</span><br><span class="line">        id: rectangle</span><br><span class="line">        border.color: <span class="string">"white"</span></span><br><span class="line">        anchors.fill: parent</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    MouseArea &#123;</span><br><span class="line">        anchors.fill: parent</span><br><span class="line">        onClicked: container.clicked(container.cellColor)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://doc.qt.io/qt-5/qqmlapplicationengine.html">qt官方文档</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -540,8 +542,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/Qt/QML学习之路(3)——QML文件加载方式/" rel="next" title="QML学习之路(3)——QML文件加载">
-                <i class="fa fa-chevron-left"></i> QML学习之路(3)——QML文件加载
+              <a href="/2020/07/12/工具/Qt/以飞机大战为例讲解Qt Scene的基本使用原理/" rel="next" title="以飞机大战为例讲解Qt Scene的基本使用原理">
+                <i class="fa fa-chevron-left"></i> 以飞机大战为例讲解Qt Scene的基本使用原理
               </a>
             
           </div>
@@ -550,8 +552,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/工具/Qt/QML学习之路(2)——QML基本类型/" rel="prev" title="QML学习之路(2)——QML基本类型及语法">
-                QML学习之路(2)——QML基本类型及语法 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/工具/Qt/QML3 QML基本元素和自定义元素/" rel="prev" title="QML基本元素和自定义元素">
+                QML基本元素和自定义元素 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -628,7 +630,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">291</span>
+                    <span class="site-state-item-count">294</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -880,7 +882,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用基本元素"><span class="nav-number">1.</span> <span class="nav-text">常用基本元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Item"><span class="nav-number">1.1.</span> <span class="nav-text">Item</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#font"><span class="nav-number">1.2.</span> <span class="nav-text">font</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Image"><span class="nav-number">1.3.</span> <span class="nav-text">Image</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义元素"><span class="nav-number">2.</span> <span class="nav-text">自定义元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Column-amp-Row"><span class="nav-number">2.1.</span> <span class="nav-text">Column &amp; Row</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用Rectangle创建自定义元素"><span class="nav-number">2.2.</span> <span class="nav-text">利用Rectangle创建自定义元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义元素的封装"><span class="nav-number">2.3.</span> <span class="nav-text">自定义元素的封装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QQmlApplicationEngine"><span class="nav-number">1.</span> <span class="nav-text">QQmlApplicationEngine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QQmlApplicationEngine特点"><span class="nav-number">1.1.</span> <span class="nav-text">QQmlApplicationEngine特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#engine方式加载qml的方法"><span class="nav-number">1.2.</span> <span class="nav-text">engine方式加载qml的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QQuickView"><span class="nav-number">2.</span> <span class="nav-text">QQuickView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -975,6 +977,13 @@
     
 
     
+      <div>
+        <div class="addthis_inline_share_toolbox">
+  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6087b6b97c33631c" async="async"></script>
+</div>
+
+      </div>
+    
   </div>
 
   
@@ -1068,7 +1077,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/工具/Qt/QML学习之路(2)——QML基本元素和自定义元素/'
+    refer: '2020/07/12/工具/Qt/QML学习之路(3)——QML文件加载/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];

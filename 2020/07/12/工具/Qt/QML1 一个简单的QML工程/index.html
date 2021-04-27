@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="本文将针对QML基本类型进行相关总结">
+  <meta name="description" content="什么是QML QML是一套基于JavaScript的用于设计界面的框架，其优点是实现了界面设计和业务逻辑设计的分离">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QML学习之路(2)——QML基本类型及语法">
-<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(2)——QML基本类型/index.html">
+<meta property="og:title" content="一个简单的QML工程">
+<meta property="og:url" content="http://yoursite.com/2020/07/12/工具/Qt/QML1 一个简单的QML工程/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="本文将针对QML基本类型进行相关总结">
+<meta property="og:description" content="什么是QML QML是一套基于JavaScript的用于设计界面的框架，其优点是实现了界面设计和业务逻辑设计的分离">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.769Z">
+<meta property="og:updated_time" content="2021-04-26T13:07:18.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QML学习之路(2)——QML基本类型及语法">
-<meta name="twitter:description" content="本文将针对QML基本类型进行相关总结">
+<meta name="twitter:title" content="一个简单的QML工程">
+<meta name="twitter:description" content="什么是QML QML是一套基于JavaScript的用于设计界面的框架，其优点是实现了界面设计和业务逻辑设计的分离">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(2)——QML基本类型/">
+  <link rel="canonical" href="http://yoursite.com/2020/07/12/工具/Qt/QML1 一个简单的QML工程/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>QML学习之路(2)——QML基本类型及语法 | 一隅</title>
+  <title>一个简单的QML工程 | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Qt/QML学习之路(2)——QML基本类型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Qt/QML1 一个简单的QML工程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">QML学习之路(2)——QML基本类型及语法
+          <h1 class="post-title" itemprop="name headline">一个简单的QML工程
 
               
             
@@ -404,6 +404,22 @@
               <time title="Created: 2020-07-12 09:05:50" itemprop="dateCreated datePublished" datetime="2020-07-12T09:05:50+08:00">2020-07-12</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-04-26 21:07:18" itemprop="dateModified" datetime="2021-04-26T21:07:18+08:00">2021-04-26</time>
+              
             
           </span>
 
@@ -461,145 +477,24 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对QML基本类型进行相关总结</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="什么是QML"><a href="#什么是QML" class="headerlink" title="什么是QML"></a>什么是QML</h2><blockquote>
+<p>QML是一套基于JavaScript的用于设计界面的框架，其优点是实现了界面设计和业务逻辑设计的分离</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="QML基本类型"><a href="#QML基本类型" class="headerlink" title="QML基本类型"></a>QML基本类型</h2><p>QML的基本类型主要包括两类：</p>
-<ul>
-<li>单值（int、var等）</li>
-<li>符合类型（size是一个由width和height属性组成的类型）</li>
-</ul>
-<h3 id="QML语言提供的基本类型"><a href="#QML语言提供的基本类型" class="headerlink" title="QML语言提供的基本类型"></a>QML语言提供的基本类型</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型名</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">int</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">double</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">bool</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">real</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">string</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">enumeration</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">list</td>
-<td style="text-align:center">QML object 的列表</td>
-</tr>
-<tr>
-<td style="text-align:center">var</td>
-<td style="text-align:center">通用属性类型，类似于C++中的auto</td>
-</tr>
-<tr>
-<td style="text-align:center">url</td>
-<td style="text-align:center">资源定位器</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="QML模块提供的基本类型"><a href="#QML模块提供的基本类型" class="headerlink" title="QML模块提供的基本类型"></a>QML模块提供的基本类型</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">类型名</th>
-<th style="text-align:center">属性</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">date</td>
-<td style="text-align:center">时间</td>
-</tr>
-<tr>
-<td style="text-align:center">point</td>
-<td style="text-align:center">(x,y)</td>
-</tr>
-<tr>
-<td style="text-align:center">rect</td>
-<td style="text-align:center">(x,y,width,height)</td>
-</tr>
-<tr>
-<td style="text-align:center">size</td>
-<td style="text-align:center">(width,height)</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="property"><a href="#property" class="headerlink" title="property"></a>property</h3><p>property是对象的一个属性，一个property的值可以被其他的对象进行访问和修改。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Rectangle &#123;</span><br><span class="line">    property color previousColor</span><br><span class="line">    property color nextColor</span><br><span class="line">    onNextColorChanged: console.log("The next color will be: " + nextColor.toString())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="基本类型行为改变"><a href="#基本类型行为改变" class="headerlink" title="基本类型行为改变"></a>基本类型行为改变</h3><p>一些基本类型具有属性，例如font类型包括pixelSize，family等属性，基本类型具有属性改变的信号，但是基本类型的属性不具有类型改变的信号，例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Text&#123;</span><br><span class="line">	onFont.pixelSizeChanged: doSomething()   <span class="comment">//非法，pixelSize是font的属性，font是基本类型，基本类型的属性不具有类型改变信号</span></span><br><span class="line">	font&#123;</span><br><span class="line">		onPixelSizeChanged: doSomething()   <span class="comment">//非法，同上理</span></span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	onFontChanged: doSomething()     <span class="comment">//合法，基本类型具有属性改变信号，改变font的任意属性，就会触发属性改变信号</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="QML语法"><a href="#QML语法" class="headerlink" title="QML语法"></a>QML语法</h2><h3 id="QML文件基本结构"><a href="#QML文件基本结构" class="headerlink" title="QML文件基本结构"></a>QML文件基本结构</h3><p>一个QML文档包括两个部分：</p>
-<ul>
-<li>import部分：引入所需模块</li>
-<li>QML元素部分：构成窗口的基本元素</li>
-</ul>
-<p>需要注意的是，一个QML有且只有一个根元素，根元素与其子元素一起，构成了一棵多叉树，QML元素可以嵌套，并使用{}划分范围，{}中是元素的属性，属性以键值对的方式<code>name:value</code>提供，元素可以有一个<code>id</code>属性，相当于该元素的指针，<code>id</code>属性必须唯一，一般来说，根元素的<code>id</code>为<code>root</code>，子元素可以使用parent关键字访问元素。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Window&#123;</span><br><span class="line">	id: rootID;</span><br><span class="line">    visible: true</span><br><span class="line">	width: 640</span><br><span class="line">	height: 480</span><br><span class="line">	title: qsTr("QML Syntax Demo")</span><br><span class="line"></span><br><span class="line">	Row&#123;</span><br><span class="line">        id : row1</span><br><span class="line">        anchors.centerIn: parent</span><br><span class="line">        spacing: 20</span><br><span class="line"></span><br><span class="line">        Rectangle&#123;</span><br><span class="line">            width: 150;</span><br><span class="line">            height: 150</span><br><span class="line">            color: "red"</span><br><span class="line">            radius: 20</span><br><span class="line">            MouseArea&#123;</span><br><span class="line">                anchors.fill: parent</span><br><span class="line">                onClicked: &#123;</span><br><span class="line">                    console.log("clicked on the red rect")</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的qml文件中各个模块之间关系如下：</p>
-<pre class="mermaid">graph TB
-    subgraph Window
-    subgraph Row
-        Rectangle
-    end
-    end</pre>
-
-<h3 id="QML属性"><a href="#QML属性" class="headerlink" title="QML属性"></a>QML属性</h3><p>（这一部分还不是很懂，先不写了）</p>
-<h3 id="QML对象间交互"><a href="#QML对象间交互" class="headerlink" title="QML对象间交互"></a>QML对象间交互</h3><p>在进行GUI设计时，我们往往需要在对象之间进行互动，例如点击一个方块，修改另一个方块的颜色，这种功能是通过对象id实现的，直接放一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Rectangle&#123;</span><br><span class="line">    id: redRectId</span><br><span class="line">    width: <span class="number">50</span></span><br><span class="line">    height: width * <span class="number">1.5</span></span><br><span class="line">    color: <span class="string">"red"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Rectangle&#123;</span><br><span class="line">    id: blueRectId</span><br><span class="line">    color: <span class="string">"blue"</span></span><br><span class="line">    width: <span class="number">100</span></span><br><span class="line">    height: <span class="number">100</span></span><br><span class="line">    anchors.bottom: parent.bottom</span><br><span class="line"></span><br><span class="line">    MouseArea&#123;</span><br><span class="line">        anchors.fill: parent</span><br><span class="line">        onClicked: &#123;</span><br><span class="line">            redRectId.width = redRectId.width + <span class="number">10</span>   <span class="comment">// 通过redRectId修改其大小</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="值与绑定"><a href="#值与绑定" class="headerlink" title="值与绑定"></a>值与绑定</h3><p>我们可以创造一个Rectangle，其height随width变化而变化，这里的隐含意思是，height和width进行了绑定。绑定关系可以被打破或重建，具体方法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Rectangle&#123;</span><br><span class="line">    id: redRectId</span><br><span class="line">    width: 50</span><br><span class="line">    height: width * 1.5</span><br><span class="line">    color: &quot;red&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Rectangle&#123;</span><br><span class="line">    id: blueRectId</span><br><span class="line">    color: &quot;blue&quot;</span><br><span class="line">    width: 100</span><br><span class="line">    height: 100</span><br><span class="line">    anchors.bottom: parent.bottom</span><br><span class="line"></span><br><span class="line">    MouseArea&#123;</span><br><span class="line">        anchors.fill: parent</span><br><span class="line">        onClicked: &#123;</span><br><span class="line">            redRectId.width = redRectId.width + 10   // 通过redRectId修改其大小，由于redRectId 中width和height绑定，所以两个值均会被修改</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Rectangle&#123;</span><br><span class="line">    id: greenRectId</span><br><span class="line">    color: &quot;green&quot;</span><br><span class="line">    width: 100</span><br><span class="line">    height: 100</span><br><span class="line">    anchors.bottom: parent.bottom</span><br><span class="line">	anchors.left: blueRectId.right</span><br><span class="line">    MouseArea&#123;</span><br><span class="line">        anchors.fill: parent</span><br><span class="line">        onClicked: &#123;</span><br><span class="line">            redRectId.height = 100 //绑定关系被打破！！！如果点击了绿色方块，再点击蓝色，会发现高度不随宽度变化而变化</span><br><span class="line">            redRectId.height = 2 * redRectId.width //绑定关系依然被打破！！！这里只是简单地将width×2的值给了height</span><br><span class="line">            rectRectId.height = Qt.binding(function()&#123;</span><br><span class="line">            	return 2 * redRectId.width</span><br><span class="line">            &#125;)   // 重新建立绑定关系</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="全局对象-global-object"><a href="#全局对象-global-object" class="headerlink" title="全局对象(global object)"></a>全局对象(global object)</h3><p>qml中有一个全局对象叫做Qt，方便我们建立一些类型，使用方法为调用其内部的函数或者成员，具体例子如下如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">Text&#123;</span><br><span class="line">	color: Qt.rgba(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>)    <span class="comment">//调用Qt中的rgba方法创建一个颜色对象</span></span><br><span class="line">    text: Qt.md5(<span class="string">"hello world"</span>)    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">property <span class="keyword">var</span> fonts : Qt.fontFamilies()</span><br><span class="line"></span><br><span class="line">Rectangle&#123;</span><br><span class="line">    width : <span class="number">200</span></span><br><span class="line">    height: <span class="number">200</span></span><br><span class="line">    color: <span class="string">"red"</span></span><br><span class="line">    anchors.centerIn: parent</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*下面是一些Qt Object的例子*/</span></span><br><span class="line">    MouseArea&#123;</span><br><span class="line">        anchors.fill : parent</span><br><span class="line">        onClicked: &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"quiting"</span>)</span><br><span class="line">            Qt.quit()   <span class="comment">//关闭</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt;fonts.length;i++)&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"["</span> + i + <span class="string">"]:"</span> + fonts[i])</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">var</span> mName = <span class="string">"Duan"</span></span><br><span class="line">            <span class="keyword">var</span> mNameHash = Qt.md5(mName)</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"The hash of the name:"</span> + nNameHash)</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//打开外部链接</span></span><br><span class="line">            Qt.openUrlExternally(<span class="string">"http://www.alittlehusky.cn"</span>)</span><br><span class="line">            <span class="comment">//打开本地文件</span></span><br><span class="line">            Qt.openUrlExternally(<span class="string">"file:///filelink"</span>)</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Qt对象的一些常用方法如下：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">名称</th>
-<th style="text-align:center">作用</th>
-<th style="text-align:center">备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">Qt.quit()</td>
-<td style="text-align:center">退出</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>详细内容请参考：<a href="https://doc.qt.io/qt-5/qml-qtqml-qt.html">Qt Global Object</a></p>
-
+<h2 id="一个简单的QML工程"><a href="#一个简单的QML工程" class="headerlink" title="一个简单的QML工程"></a>一个简单的QML工程</h2><p>一个简单的QML工程包含两个部分：</p>
+<ol>
+<li>C++部分，主要用于初始化QML引擎并载入qml文件</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGuiApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QQmlApplicationEngine&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QGuiApplication <span class="title">app</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    QQmlApplicationEngine engine;</span><br><span class="line">    engine.load(QUrl(QStringLiteral(<span class="string">"qrc:/main.qml"</span>)));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> app.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>qml部分，包含着我们用于编写界面的QML文件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> QtQuick <span class="number">2.6</span>             <span class="comment">// Text</span></span><br><span class="line"><span class="keyword">import</span> QtQuick.Window <span class="number">2.2</span>      <span class="comment">// Window</span></span><br><span class="line"></span><br><span class="line">Window &#123;</span><br><span class="line">    visible: <span class="literal">true</span></span><br><span class="line">    width: <span class="number">640</span></span><br><span class="line">    height: <span class="number">480</span></span><br><span class="line">    title: qsTr(<span class="string">"Hello World"</span>)  <span class="comment">// title of your gui</span></span><br><span class="line"></span><br><span class="line">    Text&#123;</span><br><span class="line">        anchors.centerIn: parent  <span class="comment">// center</span></span><br><span class="line">        text : <span class="string">"Hello World"</span>;</span><br><span class="line">        color: <span class="string">"red"</span>;</span><br><span class="line">        font.pointSize: <span class="number">20</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="如何预览写好的QML界面"><a href="#如何预览写好的QML界面" class="headerlink" title="如何预览写好的QML界面"></a>如何预览写好的QML界面</h2><p>第一种方式就是直接编译工程，即可看到界面。</p>
+<p>二是使用命令qml.exe或者qmlscene.exe后面跟着qml文件即可预览，如果没有该命令，那么先在QT安装文件夹下找到添加到环境变量里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qmlscene main.qml</span><br></pre></td></tr></table></figure>
+<p>或者如果不使用命令行，可以新建一个qt prototype工程，将qml文件拷贝进去预览。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
       
     </div>
 
@@ -662,8 +557,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/工具/Qt/QML学习之路(2)——QML基本元素和自定义元素/" rel="next" title="QML学习之路(2)——QML基本元素和自定义元素">
-                <i class="fa fa-chevron-left"></i> QML学习之路(2)——QML基本元素和自定义元素
+              <a href="/2020/07/12/工具/Qt/使用C++创建QML对象/" rel="next" title="使用C++创建QML对象">
+                <i class="fa fa-chevron-left"></i> 使用C++创建QML对象
               </a>
             
           </div>
@@ -672,8 +567,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/工具/Qt/Qt Widget 多窗口互动/" rel="prev" title="Qt Widget多窗口互动">
-                Qt Widget多窗口互动 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/工具/Qt/以飞机大战为例讲解Qt Scene的基本使用原理/" rel="prev" title="以飞机大战为例讲解Qt Scene的基本使用原理">
+                以飞机大战为例讲解Qt Scene的基本使用原理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -750,7 +645,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">291</span>
+                    <span class="site-state-item-count">294</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1002,7 +897,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#QML基本类型"><span class="nav-number">1.</span> <span class="nav-text">QML基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QML语言提供的基本类型"><span class="nav-number">1.1.</span> <span class="nav-text">QML语言提供的基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QML模块提供的基本类型"><span class="nav-number">1.2.</span> <span class="nav-text">QML模块提供的基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property"><span class="nav-number">1.3.</span> <span class="nav-text">property</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型行为改变"><span class="nav-number">1.4.</span> <span class="nav-text">基本类型行为改变</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QML语法"><span class="nav-number">2.</span> <span class="nav-text">QML语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QML文件基本结构"><span class="nav-number">2.1.</span> <span class="nav-text">QML文件基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QML属性"><span class="nav-number">2.2.</span> <span class="nav-text">QML属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QML对象间交互"><span class="nav-number">2.3.</span> <span class="nav-text">QML对象间交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值与绑定"><span class="nav-number">2.4.</span> <span class="nav-text">值与绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局对象-global-object"><span class="nav-number">2.5.</span> <span class="nav-text">全局对象(global object)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是QML"><span class="nav-number">1.</span> <span class="nav-text">什么是QML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个简单的QML工程"><span class="nav-number">2.</span> <span class="nav-text">一个简单的QML工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何预览写好的QML界面"><span class="nav-number">3.</span> <span class="nav-text">如何预览写好的QML界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -1097,6 +992,13 @@
     
 
     
+      <div>
+        <div class="addthis_inline_share_toolbox">
+  <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6087b6b97c33631c" async="async"></script>
+</div>
+
+      </div>
+    
   </div>
 
   
@@ -1190,7 +1092,7 @@
   
     <script>
   window.livereOptions = {
-    refer: '2020/07/12/工具/Qt/QML学习之路(2)——QML基本类型/'
+    refer: '2020/07/12/工具/Qt/QML1 一个简单的QML工程/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
