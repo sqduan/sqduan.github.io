@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/C++/动态内存管理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/C++/引用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -378,7 +378,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/07/12/工具/C++/动态内存管理/" class="post-title-link" itemprop="url">动态内存管理</a>
+                <a href="/2020/07/12/工具/C++/引用/" class="post-title-link" itemprop="url">引用</a>
               
             
           </h1>
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-12-28 22:29:06" itemprop="dateModified" datetime="2020-12-28T22:29:06+08:00">2020-12-28</time>
+                <time title="Modified: 2020-08-19 18:31:36" itemprop="dateModified" datetime="2020-08-19T18:31:36+08:00">2020-08-19</time>
               
             
           </span>
@@ -480,16 +480,38 @@
 
       
         
-          <p>本文将针对C++中动态内存管理的方式进行总结</p>
-          <!--noindex-->
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/07/12/工具/C++/动态内存管理/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><a id="more"></a>
+<h2 id="函数返回引用"><a href="#函数返回引用" class="headerlink" title="函数返回引用"></a>函数返回引用</h2><p>使用引用作为函数的返回值，效率更高，但是需要注意，<strong>返回引用需要保证对象存在，不允许返回局部变量的引用</strong>。<br>下面是一个函数返回引用的例子：<br>在使用链表构建堆栈的过程中，返回栈顶元素的函数可以返回引用，因为栈顶元素还在。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T&amp; <span class="title">top_element</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> lst.back();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是pop函数就不能返回引用了，因为在弹出栈之后，该元素作为局部变量已经消失，因此不能返回引用，只能退而求其次，返回对象的值（返回一个拷贝）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">    T el = lst.back();</span><br><span class="line">    lst.pop_back();</span><br><span class="line">    <span class="keyword">return</span> el;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运算符重载返回引用"><a href="#运算符重载返回引用" class="headerlink" title="运算符重载返回引用"></a>运算符重载返回引用</h2><p>运算符重载使用对象的引用作为返回值，主要是从如下两个方面进行考虑：</p>
+<ol>
+<li>减少创建临时对象的开销（和函数返回引用原因相同）</li>
+<li>允许进行链式操作</li>
+</ol>
+<p>例如现在有一个Mystring类，为了进行赋值操作，类中对赋值操作符进行了重载：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Mystring&amp; Mystring::<span class="keyword">operator</span>=(<span class="keyword">const</span> Mystring&amp; rhs)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span> == &amp;rhs)</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span> [] str;</span><br><span class="line">    str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="built_in">std</span>::<span class="built_in">strlen</span>(rhs.str) + <span class="number">1</span>];</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">strcpy</span>(str,rhs.str);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到，函数内部已经对被赋值的对象进行了修改，为什么还要返回对象的引用呢？返回void不可以么？返回void的问题是会导致链式赋值失效，当然如果不进行链式赋值，返回void也是可以的。</p>
+<p>关于链式赋值失效，还需要从赋值语句的值谈起，赋值语句的值是赋值对象的值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=b=c;</span><br></pre></td></tr></table></figure>
+<p>上面的语句可以视为如下语句：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=(b=c);</span><br></pre></td></tr></table></figure>
+<p><code>b=c</code>这条语句的值就是c，或者说是被赋值之后的b，然后再用这条语句的值，为a赋值。而如果重载的赋值语句返回void，那么造成的结果是<code>b=c</code>这条语句返回值为void，利用void给a进行赋值，会导致类型不匹配的问题，所以为了使链式赋值生效，<code>b=c</code>必须返回c的值，或者被赋值之后的b的值，此时给a进行赋值，就没有任何问题。不返回对象引用而返回对象本身也没有问题，但是会重复调用多次构造函数和析构函数，导致性能下降。##</p>
+<h2 id="引用与指针的区别"><a href="#引用与指针的区别" class="headerlink" title="引用与指针的区别"></a>引用与指针的区别</h2><p>初学引用时，可能会与指针混淆，在此处总结二者区别：</p>
+<ol>
+<li>指针是一个变量，引用是一个对象的别名；（你在学校叫张含韵，在家叫二丫子）</li>
+<li>指针大小为4字节（32位）或8字节（64位），引用大小为对象大小</li>
+<li>指针可以为null，引用必须初始化</li>
+<li>指针修改对象需要解引用，而修改引用会直接修改变量</li>
+<li>指针可以指向别的对象（花心），引用只能是一个对象的引用（专一）</li>
+<li>指针可以有多级，引用没有</li>
+<li>指针++和引用++含义不同</li>
+<li>返回动态内存分配的对象必须返回指针</li>
+</ol>
+
           
-          <!--/noindex-->
         
       
     </div>
@@ -1497,7 +1519,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Assembly/X86-64汇编基本语法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/C++/C++多线程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -1517,7 +1539,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/07/12/工具/Assembly/X86-64汇编基本语法/" class="post-title-link" itemprop="url">X86-64汇编基本语法</a>
+                <a href="/2020/07/12/工具/C++/C++多线程/" class="post-title-link" itemprop="url">C++多线程</a>
               
             
           </h1>
@@ -1546,22 +1568,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2021-04-26 17:08:34" itemprop="dateModified" datetime="2021-04-26T17:08:34+08:00">2021-04-26</time>
-              
-            
           </span>
 
           
@@ -1583,7 +1589,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Assembly/" itemprop="url" rel="index"><span itemprop="name">Assembly</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1620,12 +1626,13 @@
       
         
           <blockquote>
-<p>.LC0:<br>  .string “Helloworld”</p>
+<p>算了，我们走吧！</p>
+<p>我们不能。<br>为什么不能？<br>我们在等待戈多。</p>
 </blockquote>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/07/12/工具/Assembly/X86-64汇编基本语法/#more" rel="contents">
+              <a class="btn" href="/2020/07/12/工具/C++/C++多线程/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1857,7 +1864,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/C++/C++多线程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/12/工具/Assembly/X86-64汇编基本语法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -1877,7 +1884,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/07/12/工具/C++/C++多线程/" class="post-title-link" itemprop="url">C++多线程</a>
+                <a href="/2020/07/12/工具/Assembly/X86-64汇编基本语法/" class="post-title-link" itemprop="url">X86-64汇编基本语法</a>
               
             
           </h1>
@@ -1906,6 +1913,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-04-26 17:08:34" itemprop="dateModified" datetime="2021-04-26T17:08:34+08:00">2021-04-26</time>
+              
+            
           </span>
 
           
@@ -1927,7 +1950,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Assembly/" itemprop="url" rel="index"><span itemprop="name">Assembly</span></a></span>
 
                 
                 
@@ -1964,13 +1987,12 @@
       
         
           <blockquote>
-<p>算了，我们走吧！</p>
-<p>我们不能。<br>为什么不能？<br>我们在等待戈多。</p>
+<p>.LC0:<br>  .string “Helloworld”</p>
 </blockquote>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/07/12/工具/C++/C++多线程/#more" rel="contents">
+              <a class="btn" href="/2020/07/12/工具/Assembly/X86-64汇编基本语法/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2585,7 +2607,6 @@
         <div class="addthis_inline_share_toolbox">
   <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6087b6b97c33631c" async="async"></script>
 </div>
-
       </div>
     
   </div>
