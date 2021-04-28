@@ -484,7 +484,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文针对Hexo的Markdown写作中绘图教程进行讲解</p>
 <a id="more"></a>
 <h2 id="PlantUML绘图"><a href="#PlantUML绘图" class="headerlink" title="PlantUML绘图"></a>PlantUML绘图</h2><h3 id="介绍及安装"><a href="#介绍及安装" class="headerlink" title="介绍及安装"></a>介绍及安装</h3><p>PlantUML是一个脚本画图语言，能够快速生成各种UML及非UML图，比较好用，一个简单的实例如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% plantuml %&#125;    </span><br><span class="line">	Bob-&gt;Alice : hello</span><br><span class="line">&#123;% endplantuml %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% plantuml %&#125;    </span><br><span class="line">    Bob-&gt;Alice : hello</span><br><span class="line">&#123;% endplantuml %&#125;</span><br></pre></td></tr></table></figure>
 <img src="http://www.plantuml.com/plantuml/svg/Kr1Gu7BAJzArSyp9J4vLi5B8ICt9oGS0">
 <p>缺点是没办法在markdown中实时显示，但是可以在<a href="https://plantuml.com/zh/">官网</a>上进行绘制，然后将代码拷贝回来。安装方式也比较简单，执行下面语句即可</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-tag-plantuml --save</span><br></pre></td></tr></table></figure>

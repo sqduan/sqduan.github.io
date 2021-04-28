@@ -514,7 +514,7 @@
 <li>一般情况下EU从指令队列而非存储器中取指令，所以取指令和执行可以并行操作。但如果有转移、调用或返回指令，会导致指令队列失效，这时必须新取得指令后才可以继续执行，但是这种情况比较少见，所以EU和BIU相互配合的非同步并行提高了效率。</li>
 </ol>
 <h2 id="CPU工作过程"><a href="#CPU工作过程" class="headerlink" title="CPU工作过程"></a>CPU工作过程</h2><p>一般来说，CPU的工作过程可以概括为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(;;)&#123;</span><br><span class="line">	run next instruction</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for(;;)&#123;</span><br><span class="line">    run next instruction</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="CPU的工作状态"><a href="#CPU的工作状态" class="headerlink" title="CPU的工作状态"></a>CPU的工作状态</h3><p>CPU可以分为管态（特权态）与目态（常态）</p>
 <h2 id="8086CPU介绍"><a href="#8086CPU介绍" class="headerlink" title="8086CPU介绍"></a>8086CPU介绍</h2><p>本文以经典的x86系列CPU的鼻祖8086CPU为例，详细介绍一下CPU的系统结构</p>
 <h3 id="CPU引脚及其功能"><a href="#CPU引脚及其功能" class="headerlink" title="CPU引脚及其功能"></a>CPU引脚及其功能</h3><p>8086CPU的外部引脚图如下所示：</p>
