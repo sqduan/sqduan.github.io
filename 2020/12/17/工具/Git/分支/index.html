@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Listen, a tree is growing">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-02-11T10:35:41.705Z">
+<meta property="og:updated_time" content="2021-04-29T10:04:53.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分支">
 <meta name="twitter:description" content="Listen, a tree is growing">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-02-11 18:35:41" itemprop="dateModified" datetime="2021-02-11T18:35:41+08:00">2021-02-11</time>
+                <time title="Modified: 2021-04-29 18:04:53" itemprop="dateModified" datetime="2021-04-29T18:04:53+08:00">2021-04-29</time>
               
             
           </span>
@@ -491,7 +491,9 @@
 </ul>
 <h3 id="分支切换"><a href="#分支切换" class="headerlink" title="分支切换"></a>分支切换</h3><p>如果要切换到一个已经存在的分支，可以使用如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev   # 将分支切换为dev</span><br></pre></td></tr></table></figure>
-<p>有些时候，我们需要切换到历史版本，也可以使用checkout，我们可以利用<code>git log</code>查看历史提交记录，然后使用<code>git checkout xxxxxxxxxxxxxx</code>的方式切换到指定版本号对应的分支，其中xxxxxxxxxxxxxx是版本号。</p>
+<p>有些时候，我们需要切换到历史版本，也可以使用checkout，我们可以利用<code>git log</code>查看历史提交记录，然后使用<code>git checkout xxxxxxxxxxxxxx</code>的方式切换到指定版本号对应的分支，其中xxxxxxxxxxxxxx是版本号。例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line">commit 72df7ffjasdddf8fdfdf9ccc</span><br><span class="line"></span><br><span class="line">git checkout 72df7ffjasdddf8fdfdf9ccc</span><br></pre></td></tr></table></figure>
+<p>当然，切换分支后，本地的修改会被保留，使用<code>git stash</code>可以删除这些修改（慎用！）</p>
 <h3 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h3><p>假设我们的当前分支为master，那么如果我们要将分支dev合并至master，可以执行下面的命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
 <h3 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h3><p>使用分支开发过程中一个很大的问题就是解决冲突，当多个开发者试图编辑相同文件的同一行时，就可能发生冲突。Git对冲突的解决方式是：保留多个分支中的冲突的内容，然后人工进行冲突处理后再允许合并。冲突只影响合并过程</p>

@@ -104,7 +104,7 @@
 <meta property="og:description" content="朋友的朋友就是我的朋友">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/Cycle-in-graph.png">
-<meta property="og:updated_time" content="2020-08-25T14:57:48.633Z">
+<meta property="og:updated_time" content="2021-04-28T13:54:40.874Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="查并集">
 <meta name="twitter:description" content="朋友的朋友就是我的朋友">
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-08-25 22:57:48" itemprop="dateModified" datetime="2020-08-25T22:57:48+08:00">2020-08-25</time>
+                <time title="Modified: 2021-04-28 21:54:40" itemprop="dateModified" datetime="2021-04-28T21:54:40+08:00">2021-04-28</time>
               
             
           </span>
@@ -540,9 +540,9 @@ S_1\cap S_2=\varnothing</script><pre class="mermaid">graph LR
 
 <h2 id="查并集基本操作及实现3"><a href="#查并集基本操作及实现3" class="headerlink" title="查并集基本操作及实现3"></a>查并集基本操作及实现<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><p>从查并集的名字可以看出，查并集主要操作有两个：即查和并。当然，为了判断是否连通，我们还需判断两个点是否在同一连通区域内部，以及某个节点是否在查并集中。</p>
 <ul>
-<li><code>find(int m)</code>：这是并查集的基本操作，查找$m$的根节点。</li>
-<li><code>union(int m,int n)</code>：合并$m,n$两个点所在的连通区域。</li>
-<li><code>isConnected(int m,int n)</code>：判断$m,n$两个点是否在一个连通区域。</li>
+<li><code>find(int m)</code>：这是并查集的基本操作，查找<code>m</code>的根节点。</li>
+<li><code>union(int m,int n)</code>：合并<code>m,n</code>两个点所在的连通区域。</li>
+<li><code>isConnected(int m,int n)</code>：判断<code>m,n​</code>两个点是否在一个连通区域。</li>
 <li><code>isContained(int node)</code>：判断是否在查并集中</li>
 <li><code>getMaxSize()</code>：获得查并集中最大子集的规模</li>
 </ul>

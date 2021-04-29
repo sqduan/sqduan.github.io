@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文将针对堆栈相关知识进行讲解。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-06T13:59:15.419Z">
+<meta property="og:updated_time" content="2021-04-28T13:52:17.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆栈">
 <meta name="twitter:description" content="本文将针对堆栈相关知识进行讲解。">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-06 21:59:15" itemprop="dateModified" datetime="2020-09-06T21:59:15+08:00">2020-09-06</time>
+                <time title="Modified: 2021-04-28 21:52:17" itemprop="dateModified" datetime="2021-04-28T21:52:17+08:00">2021-04-28</time>
               
             
           </span>
@@ -491,7 +491,14 @@
 <p><strong>代码</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">validateStackSequences</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; pushed, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; popped)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; num_stack&#123;&#125;;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : pushed)&#123;</span><br><span class="line">        num_stack.push(v);</span><br><span class="line">        <span class="keyword">while</span>(i&lt;popped.size() &amp;&amp; !num_stack.empty() &amp;&amp; popped[i] == num_stack.top())&#123;</span><br><span class="line">            num_stack.pop();</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> num_stack.empty();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="特殊的栈"><a href="#特殊的栈" class="headerlink" title="特殊的栈"></a>特殊的栈</h3><h4 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h4><p>单调栈，顾名思义其中的元素是单调递增或单调递减的，单调栈在有些情况下很有用，例如获得一个数组中的递增子序列等。</p>
-<h5 id="单调栈应用场景"><a href="#单调栈应用场景" class="headerlink" title="单调栈应用场景"></a>单调栈应用场景</h5><p><a href="https://leetcode-cn.com/problems/remove-k-digits/">402. 移掉K位数字</a></p>
+<h5 id="单调栈应用场景"><a href="#单调栈应用场景" class="headerlink" title="单调栈应用场景"></a>单调栈应用场景</h5><p><a href="https://leetcode-cn.com/problems/next-greater-element-ii/">503. 下一个更大元素 II</a></p>
+<blockquote>
+<p>给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。</p>
+</blockquote>
+<p><strong>思路</strong></p>
+<p>给定一个普通的数组，如果我们想要按照循环的方式对其进行处理，那么可以采用求余的方法，当超过了数组长度，就对数组长度求余，这样就可以开始循环。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nextGreaterElements(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans(n, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; s&#123;&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * n; ++i) &#123; </span><br><span class="line">            <span class="keyword">int</span> cur_num = i % n;</span><br><span class="line">            <span class="keyword">while</span> (!s.empty() &amp;&amp; nums[s.top() % n] &lt; nums[cur_num]) &#123; </span><br><span class="line">                ans[s.top() % n] = nums[cur_num];</span><br><span class="line">                s.pop();</span><br><span class="line">            &#125;</span><br><span class="line">            s.push(i); </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><a href="https://leetcode-cn.com/problems/remove-k-digits/">402. 移掉K位数字</a></p>
 <blockquote>
 <p>给定一个以字符串表示的非负整数 <em>num</em>，移除这个数中的 <em>k</em> 位数字，使得剩下的数字最小。</p>
 </blockquote>

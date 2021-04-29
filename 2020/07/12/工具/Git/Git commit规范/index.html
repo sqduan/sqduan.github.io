@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="这里给出了一个比较合理的git规范，在commit的时候使用这个规范进行填写。关于这个规范参考下面的连接：5 Useful Tips For A Better Commit Message">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.763Z">
+<meta property="og:updated_time" content="2021-04-29T08:35:43.992Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git commit规范">
 <meta name="twitter:description" content="这里给出了一个比较合理的git规范，在commit的时候使用这个规范进行填写。关于这个规范参考下面的连接：5 Useful Tips For A Better Commit Message">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-04-29 16:35:43" itemprop="dateModified" datetime="2021-04-29T16:35:43+08:00">2021-04-29</time>
+              
+            
           </span>
 
           
@@ -463,6 +479,7 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>这里给出了一个比较合理的git规范，在commit的时候使用这个规范进行填写。关于这个规范参考下面的连接：<a href="https://thoughtbot.com/blog/5-useful-tips-for-a-better-commit-message">5 Useful Tips For A Better Commit Message</a></p>
 <a id="more"></a>
+<p>使用<code>git commit</code>，会打开一个文件，允许你填写更多的commit内容，请参考下面的commit样本，每次详细填写自己的commit</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 50-character subject line</span><br><span class="line">#</span><br><span class="line"># 72-character wrapped longer description. This should answer:</span><br><span class="line">#</span><br><span class="line"># * Why was this change necessary?</span><br><span class="line"># * How does it address the problem?</span><br><span class="line"># * Are there any side effects?</span><br><span class="line">#</span><br><span class="line"># Include a link to the ticket, if any.</span><br></pre></td></tr></table></figure>
 <p>一个例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Redirect user to the requested page after login</span><br><span class="line"></span><br><span class="line">https://trello.com/path/to/relevant/card</span><br><span class="line"></span><br><span class="line">Users were being redirected to the home page after login, which is less</span><br><span class="line">useful than redirecting to the page they had originally requested before</span><br><span class="line">being redirected to the login form.</span><br><span class="line"></span><br><span class="line">* Store requested path in a session variable</span><br><span class="line">* Redirect to the stored location after successfully logging in the user</span><br></pre></td></tr></table></figure>
