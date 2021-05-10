@@ -602,7 +602,7 @@
 </ul>
 <p>假设链表为：</p>
 <script type="math/tex; mode=display">
-n_1→...→n_{k−1}→n_k→n_{k+1}→...→n_m→\emptyset</script><p>若从节点 $n<em>{k+1} $到 $n</em>{m}$ 已经被反转，而我们正处于 $n_{k}$。</p>
+n_1→...→n_{k−1}→n_k→n_{k+1}→...→n_m→\emptyset</script><p>若从节点 $n_{k+1} $到 $n_{m}$ 已经被反转，而我们正处于 $n_{k}$。</p>
 <script type="math/tex; mode=display">
 n_1→...→n_{k−1}→n_k→n_{k+1}←...←n_m</script><p>我们希望$n_{k+1}$指向$n_k$，所以<code>nk-&gt;next-&gt;next = nk</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode p = reverseList(head.next);</span><br><span class="line">    head.next.next = head;   <span class="comment">//关键操作</span></span><br><span class="line">    head.next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -717,8 +717,8 @@ n_1→...→n_{k−1}→n_k→n_{k+1}←...←n_m</script><p>我们希望$n_{k+1
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/计算机/算法/递归/" rel="next" title="递归">
-                <i class="fa fa-chevron-left"></i> 递归
+              <a href="/2020/07/12/计算机/网络通信/网络模型/" rel="next" title="网络模型">
+                <i class="fa fa-chevron-left"></i> 网络模型
               </a>
             
           </div>
@@ -727,8 +727,8 @@ n_1→...→n_{k−1}→n_k→n_{k+1}←...←n_m</script><p>我们希望$n_{k+1
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/论文写作/英文论文写作中常见错误总结/" rel="prev" title="英文论文写作中常见错误总结">
-                英文论文写作中常见错误总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/计算机/算法/递归/" rel="prev" title="递归">
+                递归 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

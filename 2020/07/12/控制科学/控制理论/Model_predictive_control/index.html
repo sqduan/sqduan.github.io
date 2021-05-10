@@ -580,7 +580,7 @@
 \begin{equation}
 \begin{aligned}{ll}{U_{\min } \leq u_{i}(k) \leq U_{\max }} & {\text { for all } i=1,2, \ldots, M \text { and } k=0,1,2, \ldots, \infty} \\ {X_{\min } \leq x_{i}(k) \leq X_{\max }} & {\text { for all } i=1,2, \ldots, N \text { and } k=0,1,2, \ldots, \infty}
 \end{aligned}
-\end{equation}</script><p>so in practical control system, we need to solve a constrained LQR problem, now let’s convert infinite-time limit to a $N$ step finite-time limit. Then our optimal problem becomes a set of linear equations with variables ${\mathrm{x}(1), \mathrm{x}(2), \ldots, \mathrm{x}(\mathrm{N}) ; \mathrm{u}(0), \mathrm{u}(1), \ldots, \mathrm{u}(\mathrm{N}-1)}$, the initial state is $x(0)=x_0$. Now we give out the goal of MPC</p>
+\end{equation}</script><p>so in practical control system, we need to solve a constrained LQR problem, now let’s convert infinite-time limit to a $N$ step finite-time limit. Then our optimal problem becomes a set of linear equations with variables $\{\mathrm{x}(1), \mathrm{x}(2), \ldots, \mathrm{x}(\mathrm{N}) ; \mathrm{u}(0), \mathrm{u}(1), \ldots, \mathrm{u}(\mathrm{N}-1)\}$, the initial state is $x(0)=x_0$. Now we give out the goal of MPC</p>
 <p><strong>Goal:</strong>  find the best control sequence over a future horizon of $N$ steps</p>
 <script type="math/tex; mode=display">
 \begin{equation}
@@ -652,13 +652,13 @@ z^{*}=\left[\begin{array}{c}{u_{0}^{*}} \\ {u_{1}^{*}} \\ {\vdots} \\ {u_{N-1}^{
 \begin{aligned} V\left(x_{0}\right)=\frac{1}{2} x_{0}^{\prime} Y x_{0}+& \min _{z} \frac{1}{2} z^{\prime} H z+x_{0}^{\prime} F^{\prime} z \\ \text { s.t. } & G z \leq W+S x_{0} \end{aligned}
 \end{equation}</script><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%89%B9%E6%B3%A8%202019-11-27%20114036.jpg" width="400" alt="图片名称" align="center"></p>
 <ul>
-<li>Input constraints $u<em>{\min } \leq u</em>{k} \leq u_{\max }$</li>
+<li>Input constraints $u_{\min } \leq u_{k} \leq u_{\max }$</li>
 </ul>
 <script type="math/tex; mode=display">
 \begin{equation}
 \left[\begin{array}{cccc}{1} & {0} & {\cdots} & {0} \\ {0} & {1} & {\cdots} & {0} \\ {\vdots} & {} & {\ddots} & {\vdots} \\ {0} & {\cdots} & {0} & {1} \\ {-1} & {0} & {\cdots} & {0} \\ {0} & {-1} & {\cdots} & {0} \\ {\vdots} & {} & {\ddots} & {\vdots} \\ {0} & {\cdots} & {0} & {-1}\end{array}\right] z \leq\left[\begin{array}{c}{u_{\max }} \\ {u_{\max }} \\ {\vdots} \\ {u_{\max }} \\ {-u_{\min }} \\ {-u_{\min }} \\ {\vdots} \\ {-u_{\min }}\end{array}\right] \quad z=\left[\begin{array}{c}{u_{0}} \\ {u_{1}} \\ {\vdots} \\ {u_{N-1}}\end{array}\right]
 \end{equation}</script><ul>
-<li>Output constraints $<br>y<em>{k}=C A^{k} x</em>{0}+\sum<em>{i=0}^{k-1} C A^{i} B u</em>{k-1-i} \leq y_{\max }, k=1, \ldots, N<br>$</li>
+<li>Output constraints $<br>y_{k}=C A^{k} x_{0}+\sum_{i=0}^{k-1} C A^{i} B u_{k-1-i} \leq y_{\max }, k=1, \ldots, N<br>$</li>
 </ul>
 <script type="math/tex; mode=display">
 \begin{equation}
@@ -666,13 +666,13 @@ z^{*}=\left[\begin{array}{c}{u_{0}^{*}} \\ {u_{1}^{*}} \\ {\vdots} \\ {u_{N-1}^{
 \end{equation}</script><h5 id="Linear-MPC-algorithm"><a href="#Linear-MPC-algorithm" class="headerlink" title="Linear MPC algorithm"></a>Linear MPC algorithm</h5><p>At each sampling time $t$:</p>
 <ul>
 <li>measure (or estimate) the current state $x(t)$</li>
-<li>Get the solution $z^<em>=\left[\begin{array}{c}{u_{0}^</em>} \ {u<em>{1}^*} \ {\vdots} \ {u</em>{N-1}^*}\end{array}\right]$ of the QP</li>
+<li>Get the solution $z^<em>=\left[\begin{array}{c}{u_{0}^</em>} \\ {u_{1}^<em>} \\ {\vdots} \\ {u_{N-1}^</em>}\end{array}\right]$ of the QP</li>
 </ul>
 <script type="math/tex; mode=display">
 \begin{equation}
 \left\{\begin{array}{cc}{\min _{z}} & {\frac{1}{2} z^{\prime} H z+x^{\prime}(t) F^{\prime} z} \\ {\text { s.t. }} & {G z \leq W+Sx(t)}\end{array}\right.
 \end{equation}</script><ul>
-<li>Apply only $u(t)=u^<em>_0$, discarding the remaining optimal inputs $u^</em><em>1,…,u^*</em>{N-1}$</li>
+<li>Apply only $u(t)=u^<em>_0$, discarding the remaining optimal inputs $u^</em>_1,…,u^*_{N-1}$</li>
 </ul>
 <h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Explicit-MPC-Control-of-a-Single-Input-Single-Output-Plant3"><a href="#Explicit-MPC-Control-of-a-Single-Input-Single-Output-Plant3" class="headerlink" title="Explicit MPC Control of a Single-Input-Single-Output Plant3"></a>Explicit MPC Control of a Single-Input-Single-Output Plant<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h3><p>This subsection is mainly a summarization about reference <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
 <h4 id="Plant-design"><a href="#Plant-design" class="headerlink" title="Plant design"></a>Plant design</h4><p> The linear open-loop dynamic model is a double integrator. </p>
@@ -769,8 +769,8 @@ z^{*}=\left[\begin{array}{c}{u_{0}^{*}} \\ {u_{1}^{*}} \\ {\vdots} \\ {u_{N-1}^{
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/控制科学/控制理论/Model_predictive_control3/" rel="next" title="Model Predictive Control(3)--Prediction">
-                <i class="fa fa-chevron-left"></i> Model Predictive Control(3)--Prediction
+              <a href="/2020/07/12/控制科学/控制理论/Model_predictive_control2/" rel="next" title="Model Predictive Control(2)--Modelling">
+                <i class="fa fa-chevron-left"></i> Model Predictive Control(2)--Modelling
               </a>
             
           </div>
@@ -779,8 +779,8 @@ z^{*}=\left[\begin{array}{c}{u_{0}^{*}} \\ {u_{1}^{*}} \\ {\vdots} \\ {u_{N-1}^{
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/控制科学/控制理论/PID_control_and_tuning/" rel="prev" title="PID control and tuning">
-                PID control and tuning <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/控制科学/控制理论/模型参考自适应控制/" rel="prev" title="模型参考自适应控制">
+                模型参考自适应控制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -480,7 +480,7 @@ x_{t+1}=A x_{t}+B u_{t}
 <script type="math/tex; mode=display">
 \begin{equation}
 (\hat{A}, \hat{B})=\arg \min _{(A, B)} \sum_{t=0}^{T} \frac{1}{2}\left\|x_{t+1}-\left(A x_{t}+B u_{t}\right)\right\|_{2}^{2}
-\end{equation}</script><p>为了解决上式，令$z<em>{t}=\left[\begin{array}{l}{x</em>{t}} \ {u_{t}}\end{array}\right] \in \mathbb{R}^{n+p}$，$\theta=[A, B] \in \mathbb{R}^{(n+p) \times n}$，在每一个采样点处进行采样，我们得到：</p>
+\end{equation}</script><p>为了解决上式，令$z_{t}=\left[\begin{array}{l}{x_{t}} \\ {u_{t}}\end{array}\right] \in \mathbb{R}^{n+p}$，$\theta=[A, B] \in \mathbb{R}^{(n+p) \times n}$，在每一个采样点处进行采样，我们得到：</p>
 <script type="math/tex; mode=display">
 \begin{equation}
 X=\left[\begin{array}{c}{x_{1}} \\ {x_{2}} \\ {\vdots} \\ {x_{T}}\end{array}\right], \quad Z=\left[\begin{array}{c}{z_{0}} \\ {z_{1}} \\ {\vdots} \\ {z_{T-1}}\end{array}\right]

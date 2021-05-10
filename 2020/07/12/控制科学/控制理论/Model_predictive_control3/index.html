@@ -475,7 +475,7 @@
 <script type="math/tex; mode=display">
 \begin{equation}
 \left.\begin{array}{rl}{x_{k+1}} & {=A x_{k}+B u_{k}} \\ {y_{k}} & {=C x_{k}+d_{k}}\end{array}\right\} \Rightarrow \begin{array}{c}{y_{k+1}=C x_{k+1}+d_{k+1}} \\ {y_{k+1}=C A x_{k}+C B u_{k}+d_{k+1}}\end{array}
-\end{equation}</script><p>Nomally we can assume that $d<em>k=d</em>{k+1}$.</p>
+\end{equation}</script><p>Nomally we can assume that $d_k=d_{k+1}$.</p>
 <p>It should be noticed that one step prediction can be used <strong>recursively</strong> to find an n-step ahead prediction as follows</p>
 <script type="math/tex; mode=display">
 \begin{equation}
@@ -494,8 +494,8 @@ x_{k+n | k}=A^{n} x_{k}+A^{n-1} B u_{k | k}+A^{n-2} B u_{k+1 k}+\cdots+A B u_{k+
 \begin{equation}
 y_{k+n| k}=C A^{n} x_{k}+d_{k}+C\left(A^{n-1} B u_{k |k}+A^{n-2} B u_{k+1 |k}+\cdots+B u_{k+n-1| k}\right)
 \end{equation}</script><ul>
-<li>known: $C A^{n} x<em>{k}+d</em>{k}$, based on current and past measurement</li>
-<li><p>unknown: $C\left(A^{n-1} B u<em>{k |k}+A^{n-2} B u</em>{k+1 |k}+\cdots+B u_{k+n-1| k}\right)$, based on future input choices.</p>
+<li>known: $C A^{n} x_{k}+d_{k}$, based on current and past measurement</li>
+<li><p>unknown: $C\left(A^{n-1} B u_{k |k}+A^{n-2} B u_{k+1 |k}+\cdots+B u_{k+n-1| k}\right)$, based on future input choices.</p>
  <table><tr><td bgcolor="#F7DC6F" style="vertical-align:middle; text-align:center;">Our aim is to choose the unknown inputs to make sure that the overall prediction is satisfactory!!</td></tr></table>  
 
 </li>
@@ -628,8 +628,8 @@ a(z) \Delta y_{k}=b(z) \Delta u_{k}+T(z) \zeta_{k}
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/控制科学/控制理论/Model_predictive_control/" rel="prev" title="Model Predictive Control(1)--What and why MPC">
-                Model Predictive Control(1)--What and why MPC <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/控制科学/控制理论/PID_control_and_tuning/" rel="prev" title="PID control and tuning">
+                PID control and tuning <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

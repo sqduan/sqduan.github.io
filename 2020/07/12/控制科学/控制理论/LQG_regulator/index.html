@@ -553,7 +553,7 @@ q_1 &  &  & 0\\
 \begin{equation}
 \left[\begin{array}{ll}{x^{\top}} & {u^{\top}}\end{array}\right]\left[\begin{array}{ll}{Q} & {0} \\ {0} & {R}\end{array}\right]\left[\begin{array}{l}{x} \\ {u}\end{array}\right]
 \end{equation}</script><p>Now we can make a judgment, for example, if an actuator $u_i$ is really expensive, we can penalizing it by increasing $r_i$, if lower error $x_i$ is important, you can increasing the $q_i$.</p>
-<h4 id="Mathematical-form-and-solution-about-LQR"><a href="#Mathematical-form-and-solution-about-LQR" class="headerlink" title="Mathematical form and solution about LQR"></a>Mathematical form and solution about LQR</h4><p>For a continuous-time linear system, defined on $t \in\left[t<em>{0}, t</em>{1}\right]$, described by:</p>
+<h4 id="Mathematical-form-and-solution-about-LQR"><a href="#Mathematical-form-and-solution-about-LQR" class="headerlink" title="Mathematical form and solution about LQR"></a>Mathematical form and solution about LQR</h4><p>For a continuous-time linear system, defined on $t \in\left[t_{0}, t_{1}\right]$, described by:</p>
 <script type="math/tex; mode=display">
 \begin{equation}
 \dot{x}=A x+B u
@@ -564,9 +564,9 @@ J=x^{\top}\left(t_{1}\right) F\left(t_{1}\right) x\left(t_{1}\right)+
 \int_{t_{0}}^{t_{1}}\left(x^{\top} Q x+u^{\top} R u+2 x^{\top} N u\right) d t
 \end{equation}</script><p>in which:</p>
 <ul>
-<li>$x^{\top}\left(t<em>{1}\right) F\left(t</em>{1}\right) x\left(t_{1}\right)$ is an index about steady state</li>
-<li>$\int<em>{t</em>{0}}^{t_{1}}x^{\top} Q x d t$ is an index about transient process</li>
-<li>$\int<em>{t</em>{0}}^{t_{1}}u^{\top} R u d t$ is an index about system energy</li>
+<li>$x^{\top}\left(t_{1}\right) F\left(t_{1}\right) x\left(t_{1}\right)$ is an index about steady state</li>
+<li>$\int_{t_{0}}^{t_{1}}x^{\top} Q x d t$ is an index about transient process</li>
+<li>$\int_{t_{0}}^{t_{1}}u^{\top} R u d t$ is an index about system energy</li>
 </ul>
 <p>The feedback control law that minimizes the value of the cost is: </p>
 <script type="math/tex; mode=display">
@@ -654,9 +654,9 @@ K=R^{-1} B^{T} A^{-T}[S(k)-Q]
 </ul>
 <h2 id="Linear-quadratic-estimator"><a href="#Linear-quadratic-estimator" class="headerlink" title="Linear quadratic estimator"></a>Linear quadratic estimator</h2><h3 id="Filtering-Prediction-and-Smoothing3"><a href="#Filtering-Prediction-and-Smoothing3" class="headerlink" title="Filtering, Prediction, and Smoothing3"></a>Filtering, Prediction, and Smoothing<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h3><p>There are three general types of estimators for the LQG problem:</p>
 <ul>
-<li><strong>Predictors</strong>: use prior observations strictly $t<em>{obs}&lt;t</em>{est}$</li>
-<li><strong>Filter</strong>: use observations up to and including the time that the state of the dynamic system is to be estimated $t<em>{obs}\leq t</em>{est}$</li>
-<li><strong>Smoother</strong>: use observations beyond the estimation time $t<em>{obs}&gt;t</em>{est}$</li>
+<li><strong>Predictors</strong>: use prior observations strictly $t_{obs}&lt;t_{est}$</li>
+<li><strong>Filter</strong>: use observations up to and including the time that the state of the dynamic system is to be estimated $t_{obs}\leq t_{est}$</li>
+<li><strong>Smoother</strong>: use observations beyond the estimation time $t_{obs}&gt;t_{est}$</li>
 </ul>
 <h3 id="Kalman-Filter"><a href="#Kalman-Filter" class="headerlink" title="Kalman Filter"></a>Kalman Filter</h3><p>The Kalman filter is an optimal algorithm for state estimation, it will help us to reconstruct the state of a dynamic system uses a series measurements observed over time, containing statistical noise and other inaccuracies, and produces estimates of unknown variables that tend to be more accurate than those based on a single measurement alone. For more information about Kalman filter, please refer to <a href="/2020/07/12/控制科学/控制理论/Kalman_Filter/" title="Kalman filter">Kalman filter</a> for this section. </p>
 <h2 id="Linear-quadratic-Gaussian-regulator"><a href="#Linear-quadratic-Gaussian-regulator" class="headerlink" title="Linear quadratic Gaussian regulator"></a>Linear quadratic Gaussian regulator</h2><h3 id="Mathematical-description-of-the-problem"><a href="#Mathematical-description-of-the-problem" class="headerlink" title="Mathematical description of the problem"></a>Mathematical description of the problem</h3><p>Let’s concern a linear system driven by addictive white Gaussian noise ($N(0,\Sigma)$), consider a continuous-time linear dynamic system with disturbance and measurement noise:</p>
@@ -777,8 +777,8 @@ K(t)=R^{-1}(t) B^{\mathrm{T}}(t) S(t)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/控制科学/信号分析/扰动与噪声/" rel="prev" title="扰动与噪声">
-                扰动与噪声 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/控制科学/信号分析/信号分析基本术语/" rel="prev" title="信号分析基本术语">
+                信号分析基本术语 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
