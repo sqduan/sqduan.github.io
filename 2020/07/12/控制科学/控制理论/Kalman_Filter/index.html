@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Kalman filter is an optimal estimation algorithm. It can help us to estimate a system state when it cannot be measured directly. This blog discusses the Kalman Filter which is widely used to filtering">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-27T03:01:38.076Z">
+<meta property="og:updated_time" content="2021-05-10T13:45:44.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kalman Filter">
 <meta name="twitter:description" content="Kalman filter is an optimal estimation algorithm. It can help us to estimate a system state when it cannot be measured directly. This blog discusses the Kalman Filter which is widely used to filtering">
@@ -419,7 +419,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-27 11:01:38" itemprop="dateModified" datetime="2021-03-27T11:01:38+08:00">2021-03-27</time>
+                <time title="Modified: 2021-05-10 21:45:44" itemprop="dateModified" datetime="2021-05-10T21:45:44+08:00">2021-05-10</time>
               
             
           </span>
@@ -517,9 +517,9 @@
 </ul>
 <h3 id="Mathematical-description"><a href="#Mathematical-description" class="headerlink" title="Mathematical description"></a>Mathematical description</h3><p>The state of a Kalman filter can be represented by the following two variables:</p>
 <ul>
-<li><p>$\hat{\mathbf{x}}_{k|k-1}$: estimation at time $k-1$ with out current measurement.</p>
+<li><p>$\hat{\mathbf{x}}_{k|k-1}$: estimation at time $k-1$ without current measurement（先验状态估计，不太好的估计）.</p>
 </li>
-<li><p>$\hat{\mathbf{x}}_{k|k}$: estimation at time $k$ based on the current measurement.</p>
+<li><p>$\hat{\mathbf{x}}_{k|k}$: estimation at time $k$ based on the current measurement（后验状态估计，比较好的估计）.</p>
 </li>
 <li>$\hat{\mathbf{P}}_{k|k-1}$: prior covariance matrix of estimation error </li>
 <li>$\hat{\mathbf{P}}_{k|k}$: posterior covariance matrix of estimation error, used for judge the estimation precision. </li>
@@ -541,11 +541,17 @@
 <p>Then we use them to update variable $\mathbf{x}$ and $\mathbf{P}$</p>
 <script type="math/tex; mode=display">
 \begin{equation}
-\begin{aligned} \hat{\mathbf{x}}_{k | k} &=\hat{\mathbf{x}}_{k | k-1}+\mathbf{K}_{k} \tilde{\mathbf{y}}_{k}\\ \mathbf{P}_{k | k} &=\left(I-\mathbf{K}_{k} \mathbf{H}_{k}\right) \mathbf{P}_{k | k-1} \end{aligned}
+\begin{aligned} \hat{\mathbf{x}}_{k | k} &=\hat{\mathbf{x}}_{k | k-1}+\mathbf{K}_{k} ({\mathbf{y}}_{k}-\mathbf{H\hat{\mathbf{x}}_{k | k-1}})\\ 
+\mathbf{P}_{k | k} &=\left(I-\mathbf{K}_{k} \mathbf{H}_{k}\right) \mathbf{P}_{k | k-1} \end{aligned}
 \end{equation}</script><ul>
 <li>The first function is the updated state estimation</li>
 <li>The second is the updated covariance matrix of estimation error</li>
 </ul>
+<p>从上面的公式可以看出，卡尔曼增益$\mathbf{K}$实际代表了预测误差与测量误差之间的比重，当$\mathbf{K}=0$，则完全依靠预测，而当$\mathbf{K}=1$，则完全依靠测量。对于上式，两边各减去真实状态$\mathbf{x}_{k}$，可得：</p>
+<script type="math/tex; mode=display">
+\hat{\mathbf{x}}_{k | k} - \mathbf{x}_{k | k} =\hat{\mathbf{x}}_{k | k-1} - \mathbf{x}_{k | k}+\mathbf{K}_{k} ({\mathbf{y}}_{k}-\mathbf{H\hat{\mathbf{x}}_{k | k-1}})</script><p>即后验估计误差与先验估计误差之间的关系：</p>
+<script type="math/tex; mode=display">
+\mathbf{e}_{k | k} ={\mathbf{e}}_{k | k-1}+\mathbf{K}_{k} ({\mathbf{y}}_{k}-\mathbf{H\hat{\mathbf{x}}_{k | k-1}})</script><p>那么问题来了，如何选择$\mathbf{K}$，从而达到最优呢？我们可以</p>
 <h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><p>In this section we are going to design a Kalman filter for the inverted pendulum mentioned in <a href="/2020/07/12/控制科学/控制理论/State-space_feedback_and_estimators/" title="State feedback control">State feedback control</a>. </p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://en.wikipedia.org/wiki/Kalman_filter">Wiki about Kalman filter</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.researchgate.net/publication/243786641_Kalman_filtering_theory_and_practice_using_MATLAB">Andrews A P. Kalman Filtering: Theory and Practice Using MATLAB[M]. Wiley, 2001.</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">3.</span><span style="display: inline-block; vertical-align: top;"><a href="http://www.cs.uwc.ac.za/~kschef/papers/Kalman_tutorial.pdf.gz">Welch G, Bishop G. An introduction to the Kalman filter[J]. 1995.</a></span><a href="#fnref:3" rev="footnote"> ↩</a></li></ol></div></div>
       
