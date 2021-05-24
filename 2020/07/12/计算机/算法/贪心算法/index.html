@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="Remember, when you face erratic, always choice the best">
+  <meta name="description" content="小孩子才做选择，我全都要！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="贪心">
 <meta property="og:url" content="http://yoursite.com/2020/07/12/计算机/算法/贪心算法/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="Remember, when you face erratic, always choice the best">
+<meta property="og:description" content="小孩子才做选择，我全都要！">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-15T03:09:57.592Z">
+<meta property="og:updated_time" content="2021-05-24T06:51:44.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="贪心">
-<meta name="twitter:description" content="Remember, when you face erratic, always choice the best">
+<meta name="twitter:description" content="小孩子才做选择，我全都要！">
 
 
 
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-15 11:09:57" itemprop="dateModified" datetime="2020-09-15T11:09:57+08:00">2020-09-15</time>
+                <time title="Modified: 2021-05-24 14:51:44" itemprop="dateModified" datetime="2021-05-24T14:51:44+08:00">2021-05-24</time>
               
             
           </span>
@@ -478,13 +478,21 @@
 
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
-<p>Remember, when you face erratic, always choice the best</p>
+<p>小孩子才做选择，我全都要！</p>
 </blockquote>
 <a id="more"></a>
 <h2 id="贪心算法简介"><a href="#贪心算法简介" class="headerlink" title="贪心算法简介"></a>贪心算法简介</h2><h3 id="什么是贪心？"><a href="#什么是贪心？" class="headerlink" title="什么是贪心？"></a>什么是贪心？</h3><p>当我们对问题求解时，<strong>总是做出在当前看起来是最好的选择</strong>，即不从全局最优的角度考虑，做出局部最优解。</p>
 <p>贪心算法不是对所有问题都能得到整体最优解，关键是贪心策略的选择，选择的贪心策略必须具备无后效性，即某个状态以前的过程不会影响以后的状态，只与当前状态有关。这样才能保证结果的全局最优性。</p>
-<p>贪心算法一般用于解决最优化问题</p>
-<h2 id="贪心法常见难点及要点总结"><a href="#贪心法常见难点及要点总结" class="headerlink" title="贪心法常见难点及要点总结"></a>贪心法常见难点及要点总结</h2><h3 id="贪心策略的选择"><a href="#贪心策略的选择" class="headerlink" title="贪心策略的选择"></a>贪心策略的选择</h3><h3 id="贪心方法"><a href="#贪心方法" class="headerlink" title="贪心方法"></a>贪心方法</h3><h4 id="一、模拟法"><a href="#一、模拟法" class="headerlink" title="一、模拟法"></a>一、模拟法</h4><p>在模拟法中，我们将根据可能的情况执行相应的步骤，然后考虑每一步中的最优结果，例如<a href="https://leetcode-cn.com/problems/lemonade-change/">860. 柠檬水找零</a></p>
+<p>贪心算法一般用于解决最优化问题。</p>
+<h3 id="贪心的局限性"><a href="#贪心的局限性" class="headerlink" title="贪心的局限性"></a>贪心的局限性</h3><p>在许多情况下，贪心可能会陷入局部最优解，而无法找到全局最优。</p>
+<h2 id="贪心法常见难点及要点总结"><a href="#贪心法常见难点及要点总结" class="headerlink" title="贪心法常见难点及要点总结"></a>贪心法常见难点及要点总结</h2><h3 id="贪心策略的选择"><a href="#贪心策略的选择" class="headerlink" title="贪心策略的选择"></a>贪心策略的选择</h3><p>贪心策略的选择是贪心过程的最大难点之一，这里以Leetcode45题为例，介绍贪心策略的选择</p>
+<p><a href="https://leetcode-cn.com/problems/jump-game-ii/submissions/">45. 跳跃游戏 II</a></p>
+<blockquote>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。数组中的每个元素代表你在该位置可以跳跃的最大长度。你的目标是使用最少的跳跃次数到达数组的最后一个位置。假设你总是可以到达数组的最后一个位置。</p>
+</blockquote>
+<p>看到这个题后，我的第一反应是，找每次跳跃能够跳到的下一个最大的数所在的位置。即假设当前位置为<code>i</code>，那么下一个位置为<code>max(num[i+1], num[i+num[i]])</code>所在元素的下标。但是实际上这个贪心策略是错误的。正确的贪心策略是寻找每一步能够走到的最大位置，即<code>nums[i]+i</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">jump</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> end = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> max_pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; nums.size()<span class="number">-1</span>; ++i)&#123;</span><br><span class="line">        max_pos = max(max_pos, nums[i]+i); <span class="comment">// 当前位置所能达到的最远边界，贪心</span></span><br><span class="line">        <span class="keyword">if</span>(i == end)&#123;        <span class="comment">// 触碰到最远边界了，需要更新，因此推进边界</span></span><br><span class="line">            end = max_pos;   <span class="comment">// 边界更新，同时递增一步，在这个边界范围内，都是可以一步走到的</span></span><br><span class="line">            ans++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="贪心方法"><a href="#贪心方法" class="headerlink" title="贪心方法"></a>贪心方法</h3><h4 id="一、模拟法"><a href="#一、模拟法" class="headerlink" title="一、模拟法"></a>一、模拟法</h4><p>在模拟法中，我们将根据可能的情况执行相应的步骤，然后考虑每一步中的最优结果，例如<a href="https://leetcode-cn.com/problems/lemonade-change/">860. 柠檬水找零</a></p>
 <h4 id="二、由简到繁"><a href="#二、由简到繁" class="headerlink" title="二、由简到繁"></a>二、由简到繁</h4><p>有些情况下，我们并不能很好地找到贪心策略，这种情况下我们首先从简单问题考虑，直接想只有一种最优情况该如何选择，然后加入另一个情况，看如何达到最优策略，从而找到递推公式：</p>
 <p>例题1：<a href="https://leetcode-cn.com/problems/reducing-dishes/">1402. 做菜顺序</a></p>
 <h2 id="专题：背包问题"><a href="#专题：背包问题" class="headerlink" title="专题：背包问题"></a>专题：背包问题</h2><h2 id="LeetCode上关于贪心的相关题目"><a href="#LeetCode上关于贪心的相关题目" class="headerlink" title="LeetCode上关于贪心的相关题目"></a>LeetCode上关于贪心的相关题目</h2><h4 id="LeetCode300-最长上升子序列"><a href="#LeetCode300-最长上升子序列" class="headerlink" title="LeetCode300 最长上升子序列"></a>LeetCode300 最长上升子序列</h4><p>给定一个无序的整数数组，找到其中最长上升子序列的长度。</p>
@@ -935,7 +943,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心算法简介"><span class="nav-number">1.</span> <span class="nav-text">贪心算法简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是贪心？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是贪心？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心法常见难点及要点总结"><span class="nav-number">2.</span> <span class="nav-text">贪心法常见难点及要点总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心策略的选择"><span class="nav-number">2.1.</span> <span class="nav-text">贪心策略的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心方法"><span class="nav-number">2.2.</span> <span class="nav-text">贪心方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、模拟法"><span class="nav-number">2.2.1.</span> <span class="nav-text">一、模拟法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、由简到繁"><span class="nav-number">2.2.2.</span> <span class="nav-text">二、由简到繁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#专题：背包问题"><span class="nav-number">3.</span> <span class="nav-text">专题：背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode上关于贪心的相关题目"><span class="nav-number">4.</span> <span class="nav-text">LeetCode上关于贪心的相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode300-最长上升子序列"><span class="nav-number">4.0.1.</span> <span class="nav-text">LeetCode300 最长上升子序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-监控二叉树"><span class="nav-number">4.0.2.</span> <span class="nav-text">LeetCode 监控二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode968-监控二叉树"><span class="nav-number">4.0.3.</span> <span class="nav-text">LeetCode968 监控二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode406"><span class="nav-number">4.0.4.</span> <span class="nav-text">LeetCode406</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心算法简介"><span class="nav-number">1.</span> <span class="nav-text">贪心算法简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是贪心？"><span class="nav-number">1.1.</span> <span class="nav-text">什么是贪心？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心的局限性"><span class="nav-number">1.2.</span> <span class="nav-text">贪心的局限性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#贪心法常见难点及要点总结"><span class="nav-number">2.</span> <span class="nav-text">贪心法常见难点及要点总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心策略的选择"><span class="nav-number">2.1.</span> <span class="nav-text">贪心策略的选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心方法"><span class="nav-number">2.2.</span> <span class="nav-text">贪心方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、模拟法"><span class="nav-number">2.2.1.</span> <span class="nav-text">一、模拟法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、由简到繁"><span class="nav-number">2.2.2.</span> <span class="nav-text">二、由简到繁</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#专题：背包问题"><span class="nav-number">3.</span> <span class="nav-text">专题：背包问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LeetCode上关于贪心的相关题目"><span class="nav-number">4.</span> <span class="nav-text">LeetCode上关于贪心的相关题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode300-最长上升子序列"><span class="nav-number">4.0.1.</span> <span class="nav-text">LeetCode300 最长上升子序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode-监控二叉树"><span class="nav-number">4.0.2.</span> <span class="nav-text">LeetCode 监控二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode968-监控二叉树"><span class="nav-number">4.0.3.</span> <span class="nav-text">LeetCode968 监控二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LeetCode406"><span class="nav-number">4.0.4.</span> <span class="nav-text">LeetCode406</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></div>
             
 
           </div>
