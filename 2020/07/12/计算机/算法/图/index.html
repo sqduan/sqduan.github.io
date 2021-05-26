@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/domino_example_1.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/v2-952b78faeed7a68af4349357e34efe8f_720w.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/undirected_graph_cycle.png">
-<meta property="og:updated_time" content="2020-07-12T01:05:50.799Z">
+<meta property="og:updated_time" content="2021-05-26T09:20:13.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图">
 <meta name="twitter:description" content="图(Graph)是表示物件与物件之间的网状关系的数学对象,是图论基本研究对象，本文将对图相关知识进行总结。">
@@ -410,6 +410,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-05-26 17:20:13" itemprop="dateModified" datetime="2021-05-26T17:20:13+08:00">2021-05-26</time>
+              
+            
           </span>
 
           
@@ -469,7 +485,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p> 图(Graph)是表示物件与物件之间的网状关系的数学对象,是图论基本研究对象，本文将对图相关知识进行总结。</p>
 <a id="more"></a>
 <h2 id="图类问题解决步骤"><a href="#图类问题解决步骤" class="headerlink" title="图类问题解决步骤"></a>图类问题解决步骤</h2><h3 id="图的表示：邻接矩阵或邻接表"><a href="#图的表示：邻接矩阵或邻接表" class="headerlink" title="图的表示：邻接矩阵或邻接表"></a>图的表示：邻接矩阵或邻接表</h3><p>邻接矩阵或邻接表能够方便地查询顶点之间的关系，在邻接表中，键为起点，值为终点，而邻接矩阵中，<code>joint[i][j] == 1</code>表示从$i$到$j$有连接，邻接表占用空间较小而邻接矩阵占用空间较大。邻接表和邻接矩阵建立方法如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无向图邻接表</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">    graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">    graph[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//有向图邻接表</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">    graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无向图邻接表</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">    graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">    graph[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//有向图邻接表    </span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">    graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="图的基本要素"><a href="#图的基本要素" class="headerlink" title="图的基本要素"></a>图的基本要素</h2><p>一般来说，当讨论图问题时，会有如下要素：</p>
 <ul>
 <li>顶点及顶点值，顶点集的大小叫做图的阶</li>
