@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="本文将针对位运算进行总结。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-23T03:03:35.428Z">
+<meta property="og:updated_time" content="2021-06-06T08:21:19.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位运算">
 <meta name="twitter:description" content="本文将针对位运算进行总结。">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-23 11:03:35" itemprop="dateModified" datetime="2021-03-23T11:03:35+08:00">2021-03-23</time>
+                <time title="Modified: 2021-06-06 16:21:19" itemprop="dateModified" datetime="2021-06-06T16:21:19+08:00">2021-06-06</time>
               
             
           </span>
@@ -485,9 +485,9 @@
 <li><code>a^b</code>，相异为1，相同为0</li>
 <li>a^a = 0</li>
 <li>a^0 = a</li>
-<li>满足交换律a^b^a = a^a^b = b</li>
+<li>满足交换律a\^b\^a = a\^a\^b = b</li>
 </ul>
-<h4 id="异或运算的常见应用场景"><a href="#异或运算的常见应用场景" class="headerlink" title="异或运算的常见应用场景"></a>异或运算的常见应用场景</h4><h5 id="一、消除重复"><a href="#一、消除重复" class="headerlink" title="一、消除重复"></a>一、消除重复</h5><p>因为a^b^a = a^a^b，故一些情况下，我们可以利用位运算，实现重复数的消除，获得只出现一次的数字</p>
+<h4 id="异或运算的常见应用场景"><a href="#异或运算的常见应用场景" class="headerlink" title="异或运算的常见应用场景"></a>异或运算的常见应用场景</h4><h5 id="一、消除重复"><a href="#一、消除重复" class="headerlink" title="一、消除重复"></a>一、消除重复</h5><p>因为a\^b\^a = a\^a\^b，故一些情况下，我们可以利用位运算，实现重复数的消除，获得只出现一次的数字</p>
 <h5 id="二、计算绝对值"><a href="#二、计算绝对值" class="headerlink" title="二、计算绝对值"></a>二、计算绝对值</h5><p><a href="https://leetcode-cn.com/problems/maximum-lcci/">面试题 16.07. 最大数值</a></p>
 <blockquote>
 <p>不使用比较运算的情况下，获得一个数的绝对值</p>
@@ -509,7 +509,7 @@
 <li><p>a=a^b;</p>
 </li>
 </ul>
-<p>解释如下：令 a‘=a^b; 那么 b=a’^b = (a^b)^b=a^b^b=a^(b^b)=a^0=a，而 a’ = a^b = (a^b)^a=a^b^a=b。</p>
+<p>解释如下：令 a‘=a^b; 那么 b=a’^b = (a\^b)\^b=a\^b\^b=a\^(b\^b)=a^0=a，而 a’ = a^b = (a\^b)\^a=a\^b\^a=b。</p>
 <h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><h5 id="LeetCode-136-只出现一次的数字"><a href="#LeetCode-136-只出现一次的数字" class="headerlink" title="LeetCode 136 只出现一次的数字"></a>LeetCode 136 只出现一次的数字</h5><p>一个数组中其他数字都出现两次，只有一个数字出现一次，找到这个数，只需进行一次全员异或即可。</p>
 <h5 id="LeetCode-260-只出现一次的数字3"><a href="#LeetCode-260-只出现一次的数字3" class="headerlink" title="LeetCode 260 只出现一次的数字3"></a>LeetCode 260 只出现一次的数字3</h5><p>一个数组中其他数字都出现两次，只有两个数字出现一次，找到这两个数。</p>
 <p><strong>思路</strong></p>
@@ -633,8 +633,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/07/12/计算机/算法/双指针/" rel="next" title="双指针">
-                <i class="fa fa-chevron-left"></i> 双指针
+              <a href="/2020/07/12/计算机/算法/动态规划DP/" rel="next" title="动态规划DP">
+                <i class="fa fa-chevron-left"></i> 动态规划DP
               </a>
             
           </div>

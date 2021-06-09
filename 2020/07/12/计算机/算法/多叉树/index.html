@@ -112,7 +112,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/bplustreeinsert2.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/btreeinsert3.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/tireinsert.png">
-<meta property="og:updated_time" content="2020-09-17T03:07:53.218Z">
+<meta property="og:updated_time" content="2021-06-06T07:47:19.517Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多叉树">
 <meta name="twitter:description" content="Listen, a tree is growing">
@@ -428,7 +428,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-17 11:07:53" itemprop="dateModified" datetime="2020-09-17T11:07:53+08:00">2020-09-17</time>
+                <time title="Modified: 2021-06-06 15:47:19" itemprop="dateModified" datetime="2021-06-06T15:47:19+08:00">2021-06-06</time>
               
             
           </span>
@@ -587,14 +587,14 @@
 </tbody>
 </table>
 </div>
-<h2 id="字典树（前缀树）"><a href="#字典树（前缀树）" class="headerlink" title="字典树（前缀树）"></a>字典树（前缀树）</h2><h3 id="字典树的定义"><a href="#字典树的定义" class="headerlink" title="字典树的定义"></a>字典树的定义</h3><p>Trie树，即字典树，又称单词查找树或键树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是：最大限度地减少无谓的字符串比较，查询效率比哈希表高。字典树的基本原理就像查询字典一样，因此可以快速定位单词，非常高效。</p>
+<h2 id="字典树（前缀树）"><a href="#字典树（前缀树）" class="headerlink" title="字典树（前缀树）"></a>字典树（前缀树）</h2><h3 id="字典树的定义"><a href="#字典树的定义" class="headerlink" title="字典树的定义"></a>字典树的定义</h3><p>Trie树，即字典树，又称单词查找树或键树，是一种哈希树的变种。典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是：<strong>最大限度地减少无谓的字符串比较，查询效率比哈希表高</strong>。字典树的基本原理就像查询字典一样，因此可以快速定位单词，非常高效。</p>
 <h3 id="字典树的性质"><a href="#字典树的性质" class="headerlink" title="字典树的性质"></a>字典树的性质</h3><ol>
 <li>根节点不包含字符，除根节点外每一个节点都只包含一个字符。</li>
 <li>从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串。</li>
 <li>每个节点的所有子节点包含的字符都不相同。</li>
 </ol>
 <h3 id="字典树及其方法的实现"><a href="#字典树及其方法的实现" class="headerlink" title="字典树及其方法的实现"></a>字典树及其方法的实现</h3><p>下面给出一种常用字典树及其方法的实现，包括添加单词和搜索单词两种操作，字典树类成员变量如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;Trie*&gt; children;</span><br><span class="line">    <span class="keyword">bool</span> is_end;          <span class="comment">//用于判断一棵分支是否已经到达叶节点</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> R = <span class="number">26</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;Trie*&gt; children;  <span class="comment">//子节点，每个节点都是一个Trie* 结构</span></span><br><span class="line">    <span class="keyword">bool</span> is_end;             <span class="comment">//用于判断一棵分支是否已经到达叶节点</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> R = <span class="number">26</span>;</span><br></pre></td></tr></table></figure>
 <p>一些基本成员函数如下所示：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Trie() : children&#123;<span class="built_in">vector</span>&lt;Trie*&gt;(R)&#125;,</span><br><span class="line">         is_end&#123;<span class="literal">false</span>&#125; &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">contain_key</span><span class="params">(<span class="keyword">char</span> ch)</span></span>&#123;                      <span class="comment">//当前节点为根节点下是否包含字符ch</span></span><br><span class="line">    <span class="keyword">return</span> children[ch - <span class="string">'a'</span>] != <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Trie* <span class="title">get</span><span class="params">(<span class="keyword">char</span> ch)</span></span>&#123;                   <span class="comment">//返回子树</span></span><br><span class="line">    <span class="keyword">return</span> children[ch - <span class="string">'a'</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">char</span> ch, Trie* node)</span> </span>&#123;       <span class="comment">//将node拼接至节点下</span></span><br><span class="line">    children[ch -<span class="string">'a'</span>] = node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">set_end</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    is_end = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">get_is_end</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> is_end;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="插入键"><a href="#插入键" class="headerlink" title="插入键"></a>插入键</h4><p>我们通过搜索 Trie 树来插入一个键。我们从根开始搜索它对应于第一个键字符的链接。有两种情况：</p>
@@ -603,8 +603,8 @@
 <li>链接不存在。创建一个新的节点，并将它与父节点的链接相连，该链接与当前的键字符相匹配。</li>
 </ul>
 <p>重复以上步骤，直到到达键的最后一个字符，然后将当前节点标记为结束节点，算法完成。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">    Tire* node = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> &amp;ch : word)&#123;</span><br><span class="line">        <span class="keyword">int</span> idx = ch - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;children[idx] == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            node-&gt;children[idx] = <span class="keyword">new</span> Tire();</span><br><span class="line">        &#125;</span><br><span class="line">        node = node-&gt;children[idx];</span><br><span class="line">    &#125;</span><br><span class="line">    node-&gt;is_end = <span class="literal">true</span>;    <span class="comment">//树结尾</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/tireinsert.png" width="250" alt="图片名称" align="center"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">    Trie* node = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> &amp;ch : word)&#123;</span><br><span class="line">        <span class="keyword">int</span> idx = ch - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;children[idx] == <span class="literal">nullptr</span>)&#123;</span><br><span class="line">            node-&gt;children[idx] = <span class="keyword">new</span> Trie();</span><br><span class="line">        &#125;</span><br><span class="line">        node = node-&gt;children[idx];</span><br><span class="line">    &#125;</span><br><span class="line">    node-&gt;is_end = <span class="literal">true</span>;    <span class="comment">//树结尾</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/tireinsert.png" width="550" alt="图片名称" align="center"></p>
 <h4 id="搜索键及前缀"><a href="#搜索键及前缀" class="headerlink" title="搜索键及前缀"></a>搜索键及前缀</h4><p>每个键在 trie 中表示为从根到内部节点或叶的路径。我们用第一个键字符从根开始，。检查当前节点中与键字符对应的链接。有两种情况：</p>
 <ul>
 <li><p>存在链接。我们移动到该链接后面路径中的下一个节点，并继续搜索下一个键字符。</p>
@@ -626,7 +626,7 @@
 <li>IP路由</li>
 <li>打字预测等</li>
 </ul>
-<h3 id="字典树与哈希表对比"><a href="#字典树与哈希表对比" class="headerlink" title="字典树与哈希表对比"></a>字典树与哈希表对比</h3><p>尽管哈希表可以在 O(1)<em>O</em>(1) 时间内寻找键值，却无法高效的完成以下操作：</p>
+<h3 id="字典树与哈希表对比"><a href="#字典树与哈希表对比" class="headerlink" title="字典树与哈希表对比"></a>字典树与哈希表对比</h3><p>尽管哈希表可以在 $O(1)$ 时间内寻找键值，却无法高效的完成以下操作：</p>
 <ul>
 <li>找到具有同一前缀的全部键值</li>
 <li>按词典序枚举字符串的数据集</li>
@@ -705,8 +705,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/12/计算机/算法/越位处理/" rel="prev" title="溢出处理及负数表示">
-                溢出处理及负数表示 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/07/12/计算机/算法/贪心算法/" rel="prev" title="贪心">
+                贪心 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
