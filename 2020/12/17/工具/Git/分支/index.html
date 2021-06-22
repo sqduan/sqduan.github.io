@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Listen, a tree is growing">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-29T10:04:53.707Z">
+<meta property="og:updated_time" content="2021-06-16T12:41:26.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分支">
 <meta name="twitter:description" content="Listen, a tree is growing">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-29 18:04:53" itemprop="dateModified" datetime="2021-04-29T18:04:53+08:00">2021-04-29</time>
+                <time title="Modified: 2021-06-16 20:41:26" itemprop="dateModified" datetime="2021-06-16T20:41:26+08:00">2021-06-16</time>
               
             
           </span>
@@ -496,7 +496,10 @@
 <p>当然，切换分支后，本地的修改会被保留，使用<code>git stash</code>可以删除这些修改（慎用！）</p>
 <h3 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h3><p>假设我们的当前分支为master，那么如果我们要将分支dev合并至master，可以执行下面的命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
-<h3 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h3><p>使用分支开发过程中一个很大的问题就是解决冲突，当多个开发者试图编辑相同文件的同一行时，就可能发生冲突。Git对冲突的解决方式是：保留多个分支中的冲突的内容，然后人工进行冲突处理后再允许合并。冲突只影响合并过程</p>
+<h3 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h3><p>使用分支开发过程中一个很大的问题就是解决冲突，当多个开发者试图编辑相同文件的同一行时，就可能发生冲突。Git对冲突的解决方式是：保留多个分支中的冲突的内容，然后人工进行冲突处理后再允许合并。冲突只影响合并过程。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>在下面的分支中，两个分支各自有增有减，因此需要手动合并</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD  (Current change)</span><br><span class="line">    <span class="comment">// 当前分支的修改</span></span><br><span class="line">    <span class="comment">// Handle spurious interrupts</span></span><br><span class="line">    <span class="comment">// The hardware sometimes raises these because of noise on the</span></span><br><span class="line">    <span class="comment">// IRQ line or other reasons. We don't care.</span></span><br><span class="line">    <span class="keyword">if</span> (tf-&gt;tf_trapno == IRQ_OFFSET + IRQ_SPURIOUS) &#123;</span><br><span class="line">        cprintf(<span class="string">"Spurious interrupt on irq 7\n"</span>);</span><br><span class="line">        print_trapframe(tf);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">=======</span><br><span class="line">    <span class="comment">// 合并入的分支的修改</span></span><br><span class="line">    <span class="comment">// Handle the trap according to the trap num</span></span><br><span class="line">    <span class="keyword">switch</span> (tf-&gt;tf_trapno)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Handle the breakpoint fault (vector 3)</span></span><br><span class="line">        <span class="keyword">case</span> T_BRKPT:</span><br><span class="line">            breakpoint_handler(tf);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="comment">// Handle the page fault (vector 14)</span></span><br><span class="line">        <span class="keyword">case</span> T_PGFLT:</span><br><span class="line">            page_fault_handler(tf);</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; lab3  (并入的分支)</span><br></pre></td></tr></table></figure>
+<p>上半部分为当前分支中的内容，而下半部分为合并入的分支的内容</p>
 <h4 id="常见的引起冲突的情况"><a href="#常见的引起冲突的情况" class="headerlink" title="常见的引起冲突的情况"></a>常见的引起冲突的情况</h4><h5 id="字符集错误"><a href="#字符集错误" class="headerlink" title="字符集错误"></a>字符集错误</h5><p>不同的编辑器使用的字符集可能不一样，例如在windows环境下的换行在linux下会显示为行尾的<code>^M</code>字符。所以如果需要多个人对同一个文件进行修改，尽可能使用相同的开发环境。针对行尾的<code>^M</code>处理方式如下：</p>
 <ol>
 <li><p>在linux的vim下命令格式输入：<code>:e ++ff=unix</code>，显示结尾的^M</p>
@@ -504,6 +507,7 @@
 <li><p>输入<code>:%s/\r//g</code>删除</p>
 </li>
 </ol>
+<h4 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h4><p>解决方式一般就是手工修改代码，让冲突的部分不再冲突即可。</p>
 
       
     </div>
@@ -909,7 +913,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分支介绍"><span class="nav-number">1.</span> <span class="nav-text">分支介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支及其作用"><span class="nav-number">1.1.</span> <span class="nav-text">分支及其作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关操作"><span class="nav-number">2.</span> <span class="nav-text">相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看分支"><span class="nav-number">2.1.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支创建"><span class="nav-number">2.2.</span> <span class="nav-text">分支创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支切换"><span class="nav-number">2.3.</span> <span class="nav-text">分支切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支合并"><span class="nav-number">2.4.</span> <span class="nav-text">分支合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突解决"><span class="nav-number">2.5.</span> <span class="nav-text">冲突解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的引起冲突的情况"><span class="nav-number">2.5.1.</span> <span class="nav-text">常见的引起冲突的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字符集错误"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">字符集错误</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分支介绍"><span class="nav-number">1.</span> <span class="nav-text">分支介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分支及其作用"><span class="nav-number">1.1.</span> <span class="nav-text">分支及其作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关操作"><span class="nav-number">2.</span> <span class="nav-text">相关操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看分支"><span class="nav-number">2.1.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支创建"><span class="nav-number">2.2.</span> <span class="nav-text">分支创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支切换"><span class="nav-number">2.3.</span> <span class="nav-text">分支切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支合并"><span class="nav-number">2.4.</span> <span class="nav-text">分支合并</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#冲突解决"><span class="nav-number">2.5.</span> <span class="nav-text">冲突解决</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">2.5.1.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的引起冲突的情况"><span class="nav-number">2.5.2.</span> <span class="nav-text">常见的引起冲突的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#字符集错误"><span class="nav-number">2.5.2.1.</span> <span class="nav-text">字符集错误</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方式"><span class="nav-number">2.5.3.</span> <span class="nav-text">解决方式</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

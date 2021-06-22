@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="在这个作业中，我们将探究中断和锁之间的一些关系。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-06-13T14:23:47.448Z">
+<meta property="og:updated_time" content="2021-06-16T15:38:43.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MIT6828-HW7-locking">
 <meta name="twitter:description" content="在这个作业中，我们将探究中断和锁之间的一些关系。">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-06-13 22:23:47" itemprop="dateModified" datetime="2021-06-13T22:23:47+08:00">2021-06-13</time>
+                <time title="Modified: 2021-06-16 23:38:43" itemprop="dateModified" datetime="2021-06-16T23:38:43+08:00">2021-06-16</time>
               
             
           </span>
@@ -494,8 +494,11 @@
 <p>Let’s see what happens if we turn on interrupts while holding the <code>ide</code> lock. In <code>iderw</code> in <code>ide.c</code>, add a call to <code>sti()</code> after the <code>acquire()</code>, and a call to <code>cli()</code> just before the <code>release()</code>. Rebuild the kernel and boot it in QEMU. Chances are the kernel will panic soon after boot; try booting QEMU a few times if it doesn’t.</p>
 <h3 id="在iderw中加锁和释放锁部分开启中断"><a href="#在iderw中加锁和释放锁部分开启中断" class="headerlink" title="在iderw中加锁和释放锁部分开启中断"></a>在iderw中加锁和释放锁部分开启中断</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span></span><br><span class="line">iderw(struct buf *b)</span><br><span class="line">&#123;</span><br><span class="line"> </span><br><span class="line">  acquire(&amp;idelock);  <span class="comment">//DOC:acquire-lock</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// HW7: Add sti </span></span><br><span class="line">  sti();</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// HW7: add cli just before releasing the lock</span></span><br><span class="line">  cli();</span><br><span class="line">  release(&amp;idelock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在添加了<code>sti</code>和<code>cli</code>后，如果编译并启动内核，系统会panic。</p>
-<h3 id="sti和cli的作用"><a href="#sti和cli的作用" class="headerlink" title="sti和cli的作用"></a><code>sti</code>和<code>cli</code>的作用</h3><p><code>sti</code>开启中断，<code>cli</code>关闭中断，也就是说我们在<code>acquire</code>和<code>release</code>之间开启了中断</p>
-<h3 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h3><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-lock.html">Homework: xv6 locking (mit.edu)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+<h3 id="sti和cli的作用"><a href="#sti和cli的作用" class="headerlink" title="sti和cli的作用"></a><code>sti</code>和<code>cli</code>的作用</h3><p><code>sti</code>开启中断，<code>cli</code>关闭中断，也就是说我们在<code>acquire</code>和<code>release</code>之间开启了中断。</p>
+<h3 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h3><p>系统提示的错误信息如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58</span><br><span class="line">lapicid 1: panic: acquire</span><br><span class="line">801043ed 80102053 80105985 801056fc 80100183 80102ae5 801036c0 801056ff 0 0</span><br></pre></td></tr></table></figure>
+<p>最下方一行数字为系统调用栈情况，</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev10.pdf">xv6 book</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-lock.html">Homework: xv6 locking (mit.edu)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
