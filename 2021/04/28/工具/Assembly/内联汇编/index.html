@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="asm asm-qualifiers ( AssemblerTemplate                 : OutputOperands                 [ : InputOperands                 [ : Clobbers ] ])">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-28T06:05:51.235Z">
+<meta property="og:updated_time" content="2021-07-02T10:12:26.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内联汇编">
 <meta name="twitter:description" content="asm asm-qualifiers ( AssemblerTemplate                 : OutputOperands                 [ : InputOperands                 [ : Clobbers ] ])">
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2021-04-28 13:30:48 / Modified: 14:05:51" itemprop="dateCreated datePublished" datetime="2021-04-28T13:30:48+08:00">2021-04-28</time>
+              <time title="Created: 2021-04-28 13:30:48" itemprop="dateCreated datePublished" datetime="2021-04-28T13:30:48+08:00">2021-04-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-07-02 18:12:26" itemprop="dateModified" datetime="2021-07-02T18:12:26+08:00">2021-07-02</time>
               
             
           </span>
@@ -478,7 +490,7 @@
 <h2 id="扩展汇编"><a href="#扩展汇编" class="headerlink" title="扩展汇编"></a>扩展汇编</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>相比基本汇编，扩展汇编更加灵活高效，但是必须放在函数中。扩展汇编的基本语法如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">asm</span> ( assembler <span class="keyword">template</span> </span><br><span class="line">    : output operands                  <span class="comment">/* optional 输出操作数*/</span>  </span><br><span class="line">    : input operands                   <span class="comment">/* optional 输入操作数*/</span></span><br><span class="line">    : <span class="built_in">list</span> of clobbered registers      <span class="comment">/* optional 破坏的寄存器*/</span></span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
 <h3 id="assembler-template"><a href="#assembler-template" class="headerlink" title="assembler template"></a>assembler template</h3><p>assembler template由汇编指令组成</p>
-<h3 id="输入-输出操作数"><a href="#输入-输出操作数" class="headerlink" title="输入/输出操作数"></a>输入/输出操作数</h3><h4 id="操作数顺序"><a href="#操作数顺序" class="headerlink" title="操作数顺序"></a>操作数顺序</h4><p>我们在内联汇编中能看到<code>%0, %1, %2...</code>，这些数表示传入的第1个、第2个、…、第<code>n</code>个操作数，顺序即输出、输入操作数在内联汇编中的排列顺序。</p>
+<h3 id="输入-输出操作数"><a href="#输入-输出操作数" class="headerlink" title="输入/输出操作数"></a>输入/输出操作数</h3><h4 id="操作数顺序"><a href="#操作数顺序" class="headerlink" title="操作数顺序"></a>操作数顺序</h4><p>我们在内联汇编中能看到<code>%0, %1, %2...</code>，这些数表示输入的第1个、第2个、…、第<code>n</code>个操作数，顺序即输入操作数在内联汇编中的排列顺序。</p>
 <h4 id="操作数限制"><a href="#操作数限制" class="headerlink" title="操作数限制"></a>操作数限制</h4><p>我们可以用限制词限制输入输出操作数的位置，限制词的语法为：</p>
 <ul>
 <li><code>: &quot;=c&quot; (output)</code></li>
@@ -497,7 +509,7 @@
 <li>寄存器前有两个%%，这是为了区分操作数和寄存器，操作数只有一个%</li>
 <li>被破坏的寄存器是<code>%eax</code>，告知GCC<code>eax</code>的值发生了改变，GCC将不会用这些寄存器保存值</li>
 </ul>
-<p>当上面的代码运行完成后，<code>b</code>将保存更新后的输出值</p>
+<p>当上面的代码运行完成后，<code>b</code>将保存更新后的输出值。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://gcc.gnu.org/onlinedocs/gcc/Basic-Asm.html#Basic-Asm">Basic Asm (Using the GNU Compiler Collection (GCC))</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html#s1">GCC-Inline-Assembly-HOWTO (ibiblio.org)</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -649,7 +661,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">295</span>
+                    <span class="site-state-item-count">273</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -770,23 +782,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">60</span>
+                    <span class="site-state-item-count">52</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
