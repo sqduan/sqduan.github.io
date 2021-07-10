@@ -104,7 +104,7 @@
 <meta property="og:description" content="GDB text user interface（TUI）是GDB的一个多窗口的符号终端，能够同时显示源文件、汇编输出、寄存器等情况，本文将针对tui的使用进行一些总结。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210211184604.png">
-<meta property="og:updated_time" content="2021-04-21T00:55:38.663Z">
+<meta property="og:updated_time" content="2021-07-10T11:55:29.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TUI调试模式">
 <meta name="twitter:description" content="GDB text user interface（TUI）是GDB的一个多窗口的符号终端，能够同时显示源文件、汇编输出、寄存器等情况，本文将针对tui的使用进行一些总结。">
@@ -420,7 +420,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-21 08:55:38" itemprop="dateModified" datetime="2021-04-21T08:55:38+08:00">2021-04-21</time>
+                <time title="Modified: 2021-07-10 19:55:29" itemprop="dateModified" datetime="2021-07-10T19:55:29+08:00">2021-07-10</time>
               
             
           </span>
@@ -492,6 +492,8 @@
 <li>寄存器窗口：显示寄存器中的内容，（命令行窗口中输入<code>layout regs</code>）</li>
 </ul>
 <p>如果需要切分窗口，输入<code>layout split</code>，可以增加显示窗口的数目</p>
+<h2 id="tui配置"><a href="#tui配置" class="headerlink" title="tui配置"></a>tui配置</h2><p>每次打开GDB，我们都需要手动输入上面的命令激活tui，不太方便。我们可以将上述命令写入<code>~/.gdbinit</code>中，每次打开gdb，都会执行上述指令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tui enable</span><br><span class="line">layout asm</span><br><span class="line">layout reg</span><br></pre></td></tr></table></figure>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://unix.stackexchange.com/questions/243350/why-does-using-yes-on-bash-pipelines-not-cause-infinite-loops">shell - Why does using <code>yes</code> on bash pipelines <em>not</em> cause infinite loops? - Unix &amp; Linux Stack Exchange</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
@@ -643,7 +645,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">273</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -883,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">1.</span> <span class="nav-text">基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在GDB中激活TUI"><span class="nav-number">1.1.</span> <span class="nav-text">在GDB中激活TUI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的窗口"><span class="nav-number">1.2.</span> <span class="nav-text">不同的窗口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本命令"><span class="nav-number">1.</span> <span class="nav-text">基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在GDB中激活TUI"><span class="nav-number">1.1.</span> <span class="nav-text">在GDB中激活TUI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同的窗口"><span class="nav-number">1.2.</span> <span class="nav-text">不同的窗口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tui配置"><span class="nav-number">2.</span> <span class="nav-text">tui配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
