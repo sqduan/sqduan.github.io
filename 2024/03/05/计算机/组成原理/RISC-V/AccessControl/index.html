@@ -99,11 +99,11 @@
   <meta name="description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Access Protection">
-<meta property="og:url" content="http://sqduan.github.io/2024/03/02/计算机/组成原理/RISC-V/AccessControl/index.html">
+<meta property="og:url" content="http://sqduan.github.io/2024/03/05/计算机/组成原理/RISC-V/AccessControl/index.html">
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-03-05T01:31:57.415Z">
+<meta property="og:updated_time" content="2024-03-05T14:35:24.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Access Protection">
 <meta name="twitter:description" content="Be a security in 20, avoid 30 years of detours">
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://sqduan.github.io/2024/03/02/计算机/组成原理/RISC-V/AccessControl/">
+  <link rel="canonical" href="http://sqduan.github.io/2024/03/05/计算机/组成原理/RISC-V/AccessControl/">
 
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/03/02/计算机/组成原理/RISC-V/AccessControl/">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/03/05/计算机/组成原理/RISC-V/AccessControl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -401,25 +401,9 @@
                 
               
 
-              <time title="Created: 2024-03-02 12:00:38" itemprop="dateCreated datePublished" datetime="2024-03-02T12:00:38+08:00">2024-03-02</time>
+              <time title="Created: 2024-03-05 22:35:24" itemprop="dateCreated datePublished" datetime="2024-03-05T22:35:24+08:00">2024-03-05</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2024-03-05 09:31:57" itemprop="dateModified" datetime="2024-03-05T09:31:57+08:00">2024-03-05</time>
-              
             
           </span>
 
@@ -495,12 +479,24 @@
 </ul>
 <h2 id="PMP"><a href="#PMP" class="headerlink" title="PMP"></a>PMP</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>PMPs control the access privileges of physical memory including R/W and execute, normally it is used to regulate supervisor or user mode.</p>
 <p>In a general RISC-V core, there are normally 16 PMP entries, which means we can divide 16 resource groups.</p>
-<h3 id="PMP-configure"><a href="#PMP-configure" class="headerlink" title="PMP configure"></a>PMP configure</h3><p>When we talk about memory protection, the first thing we consider is the protection range, the setting for PMP range is quite not initiative, here we basically introduce the range setting called <strong>NAPOT</strong>, it setting the range to an amount of Power of Two, it will first calculate a pmpaddr using some bit operations, then check the lower 1 number <code>n</code> in this addr, and it will protect the region starting from <code>pmpaddr &amp; LOWER_MASK</code> with a range of $2^{n+3}$ bytes. This might be<br>confusing, let’s see an example:</p>
+<h3 id="PMP-configure"><a href="#PMP-configure" class="headerlink" title="PMP configure"></a>PMP configure</h3><h4 id="Address-amp-range-calculation"><a href="#Address-amp-range-calculation" class="headerlink" title="Address &amp; range calculation"></a>Address &amp; range calculation</h4><p>When we talk about memory protection, the first thing we consider is the protection range, the setting for PMP range is quite not initiative, here we basically introduce the range setting called <strong>NAPOT</strong>, it setting the range to an amount of Power of Two, it will first calculate a pmpaddr using some bit operations, then check the lower 1 number <code>n</code> in this addr, and it will protect the region starting from <code>pmpaddr &amp; LOWER_MASK</code> with a range of $2^{n+3}$ bytes. The calculation rules are</p>
 <p>Here we have a range of global uninit data which resides in <code>.bss</code> section that we want to protect<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PROTECTED_ATTAY_LENGTH 32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NAPOT_SIZE             128</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="keyword">uint32_t</span> protected_global[PROTECTED_ARRAY_LENGTH] __attribute__(aligned(NAPOT_SIZE));</span><br></pre></td></tr></table></figure></p>
 <p>Now we start to calculate the <code>pmpaddr</code> and range, assume that the <code>protected_global</code> is at <code>0x30415880</code>, so we are going to protect the range <code>0x30415880 -- 0x304158FF</code></p>
-<p>For the PMP addr reg, since it is 4bytes aligned, so first we omit the least two bits in the addr, and since the range is $2^{n+3}$, so we clear the bits corresponding with alignment.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* PMP address are 4-bytes aligned, drop the bottom 2 bits */</span></span><br><span class="line"><span class="keyword">size_t</span> pmpaddr = ((<span class="keyword">size_t</span>)&amp;protected_global) &gt;&gt; <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Clear the bits corresponding with alignment */</span></span><br><span class="line">pmpaddr</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* encode PMP address */</span></span><br><span class="line"><span class="keyword">if</span> (log2len == PMP_SHIFT) &#123;</span><br><span class="line">    pmpaddr = (addr &gt;&gt; PMP_SHIFT);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (log2len == __riscv_xlen) &#123;</span><br><span class="line">        pmpaddr = <span class="number">-1U</span>L;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        addrmask = (<span class="number">1U</span>L &lt;&lt; (log2len - PMP_SHIFT)) - <span class="number">1</span>;</span><br><span class="line">        pmpaddr  = ((addr &gt;&gt; PMP_SHIFT) &amp; ~addrmask);</span><br><span class="line">        pmpaddr |= (addrmask &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://medium.com/@talktokarthikbk/risc-v-memory-protection-diving-deep-into-the-complexities-9d751212be6b">PMP introduction</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<p>For the PMP addr reg, since it is 4bytes aligned, so first we omit the least two bits in the addr, and since the range is $2^{n+3}$, so we clear the bits corresponding with alignment.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* PMP address are 4-bytes aligned, drop the bottom 2 bits */</span></span><br><span class="line"><span class="keyword">size_t</span> pmpaddr = ((<span class="keyword">size_t</span>)&amp;protected_global) &gt;&gt; <span class="number">2</span>;    <span class="comment">// 0x30415880 &gt;&gt; 2 = 0xC105620</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Clear the bit corresponding with alignment */</span></span><br><span class="line">protected_addr &amp;= ~(NAPOT_SIZE &gt;&gt; <span class="number">3</span>);                 <span class="comment">// 0x30415880 &amp; 0xFFFFFFEF</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Set the bits up to the alignment bit, this address will be set in pmpaddr */</span></span><br><span class="line">protected_addr |= ((NAPOT_SIZE &gt;&gt; <span class="number">3</span>) - <span class="number">1</span>);    <span class="comment">// 0x3041588F</span></span><br></pre></td></tr></table></figure></p>
+<p>Finally we get an address of 0x3041588F, according to the <strong>NAPOT</strong> rule, we will protect $2^{4+3}$ bytes.</p>
+<h4 id="Exception-handler-register"><a href="#Exception-handler-register" class="headerlink" title="Exception handler register"></a>Exception handler register</h4><p>The next step is to handle an exception handler so that we could go and handle the exception after exception happened, here please refer to spec 3.1.20 for the exception code.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Register a handler for the store access fault exception */</span></span><br><span class="line">rc = metal_cpu_exception_register(cpu, ECODE_STORE_FAULT, store_access_fault_handler);</span><br><span class="line"><span class="keyword">if</span>(rc &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    vv_msg(SEV_INFO,ST_FUNCTION,<span class="string">"Failed to register exception handler\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Initialization-and-region-config"><a href="#Initialization-and-region-config" class="headerlink" title="Initialization and region config"></a>Initialization and region config</h4><p>Finally we do initialization and region config to finally open up the PMP module. The pmp will be sequentially used for protecting the physical region.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Initialize PMPs */</span></span><br><span class="line">pmp = metal_pmp_get_device();</span><br><span class="line"><span class="keyword">if</span>(!pmp) &#123;</span><br><span class="line">    vv_msg(SEV_INFO,ST_FUNCTION,<span class="string">"Unable to get PMP Device\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line">metal_pmp_init(pmp);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Configure PMP 0 to only allow reads to protected_global. The</span></span><br><span class="line"><span class="comment"> * PMP region is locked so that the configuration applies to M-mode</span></span><br><span class="line"><span class="comment"> * accesses. */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">metal_pmp_config</span> <span class="title">config</span> = &#123;</span></span><br><span class="line">    .L = METAL_PMP_LOCKED, <span class="comment">/*the orginal is UNLOCKED*/</span></span><br><span class="line">    .A = METAL_PMP_NAPOT, <span class="comment">/* Naturally-aligned power of two */</span></span><br><span class="line">    .X = <span class="number">0</span>,</span><br><span class="line">    .W = <span class="number">0</span>,</span><br><span class="line">    .R = <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">rc = metal_pmp_set_region(pmp, <span class="number">0</span>, config, protected_addr);</span><br><span class="line"><span class="keyword">if</span>(rc != <span class="number">0</span>) &#123;</span><br><span class="line">    vv_msg(SEV_INFO,ST_FUNCTION,<span class="string">"Failed to configure PMP 0\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Attempting to write the protected region will cause an exception:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protected_global[<span class="number">0</span>] = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://medium.com/@talktokarthikbk/risc-v-memory-protection-diving-deep-into-the-complexities-9d751212be6b">PMP introduction</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">| pmpaddr      | pmpcfg.A | Match type and size          |
+| ------------ | -------- | ---------------------------- |
+| aaaaa...aaaa | NA4      | 4-byte NAPOT range           |
+| aaaaa...aaa0 | NAPOT    | 8-byte NAPOT range           |
+| aaaaa...aa01 | NAPOT    | 16-byte NAPOT range          |
+| aaaaa...a011 | NAPOT    | 32-byte NAPOT range          |
+| aaa01...1111 | NAPOT    | $2^{XLEN}$  byte NAPOT range |</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Briscv-privileged-v1.10.pdf%5D(https://riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf)">RISCV Privileged Spec</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -863,7 +859,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RISC-V-Access-Protection-Introduction"><span class="nav-number">1.</span> <span class="nav-text">RISC-V Access Protection Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMP"><span class="nav-number">2.</span> <span class="nav-text">PMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PMP-configure"><span class="nav-number">2.2.</span> <span class="nav-text">PMP configure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RISC-V-Access-Protection-Introduction"><span class="nav-number">1.</span> <span class="nav-text">RISC-V Access Protection Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMP"><span class="nav-number">2.</span> <span class="nav-text">PMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PMP-configure"><span class="nav-number">2.2.</span> <span class="nav-text">PMP configure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Address-amp-range-calculation"><span class="nav-number">2.2.1.</span> <span class="nav-text">Address &amp; range calculation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exception-handler-register"><span class="nav-number">2.2.2.</span> <span class="nav-text">Exception handler register</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Initialization-and-region-config"><span class="nav-number">2.2.3.</span> <span class="nav-text">Initialization and region config</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
