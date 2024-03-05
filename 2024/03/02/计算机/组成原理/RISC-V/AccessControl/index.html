@@ -96,17 +96,17 @@
 
 
 
-  <meta name="description" content="在STL中，heap并不是一个容器组件，而是一组算法，使给定的容器堆化。同时，heap的算法也是实现priority_queue的底层机制，本文将针对heap的源码进行整理与总结">
+  <meta name="description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:type" content="article">
-<meta property="og:title" content="heap">
-<meta property="og:url" content="http://sqduan.github.io/2024/02/04/工具/C++/STL/heap/index.html">
+<meta property="og:title" content="Access Protection">
+<meta property="og:url" content="http://sqduan.github.io/2024/03/02/计算机/组成原理/RISC-V/AccessControl/index.html">
 <meta property="og:site_name" content="一隅">
-<meta property="og:description" content="在STL中，heap并不是一个容器组件，而是一组算法，使给定的容器堆化。同时，heap的算法也是实现priority_queue的底层机制，本文将针对heap的源码进行整理与总结">
+<meta property="og:description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-02-04T11:42:30.953Z">
+<meta property="og:updated_time" content="2024-03-05T01:31:57.415Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="heap">
-<meta name="twitter:description" content="在STL中，heap并不是一个容器组件，而是一组算法，使给定的容器堆化。同时，heap的算法也是实现priority_queue的底层机制，本文将针对heap的源码进行整理与总结">
+<meta name="twitter:title" content="Access Protection">
+<meta name="twitter:description" content="Be a security in 20, avoid 30 years of detours">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://sqduan.github.io/2024/02/04/工具/C++/STL/heap/">
+  <link rel="canonical" href="http://sqduan.github.io/2024/03/02/计算机/组成原理/RISC-V/AccessControl/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>heap | 一隅</title>
+  <title>Access Protection | 一隅</title>
   
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/C++/STL/heap/">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/03/02/计算机/组成原理/RISC-V/AccessControl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">heap
+          <h1 class="post-title" itemprop="name headline">Access Protection
 
               
             
@@ -401,9 +401,25 @@
                 
               
 
-              <time title="Created: 2024-02-04 19:42:30" itemprop="dateCreated datePublished" datetime="2024-02-04T19:42:30+08:00">2024-02-04</time>
+              <time title="Created: 2024-03-02 12:00:38" itemprop="dateCreated datePublished" datetime="2024-03-02T12:00:38+08:00">2024-03-02</time>
             
 
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2024-03-05 09:31:57" itemprop="dateModified" datetime="2024-03-05T09:31:57+08:00">2024-03-05</time>
+              
             
           </span>
 
@@ -419,21 +435,21 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/组成原理/" itemprop="url" rel="index"><span itemprop="name">组成原理</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/C/STL/" itemprop="url" rel="index"><span itemprop="name">STL</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/组成原理/RISC-V/" itemprop="url" rel="index"><span itemprop="name">RISC-V</span></a></span>
 
                 
                 
@@ -468,9 +484,23 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>在STL中，heap并不是一个容器组件，而是一组算法，使给定的容器堆化。同时，heap的算法也是实现priority_queue的底层机制，本文将针对heap的源码进行整理与总结</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>Be a security in 20, avoid 30 years of detours</p>
+</blockquote>
 <a id="more"></a>
-<h2 id="heap算法"><a href="#heap算法" class="headerlink" title="heap算法"></a>heap算法</h2><h3 id="push-heap"><a href="#push-heap" class="headerlink" title="push_heap"></a>push_heap</h3>
+<h2 id="RISC-V-Access-Protection-Introduction"><a href="#RISC-V-Access-Protection-Introduction" class="headerlink" title="RISC-V Access Protection Introduction"></a>RISC-V Access Protection Introduction</h2><p>In a RISC-V core, we have two types of access control unit, the PMP (Physical Memory Protection) and MPU (Memory Protection Unit) to distinguish &amp; protect regions between User/Machine mode and Privilege/Unprivilege mode. In a general use case, the roles of PMP and MPU are as follows:</p>
+<ul>
+<li>PMP: Protect machine mode region in user mode</li>
+<li>MPU: Separate privilege and unprivilege in user mode</li>
+</ul>
+<h2 id="PMP"><a href="#PMP" class="headerlink" title="PMP"></a>PMP</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>PMPs control the access privileges of physical memory including R/W and execute, normally it is used to regulate supervisor or user mode.</p>
+<p>In a general RISC-V core, there are normally 16 PMP entries, which means we can divide 16 resource groups.</p>
+<h3 id="PMP-configure"><a href="#PMP-configure" class="headerlink" title="PMP configure"></a>PMP configure</h3><p>When we talk about memory protection, the first thing we consider is the protection range, the setting for PMP range is quite not initiative, here we basically introduce the range setting called <strong>NAPOT</strong>, it setting the range to an amount of Power of Two, it will first calculate a pmpaddr using some bit operations, then check the lower 1 number <code>n</code> in this addr, and it will protect the region starting from <code>pmpaddr &amp; LOWER_MASK</code> with a range of $2^{n+3}$ bytes. This might be<br>confusing, let’s see an example:</p>
+<p>Here we have a range of global uninit data which resides in <code>.bss</code> section that we want to protect<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PROTECTED_ATTAY_LENGTH 32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NAPOT_SIZE             128</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="keyword">uint32_t</span> protected_global[PROTECTED_ARRAY_LENGTH] __attribute__(aligned(NAPOT_SIZE));</span><br></pre></td></tr></table></figure></p>
+<p>Now we start to calculate the <code>pmpaddr</code> and range, assume that the <code>protected_global</code> is at <code>0x30415880</code>, so we are going to protect the range <code>0x30415880 -- 0x304158FF</code></p>
+<p>For the PMP addr reg, since it is 4bytes aligned, so first we omit the least two bits in the addr, and since the range is $2^{n+3}$, so we clear the bits corresponding with alignment.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* PMP address are 4-bytes aligned, drop the bottom 2 bits */</span></span><br><span class="line"><span class="keyword">size_t</span> pmpaddr = ((<span class="keyword">size_t</span>)&amp;protected_global) &gt;&gt; <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Clear the bits corresponding with alignment */</span></span><br><span class="line">pmpaddr</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* encode PMP address */</span></span><br><span class="line"><span class="keyword">if</span> (log2len == PMP_SHIFT) &#123;</span><br><span class="line">    pmpaddr = (addr &gt;&gt; PMP_SHIFT);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (log2len == __riscv_xlen) &#123;</span><br><span class="line">        pmpaddr = <span class="number">-1U</span>L;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        addrmask = (<span class="number">1U</span>L &lt;&lt; (log2len - PMP_SHIFT)) - <span class="number">1</span>;</span><br><span class="line">        pmpaddr  = ((addr &gt;&gt; PMP_SHIFT) &amp; ~addrmask);</span><br><span class="line">        pmpaddr |= (addrmask &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://medium.com/@talktokarthikbk/risc-v-memory-protection-diving-deep-into-the-complexities-9d751212be6b">PMP introduction</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -500,8 +530,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2024/02/04/工具/C++/STL/STL——顺序容器操作/" rel="next" title="STL——顺序容器操作">
-                <i class="fa fa-chevron-left"></i> STL——顺序容器操作
+              <a href="/2024/02/04/计算机/软件工程/减少编程错误/" rel="next" title="减少编程错误">
+                <i class="fa fa-chevron-left"></i> 减少编程错误
               </a>
             
           </div>
@@ -509,10 +539,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2024/02/04/工具/C++/动态内存管理/" rel="prev" title="动态内存管理">
-                动态内存管理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -583,7 +609,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">277</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -716,7 +742,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -835,7 +863,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#heap算法"><span class="nav-number">1.</span> <span class="nav-text">heap算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#push-heap"><span class="nav-number">1.1.</span> <span class="nav-text">push_heap</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RISC-V-Access-Protection-Introduction"><span class="nav-number">1.</span> <span class="nav-text">RISC-V Access Protection Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMP"><span class="nav-number">2.</span> <span class="nav-text">PMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PMP-configure"><span class="nav-number">2.2.</span> <span class="nav-text">PMP configure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>

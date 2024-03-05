@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/控制科学/系统辨识/模型估计/">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/控制科学/控制理论/自适应控制系统设计方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -378,7 +378,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2024/02/04/控制科学/系统辨识/模型估计/" class="post-title-link" itemprop="url">模型估计</a>
+                <a href="/2024/02/04/控制科学/控制理论/自适应控制系统设计方法/" class="post-title-link" itemprop="url">自适应控制系统设计方法</a>
               
             
           </h1>
@@ -435,7 +435,7 @@
                   , 
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/控制理论/系统辨识/" itemprop="url" rel="index"><span itemprop="name">系统辨识</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/控制理论/自适应控制/" itemprop="url" rel="index"><span itemprop="name">自适应控制</span></a></span>
 
                 
                 
@@ -471,356 +471,11 @@
 
       
         
-          <p>在设计LQR与LQG的过程中，我们往往默认参数是已知的，但是实际情况中参数一般是未知的，所以我们需要首先进行模型估计。本文将针对常用的模型估计方法进行总结。</p>
+          <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>本文将针对自适应控制系统的设计方法进行相应总结。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2024/02/04/控制科学/系统辨识/模型估计/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/控制科学/机器学习/机器学习复习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shiqi Duan">
-      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一隅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2024/02/04/控制科学/机器学习/机器学习复习/" class="post-title-link" itemprop="url">机器学习复习</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2024-02-04 19:42:30" itemprop="dateCreated datePublished" datetime="2024-02-04T19:42:30+08:00">2024-02-04</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="1-概念学习-ID3-C4-5（概念聚类）"><a href="#1-概念学习-ID3-C4-5（概念聚类）" class="headerlink" title="1. 概念学习  ID3/C4.5（概念聚类）"></a>1. 概念学习  ID3/C4.5（概念聚类）</h3><p>考试考ID3</p>
-<p>ID3采用熵作为策略，<u>ID3的选择策略是什么？</u></p>
-<h3 id="2-统计学习-最小错误率-Bayes决策规则"><a href="#2-统计学习-最小错误率-Bayes决策规则" class="headerlink" title="2. 统计学习  最小错误率  Bayes决策规则"></a>2. 统计学习  最小错误率  <u>Bayes决策规则</u></h3><p>条件概率，先验概率，类条件概率，考试写出Bayes决策规则是什么。</p>
-<p>参数法与非参数法（K近邻与Parzen窗函数法）</p>
-<p><u>窗函数法很经典，公式记住。</u></p>
-<p>K近邻（没法考），直接估计后验概率，$P<em>{e</em>{Bayes}}\le error\ rate\le 2P<em>{e</em>{Bayes}}$</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2024/02/04/控制科学/机器学习/机器学习复习/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/控制科学/机器学习/BP网络权值更新公式/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shiqi Duan">
-      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一隅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2024/02/04/控制科学/机器学习/BP网络权值更新公式/" class="post-title-link" itemprop="url">BP网络权值更新公式</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2024-02-04 19:42:30" itemprop="dateCreated datePublished" datetime="2024-02-04T19:42:30+08:00">2024-02-04</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>BP网络又叫做误差反向传播网络，说这么复杂，从控制理论的角度来说，这玩意儿不就是一个负反馈回路么，无非是在负反馈回路中加入了一些自适应参数调整，不得不说有些时候还是控制科学与工程的名词叫起来更顺耳一些。BP这个负反馈过程实际上就是对权值进行更新的一个方法。本文参考了斯坦福大学的CNN for visual recognition课程，国外的这些个课程设计的简直碾压国内高校课程，看看配套的网站支持就知道了。<a href="http://cs231n.github.io/">斯坦福CNN for visual recognition课程</a>。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2024/02/04/控制科学/机器学习/BP网络权值更新公式/#more" rel="contents">
+              <a class="btn" href="/2024/02/04/控制科学/控制理论/自适应控制系统设计方法/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1227,7 +882,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/UE4/碰撞检测/">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/控制科学/机器学习/BP网络权值更新公式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -1247,7 +902,177 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2024/02/04/工具/UE4/碰撞检测/" class="post-title-link" itemprop="url">碰撞检测</a>
+                <a href="/2024/02/04/控制科学/机器学习/BP网络权值更新公式/" class="post-title-link" itemprop="url">BP网络权值更新公式</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-02-04 19:42:30" itemprop="dateCreated datePublished" datetime="2024-02-04T19:42:30+08:00">2024-02-04</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>BP网络又叫做误差反向传播网络，说这么复杂，从控制理论的角度来说，这玩意儿不就是一个负反馈回路么，无非是在负反馈回路中加入了一些自适应参数调整，不得不说有些时候还是控制科学与工程的名词叫起来更顺耳一些。BP这个负反馈过程实际上就是对权值进行更新的一个方法。本文参考了斯坦福大学的CNN for visual recognition课程，国外的这些个课程设计的简直碾压国内高校课程，看看配套的网站支持就知道了。<a href="http://cs231n.github.io/">斯坦福CNN for visual recognition课程</a>。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2024/02/04/控制科学/机器学习/BP网络权值更新公式/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/UE4/模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2024/02/04/工具/UE4/模型/" class="post-title-link" itemprop="url">模型</a>
               
             
           </h1>
@@ -1334,12 +1159,12 @@
       
         
           <blockquote>
-<p>长安街禁止碰瓷</p>
+<p>俗說天地開辟，未有人民，女媧搏黃土作人。 劇務，力不暇供，乃引繩於泥中，舉以為人。 </p>
 </blockquote>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2024/02/04/工具/UE4/碰撞检测/#more" rel="contents">
+              <a class="btn" href="/2024/02/04/工具/UE4/模型/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1399,7 +1224,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/Qt/Qt学习之路——ModelView/">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/Qt/Qt处理json文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -1419,7 +1244,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2024/02/04/工具/Qt/Qt学习之路——ModelView/" class="post-title-link" itemprop="url">Qt学习之路——Model/View</a>
+                <a href="/2024/02/04/工具/Qt/Qt处理json文件/" class="post-title-link" itemprop="url">Qt处理Json文件</a>
               
             
           </h1>
@@ -1505,183 +1330,11 @@
 
       
         
-          <p>本文将针对Qt中的Model/View结构进行介绍。</p>
+          <p>本文将针对使用Qt处理Json文件的过程进行讲解。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2024/02/04/工具/Qt/Qt学习之路——ModelView/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/Qt/Qt信号与槽——原理分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shiqi Duan">
-      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
-      <meta itemprop="image" content="/images/header.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="一隅">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2024/02/04/工具/Qt/Qt信号与槽——原理分析/" class="post-title-link" itemprop="url">Qt信号与槽——原理分析</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2024-02-04 19:42:30" itemprop="dateCreated datePublished" datetime="2024-02-04T19:42:30+08:00">2024-02-04</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>知其然，知其所以然</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2024/02/04/工具/Qt/Qt信号与槽——原理分析/#more" rel="contents">
+              <a class="btn" href="/2024/02/04/工具/Qt/Qt处理json文件/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -2066,6 +1719,346 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/Qt/QML学习之路(6)——多窗口互动/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2024/02/04/工具/Qt/QML学习之路(6)——多窗口互动/" class="post-title-link" itemprop="url">QML学习之路(6)——多窗口互动</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-02-04 19:42:30" itemprop="dateCreated datePublished" datetime="2024-02-04T19:42:30+08:00">2024-02-04</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在GUI程序中，有时需要进行多窗口互动，本文将介绍几种多窗口互动的方式。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2024/02/04/工具/Qt/QML学习之路(6)——多窗口互动/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/02/04/工具/Qt/QML学习之路(5)——QML应用结构划分/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2024/02/04/工具/Qt/QML学习之路(5)——QML应用结构划分/" class="post-title-link" itemprop="url">QML学习之路(5)——QML应用结构划分</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-02-04 19:42:30" itemprop="dateCreated datePublished" datetime="2024-02-04T19:42:30+08:00">2024-02-04</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>随着QML应用的复杂化，往往需要将复杂应用划分为小单元，本文将介绍对QML进行划分的方法。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2024/02/04/工具/Qt/QML学习之路(5)——QML应用结构划分/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2114,7 +2107,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">277</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2247,7 +2240,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">58</span>
+                      
+                    
+                    <span class="site-state-item-count">59</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
