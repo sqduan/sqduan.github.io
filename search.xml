@@ -12586,7 +12586,7 @@ h\ge \lg (n!)</script><p>我们现在要证明$\lg(n!)\ge n\lg n$，证明过程
 | aaaaa...aaa0 | NAPOT    | 8-byte NAPOT range           |
 | aaaaa...aa01 | NAPOT    | 16-byte NAPOT range          |
 | aaaaa...a011 | NAPOT    | 32-byte NAPOT range          |
-| aaa01...1111 | NAPOT    | $2^{XLEN}$  byte NAPOT range |</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="%5Briscv-privileged-v1.10.pdf%5D(https://riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf)">RISCV Privileged Spec</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
+| aaa01...1111 | NAPOT    | $2^{XLEN}$  byte NAPOT range |</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf">RISCV Privileged Spec</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>]]></content>
       <categories>
         <category>计算机</category>
         <category>组成原理</category>
