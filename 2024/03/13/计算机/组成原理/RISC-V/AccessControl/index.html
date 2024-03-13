@@ -99,11 +99,11 @@
   <meta name="description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Access Protection">
-<meta property="og:url" content="http://sqduan.github.io/2024/03/05/计算机/组成原理/RISC-V/AccessControl/index.html">
+<meta property="og:url" content="http://sqduan.github.io/2024/03/13/计算机/组成原理/RISC-V/AccessControl/index.html">
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-03-06T05:12:10.074Z">
+<meta property="og:updated_time" content="2024-03-13T05:23:06.858Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Access Protection">
 <meta name="twitter:description" content="Be a security in 20, avoid 30 years of detours">
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="http://sqduan.github.io/2024/03/05/计算机/组成原理/RISC-V/AccessControl/">
+  <link rel="canonical" href="http://sqduan.github.io/2024/03/13/计算机/组成原理/RISC-V/AccessControl/">
 
 
 
@@ -358,7 +358,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/03/05/计算机/组成原理/RISC-V/AccessControl/">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/03/13/计算机/组成原理/RISC-V/AccessControl/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shiqi Duan">
@@ -401,25 +401,9 @@
                 
               
 
-              <time title="Created: 2024-03-05 22:35:24" itemprop="dateCreated datePublished" datetime="2024-03-05T22:35:24+08:00">2024-03-05</time>
+              <time title="Created: 2024-03-13 13:23:06" itemprop="dateCreated datePublished" datetime="2024-03-13T13:23:06+08:00">2024-03-13</time>
             
 
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2024-03-06 13:12:10" itemprop="dateModified" datetime="2024-03-06T13:12:10+08:00">2024-03-06</time>
-              
             
           </span>
 
@@ -488,10 +472,11 @@
 <p>Be a security in 20, avoid 30 years of detours</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="RISC-V-Access-Protection-Introduction"><a href="#RISC-V-Access-Protection-Introduction" class="headerlink" title="RISC-V Access Protection Introduction"></a>RISC-V Access Protection Introduction</h2><p>In a RISC-V core, we have two types of access control unit, the PMP (Physical Memory Protection) and MPU (Memory Protection Unit) to distinguish &amp; protect regions between User/Machine mode and Privilege/Unprivilege mode. In a general use case, the roles of PMP and MPU are as follows:</p>
+<h2 id="RISC-V-Access-Protection-Introduction"><a href="#RISC-V-Access-Protection-Introduction" class="headerlink" title="RISC-V Access Protection Introduction"></a>RISC-V Access Protection Introduction</h2><p>In a RISC-V core, we have three types of access control unit, the PMP (Physical Memory Protection) and MPU (Memory Protection Unit) and APU (Access Protection Unit) to distinguish &amp; protect regions between User/Machine mode and Privilege/Unprivilege mode. In a general use case, the roles of PMP/MPU/APU are as follows:</p>
 <ul>
 <li>PMP: Protect machine mode region in user mode</li>
 <li>MPU: Separate privilege and unprivilege in user mode</li>
+<li>APU: Access control for RISC-V handling outside master access</li>
 </ul>
 <h2 id="PMP"><a href="#PMP" class="headerlink" title="PMP"></a>PMP</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>PMPs control the access privileges of physical memory including R/W and execute, normally it is used to regulate supervisor or user mode.</p>
 <p>In a general RISC-V core, there are normally 16 PMP entries, which means we can divide 16 resource groups.</p>
@@ -506,13 +491,17 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Initialize PMPs */</span></span><br><span class="line">pmp = metal_pmp_get_device();</span><br><span class="line"><span class="keyword">if</span>(!pmp) &#123;</span><br><span class="line">    vv_msg(SEV_INFO,ST_FUNCTION,<span class="string">"Unable to get PMP Device\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line">metal_pmp_init(pmp);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Configure PMP 0 to only allow reads to protected_global. The</span></span><br><span class="line"><span class="comment"> * PMP region is locked so that the configuration applies to M-mode</span></span><br><span class="line"><span class="comment"> * accesses. */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">metal_pmp_config</span> <span class="title">config</span> = &#123;</span></span><br><span class="line">    .L = METAL_PMP_LOCKED, <span class="comment">/*the orginal is UNLOCKED*/</span></span><br><span class="line">    .A = METAL_PMP_NAPOT, <span class="comment">/* Naturally-aligned power of two */</span></span><br><span class="line">    .X = <span class="number">0</span>,</span><br><span class="line">    .W = <span class="number">0</span>,</span><br><span class="line">    .R = <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">rc = metal_pmp_set_region(pmp, <span class="number">0</span>, config, protected_addr);</span><br><span class="line"><span class="keyword">if</span>(rc != <span class="number">0</span>) &#123;</span><br><span class="line">    vv_msg(SEV_INFO,ST_FUNCTION,<span class="string">"Failed to configure PMP 0\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Attempting to write the protected region will cause an exception:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protected_global[<span class="number">0</span>] = <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://medium.com/@talktokarthikbk/risc-v-memory-protection-diving-deep-into-the-complexities-9d751212be6b">PMP introduction</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">| pmpaddr      | pmpcfg.A | Match type and size          |
+<h2 id="APU"><a href="#APU" class="headerlink" title="APU"></a>APU</h2><h3 id="Introduction-1"><a href="#Introduction-1" class="headerlink" title="Introduction"></a>Introduction</h3><p>In our trust engine, there’s an APU which protectes the access from masters to RISC-V, we can setting the start/end address and RD/WR enable bit to control the access behavior.</p>
+<h3 id="Configure"><a href="#Configure" class="headerlink" title="Configure"></a>Configure</h3><p>To configure the APU, we need to assign the left and right boundary ($a_l$ and $a_r$) to define the region, given an access region <code>a</code>, it should satisfy that $a_l \le a \le a_r$.</p>
+<p>If at least one APU is configured, then the space will become a white list mechanism, when master try to access the unprotected region, it will face an error.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Configuration for Front Port APU</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line">apu_glb_cfg global_cfg = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">apu_config  apu_cfg = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">global_cfg.enable = <span class="number">1</span>;</span><br><span class="line">global_cfg.lock = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Restrict the region</span></span><br><span class="line">apu_cfg.start_address = &amp;dplain;</span><br><span class="line">apu_cfg.end_address   = apu_cfg.start_address + <span class="keyword">sizeof</span>(dplain);</span><br><span class="line">apu_cfg.rg_no = <span class="number">0</span>;</span><br><span class="line">apu_cfg.rg_en = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">apu_cfg.rg_rd_en = <span class="number">1</span>;</span><br><span class="line">apu_cfg.rg_wr_en = <span class="number">0</span>;</span><br><span class="line">apu_cfg.rg_lock = <span class="number">0</span>;</span><br><span class="line">TE_apu_global_enable(global_cfg);</span><br><span class="line">TE_riscv_configure_apu(apu_cfg);</span><br></pre></td></tr></table></figure>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">| pmpaddr      | pmpcfg.A | Match type and size          |
 | ------------ | -------- | ---------------------------- |
 | aaaaa...aaaa | NA4      | 4-byte NAPOT range           |
 | aaaaa...aaa0 | NAPOT    | 8-byte NAPOT range           |
 | aaaaa...aa01 | NAPOT    | 16-byte NAPOT range          |
 | aaaaa...a011 | NAPOT    | 32-byte NAPOT range          |
-| aaa01...1111 | NAPOT    | $2^{XLEN}$  byte NAPOT range |</span><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;"><a href="https://riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf">RISCV Privileged Spec</a></span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+| aaa01...1111 | NAPOT    | $2^{XLEN}$  byte NAPOT range |</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf">RISCV Privilege Spec</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -875,7 +864,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RISC-V-Access-Protection-Introduction"><span class="nav-number">1.</span> <span class="nav-text">RISC-V Access Protection Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMP"><span class="nav-number">2.</span> <span class="nav-text">PMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PMP-configure"><span class="nav-number">2.2.</span> <span class="nav-text">PMP configure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Address-amp-range-calculation"><span class="nav-number">2.2.1.</span> <span class="nav-text">Address &amp; range calculation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exception-handler-register"><span class="nav-number">2.2.2.</span> <span class="nav-text">Exception handler register</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Initialization-and-region-config"><span class="nav-number">2.2.3.</span> <span class="nav-text">Initialization and region config</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RISC-V-Access-Protection-Introduction"><span class="nav-number">1.</span> <span class="nav-text">RISC-V Access Protection Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMP"><span class="nav-number">2.</span> <span class="nav-text">PMP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PMP-configure"><span class="nav-number">2.2.</span> <span class="nav-text">PMP configure</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Address-amp-range-calculation"><span class="nav-number">2.2.1.</span> <span class="nav-text">Address &amp; range calculation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Exception-handler-register"><span class="nav-number">2.2.2.</span> <span class="nav-text">Exception handler register</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Initialization-and-region-config"><span class="nav-number">2.2.3.</span> <span class="nav-text">Initialization and region config</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APU"><span class="nav-number">3.</span> <span class="nav-text">APU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction-1"><span class="nav-number">3.1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configure"><span class="nav-number">3.2.</span> <span class="nav-text">Configure</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
