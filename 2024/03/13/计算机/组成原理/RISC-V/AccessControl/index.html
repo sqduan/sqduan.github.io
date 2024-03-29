@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-03-13T05:23:06.858Z">
+<meta property="og:updated_time" content="2024-03-29T05:41:46.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Access Protection">
 <meta name="twitter:description" content="Be a security in 20, avoid 30 years of detours">
@@ -405,6 +405,22 @@
             
 
             
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2024-03-29 13:41:46" itemprop="dateModified" datetime="2024-03-29T13:41:46+08:00">2024-03-29</time>
+              
+            
           </span>
 
           
@@ -480,7 +496,45 @@
 </ul>
 <h2 id="PMP"><a href="#PMP" class="headerlink" title="PMP"></a>PMP</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>PMPs control the access privileges of physical memory including R/W and execute, normally it is used to regulate supervisor or user mode.</p>
 <p>In a general RISC-V core, there are normally 16 PMP entries, which means we can divide 16 resource groups.</p>
-<h3 id="PMP-configure"><a href="#PMP-configure" class="headerlink" title="PMP configure"></a>PMP configure</h3><h4 id="Address-amp-range-calculation"><a href="#Address-amp-range-calculation" class="headerlink" title="Address &amp; range calculation"></a>Address &amp; range calculation</h4><p>When we talk about memory protection, the first thing we consider is the protection range, the setting for PMP range is quite not initiative, here we basically introduce the range setting called <strong>NAPOT</strong>, it setting the range to an amount of Power of Two, it will first calculate a pmpaddr using some bit operations, then check the lower 1 number <code>n</code> in this addr, and it will protect the region starting from <code>pmpaddr &amp; LOWER_MASK</code> with a range of $2^{n+3}$ bytes. The calculation rules are</p>
+<h3 id="PMP-configure"><a href="#PMP-configure" class="headerlink" title="PMP configure"></a>PMP configure</h3><h4 id="Address-amp-range-calculation"><a href="#Address-amp-range-calculation" class="headerlink" title="Address &amp; range calculation"></a>Address &amp; range calculation</h4><p>When we talk about memory protection, the first thing we consider is the protection range, the setting for PMP range is quite not initiative, here we basically introduce the range setting called <strong>NAPOT</strong>, it setting the range to an amount of Power of Two, it will first calculate a pmpaddr using some bit operations, then check the lower 1 number <code>n</code> in this addr, and it will protect the region starting from <code>pmpaddr &amp; LOWER_MASK</code> with a range of $2^{n+3}$ bytes. The calculation rules are<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>pmpaddr</th>
+<th>pmpcfg.A</th>
+<th>Match type and size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aaaaa…aaaa</td>
+<td>NA4</td>
+<td>4-byte NAPOT range</td>
+</tr>
+<tr>
+<td>aaaaa…aaa0</td>
+<td>NAPOT</td>
+<td>8-byte NAPOT range</td>
+</tr>
+<tr>
+<td>aaaaa…aa01</td>
+<td>NAPOT</td>
+<td>16-byte NAPOT range</td>
+</tr>
+<tr>
+<td>aaaaa…a011</td>
+<td>NAPOT</td>
+<td>32-byte NAPOT range</td>
+</tr>
+<tr>
+<td>aaa01…1111</td>
+<td>NAPOT</td>
+<td>$2^{XLEN}$  byte NAPOT range</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>Here we have a range of global uninit data which resides in <code>.bss</code> section that we want to protect<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PROTECTED_ATTAY_LENGTH 32</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NAPOT_SIZE             128</span></span><br><span class="line"><span class="keyword">volatile</span> <span class="keyword">uint32_t</span> protected_global[PROTECTED_ARRAY_LENGTH] __attribute__(aligned(NAPOT_SIZE));</span><br></pre></td></tr></table></figure></p>
 <p>Now we start to calculate the <code>pmpaddr</code> and range, assume that the <code>protected_global</code> is at <code>0x30415880</code>, so we are going to protect the range <code>0x30415880 -- 0x304158FF</code></p>
 <p>For the PMP addr reg, since it is 4bytes aligned, so first we omit the least two bits in the addr, and since the range is $2^{n+3}$, so we clear the bits corresponding with alignment.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* PMP address are 4-bytes aligned, drop the bottom 2 bits */</span></span><br><span class="line"><span class="keyword">size_t</span> pmpaddr = ((<span class="keyword">size_t</span>)&amp;protected_global) &gt;&gt; <span class="number">2</span>;    <span class="comment">// 0x30415880 &gt;&gt; 2 = 0xC105620</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Clear the bit corresponding with alignment */</span></span><br><span class="line">protected_addr &amp;= ~(NAPOT_SIZE &gt;&gt; <span class="number">3</span>);                 <span class="comment">// 0x30415880 &amp; 0xFFFFFFEF</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Set the bits up to the alignment bit, this address will be set in pmpaddr */</span></span><br><span class="line">protected_addr |= ((NAPOT_SIZE &gt;&gt; <span class="number">3</span>) - <span class="number">1</span>);    <span class="comment">// 0x3041588F</span></span><br></pre></td></tr></table></figure></p>
@@ -495,13 +549,7 @@
 <h3 id="Configure"><a href="#Configure" class="headerlink" title="Configure"></a>Configure</h3><p>To configure the APU, we need to assign the left and right boundary ($a_l$ and $a_r$) to define the region, given an access region <code>a</code>, it should satisfy that $a_l \le a \le a_r$.</p>
 <p>If at least one APU is configured, then the space will become a white list mechanism, when master try to access the unprotected region, it will face an error.</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment"> * Configuration for Front Port APU</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line">apu_glb_cfg global_cfg = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">apu_config  apu_cfg = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"></span><br><span class="line">global_cfg.enable = <span class="number">1</span>;</span><br><span class="line">global_cfg.lock = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Restrict the region</span></span><br><span class="line">apu_cfg.start_address = &amp;dplain;</span><br><span class="line">apu_cfg.end_address   = apu_cfg.start_address + <span class="keyword">sizeof</span>(dplain);</span><br><span class="line">apu_cfg.rg_no = <span class="number">0</span>;</span><br><span class="line">apu_cfg.rg_en = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">apu_cfg.rg_rd_en = <span class="number">1</span>;</span><br><span class="line">apu_cfg.rg_wr_en = <span class="number">0</span>;</span><br><span class="line">apu_cfg.rg_lock = <span class="number">0</span>;</span><br><span class="line">TE_apu_global_enable(global_cfg);</span><br><span class="line">TE_riscv_configure_apu(apu_cfg);</span><br></pre></td></tr></table></figure>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">| pmpaddr      | pmpcfg.A | Match type and size          |
-| ------------ | -------- | ---------------------------- |
-| aaaaa...aaaa | NA4      | 4-byte NAPOT range           |
-| aaaaa...aaa0 | NAPOT    | 8-byte NAPOT range           |
-| aaaaa...aa01 | NAPOT    | 16-byte NAPOT range          |
-| aaaaa...a011 | NAPOT    | 32-byte NAPOT range          |
-| aaa01...1111 | NAPOT    | $2^{XLEN}$  byte NAPOT range |</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf">RISCV Privilege Spec</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;"><a href="https://riscv.org/wp-content/uploads/2017/05/riscv-privileged-v1.10.pdf">RISCV Privilege Spec</a></span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
 
@@ -531,8 +579,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2024/02/04/计算机/软件工程/减少编程错误/" rel="next" title="减少编程错误">
-                <i class="fa fa-chevron-left"></i> 减少编程错误
+              <a href="/2024/02/04/计算机/设备驱动/USB30/" rel="next" title="USB 3.0 Host Controllers">
+                <i class="fa fa-chevron-left"></i> USB 3.0 Host Controllers
               </a>
             
           </div>
@@ -540,6 +588,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/03/20/计算机/组成原理/DMA/" rel="prev" title="DMA">
+                DMA <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -610,7 +662,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">274</span>
+                    <span class="site-state-item-count">275</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
