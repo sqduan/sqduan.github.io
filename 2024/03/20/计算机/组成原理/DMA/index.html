@@ -98,14 +98,14 @@
 
   <meta name="description" content="I hope that one day I can extract myself from the meaningless work and dosomething real valuable.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DMA">
+<meta property="og:title" content="AES Encryption&#x2F;Decryption using DMA">
 <meta property="og:url" content="http://sqduan.github.io/2024/03/20/计算机/组成原理/DMA/index.html">
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="I hope that one day I can extract myself from the meaningless work and dosomething real valuable.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-03-20T02:36:31.237Z">
+<meta property="og:updated_time" content="2024-04-02T05:55:12.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DMA">
+<meta name="twitter:title" content="AES Encryption&#x2F;Decryption using DMA">
 <meta name="twitter:description" content="I hope that one day I can extract myself from the meaningless work and dosomething real valuable.">
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>DMA | 一隅</title>
+  <title>AES Encryption/Decryption using DMA | 一隅</title>
   
 
 
@@ -375,7 +375,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DMA
+          <h1 class="post-title" itemprop="name headline">AES Encryption/Decryption using DMA
 
               
             
@@ -401,12 +401,24 @@
                 
               
 
-              <time title="Created: 2024-03-20 10:30:19 / Modified: 10:36:31" itemprop="dateCreated datePublished" datetime="2024-03-20T10:30:19+08:00">2024-03-20</time>
+              <time title="Created: 2024-03-20 10:30:19" itemprop="dateCreated datePublished" datetime="2024-03-20T10:30:19+08:00">2024-03-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2024-04-02 13:55:12" itemprop="dateModified" datetime="2024-04-02T13:55:12+08:00">2024-04-02</time>
               
             
           </span>
@@ -469,28 +481,8 @@
 <p>I hope that one day I can extract myself from the meaningless work and do<br>something real valuable.</p>
 </blockquote>
 <a id="more"></a>
-<p>In this article, I will give an introduction of the DMA module we used in our<br>project.</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Interfaces"><a href="#Interfaces" class="headerlink" title="Interfaces"></a>Interfaces</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>Function Name</th>
-<th>Description</th>
-<th>Param</th>
-<th>Return</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DMAGetTTFCType</td>
-<td>Get the transfer type</td>
-<td>src_addr/dst_addr</td>
-<td>transfer type</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2>
+<p>In our trust engine, we use a DMA + crypto lib structure to do the hardware<br>encryption/decryption work</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h2 id="Flow-of"><a href="#Flow-of" class="headerlink" title="Flow of"></a>Flow of</h2><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2>
       
     </div>
 
@@ -529,6 +521,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/03/29/计算机/组成原理/DMA_CLIB_AES/" rel="prev" title="DMA">
+                DMA <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -599,7 +595,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">275</span>
+                    <span class="site-state-item-count">276</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -853,7 +849,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interfaces"><span class="nav-number">2.</span> <span class="nav-text">Interfaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flow-of"><span class="nav-number">2.</span> <span class="nav-text">Flow of</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
