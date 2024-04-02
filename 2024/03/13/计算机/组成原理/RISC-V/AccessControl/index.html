@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="一隅">
 <meta property="og:description" content="Be a security in 20, avoid 30 years of detours">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-03-29T05:41:46.329Z">
+<meta property="og:updated_time" content="2024-04-02T05:57:43.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Access Protection">
 <meta name="twitter:description" content="Be a security in 20, avoid 30 years of detours">
@@ -418,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2024-03-29 13:41:46" itemprop="dateModified" datetime="2024-03-29T13:41:46+08:00">2024-03-29</time>
+                <time title="Modified: 2024-04-02 13:57:43" itemprop="dateModified" datetime="2024-04-02T13:57:43+08:00">2024-04-02</time>
               
             
           </span>
@@ -496,7 +496,7 @@
 </ul>
 <h2 id="PMP"><a href="#PMP" class="headerlink" title="PMP"></a>PMP</h2><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>PMPs control the access privileges of physical memory including R/W and execute, normally it is used to regulate supervisor or user mode.</p>
 <p>In a general RISC-V core, there are normally 16 PMP entries, which means we can divide 16 resource groups.</p>
-<h3 id="PMP-configure"><a href="#PMP-configure" class="headerlink" title="PMP configure"></a>PMP configure</h3><h4 id="Address-amp-range-calculation"><a href="#Address-amp-range-calculation" class="headerlink" title="Address &amp; range calculation"></a>Address &amp; range calculation</h4><p>When we talk about memory protection, the first thing we consider is the protection range, the setting for PMP range is quite not initiative, here we basically introduce the range setting called <strong>NAPOT</strong>, it setting the range to an amount of Power of Two, it will first calculate a pmpaddr using some bit operations, then check the lower 1 number <code>n</code> in this addr, and it will protect the region starting from <code>pmpaddr &amp; LOWER_MASK</code> with a range of $2^{n+3}$ bytes. The calculation rules are<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+<h3 id="PMP-configure"><a href="#PMP-configure" class="headerlink" title="PMP configure"></a>PMP configure</h3><h4 id="Address-amp-range-calculation"><a href="#Address-amp-range-calculation" class="headerlink" title="Address &amp; range calculation"></a>Address &amp; range calculation</h4><p>When we talk about memory protection, the first thing we consider is the protection range, the setting for PMP range is quite not initiative, here we basically introduce the range setting called <strong>NAPOT</strong>, it setting the range to an amount of Power of Two, it will first calculate a pmpaddr using some bit operations, then check the lower 1 number <code>n</code> in this addr, and it will protect the region starting from <code>pmpaddr &amp; LOWER_MASK</code> with a range of $2^{n+3}$ bytes. The calculation rules are:</p>
 <div class="table-container">
 <table>
 <thead>
