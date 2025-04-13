@@ -477,7 +477,7 @@
 </ul>
 <p>所以linux下的管道实际上是半双工的。如果创建管道失败，返回<code>-1</code>，否则返回<code>0</code>。</p>
 <h3 id="管道的一些属性"><a href="#管道的一些属性" class="headerlink" title="管道的一些属性"></a>管道的一些属性</h3><h4 id="大小"><a href="#大小" class="headerlink" title="大小"></a>大小</h4><p>管道的大小不同的机器可能不同，下面是一个测试的脚本：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">test $# -ge 1 || &#123; echo "usage: $0 write-size [wait-time]"; exit 1; &#125;</span><br><span class="line">test $# -ge 2 || set -- "$@" 1</span><br><span class="line">bytes_written=$(</span><br><span class="line">&#123;</span><br><span class="line">    exec 3&gt;&amp;1</span><br><span class="line">    &#123;</span><br><span class="line">        perl -e '</span><br><span class="line">            $size = $ARGV[0];</span><br><span class="line">            $block = q(a) x $size;</span><br><span class="line">            $num_written = 0;</span><br><span class="line">            sub report &#123; print STDERR $num_written * $size, qq(\n); &#125;</span><br><span class="line">            report; while (defined syswrite STDOUT, $block) &#123;</span><br><span class="line">                $num_written++; report;</span><br><span class="line">            &#125;</span><br><span class="line">        ' "$1" 2&gt;&amp;3</span><br><span class="line">    &#125; | (sleep "$2"; exec 0&lt;&amp;-);</span><br><span class="line">&#125; | tail -1</span><br><span class="line">)</span><br><span class="line">printf "write size: %10d; bytes successfully before error: %d\n" \</span><br><span class="line">    "$1" "$bytes_written"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">test $# -ge 1 || &#123; echo "usage: $0 write-size [wait-time]"; exit 1; &#125;</span><br><span class="line">test $# -ge 2 || set -- "$@" 1</span><br><span class="line">bytes_written=$(</span><br><span class="line">&#123;</span><br><span class="line">    exec 3&gt;&amp;1</span><br><span class="line">    &#123;</span><br><span class="line">        perl -e '</span><br><span class="line">            $size = $ARGV[0];</span><br><span class="line">            $block = q(a) x $size;</span><br><span class="line">            $num_written = 0;</span><br><span class="line">            sub report &#123; print STDERR $num_written * $size, qq(\n); &#125;</span><br><span class="line">            report; while (defined syswrite STDOUT, $block) &#123;</span><br><span class="line">                $num_written++; report;</span><br><span class="line">            &#125;</span><br><span class="line">        ' "$1" 2&gt;&amp;3</span><br><span class="line">    &#125; | (sleep "$2"; exec 0&lt;&amp;-);</span><br><span class="line">&#125; | tail -1</span><br><span class="line">)</span><br><span class="line">printf "write size: %10d; bytes successfully before error: %d\n" \</span><br><span class="line">    "$1" "$bytes_written"</span><br></pre></td></tr></table></figure>
 <p>输入测试命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash -c &apos;for p in &#123;0..18&#125;; do ts.sh $((2 ** $p)) 0.5; done&apos;</span><br></pre></td></tr></table></figure>
 <p>在我这里是65536个byte。</p>
@@ -511,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2024/10/13/计算机/数据库/SQL基本语法/" rel="next" title="SQL基本语句及语法">
-                <i class="fa fa-chevron-left"></i> SQL基本语句及语法
+              <a href="/2024/10/13/计算机/操作系统/锁/" rel="next" title="锁">
+                <i class="fa fa-chevron-left"></i> 锁
               </a>
             
           </div>
@@ -521,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2024/10/13/计算机/操作系统/页表管理/" rel="prev" title="页表管理">
-                页表管理 <i class="fa fa-chevron-right"></i>
+              <a href="/2024/10/13/计算机/算法/代码优化/" rel="prev" title="复杂度优化">
+                复杂度优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +594,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -717,23 +717,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

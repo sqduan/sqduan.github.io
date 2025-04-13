@@ -463,7 +463,7 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文将针对Archlinux下的系统运维进行介绍。</p>
 <a id="more"></a>
-<h2 id="内核相关"><a href="#内核相关" class="headerlink" title="内核相关"></a>内核相关</h2><h3 id="查看当前内核版本"><a href="#查看当前内核版本" class="headerlink" title="查看当前内核版本"></a>查看当前内核版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> uname -r</span></span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line">4.19.67-1-lts</span><br></pre></td></tr></table></figure>
+<h2 id="内核相关"><a href="#内核相关" class="headerlink" title="内核相关"></a>内核相关</h2><h3 id="查看当前内核版本"><a href="#查看当前内核版本" class="headerlink" title="查看当前内核版本"></a>查看当前内核版本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> uname -r</span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line">4.19.67-1-lts</span><br></pre></td></tr></table></figure>
 <h3 id="内核版本更换"><a href="#内核版本更换" class="headerlink" title="内核版本更换"></a>内核版本更换</h3><p>最新的内核版本滚动过于频繁，新增的许多特性也不稳定，因此将archlinux运行在稳定版本的内核上，即lts kernel</p>
 <p>直接用pacman进行安装即可</p>
 <h3 id="旧内核删除"><a href="#旧内核删除" class="headerlink" title="旧内核删除"></a>旧内核删除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -f /boot/vmlinuz-kernel_3.xxx</span><br><span class="line">sudo rm -f /boot/initrd.img-kernel_3.xxx</span><br><span class="line">sudo rm -rf /lib/modules/kernel_3.xxx</span><br></pre></td></tr></table></figure>
@@ -472,15 +472,15 @@
 <h3 id="检查运行失败的service"><a href="#检查运行失败的service" class="headerlink" title="检查运行失败的service"></a>检查运行失败的service</h3><ol>
 <li>找到运行失败的service</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl --failed  </span></span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line">systemd-modules-load.service   loaded failed failed  Load Kernel Modules</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> systemctl --failed  </span><br><span class="line">------------------------------------------------------------------------</span><br><span class="line">systemd-modules-load.service   loaded failed failed  Load Kernel Modules</span><br></pre></td></tr></table></figure>
 <ol>
 <li>查看运行失败的原因</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> systemctl status systemd-modules-load.service</span></span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">● systemd-modules-load.service - Load Kernel Modules</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/systemd-modules-load.service; static; vendor preset: dis&gt;</span><br><span class="line">   Active: failed (Result: exit-code) since Fri 2019-08-23 12:16:54 CST; 6min ago</span><br><span class="line">     Docs: man:systemd-modules-load.service(8)</span><br><span class="line">           man:modules-load.d(5)</span><br><span class="line">  Process: 190 ExecStart=/usr/lib/systemd/systemd-modules-load (code=exited, status=1/FAILURE)</span><br><span class="line"> Main PID: 190 (code=exited, status=1/FAILURE)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> systemctl status systemd-modules-load.service</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">● systemd-modules-load.service - Load Kernel Modules</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/systemd-modules-load.service; static; vendor preset: dis&gt;</span><br><span class="line">   Active: failed (Result: exit-code) since Fri 2019-08-23 12:16:54 CST; 6min ago</span><br><span class="line">     Docs: man:systemd-modules-load.service(8)</span><br><span class="line">           man:modules-load.d(5)</span><br><span class="line">  Process: 190 ExecStart=/usr/lib/systemd/systemd-modules-load (code=exited, status=1/FAILURE)</span><br><span class="line"> Main PID: 190 (code=exited, status=1/FAILURE)</span><br></pre></td></tr></table></figure>
 <ol>
 <li>根据Main PID查看对应的问题</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> journalctl _PID=190</span></span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">-- Logs begin at Thu 2019-04-25 23:48:52 CST, end at Fri 2019-08-23 12:24:50 CST. --</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vfs_monitor'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxdrv'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxpci'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetadp'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetflt'</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> journalctl _PID=190</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">-- Logs begin at Thu 2019-04-25 23:48:52 CST, end at Fri 2019-08-23 12:24:50 CST. --</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vfs_monitor'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxdrv'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxpci'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: libkmod: kmod_config_parse: /etc/modprobe.d/iwlwif&gt;</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetadp'</span><br><span class="line">8月 23 12:16:54 husky systemd-modules-load[190]: Failed to find module 'vboxnetflt'</span><br></pre></td></tr></table></figure>
 <ol>
 <li>我们有一些module系统没有找到，因此在<code>/etc/modules-load.d/</code>下查看对应设置</li>
 </ol>
@@ -488,7 +488,7 @@
 <p>结果发现什么都没有，通过<code>modinfo</code>命令检查对应模块，发现找不到对应的模块</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">modinfo vfs_monitor</span><br><span class="line">-----------------------------------------------------------------------</span><br><span class="line">modinfo: ERROR: Module vfs_monitor not found.</span><br></pre></td></tr></table></figure>
 <h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>有些情况下，我们需要查看系统发生了哪些动作，此时需要命令<code>journalctl</code>，当不带任何选项时，该命令将会无脑输出所有日志记录，基本没什么用，我们要进行一些筛选。</p>
-<h3 id="检查高优先级错误"><a href="#检查高优先级错误" class="headerlink" title="检查高优先级错误"></a>检查高优先级错误</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> journalctl -p 3 -xb</span></span><br></pre></td></tr></table></figure>
+<h3 id="检查高优先级错误"><a href="#检查高优先级错误" class="headerlink" title="检查高优先级错误"></a>检查高优先级错误</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> journalctl -p 3 -xb</span><br></pre></td></tr></table></figure>
 <h2 id="清理文件系统"><a href="#清理文件系统" class="headerlink" title="清理文件系统"></a>清理文件系统</h2><h2 id="包管理"><a href="#包管理" class="headerlink" title="包管理"></a>包管理</h2><h3 id="官方包管理-pacman"><a href="#官方包管理-pacman" class="headerlink" title="官方包管理 pacman"></a>官方包管理 pacman</h3><p>archlinux下的包管理软件为pacman（吃豆人），这个软件非常好用，能够有效解决不同包之间的依赖问题。</p>
 <h4 id="更新包数据库"><a href="#更新包数据库" class="headerlink" title="更新包数据库"></a>更新包数据库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy</span><br></pre></td></tr></table></figure>
 <p>建议安装软件前先执行这个命令。</p>
@@ -509,7 +509,7 @@
 <h3 id="非官方包管理"><a href="#非官方包管理" class="headerlink" title="非官方包管理"></a>非官方包管理</h3><p>对于一些非官方包，我们可以使用AUR（Archlinux user repository）进行管理。AUR是一个社区驱动的软件仓库，包含了非官方的软件或包</p>
 <h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><p>我们使用yay对AUR中的包进行管理，下载命令如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://aur.archlinux.org/yay.git</span><br><span class="line">cd yay</span><br><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
-<h4 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo yay -S gparted</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装包-1"><a href="#安装包-1" class="headerlink" title="安装包"></a>安装包</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo yay -S gparted</span><br></pre></td></tr></table></figure>
 <h2 id="系统更新"><a href="#系统更新" class="headerlink" title="系统更新"></a>系统更新</h2><p>Archlinux是滚动更新的系统，不支持局部更新，所以尽可能定期更新系统。更新系统的命令为</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Syu</span><br></pre></td></tr></table></figure>
 <h3 id="文件损坏处理"><a href="#文件损坏处理" class="headerlink" title="文件损坏处理"></a>文件损坏处理</h3><p>在有一些情况下，无效的或者已经损坏的文件可能会导致签名错误，从而使更新失败，这种情况的处理过程如下：</p>
@@ -556,8 +556,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2024/10/13/工具/Linux/Archlinux桌面环境/" rel="prev" title="Archlinux桌面环境">
-                Archlinux桌面环境 <i class="fa fa-chevron-right"></i>
+              <a href="/2024/10/13/工具/Linux/Linux内核/" rel="prev" title="Linux内核管理">
+                Linux内核管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -629,7 +629,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -752,23 +752,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

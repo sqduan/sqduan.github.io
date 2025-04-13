@@ -472,13 +472,13 @@
 <p>运行如下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make O=build # -j16</span><br><span class="line">make O=build install</span><br></pre></td></tr></table></figure>
 <p>进入<code>build/_install</code>目录下，该目录结构为：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tree -L 1 .</span></span><br><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── linuxrc -&gt; bin/busybox</span><br><span class="line">└── sbin</span><br><span class="line"></span><br><span class="line">2 directories, 1 file</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tree -L 1 .</span><br><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── linuxrc -&gt; bin/busybox</span><br><span class="line">└── sbin</span><br><span class="line"></span><br><span class="line">2 directories, 1 file</span><br></pre></td></tr></table></figure>
 <p>创建一些空的目录作为<code>rootfs</code>中的目录</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -pv &#123;etc,proc,sys,usr/&#123;bin,sbin&#125;&#125;</span><br></pre></td></tr></table></figure>
 <p>创建一个init文件并执行<code>chmod +x init</code>，该文件将会在系统启动后执行：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"></span><br><span class="line">mount -t proc none /proc</span><br><span class="line">mount -t sysfs none /sys</span><br><span class="line"></span><br><span class="line">echo -e "\nBoot took $(cut -d' ' -f1 /proc/uptime) seconds\n"</span><br><span class="line"></span><br><span class="line">exec /bin/sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line"></span><br><span class="line">mount -t proc none /proc</span><br><span class="line">mount -t sysfs none /sys</span><br><span class="line"></span><br><span class="line">echo -e "\nBoot took $(cut -d' ' -f1 /proc/uptime) seconds\n"</span><br><span class="line"></span><br><span class="line">exec /bin/sh</span><br></pre></td></tr></table></figure>
 <p>此时<code>build/_install</code>目录如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tree -L 1 .</span></span><br><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── etc</span><br><span class="line">├── init</span><br><span class="line">├── linuxrc -&gt; bin/busybox</span><br><span class="line">├── proc</span><br><span class="line">├── sbin</span><br><span class="line">├── sys</span><br><span class="line">└── usr</span><br><span class="line"></span><br><span class="line">6 directories, 2 files</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> tree -L 1 .</span><br><span class="line">.</span><br><span class="line">├── bin</span><br><span class="line">├── etc</span><br><span class="line">├── init</span><br><span class="line">├── linuxrc -&gt; bin/busybox</span><br><span class="line">├── proc</span><br><span class="line">├── sbin</span><br><span class="line">├── sys</span><br><span class="line">└── usr</span><br><span class="line"></span><br><span class="line">6 directories, 2 files</span><br></pre></td></tr></table></figure>
 <p>将上述目录与文件进行打包：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -print0 | cpio --null -ov --format=newc | gzip &gt; ../initramfs.cpio.gz</span><br></pre></td></tr></table></figure>
 <p>生成的cpio映像位于build目录下，实际就是将initramfs打包成了cpio格式的压缩包。</p>
@@ -530,8 +530,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2024/10/13/工具/Linux/Linux常用命令总结/" rel="next" title="Linux常用命令总结">
-                <i class="fa fa-chevron-left"></i> Linux常用命令总结
+              <a href="/2024/10/13/工具/Qt/QML2 QML基本类型/" rel="next" title="QML基本类型及语法">
+                <i class="fa fa-chevron-left"></i> QML基本类型及语法
               </a>
             
           </div>
@@ -613,7 +613,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -736,23 +736,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

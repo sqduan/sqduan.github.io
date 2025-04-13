@@ -472,7 +472,7 @@
 <p>我这里是127.0.0.1:10808，记下这个端口。需要注意的是，在使用代理时，要保证代理时间戳和主机的时间戳保持一致，否则会导致代理错误的情况。</p>
 <h3 id="代理软件安装及配置"><a href="#代理软件安装及配置" class="headerlink" title="代理软件安装及配置"></a>代理软件安装及配置</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>代理软件选择proxychains4，这个软件可以进行局部代理，即每个命令之前如果加上proxychains4，就会走代理，否则不会。</p>
 <h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>编辑<code>/usr/local/etc/proxychains.conf</code>，修改代理地址及端口为上面的<code>config.json</code>中的端口</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> meanwile                                                                      </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> defaults <span class="built_in">set</span> to <span class="string">"tor"</span>                                                         </span></span><br><span class="line"><span class="meta">#</span><span class="bash">socks4     127.0.0.1 9050                                                      </span></span><br><span class="line">socks5  127.0.0.1 10808                                                                                                                                                                </span><br><span class="line"><span class="meta">#</span><span class="bash">proxy_dns 8.8.8.8</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> meanwile                                                                      </span><br><span class="line"><span class="meta">#</span> defaults set to "tor"                                                         </span><br><span class="line"><span class="meta">#</span>socks4     127.0.0.1 9050                                                      </span><br><span class="line">socks5  127.0.0.1 10808                                                                                                                                                                </span><br><span class="line"><span class="meta">#</span>proxy_dns 8.8.8.8</span><br></pre></td></tr></table></figure>
 <p>然后保存即可。</p>
 <h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>使用方法为在要代理的命令前加上proxychains4</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">proxychains4 wget https://www.google.com</span><br><span class="line">[proxychains] preloading /usr/lib/libproxychains4.so</span><br><span class="line">[proxychains] DLL init: proxychains-ng 4.14</span><br><span class="line">--2020-11-11 19:48:33--  https://www.google.com/</span><br><span class="line">已载入 CA 证书“/etc/ssl/certs/ca-certificates.crt”</span><br><span class="line">正在解析主机 www.google.com (www.google.com)... 64.13.192.74, 2001::6ca0:a9ab</span><br><span class="line">正在连接 www.google.com (www.google.com)|64.13.192.74|:443... [proxychains] Strict chain  ...  127.0.0.1:10808  ...  64.13.192.74:443  ...  OK</span><br><span class="line">已连接。</span><br></pre></td></tr></table></figure>
@@ -508,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2024/10/13/工具/Linux/Linux内核/" rel="next" title="Linux内核管理">
-                <i class="fa fa-chevron-left"></i> Linux内核管理
+              <a href="/2024/10/13/工具/Linux/Linux学习资料总结/" rel="next" title="Linux学习资料总结">
+                <i class="fa fa-chevron-left"></i> Linux学习资料总结
               </a>
             
           </div>
@@ -591,7 +591,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -714,23 +714,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

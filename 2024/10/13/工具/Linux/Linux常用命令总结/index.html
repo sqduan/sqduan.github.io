@@ -466,14 +466,14 @@
 </blockquote>
 <a id="more"></a>
 <h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><p>管道是一种通信机制，通常用于进程间的通信（也可通过socket进行网络通信），它表现出来的形式将前面每一个进程的输出（stdout）直接作为下一个进程的输入（stdin）。在linux命令行中，管道命令使用<code>|</code>作为界定符号，将第一个命令的输入作为下一个命令的输出，例如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ls -al /etc | less</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ls -al /etc | less</span><br></pre></td></tr></table></figure>
 <h2 id="字符串处理类命令"><a href="#字符串处理类命令" class="headerlink" title="字符串处理类命令"></a>字符串处理类命令</h2><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>分析一行信息，如果其中有我们需要的信息，就将该行拿出来</p>
 <h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><blockquote>
 <p><strong>-a 或 —text</strong> : 不要忽略二进制的数据。</p>
 <p><strong>-c 或 —count</strong> : 计算符合样式的列数。</p>
 <p><strong>-i 或 —ignore-case</strong> : 忽略字符大小写的差别。</p>
 </blockquote>
-<h4 id="用例"><a href="#用例" class="headerlink" title="用例"></a>用例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat /proc/cpuinfo | grep -c <span class="string">'physical id'</span>   <span class="comment">#查看有几个物理CPU</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> cat /proc/cpuinfo | grep -c <span class="string">'processor'</span>     <span class="comment">#查看cpu核心数</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="用例"><a href="#用例" class="headerlink" title="用例"></a>用例</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat /proc/cpuinfo | grep -c 'physical id'   #查看有几个物理CPU</span><br><span class="line"><span class="meta">$</span> cat /proc/cpuinfo | grep -c 'processor'     #查看cpu核心数</span><br></pre></td></tr></table></figure>
 <h2 id="文件查看类命令"><a href="#文件查看类命令" class="headerlink" title="文件查看类命令"></a>文件查看类命令</h2><h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><p>查看指定文件下内容 </p>
 <h2 id="系统相关命令"><a href="#系统相关命令" class="headerlink" title="系统相关命令"></a>系统相关命令</h2><h3 id="系统负载查询命令"><a href="#系统负载查询命令" class="headerlink" title="系统负载查询命令"></a>系统负载查询命令</h3><h4 id="w-amp-uptime"><a href="#w-amp-uptime" class="headerlink" title="w &amp; uptime"></a>w &amp; uptime</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~ 10:56 #37]# w</span><br><span class="line">10:57:38 up 14 min,  1 user,  load average: 0.00, 0.00, 0.00  </span><br><span class="line">USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT</span><br><span class="line">root     pts/0    192.168.147.1    18:44    0.00s  0.10s  0.00s w</span><br><span class="line"></span><br><span class="line">[root@centos6 ~ 10:56 #37]# uptime</span><br><span class="line">10:57:47 up 14 min,  1 user,  load average: 0.00, 0.00, 0.00</span><br></pre></td></tr></table></figure>
 <p>load average即系统负载，三个数值分别表示一分钟、五分钟、十五分钟内系统的平均负载，即平均任务数。</p>
@@ -521,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2024/10/13/工具/Linux/编译aarch64平台内核/" rel="prev" title="linux内核编译与虚拟机启动">
-                linux内核编译与虚拟机启动 <i class="fa fa-chevron-right"></i>
+              <a href="/2024/10/13/工具/Qt/QML3 QML基本元素和自定义元素/" rel="prev" title="QML基本元素和自定义元素">
+                QML基本元素和自定义元素 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +594,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -717,23 +717,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>

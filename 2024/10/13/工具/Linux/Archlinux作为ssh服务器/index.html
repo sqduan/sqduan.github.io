@@ -468,18 +468,18 @@
 <h2 id="安装必要软件"><a href="#安装必要软件" class="headerlink" title="安装必要软件"></a>安装必要软件</h2><p>archlinux 使用OpenSSH作为ssh通讯的软件，运行如下命令安装openssh</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S openssh</span><br></pre></td></tr></table></figure>
 <h2 id="ssh服务端配置"><a href="#ssh服务端配置" class="headerlink" title="ssh服务端配置"></a>ssh服务端配置</h2><p>安装完成后，我们可以用如下命令查看openssh server运行状态</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl status sshd</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl status sshd</span><br></pre></td></tr></table></figure>
 <p>由于还未启动服务，所以Active状态为inactive。为了使archlinux作为ssh服务器，我们要开启这个服务</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl start sshd</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl start sshd</span><br></pre></td></tr></table></figure>
 <p>再一次查看状态，就能发现服务已经启动。为了使archlinux每次开机后自动运行该服务，我们需要执行下列命令进行enable</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl <span class="built_in">enable</span> sshd</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl enable sshd</span><br></pre></td></tr></table></figure>
 <p>至此我们的服务已经打开，如果需要关闭，执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl end sshd</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo systemctl <span class="built_in">disable</span> sshd</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo systemctl end sshd</span><br><span class="line"><span class="meta">$</span> sudo systemctl disable sshd</span><br></pre></td></tr></table></figure>
 <p>到目前为止，我们已经打开了SSH server的守护进程，现在客户端应该可以通过ssh命令进行连接，当然，现在还存在一些问题。当我们尝试连接服务器时，会发现服务器在连接后会立刻断开，我们还需要对sshd进行一些配置，配置文件为<code>etc/ssh/sshd_config</code>。打开后配置如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Port 888</span><br><span class="line">AddressFamily any</span><br><span class="line">ListenAddress 0.0.0.0</span><br><span class="line"></span><br><span class="line">PermitRootLogin yes</span><br><span class="line">PasswordAuthentication yes</span><br></pre></td></tr></table></figure>
 <p>然后重启服务器即可连接。</p>
 <h2 id="连接ssh服务器"><a href="#连接ssh服务器" class="headerlink" title="连接ssh服务器"></a>连接ssh服务器</h2><h3 id="查询ssh服务器的地址"><a href="#查询ssh服务器的地址" class="headerlink" title="查询ssh服务器的地址"></a>查询ssh服务器的地址</h3><p>为了连接ssh服务器，我们需要知道ssh服务器的hostname和IP地址，运行如下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ip a</span></span><br><span class="line"></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp0s31f6: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc fq_codel state DOWN group default qlen 1000</span><br><span class="line">    link/ether a6:1e:84:b7:1d:06 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">3: wlp3s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000</span><br><span class="line">    link/ether 3c:f7:62:09:99:76 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet xxx.xxx.85.194/22 brd 222.195.87.255 scope global dynamic noprefixroute wlp3s0</span><br><span class="line">       valid_lft 2766sec preferred_lft 2766sec</span><br><span class="line">    inet6 2001:da8:d880:199:b698:1f99:37fe:b408/64 scope global dynamic noprefixroute</span><br><span class="line">       valid_lft 253084sec preferred_lft 166684sec</span><br><span class="line">    inet6 fe80::f15d:42c:011:d6ee/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ip a</span><br><span class="line"></span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp0s31f6: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc fq_codel state DOWN group default qlen 1000</span><br><span class="line">    link/ether a6:1e:84:b7:1d:06 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">3: wlp3s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000</span><br><span class="line">    link/ether 3c:f7:62:09:99:76 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet xxx.xxx.85.194/22 brd 222.195.87.255 scope global dynamic noprefixroute wlp3s0</span><br><span class="line">       valid_lft 2766sec preferred_lft 2766sec</span><br><span class="line">    inet6 2001:da8:d880:199:b698:1f99:37fe:b408/64 scope global dynamic noprefixroute</span><br><span class="line">       valid_lft 253084sec preferred_lft 166684sec</span><br><span class="line">    inet6 fe80::f15d:42c:011:d6ee/64 scope link noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
 <p>可以看到SSH的IP地址为xxx.xxx.85.194</p>
 
       
@@ -511,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2024/10/13/工具/Git/分支/" rel="next" title="分支">
-                <i class="fa fa-chevron-left"></i> 分支
+              <a href="/2024/10/13/工具/Hexo/主题配置高级教程/" rel="next" title="Next主题配置高级教程">
+                <i class="fa fa-chevron-left"></i> Next主题配置高级教程
               </a>
             
           </div>
@@ -521,8 +521,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2024/10/13/工具/Latex/表格/" rel="prev" title="表格">
-                表格 <i class="fa fa-chevron-right"></i>
+              <a href="/2024/10/13/工具/Latex/插图/" rel="prev" title="绘图">
+                绘图 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -594,7 +594,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-count">274</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -717,23 +717,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-count">53</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
