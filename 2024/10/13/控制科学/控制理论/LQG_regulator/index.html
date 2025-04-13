@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Life is short, always choose the best">
+<meta name="keywords" content="Important">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linear Quadratic Gaussian Regulator">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/控制科学/控制理论/LQG_regulator/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="Life is short, always choose the best">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/MinSegModel_LQR_02.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%89%B9%E6%B3%A8%202019-11-16%20101021.jpg">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.492Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linear Quadratic Gaussian Regulator">
+<meta name="twitter:description" content="Life is short, always choose the best">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/MinSegModel_LQR_02.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/控制科学/控制理论/LQG_regulator/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linear Quadratic Gaussian Regulator | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/控制科学/控制理论/LQG_regulator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linear Quadratic Gaussian Regulator
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/" itemprop="url" rel="index"><span itemprop="name">控制科学</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/控制理论/" itemprop="url" rel="index"><span itemprop="name">控制理论</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/控制理论/自适应控制/" itemprop="url" rel="index"><span itemprop="name">自适应控制</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>Life is short, always choose the best</p>
+</blockquote>
+<a id="more"></a>
+<p>In this article, we are going to give a summarization about the LQG regulator. Like the pole placement control law, the LQG can also guide us to determine the parameters in a full state-feedback controller. </p>
+<h2 id="Prerequisite-knowledge"><a href="#Prerequisite-knowledge" class="headerlink" title="Prerequisite knowledge"></a>Prerequisite knowledge</h2><ul>
+<li><a href="/2024/10/13/控制科学/控制理论/State-space_feedback_and_estimators/" title="State feedback control">State feedback control</a>
+</li>
+<li><a href="/2024/10/13/数学/微分方程/Riccati_equation/" title="Riccati equation">Riccati equation</a>
+</li>
+</ul>
+<h2 id="Linear-quadratic-regulator"><a href="#Linear-quadratic-regulator" class="headerlink" title="Linear quadratic regulator"></a>Linear quadratic regulator</h2><p>Before talking about the LQG regulator, let’s first discuss about LQR since it is a simplified form about LQG. (without Gaussian noises)</p>
+<h3 id="A-simple-problem"><a href="#A-simple-problem" class="headerlink" title="A simple problem"></a>A simple problem</h3><p>Consider you are going to a park (desired state) from your home (initial state), you have several choices:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Time</th>
+<th style="text-align:center">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Car</td>
+<td style="text-align:center">20min</td>
+<td style="text-align:center">7</td>
+</tr>
+<tr>
+<td style="text-align:center">Bike</td>
+<td style="text-align:center">75min</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">Bus</td>
+<td style="text-align:center">30min</td>
+<td style="text-align:center">2</td>
+</tr>
+<tr>
+<td style="text-align:center">Airplane</td>
+<td style="text-align:center">4min</td>
+<td style="text-align:center">400</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If you want speed, choose airplane, if you have little money, choose bike, or you can make a compromise between time and money to take a car or a bus.</p>
+<p>Define a cost function:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+J=Qt+Rm
+\end{equation}
+\label{JQtRm}</script><p>where $t$ is time and $m$ is money, $Q$ and $R$ are two weight matrix. <strong>Based on the cost function, we make the optimal choose.</strong> Remember that the cost is strongly related to the weight matrix.</p>
+<h3 id="LQR-in-control-system"><a href="#LQR-in-control-system" class="headerlink" title="LQR in control system"></a>LQR in control system</h3><p>Now let’s consider our control system, we want to make a balance between the performance and actuator effort (energy). So we set up a cost function of the performance ($x$) and the effort ($u$):</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+J=\int_{0}^{\infty}\left(x^{\top} Q x+u^{\top} R u\right) d t
+\end{equation}</script><p>by solving the LQR problem, it returns the gain matrix $K$ that produce the lowest cost given the dynamic system. We penalizing the performance by $Q$ and penalizing the effort by $R$. Thus the function of LQR is:</p>
+<blockquote>
+<p>Given a system function with initial state, by providing a proper control quantity, the system can be transfered to a desired terminal state with lowest cost. </p>
+</blockquote>
+<h4 id="Intuitive-understand-of-the-cost-in-system"><a href="#Intuitive-understand-of-the-cost-in-system" class="headerlink" title="Intuitive understand of the cost in system"></a>Intuitive understand of the cost in system</h4><p>Performance is judged by the state $x$. Suppose that our system is at a none zero initial state, we want it to get to the zero state. The faster it return to zero, the better the performance is and the lower the cost. How to measure how quickly to return the desired state is <strong>to looking at the area under the curve, this is what the integral doing, a curve with less area means a better performance.</strong> Since the state can be either positive and negative, we square the value to keep positive. </p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/MinSegModel_LQR_02.png" width="400" alt="图片名称" align="center"></p>
+<p>The operation above turns our cost function to a quadratic function with a form of $z=x^2+y^2$, <strong>it has a definite minimum value (Great!).</strong> Now let’s consider the form of $Q$, the $Q$ needs to be positive definite thus $x^{\top} Q x&gt;0$, normally it is a diagonal matrix:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left[\begin{array}{ll}{x_{1}} & {x_{2} \dots x_{n}}\end{array}\right]
+
+\begin{bmatrix}
+q_1 &  &  & 0\\ 
+ & q_2 & & \\ 
+ &  & \ddots  & \\ 
+ 0&  &  & q_3
+\end{bmatrix}
+
+\left[\begin{array}{c}{x_{1}} \\ {x_{2}} \\ {\vdots} \\ {x_{n}}\end{array}\right]
+\end{equation}</script><p>Similarly, the $R$ matrix can penalize the input $u$, we can rewrite the equation as follows:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left[\begin{array}{ll}{x^{\top}} & {u^{\top}}\end{array}\right]\left[\begin{array}{ll}{Q} & {0} \\ {0} & {R}\end{array}\right]\left[\begin{array}{l}{x} \\ {u}\end{array}\right]
+\end{equation}</script><p>Now we can make a judgment, for example, if an actuator $u_i$ is really expensive, we can penalizing it by increasing $r_i$, if lower error $x_i$ is important, you can increasing the $q_i$.</p>
+<h4 id="Mathematical-form-and-solution-about-LQR"><a href="#Mathematical-form-and-solution-about-LQR" class="headerlink" title="Mathematical form and solution about LQR"></a>Mathematical form and solution about LQR</h4><p>For a continuous-time linear system, defined on $t \in\left[t<em>{0}, t</em>{1}\right]$, described by:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\dot{x}=A x+B u
+\end{equation}</script><p>with a quadratic cost function defined as: </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+J=x^{\top}\left(t_{1}\right) F\left(t_{1}\right) x\left(t_{1}\right)+
+\int_{t_{0}}^{t_{1}}\left(x^{\top} Q x+u^{\top} R u+2 x^{\top} N u\right) d t
+\end{equation}</script><p>in which:</p>
+<ul>
+<li>$x^{\top}\left(t<em>{1}\right) F\left(t</em>{1}\right) x\left(t_{1}\right)$ is an index about steady state</li>
+<li>$\int<em>{t</em>{0}}^{t_{1}}x^{\top} Q x d t$ is an index about transient process</li>
+<li>$\int<em>{t</em>{0}}^{t_{1}}u^{\top} R u d t$ is an index about system energy</li>
+</ul>
+<p>The feedback control law that minimizes the value of the cost is: </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+u=-K x
+\end{equation}</script><p><strong>Solution: </strong>Now let’s solve the LQR problem, taking discrete LQR as an example, we use Lagrangian multiplier method to solve it, given the optimization problem:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+&J=X^{\top}(N)Q_0X(N)+\sum_{i=0}^{N-1}[X^{\top}(i)QX(i)+U^{\top}(i)RU(i)]\\
+s.t.\quad &X(0)=X_0\\
+&X(k+1)=AX(k)+BU(k)
+\end{aligned}
+\end{equation}</script><h5 id="Step1-Create-Lagrangian-function-to-combine-the-cost-function-and-constrains"><a href="#Step1-Create-Lagrangian-function-to-combine-the-cost-function-and-constrains" class="headerlink" title="Step1: Create Lagrangian function to combine the cost function and constrains."></a>Step1: Create Lagrangian function to combine the cost function and constrains.</h5><p>Using the Lagrangian multiplier $\lambda$, we can create a function combine the cost function and constrains.</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+J_l&=X^{\top}(N)Q_0X(N)+\sum_{i=0}^{N-1}[X^{\top}(i)QX(i)+U^{\top}(i)RU(i)]+2\sum_{i=0}^{N-1}\lambda^{\top}(i+1)[AX(i)+BU(i)-X(i+1)]\\
+&=X^{\top}(N)Q_0X(N)-2\lambda^{\top}(N)X(N)+\sum_{i=1}^{N-1}[H(i)-2\lambda^{\top}(i)X(i)]+H(0)
+
+\end{aligned}
+\end{equation}</script><p>where </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+H(k)=X^{\top}QX+U^{\top}RU+2\lambda^{\top}(i)X(i)[AX+BU]
+
+\end{aligned}
+\end{equation}
+\label{XtopQX}</script><h5 id="Step2-Find-the-extreme-point-we-of-the-cost-function"><a href="#Step2-Find-the-extreme-point-we-of-the-cost-function" class="headerlink" title="Step2: Find the extreme point we of the cost function"></a>Step2: Find the extreme point we of the cost function</h5><p>finding the minimum of $J_l$ is to find the extreme point of $J_l$, thus we need to satisfy the following conditions:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left\{
+\begin{aligned}
+ \frac{\partial J_{l}}{\partial X(k)}&=2 Q X(k)+2 A^{T} \lambda(k+1)-2 \lambda(k)=0 \\ \frac{\partial J_{l}}{\partial U(k)}&=2 R U(k)+2 B^{T} \lambda(k+1)=0 \\ 
+ \frac{\partial J_{l}}{\partial \lambda(k+1)}&=2 A X(k)+2 B U(k)-2 X(k+1)=0
+\end{aligned}
+\right.
+\end{equation}</script><p>meanwhile, the final state satisfies:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\frac{\partial J_{l}}{\partial X(N)}=2 Q_{0} X(N)-2 \lambda(N)=0
+\end{equation}</script><h5 id="Step3-Solving-the-control-law-and-feedback-gain"><a href="#Step3-Solving-the-control-law-and-feedback-gain" class="headerlink" title="Step3: Solving the control law and feedback gain"></a>Step3: Solving the control law and feedback gain</h5><p>With a series transformation and solving a Riccati function, we get the control law</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+U(k)=-R^{-1} B^{T} A^{-T}[S(k)-Q] X(k)
+\end{equation}</script><p>and feedback gain</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+K=R^{-1} B^{T} A^{-T}[S(k)-Q]
+\end{equation}</script><p>That is the feedback regulator we need.</p>
+<p>In Matlab, give $Q$ and $R$, run </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">K = lqr(A,B,Q,R)</span><br></pre></td></tr></table></figure>
+<p>you get the optimal gain set. With LQR, we don’t place poles, instead, we choose $Q$ and $R$, now here’s the question, what is a proper $Q$ and $R$, it can based on our intuition and knowledge about the system, Or we can start with $Q$ and $R$ equals to identity matrix. Here we summarize the influence of $Q$ and $R$ to the system.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Overshoot</th>
+<th style="text-align:center">Setting time</th>
+<th style="text-align:center">Energy consumption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Increasing $Q$</td>
+<td style="text-align:center">decreasing</td>
+<td style="text-align:center">decreasing</td>
+<td style="text-align:center">increasing</td>
+</tr>
+<tr>
+<td style="text-align:center">Increasing $R$</td>
+<td style="text-align:center">increasing</td>
+<td style="text-align:center">increasing</td>
+<td style="text-align:center">decreasing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Difference-of-LQR-and-pole-placement"><a href="#Difference-of-LQR-and-pole-placement" class="headerlink" title="Difference of LQR and pole placement"></a>Difference of LQR and pole placement</h3><p>Basically, the LQR and pole placement controllers have the exactly the same structure, so the implementation of $K$ is the same, but how we choose $K$ is different.</p>
+<ul>
+<li>In pole placement, we solve for $K$ by choosing pole locations.</li>
+<li>In LQR, we find the optimal $K$ by choosing characteristics.</li>
+</ul>
+<h2 id="Linear-quadratic-estimator"><a href="#Linear-quadratic-estimator" class="headerlink" title="Linear quadratic estimator"></a>Linear quadratic estimator</h2><h3 id="Filtering-Prediction-and-Smoothing3"><a href="#Filtering-Prediction-and-Smoothing3" class="headerlink" title="Filtering, Prediction, and Smoothing3"></a>Filtering, Prediction, and Smoothing<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h3><p>There are three general types of estimators for the LQG problem:</p>
+<ul>
+<li><strong>Predictors</strong>: use prior observations strictly $t<em>{obs}&lt;t</em>{est}$</li>
+<li><strong>Filter</strong>: use observations up to and including the time that the state of the dynamic system is to be estimated $t<em>{obs}\leq t</em>{est}$</li>
+<li><strong>Smoother</strong>: use observations beyond the estimation time $t<em>{obs}&gt;t</em>{est}$</li>
+</ul>
+<h3 id="Kalman-Filter"><a href="#Kalman-Filter" class="headerlink" title="Kalman Filter"></a>Kalman Filter</h3><p>The Kalman filter is an optimal algorithm for state estimation, it will help us to reconstruct the state of a dynamic system uses a series measurements observed over time, containing statistical noise and other inaccuracies, and produces estimates of unknown variables that tend to be more accurate than those based on a single measurement alone. For more information about Kalman filter, please refer to <a href="/2024/10/13/控制科学/控制理论/Kalman_Filter/" title="Kalman filter">Kalman filter</a> for this section. </p>
+<h2 id="Linear-quadratic-Gaussian-regulator"><a href="#Linear-quadratic-Gaussian-regulator" class="headerlink" title="Linear quadratic Gaussian regulator"></a>Linear quadratic Gaussian regulator</h2><h3 id="Mathematical-description-of-the-problem"><a href="#Mathematical-description-of-the-problem" class="headerlink" title="Mathematical description of the problem"></a>Mathematical description of the problem</h3><p>Let’s concern a linear system driven by addictive white Gaussian noise ($N(0,\Sigma)$), consider a continuous-time linear dynamic system with disturbance and measurement noise:</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%89%B9%E6%B3%A8%202019-11-16%20101021.jpg" width="550" alt="图片名称" align="center"></p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned} \dot{\mathbf{x}}(t) &=A(t) \mathbf{x}(t)+B(t) \mathbf{u}(t)+\mathbf{v}(t) \\ \mathbf{y}(t) &=C(t) \mathbf{x}(t)+\mathbf{w}(t) \end{aligned}
+\end{equation}</script><p>here the $\mathbf{v}(t)$ and $\mathbf{w}(t)$ are the system noise and measurement noise. The objective of LQG is to find the control input history $\mathbf{u}(t)$ which at any time only depends linearly on the past measurement $\mathbf{y}\left(t^{\prime}\right), 0 \leq t^{\prime}&lt;t$ such that the following cost function is minimized:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{array}{l}{J=\mathbb{E}\left[\mathbf{x}^{\mathrm{T}}(T) F \mathbf{x}(T)+\int_{0}^{T} \mathbf{x}^{\mathrm{T}}(t) Q(t) \mathbf{x}(t)+\mathbf{u}^{\mathrm{T}}(t) R(t) \mathbf{u}(t) d t\right]} \\ {F \geq 0, \quad Q(t) \geq 0, \quad R(t)>0}\end{array}
+\end{equation}</script><p>where $\mathbb{E}$ denotes the expected value $T$ may be either finite or infinite, if infinite, the first term  $\mathbf{x}^{\mathrm{T}}(T) F \mathbf{x}(T)$ can be ignored.</p>
+<blockquote>
+<p>Here we gives out a simple explanation about why we regard the noise as Gaussian. A Gaussian noise means that if we added multiple noises, it will still obey the Gaussian distribution.</p>
+</blockquote>
+<h3 id="Regulator-design"><a href="#Regulator-design" class="headerlink" title="Regulator design"></a>Regulator design</h3><p>Now let’s design the LQG regulator, the LQG controller that solves the LQG control problem is specified by the following equations: </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{array}{l}{\dot{\hat{\mathbf{x}}}(t)=A(t) \hat{\mathbf{x}}(t)+B(t) \mathbf{u}(t)+L(t)(\mathbf{y}(t)-C(t) \hat{\mathbf{x}}(t)), \quad \hat{\mathbf{x}}(0)=\mathbb{E}[\mathbf{x}(0)]} \\ {\mathbf{u}(t)=-K(t) \hat{\mathbf{x}}(t)}\end{array}
+\end{equation}</script><p>where matrix $L(t)$ is the gain of the state estimator (Kalman gain) while $K(t)$ is the feedback gain.</p>
+<h4 id="Solve-for-L-t"><a href="#Solve-for-L-t" class="headerlink" title="Solve for $L(t)$"></a>Solve for $L(t)$</h4><p>$L(t)$ is computed from $A(t),C(t),V(t),W(t)$ and finally $\mathbb{E}\left[\mathbf{x}(0) \mathbf{x}^{\mathrm{T}}(0)\right]$ through the following associated matrix Riccati differential equation:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{array}{l}{\dot{P}(t)=A(t) P(t)+P(t) A^{\mathrm{T}}(t)-P(t) C^{\mathrm{T}}(t) W^{-1}(t) C(t) P(t)+V(t)} \\ {P(0)=\mathbb{E}\left[\mathbf{x}(0) \mathbf{x}^{\mathrm{T}}(0)\right]}\end{array}
+\end{equation}</script><p>Given the solution $P(t), 0 \leq t \leq T$ the Kalman gain equals </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+L(t)=P(t) C^{\mathrm{T}}(t) W^{-1}(t)
+\end{equation}</script><h4 id="Solve-for-K-t"><a href="#Solve-for-K-t" class="headerlink" title="Solve for $K(t)$"></a>Solve for $K(t)$</h4><p>Similar to solving for $L(t)$, the feedback gain $K(t)$ can be determined by the following Riccati differential equation:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{array}{l}{-\dot{S}(t)=A^{\mathrm{T}}(t) S(t)+S(t) A(t)-S(t) B(t) R^{-1}(t) B^{\mathrm{T}}(t) S(t)+Q(t)} \\ {S(T)=F}\end{array}
+\end{equation}</script><p>Given the solution $S(t), 0 \leq t \leq T$ the feedback gain equals </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+K(t)=R^{-1}(t) B^{\mathrm{T}}(t) S(t)
+\end{equation}</script><p>The Riccati differential equation of $L(t)$ solves the linear–quadratic estimation problem (LQE) while the second LQR problem, together they solve the linear-quadratic Gaussian control problem. So the LQG problem separates into the LQE and LQR problem that can be solved independently. Therefore, the LQG problem is called <strong>separable</strong>. </p>
+<h2 id="Application-LQG-regulator-design-for-a-inverted-pendulum-system"><a href="#Application-LQG-regulator-design-for-a-inverted-pendulum-system" class="headerlink" title="Application: LQG regulator design for a inverted pendulum system"></a>Application: LQG regulator design for a inverted pendulum system</h2><p>In this section we will design a LQG regulator for a noise added inverted pendulum system which is basically an extended part of .</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://www.youtube.com/watch?v=E_RDCFOlJx4">A course about LQR</a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="https://en.wikipedia.org/wiki/Linear%E2%80%93quadratic_regulator">Wiki about LQR</a><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><a href="https://www.researchgate.net/publication/243786641_Kalman_filtering_theory_and_practice_using_MATLAB">Andrews A P. Kalman Filtering: Theory and Practice Using MATLAB[M]. Wiley, 2001.</a><a href="#fnref:3" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Important/" rel="tag"># Important</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/控制科学/控制理论/Model_predictive_control2/" rel="next" title="Model Predictive Control(2)--Modelling">
+                <i class="fa fa-chevron-left"></i> Model Predictive Control(2)--Modelling
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/控制科学/控制理论/Model_predictive_control/" rel="prev" title="Model Predictive Control(1)--What and why MPC">
+                Model Predictive Control(1)--What and why MPC <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisite-knowledge"><span class="nav-number">1.</span> <span class="nav-text">Prerequisite knowledge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-quadratic-regulator"><span class="nav-number">2.</span> <span class="nav-text">Linear quadratic regulator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-simple-problem"><span class="nav-number">2.1.</span> <span class="nav-text">A simple problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LQR-in-control-system"><span class="nav-number">2.2.</span> <span class="nav-text">LQR in control system</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Intuitive-understand-of-the-cost-in-system"><span class="nav-number">2.2.1.</span> <span class="nav-text">Intuitive understand of the cost in system</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mathematical-form-and-solution-about-LQR"><span class="nav-number">2.2.2.</span> <span class="nav-text">Mathematical form and solution about LQR</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Step1-Create-Lagrangian-function-to-combine-the-cost-function-and-constrains"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Step1: Create Lagrangian function to combine the cost function and constrains.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Step2-Find-the-extreme-point-we-of-the-cost-function"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">Step2: Find the extreme point we of the cost function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Step3-Solving-the-control-law-and-feedback-gain"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">Step3: Solving the control law and feedback gain</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difference-of-LQR-and-pole-placement"><span class="nav-number">2.3.</span> <span class="nav-text">Difference of LQR and pole placement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-quadratic-estimator"><span class="nav-number">3.</span> <span class="nav-text">Linear quadratic estimator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Filtering-Prediction-and-Smoothing3"><span class="nav-number">3.1.</span> <span class="nav-text">Filtering, Prediction, and Smoothing3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kalman-Filter"><span class="nav-number">3.2.</span> <span class="nav-text">Kalman Filter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-quadratic-Gaussian-regulator"><span class="nav-number">4.</span> <span class="nav-text">Linear quadratic Gaussian regulator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mathematical-description-of-the-problem"><span class="nav-number">4.1.</span> <span class="nav-text">Mathematical description of the problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Regulator-design"><span class="nav-number">4.2.</span> <span class="nav-text">Regulator design</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Solve-for-L-t"><span class="nav-number">4.2.1.</span> <span class="nav-text">Solve for $L(t)$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solve-for-K-t"><span class="nav-number">4.2.2.</span> <span class="nav-text">Solve for $K(t)$</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application-LQG-regulator-design-for-a-inverted-pendulum-system"><span class="nav-number">5.</span> <span class="nav-text">Application: LQG regulator design for a inverted pendulum system</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

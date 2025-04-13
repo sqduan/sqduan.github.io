@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="“The great wall is made by blocks”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Road Ahead week4 Machine language">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/组成原理/课程/The Road Ahead week4/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="“The great wall is made by blocks”">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/Hackcomarch.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/hackmemoryio.svg">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.519Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Road Ahead week4 Machine language">
+<meta name="twitter:description" content="“The great wall is made by blocks”">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/Hackcomarch.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/组成原理/课程/The Road Ahead week4/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>The Road Ahead week4 Machine language | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/组成原理/课程/The Road Ahead week4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">The Road Ahead week4 Machine language
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/组成原理/" itemprop="url" rel="index"><span itemprop="name">组成原理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>“The great wall is made by blocks”</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Hack-computer-and-machine-language"><a href="#Hack-computer-and-machine-language" class="headerlink" title="Hack computer and machine language"></a>Hack computer and machine language</h2><p>在前几章中，我们已经定义了内存以及加法器，从本章开始我们将介绍Hack computer的基本结构，并最终搭建起一个简单的CPU。我们的机器是一个16位机器，由以下几个部分组成：</p>
+<ul>
+<li>Data memory (RAM)：A sequence of 16 bit registers</li>
+<li>Instruction memory (ROM)：A sequence of 16 bit registers</li>
+<li>Central processing unit (CPU)：perform 16 bit instructions</li>
+<li>Instruction bus/data bus/address bus</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/Hackcomarch.svg" width="480" alt="Hack computer Arch" align="center"></p>
+<p>而Hack的机器语言包括16位的A指令和C指令，操作3个寄存器：</p>
+<ul>
+<li>D寄存器保存一个16位的数据</li>
+<li>A寄存器保存16位地址</li>
+<li>M寄存器保存A寄存器地址对应的内存寄存器</li>
+</ul>
+<h2 id="Hack计算机的汇编代码"><a href="#Hack计算机的汇编代码" class="headerlink" title="Hack计算机的汇编代码"></a>Hack计算机的汇编代码</h2><h3 id="A-指令"><a href="#A-指令" class="headerlink" title="A 指令"></a>A 指令</h3><p>A指令的语法为：<code>@value</code>，其中，value是一个非负整数；其作用是将A寄存器设置为<code>value</code>，并将<code>RAM[A]</code>置为所选择的寄存器，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Set A = 21 and select RAM[21]</span><br><span class="line">@21  # A = 21, M = RAM[21]</span><br><span class="line"></span><br><span class="line">; to set RAM[100] to -1</span><br><span class="line">@100     # A = 100</span><br><span class="line">M = -1   # RAM[100] = -1</span><br></pre></td></tr></table></figure>
+<p>当我们需要操作内存时，总是需要A指令。</p>
+<h3 id="C指令"><a href="#C指令" class="headerlink" title="C指令"></a>C指令</h3><p>C指令的格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dest = comp ; jump    # 其中dest和jump都是可选的，comp指计算的操作，可选的computation如下：</span><br><span class="line"></span><br><span class="line">comp = 0, 1, -1, D, A, !D, !A, -D, -A, D + 1, A + 1, D - 1, A - 1, D + A, D - A, A - D, D &amp; A, D | A</span><br><span class="line">                    M,     !M,     -M,        M + 1,        M - 1, D + M, D - M, M - D, D &amp; M, D | M</span><br><span class="line"></span><br><span class="line">dest = NULL, M, D, MD, A, AM, AD, AMD     # M refers to RAM[A]</span><br><span class="line"></span><br><span class="line">jump = NULL, JGT, JEQ, JGE, JLT, JNE, JLE, JMP  # 如果计算结果 (&gt;, &gt;=, ==, &lt;=, &lt;, !=) 0, 则跳转至ROM[A]</span><br></pre></td></tr></table></figure>
+<p>C指令的功能包括：</p>
+<ul>
+<li>执行comp</li>
+<li>将结果保存在dest中</li>
+<li>如果计算结果与0比较成立，那么跳转</li>
+</ul>
+<p>一个例子如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># if (D - 1 == 0), jump to execute instruction in ROM[56]</span><br><span class="line">@56          # A = 56</span><br><span class="line">D - 1; JEQ   # if (D - 1 == 0) goto 56</span><br><span class="line"></span><br><span class="line"># unconditional jump</span><br><span class="line">@END</span><br><span class="line">D ; JGE      # jump to END</span><br></pre></td></tr></table></figure>
+<h2 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h2><p>Hack computer实现了一种非常简单的指令集，支持上述的A指令和C指令，指令集的格式分别如下：</p>
+<h3 id="A指令"><a href="#A指令" class="headerlink" title="A指令"></a>A指令</h3><p>A指令的二进制机器码格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 + value   # value是一个15位的二进制数</span><br></pre></td></tr></table></figure>
+<p>例如，代码<code>0000000000010101</code>表示为将A寄存器置为21。</p>
+<h3 id="C指令-1"><a href="#C指令-1" class="headerlink" title="C指令"></a>C指令</h3><p>C指令的格式相对较为复杂    ，其二进制语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   15    14 13  12 11 10  9  8  7  6    5  4  3    2  1  0</span><br><span class="line">   1   |  1 1  | a c1 c2 c3 c4 c5 c6 | d1 d2 d3 | j1 j2 j3 |</span><br><span class="line">opcode | unuse |      comp bits      |   dest   | jump bit |</span><br></pre></td></tr></table></figure>
+<p>我们先来看下comp字段，对于comp字段，对应的含义如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Comp</th>
+<th></th>
+<th>c1(instruction[11])</th>
+<th>c2(10)</th>
+<th>c3(9)</th>
+<th>c4(8)</th>
+<th>c5(7)</th>
+<th>c6(6)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-1</td>
+<td></td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>D</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>A</td>
+<td>M</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>!D</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>!A</td>
+<td>!M</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-D</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>-M</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>D+1</td>
+<td></td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>A+1</td>
+<td>M+1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>D-1</td>
+<td></td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>A-1</td>
+<td>M-1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>D+A</td>
+<td>D+M</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>D-A</td>
+<td>D-M</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>A-D</td>
+<td>M-D</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>D&amp;A</td>
+<td>D&amp;M</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>D\</td>
+<td>A</td>
+<td>D\</td>
+<td>M</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td><strong>a(12) = 0</strong></td>
+<td><strong>a = 1</strong></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>dest字段为寄存器写入字段，指示待写入寄存器</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>dest</th>
+<th>d1(instruction[5])</th>
+<th>d2(4)</th>
+<th>d3(3)</th>
+<th>effect: the value is stored in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>null</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>The value is not stored</td>
+</tr>
+<tr>
+<td>M</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>RAM[A]</td>
+</tr>
+<tr>
+<td>D</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>D register</td>
+</tr>
+<tr>
+<td>MD</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>RAM[A] and D register</td>
+</tr>
+<tr>
+<td>A</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>A register</td>
+</tr>
+<tr>
+<td>AM</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>A register and RAM[A]</td>
+</tr>
+<tr>
+<td>AD</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>A register and D register</td>
+</tr>
+<tr>
+<td>AMD</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>A/RAM[A]/D</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>jump字段如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>jump</th>
+<th>j1(2)</th>
+<th>j2(1)</th>
+<th>j3(0)</th>
+<th>effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>null</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>no jump</td>
+</tr>
+<tr>
+<td>JGT</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>if out &gt; 0 jump<br>j3 == 1 &amp;&amp; ALUOut &gt; 0</td>
+</tr>
+<tr>
+<td>JEQ</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>out == 0</td>
+</tr>
+<tr>
+<td>JGE</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>out &gt;= 0</td>
+</tr>
+<tr>
+<td>JLT</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>out &lt; 0</td>
+</tr>
+<tr>
+<td>JNE</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>out != 0</td>
+</tr>
+<tr>
+<td>JLE</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>out &lt;= 0</td>
+</tr>
+<tr>
+<td>JMP</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>unconditional jump</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="输入-输出"><a href="#输入-输出" class="headerlink" title="输入/输出"></a>输入/输出</h2><h3 id="屏幕"><a href="#屏幕" class="headerlink" title="屏幕"></a>屏幕</h3><p>我们需要接收用户的输入，并从屏幕上进行显示，对于屏幕显示的部分，我们可以将屏幕视为一个矩阵，对其进行操作，通过定期刷新映射到屏幕的内存，实现屏幕更新。我们的计算机是双字节计算机，对于一个$512\times256$大小的屏幕，所需要的内存单元数量为8192（512*256/16）个。32个内存单元能够表示一行，例如我要设置第$(row,col)$个像素，那么我要修改的内存单元为：</p>
+<script type="math/tex; mode=display">
+i = 32\times row+col/16</script><p>写为代码即：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">word = Screen[<span class="number">32</span> * row + col / <span class="number">16</span>]</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，屏幕映射的内存是我们整个内存的一部分，因此我们还需要知道屏幕内存的基地址，假设我们的屏幕内存位于16384，则</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">word = RAM[<span class="number">16384</span> + <span class="number">32</span> * row + col / <span class="number">16</span>]</span><br></pre></td></tr></table></figure>
+<p>找到了这个双字后，我们需要将第<code>col % 16</code>个bit设置，然后将其写回到内存中。</p>
+<h3 id="键盘"><a href="#键盘" class="headerlink" title="键盘"></a>键盘</h3><p>我们同样对于键盘进行了映射，不过相比屏幕，键盘所需的内存很小，我们只映射16位的内存给键盘，当我们按下一个按键后，键盘中的内容会记录在这个内存中，对于Hack计算机，能够识别的字符集为ASCII的子集。在Hack中，我们将键盘映射至24567这个地址中。经过映射之后，Hack的内存布局如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/hackmemoryio.svg" width="320" alt="Hack computer Arch" align="center"></p>
+<h2 id="Hack程序"><a href="#Hack程序" class="headerlink" title="Hack程序"></a>Hack程序</h2><h3 id="一些基本操作"><a href="#一些基本操作" class="headerlink" title="一些基本操作"></a>一些基本操作</h3><p>这里我们列举了Hack中一些基本的寄存器和内存的操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// D = 10</span></span><br><span class="line">@<span class="number">10</span></span><br><span class="line">D = A</span><br><span class="line"></span><br><span class="line"><span class="comment">// D++</span></span><br><span class="line">D = D + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// RAM[17] = 0</span></span><br><span class="line">@<span class="number">17</span></span><br><span class="line">M = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// RAM[17] = 10</span></span><br><span class="line">@<span class="number">10</span></span><br><span class="line">D = A</span><br><span class="line">@<span class="number">17</span></span><br><span class="line">M = D</span><br><span class="line"></span><br><span class="line"><span class="comment">// RAM[5] = RAM[3]</span></span><br><span class="line">@<span class="number">3</span></span><br><span class="line">D = M</span><br><span class="line">@<span class="number">5</span></span><br><span class="line">M = D</span><br></pre></td></tr></table></figure>
+<p>下面是一个简单的计算两数相加的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// RAM[2] = RAM[0] + RAM[1]</span><br><span class="line">@0</span><br><span class="line">D = M        // D = RAM[0]</span><br><span class="line"></span><br><span class="line">@1</span><br><span class="line">D = D + M    // D = D + RAM[1]</span><br><span class="line"></span><br><span class="line">@2</span><br><span class="line">M = D        // RAM[2] = D</span><br></pre></td></tr></table></figure>
+<h3 id="内嵌符号"><a href="#内嵌符号" class="headerlink" title="内嵌符号"></a>内嵌符号</h3><p>Hack汇编包含了一些内嵌的符号，对一些值进行了常数替换，前16个RAM的字用作虚拟寄存器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">symbol   value</span><br><span class="line">    R0       0</span><br><span class="line">    R1       1</span><br><span class="line">   ...     ...</span><br><span class="line">   R15      15</span><br><span class="line"></span><br><span class="line">SCREEN   16384</span><br><span class="line">   KBD   24576</span><br></pre></td></tr></table></figure>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// Program: Signum.asm</span><br><span class="line">// Compute if R0 &gt; 0 then R1 = 1; else R1 = 0</span><br><span class="line"></span><br><span class="line">@R0</span><br><span class="line">D = M</span><br><span class="line"></span><br><span class="line">@8</span><br><span class="line">D; JGT    // if R0 &gt; 0</span><br><span class="line"></span><br><span class="line">@R1</span><br><span class="line">M = 0</span><br><span class="line">@10</span><br><span class="line">0; JMP</span><br><span class="line"></span><br><span class="line">@R1</span><br><span class="line">M = 1</span><br><span class="line"></span><br><span class="line">@10</span><br><span class="line">0; JMP</span><br></pre></td></tr></table></figure>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>我们能够指定内存中某个寄存器，保存对应的变量，变量由变量名、地址以及值组成，下面是一个变量使用的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// Program: Flip.asm</span><br><span class="line">// flips the values of</span><br><span class="line">// RAM[0] and RAM[1]</span><br><span class="line"></span><br><span class="line">// temp = R1</span><br><span class="line">// R1 = R0</span><br><span class="line">// R0 = temp</span><br><span class="line"></span><br><span class="line">@R1</span><br><span class="line">D = M</span><br><span class="line">@temp        // @16</span><br><span class="line">M = D</span><br><span class="line">// @temp : find some available memory register, say the n&apos;th register, use it to represent the variable temp, the @temp in program will be translated into @n</span><br><span class="line"></span><br><span class="line">@R0</span><br><span class="line">D = M</span><br><span class="line">@R1</span><br><span class="line">M = D</span><br><span class="line"></span><br><span class="line">@temp        // @16</span><br><span class="line">D = M</span><br><span class="line">@R0</span><br><span class="line">M = D</span><br><span class="line"></span><br><span class="line">(END)</span><br><span class="line">@END</span><br><span class="line">0; JMP</span><br></pre></td></tr></table></figure>
+<p>变量的使用语境如下：</p>
+<ul>
+<li>加入一个符号没有与之对应的标签，那么将其视为一个变量</li>
+<li>变量从内存中某个位置开始，逐渐向上递增</li>
+</ul>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>这里给出一个迭代的实现，计算$1+2+…+n$的值，假设$n$保存在<code>RAM[0]</code>中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// Computes RAM[1] = 1 + 2 + 3 + ... + n</span><br><span class="line">// Put a number n in RAM[0]</span><br><span class="line">// Program: Sum1toN.asm</span><br><span class="line"></span><br><span class="line">    n = R0</span><br><span class="line">    i = 1</span><br><span class="line">    sum = 0</span><br><span class="line">LOOP:</span><br><span class="line">    if i &gt; n goto STOP</span><br><span class="line">    sum = sum + i</span><br><span class="line">    i = i + 1</span><br><span class="line">    goto LOOP</span><br><span class="line"></span><br><span class="line">STOP:</span><br><span class="line">    R1 = sum</span><br></pre></td></tr></table></figure>
+<p>此处关键的实现是迭代的逻辑，这里给出迭代的逻辑实现如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(LOOP)</span><br><span class="line">    @i</span><br><span class="line">    D = M</span><br><span class="line">    @n</span><br><span class="line">    D = D - M</span><br><span class="line">    @STOP</span><br><span class="line">    D; JGT</span><br></pre></td></tr></table></figure>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// for (i = 0; i &lt; n; i++) &#123;</span><br><span class="line">//     arr[i] = -1;</span><br><span class="line">// &#125;</span><br><span class="line"></span><br><span class="line">// suppose that arr = 100, n = 10</span><br><span class="line">    @100</span><br><span class="line">    D = A    // D = 100</span><br><span class="line">    @arr</span><br><span class="line">    M = D    // arr = 100</span><br><span class="line"></span><br><span class="line">    @10</span><br><span class="line">    D = A</span><br><span class="line">    @n</span><br><span class="line">    M = D</span><br><span class="line">    </span><br><span class="line">    @i</span><br><span class="line">    M = 0</span><br></pre></td></tr></table></figure>
+<p>在对变量进行初始化之后，内存布局如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">+------------------+  &lt;- 0x0 </span><br><span class="line">|                  |</span><br><span class="line">+------------------+  </span><br><span class="line">|        ...       |</span><br><span class="line">+------------------+  &lt;- 0x10 (arr)</span><br><span class="line">|        100       |</span><br><span class="line">+------------------+  &lt;- 0x11 (n)</span><br><span class="line">|        10        |</span><br><span class="line">+------------------+  &lt;- 0x12 (i)</span><br><span class="line">|        0         |</span><br><span class="line">+------------------+</span><br><span class="line">|        ...       |</span><br><span class="line">+------------------+  &lt;- 0x64 </span><br><span class="line">|        ...       |</span><br><span class="line">+------------------+</span><br><span class="line">|        ...       |</span><br><span class="line">+------------------+</span><br></pre></td></tr></table></figure>
+<p>循环部分如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(LOOP)</span><br><span class="line">    // if (i - n &gt;= 0) &#123;Jump to END&#125;</span><br><span class="line">    @i</span><br><span class="line">    D = M</span><br><span class="line">    @n</span><br><span class="line">    D = D - M</span><br><span class="line">    @END</span><br><span class="line">    D; JGE</span><br><span class="line"></span><br><span class="line">    // arr[i] = -1</span><br><span class="line">    @arr</span><br><span class="line">    D = M        // arr stores the base address</span><br><span class="line">    @i</span><br><span class="line">    A = D + M    // Pointer</span><br><span class="line">    M = -1</span><br><span class="line"></span><br><span class="line">    // i++</span><br><span class="line">    @i</span><br><span class="line">    M = M + 1</span><br><span class="line"></span><br><span class="line">    @LOOP</span><br><span class="line">    0; JMP</span><br></pre></td></tr></table></figure>
+<p>当我们需要使用指针对内存进行访问时，我们需要如下指令：A = M</p>
+<h3 id="IO操作"><a href="#IO操作" class="headerlink" title="IO操作"></a>IO操作</h3><p>最后，我们给出一些简单的IO操作，让我们能够在屏幕上绘制一些基本的图形，例如从屏幕的左上角开始，绘制多行黑色的像素，对应的伪代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//  for (i = 0; i &lt; n; i++) &#123;</span><br><span class="line">//      draw 16 hack pixels at the</span><br><span class="line">//      beginning of row i</span><br><span class="line">//  &#125;</span><br><span class="line"></span><br><span class="line">addr = SCREEN</span><br><span class="line">n    = RAM[0]</span><br><span class="line">i    = 0</span><br><span class="line"></span><br><span class="line">LOOP:</span><br><span class="line">    if i &gt; n goto END</span><br><span class="line">    RAM[addr] = -1     // 1111,1111,1111,1111</span><br><span class="line">    // advances to the next row</span><br><span class="line">    addr = addr + 32   // To next line</span><br><span class="line">    i = i + 1</span><br><span class="line">    goto LOOP</span><br><span class="line"></span><br><span class="line">END:</span><br><span class="line">    goto END</span><br></pre></td></tr></table></figure>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://www.nand2tetris.org/_files/ugd/44046b_89c60703ebfc4bf39acef13bdc050f5d.pdf">The Elements of Computing Systems (nand2tetris.org)</a><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/组成原理/寄存器/" rel="next" title="寄存器">
+                <i class="fa fa-chevron-left"></i> 寄存器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/组成原理/课程/The Road Ahead week5/" rel="prev" title="The Road Ahead week5 CPU">
+                The Road Ahead week5 CPU <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hack-computer-and-machine-language"><span class="nav-number">1.</span> <span class="nav-text">Hack computer and machine language</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hack计算机的汇编代码"><span class="nav-number">2.</span> <span class="nav-text">Hack计算机的汇编代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-指令"><span class="nav-number">2.1.</span> <span class="nav-text">A 指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C指令"><span class="nav-number">2.2.</span> <span class="nav-text">C指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令集"><span class="nav-number">3.</span> <span class="nav-text">指令集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A指令"><span class="nav-number">3.1.</span> <span class="nav-text">A指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C指令-1"><span class="nav-number">3.2.</span> <span class="nav-text">C指令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入-输出"><span class="nav-number">4.</span> <span class="nav-text">输入/输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#屏幕"><span class="nav-number">4.1.</span> <span class="nav-text">屏幕</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#键盘"><span class="nav-number">4.2.</span> <span class="nav-text">键盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hack程序"><span class="nav-number">5.</span> <span class="nav-text">Hack程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些基本操作"><span class="nav-number">5.1.</span> <span class="nav-text">一些基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内嵌符号"><span class="nav-number">5.2.</span> <span class="nav-text">内嵌符号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支"><span class="nav-number">5.3.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">5.4.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代"><span class="nav-number">5.5.</span> <span class="nav-text">迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">5.6.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO操作"><span class="nav-number">5.7.</span> <span class="nav-text">IO操作</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number"></span> <span class="nav-text">参考文献</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

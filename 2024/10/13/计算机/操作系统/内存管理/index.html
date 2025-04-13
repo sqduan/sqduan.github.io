@@ -1,0 +1,1831 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内存管理">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/操作系统/内存管理/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316220138.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220504201931.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/numa.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316223442.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316224349.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316231422.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316233329.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316233839.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220323215900.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830223439.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830212737.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224747.png">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内存管理">
+<meta name="twitter:description" content="计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316220138.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/内存管理/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>内存管理 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/内存管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">内存管理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>计算机诞生之初应用程序往往比内存大很多，这种情况下一般的解决方法是对程序进行拆分，必要时在内存和磁盘之间进行数据交换，这样就可以在小内存上运行较大的程序。由此，我们引申出了操作系统中内存管理的概念。</p>
+<a id="more"></a>
+<h2 id="物理内存管理"><a href="#物理内存管理" class="headerlink" title="物理内存管理"></a>物理内存管理</h2><h3 id="页与页框"><a href="#页与页框" class="headerlink" title="页与页框"></a>页与页框</h3><p>除了硬件保留及内核占用的内存，剩余内存被称为动态内存，使用页框（4K）进行管理</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316220138.png" width="580" alt="图片名称" align="center"></p>
+<p>我们使用类型为page的页描述符对页框进行管理，page保存在<code>mem_map</code>数组中，所需空间为$R<em>{ps}/R</em>{p}$，约等于$1\%$</p>
+<ul>
+<li><code>virt_to_page</code>：根据虚拟地址找到页描述符地址</li>
+<li><code>pfn_to_page</code>：产生与页框号pfn对应的页描述符地址</li>
+</ul>
+<h3 id="NUMA-Non-Uniform-Memory-Access"><a href="#NUMA-Non-Uniform-Memory-Access" class="headerlink" title="NUMA(Non-Uniform Memory Access)"></a>NUMA(Non-Uniform Memory Access)</h3><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220504201931.png" width="580" alt="图片名称" align="center"></p>
+<p>CPU距离某些内存从物理距离上更近，距离另一些更远，访问距离近的内存时速度更快，所以应当尽量使用临近的内存节点，每个节点叫做一个Numa Node</p>
+<h3 id="Zone"><a href="#Zone" class="headerlink" title="Zone"></a>Zone</h3><p>将Numa Node进一步划分，我们得到不同的Zone，每一个Zone由多个页框（page frame）组成</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/numa.svg" width="580" alt="图片名称" align="center"></p>
+<h3 id="Page-Frame"><a href="#Page-Frame" class="headerlink" title="Page Frame"></a>Page Frame</h3><p>在linux中，页框由page结构体进行描述：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">page</span> &#123;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> flags;              <span class="comment">// 页框状态   </span></span><br><span class="line">    <span class="keyword">atomic_t</span> count;                   <span class="comment">// 引用计数   0: 可被回收, 非0: 不可回收</span></span><br><span class="line">    <span class="keyword">atomic_t</span> _mapcount;               <span class="comment">// 被映射次数，即包含该PFN的PTE个数</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">lru</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">address_space</span> *<span class="title">mapping</span>;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> index;         </span><br><span class="line">    ...  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个page frame需要一个page对应，一个struct page一般占用32字节，而一个page frame为4KB，消耗的内存占系统的32/4096，略小于1%</p>
+<h3 id="内存管理区"><a href="#内存管理区" class="headerlink" title="内存管理区"></a>内存管理区</h3><p>由于硬件结构的制约，限制了页框的使用方式，在8086上，Linux将每个内存结点的物理内存划分为三个zone</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316223442.png" width="580" alt="图片名称" align="center"></p>
+<p><code>DMA</code>和<code>NORMAL</code>经过线性映射映射至虚拟地址的第4GB，内核可以直接访问。这两块内存中包含了保留的页框池，用于在一条内核控制路径产生原子内存分配请求且内存不足的情况下紧急使用。</p>
+<h3 id="页框分配"><a href="#页框分配" class="headerlink" title="页框分配"></a>页框分配</h3><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316224349.png" width="580" alt="图片名称" align="center"></p>
+<p>管理区分配器接受动态内存分配释放请求，该部分搜索一个能满足所请求的一组<strong>连续页框内存管理区</strong>，并采用伙伴算法对页框进行分配，同时保留了一小部分页框在高速缓存中用于快速响应请求。</p>
+<ul>
+<li>alloc_pages(gfp_mask, order)：返回第一个分配页框描述符的地址，gfp_mask是页框标识</li>
+<li>__get_free_pages(gfp_mask, order)：返回第一个分配页的线性地址</li>
+<li>__free_pages(page, order)：释放页框</li>
+<li>free_pages(addr, order)</li>
+</ul>
+<h3 id="高端内存映射"><a href="#高端内存映射" class="headerlink" title="高端内存映射"></a>高端内存映射</h3><p>由于32位平台线性地址空间的限制，内核并不能直接访问高端内存，内核线性地址空间的后128MB专门用于映射高端内存页框</p>
+<ul>
+<li>永久内核映射：长期映射</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (;;) &#123;</span><br><span class="line">    <span class="keyword">int</span> count;</span><br><span class="line">    DECLARE_WAITQUEUE(wait, current);</span><br><span class="line">    <span class="keyword">for</span> (count = LAST_PKMAP; count &gt; <span class="number">0</span>; --count) &#123;</span><br><span class="line">        last_pkmap_nr = (last_pkmap_nr + <span class="number">1</span>) &amp; (LAST_PKMAP - <span class="number">1</span>);    <span class="comment">// 循环数组</span></span><br><span class="line">        <span class="keyword">if</span> (!last_pkmap_nr) &#123;</span><br><span class="line">            flush_all_zero_pkmaps();</span><br><span class="line">            count = LAST_PKMAP;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!pkmap_count[last_pkmap_nr]) &#123;    <span class="comment">// 找到一个未使用项</span></span><br><span class="line">            <span class="keyword">unsigned</span> <span class="keyword">long</span> vaddr = PKMAP_BASE +</span><br><span class="line">                (last_pkmap_nr &lt;&lt; PAGE_SHIFT);</span><br><span class="line">            set_pte(&amp;(pkmap_page_table[last_pkmap_nr]),  <span class="comment">// 建立映射</span></span><br><span class="line">                    mk_pte(page, _ _pgprot(<span class="number">0x63</span>)));</span><br><span class="line">            pkmap_count[last_pkmap_nr] = <span class="number">1</span>;</span><br><span class="line">            set_page_address(page, (<span class="keyword">void</span> *) vaddr);</span><br><span class="line">            <span class="keyword">return</span> vaddr;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">// 内循环中未能找到空计数器，阻塞当前线程，直到某个进程释放了pkmap_page_table中一项</span></span><br><span class="line">    current-&gt;state = TASK_UNINTERRUPTIBLE;</span><br><span class="line">    add_wait_queue(&amp;pkmap_map_wait, &amp;wait);</span><br><span class="line">    spin_unlock(&amp;kmap_lock);</span><br><span class="line">    schedule();</span><br><span class="line">    remove_wait_queue(&amp;pkmap_map_wait, &amp;wait);</span><br><span class="line">    spin_lock(&amp;kmap_lock);</span><br><span class="line">    <span class="keyword">if</span> (page_address(page))    <span class="comment">// 检查是否存在另一个进程映射该页，内循环重新开始</span></span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">unsigned</span> <span class="keyword">long</span>) page_address(page);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>临时内核映射：不阻塞当前线程，可用于中断或可延迟函数内部</li>
+</ul>
+<h3 id="伙伴系统"><a href="#伙伴系统" class="headerlink" title="伙伴系统"></a>伙伴系统</h3><p>连续页框分配，解决外碎片问题，找到最小满足要求的空闲块，如果没有，找到更大的一块，掰成两半使用</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316231422.png" width="580" alt="图片名称" align="center"></p>
+<ul>
+<li>分配块</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 寻找合适的块</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">free_area</span> *<span class="title">area</span>;</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> current_order;</span><br><span class="line"><span class="keyword">for</span> (current_order=order; current_order&lt;<span class="number">11</span>; ++current_order) &#123;</span><br><span class="line">    area = zone-&gt;free_area + current_order;</span><br><span class="line">    <span class="keyword">if</span> (!list_empty(&amp;area-&gt;free_list))</span><br><span class="line">        <span class="keyword">goto</span> block_found;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找到了合适的块，修改管理区描述符</span></span><br><span class="line">block_found:</span><br><span class="line">    <span class="comment">// 删除第一个页框描述符</span></span><br><span class="line">    page = list_entry(area-&gt;free_list.next, struct page, lru);</span><br><span class="line">    list_del(&amp;page-&gt;lru);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 减少管理区中free_page的值</span></span><br><span class="line">    ClearPagePrivate(page);</span><br><span class="line">    page-&gt;<span class="keyword">private</span> = <span class="number">0</span>;</span><br><span class="line">    area-&gt;nr_free--;</span><br><span class="line">    zone-&gt;free_pages -= <span class="number">1U</span>L &lt;&lt; order</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果为了满足2^h的页框请求，必须执行2^k，那么需要将剩余的页框进行再分配</span></span><br><span class="line">size = <span class="number">1</span> &lt;&lt; curr_order;</span><br><span class="line"><span class="keyword">while</span> (curr_order &gt; order) &#123;</span><br><span class="line">    area--;</span><br><span class="line">    curr_order--;</span><br><span class="line">    size &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    buddy = page + size;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 插入伙伴作为链表第一个元素</span></span><br><span class="line">    list_add(&amp;buddy-&gt;lru, &amp;area-&gt;free_list);</span><br><span class="line">    area-&gt;nr_free++;</span><br><span class="line">    buddy-&gt;<span class="keyword">private</span> = curr_order;</span><br><span class="line">    SetPagePrivate(buddy);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> page;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>释放块：按照伙伴系统策略释放页框</li>
+</ul>
+<h2 id="内存区管理"><a href="#内存区管理" class="headerlink" title="内存区管理"></a>内存区管理</h2><p>伙伴系统用于分配大块内存请求，而对于小的内存区会造成浪费，这时我们采用slab分配，解决内部碎片问题</p>
+<ul>
+<li>将小块的数据结构对象放入高速缓存中，从中获取或释放</li>
+<li>内核函数倾向于反复请求同一类型的内存，例如进程描述符，文件对象等</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316233329.png" width="580" alt="图片名称" align="center"></p>
+<p>每个slab由一个或多个页框组成，页框中既包含已经分配的对象，也有空闲对象</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220316233839.png" width="580" alt="图片名称" align="center"></p>
+<ul>
+<li>创建slab</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取一组连续页框</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">kmem_getpages</span><span class="params">(<span class="keyword">kmem_cache_t</span> *cachep, <span class="keyword">int</span> flags)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">page</span> *<span class="title">page</span>;</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    flags |= cachep-&gt;gfpflags;</span><br><span class="line">    page = alloc_pages(flags, cachep-&gt;gfporder);   </span><br><span class="line">    <span class="keyword">if</span> (!page)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    i = (<span class="number">1</span> &lt;&lt; cache-&gt;gfporder);</span><br><span class="line">    <span class="keyword">if</span> (cachep-&gt;flags &amp; SLAB_RECLAIM_ACCOUNT)</span><br><span class="line">        atomic_add(i, &amp;slab_reclaim_pages);</span><br><span class="line">    <span class="keyword">while</span> (i--)</span><br><span class="line">        SetPageSlab(page++);</span><br><span class="line">    <span class="keyword">return</span> page_address(page);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>释放slab页框</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kmem_freepages</span><span class="params">(<span class="keyword">kmem_cache_t</span> *cachep, <span class="keyword">void</span> *addr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> i = (<span class="number">1</span>&lt;&lt;cachep-&gt;gfporder);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">page</span> *<span class="title">page</span> = <span class="title">virt_to_page</span>(<span class="title">addr</span>);</span></span><br><span class="line">    <span class="keyword">if</span> (current-&gt;reclaim_state)</span><br><span class="line">        current-&gt;reclaim_state-&gt;reclaimed_slab += i;</span><br><span class="line">    <span class="keyword">while</span> (i--)</span><br><span class="line">        ClearPageSlab(page++);</span><br><span class="line">    free_pages((<span class="keyword">unsigned</span> <span class="keyword">long</span>) addr, cachep-&gt;gfporder);</span><br><span class="line">    <span class="keyword">if</span> (cachep-&gt;flags &amp; SLAB_RECLAIM_ACCOUNT)</span><br><span class="line">        atomic_sub(<span class="number">1</span>&lt;&lt;cachep-&gt;gfporder, &amp;slab_reclaim_pages);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="给高速缓存分配slab"><a href="#给高速缓存分配slab" class="headerlink" title="给高速缓存分配slab"></a>给高速缓存分配slab</h3><p>一个新创建的高速缓存没有任何slab，也没有空闲对象，只有当以下两个条件为真，才分配slab</p>
+<ul>
+<li>已经发出一个分配新对象的请求</li>
+<li>高速缓存不包含任何空闲对象</li>
+</ul>
+<p>当上述情况发生时，slab分配器进行如下操作：</p>
+<ul>
+<li>调用<code>cache_grow</code>分配新slab（虚slab）</li>
+<li>调用<code>kmem_getpages</code>分配一组页框（物理内存）</li>
+<li>调用<code>alloc_slabmgmt</code>获取slab描述符0</li>
+</ul>
+<h2 id="非连续内存区管理"><a href="#非连续内存区管理" class="headerlink" title="非连续内存区管理"></a>非连续内存区管理</h2><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20220323215900.png" width="580" alt="图片名称" align="center"></p>
+<p>虚拟地址来源于vmalloc区域，通过调用<code>get_vm_area</code>可以在<code>VMALLOC_START</code>和<code>VMALLOC_END</code>之间查找一块空闲区域，大小至少为<code>size+4096</code>，步骤如下：</p>
+<ul>
+<li>调用kmalloc为<code>vm_struct</code>获得内存区</li>
+<li>上锁，遍历<code>vm_struct</code>的结构体链表，找到一个大小符合要求的(<code>size+4096</code>)区域</li>
+<li>如果找到，初始化描述符字段，释放锁，返回<code>vm_struct*</code>，否则返回NULL</li>
+</ul>
+<p><code>vmalloc</code>实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> * <span class="title">vmalloc</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">vm_struct</span> *<span class="title">area</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">page</span> **<span class="title">pages</span>;</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> array_size, i;</span><br><span class="line">    size = (size + PAGE_SIZE - <span class="number">1</span>) &amp; PAGE_MASK;</span><br><span class="line">    area = get_vm_area(size, VM_ALLOC);                       <span class="comment">// 分配虚拟地址</span></span><br><span class="line">    <span class="keyword">if</span> (!area)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    area-&gt;nr_pages = size &gt;&gt; PAGE_SHIFT;</span><br><span class="line">    array_size = (area-&gt;nr_pages * <span class="keyword">sizeof</span>(struct page *));    <span class="comment">// 分配页描述符空间</span></span><br><span class="line">    area-&gt;pages = pages = kmalloc(array_size, GFP_KERNEL);</span><br><span class="line">    <span class="keyword">if</span> (!area_pages) &#123;</span><br><span class="line">        remove_vm_area(area-&gt;addr);</span><br><span class="line">        kfree(area);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(area-&gt;pages, <span class="number">0</span>, array_size);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;area-&gt;nr_pages; i++) &#123;</span><br><span class="line">        area-&gt;pages[i] = alloc_page(GFP_KERNEL|_ _GFP_HIGHMEM);    <span class="comment">// 分配物理页</span></span><br><span class="line">        <span class="keyword">if</span> (!area-&gt;pages[i]) &#123;</span><br><span class="line">            area-&gt;nr_pages = i;</span><br><span class="line">            fail: vfree(area-&gt;addr);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (map_vm_area(area, _ _pgprot(<span class="number">0x63</span>), &amp;pages))           <span class="comment">// 建立映射，保护位总是被置为63</span></span><br><span class="line">        <span class="keyword">goto</span> fail;</span><br><span class="line">    <span class="keyword">return</span> area-&gt;addr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>映射的过程是相对比较机械的，具体步骤如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pgd</span></span><br><span class="line"><span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = pgd_index(address); i &lt; pgd_index(end<span class="number">-1</span>); i++) &#123;</span><br><span class="line">    <span class="keyword">pud_t</span> *pud = pud_alloc(&amp;init_mm, pgd, address);</span><br><span class="line">    ret = -ENOMEM;</span><br><span class="line">    <span class="keyword">if</span> (!pud)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    next = (address + PGDIR_SIZE) &amp; PGDIR_MASK;</span><br><span class="line">    <span class="keyword">if</span> (next &lt; address || next &gt; end)</span><br><span class="line">        next = end;</span><br><span class="line">    <span class="keyword">if</span> (map_area_pud(pud, address, next, prot, pages))</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    address = next;</span><br><span class="line">    pgd++;</span><br><span class="line">    ret = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// pud/pmd</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">pmd_t</span> * pmd = pmd_alloc(&amp;init_mm, pud, address);</span><br><span class="line">    <span class="keyword">if</span> (!pmd)</span><br><span class="line">        <span class="keyword">return</span> -ENOMEM;</span><br><span class="line">    <span class="keyword">if</span> (map_area_pmd(pmd, address, end-address, prot, pages))</span><br><span class="line">        <span class="keyword">return</span> -ENOMEM;</span><br><span class="line">    address = (address + PUD_SIZE) &amp; PUD_MASK;</span><br><span class="line">    pud++;</span><br><span class="line">&#125; <span class="keyword">while</span> (address &lt; end);</span><br><span class="line"></span><br><span class="line"><span class="comment">// pte</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">pte_t</span> * pte = pte_alloc_kernel(&amp;init_mm, pmd, address);</span><br><span class="line">    <span class="keyword">if</span> (!pte)</span><br><span class="line">        <span class="keyword">return</span> -ENOMEM;</span><br><span class="line">    <span class="keyword">if</span> (map_area_pte(pte, address, end-address, prot, pages))</span><br><span class="line">        <span class="keyword">return</span> -ENOMEM;</span><br><span class="line">    address = (address + PMD_SIZE) &amp; PMD_MASK;</span><br><span class="line">    pmd++;</span><br><span class="line">&#125; <span class="keyword">while</span> (address &lt; end);</span><br></pre></td></tr></table></figure>
+<h2 id="内存管理的主要目的"><a href="#内存管理的主要目的" class="headerlink" title="内存管理的主要目的"></a>内存管理的主要目的</h2><p>内存管理主要负责内存的分配与回收，例如在C++中的new与delete；同时，内存管理还负责地址转换的事宜。总结下来内存管理的目的就是实现物理内存的分配以及虚拟内存的映射。内存管理需要实现如下目的：</p>
+<ul>
+<li>抽象：逻辑地址空间</li>
+<li>保护：空间独立性</li>
+<li>共享：访问相同内存、</li>
+<li>虚拟化：更大地址空间（大于物理内存总量）</li>
+</ul>
+<h2 id="内存管理方式"><a href="#内存管理方式" class="headerlink" title="内存管理方式"></a>内存管理方式</h2><ul>
+<li>重定位：程序加载到内存后，根据加载位置的不同，要将程序中用到的地址进行重新定位，找到正确位置</li>
+<li>分段：把程序分为代码、数据、堆栈，这样可以使内存不连续</li>
+<li>分页：将内存分为最基本的单位，找一个合适的粒度大小</li>
+<li>虚拟存储</li>
+</ul>
+<h2 id="内存管理的实现"><a href="#内存管理的实现" class="headerlink" title="内存管理的实现"></a>内存管理的实现</h2><h3 id="内存管理的组成"><a href="#内存管理的组成" class="headerlink" title="内存管理的组成"></a>内存管理的组成</h3><p>内存管理可以分为物理内存分配和虚拟内存映射。</p>
+<h4 id="内核的物理内存分配器"><a href="#内核的物理内存分配器" class="headerlink" title="内核的物理内存分配器"></a>内核的物理内存分配器</h4><p>在内存管理中，我们需要为内核提供物理内存分配器，使内核能够分配和释放内存。分配的单元为页，大小一般为4KB。为了实现分配器，我们需要维护一个数据结构记录哪些内存是已经被分配的，哪些是空闲的，多少个进程在使用已经分配的内存。同时，我们还需要一套用于分配和释放的调度策略。</p>
+<h4 id="虚拟内存机制"><a href="#虚拟内存机制" class="headerlink" title="虚拟内存机制"></a>虚拟内存机制</h4><p>为了将内核和用户软件的虚拟内存地址映射到实际物理地址，我们需要一个虚拟内存映射机制。当指令使用内存时，x86的内存管理单元（MMU）通过一个页表完成映射过程。</p>
+<h3 id="为何要进行内存划分"><a href="#为何要进行内存划分" class="headerlink" title="为何要进行内存划分"></a>为何要进行内存划分</h3><p>1 解决碎片问题</p>
+<p>碎片可以分为内部碎片和外部碎片：内部碎片是固定分区中浪费掉的内存，而外部碎片来自可变分区中进程和进程间空间特别小，但是没办法再利用的碎片。</p>
+<p>2 逻辑地址和物理地址的映射关系</p>
+<p>逻辑地址可以使我们屏蔽硬件，更具逻辑性，而不必关注底层的内存物理地址。</p>
+<h3 id="内存划分方式"><a href="#内存划分方式" class="headerlink" title="内存划分方式"></a>内存划分方式</h3><h4 id="非连续分配管理"><a href="#非连续分配管理" class="headerlink" title="非连续分配管理"></a>非连续分配管理</h4><h5 id="页式管理"><a href="#页式管理" class="headerlink" title="页式管理"></a>页式管理</h5><p>把主存分为大小相等且固定（2的n次幂，如512，4096等）的一页一页的形式，页较小，相对相比于块式管理的划分力度更大，提高了内存利用率，减少了碎片。页式管理通过页表对应逻辑地址和物理地址。</p>
+<ul>
+<li>页帧：物理地址划分为大小相同的基本分配单位</li>
+<li>页面：逻辑地址划分为大小相同的基本分配单位，页帧和页面大小必须相等</li>
+</ul>
+<p>页管理就是找到页面到页帧之间的转换，依靠页表进行（找到逻辑页号和物理帧号之间的对应关系）。逻辑地址中的页号是连续的，物理地址中的帧号一般是不连续的。</p>
+<h5 id="段式管理"><a href="#段式管理" class="headerlink" title="段式管理"></a>段式管理</h5><p>段式管理把主存分为一段段的，每一段访问方式和数据属性相同，段的空间又要比一页的空间小很多 。但是，最重要的是段是有实际意义的，每个段定义了一组逻辑信息，例如堆段、栈段、代码段、数据段等。 若干段组成了进程逻辑地址空间。段式管理通过段表对应逻辑地址和物理地址（逻辑连续，物理不连续）。</p>
+<p>以linux系统为例，内存的划分可以分为五个段，其相关属性如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称/符号</th>
+<th>功能</th>
+<th>读写性</th>
+<th>动态/静态分配</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BSS段  .bss</td>
+<td>存放未初始化的全局变量，体现为一个占位符，只记录所需空间大小，而不记录具体的值，一般bss初始化为0</td>
+<td></td>
+<td>静态</td>
+</tr>
+<tr>
+<td>数据段  .data</td>
+<td>存放已初始化的全局变量或局部静态变量</td>
+<td>可读写</td>
+<td>静态</td>
+</tr>
+<tr>
+<td>代码段 .text <br>常量段 .rodata</td>
+<td>存放程序执行代码以及一些常量，一般存放在ROM中</td>
+<td>只读（一些OS可写）</td>
+<td>静态</td>
+</tr>
+<tr>
+<td>堆</td>
+<td>存放动态分配的内存段</td>
+<td>可读写，必须手动分配及释放</td>
+<td>动态</td>
+</tr>
+<tr>
+<td>栈</td>
+<td>存放临时局部变量</td>
+<td>可读写，系统自动管理</td>
+<td>动态</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>分段后，一个程序就被拆分成了若干个段，示意图如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830223439.png" width="300" alt="图片名称" align="center"></p>
+<p>段访问下，逻辑地址由二元组<code>(s, addr)</code>表示</p>
+<ul>
+<li><code>s</code>：段号</li>
+<li><code>addr</code>：段内偏移</li>
+</ul>
+<p>每个段，其内部地址是从0开始的，还有段号区分不同的段，例如代码段某条指令段号为1，段内偏移为1，那么其逻辑地址为$1:1$，当然我们要考虑段号和段内偏移的具体位数，这个和具体硬件有关，例如一个16bit的地址，段号为2bit，偏移为14bit。由逻辑地址找到程序段的过程为，通过段描述符找到段基址和长度，根据这两个值确定物理内存的位置。</p>
+<h5 id="段页式管理"><a href="#段页式管理" class="headerlink" title="段页式管理"></a>段页式管理</h5><p>段页式管理机制结合了段式管理和页式管理的优点。简单来说段页式管理机制就是把主存先分成若干段，每个段又分成若干页，也就是说 <strong>段页式管理机制</strong> 中段与段之间以及段的内部的都是离散的。</p>
+<h4 id="分页和分段的共同点和区别"><a href="#分页和分段的共同点和区别" class="headerlink" title="分页和分段的共同点和区别"></a>分页和分段的共同点和区别</h4><h5 id="共同点"><a href="#共同点" class="headerlink" title="共同点"></a>共同点</h5><ul>
+<li>都是为了提高内存利用率，减少碎片</li>
+<li>段和页都是离散存储的，两者都是离散分配模式，但页和段中内存是连续的</li>
+</ul>
+<h5 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h5><ul>
+<li>页是固定大小，由操作系统决定；段大小不固定，由当前运行程序决定</li>
+<li>分页为了满足操作系统内存管理的需求，而段是逻辑信息的单位，具有明确的意义，例如代码、堆栈和数据段等等。</li>
+</ul>
+<h4 id="页面置换算法"><a href="#页面置换算法" class="headerlink" title="页面置换算法"></a>页面置换算法</h4><p>虚拟内存实现过程中很重要的一个部分是页面置换算法。在地址映射过程中，如果在页面中发现所要访问的页面不在内存中，就发生缺页中断，即操作系统需要将页面调入主存后再进行访问，被内存映射的文件实际上成了一个分页交换文件。当发生缺页中断，如果当前内存中没有空闲页面，那么就必须选择一个页面移出从而让出空间。<strong>移出某个页面的算法就叫做页面置换算法</strong>。</p>
+<ul>
+<li>最佳页面置换算法：所淘汰的页面是以后永不会使用的，但是这种算法物理上不能实现</li>
+<li>FIFO：淘汰在页面中滞留时间最长的</li>
+<li>LRU：最近最久未使用，记录每个页面自上次访问来所经历的时间T，选择T最大的进行淘汰</li>
+<li>LFU：最少使用，选择最少使用的页面进行淘汰</li>
+</ul>
+<h4 id="快表和多级页表"><a href="#快表和多级页表" class="headerlink" title="快表和多级页表"></a>快表和多级页表</h4><p>在分页内存管理中，很重要的两个要素是：</p>
+<ul>
+<li>虚拟地址映射到物理地址的速度要快</li>
+<li>解决虚拟地址空间大，页表也会很大的问题</li>
+</ul>
+<h5 id="快表（页表的Cache）"><a href="#快表（页表的Cache）" class="headerlink" title="快表（页表的Cache）"></a>快表（页表的Cache）</h5><p>快表是页表缓冲，其内容是页表一部分或全部，功能是加快地址映射速度，通常位于MMU中。使用快表后的地址转换流程：</p>
+<ol>
+<li>根据虚拟地址中的页号查询快表</li>
+<li>如果该页面在快表中，则直接从快表读取相应的物理地址</li>
+<li>如果该页面不在快表中，访问内存中的页表，从页表中得到物理地址，同时将页表中的映射表添加至快表</li>
+<li>快表填满后，登记新页面时，根据页面置换算法淘汰快表中的一个页面</li>
+</ol>
+<h5 id="多级页表"><a href="#多级页表" class="headerlink" title="多级页表"></a>多级页表</h5><p>下面以实际的计算演示多级页表所占用的大小</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830212737.png" width="250" alt="图片名称" align="center"></p>
+<p>在32位系统中，内存地址为32位，分为两个部分，Page Number和Page Offset，由于offset即为页面大小，因此页面大小为$2^{12}=4096=4K$。而页面数为$2^{20}=1K\times 1K=1M$，意味着我们需要$1M$的空间保存页面映射表，由于页表要求连续，可能很难找到一段连续的空间保存1M，因此我们采取了二级页表划分的方式，将Page Number进一步划分为两个10位的表，即构成多级页表的寻址方式。</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830213437.png" width="250" alt="图片名称" align="center"></p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200830220742.png" width="450" alt="图片名称" align="center"></p>
+<p>外部页表的大小是$1K$，而内部页表共$1K$个，每一个的大小是$1K$，故总大小也为$1M$。但是我们不一定把这些页表都保存起来，可以只保存一部分，这样就节约了资源。</p>
+<p>下面以一个完整的例子展示多级页表的计算过程<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，一个多级页表的结构如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224747.png" width="550" alt="图片名称" align="center"></p>
+<p>令$S<em>m$为虚拟地址能表示的最大内存大小，$S_P$为页面大小，$S</em>{PTE}$为保存每个页表项（PTE）的大小。考虑一个内存大小为8GB，一个页大小为8KB（即offset为$2^{13}B$），虚拟地址长度为46bit的计算机，计算需要几级页表。</p>
+<p>首先考虑不进行分级，那么只有一级页表，那么PTE的数量$N_{PTE}$（即所需的页数）计算公式为：</p>
+<script type="math/tex; mode=display">
+N_{PTE}=S_{m}/S_{p}=2^{46}B/2^{13}B=2^{33}</script><p>所以如果只有一级页表，需要$2^{33}$个PTE，每个PTE大小为32bit，那么$S<em>{PTE}=2^{2}B$，所以页表占用的空间为$S</em>{T}=N<em>{PTE}\times S</em>{PTE}=2^{35}B$。</p>
+<p>现在考虑二级分页，在二级分页下，我们用一级页表指向二级页表，而二级页表的空间大小为$2^{35}B$，为了保存这么多的空间，我们需要$2^{35} B / 2^{13}B=2^{22}$个页面存放二级页表，所以一级页表的大小为$2^{22}$。</p>
+<h3 id="多进程时的物理内存（DRAM）"><a href="#多进程时的物理内存（DRAM）" class="headerlink" title="多进程时的物理内存（DRAM）"></a>多进程时的物理内存（DRAM）</h3><p>当多个进程同时执行时，实际物理地址可能是如下情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">=====Memory=====</span><br><span class="line">    Process1</span><br><span class="line">----------------</span><br><span class="line">    Process2</span><br><span class="line">----------------</span><br><span class="line">    Process2</span><br><span class="line">----------------    =======Disk=======</span><br><span class="line">    Process1              </span><br><span class="line">----------------    ==================</span><br></pre></td></tr></table></figure>
+<p>物理内存中保存有进程1和2的内容，但是存储方式可能是不连续的，同时，可能也只是部分存储，然后通过Cache的方式从Disk中再读取进程中的数据。我们通过逻辑地址和物理地址的映射关系，从而实现寻址过程。</p>
+<h2 id="内存分配策略"><a href="#内存分配策略" class="headerlink" title="内存分配策略"></a>内存分配策略</h2><h3 id="连续内存分配"><a href="#连续内存分配" class="headerlink" title="连续内存分配"></a>连续内存分配</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>给进程分配一块不小于指定大小的连续物理内存空间</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>内存必须连续</li>
+<li>存在外部碎片和内部碎片</li>
+<li>动态修改困难</li>
+<li>内存利用率低</li>
+</ul>
+<h4 id="内存碎片"><a href="#内存碎片" class="headerlink" title="内存碎片"></a>内存碎片</h4><p>内存释放后留下的空闲内存，可能没办法再利用，因为可能某个进程内存很小，而后续内存需要的进程都很大。碎片可以分为两种</p>
+<ul>
+<li>外部碎片：分配单元之间的未被使用的内存</li>
+<li>内部碎片：由于内存取整导致分配单元内的未被使用内存，例如有个进程想要399字节的内存，但是我只能分配512字节，就会产生没有用的碎片</li>
+</ul>
+<h4 id="动态分区分配"><a href="#动态分区分配" class="headerlink" title="动态分区分配"></a>动态分区分配</h4><p>当程序加载执行时，分配一个进程指定大小的内存区域，分区的地址是连续的。在该策略下，操作系统需要维护的数据结构包括：</p>
+<ul>
+<li>所有进程的已分配分区（链表）</li>
+<li>空闲分区（链表）</li>
+</ul>
+<p>假设进程申请的大小为$n$个字节，那么分配策略有</p>
+<ul>
+<li>最先匹配（First Fit Allocation）：找到第一个比$n$大的空闲块就分配，释放时检查是否可与临近分区合并。<ul>
+<li>优点是简单，高地址有大块空闲分区；</li>
+<li>缺点是外部碎片多、分配大块时较慢</li>
+</ul>
+</li>
+<li>最佳匹配（Best Fit Allocation）：设所有可分配的空间集合为$N$，那么相当于找$N$的上确界，即$\sup(N)$，即比$n$大，但是是$N$中最小的那个。需要查找所有的空间。空闲分区需要按照大小排序，释放时检查是否可与临近分区合并。<ul>
+<li>优点：可避免大的空间分区被拆分，减少外碎片尺寸</li>
+<li>缺点：容易产生很多无用的小碎片，释放分区慢，因为要调整排序</li>
+</ul>
+</li>
+<li>最差匹配（Worst Fit Allocation）：找最大的分配，空闲分区列表从大到小排列，分配时选最大分区，释放时检查是否可与临近分区合并，并调整顺序<ul>
+<li>优点：中等大小分配较多时，效果最好，可以避免出现太多小碎片</li>
+<li>缺点：释放较慢，容易破坏大的空间分区，依然会有外部碎片</li>
+</ul>
+</li>
+</ul>
+<h4 id="碎片整理3"><a href="#碎片整理3" class="headerlink" title="碎片整理3"></a>碎片整理<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h4><p>当内存块不够给应用程序分配时，可以对碎片进行整理，产生大的可用块。常见方法有两种：</p>
+<ul>
+<li>通过调整进程占用的分区位置，减少碎片化，但是这个需要进程可以动态重定位，需要解决下面的问题：<ul>
+<li>何时搬运进程</li>
+<li>搬运开销有多大</li>
+</ul>
+</li>
+<li>分区对换：抢占并回收处于等待状态的进程的分区，而将原始分区保存至外存中，交替开销非常大，基本现在已经很少用了</li>
+</ul>
+<h4 id="伙伴系统4"><a href="#伙伴系统4" class="headerlink" title="伙伴系统4"></a>伙伴系统<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></h4><h3 id="非连续内存分配"><a href="#非连续内存分配" class="headerlink" title="非连续内存分配"></a>非连续内存分配</h3><p>非连续内存分配存在很多问题，例如找到一个大小合适的连续区域可能很难，因此我们提出了非连续内存分配的概念，实际就是我们的段页式分配。非连续分配的设计目标为提高内存效率和灵活性</p>
+<ul>
+<li>允许一个程序使用非连续物理地址空间</li>
+<li>允许共享代码和数据</li>
+<li>支持动态加载和动态链接</li>
+</ul>
+<h4 id="非连续分配需要解决的问题"><a href="#非连续分配需要解决的问题" class="headerlink" title="非连续分配需要解决的问题"></a>非连续分配需要解决的问题</h4><ul>
+<li>如何实现虚拟地址和物理地址的转换？虚拟地址是连续的，但是物理地址可能非连续</li>
+<li>如何选择非连续分配中内存分块大小？段式管理和页式管理，段和段之间不连续、页和页之间不连续</li>
+</ul>
+<h3 id="懒分配（Lazy-Allocation）"><a href="#懒分配（Lazy-Allocation）" class="headerlink" title="懒分配（Lazy Allocation）"></a>懒分配（Lazy Allocation）</h3><p>懒分配就是指直到进程真正使用内存时，才进行内存的分配，例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Widget</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Widget singleton;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Widget <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (singleton == <span class="keyword">null</span>) &#123;</span><br><span class="line">            singleton = <span class="keyword">new</span> Widget();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Widget</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码为一个单例模式的实现，直到<code>get</code>函数第一次调用，即单例对象还未创建时，才触发内存分配。在linux内核中，懒分配指请求调页，他将页框分配推迟至不能再推迟时，再触发一个缺页异常，然后对这个异常进行处理，分配新的页面或者处理相应的内存错误。懒分配的优缺点如下：</p>
+<ul>
+<li>优点：能够使系统有更大吞吐量</li>
+<li>缺点：系统会有额外开销，每一个缺页异常都需要由内核进行处理，浪费了时钟周期，但是由局部性原理可知，缺页异常不会耗费太多的资源，可以将其视为一个稀有时间。</li>
+</ul>
+<h2 id="虚拟内存"><a href="#虚拟内存" class="headerlink" title="虚拟内存"></a>虚拟内存</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>虚拟内存是指使用磁盘空间对内存进行扩展，当然其效率比不上真正的物理内存。虚拟内存采用连续完整的地址空间，对多个不连续的物理内存进行映射，还有部分暂时存储在外部磁盘存储器上，在需要时进行数据交换。</p>
+<h3 id="局部性原理"><a href="#局部性原理" class="headerlink" title="局部性原理"></a>局部性原理</h3><p>程序在执行时往往呈现局部性规律，在某个较短时间段内，程序执行局限在某一部分，访问的存储空间也局限在某一部分，这种局部体现在<strong>时间和空间</strong>两个方面。</p>
+<ul>
+<li>时间局部性：如果程序中的某条指令一旦执行，不久以后该指令可能再次执行；如果某数据被访问过，不久以后该数据可能再次被访问。产生时间局部性的典型原因，是由于在程序中存在着大量的循环操作。</li>
+<li>空间局部性：一旦程序访问了某个存储单元，在不久之后，其附近的存储单元也将被访问，即程序在一段时间内所访问的地址，可能集中在一定的范围之内，这是因为指令通常是顺序存放、顺序执行的，数据也一般是以向量、数组、表等形式簇聚存储的。</li>
+</ul>
+<h3 id="虚拟存储器"><a href="#虚拟存储器" class="headerlink" title="虚拟存储器"></a>虚拟存储器</h3><p>操作系统将内存中暂时不使用的内容换到外存上，从而腾出空间存放将要调入内存的信息，当访问的内容不在内存上时，再从外存向内存进行调用。这样，计算机好像为用户提供了一个比实际内存大的多的存储器——<strong>虚拟存储器</strong>。例如，一个16MB的程序，通过仔细选择每个时刻将哪4MB内容保留在内存上，并在需要时在内存和磁盘间交换程序片段，可以使该程序运行在4MB的机器上</p>
+<h2 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h2><p>64位系统一般分为4级页表，分别是PGD、PUD、PMD和PTE，硬件上有一个页表基地址寄存器，用于保存PGD页表首地址。在ARM上是TTBR0_ELx和TTBR1_ELx，区别如下：</p>
+<ul>
+<li>低位虚拟地址空间位于0x0000,0000,0000,0000到0x0000,FFFF,FFFF,FFFF，</li>
+<li>高位虚拟地址空间位于0x0000,FFFF,FFFF,FFFF</li>
+</ul>
+<p>如果虚拟地址最高位为0，使用低位空间，并且使用TTBR0_ELx存放页表基地址，否则使用TTBR1_ELx</p>
+<h2 id="附录：一些简单的计算"><a href="#附录：一些简单的计算" class="headerlink" title="附录：一些简单的计算"></a>附录：一些简单的计算</h2><h3 id="16进制到KB、MB、GB的换算"><a href="#16进制到KB、MB、GB的换算" class="headerlink" title="16进制到KB、MB、GB的换算"></a>16进制到KB、MB、GB的换算</h3><p>我们一般用16进制表示地址位，那么16进制如何与KB、MB和GB这些单位进行换算呢？例如给定地址位为0xFFFFFFFF，其表示的是4GB所在的地址，计算过程如下：</p>
+<script type="math/tex; mode=display">
+{0\mathrm{xFFFFFFFF}}_{16}=4,294,967,295_{10}=\frac{4,294,967,295}{1024}KB</script><p>而1GB=1024MB=1024*1024KB，这样我们就实现了从16进制到KB、MB、GB的换算</p>
+<h3 id="内存单位"><a href="#内存单位" class="headerlink" title="内存单位"></a>内存单位</h3><p>在内存中，其基本单位为byte，即一个地址对应1 byte，不过有些时候我们需要更大一点的划分，例如一个int对应4byte，这里总结一下内存的一些常用单位</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>单位名</th>
+<th>字母</th>
+<th>长度(以byte记)</th>
+<th>push命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>byte</td>
+<td>B</td>
+<td>1 byte (uint8)</td>
+<td>push</td>
+</tr>
+<tr>
+<td>word</td>
+<td>W</td>
+<td>2 byte (uint16)</td>
+<td>pushl</td>
+</tr>
+<tr>
+<td>double word</td>
+<td>D</td>
+<td>4 byte (uint32)</td>
+<td></td>
+</tr>
+<tr>
+<td>quad word</td>
+<td>Q</td>
+<td>8 byte (uint64)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="http://115.78.133.167:81/bitstream/TVHG_07113876976/270/1/OReilly%20-%20Understanding%20The%20Linux%20Kernel.pdf">Bovet D P, Cesati M. Understanding the Linux Kernel: from I/O ports to process management[M]. &quot; O'Reilly Media, Inc.&quot;, 2005.</a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="https://www.geeksforgeeks.org/multilevel-paging-in-operating-system/">Multilevel Paging in Operating System - GeeksforGeeks</a><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173359">碎片整理</a><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><a href="https://github.com/wuwenbin/buddy2">伙伴系统实现</a><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/共享内存/" rel="next" title="共享内存">
+                <i class="fa fa-chevron-left"></i> 共享内存
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/文件系统/" rel="prev" title="文件系统">
+                文件系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#物理内存管理"><span class="nav-number">1.</span> <span class="nav-text">物理内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页与页框"><span class="nav-number">1.1.</span> <span class="nav-text">页与页框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NUMA-Non-Uniform-Memory-Access"><span class="nav-number">1.2.</span> <span class="nav-text">NUMA(Non-Uniform Memory Access)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Zone"><span class="nav-number">1.3.</span> <span class="nav-text">Zone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Page-Frame"><span class="nav-number">1.4.</span> <span class="nav-text">Page Frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存管理区"><span class="nav-number">1.5.</span> <span class="nav-text">内存管理区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页框分配"><span class="nav-number">1.6.</span> <span class="nav-text">页框分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高端内存映射"><span class="nav-number">1.7.</span> <span class="nav-text">高端内存映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伙伴系统"><span class="nav-number">1.8.</span> <span class="nav-text">伙伴系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存区管理"><span class="nav-number">2.</span> <span class="nav-text">内存区管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#给高速缓存分配slab"><span class="nav-number">2.1.</span> <span class="nav-text">给高速缓存分配slab</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非连续内存区管理"><span class="nav-number">3.</span> <span class="nav-text">非连续内存区管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的主要目的"><span class="nav-number">4.</span> <span class="nav-text">内存管理的主要目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理方式"><span class="nav-number">5.</span> <span class="nav-text">内存管理方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存管理的实现"><span class="nav-number">6.</span> <span class="nav-text">内存管理的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内存管理的组成"><span class="nav-number">6.1.</span> <span class="nav-text">内存管理的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内核的物理内存分配器"><span class="nav-number">6.1.1.</span> <span class="nav-text">内核的物理内存分配器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#虚拟内存机制"><span class="nav-number">6.1.2.</span> <span class="nav-text">虚拟内存机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为何要进行内存划分"><span class="nav-number">6.2.</span> <span class="nav-text">为何要进行内存划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存划分方式"><span class="nav-number">6.3.</span> <span class="nav-text">内存划分方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非连续分配管理"><span class="nav-number">6.3.1.</span> <span class="nav-text">非连续分配管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#页式管理"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">页式管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#段式管理"><span class="nav-number">6.3.1.2.</span> <span class="nav-text">段式管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#段页式管理"><span class="nav-number">6.3.1.3.</span> <span class="nav-text">段页式管理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页和分段的共同点和区别"><span class="nav-number">6.3.2.</span> <span class="nav-text">分页和分段的共同点和区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#共同点"><span class="nav-number">6.3.2.1.</span> <span class="nav-text">共同点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#区别"><span class="nav-number">6.3.2.2.</span> <span class="nav-text">区别</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#页面置换算法"><span class="nav-number">6.3.3.</span> <span class="nav-text">页面置换算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快表和多级页表"><span class="nav-number">6.3.4.</span> <span class="nav-text">快表和多级页表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#快表（页表的Cache）"><span class="nav-number">6.3.4.1.</span> <span class="nav-text">快表（页表的Cache）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多级页表"><span class="nav-number">6.3.4.2.</span> <span class="nav-text">多级页表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多进程时的物理内存（DRAM）"><span class="nav-number">6.4.</span> <span class="nav-text">多进程时的物理内存（DRAM）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存分配策略"><span class="nav-number">7.</span> <span class="nav-text">内存分配策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#连续内存分配"><span class="nav-number">7.1.</span> <span class="nav-text">连续内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">7.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缺点"><span class="nav-number">7.1.2.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存碎片"><span class="nav-number">7.1.3.</span> <span class="nav-text">内存碎片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动态分区分配"><span class="nav-number">7.1.4.</span> <span class="nav-text">动态分区分配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#碎片整理3"><span class="nav-number">7.1.5.</span> <span class="nav-text">碎片整理3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伙伴系统4"><span class="nav-number">7.1.6.</span> <span class="nav-text">伙伴系统4</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非连续内存分配"><span class="nav-number">7.2.</span> <span class="nav-text">非连续内存分配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#非连续分配需要解决的问题"><span class="nav-number">7.2.1.</span> <span class="nav-text">非连续分配需要解决的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#懒分配（Lazy-Allocation）"><span class="nav-number">7.3.</span> <span class="nav-text">懒分配（Lazy Allocation）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟内存"><span class="nav-number">8.</span> <span class="nav-text">虚拟内存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">8.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局部性原理"><span class="nav-number">8.2.</span> <span class="nav-text">局部性原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟存储器"><span class="nav-number">8.3.</span> <span class="nav-text">虚拟存储器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">9.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录：一些简单的计算"><span class="nav-number">10.</span> <span class="nav-text">附录：一些简单的计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#16进制到KB、MB、GB的换算"><span class="nav-number">10.1.</span> <span class="nav-text">16进制到KB、MB、GB的换算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存单位"><span class="nav-number">10.2.</span> <span class="nav-text">内存单位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">11.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

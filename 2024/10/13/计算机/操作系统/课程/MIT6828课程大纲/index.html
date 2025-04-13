@@ -1,0 +1,2401 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT6828课程大纲">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/操作系统/课程/MIT6828课程大纲/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIT6828课程大纲">
+<meta name="twitter:description" content="HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/课程/MIT6828课程大纲/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MIT6828课程大纲 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/课程/MIT6828课程大纲/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MIT6828课程大纲
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/课程/" itemprop="url" rel="index"><span itemprop="name">课程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>HumanCore - CP/M-17 Version 1.0, Date: January 08, 1996</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="课程安排"><a href="#课程安排" class="headerlink" title="课程安排"></a>课程安排</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Mon</th>
+<th style="text-align:left">Tue</th>
+<th style="text-align:left">Wed</th>
+<th>Thur</th>
+<th>Fri</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Binary search trees, BST sort</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">AVL trees, AVL sort</td>
+<td><strong>LEC 2 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-x86.pdf">PC hardware and x86 programming slides</a>, <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-x86.html">notes</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Bootstrap/PC hardware appendices and the related xv6 source files</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-boot.html">HW: Boot xv6</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Counting sort, radix sort, lower bounds for sorting and searching</td>
+<td style="text-align:left"><strong>LEC 3 (TAs):</strong> C and <a href="https://pdos.csail.mit.edu/6.828/2018/lec/gdb_slides.pdf">gdb</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/pointers.c">pointers example</a>) <strong>Homework 1 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-boot.html">Boot xv6</a> <strong>Preparation</strong>: Read 2.9 (Bitwise operators), 5.1 (Pointers and Addresses) through 5.5(Character Pointers and Functions) and 6.4 (pointers to structures) in K&amp;R <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-shell.html">HW: shell</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab2/">Lab 2: Memory management</a></td>
+<td style="text-align:left">Hashing with chaining</td>
+<td><strong>DUE</strong>: Lab 1<strong>LEC 4 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-shell.txt">Shell &amp; OS organization</a> <strong>Preparation</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Read chapter 0 of the xv6 book</a>. <strong>Homework 2 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-shell.html">shell</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Table doubling, Karp-Rabin</td>
+<td style="text-align:left"><strong>LEC 5 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-internal.txt">Isolation mechanisms</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Chapter 1: Operating system organization” and the related xv6 source files</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-syscall.html">HW: system calls</a></td>
+<td style="text-align:left">Open addressing, cryptographic hashing</td>
+<td><strong>LEC 6 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm.md">Virtual memory (1)</a> (handouts: <a href="https://pdos.csail.mit.edu/6.828/2018/lec/x86_translation_and_registers.pdf">page table translation and registers</a>) (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Chapter 2: Page Tables”</a> <strong>Homework 3 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-syscall.html">system calls</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-zero-fill.html">HW lazy page allocation</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Quiz 1</td>
+<td style="text-align:left"><strong>LEC 7 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-usevm.md">Virtual memory (2)</a> (handout: <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-josmem.html">JOS virtual memory layout</a>) (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-usingvm.pdf">slides</a>) <strong>Homework 4 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-zero-fill.html">HW lazy page allocation</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-alarm.html">HW xv6 CPU alarm</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab 3: User-Level Environments</a></td>
+<td style="text-align:left">Integer arithmetic, Karatsuba multiplication</td>
+<td><strong>DUE</strong>: Lab 2 <strong>LEC 8 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-interrupt.txt">System calls, interrupts, exceptions</a> (handouts: <a href="https://pdos.csail.mit.edu/6.828/2018/lec/x86_idt.pdf">IDT</a>) <strong>Prep  aration</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Traps, interrupts, and drivers” and the related xv6 source files</a> <strong>Homework 5 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-alarm.html">HW xv6 CPU alarm</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/lock.html">HW multithreaded programming</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Square roots, Newton’s method</td>
+<td style="text-align:left"><strong>LEC 9 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-lockv2.txt">Multiprocessors and locking</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-locks.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Locking”</a> with spinlock.c and skim mp.c <strong>Homework 6 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/lock.html">HW multithreaded programming</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-lock.html">HW xv6 locks</a></td>
+<td style="text-align:left">Breadth-first search (BFS)</td>
+<td><strong>DUE</strong>: Lab 3 (Part A)oct 10 Hacking day <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab4/">Lab 4: Preemptive Multitasking</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Depth-first search (DFS), topological sorting</td>
+<td style="text-align:left"><strong>LEC 10 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-threads.txt">Processes and switching</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Scheduling”</a> up to “Sleep and wakeup” and proc.c, swtch.S <strong>Homework 7 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-lock.html">HW xv6 locks</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-uthread.html">HW uthreads</a></td>
+<td style="text-align:left">Single-source shortest paths problem</td>
+<td><strong>LEC 11 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-coordination.txt">sleep&amp;wakeup</a> <strong>Preparation</strong>: Read remainder of <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Scheduling”</a>, and corresponding parts of proc.c <strong>Homework 8 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-uthread.html">HW uthreads</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/barrier.html">HW barrier</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Dijkstra</td>
+<td style="text-align:left"><strong>LEC 12 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-fs.txt">File systems</a> <strong>Preparation</strong>: Read bio.c, fs.c, sysfile.c, file.c and “File system” except for the logging sections <strong>Homework 9 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/barrier.html">HW barrier</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-big-files.html">HW big files</a></td>
+<td style="text-align:left">Bellman-Ford</td>
+<td><strong>DUE</strong>: Lab 4 (Part A)oct 24 <strong>LEC 13 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-crash.txt">Crash recovery</a> <strong>Preparation</strong>: Read log.c and the logging sections of “File system” <strong>Homework 10 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-big-files.html">HW big files</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-new-log.html">HW crash</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab6/">Lab 6: Networking</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab7/">Lab 7: Final project</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Speeding up Dijkstra</td>
+<td style="text-align:left"><strong>Quiz #1</strong> <strong>open book and notes</strong> <strong>scope</strong>: Lectures 1 through 13, HW 1 through 10, labs 1 through 3 <strong>practice:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/quiz.html">previous years’ quizzes</a>.</td>
+<td style="text-align:left">Quiz 2</td>
+<td><strong>DUE</strong>: Lab 4 (Part B)oct 31 Hacking day <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab5/">Lab 5: File system, spawn, and sh</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Memoization, subproblems, guessing, bottom-up; Fibonacci, shortest paths</td>
+<td style="text-align:left"><strong>LEC 14 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-journal.txt">File system performance and fast crash recovery</a> <strong>Homework 11 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-new-log.html">HW crash</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/homework/journal-ext2fs.html">Journaling the Linux ext2fs Filesystem (1998)</a> <strong>Assignment</strong>: <a href="https://pdos.csail.mit.edu/6.828/2018/homework/mmap.html">mmap()</a></td>
+<td style="text-align:left">Parent pointers; text justification, perfect-information blackjack</td>
+<td><strong>DUE</strong>: Lab 4 (Part C)nov 7 <strong>LEC 15 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm-again.txt">Virtual Memory (3)</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm-again.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/appel-li.pdf">Virtual Memory Primitives for User Programs (1991)</a> <strong>Homework 12 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/mmap.html">mmap</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">String subproblems, psuedopolynomial time; parenthesization, edit distance, knapsack</td>
+<td style="text-align:left"><strong>LEC 16 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-organization.txt">OS Organization</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/engler95exokernel.pdf">Exokernel (1995)</a> <strong>Homework 13 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/exok.html">HW exokernel question</a></td>
+<td style="text-align:left">Two kinds of guessing; piano/guitar fingering, Tetris training, Super Mario Bros.</td>
+<td><strong>DUE</strong>: Final project proposal (if doing project)nov 19 <strong>LEC 17 (cc):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-biscuit.txt">Kernels and HLL</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/biscuit.pdf">the Biscuit paper (2018)</a> <strong>Homework 14 due:</strong> [HW Biscuit question</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left">Computational complexity</td>
+<td style="text-align:left"><strong>DROP DATE</strong> <strong>LEC 18 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-scalable-lock.md">Scalable locks</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-mcs.pdf">slides</a>) (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/scalable-lock-code.c">code</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/linux-lock.pdf">Non-scalable locks paper (2012)</a> <strong>Homework 15 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/ticketlock.html">ticket lock question</a></td>
+<td style="text-align:left">Algorithms research topics</td>
+<td><strong>DUE</strong>: Lab 5nov 26 <strong>LEC 19 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-rcu.pdf">Scaling OSes slides</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/rcu-decade-later.pdf">RCU (2013)</a> <strong>Homework 16 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/rcu.html">RCU question</a> <strong>DUE</strong>: Email us a status update on your final project (a paragraph)</td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><strong>LEC 20 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmware.txt">Virtual Machines (1)</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmware.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/adams06vmware.pdf">Software vs Hardware Virtualization (2006)</a> <strong>Homework 17 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/vmware.html">VM question</a></td>
+<td style="text-align:left"></td>
+<td><strong>LEC 21 (ab):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmm.md">Virtual Machines (2)</a> (<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-virt2.pdf">slides</a>) <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/belay-dune.pdf">Dune: Safe User-level Access to Privileged CPU Features (2012)</a> <strong>Homework 18 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/dune.html">Dune question</a></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><strong>LEC 22 (fk):</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-net.txt">High-performance networking</a> <strong>Preparation</strong>: Read <a href="https://pdos.csail.mit.edu/6.828/2018/readings/osdi14-paper-belay.pdf">IX: A Protected Dataplane Operating System for High Throughput and Low Latency (2014)</a> <strong>Homework 19 due:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/homework/ix.html">IX question</a></td>
+<td style="text-align:left"></td>
+<td><strong>Quiz #2</strong> <strong>DUPONT-Gym, 9am-11pm</strong> <strong>open book, notes, and papers.</strong> <strong>scope</strong>: Lectures 14 through last lecture (dec 12), labs 4 and 5. <strong>practice:</strong> <a href="https://pdos.csail.mit.edu/6.828/2018/quiz.html">previous years’ quizzes</a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="课程阅读"><a href="#课程阅读" class="headerlink" title="课程阅读"></a>课程阅读</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">课程</th>
+<th style="text-align:left">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">LEC1</td>
+<td style="text-align:left">阅读：课程大纲</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">观看：Unix系统介绍</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">LEC2</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-x86.pdf">PC hardware and x86 programming slides</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-x86.html">notes</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Bootstrap/PC hardware appendices and the related xv6 source files</a></td>
+<td style="text-align:center">完成，但是剩下三个题目不会</td>
+</tr>
+<tr>
+<td style="text-align:left">LEC3</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/gdb_slides.pdf">gdb (mit.edu)</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：K&amp;R2.9、5.1-5.5、6.4章节</td>
+<td style="text-align:center">完成，2.9节三个练习没做</td>
+</tr>
+<tr>
+<td style="text-align:left">LEC4</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-shell.txt">Shell &amp; OS organization</a></td>
+<td style="text-align:center">剩下三个挑战问题和两个问答题没做</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">chapter 0 of the xv6 book</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">LEC5</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-internal.txt">Isolation mechanisms</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Chapter 1: Operating system organization” and the related xv6 source files</a></td>
+<td style="text-align:center">读到了22页</td>
+</tr>
+<tr>
+<td style="text-align:left">LEC6</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm.md">Virtual memory (1)</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/x86_translation_and_registers.pdf">page table translation and registers</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm.pdf">slides</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Chapter 2: Page Tables</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">LEC7</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-usevm.md">Virtual memory (2)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-josmem.html">JOS virtual memory layout</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-usingvm.pdf">slides</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC8</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-interrupt.txt">System calls, interrupts, exceptions</a></td>
+<td style="text-align:center">基本上看完了</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/x86_idt.pdf">IDT</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">Traps, interrupts, and drivers” and the related xv6 source files</a></td>
+<td style="text-align:center">大致浏览了一遍，代码还没看，这个很重要，多看几遍</td>
+</tr>
+<tr>
+<td style="text-align:left">LEC9</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-lockv2.txt">Multiprocessors and locking (mit.edu)</a></td>
+<td style="text-align:center">前两页读完了</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-locks.pdf">slides (mit.edu)</a></td>
+<td style="text-align:center">锁的实现没有读完</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读： <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Locking”</a> with spinlock.c and skim mp.c</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC10</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-threads.txt">Processes and switching</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Scheduling”</a> up to “Sleep and wakeup” and proc.c, swtch.S</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC11</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-coordination.txt">sleep&amp;wakeup</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：remainder of <a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">“Scheduling”</a>, and corresponding parts of proc.c</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC12</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-fs.txt">File systems</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：bio.c, fs.c, sysfile.c, file.c and “File system” except for the logging sections</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC13</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-crash.txt">Crash recovery</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：log.c and the logging sections of “File system”</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC14</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-journal.txt">File system performance and fast crash recovery</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/homework/journal-ext2fs.html">Journaling the Linux ext2fs Filesystem (1998)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC15</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm-again.txt">Virtual Memory (3)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vm-again.pdf">slides</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/appel-li.pdf">Virtual Memory Primitives for User Programs (1991)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC16</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-organization.txt">OS Organization</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/engler95exokernel.pdf">Exokernel (1995)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC17</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-biscuit.txt">Kernels and HLL</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/biscuit.pdf">Biscuit paper (2018)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC18</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-scalable-lock.md">Scalable locks</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-mcs.pdf">slides</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/scalable-lock-code.c">code</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/linux-lock.pdf">Non-scalable locks paper (2012)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC19</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-rcu.pdf">Scaling OSes slides</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/rcu-decade-later.pdf">RCU (2013)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC20</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmware.txt">Virtual Machines (1)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmware.pdf">slides</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC21</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/adams06vmware.pdf"><a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-vmm.md">Virtual Machines (2)</a></a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-virt2.pdf">slides</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/belay-dune.pdf">Dune: Safe User-level Access to Privileged CPU Features (2012)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">LEC22</td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/lec/l-net.txt">High-performance networking</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/osdi14-paper-belay.pdf">IX: A Protected Dataplane Operating System for High Throughput and Low Latency (2014)</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="阅读练习"><a href="#阅读练习" class="headerlink" title="阅读练习"></a>阅读练习</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">章节</th>
+<th style="text-align:left">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Chapter1</td>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">Chapter2</td>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">Chapter3</td>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">Chapter4</td>
+<td style="text-align:left">练习1：触发竞态</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">Chapter5</td>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">Chapter6</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="课程视频"><a href="#课程视频" class="headerlink" title="课程视频"></a>课程视频</h2><p>由于本课程视频较为模糊，因此我们以其他的视频进行替代</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">课程</th>
+<th style="text-align:left">内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">第一讲</td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173324">为何学习操作系统</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">第三讲</td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173340">操作系统启动流程</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173341">中断、异常和系统调用比较</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/exercise/9173345">中断、异常和系统调用题目</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173342">系统调用及题目</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">第四讲</td>
+<td style="text-align:left"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">第五讲：物理内存管理</td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173356">计算机体系结构和内存层次</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173357">地址空间和地址生成</a></td>
+<td style="text-align:center">完成：笔记记录在内存管理章节</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173358">连续内存分配</a></td>
+<td style="text-align:center">完成：笔记记录在内存管理章节</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173359">碎片整理</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:left">第六讲：非连续内存分配</td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173362">非连续分配需求背景 </a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173363">段式管理</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="ttps://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173364">页式管理</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">第十一讲：进程和线程</td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173407">进程的概念</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173408">进程控制块</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173409">进程状态</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173410">进程三状态模型</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173411">进程挂起</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173412">线程</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">第十二讲：进程控制</td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173422">进程切换</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173423">进程创建</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/exercise/9173428">进程加载</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td style="text-align:left">第十三讲：内核线程管理</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>作业</th>
+<th>内容</th>
+<th style="text-align:center">完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-boot.html">作业1：boot xv6 (Lecture2)</a></td>
+<td>Boot xv6</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>Finding and breaking at an address</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>Exercise: What is on the stack?</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-shell.html">作业2：shell (Lecture3)</a></td>
+<td>完成：<a href="http://web.mit.edu/6.033/2004/wwwdocs/handouts/handson/unix.html">6.033: Hands-on Assignment (UNIX) (mit.edu)</a></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td></td>
+<td>阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf">chapter 0 of the xv6 book</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/homework/sh.c">6.828 shell</a></td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：实验环境搭建</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：执行简单命令</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：IO重定向</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：实施管道</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：挑战练习</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-syscall.html">作业3：xv6 system calls (Lecture5)</a></td>
+<td>完成：syscall函数</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：date函数</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-zero-fill.html">作业4：lazy page allocation(Lecture6)</a></td>
+<td>完成：修改sbrk函数</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：lazy allocation</td>
+<td style="text-align:center">完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：挑战任务</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/homework/xv6-alarm.html">作业5：CPU Alarm(Lecture7)</a></td>
+<td>阅读：作业内容</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/homework/lock.html">作业6：Threads and Locking</a></td>
+<td>完成：对put进行加锁保护</td>
+<td style="text-align:center">完成，但是Hash表原理不太懂，复习了一下，基本懂了</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="实-验"><a href="#实-验" class="headerlink" title="实     验"></a>实     验</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>实验</th>
+<th>内容</th>
+<th>完成情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab1/">Lab1</a></td>
+<td></td>
+<td>完成</td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab2/">Lab2</a></td>
+<td>阅读：Introduction</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>完成：实验环境搭建</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读：第一部分，物理页管理</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读：第二部分，虚拟内存</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读：第三部分，内核地址空间</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>编程：编写一个物理内存分配 boot_alloc</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>第一部分：编写mem_init()</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>第一部分：编写page_init</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>第一部分：编写page_alloc和page_free</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>第二部分：编写pgdir_walk</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>编写boot_map_region</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>编写page_lookup</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>编写page_insert</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>编写page_delete</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>第三部分：内核地址空间</td>
+<td>完成</td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab3/">Lab3</a></td>
+<td>源码阅读</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读进程状态章节</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>进程创建及运行章节代码</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读：<a href="https://pdos.csail.mit.edu/6.828/2018/readings/ia32/IA32-3A.pdf">IA-32 Developer’s Manual 第五章</a></td>
+<td>读到了5.10节</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读”Basics of Protected Control Transfer”</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习4，编写trapentry</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习5，编写trap_dispatch</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习6，编写断点异常</td>
+<td>完成</td>
+</tr>
+<tr>
+<td><a href="https://pdos.csail.mit.edu/6.828/2018/labs/lab4/">Lab 4</a></td>
+<td>课程准备</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>第一部分</strong></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>练习1：编写<code>mmio_map_region</code>函数</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习2：阅读boot_aps、mp_main以及<code>mpentry.S</code></td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习2：修改<code>page_init</code>，删除特定内存</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>阅读CPU状态</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习3：初始化每个CPU的内核栈</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习4：编写<code>trap_init_percpu</code></td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习5：对内核进行锁保护</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>挑战1：使用细颗粒锁</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>练习6：完成Round-robin调度</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>挑战2：添加优先级调度</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>挑战3：浮点单元支持</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>完成用于支持进程创建的系统调用</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td>练习7：<code>sys_exofork</code>实现</td>
+<td>完成</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>第二部分</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
+<li>测试一：<a href="https://pdos.csail.mit.edu/6.828/2018/quiz.html">previous years’ quizzes</a>.</li>
+<li>测试二：<a href="https://pdos.csail.mit.edu/6.828/2018/quiz.html">previous years’ quizzes</a>.</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://www.bilibili.com/video/av15896196/">MIT6828课程视频链接</a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="https://pdos.csail.mit.edu/6.828/2018/schedule.html">6.828 / Fall 2018 (mit.edu)</a><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173325">清华操作系统课程</a><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><a href="https://pdos.csail.mit.edu/6.828/2020/labs/">Index of /2020/labs (mit.edu)</a><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><a href="https://zhuanlan.zhihu.com/p/74028717">MIT6.828全系列</a><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/课程/MIT6828-环境配置指南/" rel="next" title="MIT6828实验环境配置指南">
+                <i class="fa fa-chevron-left"></i> MIT6828实验环境配置指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/进程/" rel="prev" title="进程">
+                进程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程安排"><span class="nav-number">1.</span> <span class="nav-text">课程安排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程阅读"><span class="nav-number">2.</span> <span class="nav-text">课程阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#阅读练习"><span class="nav-number">3.</span> <span class="nav-text">阅读练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程视频"><span class="nav-number">4.</span> <span class="nav-text">课程视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作业"><span class="nav-number">5.</span> <span class="nav-text">作业</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实-验"><span class="nav-number">6.</span> <span class="nav-text">实     验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试"><span class="nav-number">7.</span> <span class="nav-text">测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

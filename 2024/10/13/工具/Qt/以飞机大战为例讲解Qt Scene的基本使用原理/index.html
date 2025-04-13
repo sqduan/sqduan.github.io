@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Let’s make a GAME!!!!">
+<meta property="og:type" content="article">
+<meta property="og:title" content="以飞机大战为例讲解Qt Scene的基本使用原理">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/工具/Qt/以飞机大战为例讲解Qt Scene的基本使用原理/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="Let’s make a GAME!!!!">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.489Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="以飞机大战为例讲解Qt Scene的基本使用原理">
+<meta name="twitter:description" content="Let’s make a GAME!!!!">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/工具/Qt/以飞机大战为例讲解Qt Scene的基本使用原理/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>以飞机大战为例讲解Qt Scene的基本使用原理 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/工具/Qt/以飞机大战为例讲解Qt Scene的基本使用原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">以飞机大战为例讲解Qt Scene的基本使用原理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>Let’s make a GAME!!!!</p>
+</blockquote>
+<a id="more"></a>
+<p>本文将以Qt设计的一个飞机大战为例，讲解小游戏开发的一些基本要素。</p>
+<h2 id="基于Qt-Scene的场景构建"><a href="#基于Qt-Scene的场景构建" class="headerlink" title="基于Qt Scene的场景构建"></a>基于Qt Scene的场景构建</h2><h3 id="场景、视窗和对象"><a href="#场景、视窗和对象" class="headerlink" title="场景、视窗和对象"></a>场景、视窗和对象</h3><h4 id="QGraphicsScene"><a href="#QGraphicsScene" class="headerlink" title="QGraphicsScene"></a>QGraphicsScene</h4><p>这个类就像一个场景类，你可以向场景类中添加各种各样的对象，例如放入一只猫或者一个英雄等等</p>
+<h4 id="QGraphicsView"><a href="#QGraphicsView" class="headerlink" title="QGraphicsView"></a>QGraphicsView</h4><p>这个类用于将场景进行可视化，如果不可视化场景，我们便看不到任何东西</p>
+<h4 id="QGraphicsItem"><a href="#QGraphicsItem" class="headerlink" title="QGraphicsItem"></a>QGraphicsItem</h4><h5 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h5><p>这个类就是我们可以向场景中添加的对象，例如一个矩形（QGraphicsRectItem）</p>
+<h5 id="Item的组合"><a href="#Item的组合" class="headerlink" title="Item的组合"></a>Item的组合</h5><p>每个item可以有自己的parent，从而我们可以将多个item进行组合，这对于创造复杂的对象很有帮助，例如如果我们想创建一个坦克，坦克包含如下部分：</p>
+<ul>
+<li>炮管</li>
+<li>车身</li>
+</ul>
+<p>我们可以令车身为炮管的parent，当parent被销毁时，child也会被销毁；而当chlid被销毁时，parent不会被销毁，这样我们可以实现如下的逻辑：当车身被打坏时，炮管连带也被销毁，而当炮管被打坏时，车身还在。</p>
+<h3 id="构建一个基本场景"><a href="#构建一个基本场景" class="headerlink" title="构建一个基本场景"></a>构建一个基本场景</h3><h4 id="综合代码"><a href="#综合代码" class="headerlink" title="综合代码"></a>综合代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QApplication&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGraphicsScene&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGraphicsItem&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QGraphicsView&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">QApplication <span class="title">a</span><span class="params">(argc, argv)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// create a scene</span></span><br><span class="line">    QGraphicsScene *scene = <span class="keyword">new</span> QGraphicsScene();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// create an item </span></span><br><span class="line">    QGraphicsRectItem *rect = <span class="keyword">new</span> QGraphicsRectItem();</span><br><span class="line">    rect-&gt;setRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>);    <span class="comment">//0,0代表在view中的位置</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// add the item to the scene</span></span><br><span class="line">    scene-&gt;addItem(rect);   <span class="comment">//在场景中添加item</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// add a view, Without a view, nothing can be seen</span></span><br><span class="line">    QGraphicsView* view = <span class="keyword">new</span> QGraphicsView(scene);</span><br><span class="line">    view-&gt;show();  <span class="comment">//显示</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> a.exec();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="三者关系"><a href="#三者关系" class="headerlink" title="三者关系"></a>三者关系</h4><p>三者关系可以用下图进行表示</p>
+<pre class="mermaid">graph TB
+    subgraph QGraphicsScene
+
+        subgraph QGraphicsView
+            object1[QGraphicsRectItem]
+        end
+
+    end</pre>
+
+<p>视觉效果从上图可以看出，QGraphicsView其实就是可见区域，需要注意的是，当存在多个Item时，View默认是以多个Item的中心作为中心的，我们可以设置以某一个具体的Item作为中心或者以整个Scene作为中心。</p>
+<h4 id="坐标系系统"><a href="#坐标系系统" class="headerlink" title="坐标系系统"></a>坐标系系统</h4><p>在Qt中，有三个坐标系系统需要我们注意：Scene、View和Item，左上角是三个坐标系的原点，通过改变其位置，我们能够得到不同的视觉效果。</p>
+<h3 id="对场景类的修改"><a href="#对场景类的修改" class="headerlink" title="对场景类的修改"></a>对场景类的修改</h3><h4 id="尺寸修改"><a href="#尺寸修改" class="headerlink" title="尺寸修改"></a>尺寸修改</h4><p>我们可以设置场景类的一些关键参数，从而实现理想的场景效果，例如在QGraphcsScene中，如果我们不限定其大小，随着场景中item越来越多，那么我们的Scene尺寸会越来越大，一般来说，我们会将Scene的尺寸和view的尺寸设置为一致。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">view-&gt;setFixedSize(<span class="number">800</span>,<span class="number">600</span>);</span><br><span class="line">scene-&gt;setSceneRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">800</span>,<span class="number">600</span>);</span><br><span class="line">player-&gt;setPos(view-&gt;width()/<span class="number">2</span>-player-&gt;rect().width()/<span class="number">2</span>,view-&gt;height() - player-&gt;rect().height()); <span class="comment">//设置玩家相对与view的位置</span></span><br><span class="line">view-&gt;show();</span><br></pre></td></tr></table></figure>
+<h3 id="对Item类的修改"><a href="#对Item类的修改" class="headerlink" title="对Item类的修改"></a>对Item类的修改</h3><h4 id="添加item"><a href="#添加item" class="headerlink" title="添加item"></a>添加item</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> Qt::Key_Space:    <span class="comment">//按下空格键</span></span><br><span class="line">    Bullet* bullet = <span class="keyword">new</span> Bullet();  <span class="comment">//创建一个新item</span></span><br><span class="line">    bullet-&gt;setPos(x(),y());         <span class="comment">//设置item的位置</span></span><br><span class="line">    scene()-&gt;addItem(bullet);        <span class="comment">//添加item至场景中</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="删除item"><a href="#删除item" class="headerlink" title="删除item"></a>删除item</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(pos().y() &lt; <span class="number">0</span> - <span class="keyword">this</span>-&gt;rect().height())&#123;</span><br><span class="line">    scene()-&gt;removeItem(<span class="keyword">this</span>);   <span class="comment">//当子弹跑出场景外时，从场景中移除对象</span></span><br><span class="line">    <span class="keyword">delete</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="音频和图像"><a href="#音频和图像" class="headerlink" title="音频和图像"></a>音频和图像</h2><h3 id="音频及图像Resources管理"><a href="#音频及图像Resources管理" class="headerlink" title="音频及图像Resources管理"></a>音频及图像Resources管理</h3><p>一般来说，我们将多媒体素材放置在Qt的resourse中，右键项目，Add New，在Qt一栏中选择resource，即可添加，其后缀为.qrc。点击add prefix可以添加前缀，就是划分文件夹以便分类保管不同的资源。</p>
+<h3 id="声音"><a href="#声音" class="headerlink" title="声音"></a>声音</h3><h4 id="配置工程文件"><a href="#配置工程文件" class="headerlink" title="配置工程文件"></a>配置工程文件</h4><p>为了添加声音，我们需要使用多媒体，修改项目工程文件，在Qt组件中添加多媒体</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QT       += core gui \</span><br><span class="line">            multimedia</span><br></pre></td></tr></table></figure>
+<h4 id="添加背景音乐"><a href="#添加背景音乐" class="headerlink" title="添加背景音乐"></a>添加背景音乐</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QMediaPlayer* bgm = <span class="keyword">new</span> QMediaPlayer();</span><br><span class="line">bgm-&gt;setMedia(QUrl(<span class="string">"qrc:/sound/fire.wav"</span>));</span><br><span class="line">bgm-&gt;play();</span><br></pre></td></tr></table></figure>
+<h4 id="添加开火音效"><a href="#添加开火音效" class="headerlink" title="添加开火音效"></a>添加开火音效</h4><p>在添加开火音效时，我们要注意音效的重复播放问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Player::fireSound</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    **    Play fire sound effect, if the sound effect is playing</span></span><br><span class="line"><span class="comment">    **    we set the sound track to the beginning to make a continue</span></span><br><span class="line"><span class="comment">    **    firing sound effect, and if the sound effect is finished</span></span><br><span class="line"><span class="comment">    **    we replay it</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="keyword">if</span>(bullet_sound-&gt;state() == QMediaPlayer::PlayingState)&#123;</span><br><span class="line">        bullet_sound-&gt;setPosition(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(bullet_sound-&gt;state() == QMediaPlayer::StoppedState)&#123;</span><br><span class="line">        bullet_sound-&gt;play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><h4 id="背景设置"><a href="#背景设置" class="headerlink" title="背景设置"></a>背景设置</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scene  = <span class="keyword">new</span> QGraphicsScene();</span><br><span class="line">scene-&gt;setSceneRect(posX,posY,width,height);</span><br><span class="line">scene-&gt;setBackgroundBrush(QBrush(<span class="string">":/images/bg.png"</span>));</span><br></pre></td></tr></table></figure>
+<h4 id="游戏角色设置"><a href="#游戏角色设置" class="headerlink" title="游戏角色设置"></a>游戏角色设置</h4><h5 id="QGraphicsPixmapItem"><a href="#QGraphicsPixmapItem" class="headerlink" title="QGraphicsPixmapItem"></a>QGraphicsPixmapItem</h5><p>为了使用具有图片属性的对象，我们需要使用QGraphicsPixmapItem类，该类能够为对象添加图元</p>
+<h5 id="创建一个具有图元属性的对象并进行处理"><a href="#创建一个具有图元属性的对象并进行处理" class="headerlink" title="创建一个具有图元属性的对象并进行处理"></a>创建一个具有图元属性的对象并进行处理</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">**    Player image set</span></span><br><span class="line"><span class="comment">**      setPixmap -- set the image of the player</span></span><br><span class="line"><span class="comment">**      setTransformOriginPoint -- set the origin of the player</span></span><br><span class="line"><span class="comment">**      setRotation -- rotate the player around origin</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">player-&gt;setPixmap(QPixmap(<span class="string">":/images/player.png"</span>));</span><br><span class="line"><span class="comment">//player-&gt;setRect(0,0,100,100);</span></span><br><span class="line">player-&gt;setTransformOriginPoint(player-&gt;boundingRect().width()/<span class="number">2</span>,</span><br><span class="line">                                player-&gt;boundingRect().height()/<span class="number">2</span>);</span><br><span class="line">player-&gt;setRotation(<span class="number">180</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="人机交互事件"><a href="#人机交互事件" class="headerlink" title="人机交互事件"></a>人机交互事件</h2><p>人机交互有多种事件，例如鼠标点击，键盘点击等等，本文将使用键盘触发相应事件</p>
+<h3 id="keyPressEvent-和-QKeyEvent"><a href="#keyPressEvent-和-QKeyEvent" class="headerlink" title="keyPressEvent() 和 QKeyEvent"></a>keyPressEvent() 和 QKeyEvent</h3><p>我们定义好了一个对象叫MyRect，继承自QGraphicsRectItem，同时定义了keyPressEvent()函数如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MyRect::keyPressEvent</span><span class="params">(QKeyEvent *event)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    qDebug() &lt;&lt; <span class="string">"MyRect knows that you pressed a key"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们按下键盘，发现并没有事情发生，因为在Qt中，同一时刻只能有一个focus的对象响应键盘事件，因此我们要将我们的MyRect对象设置为focus的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rect-&gt;setFlag(QGraphicsItem::ItemIsFocusable);   <span class="comment">//设置为可Focus的</span></span><br><span class="line">rect-&gt;setFocus();                                <span class="comment">//Focus rect，使其能够响应键盘事件</span></span><br></pre></td></tr></table></figure>
+<h3 id="event-传递系统"><a href="#event-传递系统" class="headerlink" title="event 传递系统"></a>event 传递系统</h3><p>对于一个事件，我们要知道以下几点：</p>
+<ul>
+<li>事件从何而来</li>
+<li>事件到哪里去</li>
+<li>事件何时触发</li>
+</ul>
+<p>我们需要Qt中的event propogation system来控制事件的传递。具体原理如下</p>
+<ol>
+<li>QGraphicsView 监听键盘事件</li>
+<li>当键盘事件来临后，QGraphicsView通知QGraphicsScene</li>
+<li>QGraphicsScene查看当前被Focus的QGraphicsItem，控制其动作</li>
+<li>QGraphicsItem检查并调用其keyPressEvent函数，完成动作</li>
+</ol>
+<h3 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h3><p>一些情况下我们需要触发定时器中断，此时我们需要设置Timer，例如在游戏中我们需要子弹自己运动，那么设置好定时器，然后将定时器与运动函数进行connect，从而实现子弹的自动移动</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Bullet::Bullet()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// draw the rect</span></span><br><span class="line">    setRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">10</span>,<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">    QTimer* timer = <span class="keyword">new</span> QTimer();</span><br><span class="line">    connect(timer, SIGNAL(timeout()), <span class="keyword">this</span>, SLOT(move()));</span><br><span class="line">    timer-&gt;start(<span class="number">50</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="游戏机制"><a href="#游戏机制" class="headerlink" title="游戏机制"></a>游戏机制</h2><h3 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h3><p>在子弹的飞行过程中，我们需要对子弹碰撞的物体进行检测，如果发现子弹碰撞到了飞机，那么立刻将子弹和飞机都销毁，</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QGraphicsItem*&gt; colliding_item = collidingItems();  <span class="comment">//获取碰撞的物体并保存在列表中</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; colliding_item.size();i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeid</span> (*(colliding_item[i])) == <span class="keyword">typeid</span> (Enemy))&#123;  <span class="comment">//如果碰撞的物体类型为 Enemy</span></span><br><span class="line">        <span class="comment">//从场景中移除</span></span><br><span class="line">        scene() -&gt; removeItem(colliding_item[i]); <span class="comment">//remove the enemy</span></span><br><span class="line">        scene() -&gt; removeItem(<span class="keyword">this</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//释放内存</span></span><br><span class="line">        <span class="keyword">delete</span> colliding_item[i];                </span><br><span class="line">        <span class="keyword">delete</span> <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/工具/Qt/使用C++创建QML对象/" rel="next" title="使用C++创建QML对象">
+                <i class="fa fa-chevron-left"></i> 使用C++创建QML对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/工具/Qt/StackView/" rel="prev" title="Qt Quick StackView介绍">
+                Qt Quick StackView介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于Qt-Scene的场景构建"><span class="nav-number">1.</span> <span class="nav-text">基于Qt Scene的场景构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景、视窗和对象"><span class="nav-number">1.1.</span> <span class="nav-text">场景、视窗和对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#QGraphicsScene"><span class="nav-number">1.1.1.</span> <span class="nav-text">QGraphicsScene</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QGraphicsView"><span class="nav-number">1.1.2.</span> <span class="nav-text">QGraphicsView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#QGraphicsItem"><span class="nav-number">1.1.3.</span> <span class="nav-text">QGraphicsItem</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#功能"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Item的组合"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Item的组合</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建一个基本场景"><span class="nav-number">1.2.</span> <span class="nav-text">构建一个基本场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#综合代码"><span class="nav-number">1.2.1.</span> <span class="nav-text">综合代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三者关系"><span class="nav-number">1.2.2.</span> <span class="nav-text">三者关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#坐标系系统"><span class="nav-number">1.2.3.</span> <span class="nav-text">坐标系系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对场景类的修改"><span class="nav-number">1.3.</span> <span class="nav-text">对场景类的修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#尺寸修改"><span class="nav-number">1.3.1.</span> <span class="nav-text">尺寸修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对Item类的修改"><span class="nav-number">1.4.</span> <span class="nav-text">对Item类的修改</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加item"><span class="nav-number">1.4.1.</span> <span class="nav-text">添加item</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除item"><span class="nav-number">1.4.2.</span> <span class="nav-text">删除item</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#音频和图像"><span class="nav-number">2.</span> <span class="nav-text">音频和图像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#音频及图像Resources管理"><span class="nav-number">2.1.</span> <span class="nav-text">音频及图像Resources管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声音"><span class="nav-number">2.2.</span> <span class="nav-text">声音</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置工程文件"><span class="nav-number">2.2.1.</span> <span class="nav-text">配置工程文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加背景音乐"><span class="nav-number">2.2.2.</span> <span class="nav-text">添加背景音乐</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加开火音效"><span class="nav-number">2.2.3.</span> <span class="nav-text">添加开火音效</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像"><span class="nav-number">2.3.</span> <span class="nav-text">图像</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景设置"><span class="nav-number">2.3.1.</span> <span class="nav-text">背景设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#游戏角色设置"><span class="nav-number">2.3.2.</span> <span class="nav-text">游戏角色设置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#QGraphicsPixmapItem"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">QGraphicsPixmapItem</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个具有图元属性的对象并进行处理"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">创建一个具有图元属性的对象并进行处理</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#人机交互事件"><span class="nav-number">3.</span> <span class="nav-text">人机交互事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keyPressEvent-和-QKeyEvent"><span class="nav-number">3.1.</span> <span class="nav-text">keyPressEvent() 和 QKeyEvent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#event-传递系统"><span class="nav-number">3.2.</span> <span class="nav-text">event 传递系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timer"><span class="nav-number">3.3.</span> <span class="nav-text">Timer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏机制"><span class="nav-number">4.</span> <span class="nav-text">游戏机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#碰撞检测"><span class="nav-number">4.1.</span> <span class="nav-text">碰撞检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">4.1.1.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

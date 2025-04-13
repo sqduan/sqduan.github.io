@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="“I don’t make mistakes. I make prophecies which immediately turn out to be wrong.”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Branch Prediction Unit(BPU)">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/组成原理/FrontEnd/BPU/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="“I don’t make mistakes. I make prophecies which immediately turn out to be wrong.”">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20221010103033.png">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Branch Prediction Unit(BPU)">
+<meta name="twitter:description" content="“I don’t make mistakes. I make prophecies which immediately turn out to be wrong.”">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20221010103033.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/组成原理/FrontEnd/BPU/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Branch Prediction Unit(BPU) | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/组成原理/FrontEnd/BPU/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Branch Prediction Unit(BPU)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/组成原理/" itemprop="url" rel="index"><span itemprop="name">组成原理</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/组成原理/FrontEnd/" itemprop="url" rel="index"><span itemprop="name">FrontEnd</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>“I don’t make mistakes. I make prophecies which immediately turn out to be wrong.”</p>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>本文将对香山的分支预测顶层模块BPU进行介绍，BPU为取值目标队列（FTQ）提供预测的取址目标，BPU主要包含如下逻辑：</p>
+<ul>
+<li>覆盖预测逻辑（后级预测对前级进行覆盖）</li>
+<li>流水线握手（各级之间以及BPU和FTQ之间）</li>
+<li>全局分支历史管理</li>
+</ul>
+<h2 id="基本结构及参数"><a href="#基本结构及参数" class="headerlink" title="基本结构及参数"></a>基本结构及参数</h2><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20221010103033.png" width="550" alt="BPU" align="center"></p>
+<p>分支预测单元采用多级混合预测架构，主要包含两个部分</p>
+<ul>
+<li><p>Next Line Predictor (NLP)：$\mu $BTB</p>
+</li>
+<li><p>Accurate Predictor (APD): FTB/TAGE-SC/ITTAGE/RAS</p>
+</li>
+</ul>
+<h2 id="Input-Output"><a href="#Input-Output" class="headerlink" title="Input/Output"></a>Input/Output</h2><h3 id="BasePredictor"><a href="#BasePredictor" class="headerlink" title="BasePredictor"></a>BasePredictor</h3><h4 id="IO-in"><a href="#IO-in" class="headerlink" title="IO.in"></a>IO.in</h4><p>预测器的基本输入如下：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasePredictorInput</span> (<span class="params">implicit p: <span class="type">Parameters</span></span>) <span class="keyword">extends</span> <span class="title">XSBundle</span> <span class="keyword">with</span> <span class="title">HasBPUConst</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">nInputs</span> </span>= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> s0_pc = <span class="type">UInt</span>(<span class="type">VAddrBits</span>.<span class="type">W</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> folded_hist = <span class="keyword">new</span> <span class="type">AllFoldedHistories</span>(foldedGHistInfos)    <span class="comment">// 经过折叠的历史</span></span><br><span class="line">    <span class="keyword">val</span> ghist = <span class="type">UInt</span>(<span class="type">HistoryLength</span>.<span class="type">W</span>)                             <span class="comment">// 全局历史</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> resp_in = <span class="type">Vec</span>(nInputs, <span class="keyword">new</span> <span class="type">BranchPredictionResp</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="IO-out"><a href="#IO-out" class="headerlink" title="IO.out"></a>IO.out</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasePredictorOutput</span> (<span class="params">implicit p: <span class="type">Parameters</span></span>) <span class="keyword">extends</span> <span class="title">XSBundle</span> <span class="keyword">with</span> <span class="title">HasBPUConst</span> </span>&#123;</span><br><span class="line">    <span class="keyword">val</span> last_stage_meta = <span class="type">UInt</span>(<span class="type">MaxMetaLength</span>.<span class="type">W</span>) <span class="comment">// This is use by composer</span></span><br><span class="line">    <span class="keyword">val</span> resp = <span class="keyword">new</span> <span class="type">BranchPredictionResp</span>         <span class="comment">// 预测器的结果，包含了各个stage的预测结果</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h4><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BasePredictorIO</span> (<span class="params">implicit p: <span class="type">Parameters</span></span>) <span class="keyword">extends</span> <span class="title">XSBundle</span> <span class="keyword">with</span> <span class="title">HasBPUConst</span> </span>&#123;</span><br><span class="line">    <span class="keyword">val</span> reset_vector = <span class="type">Input</span>(<span class="type">UInt</span>(<span class="type">PAddrBits</span>.<span class="type">W</span>))</span><br><span class="line">    <span class="keyword">val</span> in  = <span class="type">Flipped</span>(<span class="type">DecoupledIO</span>(<span class="keyword">new</span> <span class="type">BasePredictorInput</span>)) <span class="comment">// BasePredictorInput</span></span><br><span class="line">    <span class="keyword">val</span> out = <span class="type">Output</span>(<span class="keyword">new</span> <span class="type">BasePredictorOutput</span>)              <span class="comment">// BasePredictorOutput</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> ctrl = <span class="type">Input</span>(<span class="keyword">new</span> <span class="type">BPUCtrl</span>)                          <span class="comment">// Control signal</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> s0_fire = <span class="type">Input</span>(<span class="type">Bool</span>())                            <span class="comment">// 驱动下一级stage</span></span><br><span class="line">    <span class="keyword">val</span> s1_fire = <span class="type">Input</span>(<span class="type">Bool</span>())</span><br><span class="line">    <span class="keyword">val</span> s2_fire = <span class="type">Input</span>(<span class="type">Bool</span>())</span><br><span class="line">    <span class="keyword">val</span> s3_fire = <span class="type">Input</span>(<span class="type">Bool</span>())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> s2_redirect = <span class="type">Input</span>(<span class="type">Bool</span>())                        <span class="comment">// 重定向，后级预测错误，需要冲刷前一级</span></span><br><span class="line">    <span class="keyword">val</span> s3_redirect = <span class="type">Input</span>(<span class="type">Bool</span>())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> s1_ready = <span class="type">Output</span>(<span class="type">Bool</span>())</span><br><span class="line">    <span class="keyword">val</span> s2_ready = <span class="type">Output</span>(<span class="type">Bool</span>())</span><br><span class="line">    <span class="keyword">val</span> s3_ready = <span class="type">Output</span>(<span class="type">Bool</span>())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> update = <span class="type">Flipped</span>(<span class="type">Valid</span>(<span class="keyword">new</span> <span class="type">BranchPredictionUpdate</span>))    </span><br><span class="line">    <span class="keyword">val</span> redirect = <span class="type">Flipped</span>(<span class="type">Valid</span>(<span class="keyword">new</span> <span class="type">BranchPredictionRedirect</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="PredictorIO"><a href="#PredictorIO" class="headerlink" title="PredictorIO"></a>PredictorIO</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PredictorIO</span>(<span class="params">implicit p: <span class="type">Parameters</span></span>) <span class="keyword">extends</span> <span class="title">XSBundle</span> </span>&#123;</span><br><span class="line">    <span class="keyword">val</span> bpu_to_ftq = <span class="keyword">new</span> <span class="type">BpuToFtqIO</span>()             <span class="comment">// 预测结果</span></span><br><span class="line">    <span class="keyword">val</span> ftq_to_bpu = <span class="type">Flipped</span>(<span class="keyword">new</span> <span class="type">FtqToBpuIO</span>())    <span class="comment">// reverse input and output, update及redirect信息</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> ctrl = <span class="type">Input</span>(<span class="keyword">new</span> <span class="type">BPUCtrl</span>)</span><br><span class="line">    <span class="keyword">val</span> reset_vector = <span class="type">Input</span>(<span class="type">UInt</span>(<span class="type">PAddrBits</span>.<span class="type">W</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="预测器逻辑"><a href="#预测器逻辑" class="headerlink" title="预测器逻辑"></a>预测器逻辑</h2><h3 id="握手逻辑"><a href="#握手逻辑" class="headerlink" title="握手逻辑"></a>握手逻辑</h3><p>BPU 的各个流水级都会连接 <a href="https://xiangshan-doc.readthedocs.io/zh_CN/latest/frontend/ftq/">FTQ</a>，一旦第一个预测流水级存在有效预测结果，或者后续预测流水级产生不同的预测结果，和 <a href="https://xiangshan-doc.readthedocs.io/zh_CN/latest/frontend/ftq/">FTQ</a> 的握手信号有效位都会置高。</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 握手逻辑</span></span><br><span class="line">io.bpu_to_ftq.resp.valid :=</span><br><span class="line">    s1_valid &amp;&amp; s2_components_ready &amp;&amp; s2_ready ||</span><br><span class="line">    s2_fire &amp;&amp; s2_redirect ||                          <span class="comment">// different predict result</span></span><br><span class="line">    s3_fire &amp;&amp; s3_redirect</span><br><span class="line">io.bpu_to_ftq.resp.bits  := <span class="type">BpuToFtqBundle</span>(predictors.io.out.resp)</span><br><span class="line">io.bpu_to_ftq.resp.bits.meta  := predictors.io.out.last_stage_meta <span class="comment">// <span class="doctag">TODO:</span> change to lastStageMeta</span></span><br><span class="line">io.bpu_to_ftq.resp.bits.s3.folded_hist := s3_folded_gh</span><br><span class="line">io.bpu_to_ftq.resp.bits.s3.histPtr := s3_ghist_ptr</span><br><span class="line">io.bpu_to_ftq.resp.bits.s3.lastBrNumOH := s3_last_br_num_oh</span><br><span class="line">io.bpu_to_ftq.resp.bits.s3.afhob := s3_ahead_fh_oldest_bits</span><br></pre></td></tr></table></figure>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p>当不同预测阶段的预测结果不一致时，需要进行重定向：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> s3_redirect_on_br_taken = resp.s3.full_pred.real_br_taken_mask().asUInt =/= previous_s2_pred.full_pred.real_br_taken_mask().asUInt</span><br><span class="line"><span class="keyword">val</span> s3_redirect_on_target = resp.s3.getTarget =/= previous_s2_pred.getTarget</span><br><span class="line"><span class="keyword">val</span> s3_redirect_on_jalr_target = resp.s3.full_pred.hit_taken_on_jalr &amp;&amp; resp.s3.full_pred.jalr_target =/= previous_s2_pred.full_pred.jalr_target</span><br><span class="line"><span class="keyword">val</span> s3_redirect_on_fall_thru_error = resp.s3.fallThruError</span><br><span class="line"></span><br><span class="line">s3_redirect := s3_fire &amp;&amp; (</span><br><span class="line">    s3_redirect_on_br_taken || s3_redirect_on_target || s3_redirect_on_fall_thru_error</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">preds_needs_redirect_vec</span></span>(x: <span class="type">BranchPredictionBundle</span>, y: <span class="type">BranchPredictionBundle</span>) = &#123;</span><br><span class="line">    <span class="type">VecInit</span>(</span><br><span class="line">        x.getTarget =/= y.getTarget,</span><br><span class="line">        x.lastBrPosOH.asUInt =/= y.lastBrPosOH.asUInt,</span><br><span class="line">        x.taken =/= y.taken,</span><br><span class="line">        (x.taken &amp;&amp; y.taken) &amp;&amp; x.cfiIndex.bits =/= y.cfiIndex.bits,</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="流水线逻辑"><a href="#流水线逻辑" class="headerlink" title="流水线逻辑"></a>流水线逻辑</h3><p>不同的预测stage之间依靠寄存器保存中间结果，当某一级发射后，相应的PC值以及分支历史等信息进入下一级：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> reset_vector = <span class="type">DelayN</span>(io.reset_vector, <span class="number">5</span>)</span><br><span class="line"><span class="keyword">val</span> s0_pc = <span class="type">Wire</span>(<span class="type">UInt</span>(<span class="type">VAddrBits</span>.<span class="type">W</span>))</span><br><span class="line"><span class="keyword">val</span> s0_pc_reg = <span class="type">RegNext</span>(s0_pc)</span><br><span class="line">when (<span class="type">RegNext</span>(<span class="type">RegNext</span>(reset.asBool) &amp;&amp; !reset.asBool)) &#123;</span><br><span class="line">s0_pc_reg := reset_vector</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">val</span> s1_pc = <span class="type">RegEnable</span>(s0_pc, s0_fire)</span><br><span class="line"><span class="keyword">val</span> s2_pc = <span class="type">RegEnable</span>(s1_pc, s1_fire)</span><br><span class="line"><span class="keyword">val</span> s3_pc = <span class="type">RegEnable</span>(s2_pc, s2_fire)</span><br><span class="line"></span><br><span class="line"><span class="comment">// folded history</span></span><br><span class="line"><span class="keyword">val</span> s0_folded_gh = <span class="type">Wire</span>(<span class="keyword">new</span> <span class="type">AllFoldedHistories</span>(foldedGHistInfos))</span><br><span class="line"><span class="keyword">val</span> s0_folded_gh_reg = <span class="type">RegNext</span>(s0_folded_gh, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_folded_gh))</span><br><span class="line"><span class="keyword">val</span> s1_folded_gh = <span class="type">RegEnable</span>(s0_folded_gh, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_folded_gh), s0_fire)</span><br><span class="line"><span class="keyword">val</span> s2_folded_gh = <span class="type">RegEnable</span>(s1_folded_gh, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_folded_gh), s1_fire)</span><br><span class="line"><span class="keyword">val</span> s3_folded_gh = <span class="type">RegEnable</span>(s2_folded_gh, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_folded_gh), s2_fire)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ???????</span></span><br><span class="line"><span class="keyword">val</span> s0_last_br_num_oh = <span class="type">Wire</span>(<span class="type">UInt</span>((numBr+<span class="number">1</span>).<span class="type">W</span>))</span><br><span class="line"><span class="keyword">val</span> s0_last_br_num_oh_reg = <span class="type">RegNext</span>(s0_last_br_num_oh, <span class="number">0.</span><span class="type">U</span>)</span><br><span class="line"><span class="keyword">val</span> s1_last_br_num_oh = <span class="type">RegEnable</span>(s0_last_br_num_oh, <span class="number">0.</span><span class="type">U</span>, s0_fire)</span><br><span class="line"><span class="keyword">val</span> s2_last_br_num_oh = <span class="type">RegEnable</span>(s1_last_br_num_oh, <span class="number">0.</span><span class="type">U</span>, s1_fire)</span><br><span class="line"><span class="keyword">val</span> s3_last_br_num_oh = <span class="type">RegEnable</span>(s2_last_br_num_oh, <span class="number">0.</span><span class="type">U</span>, s2_fire)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ???????</span></span><br><span class="line"><span class="keyword">val</span> s0_ahead_fh_oldest_bits = <span class="type">Wire</span>(<span class="keyword">new</span> <span class="type">AllAheadFoldedHistoryOldestBits</span>(foldedGHistInfos))</span><br><span class="line"><span class="keyword">val</span> s0_ahead_fh_oldest_bits_reg = <span class="type">RegNext</span>(s0_ahead_fh_oldest_bits, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_ahead_fh_oldest_bits))</span><br><span class="line"><span class="keyword">val</span> s1_ahead_fh_oldest_bits = <span class="type">RegEnable</span>(s0_ahead_fh_oldest_bits, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_ahead_fh_oldest_bits), s0_fire)</span><br><span class="line"><span class="keyword">val</span> s2_ahead_fh_oldest_bits = <span class="type">RegEnable</span>(s1_ahead_fh_oldest_bits, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_ahead_fh_oldest_bits), s1_fire)</span><br><span class="line"><span class="keyword">val</span> s3_ahead_fh_oldest_bits = <span class="type">RegEnable</span>(s2_ahead_fh_oldest_bits, <span class="number">0.</span><span class="type">U</span>.asTypeOf(s0_ahead_fh_oldest_bits), s2_fire)</span><br></pre></td></tr></table></figure>
+<p>当发生重定向时，需要进行流水线冲刷</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 流水线冲刷</span></span><br><span class="line">s3_flush := redirect_req.valid <span class="comment">// flush when redirect comes</span></span><br><span class="line">s2_flush := s3_flush || s3_redirect</span><br><span class="line">s1_flush := s2_flush || s2_redirect</span><br><span class="line"></span><br><span class="line">s1_components_ready := predictors.io.s1_ready</span><br><span class="line">s1_ready := s1_fire || !s1_valid</span><br><span class="line">s0_fire := !reset.asBool &amp;&amp; s1_components_ready &amp;&amp; s1_ready    <span class="comment">// s0 chould fire when s1 ready</span></span><br><span class="line">predictors.io.s0_fire := s0_fire</span><br><span class="line"></span><br><span class="line">s2_components_ready := predictors.io.s2_ready</span><br><span class="line">s2_ready := s2_fire || !s2_valid</span><br><span class="line">s1_fire := s1_valid &amp;&amp; s2_components_ready &amp;&amp; s2_ready &amp;&amp; io.bpu_to_ftq.resp.ready</span><br><span class="line"></span><br><span class="line">s3_components_ready := predictors.io.s3_ready</span><br><span class="line">s3_ready := s3_fire || !s3_valid</span><br><span class="line">s2_fire := s2_valid &amp;&amp; s3_components_ready &amp;&amp; s3_ready</span><br><span class="line"></span><br><span class="line">when (redirect_req.valid) &#123; s1_valid := <span class="literal">false</span>.<span class="type">B</span> &#125;</span><br><span class="line">.elsewhen(s0_fire)        &#123; s1_valid := <span class="literal">true</span>.<span class="type">B</span>  &#125;</span><br><span class="line">.elsewhen(s1_flush)       &#123; s1_valid := <span class="literal">false</span>.<span class="type">B</span> &#125;</span><br><span class="line">.elsewhen(s1_fire)        &#123; s1_valid := <span class="literal">false</span>.<span class="type">B</span> &#125;</span><br><span class="line"></span><br><span class="line">predictors.io.s1_fire := s1_fire</span><br><span class="line"></span><br><span class="line">s2_fire := s2_valid        <span class="comment">// ?????????????</span></span><br><span class="line"></span><br><span class="line">when(s2_flush)       &#123; s2_valid := <span class="literal">false</span>.<span class="type">B</span> &#125;</span><br><span class="line">.elsewhen(s1_fire) &#123; s2_valid := !s1_flush &#125;</span><br><span class="line">.elsewhen(s2_fire) &#123; s2_valid := <span class="literal">false</span>.<span class="type">B</span> &#125;</span><br><span class="line"></span><br><span class="line">predictors.io.s2_fire := s2_fire</span><br><span class="line">predictors.io.s2_redirect := s2_redirect</span><br><span class="line"></span><br><span class="line">s3_fire := s3_valid</span><br><span class="line"></span><br><span class="line">when(s3_flush)       &#123; s3_valid := <span class="literal">false</span>.<span class="type">B</span> &#125;</span><br><span class="line">.elsewhen(s2_fire)   &#123; s3_valid := !s2_flush &#125;</span><br><span class="line">.elsewhen(s3_fire)   &#123; s3_valid := <span class="literal">false</span>.<span class="type">B</span> &#125;</span><br><span class="line"></span><br><span class="line">predictors.io.s3_fire := s3_fire</span><br><span class="line">predictors.io.s3_redirect := s3_redirect</span><br></pre></td></tr></table></figure>
+<h3 id="分支历史管理"><a href="#分支历史管理" class="headerlink" title="分支历史管理"></a>分支历史管理</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// History manage</span></span><br><span class="line"><span class="comment">// s1</span></span><br><span class="line"><span class="keyword">val</span> s1_possible_predicted_ghist_ptrs = (<span class="number">0</span> to numBr).map(s1_ghist_ptr - _.<span class="type">U</span>)</span><br><span class="line"><span class="keyword">val</span> s1_predicted_ghist_ptr = <span class="type">Mux1H</span>(resp.s1.lastBrPosOH, s1_possible_predicted_ghist_ptrs)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> s1_possible_predicted_fhs = (<span class="number">0</span> to numBr).map(i =&gt;</span><br><span class="line">    s1_folded_gh.update(s1_ahead_fh_oldest_bits, s1_last_br_num_oh, i, resp.s1.brTaken &amp;&amp; resp.s1.lastBrPosOH(i)))</span><br><span class="line"><span class="keyword">val</span> s1_predicted_fh = <span class="type">Mux1H</span>(resp.s1.lastBrPosOH, s1_possible_predicted_fhs)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> s1_ahead_fh_ob_src = <span class="type">Wire</span>(<span class="keyword">new</span> <span class="type">AllAheadFoldedHistoryOldestBits</span>(foldedGHistInfos))</span><br><span class="line">s1_ahead_fh_ob_src.read(ghv, s1_ghist_ptr)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="type">EnableGHistDiff</span>) &#123;</span><br><span class="line">    <span class="keyword">val</span> s1_predicted_ghist = <span class="type">WireInit</span>(getHist(s1_predicted_ghist_ptr).asTypeOf(<span class="type">Vec</span>(<span class="type">HistoryLength</span>, <span class="type">Bool</span>())))</span><br><span class="line">    <span class="keyword">for</span> (i &lt;- <span class="number">0</span> until numBr) &#123;</span><br><span class="line">        when (resp.s1.shouldShiftVec(i)) &#123;</span><br><span class="line">            s1_predicted_ghist(i) := resp.s1.brTaken &amp;&amp; (i==<span class="number">0</span>).<span class="type">B</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    when (s1_valid) &#123;</span><br><span class="line">        s0_ghist := s1_predicted_ghist.asUInt</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> s1_ghv_wens = (<span class="number">0</span> until <span class="type">HistoryLength</span>).map(n =&gt;</span><br><span class="line">                                              (<span class="number">0</span> until numBr).map(b =&gt; (s1_ghist_ptr).value === (<span class="type">CGHPtr</span>(<span class="literal">false</span>.<span class="type">B</span>, n.<span class="type">U</span>) + b.<span class="type">U</span>).value &amp;&amp; resp.s1.shouldShiftVec(b) &amp;&amp; s1_valid))</span><br><span class="line"><span class="keyword">val</span> s1_ghv_wdatas = (<span class="number">0</span> until <span class="type">HistoryLength</span>).map(n =&gt;</span><br><span class="line">                                                <span class="type">Mux1H</span>(</span><br><span class="line">                                                    (<span class="number">0</span> until numBr).map(b =&gt; (</span><br><span class="line">                                                        (s1_ghist_ptr).value === (<span class="type">CGHPtr</span>(<span class="literal">false</span>.<span class="type">B</span>, n.<span class="type">U</span>) + b.<span class="type">U</span>).value &amp;&amp; resp.s1.shouldShiftVec(b),</span><br><span class="line">                                                        resp.s1.brTaken &amp;&amp; resp.s1.lastBrPosOH(b+<span class="number">1</span>)</span><br><span class="line">                                                    ))</span><br><span class="line">                                                )</span><br><span class="line">                                               )</span><br></pre></td></tr></table></figure>
+<h3 id="结果保存"><a href="#结果保存" class="headerlink" title="结果保存"></a>结果保存</h3><p>每个stage产生的结果保存在对应的Priority Mux中</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> npcGen   = <span class="keyword">new</span> <span class="type">PhyPriorityMuxGenerator</span>[<span class="type">UInt</span>]</span><br><span class="line"><span class="keyword">val</span> foldedGhGen = <span class="keyword">new</span> <span class="type">PhyPriorityMuxGenerator</span>[<span class="type">AllFoldedHistories</span>]</span><br><span class="line"><span class="keyword">val</span> ghistPtrGen = <span class="keyword">new</span> <span class="type">PhyPriorityMuxGenerator</span>[<span class="type">CGHPtr</span>]</span><br><span class="line"><span class="keyword">val</span> lastBrNumOHGen = <span class="keyword">new</span> <span class="type">PhyPriorityMuxGenerator</span>[<span class="type">UInt</span>]</span><br><span class="line"><span class="keyword">val</span> aheadFhObGen = <span class="keyword">new</span> <span class="type">PhyPriorityMuxGenerator</span>[<span class="type">AllAheadFoldedHistoryOldestBits</span>]</span><br><span class="line"></span><br><span class="line">npcGen.register(s1_valid, resp.s1.getTarget, <span class="type">Some</span>(<span class="string">"s1_target"</span>), <span class="number">4</span>)</span><br><span class="line">foldedGhGen.register(s1_valid, s1_predicted_fh, <span class="type">Some</span>(<span class="string">"s1_FGH"</span>), <span class="number">4</span>)</span><br><span class="line">ghistPtrGen.register(s1_valid, s1_predicted_ghist_ptr, <span class="type">Some</span>(<span class="string">"s1_GHPtr"</span>), <span class="number">4</span>)</span><br><span class="line">lastBrNumOHGen.register(s1_valid, resp.s1.lastBrPosOH.asUInt, <span class="type">Some</span>(<span class="string">"s1_BrNumOH"</span>), <span class="number">4</span>)</span><br><span class="line">aheadFhObGen.register(s1_valid, s1_ahead_fh_ob_src, <span class="type">Some</span>(<span class="string">"s1_AFHOB"</span>), <span class="number">4</span>)</span><br><span class="line">ghvBitWriteGens.zip(s1_ghv_wens).zipWithIndex.map&#123;<span class="keyword">case</span> ((b, w), i) =&gt;</span><br><span class="line">    b.register(w.reduce(_||_), s1_ghv_wdatas(i), <span class="type">Some</span>(<span class="string">s"s1_new_bit_<span class="subst">$i</span>"</span>), <span class="number">4</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">npcGen.register(s2_redirect, resp.s2.getTarget, <span class="type">Some</span>(<span class="string">"s2_target"</span>), <span class="number">5</span>)</span><br><span class="line">foldedGhGen.register(s2_redirect, s2_predicted_fh, <span class="type">Some</span>(<span class="string">"s2_FGH"</span>), <span class="number">5</span>)</span><br><span class="line">ghistPtrGen.register(s2_redirect, s2_predicted_ghist_ptr, <span class="type">Some</span>(<span class="string">"s2_GHPtr"</span>), <span class="number">5</span>)</span><br><span class="line">lastBrNumOHGen.register(s2_redirect, resp.s2.lastBrPosOH.asUInt, <span class="type">Some</span>(<span class="string">"s2_BrNumOH"</span>), <span class="number">5</span>)</span><br><span class="line">aheadFhObGen.register(s2_redirect, s2_ahead_fh_ob_src, <span class="type">Some</span>(<span class="string">"s2_AFHOB"</span>), <span class="number">5</span>)</span><br><span class="line">ghvBitWriteGens.zip(s2_ghv_wens).zipWithIndex.map&#123;<span class="keyword">case</span> ((b, w), i) =&gt;</span><br><span class="line">    b.register(w.reduce(_||_), s2_ghv_wdatas(i), <span class="type">Some</span>(<span class="string">s"s2_new_bit_<span class="subst">$i</span>"</span>), <span class="number">5</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ?????? why stage 3's prio is less than s2</span></span><br><span class="line">npcGen.register(s3_redirect, resp.s3.getTarget, <span class="type">Some</span>(<span class="string">"s3_target"</span>), <span class="number">3</span>)</span><br><span class="line">foldedGhGen.register(s3_redirect, s3_predicted_fh, <span class="type">Some</span>(<span class="string">"s3_FGH"</span>), <span class="number">3</span>)</span><br><span class="line">ghistPtrGen.register(s3_redirect, s3_predicted_ghist_ptr, <span class="type">Some</span>(<span class="string">"s3_GHPtr"</span>), <span class="number">3</span>)</span><br><span class="line">lastBrNumOHGen.register(s3_redirect, resp.s3.lastBrPosOH.asUInt, <span class="type">Some</span>(<span class="string">"s3_BrNumOH"</span>), <span class="number">3</span>)</span><br><span class="line">aheadFhObGen.register(s3_redirect, s3_ahead_fh_ob_src, <span class="type">Some</span>(<span class="string">"s3_AFHOB"</span>), <span class="number">3</span>)</span><br><span class="line">ghvBitWriteGens.zip(s3_ghv_wens).zipWithIndex.map&#123;<span class="keyword">case</span> ((b, w), i) =&gt;</span><br><span class="line">    b.register(w.reduce(_||_), s3_ghv_wdatas(i), <span class="type">Some</span>(<span class="string">s"s3_new_bit_<span class="subst">$i</span>"</span>), <span class="number">3</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">when (<span class="type">RegNext</span>(<span class="type">RegNext</span>(reset.asBool) &amp;&amp; !reset.asBool)) &#123;    <span class="comment">// reset release</span></span><br><span class="line">    s1_pc := reset_vector</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href>Proteus软件</a><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/组成原理/FrontEnd/BHT/" rel="next" title="Branch History Table">
+                <i class="fa fa-chevron-left"></i> Branch History Table
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/组成原理/DMA_CLIB_AES/" rel="prev" title="DMA">
+                DMA <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本结构及参数"><span class="nav-number">2.</span> <span class="nav-text">基本结构及参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input-Output"><span class="nav-number">3.</span> <span class="nav-text">Input/Output</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BasePredictor"><span class="nav-number">3.1.</span> <span class="nav-text">BasePredictor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IO-in"><span class="nav-number">3.1.1.</span> <span class="nav-text">IO.in</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IO-out"><span class="nav-number">3.1.2.</span> <span class="nav-text">IO.out</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IO"><span class="nav-number">3.1.3.</span> <span class="nav-text">IO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PredictorIO"><span class="nav-number">3.2.</span> <span class="nav-text">PredictorIO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#预测器逻辑"><span class="nav-number">4.</span> <span class="nav-text">预测器逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#握手逻辑"><span class="nav-number">4.1.</span> <span class="nav-text">握手逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">4.2.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水线逻辑"><span class="nav-number">4.3.</span> <span class="nav-text">流水线逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支历史管理"><span class="nav-number">4.4.</span> <span class="nav-text">分支历史管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果保存"><span class="nav-number">4.5.</span> <span class="nav-text">结果保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reset"><span class="nav-number">4.6.</span> <span class="nav-text">reset</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

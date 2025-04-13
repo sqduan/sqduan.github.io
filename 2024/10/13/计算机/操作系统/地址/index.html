@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="我迷失在田野里，渐渐忘记了回家的路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="地址">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/操作系统/地址/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="我迷失在田野里，渐渐忘记了回家的路">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/physicalmemory.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/programloading.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/CPUandMem.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/addresstrans.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224451.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210302113437.png">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.501Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="地址">
+<meta name="twitter:description" content="我迷失在田野里，渐渐忘记了回家的路">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/physicalmemory.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/地址/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>地址 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/地址/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">地址
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>我迷失在田野里，渐渐忘记了回家的路</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="几种不同的地址"><a href="#几种不同的地址" class="headerlink" title="几种不同的地址"></a>几种不同的地址</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>概念</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>逻辑地址</td>
+<td>程序产生的段内偏移，由段选择符和段内偏移组成的地址。由操作系统决定，和物理地址一一对应的地址，C语言中的指针即为逻辑地址<br>逻辑地址就是段+页偏移</td>
+</tr>
+<tr>
+<td>线性地址</td>
+<td>段基址+段内偏移量构成的地址，如果未开启分页，那么线性地址就是物理地址，否则还需二次转换。<br>线性地址就是段偏移，但是还未进行页转换的地址<br>虚拟地址就是线性地址（linux内核明确表示）</td>
+</tr>
+<tr>
+<td>物理地址</td>
+<td>真实物理内存中的地址，即内存地址寄存器中的地址物理地址</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h3><p>物理地址就是硬件支持的地址空间，起始地址为0，一直到$\textrm{MAX}_{\textrm{sys}}$，如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/physicalmemory.svg" width="150" alt="图片名称" align="center"></p>
+<p>每个物理内存单元的物理地址编号是唯一的，给写程序造成了不便，因此我们需要使用逻辑地址或虚拟地址，建立虚拟地址与物理地址之间的映射，<strong>从而可以使用相同的虚拟地址指向不同的物理地址</strong></p>
+<h3 id="逻辑地址"><a href="#逻辑地址" class="headerlink" title="逻辑地址"></a>逻辑地址</h3><p>CPU运行进程时看到的地址，起始地址为0，一直到$\textrm{MAX}_{\textrm{proc}}$</p>
+<h4 id="逻辑地址的作用"><a href="#逻辑地址的作用" class="headerlink" title="逻辑地址的作用"></a>逻辑地址的作用</h4><ul>
+<li>避免直接将物理地址暴露，从而导致访问任意内存程序崩溃</li>
+<li>可以用相邻的虚拟地址映射到不相邻的物理地址</li>
+<li>可以使用一系列的虚拟地址访问大于可用物理内存的内存缓冲区（虚拟内存）</li>
+<li>不同进程间使用虚拟地址相互隔离</li>
+</ul>
+<p>例如，如果同一时刻由两个进程P1和P2，那么两者的逻辑地址范围是多少？假设逻辑地址最大为65535。实际上，P1和P2可以有一样范围的地址，都为0-65535，操作系统会确保其逻辑地址指向不同的物理地址。</p>
+<p>从这个问题中我们也可以看出，操作系统帮我们屏蔽了底层的物理实现。</p>
+<h4 id="逻辑地址的生成过程"><a href="#逻辑地址的生成过程" class="headerlink" title="逻辑地址的生成过程"></a>逻辑地址的生成过程</h4><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/programloading.svg" width="550" alt="图片名称" align="center"></p>
+<h4 id="生成时机和限制"><a href="#生成时机和限制" class="headerlink" title="生成时机和限制"></a>生成时机和限制</h4><ul>
+<li>编译时（最不灵活，写死的，但是比较简单）<ul>
+<li>假设起始地址已知</li>
+<li>如果起始地址改变，必须重新编译</li>
+</ul>
+</li>
+<li>加载时（加载程序可以选择加载位置，但是加载好了执行过程中不能变）<ul>
+<li>如编译时起始位置未知，编译器需要生成可重定位的代码</li>
+<li>加载时生成绝对地址，在可执行文件中有一个重定位表，根据表修改绝对地址</li>
+</ul>
+</li>
+<li>执行时（执行过程中可以移动代码，最灵活，需要虚拟地址支持）<ul>
+<li>执行时代码可移动（前两种情况不能随意改动）</li>
+<li>需要地址转换（映射）硬件支持</li>
+</ul>
+</li>
+</ul>
+<h2 id="地址转换"><a href="#地址转换" class="headerlink" title="地址转换"></a>地址转换</h2><h3 id="虚拟地址（线性地址）到物理地址转换步骤"><a href="#虚拟地址（线性地址）到物理地址转换步骤" class="headerlink" title="虚拟地址（线性地址）到物理地址转换步骤"></a>虚拟地址（线性地址）到物理地址转换步骤</h3><p>这里讨论一个二级页表情况下VA到PA的转换过程，已知一个虚拟地址为<strong>0x01EB6338</strong>，CR3寄存器的值为<strong>0xAC0F1000</strong>，求物理地址。</p>
+<h4 id="第一步：写出二进制地址并拆分"><a href="#第一步：写出二进制地址并拆分" class="headerlink" title="第一步：写出二进制地址并拆分"></a>第一步：写出二进制地址并拆分</h4><p>虚拟地址的二进制为：$0000,0001 ,1110 ,1011 ,0110 ,0011 ,0011 ,1000$</p>
+<p>按照线性地址2级分页进行划分，地址可以被拆分为：</p>
+<ul>
+<li>Dir：0000,0001,11</li>
+<li>Table：10 ,1011 ,0110</li>
+<li>Offset：0011 ,0011 ,1000</li>
+</ul>
+<p>换算成十六进制可得到如下结果：</p>
+<ul>
+<li>页目录索引：7</li>
+<li>页表索引：0x2B6</li>
+<li>偏移量：0x338</li>
+</ul>
+<h4 id="第二步：根据CR3寄存器的物理地址确定页目录表的基地址"><a href="#第二步：根据CR3寄存器的物理地址确定页目录表的基地址" class="headerlink" title="第二步：根据CR3寄存器的物理地址确定页目录表的基地址"></a>第二步：根据CR3寄存器的物理地址确定页目录表的基地址</h4><p>CR3中存放的物理地址就是页目录表的基地址</p>
+<h4 id="第三步：计算页表项的地址"><a href="#第三步：计算页表项的地址" class="headerlink" title="第三步：计算页表项的地址"></a>第三步：计算页表项的地址</h4><p>页表地址存放在Page Directory Entry的第7项中，即</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">　[<span class="number">0xAC0F1000</span> + <span class="number">4</span> * <span class="number">7</span>] = [<span class="number">0xAC0F101C</span>] = <span class="number">0xAC0F101C</span>: pte</span><br></pre></td></tr></table></figure>
+<p>0xAC0F101C这个地址保存了pte的值，假设这个值为<strong>0x2F103841</strong>，那么其中PTE为<strong>0x2F103000</strong>，而页表属性为0x381。</p>
+<h4 id="第四步：计算页面的物理地址"><a href="#第四步：计算页面的物理地址" class="headerlink" title="第四步：计算页面的物理地址"></a>第四步：计算页面的物理地址</h4><p>页表的地址为<strong>0x2F103000</strong>，存放在第0x2B6项，所以虚拟地址所在页的物理地址为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[0x2F103000 + 0x2B6 * 4] = [0x2F103AD8] = 0x2F103AD8: pa</span><br></pre></td></tr></table></figure>
+<p>这里得到的pa是未经偏移的物理地址，假设为<strong>0x7095e847</strong>，那么页面物理地址为<strong>0x7095E000</strong>，属性为0x847</p>
+<h4 id="最后一步：计算偏移量"><a href="#最后一步：计算偏移量" class="headerlink" title="最后一步：计算偏移量"></a>最后一步：计算偏移量</h4><p>最终物理地址为0x7095E000+0x338 = 7095E338</p>
+<h3 id="地址生成过程的硬件解释"><a href="#地址生成过程的硬件解释" class="headerlink" title="地址生成过程的硬件解释"></a>地址生成过程的硬件解释</h3><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/CPUandMem.svg" width="480" alt="图片名称" align="center"></p>
+<p>CPU与内存连接的结构图如上图所示，我们从一条指令执行过程出发，分析虚拟地址到物理地址的转换过程。</p>
+<ul>
+<li>CPU当前正在执行一条指令<ul>
+<li>ALU：需要逻辑地址指向的内存内容</li>
+<li>MMU：根据页表进行逻辑到物理的转换</li>
+<li>CPU控制器：给总线发送物理地址请求</li>
+</ul>
+</li>
+<li>内存<ul>
+<li>根据控制信号是读还是写，向总线发送或接收内容</li>
+</ul>
+</li>
+<li><strong>操作系统</strong><ul>
+<li>建立逻辑地址LA到物理地址PA的映射，地址转换是MMU硬件完成的，而操作系统只负责提供映射表</li>
+</ul>
+</li>
+</ul>
+<h2 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h2><p>现代CPU采用虚拟寻址的方式，需要将虚拟地址翻译成物理地址，这样才能访问真实的物理内存。完成虚拟地址转换为物理地址的的硬件是CPU中的MMU。转换过程为：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/addresstrans.svg" width="550" alt="图片名称" align="center"></p>
+<p>其中，C语言中的指针就是虚拟地址中的Offset部分，如果关闭了段选，那么线性地址就是虚拟地址。更具体的带有多级页表的转换方式如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210223224451.png" width="650" alt="图片名称" align="center"></p>
+<h3 id="地址检查"><a href="#地址检查" class="headerlink" title="地址检查"></a>地址检查</h3><p>在地址转换过程中，操作系统会对地址进行检查。例如在段选过程中，操作系统会判断逻辑地址是否大于段长度寄存器，如果是，那么会触发内存异常。如果不是，那么地址会和段基址寄存器相加，生成线性地址。操作系统负责设置段长度和段基址。</p>
+<h3 id="分级"><a href="#分级" class="headerlink" title="分级"></a>分级</h3><p>上面的线性地址被分为了两级，分别是：</p>
+<ul>
+<li>Dir</li>
+<li>Table</li>
+</ul>
+<h2 id="Page-Table-Entry"><a href="#Page-Table-Entry" class="headerlink" title="Page Table Entry"></a>Page Table Entry</h2><h3 id="PDE与PTE"><a href="#PDE与PTE" class="headerlink" title="PDE与PTE"></a>PDE与PTE</h3><p>PDE与PTE的大小都为32位，具体格式如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210302113437.png" width="750" alt="图片名称" align="center"></p>
+<h4 id="PDE（页目录表）"><a href="#PDE（页目录表）" class="headerlink" title="PDE（页目录表）"></a>PDE（页目录表）</h4><p>MMU通过<code>%cr3</code>寄存器获得PD位置，即完成不同进程之间PD的切换</p>
+<h4 id="PTE（页表）"><a href="#PTE（页表）" class="headerlink" title="PTE（页表）"></a>PTE（页表）</h4><p>PTE由Physical Page Number（20-bit）和flags（12-bit）组成，其中：</p>
+<ul>
+<li>Physical Page Number = PPN，根据这个值可以找到对应的物理内存页的基地址</li>
+<li>flag记录了该页的控制信息（是否存在、能否写以及能否被进程使用等）</li>
+</ul>
+<p>MMU将会把这20位的虚拟地址替换为PTE中的物理地址。PTE由MMU加载并存储在内存中。</p>
+<h4 id="标志位解析"><a href="#标志位解析" class="headerlink" title="标志位解析"></a>标志位解析</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>标志位</th>
+<th>全称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P</td>
+<td>Present</td>
+<td>对于大多数操作系统，如果present为0，代表PDE或PTE数据无效</td>
+</tr>
+<tr>
+<td>W</td>
+<td>Writable</td>
+<td>内存是否可写</td>
+</tr>
+<tr>
+<td>U(PTE_U)</td>
+<td>User</td>
+<td>用户是否可访问</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/多线程并发/" rel="next" title="多线程并发">
+                <i class="fa fa-chevron-left"></i> 多线程并发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/启动过程/" rel="prev" title="启动过程">
+                启动过程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#几种不同的地址"><span class="nav-number">1.</span> <span class="nav-text">几种不同的地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#物理地址"><span class="nav-number">1.1.</span> <span class="nav-text">物理地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑地址"><span class="nav-number">1.2.</span> <span class="nav-text">逻辑地址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑地址的作用"><span class="nav-number">1.2.1.</span> <span class="nav-text">逻辑地址的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑地址的生成过程"><span class="nav-number">1.2.2.</span> <span class="nav-text">逻辑地址的生成过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成时机和限制"><span class="nav-number">1.2.3.</span> <span class="nav-text">生成时机和限制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地址转换"><span class="nav-number">2.</span> <span class="nav-text">地址转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟地址（线性地址）到物理地址转换步骤"><span class="nav-number">2.1.</span> <span class="nav-text">虚拟地址（线性地址）到物理地址转换步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#第一步：写出二进制地址并拆分"><span class="nav-number">2.1.1.</span> <span class="nav-text">第一步：写出二进制地址并拆分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第二步：根据CR3寄存器的物理地址确定页目录表的基地址"><span class="nav-number">2.1.2.</span> <span class="nav-text">第二步：根据CR3寄存器的物理地址确定页目录表的基地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三步：计算页表项的地址"><span class="nav-number">2.1.3.</span> <span class="nav-text">第三步：计算页表项的地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四步：计算页面的物理地址"><span class="nav-number">2.1.4.</span> <span class="nav-text">第四步：计算页面的物理地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后一步：计算偏移量"><span class="nav-number">2.1.5.</span> <span class="nav-text">最后一步：计算偏移量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地址生成过程的硬件解释"><span class="nav-number">2.2.</span> <span class="nav-text">地址生成过程的硬件解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻址方式"><span class="nav-number">3.</span> <span class="nav-text">寻址方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址检查"><span class="nav-number">3.1.</span> <span class="nav-text">地址检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分级"><span class="nav-number">3.2.</span> <span class="nav-text">分级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Page-Table-Entry"><span class="nav-number">4.</span> <span class="nav-text">Page Table Entry</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PDE与PTE"><span class="nav-number">4.1.</span> <span class="nav-text">PDE与PTE</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PDE（页目录表）"><span class="nav-number">4.1.1.</span> <span class="nav-text">PDE（页目录表）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PTE（页表）"><span class="nav-number">4.1.2.</span> <span class="nav-text">PTE（页表）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标志位解析"><span class="nav-number">4.1.3.</span> <span class="nav-text">标志位解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

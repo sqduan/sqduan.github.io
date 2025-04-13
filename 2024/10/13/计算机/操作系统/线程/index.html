@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="最后他的身躯一点点消散，留下了苍老的浮云和涛声，而他的血管，业已成为那条河的支流。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/操作系统/线程/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="最后他的身躯一点点消散，留下了苍老的浮云和涛声，而他的血管，业已成为那条河的支流。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/threadandprocess.svg">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线程">
+<meta name="twitter:description" content="最后他的身躯一点点消散，留下了苍老的浮云和涛声，而他的血管，业已成为那条河的支流。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/threadandprocess.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/线程/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>线程 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">线程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>最后他的身躯一点点消散，留下了苍老的浮云和涛声，而他的血管，业已成为那条河的支流。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>线程是CPU进行调度和分配的基本方式，一个CPU在一个时间只能运行一个线程。我们要注意程序为何要设计成多线程的，在一开始CPU都是单核的，其实这种情况下程序执行的最快的方式就是单核单线程，但是这样会带来并发问题，例如当处理IO时，如果只是单线程的，就会导致阻塞，此时CPU无事可做，所以我们开始将程序设计为多线程，从而实现并发。给我们一种错觉，就是同一时间有多个程序在执行。</p>
+<h3 id="线程的特点及优点"><a href="#线程的特点及优点" class="headerlink" title="线程的特点及优点"></a>线程的特点及优点</h3><h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><p>线程是轻量化的进程，其特点为：</p>
+<ul>
+<li>共享代码、数据、文件和内存地址</li>
+<li>独有寄存器（程序计数器）和栈空间，因为每个线程执行速度是不一样的</li>
+</ul>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><h5 id="单CPU"><a href="#单CPU" class="headerlink" title="单CPU"></a>单CPU</h5><p>充分利用CPU，令$t_i$为线程1的空闲时间，$t_s$为上下文切换时间，那么当满足下面公式时，进行多线程可以提高CPU利用率。一般来说，线程切换比进程切换开销小很多。</p>
+<script type="math/tex; mode=display">
+t_i>2t_s</script><h5 id="多CPU"><a href="#多CPU" class="headerlink" title="多CPU"></a>多CPU</h5><ol>
+<li>加速</li>
+<li>专业化，每个线程做特定的工作，也可以保证hot cache</li>
+</ol>
+<h3 id="支持线程机制的要素"><a href="#支持线程机制的要素" class="headerlink" title="支持线程机制的要素"></a>支持线程机制的要素</h3><ul>
+<li>thread data struct：和PCB一样，用于对线程进行描述。</li>
+<li>创建和管理线程的机制</li>
+<li>多线程合作的机制：由于多线程共享内存地址，所以会导致同步问题</li>
+</ul>
+<h4 id="Thread-data-structure"><a href="#Thread-data-structure" class="headerlink" title="Thread data structure"></a>Thread data structure</h4><p>一个完善的线程数据结构应包括：线程ID、程序计数器、栈顶指针（SP）、栈段以及其他的一些关键属性。</p>
+<h4 id="线程创建和管理"><a href="#线程创建和管理" class="headerlink" title="线程创建和管理"></a>线程创建和管理</h4><h5 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h5><p>fork，创建一个线程而非进程，线程创建的同时，还会初始化线程数据结构。</p>
+<h5 id="join"><a href="#join" class="headerlink" title="join"></a>join</h5><p>当父线程t0对子线程t1调用join时，<code>join(t1)</code>，那么父线程会被阻塞，直到子线程返回。同时，join将会返回子线程的计算结果。</p>
+<h5 id="detach"><a href="#detach" class="headerlink" title="detach"></a>detach</h5><p>一个detach的线程被创建后，父子线程是相互独立的。</p>
+<h4 id="线程创建的例子（伪代码）"><a href="#线程创建的例子（伪代码）" class="headerlink" title="线程创建的例子（伪代码）"></a>线程创建的例子（伪代码）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Thread thread1;</span><br><span class="line">Shared_list list;</span><br><span class="line">thread1 = fork(safe_insert,4);</span><br><span class="line">safe_insert(6);</span><br><span class="line">join(thread1);   //这里join是一个非必须的语句，因为很有可能执行到这一步时，thread1已经执行完了，那么join会立刻返回</span><br></pre></td></tr></table></figure>
+<p>这个代码没有考虑线程调用顺序，因此会导致结果的不确定性。</p>
+<h2 id="内核态和用户态线程"><a href="#内核态和用户态线程" class="headerlink" title="内核态和用户态线程"></a>内核态和用户态线程</h2><p>内核态和用户态中都可以有线程。内核态的线程可以由内核访问和管理。调度器会决定哪个线程运行在哪个CPU上。一些内核线程可能在支持用户态线程的工作，另一些可能在执行一些内核的工作。一个用户态线程必须和一个内核线程关联后，才能被正确调度和运行。本节将针对内核态和用户态线程的调度模型进行总结。</p>
+<h3 id="内核线程与用户线程的区别"><a href="#内核线程与用户线程的区别" class="headerlink" title="内核线程与用户线程的区别"></a>内核线程与用户线程的区别</h3><ol>
+<li>内核线程<strong>只</strong>运行在内核态，而用户线程可以运行在用户态，也可以运行在内核态（系统调用时）</li>
+<li>内核线程一般作为守护线程，执行一些诸如页表换入换出、脏页回写、软中断处理等操作</li>
+<li>内核线程也会参与调度，每个CPU上有一个IDLE线程，实际是一个优先级最低的内核线程，实在没有任务了就执行这个</li>
+<li>init是所有用户进程的祖先，而kthreadd是所有内核线程的祖先</li>
+</ol>
+<h3 id="用户态多线程模型"><a href="#用户态多线程模型" class="headerlink" title="用户态多线程模型"></a>用户态多线程模型</h3><h4 id="一一对应模型"><a href="#一一对应模型" class="headerlink" title="一一对应模型"></a>一一对应模型</h4><p>在该模型中，一个用户态线程和一个内核态线程是一一对应的关系。当一个用户态线程被创建后，就会有一个新创建或已经存在的内核线程和其一一对应。</p>
+<h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><p>并发性好，内核可以知道用户到底有多少个线程，从而可以动态调整内核线程数目和用户态进程中的多线程相匹配</p>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>必须在操作系统中完成所有操作，而且要频繁在用户态和内核态切换，代价大。</li>
+<li>只能依赖内核态的线程调度策略，这也限制了可移植性</li>
+</ul>
+<h4 id="多对一模型"><a href="#多对一模型" class="headerlink" title="多对一模型"></a>多对一模型</h4><p>在该模型中，多个用户态线程和一个内核态线程对应，由用户指定调度策略，指定规定时间哪个线程和内核态线程对应</p>
+<h5 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h5><p>可移植性强，不依赖内核态线程调度策略</p>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>由于没有用到内核线程的特性，所以操作系统对于用户的多线程程序基本上没太多帮助，操作系统也不知道用户到底有几个线程</li>
+<li>一个用户线程的阻塞将会导致整个进程的阻塞</li>
+</ul>
+<h4 id="多对多模型"><a href="#多对多模型" class="headerlink" title="多对多模型"></a>多对多模型</h4><p>该模型是上面两种模型的综合，一些线程一一对应，另一些和内核多对一对应</p>
+<h5 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h5><p>综合了上面两种的优点</p>
+<h5 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h5><p>对于内核和线程的管理更加复杂，需要一个专门的用户-内核态线程管理器</p>
+<h3 id="用户态和内核态线程调度"><a href="#用户态和内核态线程调度" class="headerlink" title="用户态和内核态线程调度"></a>用户态和内核态线程调度</h3><p>在用户态中，由一个用户层面的库对于一个进程中的线程进行管理，而在内核态中，由CPU调度器对内核态线程的调度和资源分配进行管理</p>
+<h2 id="Pthreads（Posix-thread）"><a href="#Pthreads（Posix-thread）" class="headerlink" title="Pthreads（Posix thread）"></a>Pthreads（Posix thread）</h2><p>pthreads(Portable operating system interface)是Unix系统下常用的线程API，本节将针对pthreads的使用进行介绍。</p>
+<h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><h4 id="常用数据结构及API"><a href="#常用数据结构及API" class="headerlink" title="常用数据结构及API"></a>常用数据结构及API</h4><h5 id="创建thread对象"><a href="#创建thread对象" class="headerlink" title="创建thread对象"></a>创建thread对象</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//-----------------------thread对象</span></span><br><span class="line"><span class="keyword">pthread_t</span> aThread;   <span class="comment">//type of thread</span></span><br></pre></td></tr></table></figure>
+<h5 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *thread,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,    <span class="comment">//设置线程属性，例如栈大小、优先级、调度策略、是否可join</span></span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">void</span> * (*start_routine)(<span class="keyword">void</span> *),</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">void</span> *arg)</span></span>;    <span class="comment">//函数输入参数</span></span><br></pre></td></tr></table></figure>
+<p>返回值表示是否创建成功，可以根据attr设置创建线程的属性。</p>
+<h5 id="join-1"><a href="#join-1" class="headerlink" title="join"></a>join</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, </span></span></span><br><span class="line"><span class="function"><span class="params">                 <span class="keyword">void</span> **status)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// status将会捕获子进程返回信息和结果</span></span><br></pre></td></tr></table></figure>
+<p>返回值表示join是否成功</p>
+<h5 id="detach-1"><a href="#detach-1" class="headerlink" title="detach"></a>detach</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式2</span></span><br><span class="line">pthread_attr_setdetachstate(attr, PTHREAD_CREATE_DETACHED);</span><br><span class="line">pthread_create(..., attr, ...);</span><br></pre></td></tr></table></figure>
+<h5 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_exit</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h5 id="设置属性"><a href="#设置属性" class="headerlink" title="设置属性"></a>设置属性</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//----------------------- attr 处理</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_init</span><span class="params">(<span class="keyword">pthread_attr_t</span>* atrr)</span></span>;     <span class="comment">//创建attr</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_attr_destory</span><span class="params">(<span class="keyword">pthread_attr_t</span>* atrr)</span></span>;  <span class="comment">//销毁attr</span></span><br><span class="line"><span class="keyword">int</span> pthread_attr_&#123;get/<span class="built_in">set</span>&#125;();                    <span class="comment">//获得/设置</span></span><br></pre></td></tr></table></figure>
+<h4 id="例子：创建多线程程序"><a href="#例子：创建多线程程序" class="headerlink" title="例子：创建多线程程序"></a>例子：创建多线程程序</h4><h5 id="无参数线程函数"><a href="#无参数线程函数" class="headerlink" title="无参数线程函数"></a>无参数线程函数</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">foo</span> <span class="params">(<span class="keyword">void</span> ar)</span></span>&#123;</span><br><span class="line">    pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">pthread_t</span> tid;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">pthread_attr_t</span> attr;</span><br><span class="line">    pthread_attr_init(&amp;attr);</span><br><span class="line">    pthread_attr_setdetachstate(attr, PTHREAD_CREATE_DETACHED);</span><br><span class="line">    pthread_attr_setscope(&amp;attr, PTHREAD_SCOPE_SYSTEM);   <span class="comment">// 设置调度方式和系统相同</span></span><br><span class="line">    pthread_create(<span class="literal">NULL</span>, &amp;attr, foo, <span class="literal">NULL</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译过程为：<code>gcc -o main main.c -lpthread</code></p>
+<h5 id="有参数线程函数"><a href="#有参数线程函数" class="headerlink" title="有参数线程函数"></a>有参数线程函数</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">threadFun</span> <span class="params">(<span class="keyword">void</span> *pArg)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *p = (<span class="keyword">int</span>*) pArg;</span><br><span class="line">    <span class="keyword">int</span> myNum = *p;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, myNum);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">pthread_t</span> tid;</span><br><span class="line">    pthread_create(&amp;tid, <span class="literal">NULL</span>, threadFun, &amp;i);  <span class="comment">// Input parameter</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Mutex"><a href="#Mutex" class="headerlink" title="Mutex"></a>Mutex</h3><p>pthreads 对于锁的使用如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pthread_mutex_t</span> aMutex;   <span class="comment">//创建锁</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_init</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex, <span class="keyword">const</span> <span class="keyword">pthread_mutexattr_t</span> *attr)</span></span>;  <span class="comment">//初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_lock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;  <span class="comment">//上锁</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_unlock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;<span class="comment">//解锁</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_trylock</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;   <span class="comment">//尝试上锁，如果不成功，不会阻塞当前线程</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_mutex_destory</span><span class="params">(<span class="keyword">pthread_mutex_t</span>* mutex)</span></span>;<span class="comment">//销毁锁</span></span><br></pre></td></tr></table></figure>
+<p>注意：<strong>Mutex不能用在中断场景下，因为会引起睡眠</strong></p>
+<h3 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pthread_cond_t</span> aCond; <span class="comment">//创建</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//--------------------------- wait</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_wait</span><span class="params">(<span class="keyword">pthread_cond_t</span>* cond, <span class="keyword">pthread_mutex_t</span> *mutex)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//--------------------------- notify</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_signal</span><span class="params">(<span class="keyword">pthread_cond_t</span>* cond)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_broadcast</span><span class="params">(<span class="keyword">pthread_cond_t</span>* cond)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_init</span><span class="params">(<span class="keyword">pthread_cond_t</span>* cond, <span class="keyword">const</span> <span class="keyword">pthread_condattr_t</span> *attr)</span></span>;  <span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cond_destory</span><span class="params">(<span class="keyword">pthread_cond_t</span>* mutex)</span></span>;<span class="comment">//销毁锁</span></span><br></pre></td></tr></table></figure>
+<h2 id="Linux下线程的实现"><a href="#Linux下线程的实现" class="headerlink" title="Linux下线程的实现"></a>Linux下线程的实现</h2><h3 id="共享与独占资源"><a href="#共享与独占资源" class="headerlink" title="共享与独占资源"></a>共享与独占资源</h3><p>在linux下的线程中，会有自身独有和共享的资源，这里对这些资源进行一个总结，其中，共享的资源包括：</p>
+<ul>
+<li>虚拟内存映射</li>
+<li>进程基础信息</li>
+<li>一些数据</li>
+<li>打开的文件</li>
+<li>信号处理</li>
+<li>当前工作目录</li>
+<li>用户和用户组属性</li>
+<li>……</li>
+</ul>
+<p>独占的资源包括：</p>
+<ul>
+<li>线程ID</li>
+<li>一系列寄存器</li>
+<li>栈</li>
+<li>错误码</li>
+<li>信号掩码</li>
+<li>线程优先级</li>
+<li>……</li>
+</ul>
+<h2 id="进程与线程的联系与区别"><a href="#进程与线程的联系与区别" class="headerlink" title="进程与线程的联系与区别"></a>进程与线程的联系与区别</h2><h3 id="联系"><a href="#联系" class="headerlink" title="联系"></a>联系</h3><p>线程实际上是将进程的指令执行流部分进行了剥离，进程负责资源调度，而具体指令执行交给了线程，两者的关系可以用下面的图进行概括：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/threadandprocess.svg" width="280" alt="图片名称" align="center"></p>
+<p>可以看的线程是有自己独立的堆栈和SP指针，以及相应的寄存器等。所以线程实际就是进程减去资源共享</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
+<li>进程是操作系统进行资源分配的最小单位，而线程是CPU进行任务调度的最小单位。一个进程至少包含一个线程</li>
+<li>进程有独立的地址空间，每次启动一个进程，系统会分配地址空间，同时建立数据表维护代码、数据、堆栈段，开销很大。而线程共享代码段（代码与常量）、数据段（全局变量与静态变量）和堆段，开销小很多，但是每个线程有自己的栈段（局部变量和临时变量）。创建与切换线程的开销比创建切换线程大很多。</li>
+<li>线程间通信更方便，同一进程下的线程共享全局变量、静态变量等数据，进程间通信需要以通信方式进行，但是多线程需要处理好同步与互斥。</li>
+<li>多进程程序更健壮，一个进程的消亡不会影响另外的进程；而多线程的程序有一个线程死掉，整个进程就会死掉。</li>
+</ol>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://zhuanlan.zhihu.com/p/364898425">深入理解Linux内核之内核线程（上）</a><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/线程设计考虑/" rel="next" title="线程设计考虑">
+                <i class="fa fa-chevron-left"></i> 线程设计考虑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/线程池/" rel="prev" title="线程池">
+                线程池 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本介绍"><span class="nav-number">1.</span> <span class="nav-text">基本介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的特点及优点"><span class="nav-number">1.2.</span> <span class="nav-text">线程的特点及优点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">1.2.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">1.2.2.</span> <span class="nav-text">优点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单CPU"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">单CPU</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多CPU"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">多CPU</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持线程机制的要素"><span class="nav-number">1.3.</span> <span class="nav-text">支持线程机制的要素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Thread-data-structure"><span class="nav-number">1.3.1.</span> <span class="nav-text">Thread data structure</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程创建和管理"><span class="nav-number">1.3.2.</span> <span class="nav-text">线程创建和管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fork"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">fork</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#join"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#detach"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">detach</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程创建的例子（伪代码）"><span class="nav-number">1.3.3.</span> <span class="nav-text">线程创建的例子（伪代码）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内核态和用户态线程"><span class="nav-number">2.</span> <span class="nav-text">内核态和用户态线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内核线程与用户线程的区别"><span class="nav-number">2.1.</span> <span class="nav-text">内核线程与用户线程的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户态多线程模型"><span class="nav-number">2.2.</span> <span class="nav-text">用户态多线程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一一对应模型"><span class="nav-number">2.2.1.</span> <span class="nav-text">一一对应模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点-1"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多对一模型"><span class="nav-number">2.2.2.</span> <span class="nav-text">多对一模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点-2"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点-1"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多对多模型"><span class="nav-number">2.2.3.</span> <span class="nav-text">多对多模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#优点-3"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点-2"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户态和内核态线程调度"><span class="nav-number">2.3.</span> <span class="nav-text">用户态和内核态线程调度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pthreads（Posix-thread）"><span class="nav-number">3.</span> <span class="nav-text">Pthreads（Posix thread）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-number">3.1.</span> <span class="nav-text">创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用数据结构及API"><span class="nav-number">3.1.1.</span> <span class="nav-text">常用数据结构及API</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建thread对象"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">创建thread对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建线程"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">创建线程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#join-1"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">join</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#detach-1"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">detach</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#exit"><span class="nav-number">3.1.1.5.</span> <span class="nav-text">exit</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置属性"><span class="nav-number">3.1.1.6.</span> <span class="nav-text">设置属性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子：创建多线程程序"><span class="nav-number">3.1.2.</span> <span class="nav-text">例子：创建多线程程序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#无参数线程函数"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">无参数线程函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#有参数线程函数"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">有参数线程函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mutex"><span class="nav-number">3.2.</span> <span class="nav-text">Mutex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条件变量"><span class="nav-number">3.3.</span> <span class="nav-text">条件变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下线程的实现"><span class="nav-number">4.</span> <span class="nav-text">Linux下线程的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#共享与独占资源"><span class="nav-number">4.1.</span> <span class="nav-text">共享与独占资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程与线程的联系与区别"><span class="nav-number">5.</span> <span class="nav-text">进程与线程的联系与区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#联系"><span class="nav-number">5.1.</span> <span class="nav-text">联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">5.2.</span> <span class="nav-text">区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

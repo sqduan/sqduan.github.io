@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="图(Graph)是表示物件与物件之间的网状关系的数学对象,是图论基本研究对象，本文将对图相关知识进行总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/算法/图/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="图(Graph)是表示物件与物件之间的网状关系的数学对象,是图论基本研究对象，本文将对图相关知识进行总结。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/v2-81f21981c992bc0b5b1acf04b37ff6c2_720w.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/domino_example_1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/v2-952b78faeed7a68af4349357e34efe8f_720w.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/undirected_graph_cycle.png">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.509Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图">
+<meta name="twitter:description" content="图(Graph)是表示物件与物件之间的网状关系的数学对象,是图论基本研究对象，本文将对图相关知识进行总结。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/v2-81f21981c992bc0b5b1acf04b37ff6c2_720w.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/算法/图/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>图 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/算法/图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">图
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/算法和数据结构/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p> 图(Graph)是表示物件与物件之间的网状关系的数学对象,是图论基本研究对象，本文将对图相关知识进行总结。</p>
+<a id="more"></a>
+<h2 id="图类问题解决步骤"><a href="#图类问题解决步骤" class="headerlink" title="图类问题解决步骤"></a>图类问题解决步骤</h2><h3 id="图的表示：邻接矩阵或邻接表"><a href="#图的表示：邻接矩阵或邻接表" class="headerlink" title="图的表示：邻接矩阵或邻接表"></a>图的表示：邻接矩阵或邻接表</h3><p>邻接矩阵或邻接表能够方便地查询顶点之间的关系，在邻接表中，键为起点，值为终点，而邻接矩阵中，<code>joint[i][j] == 1</code>表示从$i$到$j$有连接，邻接表占用空间较小而邻接矩阵占用空间较大。邻接表和邻接矩阵建立方法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//无向图邻接表</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">    graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">    graph[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//有向图邻接表    </span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">    graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="图的基本要素"><a href="#图的基本要素" class="headerlink" title="图的基本要素"></a>图的基本要素</h2><p>一般来说，当讨论图问题时，会有如下要素：</p>
+<ul>
+<li>顶点及顶点值，顶点集的大小叫做图的阶</li>
+<li>顶点的度，即与某个顶点相连的边数。（对于有向图，度可进一步分为入度和出度即顶点的入边条数及出边条数）</li>
+<li>边及边权重</li>
+</ul>
+<h2 id="图的基本操作"><a href="#图的基本操作" class="headerlink" title="图的基本操作"></a>图的基本操作</h2><h3 id="图的DFS和BFS遍历"><a href="#图的DFS和BFS遍历" class="headerlink" title="图的DFS和BFS遍历"></a>图的DFS和BFS遍历</h3><h4 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Boolean visited[MAX_VERTEX_NUM]; <span class="comment">// 访问标志数组</span></span><br><span class="line">Status (*VisitFunc)(<span class="keyword">int</span> v); <span class="comment">// VisitFunc是访问函数，对图的每个顶点调用该函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFSTraverse</span> <span class="params">(Graph G, Status(*Visit)(<span class="keyword">int</span> v))</span> </span>&#123;</span><br><span class="line">    VisitFunc = Visit;</span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; G.vexnum; ++v)</span><br><span class="line">        visited[v] = FALSE; <span class="comment">// 访问标志数组初始化</span></span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; G.vexnum; ++v)</span><br><span class="line">        <span class="keyword">if</span> (!visited[v])</span><br><span class="line">            DFS(G, v);  <span class="comment">// 对尚未访问的顶点调用DFS</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(Graph G, <span class="keyword">int</span> v)</span> </span>&#123; <span class="comment">// 从第v个顶点出发递归地深度优先遍历图G</span></span><br><span class="line">    visited[v] = TRUE;</span><br><span class="line">    VisitFunc(v);   <span class="comment">// 访问第v个顶点</span></span><br><span class="line">    <span class="keyword">for</span> (w = FirstAdjVex(G, v); w &gt;= <span class="number">0</span>; w = NextAdjVex(G, v, w))</span><br><span class="line">        <span class="comment">// FirstAdjVex返回v的第一个邻接顶点，若顶点在G中没有邻接顶点，则返回空（0）。</span></span><br><span class="line">        <span class="comment">// 若w是v的邻接顶点，NextAdjVex返回v的（相对于w的）下一个邻接顶点。</span></span><br><span class="line">        <span class="comment">// 若w是v的最后一个邻接点，则返回空（0）。</span></span><br><span class="line">        <span class="keyword">if</span> (!visited[w])</span><br><span class="line">            DFS(G, w);  <span class="comment">// 对v的尚未访问的邻接顶点w调用DFS</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Boolean visited[ MAX_VERTEX_NUM ]; <span class="comment">// 访问标志数组</span></span><br><span class="line">Status (* VisitFunc)(<span class="keyword">int</span> v); <span class="comment">// VisitFunc是访问函数，对图的每个顶点调用该函数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFSTraverse</span><span class="params">(Graph G, Status(* Visit)(<span class="keyword">int</span> v))</span> </span>&#123;</span><br><span class="line">    VisitFunc = Visit;</span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; G.vexnum; ++v)</span><br><span class="line">        visited[v] = FALSE;</span><br><span class="line">    initQueue(Q); <span class="comment">// 置空辅助队列Q</span></span><br><span class="line">    <span class="keyword">for</span> (v = <span class="number">0</span>; v &lt; G.vexnum; ++v) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visited[v]) &#123;</span><br><span class="line">            visited[v] = TRUE;</span><br><span class="line">            VisitFunc(v);</span><br><span class="line">            EnQueue(Q, v); <span class="comment">// v入队列</span></span><br><span class="line">            <span class="keyword">while</span> (!QueueEmpty(Q)) &#123;</span><br><span class="line">                DeQueue(Q, u); <span class="comment">// 队头元素出队并置为u</span></span><br><span class="line">                <span class="keyword">for</span> (w = FirstAdjVex(G, u);</span><br><span class="line">                        w &gt;= <span class="number">0</span>; w = NextAdjVex(G, u, w))</span><br><span class="line">                    <span class="keyword">if</span> (!Visited[w]) &#123; <span class="comment">// w为u的尚未访问的邻接顶点</span></span><br><span class="line">                        Visited[w] = TRUE;</span><br><span class="line">                        VisitFunc(w);</span><br><span class="line">                        EnQueue(Q, w);</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二分图"><a href="#二分图" class="headerlink" title="二分图"></a>二分图</h2><h4 id="二分图定义1"><a href="#二分图定义1" class="headerlink" title="二分图定义1"></a>二分图定义<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></h4><p><strong>二分图</strong>（<strong>Bipartite graph</strong>）是一类特殊的<strong>图</strong>，它可以被划分为两个部分，每个部分内的点互不相连。下图是典型的二分图。可以看到，$X$与$Y$内部节点互不连接，而相互之间有连接。</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/v2-81f21981c992bc0b5b1acf04b37ff6c2_720w.jpg" width="250" alt="图片名称" align="center"></p>
+<p>如果我们能将一个图的节点集合分割成两个独立的子集A和B，并使图中的每一条边的两个节点一个来自A集合，一个来自B集合，我们就将这个图称为二分图。</p>
+<h4 id="二分图性质"><a href="#二分图性质" class="headerlink" title="二分图性质"></a>二分图性质</h4><ul>
+<li>一个图若果为合法的二分图应是不存在一个或多个包含奇数个元素的环。</li>
+</ul>
+<h4 id="二分图基本操作"><a href="#二分图基本操作" class="headerlink" title="二分图基本操作"></a>二分图基本操作</h4><h5 id="判断二分图（染色法）"><a href="#判断二分图（染色法）" class="headerlink" title="判断二分图（染色法）"></a>判断二分图（染色法）</h5><p>思路</p>
+<p>二分图和红黑树有一些类似，对于红黑树来说，一个节点要么是红要么是黑；同理，对于二分图，其节点要么为红，要么为黑。我们可以使用贪心的方法给图进行着色，一个节点为黑，那么所有邻接节点均为红，其邻接节点的邻接节点均为黑，以此类推。我们可以使用DFS或BFS解决此类问题。需要注意的是因为图中可能存在孤岛，因此需要遍历所有的节点。</p>
+<p>代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">bool</span> <span class="title">isBipartite</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph)</span> </span>&#123;</span><br><span class="line">     <span class="keyword">int</span> n = graph.size();</span><br><span class="line">     <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">visited</span><span class="params">(n,<span class="number">0</span>)</span></span>;</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">         <span class="keyword">if</span>(!dfs(graph, visited,i,<span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph,</span></span></span><br><span class="line"><span class="function"><span class="params">         <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; visited,</span></span></span><br><span class="line"><span class="function"><span class="params">         <span class="keyword">int</span> cur,</span></span></span><br><span class="line"><span class="function"><span class="params">         <span class="keyword">int</span> last_color)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(visited[cur] != <span class="number">0</span>)&#123;   <span class="comment">//说明当前节点已经被访问 1: 节点属于1, -1：节点属于-1</span></span><br><span class="line">        <span class="keyword">return</span> visited[cur] != last_color;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    visited[cur] = last_color == <span class="number">1</span> ? <span class="number">2</span> : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;graph[cur].size();i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfs(graph, visited, graph[cur][i],visited[cur])) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="匈牙利算法（用于解决二分图最大匹配和最小点覆盖问题）"><a href="#匈牙利算法（用于解决二分图最大匹配和最小点覆盖问题）" class="headerlink" title="匈牙利算法（用于解决二分图最大匹配和最小点覆盖问题）"></a>匈牙利算法（用于解决二分图最大匹配和最小点覆盖问题）</h4><ol>
+<li>最大匹配问题</li>
+</ol>
+<p>在上面的图中，如果X和Y中节点只能是一一匹配的关系，那么最大能够有多少个匹配数？</p>
+<ol>
+<li>最小点覆盖问题</li>
+</ol>
+<p>另外一个关于二分图的问题是求<strong>最小点覆盖</strong>：我们想找到<strong>最少</strong>的一些<strong>点</strong>，使二分图所有的边都<strong>至少有一个端点</strong>在这些点之中。倒过来说就是，删除包含这些点的边，可以删掉所有边。在上面的图中，删除Y2、X3、Y4即可删除所有的边。</p>
+<h5 id="匈牙利算法应用"><a href="#匈牙利算法应用" class="headerlink" title="匈牙利算法应用"></a>匈牙利算法应用</h5><ol>
+<li>棋盘覆盖（LeetCode LCP4）<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></li>
+</ol>
+<p>你有一块棋盘，棋盘上有一些格子已经坏掉了。你还有无穷块大小为1 * 2的多米诺骨牌，你想把这些骨牌不重叠地覆盖在完好的格子上，请找出你最多能在棋盘上放多少块骨牌？这些骨牌可以横着或者竖着放。</p>
+<blockquote>
+<p>输入：n = 2, m = 3, broken = [[1, 0], [1, 1]]<br>输出：2<br>解释：我们最多可以放两块骨牌：[[0, 0], [0, 1]]以及[[0, 2], [1, 2]]。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/domino_example_1.jpg" width="250" alt="图片名称" align="center"></p>
+<p>棋盘覆盖是一个经典的问题，查看下面的棋盘：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/v2-952b78faeed7a68af4349357e34efe8f_720w.jpg" width="250" alt="图片名称" align="center"></p>
+<p>我们将棋盘染色，使黑白相互间隔，那么染色之后棋盘构成了一个二分图，白格只与黑格相连接，每个未删除的格子都与上下左右紧邻的未删除的格子相连，那么二分图的最大匹配数就是能放下的多米诺骨牌数目。</p>
+<h2 id="无向图"><a href="#无向图" class="headerlink" title="无向图"></a>无向图</h2><h3 id="无向图的定义"><a href="#无向图的定义" class="headerlink" title="无向图的定义"></a>无向图的定义</h3><p>在无向图中没有方向，节点u和v如果连接，则可以相互访问。</p>
+<h3 id="无向图基本操作"><a href="#无向图基本操作" class="headerlink" title="无向图基本操作"></a>无向图基本操作</h3><h4 id="保存索引"><a href="#保存索引" class="headerlink" title="保存索引"></a>保存索引</h4><p>在使用无向图直线，要先将边的两个节点构成的索引对利用哈希进行保存，从而实现快速查找，需要注意的是，一个节点可能与多个节点相连，所以索引的值是vector</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">    graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">    graph[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><p><a href="https://leetcode-cn.com/problems/clone-graph/">133. 图的深拷贝</a>图的深拷贝过程中，由于有环的存在，可能会出现重复搜索的情况，因此我们需要一个hashmap，对已经访问过的节点进行保存，如果发现某个节点已经被拷贝，那么直接返回复制的节点即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="built_in">vector</span>&lt;Node*&gt; neighbors;</span><br><span class="line">    </span><br><span class="line">    Node() &#123;</span><br><span class="line">        val = <span class="number">0</span>;</span><br><span class="line">        neighbors = <span class="built_in">vector</span>&lt;Node*&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Node(<span class="keyword">int</span> _val) &#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        neighbors = <span class="built_in">vector</span>&lt;Node*&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Node(<span class="keyword">int</span> _val, <span class="built_in">vector</span>&lt;Node*&gt; _neighbors) &#123;</span><br><span class="line">        val = _val;</span><br><span class="line">        neighbors = _neighbors;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;Node*, Node*&gt; node_map&#123;&#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Node* <span class="title">cloneGraph</span><span class="params">(Node* node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node_map.find(node) != node_map.end()) <span class="keyword">return</span> node_map[node];</span><br><span class="line"></span><br><span class="line">        Node* result = <span class="keyword">new</span> Node(node-&gt;val);</span><br><span class="line">        node_map[node] = result;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : node-&gt;neighbors)&#123;</span><br><span class="line">            result-&gt;neighbors.push_back(cloneGraph(v));</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>相关问题还包括二叉树或链表的深拷贝</p>
+<h4 id="计算无向图中连通分量的数目"><a href="#计算无向图中连通分量的数目" class="headerlink" title="计算无向图中连通分量的数目"></a>计算无向图中连通分量的数目</h4><p><a href="https://leetcode-cn.com/problems/number-of-connected-components-in-an-undirected-graph/">323. 无向图中连通分量的数目</a></p>
+<blockquote>
+<p>给定编号从 0 到 n-1 的 n 个节点和一个无向边列表（每条边都是一对节点），请编写一个函数来计算无向图中连通分量的数目。</p>
+<p>示例 1:</p>
+<p>输入: n = 5 和 edges = [[0, 1], [1, 2], [3, 4]]</p>
+<pre><code>0          3
+|          |
+1 --- 2    4 
+</code></pre><p>输出: 2<br>示例 2:</p>
+<p>输入: n = 5 和 edges = [[0, 1], [1, 2], [2, 3], [3, 4]]</p>
+<pre><code>0           4
+|           |
+1 --- 2 --- 3
+</code></pre><p>输出:  1<br>注意:<br>你可以假设在 edges 中不会出现重复的边。而且由于所以的边都是无向边，[0, 1] 与 [1, 0]  相同，所以它们不会同时在 edges 中出现。</p>
+</blockquote>
+<p>示例 1:</p>
+<p>输入: n = 5 和 edges = [[0, 1], [1, 2], [3, 4]]</p>
+<pre><code> 0          3
+ |          |
+ 1 --- 2    4 
+</code></pre><p>输出: 2<br>你可以假设在 edges 中不会出现重复的边。而且由于所以的边都是无向边，[0, 1] 与 [1, 0]  相同，所以它们不会同时在 edges 中出现。</p>
+<h5 id="解法1：DFS"><a href="#解法1：DFS" class="headerlink" title="解法1：DFS"></a>解法1：DFS</h5><p><strong>代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">countComponents</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(edges.empty() )<span class="keyword">return</span> n;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; graph&#123;&#125;;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">visited</span><span class="params">(n,<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : edges)&#123;</span><br><span class="line">        graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">        graph[v[<span class="number">1</span>]].push_back(v[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(visited[i] == <span class="number">0</span>)&#123;</span><br><span class="line">            ans ++;</span><br><span class="line">            dfs(graph, visited, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; visited, <span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    visited[i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : graph[i])&#123;</span><br><span class="line">        <span class="keyword">if</span>(!visited[v])&#123;</span><br><span class="line">            dfs(graph, visited, v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="解法2：BFS"><a href="#解法2：BFS" class="headerlink" title="解法2：BFS"></a>解法2：BFS</h5><h5 id="解法3：查并集"><a href="#解法3：查并集" class="headerlink" title="解法3：查并集"></a>解法3：查并集</h5><h4 id="判断是否成环"><a href="#判断是否成环" class="headerlink" title="判断是否成环"></a>判断是否成环</h4><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/undirected_graph_cycle.png" width="450" alt="图片名称" align="center"></p>
+<h5 id="解法1：DFS-1"><a href="#解法1：DFS-1" class="headerlink" title="解法1：DFS"></a>解法1：DFS</h5><p>思路</p>
+<p>我们从下面的图进行考虑<br><div><div class="fold_hider"><div class="close hider_title">点击显示/隐藏</div></div><div class="fold">
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">      0</span><br><span class="line">    /   \</span><br><span class="line">   1     2 </span><br><span class="line">       /   \</span><br><span class="line">     3-------4</span><br><span class="line">     </span><br><span class="line">可以看到，图中2,3,4顶点构成了环，我们把没访问过的顶点记录为i，访问过的记录为i*，从顶点0开始进行访问，设定其父顶点为-1</span><br><span class="line"></span><br><span class="line">      0*</span><br><span class="line">    /   \</span><br><span class="line">   1     2 </span><br><span class="line">       /   \</span><br><span class="line">     3-------4</span><br><span class="line">访问后，顶点0状态改变，顶点</span><br></pre></td></tr></table></figure>
+
+</div></div></p>
+<p>代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; point&#123;&#125;;</span><br><span class="line">point.push(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">bool</span>&gt; <span class="title">visited</span><span class="params">(n,<span class="number">0</span>)</span></span>;</span><br><span class="line"><span class="keyword">while</span>(!point.empty())&#123;</span><br><span class="line">    <span class="keyword">int</span> cur = point.top();</span><br><span class="line">    point.pop();</span><br><span class="line">    visited[cur] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(graph[cur][i] == <span class="number">1</span>)&#123;    <span class="comment">//添加和当前搜索点相连的节点</span></span><br><span class="line">            <span class="keyword">if</span>(visited[i] == <span class="literal">true</span>) <span class="keyword">return</span> <span class="literal">false</span>;     <span class="comment">//例如有三个节点 i,j,k；通过i可以访问j和k，因此j和k要被压入栈中，而如果通过j访问到了k，且k已经被访问，说明i,j,k之间构成了环形</span></span><br><span class="line">            visited[i] = <span class="literal">true</span>;</span><br><span class="line">            </span><br><span class="line">           	graph[cur][i] = <span class="number">0</span>;  <span class="comment">//已经访问过的节点要删掉，防止重复访问</span></span><br><span class="line">            graph[i][cur] = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            point.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="解法2：BFS-1"><a href="#解法2：BFS-1" class="headerlink" title="解法2：BFS"></a>解法2：BFS</h5><p>和DFS类似</p>
+<h5 id="解法3：查并集-1"><a href="#解法3：查并集-1" class="headerlink" title="解法3：查并集"></a>解法3：查并集</h5><p>查并集这种数据结构对于判断环是非常有用的，我们只需要判断一条边两个节点是否已经连接在一起，即可判断是否成环。</p>
+<h5 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h5><p><a href="https://leetcode-cn.com/problems/graph-valid-tree/">261. 以图判树</a></p>
+<h4 id="判断图中子图的连通性"><a href="#判断图中子图的连通性" class="headerlink" title="判断图中子图的连通性"></a>判断图中子图的连通性</h4><p>在有些图中，子图之间可能没有桥，从而子图被分割为了两个部分，这种情况下需要我们对连通性进行判断，判断方法也比较简单，对图进行遍历，更新visited矩阵，然后遍历visited矩阵，看是否所有的图都能被访问到。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!visited[i]) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//有顶点没有被访问，说明出现了断桥</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="专题：染色问题"><a href="#专题：染色问题" class="headerlink" title="专题：染色问题"></a>专题：染色问题</h3><p>染色问题要求我们在图中对节点进行染色，相邻的节点为不同的颜色。本节将对常见的染色问题进行总结。</p>
+<h4 id="例题-1"><a href="#例题-1" class="headerlink" title="例题"></a>例题</h4><p><a href="https://leetcode-cn.com/problems/flower-planting-with-no-adjacent/">1042. 不邻接植花</a></p>
+<blockquote>
+<p>有 N 个花园，按从 1 到 N 标记。在每个花园中，你打算种下四种花之一。</p>
+<p>paths[i] = [x, y] 描述了花园 x 到花园 y 的双向路径。</p>
+<p>另外，没有花园有 3 条以上的路径可以进入或者离开。</p>
+<p>你需要为每个花园选择一种花，使得通过路径相连的任何两个花园中的花的种类互不相同。</p>
+<p>以数组形式返回选择的方案作为答案 answer，其中 answer[i] 为在第 (i+1) 个花园中种植的花的种类。花的种类用  1, 2, 3, 4 表示。保证存在答案。</p>
+</blockquote>
+<p>思路</p>
+<p>我们的染色集合为$C={1,2,3,…,n}$，假设目前我们处理第$i$个节点，与节点$i$相连的节点集合为$P<em>i={j_1,j_2,…,j_m}$，其颜色集合为$C_i={C</em>{j<em>1},C</em>{j<em>2},C</em>{j<em>3}…,C</em>{j_m}}$，那么$i$可选取的颜色为$C\cap C_i$</p>
+<p>代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">gardenNoAdj</span><span class="params">(<span class="keyword">int</span> N, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; paths)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; paths_table&#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v: paths)&#123;</span><br><span class="line">        paths_table[v[<span class="number">0</span>]<span class="number">-1</span>].push_back(v[<span class="number">1</span>]<span class="number">-1</span>);</span><br><span class="line">        paths_table[v[<span class="number">1</span>]<span class="number">-1</span>].push_back(v[<span class="number">0</span>]<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">ans</span><span class="params">(N,<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">        <span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; color&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; paths_table[i].size();k++)&#123;</span><br><span class="line">            color.erase(ans[paths_table[i][k]]);</span><br><span class="line">        &#125;</span><br><span class="line">        ans[i] = *(color.begin());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="有向图"><a href="#有向图" class="headerlink" title="有向图"></a>有向图</h2><h3 id="有向图的定义"><a href="#有向图的定义" class="headerlink" title="有向图的定义"></a>有向图的定义</h3><h3 id="有向图基本操作"><a href="#有向图基本操作" class="headerlink" title="有向图基本操作"></a>有向图基本操作</h3><h4 id="判断是否成环（有向无环图）"><a href="#判断是否成环（有向无环图）" class="headerlink" title="判断是否成环（有向无环图）"></a>判断是否成环（有向无环图）</h4><h5 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h5><ul>
+<li>借助一个标志表<code>visited</code>，用于判断每个节点<code>i</code>的状态<ul>
+<li>$i=0$：尚未访问</li>
+<li>$i=1$：已被当前节点出发的DFS访问</li>
+<li>$i=-1$：已被其他节点出发的DFS访问</li>
+</ul>
+</li>
+<li>对图中所有节点依次执行DFS，判断每个节点出发的DFS是否存在环，存在则返回False，流程如下：<ul>
+<li>终止条件<ul>
+<li>当<code>visited == -1</code>，说明当前访问节点已被其他节点出发的DFS访问，无需重复搜索，直接返回$true$</li>
+<li>当<code>visited == 1</code>，说明当前访问节点已被本节点出发的DFS第二次访问，存在环，直接返回$false$</li>
+</ul>
+</li>
+<li>将当前节点<code>i</code>对应的<code>visited[i]</code>置1，代表本节点已被访问</li>
+<li>递归访问<code>i</code>的邻接节点，发现环直接返回$false$</li>
+<li>当前节点所有邻接节点已被访问，不存在环，则将<code>visited[i]</code>设为-1并返回$true$</li>
+</ul>
+</li>
+<li>整个图均未发现环，则返回$true$</li>
+</ul>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canFinish</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; prerequisites)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; graph&#123;&#125;;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">visited</span><span class="params">(numCourses,<span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : prerequisites)&#123;</span><br><span class="line">        graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numCourses;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!dfs(graph, visited, i)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="built_in">map</span>&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; graph, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; visited, <span class="keyword">int</span> cur_course)</span></span>&#123; <span class="comment">//true : 图无环</span></span><br><span class="line">    <span class="keyword">if</span>(visited[cur_course] == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(visited[cur_course] == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        visited[cur_course] = <span class="number">1</span>; <span class="comment">//正在搜索状态</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; graph[cur_course].size();i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> next_course = graph[cur_course][i];</span><br><span class="line">            <span class="keyword">if</span>(!dfs(graph,visited,next_course)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        visited[cur_course] = <span class="number">-1</span>;  <span class="comment">//搜索完成状态</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="判断是否有路径"><a href="#判断是否有路径" class="headerlink" title="判断是否有路径"></a>判断是否有路径</h4><h5 id="查并集"><a href="#查并集" class="headerlink" title="查并集"></a>查并集</h5><h5 id="例题-2"><a href="#例题-2" class="headerlink" title="例题"></a>例题</h5><p><a href="https://leetcode-cn.com/problems/route-between-nodes-lcci/">面试题 04.01. 节点间通路</a></p>
+<blockquote>
+<p>节点间通路。给定有向图，设计一个算法，找出两个节点之间是否存在一条路径。</p>
+<p> 输入：n = 3, graph = [[0, 1], [0, 2], [1, 2], [1, 2]], start = 0, target = 2<br> 输出：true</p>
+</blockquote>
+<p>使用图的深度优先搜索即可完成，这一部分请参考图的深度优先搜索部分。</p>
+<h3 id="带权值有向图"><a href="#带权值有向图" class="headerlink" title="带权值有向图"></a>带权值有向图</h3><h4 id="使用查并集处理带权有向图问题"><a href="#使用查并集处理带权有向图问题" class="headerlink" title="使用查并集处理带权有向图问题"></a>使用查并集处理带权有向图问题</h4><h5 id="例题-3"><a href="#例题-3" class="headerlink" title="例题"></a>例题</h5><p><a href="https://leetcode-cn.com/problems/evaluate-division/">399. 除法求值</a></p>
+<blockquote>
+<p>给出方程式 A / B = k, 其中 A 和 B 均为用字符串表示的变量， k 是一个浮点型数字。根据已知方程式求解问题，并返回计算结果。如果结果不存在，则返回 -1.0。</p>
+<p>示例 :<br>给定 a / b = 2.0, b / c = 3.0<br>问题: a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?<br>返回 [6.0, 0.5, -1.0, 1.0, -1.0 ]</p>
+<p>输入为: vector<pair<string, string>&gt; equations, vector<double>&amp; values, vector<pair<string, string>&gt; queries(方程式，方程式结果，问题方程式)， 其中 equations.size() == values.size()，即方程式的长度与方程式结果长度相等（程式与结果一一对应），并且结果值均为正数。以上为方程式的描述。 返回vector<double>类型。</double></pair<string,></double></pair<string,></p>
+<p>基于上述例子，输入如下：</p>
+<p>equations(方程式) = [ [“a”, “b”], [“b”, “c”] ],<br>values(方程式结果) = [2.0, 3.0],<br>queries(问题方程式) = [ [“a”, “c”], [“b”, “a”], [“a”, “e”], [“a”, “a”], [“x”, “x”] ].<br>输入总是有效的。你可以假设除法运算中不会出现除数为0的情况，且不存在任何矛盾的结果。</p>
+</blockquote>
+<p>思路</p>
+<p>本题目就是典型的带权有向图问题。在解决问题之前，我们先做出如下定义：</p>
+<ul>
+<li>$f(a,b) = \frac{a}{b}$</li>
+<li><code>parent[b] = a</code></li>
+<li>令$b$在查并集中的根节点为<code>root(b)</code></li>
+<li><code>weight[b]</code>表示<code>root(b)/b</code>的值，即</li>
+</ul>
+<script type="math/tex; mode=display">
+w_b=\frac{r_b}{b}</script><p>假设<code>root(a)</code>到<code>a</code>的路径为</p>
+<pre class="mermaid">graph LR
+    nodera((root_a))
+    nodea1((a1))
+    nodea2((a2))
+    nodean((an))
+    nodea((a))
+
+    nodera-->nodea1
+    nodea1-->nodea2
+    nodea2-->|...|nodean
+    nodean-->nodea</pre>
+
+<p>考虑$\frac{r_a}{r_b}$，我们有如下递推关系式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac{r_a}{r_b} &= \frac{r_a/a_1}{r_b/b_1}\frac{a_1}{b_1}\\
+&=\frac{f(r_a,a_1)*a_1}{f(r_b,b_1)*b_1}\\
+&=\frac{f(r_a,a_1)*f(a_1,a_2)*a_2}{f(r_b,b_1)*f(b_1,b_2)*b_2}\\
+&...\\
+&=\frac{f(r_a,a_1)*f(a_1,a_2)*...*f(a_n,a)*a}{f(r_b,b_1)*f(b_1,b_2)*...*f(b_m,b)*b}\\
+&=\frac{pm(a)}{pm(b)}\frac{a}{b}
+\end{aligned}</script><p>如果我们知道了$r_a,r_b,pm(a),pm(b)$，即可求出$a/b$的值，$pm(a)=f(p(a),a)*pm(p(a))$，其中$p(a)$为$a$的父节点</p>
+<p>代码</p>
+<h3 id="专题：有向图的出度与入度"><a href="#专题：有向图的出度与入度" class="headerlink" title="专题：有向图的出度与入度"></a>专题：有向图的出度与入度</h3><p>对有向图而言，度可以分为入度和出度，有些问题需要我们计算有向图顶点的静流量，此时我们需要利用入度和出度进行计算。</p>
+<h4 id="使用出入度的常见场景"><a href="#使用出入度的常见场景" class="headerlink" title="使用出入度的常见场景"></a>使用出入度的常见场景</h4><ul>
+<li>对于一棵二叉树，根节点入度一定为0，叶节点出度为0，中间节点则既有出度也有入度</li>
+</ul>
+<p><a href="https://leetcode-cn.com/problems/validate-binary-tree-nodes/">1361. 验证二叉树</a></p>
+<blockquote>
+<p>二叉树上有 n 个节点，按从 0 到 n - 1 编号，其中节点 i 的两个子节点分别是 leftChild[i] 和 rightChild[i]。只有 所有 节点能够形成且 只 形成 一颗 有效的二叉树时，返回 true；否则返回 false。如果节点 i 没有左子节点，那么 leftChild[i] 就等于 -1。右子节点也符合该规则。注意：节点没有值，本问题中仅仅使用节点编号。</p>
+</blockquote>
+<pre class="mermaid">graph TB
+    node0((0))
+    node1((1))
+    node2((2))
+    node3((3))
+
+    node0-->node1
+    node0-->node2
+    node2-->node3</pre>
+
+<blockquote>
+<p>输入：n = 4, leftChild = [1,-1,3,-1], rightChild = [2,-1,-1,-1]<br>输出：true</p>
+</blockquote>
+<p>思路</p>
+<p>我们首先要找到根节点，即入度为0的节点（可能不止一个，稍后讨论不止一个的情况），然后从该节点开始，进行搜索，看所有的节点是否都只访问了一次（如果多次，说明存在环或者多条路径，如果没访问，说明存在孤岛节点），从而判断是否为二叉树。</p>
+<p>代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//注意，本题使用中序遍历时间复杂度过高，所以采用前序实现</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">validateBinaryTreeNodes</span><span class="params">(<span class="keyword">int</span> n, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; leftChild, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; rightChild)</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">inIndex</span><span class="params">(n,<span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> root = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(leftChild[i] !=<span class="number">-1</span>)  inIndex[leftChild[i]]++;</span><br><span class="line">            <span class="keyword">if</span>(rightChild[i]!=<span class="number">-1</span>) inIndex[rightChild[i]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(inIndex[i] == <span class="number">0</span>)&#123;</span><br><span class="line">                root = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="number">-1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; nodes&#123;&#125;;</span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">seen</span><span class="params">(n,<span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="keyword">int</span> curr = root;</span><br><span class="line">        <span class="keyword">int</span> seen_nodes_num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        nodes.push(curr);</span><br><span class="line">        seen[curr]++;</span><br><span class="line">        seen_nodes_num++;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(!nodes.empty())&#123;</span><br><span class="line">            <span class="keyword">int</span> u = nodes.top();</span><br><span class="line">            nodes.pop();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(leftChild[u] != <span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(seen[leftChild[u]] != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    seen[leftChild[u]]++;</span><br><span class="line">                    seen_nodes_num++;</span><br><span class="line">                    nodes.push(leftChild[u]);</span><br><span class="line">                &#125; </span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(rightChild[u] != <span class="number">-1</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(seen[rightChild[u]] != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    seen[rightChild[u]]++;</span><br><span class="line">                    seen_nodes_num++;</span><br><span class="line">                    nodes.push(rightChild[u]);</span><br><span class="line">                &#125; </span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> seen_nodes_num == n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//其实就是在前序中多了几步判断，要求每个节点至少且至多访问一次。</span></span><br></pre></td></tr></table></figure>
+<h4 id="例题-4"><a href="#例题-4" class="headerlink" title="例题"></a>例题</h4><p><a href="https://leetcode-cn.com/problems/find-the-town-judge/">997. 找到小镇的法官</a></p>
+<blockquote>
+<p>找到阶为N的图中的某个顶点，其入度为N-1，出度为0</p>
+</blockquote>
+<p>思路</p>
+<p>只要计算每个定点的出度与入度即可。</p>
+<h2 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h2><h2 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h2><h3 id="拓扑排序的定义"><a href="#拓扑排序的定义" class="headerlink" title="拓扑排序的定义"></a>拓扑排序的定义</h3><p>假设有$n$个变量，还有$m$个二元组$(u,v)$，分别表示变量$u$小于$v$，那么所有变量从小到大排列的结果应该为什么样呢？例如四个变量$a,b,c,d$，如果已知$a&lt;b,c&lt;d,d&lt;c$，则可能排序结果为：$a&lt;d&lt;c&lt;b$或$d&lt;a&lt;c&lt;b$。如果我们将变量视为一个点，小于关系看作一条有向边，那么就得到了一个有向图。<strong>我们的实际任务是把图所有节点排序，使$(u,v)$对应的$u$排在$v$之前</strong>。</p>
+<h3 id="拓扑排序的性质"><a href="#拓扑排序的性质" class="headerlink" title="拓扑排序的性质"></a>拓扑排序的性质</h3><ul>
+<li>如果图 $G$ 中存在环，那么图 $G$ 不存在拓扑排序</li>
+<li>有向无环图拓扑排序可能不唯一</li>
+</ul>
+<h3 id="拓扑排序实现代码"><a href="#拓扑排序实现代码" class="headerlink" title="拓扑排序实现代码"></a>拓扑排序实现代码</h3><h4 id="解法1：DFS-2"><a href="#解法1：DFS-2" class="headerlink" title="解法1：DFS"></a>解法1：DFS</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findOrder</span><span class="params">(<span class="keyword">int</span> numCourses, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; prerequisites)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>-&gt;numCourses = numCourses;</span><br><span class="line">    graph.resize(numCourses);</span><br><span class="line">    visited.resize(numCourses);</span><br><span class="line">    hasCircle = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> <span class="keyword">auto</span>&amp; v:prerequisites)&#123;</span><br><span class="line">        graph[v[<span class="number">0</span>]].push_back(v[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numCourses &amp;&amp; !hasCircle;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(visited[i] == <span class="number">0</span>)&#123;</span><br><span class="line">            dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(hasCircle) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    visited[u] = <span class="number">1</span>; <span class="comment">//搜索中</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v : graph[u])&#123;</span><br><span class="line">        <span class="keyword">if</span>(visited[v] == <span class="number">0</span>)&#123; <span class="comment">//节点未搜索</span></span><br><span class="line">            dfs(v);</span><br><span class="line">            <span class="keyword">if</span>(hasCircle) <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(visited[v] == <span class="number">1</span>)&#123;   <span class="comment">//节点搜索中，说明形成了环？此处存疑</span></span><br><span class="line">            hasCircle = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    visited[u] = <span class="number">2</span>;</span><br><span class="line">    ans.push_back(u);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 拓扑排序其实和判断有向无环图代码类似，只不过多加了一步保存搜索结束的节点的过程</span></span><br></pre></td></tr></table></figure>
+<h4 id="解法2：BFS-2"><a href="#解法2：BFS-2" class="headerlink" title="解法2：BFS"></a>解法2：BFS</h4><h2 id="路径规划3"><a href="#路径规划3" class="headerlink" title="路径规划3"></a>路径规划<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h2><h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><p>图的生成树是一棵含有其所有的顶点的无环联通子图，一幅加权图的<strong>最小生成树（ MST ）</strong> 是它的一颗权值（树中所有边的权值之和）最小的生成树。</p>
+<h4 id="求加权图的最小生成树算法"><a href="#求加权图的最小生成树算法" class="headerlink" title="求加权图的最小生成树算法"></a>求加权图的最小生成树算法</h4><p>假定一个图中有$N$个顶点，连接两个顶点会有一个成本<code>cost</code>，返回连接所有顶点的最小权值。对于加权图的最小生成树，我们可以确定的一点，最小生成树一定是无环的，因为如果有环，删掉一条边之后，权重一定会变小。</p>
+<h4 id="kruskal-算法"><a href="#kruskal-算法" class="headerlink" title="kruskal 算法"></a>kruskal 算法</h4><p>Kruskal算法的基本原理是排序+查并集，首先将所有路径进行排序，然后利用查并集连接节点，如果某条边会够成环，就跳过该边，最后对路径数目进行累加，如果路径数目为$N-1$，代表所有的节点已经连接。具体步骤如下：</p>
+<ol>
+<li>将所有的边按照权重从小到大排序。</li>
+<li>取一条权重最小的边。</li>
+<li>使用并查集（union-find）数据结构来判断加入这条边后是否会形成环。若不会构成环，则将这条边加入最小生成树中。</li>
+<li>检查所有的结点是否已经全部联通，这一点可以通过目前已经加入的边的数量来判断。若全部联通，则结束算法；否则返回步骤 2.</li>
+</ol>
+<h4 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h4><p>Prim算法本质上是一个贪心算法，其基本原理</p>
+<h3 id="最短路算法"><a href="#最短路算法" class="headerlink" title="最短路算法"></a>最短路算法</h3><h4 id="Floyd-算法"><a href="#Floyd-算法" class="headerlink" title="Floyd 算法"></a>Floyd 算法</h4><p>考虑如下问题，在加权无向图中，给定一个阈值距离$D$，找到某个节点$i$，使该节点在阈值距离$D$内邻居节点数目最少，此类问题我们可以使用Floyd算法解决。该算法本质上是一种动态规划算法，步骤如下：</p>
+<ul>
+<li>令<code>dp[i][j]</code>为从i到j的最短距离</li>
+<li>$n$个节点依次作为插入节点，例如当前插入节点为$k$，若<code>dp[i][k] + dp[k][j] &lt; dp[i][j]</code>，更新<code>dp[i][j]</code>，即<code>dp[i][j]=min(dp[i][k]+dp[k][j], dp[i][j])</code>。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Floyd算法</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;</span><br><span class="line"><span class="comment">// n个顶点依次作为插入点</span></span><br><span class="line"><span class="comment">// 注意插点k是放在第一层循环</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            dp[i][j] = min(dp[i][k]+dp[k][j], dp[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>为什么k要放在第一层循环<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></p>
+<p>这个源自Floyd的核心思想—动态规划，代码中的二维状态转移方程<code>D[i][j] = min(D[i,k]+D[k,j],D[i,j]);</code>，其实是从三维简化得到的。我们不妨从最初的三维说起，思路和二维一样：</p>
+<ul>
+<li>首先定义状态数组（也就是距离矩阵）<code>D[n][n][n]</code>，其中<code>D[k][i][j]</code>表示顶点<code>i</code>, 顶点<code>j</code>通过前<code>k</code>个顶点（0~k）得到的最短距离。</li>
+<li><code>D[k][i][j]</code>是从<code>D[k-1][i][j]</code>和<code>D[k-1][i][k] + D[k-1][k][j]</code>两者中值较小的一个转移得到的，也就是说要在前k-1个顶点已经插入，更新距离矩阵状态之后，第k个顶点才能作为插入顶点。</li>
+<li>归纳得到状态转移方程：<code>D[k][i][j] = min(D[k-1][i][j], D[k-1][i][k] + D[k-1][k][j])</code>。</li>
+</ul>
+<p>其中k的作用是标志到达了第几个插入点，也就是状态数组到达了哪个状态，不用刻意记录，于是减去第一维就变成了二维。明白了Floyd的三维dp思想，根据状 态转移方程在编码时就很自然的会将 k 放在第一层循环，而将k放在最后一层则是错误的编码。</p>
+</blockquote>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://zhuanlan.zhihu.com/p/96229700">二分图</a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="https://leetcode-cn.com/problems/broken-board-dominoes/">棋盘覆盖问题</a><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><a href="https://leetcode-cn.com/problems/connecting-cities-with-minimum-cost/solution/zui-di-cheng-ben-lian-tong-suo-you-cheng-shi-by-le/">图的最小生成树</a><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><a href="https://leetcode-cn.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/solution/yu-zhi-ju-chi-nei-lin-ju-zui-shao-de-cheng-shi-flo/">Floyd算法</a><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/数据库/查询处理与优化/" rel="next" title="SQL基本语法">
+                <i class="fa fa-chevron-left"></i> SQL基本语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/算法/动态规划DP/" rel="prev" title="动态规划DP">
+                动态规划DP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#图类问题解决步骤"><span class="nav-number">1.</span> <span class="nav-text">图类问题解决步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图的表示：邻接矩阵或邻接表"><span class="nav-number">1.1.</span> <span class="nav-text">图的表示：邻接矩阵或邻接表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的基本要素"><span class="nav-number">2.</span> <span class="nav-text">图的基本要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的基本操作"><span class="nav-number">3.</span> <span class="nav-text">图的基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图的DFS和BFS遍历"><span class="nav-number">3.1.</span> <span class="nav-text">图的DFS和BFS遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DFS"><span class="nav-number">3.1.1.</span> <span class="nav-text">DFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BFS"><span class="nav-number">3.1.2.</span> <span class="nav-text">BFS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二分图"><span class="nav-number">4.</span> <span class="nav-text">二分图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二分图定义1"><span class="nav-number">4.0.1.</span> <span class="nav-text">二分图定义1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二分图性质"><span class="nav-number">4.0.2.</span> <span class="nav-text">二分图性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二分图基本操作"><span class="nav-number">4.0.3.</span> <span class="nav-text">二分图基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#判断二分图（染色法）"><span class="nav-number">4.0.3.1.</span> <span class="nav-text">判断二分图（染色法）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#匈牙利算法（用于解决二分图最大匹配和最小点覆盖问题）"><span class="nav-number">4.0.4.</span> <span class="nav-text">匈牙利算法（用于解决二分图最大匹配和最小点覆盖问题）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#匈牙利算法应用"><span class="nav-number">4.0.4.1.</span> <span class="nav-text">匈牙利算法应用</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#无向图"><span class="nav-number">5.</span> <span class="nav-text">无向图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无向图的定义"><span class="nav-number">5.1.</span> <span class="nav-text">无向图的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无向图基本操作"><span class="nav-number">5.2.</span> <span class="nav-text">无向图基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#保存索引"><span class="nav-number">5.2.1.</span> <span class="nav-text">保存索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#深拷贝"><span class="nav-number">5.2.2.</span> <span class="nav-text">深拷贝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算无向图中连通分量的数目"><span class="nav-number">5.2.3.</span> <span class="nav-text">计算无向图中连通分量的数目</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解法1：DFS"><span class="nav-number">5.2.3.1.</span> <span class="nav-text">解法1：DFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解法2：BFS"><span class="nav-number">5.2.3.2.</span> <span class="nav-text">解法2：BFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解法3：查并集"><span class="nav-number">5.2.3.3.</span> <span class="nav-text">解法3：查并集</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否成环"><span class="nav-number">5.2.4.</span> <span class="nav-text">判断是否成环</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解法1：DFS-1"><span class="nav-number">5.2.4.1.</span> <span class="nav-text">解法1：DFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解法2：BFS-1"><span class="nav-number">5.2.4.2.</span> <span class="nav-text">解法2：BFS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解法3：查并集-1"><span class="nav-number">5.2.4.3.</span> <span class="nav-text">解法3：查并集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例题"><span class="nav-number">5.2.4.4.</span> <span class="nav-text">例题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断图中子图的连通性"><span class="nav-number">5.2.5.</span> <span class="nav-text">判断图中子图的连通性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专题：染色问题"><span class="nav-number">5.3.</span> <span class="nav-text">专题：染色问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例题-1"><span class="nav-number">5.3.1.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有向图"><span class="nav-number">6.</span> <span class="nav-text">有向图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有向图的定义"><span class="nav-number">6.1.</span> <span class="nav-text">有向图的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有向图基本操作"><span class="nav-number">6.2.</span> <span class="nav-text">有向图基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否成环（有向无环图）"><span class="nav-number">6.2.1.</span> <span class="nav-text">判断是否成环（有向无环图）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#算法流程"><span class="nav-number">6.2.1.1.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">6.2.1.2.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断是否有路径"><span class="nav-number">6.2.2.</span> <span class="nav-text">判断是否有路径</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查并集"><span class="nav-number">6.2.2.1.</span> <span class="nav-text">查并集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#例题-2"><span class="nav-number">6.2.2.2.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带权值有向图"><span class="nav-number">6.3.</span> <span class="nav-text">带权值有向图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用查并集处理带权有向图问题"><span class="nav-number">6.3.1.</span> <span class="nav-text">使用查并集处理带权有向图问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#例题-3"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#专题：有向图的出度与入度"><span class="nav-number">6.4.</span> <span class="nav-text">专题：有向图的出度与入度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用出入度的常见场景"><span class="nav-number">6.4.1.</span> <span class="nav-text">使用出入度的常见场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例题-4"><span class="nav-number">6.4.2.</span> <span class="nav-text">例题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路径问题"><span class="nav-number">7.</span> <span class="nav-text">最短路径问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓扑排序"><span class="nav-number">8.</span> <span class="nav-text">拓扑排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拓扑排序的定义"><span class="nav-number">8.1.</span> <span class="nav-text">拓扑排序的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓扑排序的性质"><span class="nav-number">8.2.</span> <span class="nav-text">拓扑排序的性质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓扑排序实现代码"><span class="nav-number">8.3.</span> <span class="nav-text">拓扑排序实现代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解法1：DFS-2"><span class="nav-number">8.3.1.</span> <span class="nav-text">解法1：DFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法2：BFS-2"><span class="nav-number">8.3.2.</span> <span class="nav-text">解法2：BFS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径规划3"><span class="nav-number">9.</span> <span class="nav-text">路径规划3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小生成树"><span class="nav-number">9.1.</span> <span class="nav-text">最小生成树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#求加权图的最小生成树算法"><span class="nav-number">9.1.1.</span> <span class="nav-text">求加权图的最小生成树算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kruskal-算法"><span class="nav-number">9.1.2.</span> <span class="nav-text">kruskal 算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prim算法"><span class="nav-number">9.1.3.</span> <span class="nav-text">Prim算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最短路算法"><span class="nav-number">9.2.</span> <span class="nav-text">最短路算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Floyd-算法"><span class="nav-number">9.2.1.</span> <span class="nav-text">Floyd 算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">10.</span> <span class="nav-text">参考文献</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

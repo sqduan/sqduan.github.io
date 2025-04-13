@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="$ ls">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/操作系统/Shell/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="$ ls">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/202012101045.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/202012101150.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/202012101519.svg">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.499Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell">
+<meta name="twitter:description" content="$ ls">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/202012101045.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/Shell/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Shell | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/Shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shell
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>$ ls</p>
+</blockquote>
+<a id="more"></a>
+<p>Shell本质上是一个用户态程序，运行于内核之上，可以与用户进行交互。当用户输入一些命令后，shell会对这个输入进行解析，找到对应的可执行文件并执行，然后显示输出。</p>
+<h2 id="shell基本工作原理"><a href="#shell基本工作原理" class="headerlink" title="shell基本工作原理"></a>shell基本工作原理</h2><h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><p>shell的基本工作原理可以用下图概括：当shell运行后，会处在一个死循环中，等待用户输入命令；而一旦用户有命令输入，会调用fork产生一个子进程，父进程等待子进程完成，子进程调用exec替换内核镜像执行用户命令，结束后执行exit。</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/202012101045.svg" width="580" alt="图片名称" align="center"></p>
+<h2 id="管道命令"><a href="#管道命令" class="headerlink" title="管道命令"></a>管道命令</h2><h3 id="管道命令模型"><a href="#管道命令模型" class="headerlink" title="管道命令模型"></a>管道命令模型</h3><p>利用管道组合而成的命令，实际上是构成了一棵命令树，例如当<code>sh</code>解析命令<code>ls | (sort|tail -1)</code>时，得到的命令树如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/202012101150.svg" width="380" alt="图片名称" align="center"></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="任务划分"><a href="#任务划分" class="headerlink" title="任务划分"></a>任务划分</h4><p>现在我们来考虑如何实现管道功能，我们把整个任务划分为三个部分：</p>
+<ul>
+<li>创建管道</li>
+<li>左侧命令向管道中写入</li>
+<li>右侧命令从管道中读取</li>
+</ul>
+<h4 id="创建管道"><a href="#创建管道" class="headerlink" title="创建管道"></a>创建管道</h4><p>我们使用<code>pipe()</code>函数创建管道，如果失败触发一个perror</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(pipe(p) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    perror(<span class="string">"create pipe error!"</span>);</span><br><span class="line">    _exit(<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="处理左侧命令"><a href="#处理左侧命令" class="headerlink" title="处理左侧命令"></a>处理左侧命令</h4><p>创建管道后，我们开始处理左侧命令，我们首先创建了一个新的进程，然后将标准输出重定向至写管道，最后执行左侧命令</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(fork1() == <span class="number">0</span>)&#123;</span><br><span class="line">    close(<span class="number">1</span>);</span><br><span class="line">    dup(p[<span class="number">1</span>]);                 <span class="comment">// 重定向stdout</span></span><br><span class="line">    close(p[<span class="number">0</span>]);</span><br><span class="line">    close(p[<span class="number">1</span>]);</span><br><span class="line">    runcmd(pcmd-&gt;left);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="处理右侧命令"><a href="#处理右侧命令" class="headerlink" title="处理右侧命令"></a>处理右侧命令</h4><p>右侧命令类似，只不过方向是从读管道中读取</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(fork1() == <span class="number">0</span>)&#123;</span><br><span class="line">    close(<span class="number">0</span>);</span><br><span class="line">    dup(p[<span class="number">0</span>]);</span><br><span class="line">    close(p[<span class="number">0</span>]);</span><br><span class="line">    close(p[<span class="number">1</span>]);</span><br><span class="line">    runcmd(pcmd-&gt;right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="等待左右命令完成"><a href="#等待左右命令完成" class="headerlink" title="等待左右命令完成"></a>等待左右命令完成</h4><p>最后我们的线程做一些收尾工作，等待左右命令完成</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">close(p[<span class="number">0</span>]);</span><br><span class="line">close(p[<span class="number">1</span>]);</span><br><span class="line">wait(&amp;r);</span><br><span class="line">wait(&amp;r);</span><br></pre></td></tr></table></figure>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>根据上面的管道实现的过程，思考下面的问题：</p>
+<ul>
+<li>为何需要多次关闭pipe？</li>
+<li>为何要为左右命令都<code>fork</code>？能不能只为左侧或右侧命令创建进程？</li>
+<li>为何要在两个子进程都创建好之后才开始wait，能不能先创建一个wait一个再创建另一个wait另一个？</li>
+<li>当左右两侧读写速度不一致时会发生什么？如果左侧快会怎样？右侧快又会怎样？</li>
+<li>左右两侧的命令是如何决定何时退出的？</li>
+<li>如果右侧命令没有关闭写端，会发生什么？左侧命令没有关闭读端，又会发生什么？</li>
+<li>内核如何决定何时释放<code>pipe</code>的<code>buffer</code>？</li>
+</ul>
+<h4 id="为何需要多次关闭pipe？"><a href="#为何需要多次关闭pipe？" class="headerlink" title="为何需要多次关闭pipe？"></a>为何需要多次关闭pipe？</h4><p>每个进程的文件描述符表是相互独立的，所以每个进程都需要单独关闭自己的文件描述符。</p>
+<h4 id="为何要为左右命令都fork？能不能只为左侧或右侧命令创建进程？"><a href="#为何要为左右命令都fork？能不能只为左侧或右侧命令创建进程？" class="headerlink" title="为何要为左右命令都fork？能不能只为左侧或右侧命令创建进程？"></a>为何要为左右命令都<code>fork</code>？能不能只为左侧或右侧命令创建进程？</h4><p>根据管道命令构成的命令树我们可知，如果只为右侧命令创建进程，那么构成的命令树如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/202012101519.svg" width="280" alt="图片名称" align="center"></p>
+<p>这个显然是有问题的，shell会调用<code>exec</code>去执行左侧命令，如果不fork，那么意味着进程会执行<code>runcmd(pcmd-&gt;left);</code>，也不会返回，<code>more</code>命令不会有机会被执行，所以此时只有<code>ls</code>向管道中写入了命令，而没有命令从管道中读取。</p>
+<p>而如果我们只为左侧命令创建进程，那么执行过程如下：</p>
+<ul>
+<li>先创建一个进程，子进程执行左侧命令</li>
+<li>父进程执行右侧命令，如果右侧命令还是带管道的命令，那么重复上述过程</li>
+</ul>
+<p>看似没什么问题，执行起来也确实如此，但是这只是表象，如果我们执行下列命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sleep 10 | echo hi</span><br></pre></td></tr></table></figure>
+<p>正常情况下，这个命令应该先打印<code>hi</code>，然后等待约10秒后退出，但是如果没有给右侧命令创建进程，那么会打印hi然后直接显示终端，没有睡眠10秒的过程，是因为右侧命令占用了我们的进程，改变了进程的执行分支，导致主进程没有办法执行wait指令，从而无法对子进程进行回收，直接抛弃了子进程继续执行而不是等待子进程结束后再显示终端。此时如果用<code>ps ax</code>查看，可以看到一个<code>sleep 10</code>的进程，说明左侧命令确实执行了，但是是以孤儿进程的方式执行的，父进程不再等待这个进程，任由其自生自灭。从上面两个实验我们可知，使用管道时，必须对左右命令单独创建子进程，然后主进程等待这两个命令执行完毕。</p>
+<h4 id="为何要在两个子进程都创建好之后才开始wait"><a href="#为何要在两个子进程都创建好之后才开始wait" class="headerlink" title="为何要在两个子进程都创建好之后才开始wait"></a>为何要在两个子进程都创建好之后才开始wait</h4><p>如果我们先创建一个wait一个，再创建另一个wait另一个，这意味着我们明确规定管道左侧的命令先执行，等管道左侧命令完成后再执行管道右侧。如果左侧命令向管道中写入的数据不多，这是可以的。但是如果左侧命令向管道中写入大量数据直到写满了，而没有进程消耗这些数据，就会导致写堵塞，既写不进去，有没有进程读取数据，会导致程序被阻塞。</p>
+<h4 id="左右两侧读取速度不一致会发生什么？"><a href="#左右两侧读取速度不一致会发生什么？" class="headerlink" title="左右两侧读取速度不一致会发生什么？"></a>左右两侧读取速度不一致会发生什么？</h4><p>根据<a href="https://man7.org/linux/man-pages/man7/pipe.7.html">pipe(7) - Linux manual page (man7.org)</a>可知，如果试图往一个满的pipe写入，那么<code>write</code>会被阻塞，直到<code>pipe</code>被读取后有空间写入后才会继续执行；同理，如果试图读取空的pipe，<code>read</code>也会被阻塞，直到有数据可读。</p>
+<h4 id="左右两侧的命令如何决定何时退出？"><a href="#左右两侧的命令如何决定何时退出？" class="headerlink" title="左右两侧的命令如何决定何时退出？"></a>左右两侧的命令如何决定何时退出？</h4><p>管道只是起了重定向的作用，我认为命令的退出还是和命令本身的退出机制有关，例如ls，如果读取的文件结束并且输出也结束，那么ls就会退出。（这里还不是特别清楚）</p>
+<h4 id="如果右侧命令没有关闭写端，会发生什么？左侧命令没有关闭读端，又会发生什么？"><a href="#如果右侧命令没有关闭写端，会发生什么？左侧命令没有关闭读端，又会发生什么？" class="headerlink" title="如果右侧命令没有关闭写端，会发生什么？左侧命令没有关闭读端，又会发生什么？"></a>如果右侧命令没有关闭写端，会发生什么？左侧命令没有关闭读端，又会发生什么？</h4><ul>
+<li>如果右侧（读）命令没有关闭写端，那么左侧命令执行完后会退出，右侧不会</li>
+</ul>
+<p>因为右侧命令还会等待其他命令对管道的写入，直到发现管道写端也关闭后，才会结束读取的动作并退出。但是左侧命令没关写管道就结束了，留下右侧命令以为还有进程会写pipe，所以它会傻傻地等待。</p>
+<ul>
+<li>如果左侧（写）命令没有关闭读端，会发生什么？</li>
+</ul>
+<p>这个情况比较复杂，首先要了解一个概念<code>broken pipe</code></p>
+<blockquote>
+<p>一个程序如果试图向一个没有任何读者的管道中写入内容，那么这个程序会收到一个SIGPIPE 信号，告诉这个程序别瞎忙活了，没有人读管道，然后这个程序就会结束写操作。</p>
+</blockquote>
+<p>一个经典的例子如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yes | true</span><br></pre></td></tr></table></figure>
+<p>yes命令会无限地向管道中写’y’，而true命令判断管道中内容是否为真，为真就退出。按照我们的理解，true会判断yes写入的内容为真，立刻退出，然后yes会一直向管道中写内容，直到写阻塞。但是实际并不是这样，yes会在true结束后立刻结束。因为true结束后，管道没人读了，yes如果继续写，会导致<code>broken pipe</code>并收到一个SIGPIPE 信号，然后导致yes退出。现在来理解一下问题：</p>
+<blockquote>
+<p>如果左侧（写）命令没有关闭读端，会发生什么？</p>
+</blockquote>
+<p>如果写命令没有关闭读端，那么他会以为管道有读者（实际上这个读者就是他自己），从而不会触发broken pipe，写命令会傻傻地将管道写满至堵塞，然后等那个不存在的读者读取，所以会导致阻塞的发生。</p>
+<h2 id="IO重定向"><a href="#IO重定向" class="headerlink" title="IO重定向"></a>IO重定向</h2><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>在解释IO重定向前，我们先了解一下shell中最终要的三个文件描述符:</p>
+<ul>
+<li>标准输入：stdin 0</li>
+<li>标准输出：stdout 1</li>
+<li>标准错误：stderr 2</li>
+</ul>
+<p>shell一般从标准输入获取命令，然后将运行结果发送至标准输出或错误，而一般标准输出就是终端。shell一般保证这三个描述符总是打开的。现在我们想要重定向输入输出，从其他的文件中读取，再发送到普通文件，这就需要进行IO重定向。</p>
+<h3 id="命令列表"><a href="#命令列表" class="headerlink" title="命令列表"></a>命令列表</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>command &gt; file</td>
+<td>将输出重定向至file</td>
+</tr>
+<tr>
+<td>command &lt; file</td>
+<td>将输入重定向至file</td>
+</tr>
+<tr>
+<td>command &gt;&gt; file</td>
+<td>将输出追加至file</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><h4 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h4><ul>
+<li>open</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int open (const char* Path, int flags [, int mode ]);   // flags表示了文件处理方式</span><br></pre></td></tr></table></figure>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>shell对命令解析后，为了实现重定向，我们需要做下面几件事：</p>
+<ul>
+<li>关闭原有的fd</li>
+<li>打开新文件，替换原有fd</li>
+<li>执行命令</li>
+</ul>
+<p>所以我们的代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> <span class="string">'&gt;'</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="string">'&lt;'</span>:</span><br><span class="line">    rcmd = (struct redircmd*)cmd;</span><br><span class="line">    close(rcmd-&gt;fd);                            <span class="comment">// 0 or 1 now closed </span></span><br><span class="line">    <span class="keyword">if</span>(open(rcmd-&gt;file, rcmd-&gt;mode) &lt; <span class="number">0</span>)&#123;       <span class="comment">// 0 or 1 now ----&gt; rcmd-&gt;file</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="number">2</span>, <span class="string">"open %s failed\n"</span>, rcmd-&gt;file);   <span class="comment">//这里没有使用dup，而是利用关闭fd的方式实现了重定向，很巧妙</span></span><br><span class="line">        <span class="built_in">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    runcmd(rcmd-&gt;cmd);</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure>
+<p>现在当我们执行下面语句是，就会将给定文件重定向至标准输入/输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">6.828$ /bin/echo &quot;Helloworld&quot; &gt; result  </span><br><span class="line">6.828$ /bin/cat &lt; result</span><br><span class="line">&quot;Helloworld&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="其他运算符"><a href="#其他运算符" class="headerlink" title="其他运算符"></a>其他运算符</h2><p>这里总结一下其他常见的一些shell中的运算符：</p>
+<h3 id="amp-amp-运算符"><a href="#amp-amp-运算符" class="headerlink" title="&amp;&amp;运算符"></a>&amp;&amp;运算符</h3><h4 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd1 &amp;&amp; cmd2</span><br></pre></td></tr></table></figure>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p>只有在左侧命令返回<code>true</code>时，才执行右侧命令</p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="||运算符"></a>||运算符</h3><h4 id="格式-1"><a href="#格式-1" class="headerlink" title="格式"></a>格式</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd1 || cmd2</span><br></pre></td></tr></table></figure>
+<h4 id="功能-1"><a href="#功能-1" class="headerlink" title="功能"></a>功能</h4><p>只有在左侧命令返回<code>false</code>时，才执行右侧命令</p>
+<h3 id="运算符-1"><a href="#运算符-1" class="headerlink" title="()运算符"></a>()运算符</h3><h4 id="格式-2"><a href="#格式-2" class="headerlink" title="格式"></a>格式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(cmd1; cmd2; cmd3)</span><br></pre></td></tr></table></figure>
+<h4 id="功能-2"><a href="#功能-2" class="headerlink" title="功能"></a>功能</h4><p>命令组，括号中的命令会新开一个子shell顺序执行。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://www.bilibili.com/video/av15896196/">MIT6828第四课</a><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/OpenEuler/sharepool介绍/" rel="next" title="sharepool介绍">
+                <i class="fa fa-chevron-left"></i> sharepool介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/TLB/" rel="prev" title="TLB原理">
+                TLB原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#shell基本工作原理"><span class="nav-number">1.</span> <span class="nav-text">shell基本工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">1.1.</span> <span class="nav-text">命令执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道命令"><span class="nav-number">2.</span> <span class="nav-text">管道命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#管道命令模型"><span class="nav-number">2.1.</span> <span class="nav-text">管道命令模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任务划分"><span class="nav-number">2.2.1.</span> <span class="nav-text">任务划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建管道"><span class="nav-number">2.2.2.</span> <span class="nav-text">创建管道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理左侧命令"><span class="nav-number">2.2.3.</span> <span class="nav-text">处理左侧命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理右侧命令"><span class="nav-number">2.2.4.</span> <span class="nav-text">处理右侧命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#等待左右命令完成"><span class="nav-number">2.2.5.</span> <span class="nav-text">等待左右命令完成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-number">2.3.</span> <span class="nav-text">思考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为何需要多次关闭pipe？"><span class="nav-number">2.3.1.</span> <span class="nav-text">为何需要多次关闭pipe？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为何要为左右命令都fork？能不能只为左侧或右侧命令创建进程？"><span class="nav-number">2.3.2.</span> <span class="nav-text">为何要为左右命令都fork？能不能只为左侧或右侧命令创建进程？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为何要在两个子进程都创建好之后才开始wait"><span class="nav-number">2.3.3.</span> <span class="nav-text">为何要在两个子进程都创建好之后才开始wait</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#左右两侧读取速度不一致会发生什么？"><span class="nav-number">2.3.4.</span> <span class="nav-text">左右两侧读取速度不一致会发生什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#左右两侧的命令如何决定何时退出？"><span class="nav-number">2.3.5.</span> <span class="nav-text">左右两侧的命令如何决定何时退出？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如果右侧命令没有关闭写端，会发生什么？左侧命令没有关闭读端，又会发生什么？"><span class="nav-number">2.3.6.</span> <span class="nav-text">如果右侧命令没有关闭写端，会发生什么？左侧命令没有关闭读端，又会发生什么？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IO重定向"><span class="nav-number">3.</span> <span class="nav-text">IO重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释"><span class="nav-number">3.1.</span> <span class="nav-text">解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令列表"><span class="nav-number">3.2.</span> <span class="nav-text">命令列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现-1"><span class="nav-number">3.3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数原型"><span class="nav-number">3.3.1.</span> <span class="nav-text">函数原型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.4.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他运算符"><span class="nav-number">4.</span> <span class="nav-text">其他运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-amp-运算符"><span class="nav-number">4.1.</span> <span class="nav-text">&amp;&amp;运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#格式"><span class="nav-number">4.1.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能"><span class="nav-number">4.1.2.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">4.2.</span> <span class="nav-text">||运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#格式-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能-1"><span class="nav-number">4.2.2.</span> <span class="nav-text">功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符-1"><span class="nav-number">4.3.</span> <span class="nav-text">()运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#格式-2"><span class="nav-number">4.3.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#功能-2"><span class="nav-number">4.3.2.</span> <span class="nav-text">功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一个人思虑太多，就会失去做人的乐趣。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MIT 6006 Lecture 1——算法思维，峰值寻找">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/算法/课程/MIT6006-1/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="一个人思虑太多，就会失去做人的乐趣。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/1dimdatastructure.JPG?raw=true">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/2020917.JPG?raw=true">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/20209171535.JPG?raw=true">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/20209171544.JPG?raw=true">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MIT 6006 Lecture 1——算法思维，峰值寻找">
+<meta name="twitter:description" content="一个人思虑太多，就会失去做人的乐趣。">
+<meta name="twitter:image" content="https://github.com/sqduan/hexoimg/blob/master/1dimdatastructure.JPG?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/算法/课程/MIT6006-1/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MIT 6006 Lecture 1——算法思维，峰值寻找 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/算法/课程/MIT6006-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MIT 6006 Lecture 1——算法思维，峰值寻找
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/算法和数据结构/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/算法和数据结构/课程/" itemprop="url" rel="index"><span itemprop="name">课程</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>一个人思虑太多，就会失去做人的乐趣。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>本课程中我们将考虑大规模问题的高效解法，即考虑<strong>规模性</strong>。本课程的结构如下：</p>
+<ul>
+<li>算法思想</li>
+<li>排序/树</li>
+<li>哈希</li>
+<li>数论：加密解密算法</li>
+<li>图</li>
+<li>最短路径</li>
+<li>动态规划：图像压缩</li>
+<li>高级话题</li>
+</ul>
+<h2 id="峰值算法"><a href="#峰值算法" class="headerlink" title="峰值算法"></a>峰值算法</h2><h3 id="一维峰值算法"><a href="#一维峰值算法" class="headerlink" title="一维峰值算法"></a>一维峰值算法</h3><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>考虑下面的一维数组，其中$a-i$为数字：</p>
+<p><img src="https://github.com/sqduan/hexoimg/blob/master/1dimdatastructure.JPG?raw=true" width="380" alt align="center"></p>
+<p>极值点的定义为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\textrm{if}\ \ \ \ b\ge a\ \ \ \ \textrm{and}\ \ \ \ b\ge c \\
+\textrm{then}\ b\ \textrm{is the peak point}
+\end{equation}</script><p>当然，如果在边界上，那么只需要大于一侧即可。我们的问题是：<strong>如果峰值点存在，找到峰值点</strong>。</p>
+<h4 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h4><p>最直接的解法就是遍历每一个元素，然后根据定义看一下是否为峰值，其复杂度为$O(n)$，现在我们来看看一个更高效的解法：分治法。</p>
+<p><img src="https://github.com/sqduan/hexoimg/blob/master/2020917.JPG?raw=true" width="380" alt align="center"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a[n/<span class="number">2</span>] &lt; a[n/<span class="number">2</span><span class="number">-1</span>] </span><br><span class="line">    在 <span class="number">1.</span>..n/<span class="number">2</span><span class="number">-1</span> 中寻找peak，一定会有</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> a[n/<span class="number">2</span>] &lt; a[n/<span class="number">2</span>+<span class="number">1</span>] </span><br><span class="line">    在 n/<span class="number">2</span>+<span class="number">1.</span>..n 中寻找peak</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    a[n/<span class="number">2</span>] 是极值点</span><br></pre></td></tr></table></figure>
+<h5 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h5><p>假设我们的算法是正确的，那么其时间复杂度为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(n) =& T(n/2)+\Theta(1)\\
+T(1) =& \Theta(1)
+\end{aligned}
+\end{equation}</script><p>故：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(n) =& T(n/2)+\Theta(1)\\
+ =& T(n/4)+2\Theta(1)\\
+ ...&\\
+ =&T(n/2^{\log_2n})+(\log_2n)\Theta(1)\\
+ =&\Theta(\log _2n)
+\end{aligned}
+\end{equation}</script><h3 id="二维峰值算法"><a href="#二维峰值算法" class="headerlink" title="二维峰值算法"></a>二维峰值算法</h3><h4 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h4><p>考虑下面的二维数组：</p>
+<p><img src="https://github.com/sqduan/hexoimg/blob/master/20209171535.JPG?raw=true" width="280" alt align="center"></p>
+<p>假定$a$为峰值点，那么$a\ge b, a\ge c, a\ge d,a\ge e$。</p>
+<h4 id="解法-1"><a href="#解法-1" class="headerlink" title="解法"></a>解法</h4><h5 id="解法1：贪心"><a href="#解法1：贪心" class="headerlink" title="解法1：贪心"></a>解法1：贪心</h5><p>我们使用贪心算法解决这个问题，假设我们的矩阵为：</p>
+<p><img src="https://github.com/sqduan/hexoimg/blob/master/20209171544.JPG?raw=true" width="240" alt align="center"></p>
+<p>我们的策略是，总是沿着最大的路径走，例如从12开始，我们向13搜索，依次走过14-&gt;15-&gt;16…直到20为止。该算法的时间复杂度为$\Theta(nm)$。</p>
+<h5 id="解法2：分治法"><a href="#解法2：分治法" class="headerlink" title="解法2：分治法"></a>解法2：分治法</h5><p>考虑这样的解法：我们先选取中间列，令$j=m/2$，找到一个位于$(i,j)$的一维峰值点，然后以$(i,j)$为基准，再找到这一行的一维峰值点，这样能找到二维的峰值点吗？</p>
+<p>答案是不行，这个解法是错误的，以我们上面的图为例，假设12是该列的一个峰值点，而当我们搜索12所在的行时，最终找到的峰值点是14，但是14并不是一个二维峰值点，所以该算法是错的。我们给出正确的贪心规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">选取中间列 j=m/2</span><br><span class="line">找到该列的全局最大值 (i,j)</span><br><span class="line">比较(i,j-1), (i,j), (i,j+1)</span><br><span class="line">if (i,j-1) &gt; (i,j)</span><br><span class="line">    选择左半列</span><br><span class="line">if (i,j+1) &gt; (i,j)</span><br><span class="line">    选择右半列</span><br><span class="line">else </span><br><span class="line">    选择(i,j)</span><br></pre></td></tr></table></figure>
+<p>在上面的伪代码中，else部分可以直接返回极值点，是因为$(i,j)$为该列的最大值，所以比$(i-1,j),(i+1,j)$都要大，而该点又比$(i,j-1),(i,j+1)$大，故符合峰值定义，可以直接返回。当只有一列时，最大值即峰值，这个是基例。</p>
+<h6 id="时间复杂度分析-1"><a href="#时间复杂度分析-1" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h6><p>上面的算法时间复杂度计算如下：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(n,m) &= T(n,m/2)+\Theta(n)\\
+T(n,1) &=\Theta(n)\\
+T(n,m) &=\Theta(n)+...+\Theta(n) = \Theta(n\log_2m)
+\end{aligned}
+\end{equation}</script><h2 id="题目及题解"><a href="#题目及题解" class="headerlink" title="题目及题解"></a>题目及题解</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="一：将下列函数根据时间复杂度进行排序"><a href="#一：将下列函数根据时间复杂度进行排序" class="headerlink" title="一：将下列函数根据时间复杂度进行排序"></a>一：将下列函数根据时间复杂度进行排序</h4><h5 id="第一组"><a href="#第一组" class="headerlink" title="第一组"></a>第一组</h5><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+f_1(n)&=n^{0.999999}\log n\\
+f_2(n)&=10000000n\\
+f_3(n)&=1.000001^n\\
+f_4(n)&=n^2\\
+\end{aligned}
+\end{equation}</script><h6 id="解"><a href="#解" class="headerlink" title="解"></a>解</h6><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\frac{f_1}{f_2}&=\frac{n^{1-0.0000001}\log n}{10000000n}\\
+&=C_1\frac{\log n}{n^{0.0000001}}\\
+\end{aligned}
+\end{equation}</script><p>由于$n\rightarrow \infin$时$\log n$与$n^{0.0000001}$趋近于无穷大，所以对上式使用洛必达法则：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\underset{n\rightarrow \infin}{\lim}\frac{f_1}{f_2}&=\underset{n\rightarrow \infin}{\lim}\frac{f_1'}{f_2'}\\
+&=\underset{n\rightarrow \infin}{\lim}\frac{1}{n^{0.0000001}}\\
+&=0
+\end{aligned}
+\end{equation}</script><p>故$\Theta(f_1)\le\Theta(f_2)$。同理易得$\Theta(f_2)\le\Theta(f_3)$，$\Theta(f_2)\le\Theta(f_4)$，而$\Theta(f_4)\le\Theta(f_3)$，故上述公式时间复杂度排序为：$\Theta(f_1)\le\Theta(f_2)\le\Theta(f_4)\le\Theta(f3)$</p>
+<h5 id="第二组"><a href="#第二组" class="headerlink" title="第二组"></a>第二组</h5><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+f_1(n)&=2^{2^{1000000}}\\
+f_2(n)&=2^{100000n}\\
+f_3(n)&=C_n^2\\
+f_4(n)&=n\sqrt n\\
+\end{aligned}
+\end{equation}</script><h6 id="解-1"><a href="#解-1" class="headerlink" title="解"></a>解</h6><p>常数时间复杂度为$\Theta(1)$为最小，$f_2$时间复杂度最高，为$\Theta(2^n)$，现比较$f_3$和$f_4$，$f_3=\frac{n(n-1)}{2}$，故</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+\underset{n\rightarrow \infin}{\lim}\frac{f_3}{f_4}&=\underset{n\rightarrow \infin}{\lim}\frac{n(n-1)}
+{2n\sqrt n}\\
+&=\frac{\sqrt n}{2}-\frac{1}{2\sqrt n}\\
+&=\infin
+\end{aligned}
+\end{equation}</script><p>所以排序结果为$\Theta(f_1)\le\Theta(f_4)\le\Theta(f_3)\le\Theta(f2)$.</p>
+<h5 id="第三组"><a href="#第三组" class="headerlink" title="第三组"></a>第三组</h5><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+f_1(n)&=n^{\sqrt n}\\
+f_2(n)&=2^{n}\\
+f_3(n)&=n^{10}2^{n/2}\\
+f_4(n)&=\sum_{i=1}^{n}(i+1)\\
+\end{aligned}
+\end{equation}</script><p>这个算极限比较麻烦，采用matlab求两两之间的极限，代码如下：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">syms n</span><br><span class="line">f1 = n^<span class="built_in">sqrt</span>(n)</span><br><span class="line">f2 = <span class="number">2</span>^n</span><br><span class="line">f3 = n^<span class="number">10</span>*<span class="number">2</span>^(n/<span class="number">2</span>)</span><br><span class="line">f4 = (<span class="number">1</span>+n)*n/<span class="number">2</span>+n</span><br><span class="line"></span><br><span class="line">f1_f2 = f1/f2</span><br><span class="line">f1_f3 = f1/f3</span><br><span class="line">f1_f4 = f1/f4</span><br><span class="line">f2_f3 = f2/f3</span><br><span class="line">f2_f4 = f2/f4</span><br><span class="line">f3_f4 = f3/f4</span><br><span class="line">limit(f1_f2, n, inf)   #对f1/f2求极限，结果为0，即O(f1) &lt;= O(f2)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>最终结果为：$\Theta(f_4)\le\Theta(f_1)\le\Theta(f_3)\le\Theta(f_2)$</p>
+<h4 id="二：递归复杂度求解"><a href="#二：递归复杂度求解" class="headerlink" title="二：递归复杂度求解"></a>二：递归复杂度求解</h4><h5 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h5><p>已知：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(x,c) &= \Theta(x)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
+T(c,y) &= \Theta(y)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
+T(x,y) &=\Theta(x+y)+T(x/2,y/2)
+\end{aligned}
+\end{equation}</script><p>求$T(n,n)$的时间复杂度</p>
+<h6 id="解："><a href="#解：" class="headerlink" title="解："></a>解：</h6><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(x,y)&=\Theta(x+y)+T(x/2,y/2)\\
+&=\Theta(x+y)+\Theta(x/2+y/2)+T(x/4,y/4)\\
+&=\Theta(x+y)+\Theta(x/2+y/2)+\Theta(x/4+y/4)+...\\
+&=\Theta(2x+2y)
+\end{aligned}
+\end{equation}</script><p>故$T(n,n)=\Theta(n)$。</p>
+<h5 id="第二题"><a href="#第二题" class="headerlink" title="第二题"></a>第二题</h5><p>已知：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(x,c) &= \Theta(x)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
+T(c,y) &= \Theta(y)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
+T(x,y) &=\Theta(x)+T(x,y/2)
+\end{aligned}
+\end{equation}</script><h6 id="解：-1"><a href="#解：-1" class="headerlink" title="解："></a>解：</h6><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(x,y)&=\Theta(x)+T(x,y/2)\\
+&=\Theta(x)+\Theta(x)+T(x,y/4)\\
+&=\underset{\log y个\Theta(x)}{\underbrace{\Theta(x)+\Theta(x)+...+\Theta(x)}}\\
+&=\Theta(x\log y)
+\end{aligned}
+\end{equation}</script><p>故$T(n,n)=\Theta(n\log n)$。</p>
+<h5 id="第三题"><a href="#第三题" class="headerlink" title="第三题"></a>第三题</h5><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(x,c) &= \Theta(x)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
+T(x,y) &= \Theta(x)+S(x,y/2)\\
+S(c,y) &= \Theta(y)\ \ \ \ \ \ \ \ \ \textrm{for}\ \ c\le2\\
+S(x,y) &= \Theta(y)+T(x/2,y)
+\end{aligned}
+\end{equation}</script><h6 id="解-2"><a href="#解-2" class="headerlink" title="解"></a>解</h6><script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+T(x,y)&=\Theta(x)+\Theta(y/2)+T(x/2,y/2)\\
+&=\Theta(x)+\Theta(y/2)+\Theta(x/2)+\Theta(y/4)+...\\
+&\le\Theta(2x+y)
+\end{aligned}
+\end{equation}</script><p>故$T(n,n)=\Theta(n)$</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="向量峰值搜索代码"><a href="#向量峰值搜索代码" class="headerlink" title="向量峰值搜索代码"></a>向量峰值搜索代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">findPeakElement</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">            <span class="keyword">int</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (nums[mid] &gt; nums[mid + <span class="number">1</span>])     <span class="comment">//由于除法是向下取整，这意味着我们得到的mid都是左mid</span></span><br><span class="line">                                               <span class="comment">//因此mid+1一定是存在的</span></span><br><span class="line">                r = mid;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                l = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> l;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="矩阵峰值搜索代码"><a href="#矩阵峰值搜索代码" class="headerlink" title="矩阵峰值搜索代码"></a>矩阵峰值搜索代码</h3><h4 id="方法一：分治法"><a href="#方法一：分治法" class="headerlink" title="方法一：分治法"></a>方法一：分治法</h4><p>根据上面的分治法，我们可以写出如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">algorithm1</span><span class="params">(problem, trace = None)</span>:</span></span><br><span class="line">    <span class="comment"># if it's empty, we're done </span></span><br><span class="line">    <span class="keyword">if</span> problem.numRow &lt;= <span class="number">0</span> <span class="keyword">or</span> problem.numCol &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># the recursive subproblem will involve half the number of columns</span></span><br><span class="line">    mid = problem.numCol // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># information about the two subproblems</span></span><br><span class="line">    (subStartR, subNumR) = (<span class="number">0</span>, problem.numRow)</span><br><span class="line">    (subStartC1, subNumC1) = (<span class="number">0</span>, mid)</span><br><span class="line">    (subStartC2, subNumC2) = (mid + <span class="number">1</span>, problem.numCol - (mid + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    subproblems = []</span><br><span class="line">    subproblems.append((subStartR, subStartC1, subNumR, subNumC1))   <span class="comment"># 子问题一：左侧部分</span></span><br><span class="line">    subproblems.append((subStartR, subStartC2, subNumR, subNumC2))   <span class="comment"># 子问题二：右侧部分</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get a list of all locations in the dividing column</span></span><br><span class="line">    divider = crossProduct(range(problem.numRow), [mid])   <span class="comment"># 利用笛卡尔积针对一列进行划分，得到该列元素所有坐标</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># find the maximum in the dividing column</span></span><br><span class="line">    bestLoc = problem.getMaximum(divider, trace)           <span class="comment"># 获得该列的最大值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># see if the maximum value we found on the dividing line has a better</span></span><br><span class="line">    <span class="comment"># neighbor (which cannot be on the dividing line, because we know that</span></span><br><span class="line">    <span class="comment"># this location is the best on the dividing line)</span></span><br><span class="line">    neighbor = problem.getBetterNeighbor(bestLoc, trace)   <span class="comment"># 找到更大的左右邻居</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># this is a peak, so return it                         左右邻居不存在，当前点即为峰值点</span></span><br><span class="line">    <span class="keyword">if</span> neighbor == bestLoc:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.foundPeak(bestLoc)</span><br><span class="line">        <span class="keyword">return</span> bestLoc</span><br><span class="line">   </span><br><span class="line">    <span class="comment"># otherwise, figure out which subproblem contains the neighbor, and</span></span><br><span class="line">    <span class="comment"># recurse in that half</span></span><br><span class="line">    sub = problem.getSubproblemContaining(subproblems, neighbor)  <span class="comment"># 判断向左还是向右搜索</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.setProblemDimensions(sub)</span><br><span class="line">    result = algorithm1(sub, trace)                         <span class="comment"># 解决子问题</span></span><br><span class="line">    <span class="keyword">return</span> problem.getLocationInSelf(sub, result)</span><br></pre></td></tr></table></figure>
+<h5 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h5><p>为了证明算法总是能找到峰值，我们需要证明如下两条陈述：</p>
+<ol>
+<li><p>如果矩阵非空，那么算法1总能返回一个位置</p>
+</li>
+<li><p>如果算法1返回了一个位置，那么这个位置一定是峰值点</p>
+</li>
+</ol>
+<p><strong>证明第一点：</strong></p>
+<p>假设矩阵为$n\times n$，那么递归子问题的规模为$m \times\left \lfloor n/2 \right \rfloor$，所以递归子问题中列数随着递归过程是严格递减的。所以算法最终会返回一个点，或者最后进入一个列为0的子问题而不返回任何一个位置，故如果算法1存在不返回位置的情况，那么一定有子问题列数为0，下面我们证明这种情况不可能发生。如果算法确实处理了一个空的子问题，那么该问题的上一步子问题规模一定为$m\times 1$或者$m\times2$，下面分类讨论</p>
+<p>(1) 如果为$m\times1$，那么计算中心列的最大值即为计算整个子数组的最大值，而子数组的最大值是一定存在的，所以一定会返回一个峰值点。</p>
+<p>(2) 如果为$m\times2$，那么又存在两种情况，第一，中心列的最大值即为峰值点，那么会返回峰值的位置；第二，中心列的最大值不是峰值点，那么算法又会进一步递归，处理一个$m\times1$的子问题，一定会返回一个峰值点。</p>
+<p>综上，算法一定会返回一个点。</p>
+<p><strong>证明第二点：</strong></p>
+<p>假设我们返回的点为$(r_1,c_1)$，那么该点一定是$c_1$列上最大的，如果该点不是峰值点，那么算法会以$(r_1,c_1)$为起点进入下一个递归中，同时，根据算法的规则，存在与$c_1$相邻的$c_2$（$|c1-c2|= 1$），满足$val(r_1,c_1) &lt; val(r_1,c_2)$，令$(r_2,c_2)$为$c_2$列上的最大值，有$val(r_1,c_2)\le val(r_2,c_2)$。因为算法执行到了包含$(r_1,c_1)$的一侧，所以一定有$val(r_2,c_2)&lt;val(r_2,c_1)$，所以</p>
+<script type="math/tex; mode=display">
+val(r_1,c_1)<val(r_1,c_2)\le val(r_2,c_2)<val(r_2,c_1)</script><p>但是$(r_1,c_1)$又是该列最大的，所以产生了矛盾，所以$(r_1,c_1)$一定是峰值点。</p>
+<h5 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h5><p>根据前面的结果，分治法的时间复杂度为$\Theta(n\log n)$</p>
+<h4 id="方法二：贪心上升法"><a href="#方法二：贪心上升法" class="headerlink" title="方法二：贪心上升法"></a>方法二：贪心上升法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">algorithm2</span><span class="params">(problem, location = <span class="params">(<span class="number">0</span>, <span class="number">0</span>)</span>, trace = None)</span>:</span></span><br><span class="line">    <span class="comment"># if it's empty, we're done </span></span><br><span class="line">    <span class="keyword">if</span> problem.numRow &lt;= <span class="number">0</span> <span class="keyword">or</span> problem.numCol &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    nextLocation = problem.getBetterNeighbor(location, trace)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> nextLocation == location:</span><br><span class="line">        <span class="comment"># there is no better neighbor, so return this peak</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.foundPeak(location)</span><br><span class="line">        <span class="keyword">return</span> location</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># there is a better neighbor, so move to the neighbor and recurse</span></span><br><span class="line">        <span class="keyword">return</span> algorithm2(problem, nextLocation, trace)</span><br></pre></td></tr></table></figure>
+<p>方法二的逻辑很简单，一直找比当前节点更大的相邻节点，直到找不到为止。</p>
+<h5 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h5><p>在贪心算法中，我们的搜索过程是单调递增的，由于数组的大小是有限的，那么数组中的数存在上界，我们一定能够找到一个位置，且该位置一定是一个峰值点。</p>
+<h5 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h5><p>设二维矩阵大小为$n\times n$，假设$a(i,j)$为当前搜索位置，那么下一个搜索位置$a_{next}$的完整递归定义为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}
+a_{next} = \left\{\begin{matrix}
+a(i,j) & a(i,j)\ \textrm{is the peak}\\ 
+\max(a(i-1,j),a(i+1,j),a(i,j-1),a(i,j+1)) & a(i,j)\ \textrm{is not the peak}
+\end{matrix}\right.
+\end{aligned}
+\end{equation}</script><p>从递归中可知，最坏的情况下，需要遍历所有的网格，所以时间复杂度为$\Theta(n^2)$。</p>
+<h4 id="方法三：改进的分治法（错误）"><a href="#方法三：改进的分治法（错误）" class="headerlink" title="方法三：改进的分治法（错误）"></a>方法三：改进的分治法（错误）</h4><p>在分治法中，我们将矩阵分为了左右两个部分，寻找极值点，那么我们能不能进一步分割呢？比如不再是二分割，而是将矩阵四分割，横纵坐标各切一刀，将矩阵分为四个部分，依次在四个部分中寻找极值点？代码如下：</p>
+<div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">algorithm3</span><span class="params">(problem, bestSeen = None, trace = None)</span>:</span></span><br><span class="line">    <span class="comment"># if it's empty, we're done </span></span><br><span class="line">    <span class="keyword">if</span> problem.numRow &lt;= <span class="number">0</span> <span class="keyword">or</span> problem.numCol &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    midRow = problem.numRow // <span class="number">2</span></span><br><span class="line">    midCol = problem.numCol // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># first, get the list of all subproblems</span></span><br><span class="line">    subproblems = []</span><br><span class="line"></span><br><span class="line">    (subStartR1, subNumR1) = (<span class="number">0</span>, midRow)</span><br><span class="line">    (subStartR2, subNumR2) = (midRow + <span class="number">1</span>, problem.numRow - (midRow + <span class="number">1</span>))</span><br><span class="line">    (subStartC1, subNumC1) = (<span class="number">0</span>, midCol)</span><br><span class="line">    (subStartC2, subNumC2) = (midCol + <span class="number">1</span>, problem.numCol - (midCol + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    subproblems.append((subStartR1, subStartC1, subNumR1, subNumC1))</span><br><span class="line">    subproblems.append((subStartR1, subStartC2, subNumR1, subNumC2))</span><br><span class="line">    subproblems.append((subStartR2, subStartC1, subNumR2, subNumC1))</span><br><span class="line">    subproblems.append((subStartR2, subStartC2, subNumR2, subNumC2))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># find the best location on the cross (the middle row combined with the</span></span><br><span class="line">    <span class="comment"># middle column)</span></span><br><span class="line">    cross = []</span><br><span class="line"></span><br><span class="line">    cross.extend(crossProduct([midRow], range(problem.numCol)))</span><br><span class="line">    cross.extend(crossProduct(range(problem.numRow), [midCol]))</span><br><span class="line"></span><br><span class="line">    crossLoc = problem.getMaximum(cross, trace)</span><br><span class="line">    neighbor = problem.getBetterNeighbor(crossLoc, trace)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># update the best we've seen so far based on this new maximum</span></span><br><span class="line">    <span class="keyword">if</span> bestSeen <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> problem.get(neighbor) &gt; problem.get(bestSeen):</span><br><span class="line">        bestSeen = neighbor</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.setBestSeen(bestSeen)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># return if we can't see any better neighbors</span></span><br><span class="line">    <span class="keyword">if</span> neighbor == crossLoc:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.foundPeak(crossLoc)</span><br><span class="line">        <span class="keyword">return</span> crossLoc</span><br><span class="line"></span><br><span class="line">    <span class="comment"># figure out which subproblem contains the largest number we've seen so</span></span><br><span class="line">    <span class="comment"># far, and recurse</span></span><br><span class="line">    sub = problem.getSubproblemContaining(subproblems, bestSeen)</span><br><span class="line">    newBest = sub.getLocationInSelf(problem, bestSeen)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.setProblemDimensions(sub)</span><br><span class="line">    result = algorithm3(sub, newBest, trace)</span><br><span class="line">    <span class="keyword">return</span> problem.getLocationInSelf(sub, result)</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<p>代码逻辑如下，每次在<code>midRow</code>和<code>midCol</code>中找到最大值，然后找到最大值的四邻域中的最大值，如果上下左右四格都比找到的最大值小，那么最大值即为峰值；如果存在临近的位置比找到的最大值大，那么就到该位置所在的子问题中寻找峰值点。通过将问题分为四个子问题，我们似乎能够递归地找到峰值点结果。但是很遗憾，这个代码是错误的，一个反例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">matrix = [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">          [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">          [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">          [<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">          [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">          [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>],</span><br><span class="line">          [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]]</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，我们先在中间行和列找到了最大值8，然后8的邻居中最大的是9，选择左上子矩阵作为子问题，中心十字最大值为1，而在这个子问题中，1是子矩阵的极值点，但并不是全局极值点。这个解法的根本问题在于，在解决子问题的过程中，子问题边界值的比较是不充分的，在上面的例子中，1是子问题的边界值，但是这个边界值并没有和2进行比较，所以比较不充分，找到了错误的解。</p>
+<h3 id="方法四：另一个改进的分治法"><a href="#方法四：另一个改进的分治法" class="headerlink" title="方法四：另一个改进的分治法"></a>方法四：另一个改进的分治法</h3><div><div class="fold_hider"><div class="close hider_title">点击显/隐内容</div></div><div class="fold">
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">algorithm4</span><span class="params">(problem, bestSeen = None, rowSplit = True, trace = None)</span>:</span></span><br><span class="line">    <span class="comment"># if it's empty, we're done </span></span><br><span class="line">    <span class="keyword">if</span> problem.numRow &lt;= <span class="number">0</span> <span class="keyword">or</span> problem.numCol &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    subproblems = []</span><br><span class="line">    divider = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> rowSplit:</span><br><span class="line">        <span class="comment"># the recursive subproblem will involve half the number of rows</span></span><br><span class="line">        mid = problem.numRow // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># information about the two subproblems</span></span><br><span class="line">        (subStartR1, subNumR1) = (<span class="number">0</span>, mid)</span><br><span class="line">        (subStartR2, subNumR2) = (mid + <span class="number">1</span>, problem.numRow - (mid + <span class="number">1</span>))</span><br><span class="line">        (subStartC, subNumC) = (<span class="number">0</span>, problem.numCol)</span><br><span class="line"></span><br><span class="line">        subproblems.append((subStartR1, subStartC, subNumR1, subNumC))</span><br><span class="line">        subproblems.append((subStartR2, subStartC, subNumR2, subNumC))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># get a list of all locations in the dividing column</span></span><br><span class="line">        divider = crossProduct([mid], range(problem.numCol))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># the recursive subproblem will involve half the number of columns</span></span><br><span class="line">        mid = problem.numCol // <span class="number">2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># information about the two subproblems</span></span><br><span class="line">        (subStartR, subNumR) = (<span class="number">0</span>, problem.numRow)</span><br><span class="line">        (subStartC1, subNumC1) = (<span class="number">0</span>, mid)</span><br><span class="line">        (subStartC2, subNumC2) = (mid + <span class="number">1</span>, problem.numCol - (mid + <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        subproblems.append((subStartR, subStartC1, subNumR, subNumC1))</span><br><span class="line">        subproblems.append((subStartR, subStartC2, subNumR, subNumC2))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># get a list of all locations in the dividing column</span></span><br><span class="line">        divider = crossProduct(range(problem.numRow), [mid])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># find the maximum in the dividing row or column</span></span><br><span class="line">    bestLoc = problem.getMaximum(divider, trace)</span><br><span class="line">    neighbor = problem.getBetterNeighbor(bestLoc, trace)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># update the best we've seen so far based on this new maximum</span></span><br><span class="line">    <span class="keyword">if</span> bestSeen <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> problem.get(neighbor) &gt; problem.get(bestSeen):</span><br><span class="line">        bestSeen = neighbor</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.setBestSeen(bestSeen)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># return when we know we've found a peak</span></span><br><span class="line">    <span class="keyword">if</span> neighbor == bestLoc <span class="keyword">and</span> problem.get(bestLoc) &gt;= problem.get(bestSeen):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.foundPeak(bestLoc)</span><br><span class="line">        <span class="keyword">return</span> bestLoc</span><br><span class="line"></span><br><span class="line">    <span class="comment"># figure out which subproblem contains the largest number we've seen so</span></span><br><span class="line">    <span class="comment"># far, and recurse, alternating between splitting on rows and splitting</span></span><br><span class="line">    <span class="comment"># on columns</span></span><br><span class="line">    sub = problem.getSubproblemContaining(subproblems, bestSeen)</span><br><span class="line">    newBest = sub.getLocationInSelf(problem, bestSeen)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> trace <span class="keyword">is</span> <span class="literal">None</span>: trace.setProblemDimensions(sub)</span><br><span class="line">    result = algorithm4(sub, newBest, <span class="keyword">not</span> rowSplit, trace)</span><br><span class="line">    <span class="keyword">return</span> problem.getLocationInSelf(sub, result)</span><br></pre></td></tr></table></figure>
+
+</div></div>
+<p>方法四在方法一的基础上添加了一个bestSeen变量，用于记录上一步操作中最大的值，下面我们对这个方法进行证明。证明过程参考方法一，也是分为两步，第一步证明如果矩阵不为空，那么返回值存在，第二步证明返回值一定是峰值。这里直接证明第二步。</p>
+<p>假设我们的返回值为$(r_1,c_1)$，且该点不是峰值点，那么存在$(r_3,c_3)$与$(r_1,c_1)$相邻，且$val(r_3,c_3)&gt;val(r_1,c_1)$，又因为$(r_1,c_1)$为返回值，故存在$(r_2,c_2)\rightarrow (r_1,c_1)$的转换，且$val(r_2,c_2) &lt; val(r_1,c_1)$。但是我们的返回值是$(r_1,c_1)$，所以递归到$(r_3,c_3)$后，又会经过某个递归链从$(r_3,c_3)$到达$(r_2,c_2)$，所以$val(r_3,c_3)&lt;val(r_2,c_2)&lt;val(r_1,c_1)&lt;val(r_3,c_3)$，产生矛盾，故$(r_1,c_1)$一定是峰值点。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/lecture-videos/lecture-1-algorithmic-thinking-peak-finding/">第一课视频</a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/assignments/MIT6_006F11_ps1.pdf">第一课作业</a><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/算法/课程/MIT6006-2/" rel="next" title="MIT 6006 Lecture 2——计算模型，文本距离">
+                <i class="fa fa-chevron-left"></i> MIT 6006 Lecture 2——计算模型，文本距离
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/算法/课程/MIT6006-课程大纲/" rel="prev" title="MIT 6006 课程大纲">
+                MIT 6006 课程大纲 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#峰值算法"><span class="nav-number">2.</span> <span class="nav-text">峰值算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一维峰值算法"><span class="nav-number">2.1.</span> <span class="nav-text">一维峰值算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题"><span class="nav-number">2.1.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法"><span class="nav-number">2.1.2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#时间复杂度分析"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">时间复杂度分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二维峰值算法"><span class="nav-number">2.2.</span> <span class="nav-text">二维峰值算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解法1：贪心"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">解法1：贪心</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解法2：分治法"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">解法2：分治法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#时间复杂度分析-1"><span class="nav-number">2.2.2.2.1.</span> <span class="nav-text">时间复杂度分析</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目及题解"><span class="nav-number">3.</span> <span class="nav-text">题目及题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">3.1.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一：将下列函数根据时间复杂度进行排序"><span class="nav-number">3.1.1.</span> <span class="nav-text">一：将下列函数根据时间复杂度进行排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一组"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">第一组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#解"><span class="nav-number">3.1.1.1.1.</span> <span class="nav-text">解</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二组"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">第二组</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#解-1"><span class="nav-number">3.1.1.2.1.</span> <span class="nav-text">解</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三组"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">第三组</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二：递归复杂度求解"><span class="nav-number">3.1.2.</span> <span class="nav-text">二：递归复杂度求解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一题"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">第一题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#解："><span class="nav-number">3.1.2.1.1.</span> <span class="nav-text">解：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二题"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">第二题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#解：-1"><span class="nav-number">3.1.2.2.1.</span> <span class="nav-text">解：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三题"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">第三题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#解-2"><span class="nav-number">3.1.2.3.1.</span> <span class="nav-text">解</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">4.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#向量峰值搜索代码"><span class="nav-number">4.1.</span> <span class="nav-text">向量峰值搜索代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#矩阵峰值搜索代码"><span class="nav-number">4.2.</span> <span class="nav-text">矩阵峰值搜索代码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一：分治法"><span class="nav-number">4.2.1.</span> <span class="nav-text">方法一：分治法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#证明"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复杂度分析"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二：贪心上升法"><span class="nav-number">4.2.2.</span> <span class="nav-text">方法二：贪心上升法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#证明-1"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复杂度分析-1"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">复杂度分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法三：改进的分治法（错误）"><span class="nav-number">4.2.3.</span> <span class="nav-text">方法三：改进的分治法（错误）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法四：另一个改进的分治法"><span class="nav-number">4.3.</span> <span class="nav-text">方法四：另一个改进的分治法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

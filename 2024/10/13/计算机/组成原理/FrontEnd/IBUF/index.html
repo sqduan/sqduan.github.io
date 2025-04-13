@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Life is all like this, meaningless, hopeless and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Instruction Buffer">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/组成原理/FrontEnd/IBUF/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="Life is all like this, meaningless, hopeless and">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/bypass_logic1.svg">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Instruction Buffer">
+<meta name="twitter:description" content="Life is all like this, meaningless, hopeless and">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/bypass_logic1.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/组成原理/FrontEnd/IBUF/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Instruction Buffer | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/组成原理/FrontEnd/IBUF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Instruction Buffer
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/组成原理/" itemprop="url" rel="index"><span itemprop="name">组成原理</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/组成原理/FrontEnd/" itemprop="url" rel="index"><span itemprop="name">FrontEnd</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>Life is all like this, meaningless, hopeless and </p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Inst-Buffer-Structure"><a href="#Inst-Buffer-Structure" class="headerlink" title="Inst Buffer Structure"></a>Inst Buffer Structure</h2><p>Inst buffer包含32个entries，每个entry的structure如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//==========================================================</span><br><span class="line">//Inst Buffer Entry Fields Description:</span><br><span class="line">//+-----+------+----------+---------+-------+-----------+--------+--------+-------+</span><br><span class="line">//| vld | inst | 32_start | acc_err | pgflt | high_expt | split1 | split0 | fence |  </span><br><span class="line">//+-----+------+----------+---------+-------+-----------+--------+--------+-------+</span><br><span class="line">//==========================================================</span><br><span class="line">//vld           means entry valid </span><br><span class="line">//inst[15:0]    means the half word inst data</span><br><span class="line">//32_start      means this half is the start of 32 inst</span><br><span class="line">//acc_err       means this half have acc_err expt</span><br><span class="line">//pgflt         means this half have pgflt expt</span><br><span class="line">//tinv          means this half have tinv expt</span><br><span class="line">//tfatal        means this half have tfatal expt</span><br><span class="line">//high_expt      means 32 bit inst &amp; expt happen at low half</span><br><span class="line">//split1        means predecode info</span><br><span class="line">//split0        means predecode info</span><br><span class="line">//fence         means predecode info</span><br></pre></td></tr></table></figure>
+<h2 id="Inst-Buffer-关键逻辑"><a href="#Inst-Buffer-关键逻辑" class="headerlink" title="Inst Buffer 关键逻辑"></a>Inst Buffer 关键逻辑</h2><h3 id="空满逻辑"><a href="#空满逻辑" class="headerlink" title="空满逻辑"></a>空满逻辑</h3><p>ibuf的空满逻辑如下，当ibuf满时，需要将ibctrl进行stall</p>
+<ul>
+<li>Full：当ibuf中不能再保存9条指令时，为满（指针左移8位，并与vld信号比较，如果发现移动后的指针所在位置已经vld，说明ibuf full）</li>
+<li>Empty：当创建的指令数和退休的指令数相同，且entry invalid，则为空</li>
+</ul>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> ibuf_full  = |(&#123;ibuf_create_pointer[ENTRY_NUM-<span class="number">9</span>:<span class="number">0</span>],</span><br><span class="line">                       ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">8</span>]&#125; &amp; </span><br><span class="line">                       entry_vld[<span class="number">31</span>:<span class="number">0</span>]);</span><br><span class="line"><span class="keyword">assign</span> ibuf_empty = (ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>] == </span><br><span class="line">                     ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>]) &amp;&amp; </span><br><span class="line">                    !entry_vld[<span class="number">0</span>]; <span class="comment">//in case of 32 entry all valid</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> ibuf_lbuf_empty   = ibuf_empty;        </span><br><span class="line"><span class="keyword">assign</span> ibuf_ibctrl_stall = ibuf_full;</span><br><span class="line"><span class="keyword">assign</span> ibuf_ibctrl_empty = ibuf_empty;</span><br></pre></td></tr></table></figure>
+<p>Empty的判断条件相对比较绕</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$T$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$2T$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$3T$</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>$4T$</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Create-Logic"><a href="#Create-Logic" class="headerlink" title="Create Logic"></a>Create Logic</h3><p>在<code>ibuf</code>的create逻辑中，我们重点需要解决两个问题：</p>
+<ul>
+<li>在<code>ibuf</code>什么位置保存指令（pointer logic）</li>
+<li>指令是否需要保存在<code>ibuf</code>中（vld logic）</li>
+</ul>
+<h4 id="Create-pointer-logic"><a href="#Create-pointer-logic" class="headerlink" title="Create pointer logic"></a>Create pointer logic</h4><p>对于一个FIFO，我们会有入队列和出队列两种逻辑，而在ibuf中，入队列的逻辑是由create pointer logic进行控制的，使用了一个变量<code>ibuf_create_pointer</code>作为FIFO的指针。当CPU进行rst之后，<code>ibuf_create_pointer</code>的值为0x00000001。更新create pointer时，会根据半字的数量，预先生成create pointer</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @( ibuf_create_pointer[<span class="number">31</span>:<span class="number">0</span>]</span><br><span class="line">         <span class="keyword">or</span> ibdp_ibuf_half_vld_num[<span class="number">3</span>:<span class="number">0</span>])    <span class="comment">// 根据半字的数量，决定create_pointer</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">case</span>(ibdp_ibuf_half_vld_num[<span class="number">3</span>:<span class="number">0</span>])</span><br><span class="line">  <span class="number">4'b0001</span> : create_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_create_pointer[ENTRY_NUM-<span class="number">2</span>:<span class="number">0</span>],  <span class="comment">// 坐移一位</span></span><br><span class="line">                                                 ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>]&#125;;</span><br><span class="line">  <span class="number">4'b0010</span> : create_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_create_pointer[ENTRY_NUM-<span class="number">3</span>:<span class="number">0</span>],  <span class="comment">// 左移两位</span></span><br><span class="line">                                                 ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">2</span>]&#125;;</span><br><span class="line">  <span class="number">4'b1001</span>:</span><br><span class="line"> <span class="comment">// 左移九位</span></span><br><span class="line">  ...</span><br><span class="line"><span class="keyword">endcase</span></span><br><span class="line"><span class="comment">// &amp;CombEnd; @187</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 将准备好的pointer赋给实际的ibuf create pointer</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> ibuf_create_pointer_update_clk <span class="keyword">or</span> <span class="keyword">negedge</span> cpurst_b)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">  <span class="keyword">if</span>(!cpurst_b || ibuf_flush)</span><br><span class="line">    ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] &lt;= &#123;&#123;(ENTRY_NUM-<span class="number">1</span>)&#123;<span class="number">1'b0</span>&#125;&#125;, <span class="number">1'b1</span>&#125;;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(ibuf_create_vld)</span><br><span class="line">    ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] &lt;= create_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] &lt;= ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>由于最多有9条指令需要被保存在ibuf中，因此我们会创建9个pointer（通过左移指向待保存的位置）。这个半字的数量是由<code>ibdp_ibuf_half_vld_num</code>决定的，根据block中是否存在条件分支或转移语句，决定提供给<code>ib</code>阶段的半字有多少个：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> ibdp_half_vld_num[<span class="number">3</span>:<span class="number">0</span>]    = (ipdp_ibdp_con_br_num_vld)</span><br><span class="line">                                 ? ipdp_ibdp_con_br_num[<span class="number">3</span>:<span class="number">0</span>]</span><br><span class="line">                                 : (ipdp_ibdp_chgflw_num_vld)</span><br><span class="line">                                   ? ipdp_ibdp_chgflw_num[<span class="number">3</span>:<span class="number">0</span>]</span><br><span class="line">                                   : ipdp_ibdp_no_chgflw_num[<span class="number">3</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>所以，此处create<em>pointer_pre表示ibuf需要预先创建多少个指针用来保存需要存在<code>ibuf</code>中的指令数目$N</em>{max}$，但是实际保存的指令数目$N&lt;N_{max}$。那么，实际需要保存至<code>ibuf</code>中的指令数目该如何计算呢，设<code>ibuf</code>中当前保存的指令数目为$N_0$，那么理论上需要保存的有效指令数最大为$n_v$，则<code>ibuf</code>中预计需要保存到指令数为：</p>
+<script type="math/tex; mode=display">
+N_{max}=N_0+n_v</script><p>$N_{max}$表示无bypass的情况。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @( ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> ibdp_ibuf_half_vld_num[<span class="number">3</span>:<span class="number">0</span>])</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">case</span>(ibdp_ibuf_half_vld_num[<span class="number">3</span>:<span class="number">0</span>])</span><br><span class="line">  <span class="number">4'b0001</span> : create_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>] + <span class="number">5'd1</span>;</span><br><span class="line">  <span class="number">4'b0010</span> : create_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>] + <span class="number">5'd2</span>;</span><br><span class="line">  ...</span><br><span class="line">  <span class="number">4'b1001</span> : create_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>] + <span class="number">5'd9</span>;</span><br><span class="line">  <span class="keyword">default</span> : create_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">endcase</span></span><br><span class="line"><span class="comment">// &amp;CombEnd; @282</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>而实际保存的指令需要减掉bypass的指令数$n_b$，故最终保存在ibuf中有效的指令数目为：</p>
+<script type="math/tex; mode=display">
+N=N_{max}-n_b\\
+=N_0+n_v-n_b</script><p>而$n_b$在处理bypass的情况时进行计算</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @( ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> bypass_way_inst2_valid</span><br><span class="line">       <span class="keyword">or</span> bypass_way_half_num[<span class="number">2</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> create_num_pre[<span class="number">4</span>:<span class="number">0</span>])</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">casez</span>(&#123;bypass_way_inst2_valid, bypass_way_half_num[<span class="number">2</span>:<span class="number">0</span>]&#125;)</span><br><span class="line">  <span class="number">4'b0</span>??? : create_num_pre_bypass[<span class="number">4</span>:<span class="number">0</span>] = ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>];</span><br><span class="line">  <span class="number">4'b1011</span> : create_num_pre_bypass[<span class="number">4</span>:<span class="number">0</span>] = create_num_pre[<span class="number">4</span>:<span class="number">0</span>] - <span class="number">5'd3</span>;</span><br><span class="line">  <span class="number">4'b1100</span> : create_num_pre_bypass[<span class="number">4</span>:<span class="number">0</span>] = create_num_pre[<span class="number">4</span>:<span class="number">0</span>] - <span class="number">5'd4</span>;</span><br><span class="line">  <span class="number">4'b1101</span> : create_num_pre_bypass[<span class="number">4</span>:<span class="number">0</span>] = create_num_pre[<span class="number">4</span>:<span class="number">0</span>] - <span class="number">5'd5</span>;</span><br><span class="line">  <span class="number">4'b1110</span> : create_num_pre_bypass[<span class="number">4</span>:<span class="number">0</span>] = create_num_pre[<span class="number">4</span>:<span class="number">0</span>] - <span class="number">5'd6</span>;</span><br><span class="line">  <span class="keyword">default</span> : create_num_pre_bypass[<span class="number">4</span>:<span class="number">0</span>] = create_num_pre[<span class="number">4</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">endcase</span></span><br></pre></td></tr></table></figure>
+<p>实际的指针如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> ibuf_create_pointer0[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] =  ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assign</span> ibuf_create_pointer1[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_create_pointer[ENTRY_NUM-<span class="number">2</span>:<span class="number">0</span>],</span><br><span class="line">                                              ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>]&#125;;</span><br><span class="line"><span class="keyword">assign</span> ibuf_create_pointer2[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_create_pointer[ENTRY_NUM-<span class="number">3</span>:<span class="number">0</span>],</span><br><span class="line">                                              ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">2</span>]&#125;;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">assign</span> ibuf_create_pointer8[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_create_pointer[ENTRY_NUM-<span class="number">9</span>:<span class="number">0</span>],</span><br><span class="line">                                              ibuf_create_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">8</span>]&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Create-Num-Logic"><a href="#Create-Num-Logic" class="headerlink" title="Create Num Logic"></a>Create Num Logic</h4><p>在对FIFO进行入队列操作时，我们还需要对进入FIFO的指令数量进行统计，这个参数会被用于判断bypass是否有效，以及<code>ibuf</code>是否为空，计算方法如下：</p>
+<script type="math/tex; mode=display">
+N[n]=N[n-1]+V</script><p>其中，$V$是用于保存至ibuf中的有效半字个数</p>
+<h5 id="Merge-情况处理"><a href="#Merge-情况处理" class="headerlink" title="Merge 情况处理"></a>Merge 情况处理</h5><p>当ibuf中存在指令，但是指令不足以凑成完整的三条送入idu时，需要和ip送来的指令进行Merge</p>
+<p><strong>Merge 指令数量计算</strong></p>
+<p>我们需要根据ibuf中能pop出的指令数目，来确认需要bypass提供的merge指令数目</p>
+<script type="math/tex; mode=display">
+N_m=3-N_{pop}</script><p>其中，$N_m$为bypass提供的与pop的指令进行merge的指令（32位）</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">casez</span>(&#123;ibuf_pop_inst1_valid,bypass_way_inst0_32_start,bypass_way_inst1_valid,bypass_way_inst1_32_start&#125;)</span><br><span class="line">   <span class="comment">// if inst1 is valid, bypass only needs merge 1</span></span><br><span class="line">   <span class="number">4'b10</span>?? : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00001</span>;</span><br><span class="line">   <span class="number">4'b11</span>?? : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00010</span>;</span><br><span class="line">   <span class="number">4'b000</span>? : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00001</span>;</span><br><span class="line">   <span class="number">4'b0010</span> : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00010</span>;</span><br><span class="line">   <span class="number">4'b0011</span> : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00011</span>;</span><br><span class="line">   <span class="number">4'b010</span>? : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00010</span>;</span><br><span class="line">   <span class="number">4'b0110</span> : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00011</span>;</span><br><span class="line">   <span class="number">4'b0111</span> : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00100</span>;</span><br><span class="line">   <span class="keyword">default</span> : merge_way_inst1_num[<span class="number">4</span>:<span class="number">0</span>] = <span class="number">5'b00000</span>;</span><br><span class="line"> <span class="keyword">endcase</span></span><br><span class="line"><span class="comment">// &amp;CombEnd; @5278</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>当发生merge时</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &amp;CombBeg; @315</span></span><br><span class="line"><span class="keyword">always</span> @( merge_half_num[<span class="number">4</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> ibuf_pop_inst2_valid</span><br><span class="line">       <span class="keyword">or</span> ibuf_pop3_half_num[<span class="number">2</span>:<span class="number">0</span>])</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">casez</span>(&#123;ibuf_pop_inst2_valid, ibuf_pop3_half_num[<span class="number">2</span>:<span class="number">0</span>]&#125;)</span><br><span class="line">  <span class="comment">// This is the merge number when merge happened, but don't know why add merge_half_num</span></span><br><span class="line">  <span class="comment">// 这个是什么原理，为啥是创建的数目+merge的bypass数目</span></span><br><span class="line">  <span class="number">4'b0</span>??? : retire_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>] + merge_half_num[<span class="number">4</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">  <span class="number">4'b1011</span> : retire_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>] + <span class="number">5'd3</span>;</span><br><span class="line">  <span class="number">4'b1100</span> : retire_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>] + <span class="number">5'd4</span>;</span><br><span class="line">  <span class="number">4'b1101</span> : retire_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>] + <span class="number">5'd5</span>;</span><br><span class="line">  <span class="number">4'b1110</span> : retire_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>] + <span class="number">5'd6</span>;</span><br><span class="line">  <span class="keyword">default</span> : retire_num_pre[<span class="number">4</span>:<span class="number">0</span>] = ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">endcase</span></span><br><span class="line"><span class="comment">// &amp;CombEnd; @324</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><strong>Merge retire指针计算</strong></p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">casez</span>(&#123;ibuf_pop_inst1_valid,bypass_way_inst0_32_start,bypass_way_inst1_valid,bypass_way_inst1_32_start&#125;)</span><br><span class="line">   <span class="number">4'b10</span>?? : merge_way_retire_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = ibuf_create_pointer1[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line">   <span class="number">4'b11</span>?? : merge_way_retire_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = ibuf_create_pointer2[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>]; </span><br><span class="line">   ...</span><br><span class="line">   <span class="number">4'b0111</span> : merge_way_retire_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = ibuf_create_pointer4[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line">   <span class="keyword">default</span> : merge_way_retire_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = ibuf_create_pointer0[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line"> <span class="keyword">endcase</span></span><br><span class="line"><span class="comment">// &amp;CombEnd; @5292</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="Create-Valid-Logic"><a href="#Create-Valid-Logic" class="headerlink" title="Create Valid Logic"></a>Create Valid Logic</h4><p>在前面的小节中我们讨论了当向<code>ibuf</code>中保存指令时Create指针移动的逻辑，本节讨论哪些指令需要保存在<code>ibuf</code>中或从<code>ibuf</code>中退休，即entry create &amp; retire vld的逻辑。在Xuantie的代码中，使用了<code>entry_create_*</code>和<code>entry_retire_*</code>两个32位的变量，与<code>ibuf</code>的32个entry一一对应，用于表示哪一个entry需要创建或退休。本文首先讨论entry create的逻辑。</p>
+<p>在entry create的逻辑中，Xuantie的代码分为了nopass和bypass两种类型进行讨论，实际nopass还可以分为merge和pop两种情况。对于nopass的情况，我们依据三个条件确定需要create的entry：</p>
+<ul>
+<li><code>ibuf</code>create指针所在位置，即create_pointer0-9</li>
+<li>传递给<code>ibuf</code>的指令的有效性，即ib_hn_create_vld[8:0]</li>
+<li>merge指令的掩码（当merge无效时为全1，此时无merge指令，否则根据merge指令数量及指令是否为32bit，确定掩码）</li>
+</ul>
+<p>对于bypass的情况，则根据<code>ibuf</code>create指针所在位置以及bypass的指令数量及类型，确定create的entry。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">default</span>  : <span class="keyword">begin</span> <span class="comment">//1?1?1</span></span><br><span class="line">           bypass_way_inst0_valid       = bypass_way_h0_vld;</span><br><span class="line">           ...</span><br><span class="line">           bypass_way_half_num[<span class="number">2</span>:<span class="number">0</span>]     = <span class="number">3'b110</span>;</span><br><span class="line">           ib_hn_create_vld_bypass[<span class="number">8</span>:<span class="number">0</span>] = &#123;<span class="number">6'b0</span>,ib_hn_create_vld[<span class="number">2</span>:<span class="number">0</span>]&#125;;</span><br></pre></td></tr></table></figure>
+<p>得到32位create vld bits后，会将每一位赋给entry，作为vld信号。注意，<strong>vld信号仅控制control signal的更新，保存在entry中的数据不受vld信号控制</strong>。control signal包括：</p>
+<ol>
+<li>entry是否vld</li>
+<li>entry中的指令是否为32位指令前半部分</li>
+</ol>
+<h4 id="Create-Input-Data-Generate"><a href="#Create-Input-Data-Generate" class="headerlink" title="Create Input Data Generate"></a>Create Input Data Generate</h4><p>在得到<code>ibuf</code>的entry create vld信号后，还需要组织向<code>ibuf</code>中保存的指令的信息，这一部分逻辑较为简单，从3667行到5520行为该段逻辑。</p>
+<h3 id="retire-logic"><a href="#retire-logic" class="headerlink" title="retire logic"></a>retire logic</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">always</span> @( ibuf_merge_retire_pointer[<span class="number">31</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> ibuf_retire_pointer[<span class="number">31</span>:<span class="number">0</span>]</span><br><span class="line">       <span class="keyword">or</span> ibuf_pop_inst2_valid</span><br><span class="line">       <span class="keyword">or</span> ibuf_pop3_half_num[<span class="number">2</span>:<span class="number">0</span>])</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line"><span class="keyword">casez</span>(&#123;ibuf_pop_inst2_valid, ibuf_pop3_half_num[<span class="number">2</span>:<span class="number">0</span>]&#125;)</span><br><span class="line">  <span class="number">4'b0</span>??? : retire_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] =  ibuf_merge_retire_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line">  <span class="number">4'b1011</span> : retire_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_retire_pointer[ENTRY_NUM-<span class="number">4</span>:<span class="number">0</span>],</span><br><span class="line">                                                 ibuf_retire_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">3</span>]&#125;;</span><br><span class="line">  <span class="number">4'b1100</span> : retire_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_retire_pointer[ENTRY_NUM-<span class="number">5</span>:<span class="number">0</span>],</span><br><span class="line">                                                 ibuf_retire_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">4</span>]&#125;;</span><br><span class="line">  <span class="number">4'b1101</span> : retire_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_retire_pointer[ENTRY_NUM-<span class="number">6</span>:<span class="number">0</span>],</span><br><span class="line">                                                 ibuf_retire_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">5</span>]&#125;;</span><br><span class="line">  <span class="number">4'b1110</span> : retire_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] = &#123;ibuf_retire_pointer[ENTRY_NUM-<span class="number">7</span>:<span class="number">0</span>],</span><br><span class="line">                                                 ibuf_retire_pointer[ENTRY_NUM-<span class="number">1</span>:ENTRY_NUM-<span class="number">6</span>]&#125;;</span><br><span class="line">  <span class="keyword">default</span> : retire_pointer_pre[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>] =  ibuf_retire_pointer[ENTRY_NUM-<span class="number">1</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">endcase</span></span><br><span class="line"><span class="comment">// &amp;CombEnd; @399</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="Retire-Valid-Logic"><a href="#Retire-Valid-Logic" class="headerlink" title="Retire Valid Logic"></a>Retire Valid Logic</h4><p>Retire Valid逻辑相比Create来说较为简单，首先由<code>retire_pointer*</code>确定可能retire的entry，然后和<code>retire_vld_*</code>进行mask，而<code>retire_vld_*</code>根据实际从<code>ibuf</code>中pop的指令数量确定</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">casez</span>(&#123;pop_h0_32_start,pop_h1_32_start,pop_h2_32_start,</span><br><span class="line">       pop_h3_32_start,pop_h4_32_start&#125;)</span><br><span class="line">       <span class="number">5'b000</span>?? : <span class="keyword">begin</span></span><br><span class="line">                  ibuf_pop_inst0_valid      = pop_h0_vld;</span><br><span class="line">                  ibuf_pop_inst0_data[<span class="number">31</span>:<span class="number">0</span>] = &#123;<span class="number">16'b0</span>,pop_h0_data[<span class="number">15</span>:<span class="number">0</span>]&#125;;</span><br><span class="line">                  ibuf_pop_inst0_pc[<span class="number">14</span>:<span class="number">0</span>]   = pop_h0_pc[<span class="number">14</span>:<span class="number">0</span>];                  </span><br><span class="line">                  <span class="comment">// inst0-2's data</span></span><br><span class="line">                  ibuf_pop3_half_num[<span class="number">2</span>:<span class="number">0</span>]   = <span class="number">3'b011</span>;    <span class="comment">// Get poped half number</span></span><br><span class="line">                  ibuf_pop3_retire_vld[<span class="number">5</span>:<span class="number">0</span>] = <span class="number">6'b111000</span>; <span class="comment">// Get the retire mask</span></span><br></pre></td></tr></table></figure>
+<h2 id="Bypass-逻辑"><a href="#Bypass-逻辑" class="headerlink" title="Bypass 逻辑"></a>Bypass 逻辑</h2><h3 id="何时进行bypass"><a href="#何时进行bypass" class="headerlink" title="何时进行bypass"></a>何时进行bypass</h3><p>在ibuf为空时，将会对指令进行bypass，最多bypass3条指令，其余的将会被保存在ibuf中。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> bypass_vld = (ibuf_create_num[<span class="number">4</span>:<span class="number">0</span>] == </span><br><span class="line">                     ibuf_retire_num[<span class="number">4</span>:<span class="number">0</span>]) &amp;&amp; </span><br><span class="line">                     !ibctrl_ibuf_bypass_not_select;</span><br></pre></td></tr></table></figure>
+<h3 id="Inst-attr"><a href="#Inst-attr" class="headerlink" title="Inst attr"></a>Inst attr</h3><p>在IBUF的bypass逻辑中，最多可以输出三条指令（16bits或32bits）。首先，ibuf以16bits为单位，对h0到h5的属性进行了判断</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> bypass_way_h0_vld = (ibdp_ibuf_h0_vld)</span><br><span class="line">                         ? ibdp_ibuf_h0_vld</span><br><span class="line">                         : ibdp_ibuf_hn_vld[<span class="number">7</span>];</span><br><span class="line">...</span><br><span class="line"><span class="keyword">assign</span> bypass_way_h4_vld = (ibdp_ibuf_h0_vld)</span><br><span class="line">                         ? ibdp_ibuf_hn_vld[<span class="number">4</span>]</span><br><span class="line">                         : ibdp_ibuf_hn_vld[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="Inst-Gen"><a href="#Inst-Gen" class="headerlink" title="Inst Gen"></a>Inst Gen</h3><p>指令生成逻辑。在bypass valid的情况下，ibuf最多会提供三条指令（16或32位），此时的逻辑如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/bypass_logic1.svg" width="580" alt="图片名称" align="center"></p>
+<p>ibuf中会根据<code>bypass_way_hn_32_start</code>的标志位来进行指令的生成（8570-9383行），同时记录bypass了几条half的指令</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">casez</span>(&#123;bypass_way_h0_32_start,bypass_way_h1_32_start,bypass_way_h2_32_start,</span><br><span class="line">       bypass_way_h3_32_start,bypass_way_h4_32_start&#125;)</span><br><span class="line">        <span class="number">5'b1</span>?<span class="number">1</span>?<span class="number">0</span> : <span class="keyword">begin</span></span><br><span class="line">                  bypass_way_inst0_valid       = bypass_way_h0_vld;</span><br><span class="line">                  bypass_way_inst0_data[<span class="number">31</span>:<span class="number">0</span>]  = &#123;bypass_way_h1_data[<span class="number">15</span>:<span class="number">0</span>],bypass_way_h0_data[<span class="number">15</span>:<span class="number">0</span>]&#125;;</span><br><span class="line">                  ... <span class="comment">// inst 0 attrs</span></span><br><span class="line">                  bypass_way_inst1_valid       = bypass_way_h2_vld;</span><br><span class="line">                  bypass_way_inst1_data[<span class="number">31</span>:<span class="number">0</span>]  = &#123;bypass_way_h3_data[<span class="number">15</span>:<span class="number">0</span>],bypass_way_h2_data[<span class="number">15</span>:<span class="number">0</span>]&#125;;</span><br><span class="line">                  bypass_way_inst1_pc[<span class="number">14</span>:<span class="number">0</span>]    = bypass_way_h2_pc[<span class="number">14</span>:<span class="number">0</span>];                  </span><br><span class="line">                  ...</span><br><span class="line">                  bypass_way_inst2_data[<span class="number">31</span>:<span class="number">0</span>]  = &#123;<span class="number">16'b0</span>,bypass_way_h4_data[<span class="number">15</span>:<span class="number">0</span>]&#125;;</span><br><span class="line">                  bypass_way_inst2_pc[<span class="number">14</span>:<span class="number">0</span>]    = bypass_way_h4_pc[<span class="number">14</span>:<span class="number">0</span>];                  </span><br><span class="line">                  ...</span><br><span class="line">                  bypass_way_half_num[<span class="number">2</span>:<span class="number">0</span>]     = <span class="number">3'b101</span>;    <span class="comment">//一共bypass了5条half指令</span></span><br><span class="line">                  ib_hn_create_vld_bypass[<span class="number">8</span>:<span class="number">0</span>] = &#123;<span class="number">5'b0</span>,ib_hn_create_vld[<span class="number">3</span>:<span class="number">0</span>]&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="指令Merge逻辑"><a href="#指令Merge逻辑" class="headerlink" title="指令Merge逻辑"></a>指令Merge逻辑</h2><p>在<code>ibuf</code>中，需要根据ibuf中所保存的指令，将Bypass和ibuf中获得的指令进行Merge，并得到最终送给decoder的指令。其代码片段如下，此处容易迷惑的点是这里虽然叫<code>merge_way_inst0</code>，<strong>但是实际上指的是用于指令merge的bypass的指令</strong>。当需要从ibuf中取出指令时，bypass最多提供两条指令进行merge，所以此处我们只需要考虑<code>inst0</code>和<code>inst1</code>。</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> merge_way_inst0_sel        = !ibuf_pop_inst1_valid;</span><br><span class="line"><span class="keyword">assign</span> merge_way_inst0_valid      = bypass_way_inst0_valid &amp;&amp; ibctrl_ibuf_merge_vld;</span><br><span class="line"><span class="keyword">assign</span> merge_way_inst0[<span class="number">31</span>:<span class="number">0</span>]      = bypass_way_inst0_data[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> merge_way_inst1_sel        = !ibuf_pop_inst1_valid || !ibuf_pop_inst2_valid;</span><br><span class="line"><span class="keyword">assign</span> merge_way_inst1_valid      = (ibuf_pop_inst1_valid) ? bypass_way_inst0_valid &amp;&amp; ibctrl_ibuf_merge_vld</span><br><span class="line">                                                           : bypass_way_inst1_valid &amp;&amp; ibctrl_ibuf_merge_vld;</span><br><span class="line"><span class="keyword">assign</span> merge_way_inst1[<span class="number">31</span>:<span class="number">0</span>]      = (ibuf_pop_inst1_valid) ? bypass_way_inst0_data[<span class="number">31</span>:<span class="number">0</span>]: bypass_way_inst1_data[<span class="number">31</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>我们考虑如下几种情况：</p>
+<ul>
+<li>情况一：ibuf中的3条指令都有效</li>
+</ul>
+<p>此时直接使用ibuf中pop出来的指令，无需进行merge</p>
+<ul>
+<li>情况二：ibuf中<code>inst1</code>或<code>inst2</code>无效，此时分为如下几种情况讨论：<ul>
+<li><code>inst1</code>无效</li>
+<li><code>inst2</code>无效</li>
+<li><code>inst1</code>和<code>inst2</code>均无效</li>
+</ul>
+</li>
+</ul>
+<p>对于第一种子情况，得到的结果如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">merge_way_inst0 = bypass_way_inst0_data;</span><br><span class="line">merge_way_inst1 = bypass_way_inst1_data;</span><br></pre></td></tr></table></figure>
+<p>对于第二种子情况，得到的结果如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">merge_way_inst0 <span class="comment">// 不会被选择</span></span><br><span class="line">merge_way_inst1 = bypass_way_inst1_data;</span><br></pre></td></tr></table></figure>
+<p>对于第三种子情况，得到的结果如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">merge_way_inst0 = bypass_way_inst0_data;</span><br><span class="line">merge_way_inst1 = bypass_way_inst1_data;</span><br></pre></td></tr></table></figure>
+<p>最终，从<code>ibuf</code>提供给<code>ibdp</code>的三条指令如下：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> ibuf_ibdp_inst0[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_pop_inst0_data[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assign</span> ibuf_ibdp_inst1[<span class="number">31</span>:<span class="number">0</span>]      = (merge_way_inst0_sel) ? merge_way_inst0[<span class="number">31</span>:<span class="number">0</span>]     :  ibuf_pop_inst1_data[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line"><span class="keyword">assign</span> ibuf_ibdp_inst2[<span class="number">31</span>:<span class="number">0</span>]      = (merge_way_inst1_sel) ? merge_way_inst1[<span class="number">31</span>:<span class="number">0</span>]     :  ibuf_pop_inst2_data[<span class="number">31</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<p>这三条指令已经包含了merge bypass的过程，因此可以在ib阶段直接进行mux，选择需要送给decoder的三条指令即可：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span>(&#123;bypass_inst_vld,ibuf_inst_vld,lbuf_inst_vld&#125;)</span><br><span class="line"> <span class="comment">// Pure bypass</span></span><br><span class="line"> <span class="number">3'b100</span>: <span class="keyword">begin</span></span><br><span class="line">         inst0[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_ibdp_bypass_inst0[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line">         inst1[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_ibdp_bypass_inst1[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line">         inst2[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_ibdp_bypass_inst2[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line"> <span class="comment">// ibuf merged with bypass    </span></span><br><span class="line"> <span class="number">3'b010</span>:  <span class="keyword">begin</span></span><br><span class="line">         inst0[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_ibdp_inst0[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line">         inst1[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_ibdp_inst1[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line">         inst2[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_ibdp_inst2[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line"> <span class="comment">// lbuf</span></span><br><span class="line"> <span class="number">3'b001</span>:  <span class="keyword">begin</span></span><br><span class="line">         inst0[<span class="number">31</span>:<span class="number">0</span>]      = lbuf_ibdp_inst0[<span class="number">31</span>:<span class="number">0</span>]; </span><br><span class="line">         inst1[<span class="number">31</span>:<span class="number">0</span>]      = lbuf_ibdp_inst1[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line">         inst2[<span class="number">31</span>:<span class="number">0</span>]      = lbuf_ibdp_inst2[<span class="number">31</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="Design-4-normal-inst-bypass"><a href="#Design-4-normal-inst-bypass" class="headerlink" title="Design: 4 normal inst bypass"></a>Design: 4 normal inst bypass</h2><p>为了增加ibuf的吞吐量，我们为<code>ibuf</code>设计了一个新的bypass路径，当fetch的指令为4条normal类型的指令，且<code>ibuf</code>为空的情况下，我们会将这四条normal指令直接送至IDU进行decoder处理，此时control signal新增一条</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assign bypass_all_inst_vld  = ibctrl_ibdp_bypass_all_inst_vld;</span><br><span class="line"></span><br><span class="line">assign bypass_inst_vld = ibctrl_ibdp_bypass_inst_vld &amp; !bypass_all_inst_vld;</span><br><span class="line">assign ibuf_inst_vld   = ibctrl_ibdp_ibuf_inst_vld &amp; !bypass_all_inst_vld;</span><br><span class="line">assign lbuf_inst_vld   = ibctrl_ibdp_lbuf_inst_vld &amp; !bypass_all_inst_vld;</span><br></pre></td></tr></table></figure>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
+<li>在Bypass逻辑的判断过程中，为何是h0-h4而不是h0-h5？</li>
+</ol>
+<p>因为根据h0-h4即可知道全部bypass inst的信息，首先如果h4是一条16bits的语句，那么bypass的指令必然没有h5；如果h4是32位指令，那么{h4, h5}可以拼成一条32位指令，根据h4即可获得h5的信息</p>
+<ol>
+<li>在Merge的逻辑判断过程中，为何没有考虑ibuf的inst0无效的逻辑？</li>
+</ol>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> ibuf_ibdp_inst0[<span class="number">31</span>:<span class="number">0</span>]      = ibuf_pop_inst0_data[<span class="number">31</span>:<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">assign</span> ibuf_ibdp_inst1[<span class="number">31</span>:<span class="number">0</span>]      = (merge_way_inst0_sel) ? merge_way_inst0[<span class="number">31</span>:<span class="number">0</span>]     :  ibuf_pop_inst1_data[<span class="number">31</span>:<span class="number">0</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href>Proteus软件</a><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/组成原理/FrontEnd/BTB/" rel="next" title="Branch Target Buffer">
+                <i class="fa fa-chevron-left"></i> Branch Target Buffer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/组成原理/Modelsim编译及仿真/" rel="prev" title="Modelsim 编译及仿真">
+                Modelsim 编译及仿真 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Inst-Buffer-Structure"><span class="nav-number">1.</span> <span class="nav-text">Inst Buffer Structure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inst-Buffer-关键逻辑"><span class="nav-number">2.</span> <span class="nav-text">Inst Buffer 关键逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#空满逻辑"><span class="nav-number">2.1.</span> <span class="nav-text">空满逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-Logic"><span class="nav-number">2.2.</span> <span class="nav-text">Create Logic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-pointer-logic"><span class="nav-number">2.2.1.</span> <span class="nav-text">Create pointer logic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-Num-Logic"><span class="nav-number">2.2.2.</span> <span class="nav-text">Create Num Logic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Merge-情况处理"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">Merge 情况处理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-Valid-Logic"><span class="nav-number">2.2.3.</span> <span class="nav-text">Create Valid Logic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-Input-Data-Generate"><span class="nav-number">2.2.4.</span> <span class="nav-text">Create Input Data Generate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#retire-logic"><span class="nav-number">2.3.</span> <span class="nav-text">retire logic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Retire-Valid-Logic"><span class="nav-number">2.3.1.</span> <span class="nav-text">Retire Valid Logic</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bypass-逻辑"><span class="nav-number">3.</span> <span class="nav-text">Bypass 逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#何时进行bypass"><span class="nav-number">3.1.</span> <span class="nav-text">何时进行bypass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inst-attr"><span class="nav-number">3.2.</span> <span class="nav-text">Inst attr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inst-Gen"><span class="nav-number">3.3.</span> <span class="nav-text">Inst Gen</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令Merge逻辑"><span class="nav-number">4.</span> <span class="nav-text">指令Merge逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Design-4-normal-inst-bypass"><span class="nav-number">5.</span> <span class="nav-text">Design: 4 normal inst bypass</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">6.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

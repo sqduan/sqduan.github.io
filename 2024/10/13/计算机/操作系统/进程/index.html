@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Hi siri! Help me to copy a siri.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/操作系统/进程/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="Hi siri! Help me to copy a siri.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901172929.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/tss.svg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210627193306.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/0f1e8498-9405-95aa-e2b9-7ef1f3d0e6e9.png">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/ioprocess.JPG?raw=true">
+<meta property="og:image" content="https://github.com/sqduan/hexoimg/blob/master/processStateTrans.JPG?raw=true">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程">
+<meta name="twitter:description" content="Hi siri! Help me to copy a siri.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901172929.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/进程/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>进程 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/操作系统/进程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>Hi siri! Help me to copy a siri.</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="进程的定义"><a href="#进程的定义" class="headerlink" title="进程的定义"></a>进程的定义</h3><p>进程是系统进行资源分配与调度的基本单位，具体一点讲，进程就是活动的程序，进程是暂时的，程序是永久的。</p>
+<h3 id="进程的组成"><a href="#进程的组成" class="headerlink" title="进程的组成"></a>进程的组成</h3><p>作为一个被加载到内存中的活动的程序，进程由五个部分组成，即将内存进行分段后，分配给某一个进程，分段示意图如下：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20200901172929.png" width="180" alt="图片名称" align="center"></p>
+<p>进程包含了正在运行的一个程序的所有状态信息：</p>
+<ul>
+<li>代码</li>
+<li>数据</li>
+<li>状态寄存器：CPU状态CR0、指令指针IP</li>
+<li>通用寄存器：AX、BX、CX…</li>
+<li>进程占用系统资源：已分配内存、打开文件</li>
+</ul>
+<h3 id="进程特点"><a href="#进程特点" class="headerlink" title="进程特点"></a>进程特点</h3><p>进程包含动态性、并发性、独立性和制约性（因访问共享数据/资源产生的制约）</p>
+<h2 id="进程描述符-Process-Control-Block-PCB"><a href="#进程描述符-Process-Control-Block-PCB" class="headerlink" title="进程描述符(Process Control Block,PCB)"></a>进程描述符(Process Control Block,PCB)</h2><p>进程描述符实际上保存了进程的控制信息，这些信息包括：调度和状态信息、进程间通信信息、存储管理信息、进程使用资源信息以及有关数据结构连接信息（与PCB相关的进程队列）。</p>
+<h3 id="进程描述符内容"><a href="#进程描述符内容" class="headerlink" title="进程描述符内容"></a>进程描述符内容</h3><p>进程描述符（或者叫进程控制块PCB）是一个对进程进行管理的数据结构，<strong>在进程创建时一同建立并严格一一对应</strong>。在Linux系统下，PCB是一个task_struct类型结构，包含了和进程相关的若干信息。具体内容包括：</p>
+<ol>
+<li>进程状态</li>
+<li>进程ID</li>
+<li>程序计数器</li>
+<li>寄存器</li>
+<li>内存限制</li>
+<li>打开的文件</li>
+<li>优先级</li>
+<li>…</li>
+</ol>
+<p>有些内容会随着进程状态改变而改变，而有些内容会频繁发生更新。上面的信息可以分为几类：</p>
+<ul>
+<li>标识信息</li>
+<li>状态信息</li>
+<li>资源信息</li>
+<li>现场保护信息</li>
+<li>队列信息</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">struct process&#123;</span><br><span class="line">    //标识信息</span><br><span class="line">    char name[PROC_NAME_LEN + 1];</span><br><span class="line">    int pid;</span><br><span class="line">    int runs;</span><br><span class="line">    sturct process* parent;</span><br><span class="line">    </span><br><span class="line">    //状态信息</span><br><span class="line">    uint32_t flags;     //CPU状态寄存器</span><br><span class="line">    uintptr_t cr3;      //地址空间起头位置</span><br><span class="line">    enum proc_state state //进程状态</span><br><span class="line">    volatile bool need_resched; //是否允许调度</span><br><span class="line">    </span><br><span class="line">    //进程占用存储资源</span><br><span class="line">    uintptr_t kstack;   //内核栈</span><br><span class="line">    struct memory_map* mm;  //内存</span><br><span class="line">    </span><br><span class="line">    //现场保护信息</span><br><span class="line">    struct trapframe *tf</span><br><span class="line">    struct context context;</span><br><span class="line">    </span><br><span class="line">    //队列信息</span><br><span class="line">    list_entry_t hash_list;</span><br><span class="line">    char name[PROC_NAME_LEN+1]; //内核状态名称</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>在上面的代码中，memory_map是一个比较重要的数据结构，具体如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">struct memory_map&#123;</span><br><span class="line">    list_entry_t mmap_list;     //进程内存块映射</span><br><span class="line">    struct vma* mmap_cache;     </span><br><span class="line">    pde_t* pgdir;               //一级页表起始地址   =cr3</span><br><span class="line">    int map_count;              //内存共享次数 </span><br><span class="line">    void* sm_priv;              //外存置换数据结构</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="进程描述符工作过程"><a href="#进程描述符工作过程" class="headerlink" title="进程描述符工作过程"></a>进程描述符工作过程</h3><p>当一个进程处于运行态时，CPU的寄存器会保存PCB，而当发生进程切换，操作系统会保存当前进程的状态，然后切换到另一个进程，同时CPU中保存的PCB也会发生变化。</p>
+<h3 id="PCB组织结构"><a href="#PCB组织结构" class="headerlink" title="PCB组织结构"></a>PCB组织结构</h3><p>PCB的组织结构一般采用链表或索引表组成，在实验中是使用链表进行组织。内核将相同状态的进程PCB放置在一个队列中。而在实际应用中，由于链表索引困难，因此采用哈希链表，将大链表拆分，每一个部分进行哈希处理，这样可以使索引变为$O(m)$，其中$m$为每个部分的平均长度</p>
+<h2 id="进程的状态"><a href="#进程的状态" class="headerlink" title="进程的状态"></a>进程的状态</h2><h3 id="轻重进程状态"><a href="#轻重进程状态" class="headerlink" title="轻重进程状态"></a>轻重进程状态</h3><p>由于进程中可能有多个线程在执行，因此我们的PCB可以被进一步分割，分为轻重进程状态：</p>
+<ul>
+<li>轻进程状态：随着线程切换而改变的，例如signal mask和系统调用的参数等</li>
+<li>重进程状态：不随线程切换而改变的，即所有线程共有的，例如虚拟地址映射</li>
+</ul>
+<h3 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h3><pre class="mermaid">graph TB
+    node1((new))
+    node2((ready))
+    node3((running))
+    node4((waiting))
+    node5((end))
+
+    node1--admit-->node2
+    node2--调度-->node3
+    node3--抢占/中断或时间片用完-->node2
+    node3--IO或事件等待-->node4
+    node4--IO或事件完成-->node2
+    node3--退出-->node5</pre>
+
+<ul>
+<li>新生（new）：当进程被创建后，它处于新生态，此时等待操作系统进行调度</li>
+<li>就绪（ready）：进程已处于准备好运行的状态，即进程已分配到除CPU外的所有必要资源后，只要再获得CPU，便可立即执行。就绪进程位于就绪队列中。<strong>当时间片结束之后，进程处于就绪态而非等待态</strong>。</li>
+<li>执行（running）：进程已经获得CPU，程序正在执行状态</li>
+<li>阻塞（waiting）：正在执行的进程由于发生某事件（如I/O请求、申请缓冲区失败等）暂时无法继续执行的状态，等待是进程内部原因导致的</li>
+<li>结束（end）：进程僵死或死亡，要将资源还回去。进程结束可能是正常退出、错误退出、致命错误或被其他进程杀死</li>
+</ul>
+<p>除此之外，进程还有一个特殊的状态叫进程挂起，进程挂起涉及虚拟内存，即将处于等待或就绪的进程保存在外存当中，而当进程开始运行，再从外寸调回内存。实际上是时间换空间的做法。挂起即把进程从内存转到外存。这里稍微了解一下<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>。</p>
+<p>内存时的挂起状态包括：</p>
+<ul>
+<li>等待到等待挂起</li>
+<li>就绪到就绪挂起</li>
+<li>运行到就绪挂起：对于抢占式的系统，高优先级抢占低优先级，且没有足够内存空间</li>
+</ul>
+<p>外存时的挂起状态</p>
+<h3 id="三状态模型"><a href="#三状态模型" class="headerlink" title="三状态模型"></a>三状态模型</h3><p>将进程状态最重要的部分进行抽象，我们可以得到进程的三状态模型，即就绪、运行和等待。因为这些是最频繁发生且非一次性的，而创建和退出是一次性的。</p>
+<h3 id="状态队列"><a href="#状态队列" class="headerlink" title="状态队列"></a>状态队列</h3><p>根据进程的状态，可以创造不同的队列保存不同状态的进程，进程状态的切换实际上是队列的切换。运行态的进程没有队列。</p>
+<h4 id="Linux上的进程状态"><a href="#Linux上的进程状态" class="headerlink" title="Linux上的进程状态"></a>Linux上的进程状态</h4><p>linux上的进程状态可以进一步细分为7个：</p>
+<ul>
+<li><h4 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h4></li>
+</ul>
+<p><strong>产生原因</strong></p>
+<p>当一个子进程结束时，并没有真正被销毁，而是留下了一个成为僵尸进程的数据结构，包含退出码和CPU等待时间等数据，这些数据最终会被传递给父进程。而父进程会起到为其收尸的作用，收尸的情况可能有两种</p>
+<ul>
+<li>父进程调用wait或waitpid等待子进程结束</li>
+<li>父进程结束后由init进程销毁</li>
+</ul>
+<p>但如果父进程是一个不会结束的循环进程，就会导致僵尸进程持续存在，虽然一个僵尸进程几乎不占用系统资源，但是如果多了还是会给系统带来影响，那么我们应该如何处理僵尸进程呢？</p>
+<p><strong>处理僵尸进程的方法</strong></p>
+<ul>
+<li>终止</li>
+</ul>
+<p>首先，我们先找到僵尸进程的父进程，shell命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep defunct_process_pid</span><br></pre></td></tr></table></figure>
+<p>然后将父进程杀死，连带着僵尸进程也会被杀死。</p>
+<ul>
+<li>预防</li>
+</ul>
+<p>上面给出的方法属于被动解决僵尸进程，显然我们是不满意的，我们还希望能够提供自动预防僵尸进程产生的方法，这里提供三个</p>
+<ul>
+<li>父进程调用函数<code>signal(SIGCHLD,SIG_IGN);</code>令系统自动回收子进程</li>
+<li>用waitpid等待子进程返回</li>
+</ul>
+<h2 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h2><h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p>当CPU从执行进程A切换至执行进程B时，发生了上下文的切换。当发生上下文切换时，操作系统必须高效地中断并保存现场，决定下一个进程，并释放将要执行的进程。所以进程切换要做两件事：</p>
+<ul>
+<li>暂停当前进程，从运行态切换为其它态</li>
+<li>调度另一个进程，从就绪态变为运行态</li>
+</ul>
+<p>一般进程的切换频率为10-15ms，切换速度非常快，因此一般使用汇编实现。</p>
+<h4 id="Task-State-Segment"><a href="#Task-State-Segment" class="headerlink" title="Task State Segment"></a>Task State Segment</h4><h5 id="32-bit-TSS的结构"><a href="#32-bit-TSS的结构" class="headerlink" title="32-bit TSS的结构"></a>32-bit TSS的结构</h5><p>Linux为每一个CPU设置了单独的TSS，来保存任务状态，并使用一个32位TSS descriptor来指向TSS的起始地址。32-bit的TSS的结构如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/tss.svg" width="450" alt="图片名称" align="center"></p>
+<p>TSS中主要包含静态和动态部分。其中动态部分在程序切换时由处理器进行更新；而静态部分在任务创建时被设置，处理器一般只读。</p>
+<ul>
+<li>动态：通用寄存器、段寄存器、EFLAGS、EIP以及前一个任务的TSS的选择符</li>
+<li>静态：任务的LDT的段选择符、CR3寄存器、不同优先级的栈指针及偏移量</li>
+</ul>
+<p>TSS保存了不同特权级下的堆栈信息，当发生堆栈切换，被调用者的堆栈的SS和ESP从此处取出，从而产生特权级的切换，由于从低特权级向高特权级转换，故TSS没有最低特权级的堆栈信息。</p>
+<h5 id="TSS-Descriptor5"><a href="#TSS-Descriptor5" class="headerlink" title="TSS Descriptor5"></a>TSS Descriptor<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup></h5><p>TSSD 记录了TSS的位置、大小以及相关属性，TSSD存放在GDT中，GDT的基址存放在每个CPU的<code>gdtr</code>寄存器中，TSSD的格式如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/20210627193306.png" width="550" alt="图片名称" align="center"></p>
+<p>关键字段的功能如下：</p>
+<ul>
+<li>Base Address：TSS线性地址的第一个Byte</li>
+<li>Limit：TSS最大偏移量</li>
+<li>DPL：TSSD的特权级</li>
+<li>G：TSS大小粒度（0-byte粒度，1-4KB粒度）</li>
+<li>P：TSS是否在物理内存中</li>
+<li>B（busy flag）：当前任务是否busy（B=1），一个忙任务表示正在运行或挂起的任务</li>
+</ul>
+<h5 id="TSS-Selector"><a href="#TSS-Selector" class="headerlink" title="TSS Selector"></a>TSS Selector</h5><p>TSS Selector用于在GDT中寻找特定的TSSD，实际上就是数组的一个偏移量。</p>
+<h4 id="切换过程"><a href="#切换过程" class="headerlink" title="切换过程"></a>切换过程</h4><p>进程切换分为两步：</p>
+<ol>
+<li>切换页目录，安装新的地址空间</li>
+<li>切换内核栈和硬件上下文（线程只做这一步）</li>
+</ol>
+<p>进程切换过程如下图所示：</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/0f1e8498-9405-95aa-e2b9-7ef1f3d0e6e9.png" width="500" alt="图片名称" align="center"></p>
+<p>具体的切换流程如下：</p>
+<pre class="mermaid">graph TB
+    node1[开始调度:cpu_idle]
+    node2[清除调度标志:schedule]
+    node3[查找就绪进程:还有可能查到自己]
+    node4[修改进程状态]
+    node5[进程切换:switch_to]
+
+    node1-->node2
+    node2-->node3
+    node3-->node4
+    node4-->node5
+    node5-->node6</pre>
+
+<h4 id="CPU调度器"><a href="#CPU调度器" class="headerlink" title="CPU调度器"></a>CPU调度器</h4><p>CPU调度器决定何时执行何进程多长时间。在设计调度器时，我们需要考虑进程应该执行多长时间，或者说调度频率应该有多高。这里我们引入CPU有效工作占比$r_e$的概念，其公式为：</p>
+<script type="math/tex; mode=display">
+r_e = t_p/T=\frac{t_p}{t_p+t_s}</script><p>其中$t_p$为进程工作时间，$T$为一个调度周期总时间，$t_s$为上下文切换时间。从公式中可见，如果切换过于频繁或者上下文切换时间过长，那么会导致有效工作率下降</p>
+<h4 id="消耗"><a href="#消耗" class="headerlink" title="消耗"></a>消耗</h4><p>进程切换后，虚拟内存空间发生了变化，这一步是由操作系统内核完成的。进程切换是有损耗的，除了时间损耗外，还有两个关于空间的损耗，所以我们要控制进程切换的频率</p>
+<ul>
+<li>寄存器中的内容需要发生变化；</li>
+<li>上下文切换会扰乱CPU Cache，已经缓存的进程A的数据在一瞬间全部作废，换成进程B。（cold cache）</li>
+</ul>
+<h3 id="进程创建"><a href="#进程创建" class="headerlink" title="进程创建"></a>进程创建</h3><h4 id="Linux下进程创建系统调用fork"><a href="#Linux下进程创建系统调用fork" class="headerlink" title="Linux下进程创建系统调用fork"></a>Linux下进程创建系统调用<code>fork</code></h4><p><code>fork</code>函数会创建一个新进程，和调用fork的进程几乎一致，两个进程都会继续运行，fork函数返回值如下：</p>
+<ul>
+<li>子进程中成功的fork调用返回0</li>
+<li>父进程返回子进程pid，出现错误返回负值</li>
+</ul>
+<h6 id="fork-使用方法及例子"><a href="#fork-使用方法及例子" class="headerlink" title="fork 使用方法及例子"></a>fork 使用方法及例子</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> pid = fork();</span><br><span class="line"><span class="keyword">if</span>(pid &gt; <span class="number">0</span>)&#123;    <span class="comment">//父进程</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"parent: child = %d\n"</span>, pid);</span><br><span class="line">    pid = wait();   <span class="comment">// 等待某个子进程结束，返回该子进程pid，如果没有，那么等待一个结束</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"child %d is done\n"</span>, pid);</span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"child exiting\n"</span>);</span><br><span class="line">    <span class="built_in">exit</span>();</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"fork error\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果fork正确，上面的代码运行结果可能为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parent:child = 1234</span><br><span class="line">child exiting</span><br><span class="line">child 1234 is done</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">child exiting</span><br><span class="line">parent:child = 1234</span><br><span class="line">child 1234 is done</span><br></pre></td></tr></table></figure>
+<p>取决于子进程和父进程谁先获得执行权</p>
+<ol>
+<li>fork一个新进程</li>
+<li>使用exec()载入一个新的应用程序，替换当前进程，这样就可以派生并执行一个不同的进程</li>
+</ol>
+<h6 id="fork计算"><a href="#fork计算" class="headerlink" title="fork计算"></a>fork计算</h6><p>fork一次会产生两个进程，而循环$n$次进行fork，会产生$2^n$个进程</p>
+<h6 id="fork的演进"><a href="#fork的演进" class="headerlink" title="fork的演进"></a>fork的演进</h6><p>早期的Unix系统fork会老老实实复制一份新数据，开销很大。但是后来为了提高效率，只在进行写操作时复制。在linux下是<code>vfork</code>，即轻量级fork，将内存复制延迟到应用时。</p>
+<h6 id="fork与多线程"><a href="#fork与多线程" class="headerlink" title="fork与多线程"></a>fork与多线程</h6><p>考虑这个问题，在一个多线程的进程中进行fork（听起来就蛋疼的要命）。在POSIX标准中，其行为如下：</p>
+<ul>
+<li>复制整个空间的写数据</li>
+<li>仅复制当前线程到子进程，其余线程全部蒸发</li>
+</ul>
+<p>这产生了一个严重问题，锁被复制，但是线程没了，这些锁就成为了孤儿锁，没有主人，无法被解锁，会导致程序发生严重死锁。</p>
+<h6 id="fork与文件"><a href="#fork与文件" class="headerlink" title="fork与文件"></a>fork与文件</h6><p>使用fork创建新的进程后，子进程会拷贝父进程的文件描述符表，但是父子进程会共享文件偏移量，考虑下面的例子：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(fork() == <span class="number">0</span>)&#123;</span><br><span class="line">    write(<span class="number">1</span>, <span class="string">"hello "</span>, <span class="number">6</span>);</span><br><span class="line">    <span class="built_in">exit</span>();</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    wait();</span><br><span class="line">    write(<span class="number">1</span>, <span class="string">"world\n"</span>, <span class="number">6</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结束后文件描述符1指向的文件会包含数据<code>&quot;hello world&quot;</code>，因为有<code>wait()</code>的存在，子进程会先于父进程进行写操作，改变文件的偏移量；而父进程会在此基础上进行写操作</p>
+<h3 id="创建空闲进程"><a href="#创建空闲进程" class="headerlink" title="创建空闲进程"></a>创建空闲进程</h3><p>如果没有用户进程，那么操作系统会怎么处理呢？操作系统会创建一个空闲进程，然后运行这个进程。</p>
+<h4 id="创建第一个内核线程"><a href="#创建第一个内核线程" class="headerlink" title="创建第一个内核线程"></a>创建第一个内核线程</h4><h3 id="进程加载"><a href="#进程加载" class="headerlink" title="进程加载"></a>进程加载</h3><h4 id="使用exec加载进程"><a href="#使用exec加载进程" class="headerlink" title="使用exec加载进程"></a>使用<code>exec</code>加载进程</h4><p>进程加载允许进程加载一个完全不同的程序，并从main开始执行，程序的加载和执行的系统调用是<code>exec()</code>。exec允许指定启动参数。当<code>exec</code>调用成功后，会替换调用进程的内存，重写代码段、堆栈和堆，并载入一个新内存镜像。<code>exec</code>在shell中很常见，用于执行用户的指令</p>
+<h5 id="exec-使用方法及例子"><a href="#exec-使用方法及例子" class="headerlink" title="exec 使用方法及例子"></a>exec 使用方法及例子</h5><p><code>exec</code>    接收两个参数，可执行文件的名称以及字符串格式的参数数组，<code>exec</code>如果成功执行，不会返回。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *argv[<span class="number">3</span>];</span><br><span class="line"></span><br><span class="line">argv[<span class="number">0</span>] = <span class="string">"echo"</span>;</span><br><span class="line">argv[<span class="number">1</span>] = <span class="string">"hello"</span>;</span><br><span class="line">argv[<span class="number">2</span>] = <span class="number">0</span>;</span><br><span class="line">exec(<span class="string">"/bin/echo"</span>, argv);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"exec error\n"</span>);   <span class="comment">//如果exec正常，这句永远不会执行</span></span><br></pre></td></tr></table></figure>
+<h5 id="fork和exec共同使用"><a href="#fork和exec共同使用" class="headerlink" title="fork和exec共同使用"></a>fork和exec共同使用</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> pid = fork();</span><br><span class="line"><span class="keyword">if</span>(pid == <span class="number">0</span>)&#123;</span><br><span class="line">    exec(<span class="string">"program"</span>, argc, argv0, argv1,...)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="exec实现"><a href="#exec实现" class="headerlink" title="exec实现"></a>exec实现</h5><p>exec的实现可以分为三个函数</p>
+<ul>
+<li>sys_exec：获取创建进程的相应参数</li>
+<li>do_execve：创建新进程所需要的段结构</li>
+<li><strong>load_icode</strong>：识别可执行文件格式，并加载到内存中</li>
+</ul>
+<h2 id="进程使用"><a href="#进程使用" class="headerlink" title="进程使用"></a>进程使用</h2><h3 id="进程树"><a href="#进程树" class="headerlink" title="进程树"></a>进程树</h3><p>在大多数操作系统中，进程创建的过程可以被视为一个树形结构，首先有一个根进程在系统启动后被创建，然后这个根进程创建了一些初始进程，这些初始进程随后又开始工作，创建了更多的工作进程。以linux为例，这个过程如下所示：</p>
+<pre class="mermaid">graph TB
+    node["idle(0)"]
+    node1["init(1)"]
+    node2["pageout"]
+    node3["shell"]
+    node4["ls"]
+    node5["emacs"]
+    node6["..."]
+
+    node-->node1
+    node-->node2
+    node1-->node3
+    node3-->node4
+    node3-->node5
+    node5-->node6</pre>
+
+<p>Linux的进程祖先为进程0，即idle进程，该进程使用静态分配的数据结构，而其他进程数据结构都是动态的。而init进程由start_kernel()创建。操作系统外层的其他所有的进程都由init创建。</p>
+<h3 id="进程同步"><a href="#进程同步" class="headerlink" title="进程同步"></a>进程同步</h3><p>进程同步：指对多个相关进程在执行次序上进行协调，以使并发执行的进程之间能有效地共享资源和相互合作，从而使程序的执行具有可再现性，同步机制如下：</p>
+<ul>
+<li>空闲切换</li>
+<li>忙则等待（保证临界区互斥访问）</li>
+<li>有限等待（等待有限时间，避免死等）</li>
+<li>让权等待（当无法访问临界区时，应当释放处理机，以免陷入忙等）</li>
+</ul>
+<h3 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h3><p>当进程执行过程中，会执行IO过程，而IO往往是很慢的，所以CPU需要考虑IO对进程的影响，CPU处理进程中的IO操作的模型如下：</p>
+<p><img src="https://github.com/sqduan/hexoimg/blob/master/ioprocess.JPG?raw=true" width="480" alt="图片名称" align="center"></p>
+<p>在IO请求时，正在执行的进程将进入等待队列中。</p>
+<h3 id="进程活动模型"><a href="#进程活动模型" class="headerlink" title="进程活动模型"></a>进程活动模型</h3><p>现在我们对进程的活动模型进行一个总结，如下图所示：</p>
+<p><img src="https://github.com/sqduan/hexoimg/blob/master/processStateTrans.JPG?raw=true" width="480" alt="图片名称" align="center"></p>
+<p>从上图中可以看到，当发生IO请求、时间片耗尽、fork线程或发生中断时，都有可能导致进程从运行态进入等待队列中。</p>
+<h3 id="进程通信方式（Inter-Process-Communication-IPC）"><a href="#进程通信方式（Inter-Process-Communication-IPC）" class="headerlink" title="进程通信方式（Inter Process Communication, IPC）"></a>进程通信方式（Inter Process Communication, IPC）</h3><p>通信方式包括无名管道、有名管道、信号、共享内存、消息队列、信号量等。可以分为高级与低级两种。由于每个进程拥有自己的用户地址空间，因此进程间的全局变量是不可变的，所以进程间通信必须经过内核。</p>
+<h4 id="高级通信方式"><a href="#高级通信方式" class="headerlink" title="高级通信方式"></a>高级通信方式</h4><ul>
+<li>共享内存：最快的进程间通信方式，例如剪贴板，共享内存是完全在用户态的，操作系统不需要干预，这也导致没有合适的系统调用帮助我们进行通信。</li>
+<li>消息传递系统：类似于信号—槽系统，是一种无连接不可靠的单向数据传输系统</li>
+<li>管道通信系统：管道是单向的、先进先出的、无结构的、固定大小的字节流，它把一个进程的标准输出和另一个进程的标准输入连接在一起。写进程在管道的尾端写入数据，读进程在管道的道端读出数据。数据读出后将从管道中移走，其它读进程都不能再读到这些数据。管道提供了简单的流控制机制。进程试图读空管道时，在有数据写入管道前，进程将一直阻塞。同样地，管道已经满时，进程再试图写管道，在其它进程从管道中移走数据之前，写进程将一直阻塞。<ul>
+<li>匿名管道：未命名的、单向管道，通过父进程和一个子进程之间传输数据。匿名管道只能实现本地机器上两个进程之间的通信，而不能实现跨网络的通信。</li>
+<li>命名管道：不仅可以在本机上实现两个进程间的通信，还可以跨网络实现两个进程间的通信。</li>
+</ul>
+</li>
+<li>套接字：套接字也是一种进程间通信机制，与其它通信机制不同的是，它可用于不同机器间的进程通信</li>
+<li>消息队列：是一个在系统内核中用来保存消息的队列，它在系统内核中是以消息链表的形式出现的。消息队列克服了信号传递信息少、管道只能承载无格式字节流以及缓冲区大小受限等缺点</li>
+</ul>
+<h4 id="低级通信方式："><a href="#低级通信方式：" class="headerlink" title="低级通信方式："></a>低级通信方式：</h4><ul>
+<li>信号量：信号量是一个计数器，可以用来控制多个进程对共享资源的访问。它常作为一种锁机制，防止某进程正在访问共享资源时，其它进程也访问该资源。因此，主要作为进程间以及同一进程内不同线程之间的同步手段</li>
+</ul>
+<h3 id="创建进程的方式"><a href="#创建进程的方式" class="headerlink" title="创建进程的方式"></a>创建进程的方式</h3><p>进程创建有fork和exec两种方式，其特点分别如下：</p>
+<ul>
+<li>fork复制进程，然后两个进程开始分别运行</li>
+<li>exec在现有进程上下文中运行可执行文件，替换以前的可执行文件</li>
+</ul>
+<h2 id="进程相关系统调用"><a href="#进程相关系统调用" class="headerlink" title="进程相关系统调用"></a>进程相关系统调用</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kill</td>
+<td>向进程发送信号</td>
+</tr>
+<tr>
+<td>setgid</td>
+<td>设置进程的组id</td>
+</tr>
+<tr>
+<td>exec</td>
+<td>执行给定的文件，不会改变进程号，只会以另一个可执行文件替换当前程序</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="exec族"><a href="#exec族" class="headerlink" title="exec族"></a>exec族</h3><h4 id="execv"><a href="#execv" class="headerlink" title="execv"></a>execv</h4><ul>
+<li>原型</li>
+</ul>
+<p>execv的原型如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">execv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *path, <span class="keyword">char</span> *constargv[])</span></span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输入<ul>
+<li>path：可执行文件路径，</li>
+<li>constargv：传递给应用程序的参数列表，<code>constargv[0]</code>为应用程序本身的名字，最后一个参数应当为NULL</li>
+</ul>
+</li>
+</ul>
+<h2 id="附录：PID结构体内容"><a href="#附录：PID结构体内容" class="headerlink" title="附录：PID结构体内容"></a>附录：PID结构体内容</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="http://115.78.133.167:81/bitstream/TVHG_07113876976/270/1/OReilly%20-%20Understanding%20The%20Linux%20Kernel.pdf">Bovet D P, Cesati M. Understanding the Linux Kernel: from I/O ports to process management[M]. &quot; O'Reilly Media, Inc.&quot;, 2005.</a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="https://zhuanlan.zhihu.com/p/86629244">操作系统问题总结</a><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><a href="https://blog.csdn.net/LEON1741/article/details/78142269">linux下僵尸进程产生原因与解决方法</a><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><a href="https://www.xuetangx.com/learn/THU08091000267/THU08091000267/5883104/video/9173411">进程挂起</a><a href="#fnref:4" rev="footnote"> ↩</a></li><li id="fn:5"><a href="http://www.logix.cz/michal/doc/i386/chp07-02.htm">TSS Descriptor</a><a href="#fnref:5" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/课程/MIT6828课程大纲/" rel="next" title="MIT6828课程大纲">
+                <i class="fa fa-chevron-left"></i> MIT6828课程大纲
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/操作系统/进程位数判断/" rel="prev" title="进程位数判断">
+                进程位数判断 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的定义"><span class="nav-number">1.1.</span> <span class="nav-text">进程的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程的组成"><span class="nav-number">1.2.</span> <span class="nav-text">进程的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程特点"><span class="nav-number">1.3.</span> <span class="nav-text">进程特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程描述符-Process-Control-Block-PCB"><span class="nav-number">2.</span> <span class="nav-text">进程描述符(Process Control Block,PCB)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程描述符内容"><span class="nav-number">2.1.</span> <span class="nav-text">进程描述符内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程描述符工作过程"><span class="nav-number">2.2.</span> <span class="nav-text">进程描述符工作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCB组织结构"><span class="nav-number">2.3.</span> <span class="nav-text">PCB组织结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程的状态"><span class="nav-number">3.</span> <span class="nav-text">进程的状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#轻重进程状态"><span class="nav-number">3.1.</span> <span class="nav-text">轻重进程状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生命周期"><span class="nav-number">3.2.</span> <span class="nav-text">生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三状态模型"><span class="nav-number">3.3.</span> <span class="nav-text">三状态模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态队列"><span class="nav-number">3.4.</span> <span class="nav-text">状态队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux上的进程状态"><span class="nav-number">3.4.1.</span> <span class="nav-text">Linux上的进程状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#僵尸进程"><span class="nav-number">3.4.2.</span> <span class="nav-text">僵尸进程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程控制"><span class="nav-number">4.</span> <span class="nav-text">进程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#上下文切换"><span class="nav-number">4.1.</span> <span class="nav-text">上下文切换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Task-State-Segment"><span class="nav-number">4.1.1.</span> <span class="nav-text">Task State Segment</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#32-bit-TSS的结构"><span class="nav-number">4.1.1.1.</span> <span class="nav-text">32-bit TSS的结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TSS-Descriptor5"><span class="nav-number">4.1.1.2.</span> <span class="nav-text">TSS Descriptor5</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TSS-Selector"><span class="nav-number">4.1.1.3.</span> <span class="nav-text">TSS Selector</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#切换过程"><span class="nav-number">4.1.2.</span> <span class="nav-text">切换过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU调度器"><span class="nav-number">4.1.3.</span> <span class="nav-text">CPU调度器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消耗"><span class="nav-number">4.1.4.</span> <span class="nav-text">消耗</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程创建"><span class="nav-number">4.2.</span> <span class="nav-text">进程创建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux下进程创建系统调用fork"><span class="nav-number">4.2.1.</span> <span class="nav-text">Linux下进程创建系统调用fork</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#fork-使用方法及例子"><span class="nav-number">4.2.1.0.1.</span> <span class="nav-text">fork 使用方法及例子</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#fork计算"><span class="nav-number">4.2.1.0.2.</span> <span class="nav-text">fork计算</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#fork的演进"><span class="nav-number">4.2.1.0.3.</span> <span class="nav-text">fork的演进</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#fork与多线程"><span class="nav-number">4.2.1.0.4.</span> <span class="nav-text">fork与多线程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#fork与文件"><span class="nav-number">4.2.1.0.5.</span> <span class="nav-text">fork与文件</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建空闲进程"><span class="nav-number">4.3.</span> <span class="nav-text">创建空闲进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建第一个内核线程"><span class="nav-number">4.3.1.</span> <span class="nav-text">创建第一个内核线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程加载"><span class="nav-number">4.4.</span> <span class="nav-text">进程加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用exec加载进程"><span class="nav-number">4.4.1.</span> <span class="nav-text">使用exec加载进程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#exec-使用方法及例子"><span class="nav-number">4.4.1.1.</span> <span class="nav-text">exec 使用方法及例子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fork和exec共同使用"><span class="nav-number">4.4.1.2.</span> <span class="nav-text">fork和exec共同使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#exec实现"><span class="nav-number">4.4.1.3.</span> <span class="nav-text">exec实现</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#进程使用"><span class="nav-number">5.</span> <span class="nav-text">进程使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#进程树"><span class="nav-number">5.1.</span> <span class="nav-text">进程树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程同步"><span class="nav-number">5.2.</span> <span class="nav-text">进程同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO"><span class="nav-number">5.3.</span> <span class="nav-text">IO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程活动模型"><span class="nav-number">5.4.</span> <span class="nav-text">进程活动模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程通信方式（Inter-Process-Communication-IPC）"><span class="nav-number">5.5.</span> <span class="nav-text">进程通信方式（Inter Process Communication, IPC）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#高级通信方式"><span class="nav-number">5.5.1.</span> <span class="nav-text">高级通信方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#低级通信方式："><span class="nav-number">5.5.2.</span> <span class="nav-text">低级通信方式：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建进程的方式"><span class="nav-number">5.6.</span> <span class="nav-text">创建进程的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程相关系统调用"><span class="nav-number">6.</span> <span class="nav-text">进程相关系统调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exec族"><span class="nav-number">6.1.</span> <span class="nav-text">exec族</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#execv"><span class="nav-number">6.1.1.</span> <span class="nav-text">execv</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录：PID结构体内容"><span class="nav-number">7.</span> <span class="nav-text">附录：PID结构体内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

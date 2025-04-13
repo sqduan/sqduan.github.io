@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Model predictive control is like playing chess, at ,each time step, you choose the best strategy to win. In this process, you make prediction based on current situation.">
+<meta name="keywords" content="Important">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Model Predictive Control(1)--What and why MPC">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/控制科学/控制理论/Model_predictive_control/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="Model predictive control is like playing chess, at ,each time step, you choose the best strategy to win. In this process, you make prediction based on current situation.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/prediction.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/response.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/lowandhigh.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/lowandhigh1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%89%B9%E6%B3%A8%202019-11-30%20102145.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%89%B9%E6%B3%A8%202019-11-27%20114036.jpg">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.492Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Model Predictive Control(1)--What and why MPC">
+<meta name="twitter:description" content="Model predictive control is like playing chess, at ,each time step, you choose the best strategy to win. In this process, you make prediction based on current situation.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/prediction.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/控制科学/控制理论/Model_predictive_control/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Model Predictive Control(1)--What and why MPC | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/控制科学/控制理论/Model_predictive_control/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Model Predictive Control(1)--What and why MPC
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/" itemprop="url" rel="index"><span itemprop="name">控制科学</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/控制理论/" itemprop="url" rel="index"><span itemprop="name">控制理论</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/控制科学/控制理论/自适应控制/" itemprop="url" rel="index"><span itemprop="name">自适应控制</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Model predictive control is like playing chess, at ,each time step, you choose the best strategy to win. In this process, you make <strong>prediction</strong> based on current situation.</p>
+<a id="more"></a>
+<p>Model predictive control (MPC), also known as dynamical matrix control (DMC), generalized predictive control (GPC) or receding horizon control (RHC), is an online control algorithm based on numerically solving an optimal problem at each step. This article gives a summarization about model predictive control strategy. It is mainly a summarization about reference <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>  </p>
+<h2 id="Why-MPC"><a href="#Why-MPC" class="headerlink" title="Why MPC"></a>Why MPC</h2><ul>
+<li>Intuitive concept, easy to understand and implement</li>
+<li>Systematic handling of constrains</li>
+<li>Can handle MIMO and dead-time without modification</li>
+<li>Feed forward to make good use of future target information </li>
+<li>Handling challenging dynamics (unlike PID)</li>
+</ul>
+<p>MPC has been widely used in industry because it has been proved that by giving superior control, the profits can be improved: </p>
+<ul>
+<li><strong>If one is confident that the variance of the output can be reduced, one can then safely operate closer to a constraint and increase quantity.</strong> </li>
+<li>It has the ability to incorporate constraints explicitly enables ‘optimum’ constrained performance</li>
+</ul>
+<h2 id="What-is-MPC4"><a href="#What-is-MPC4" class="headerlink" title="What is MPC4"></a>What is MPC<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></h2><h3 id="Main-components-Important"><a href="#Main-components-Important" class="headerlink" title="Main components (Important)"></a>Main components (Important)</h3><ol>
+<li>Prediction</li>
+<li>Receding horizon (滑动窗口)</li>
+<li>Modelling</li>
+<li>Performance index</li>
+<li>Degree of freedom</li>
+<li>Constraint handling</li>
+<li>Multivariable (MIMO)</li>
+</ol>
+<p>We will discuss them one by one</p>
+<h3 id="Prediction"><a href="#Prediction" class="headerlink" title="Prediction"></a>Prediction</h3><p>When we talk about prediction, answer the following question:</p>
+<ul>
+<li>Why is prediction important</li>
+</ul>
+<blockquote>
+<p>Think three step before do one step — 三思而后行</p>
+</blockquote>
+<p>Before planning an activity, always think though about all the likely consequences or there will be disasters!!!</p>
+<ul>
+<li><p><strong>How to predict</strong> and <strong>how far</strong> and <strong>how accurate</strong> should we predict</p>
+<ul>
+<li>How far</li>
+</ul>
+<p>Prediction horizon is often mistreated as a tuning parameters in MPC. However, in terms of normal human behavior, we all know how far we need to predict, for example:</p>
+<blockquote>
+<p>Q: When driving a car, what is the prediction horizon</p>
+<p>A: <strong>You should predict beyond the safe braking distance, our you will die!</strong> For example, while driving 70 mph, you need to look at least 100 m ahead, while driving 20 mph, 20 m is OK.</p>
+</blockquote>
+<p>   <table><tr><td bgcolor="#F7DC6F" style="vertical-align:middle; text-align:center;">Prediction horizen > settling time!</td></tr></table><br><strong>Summary: </strong>always look beyond the key dynamics of a process</p>
+<p>Consequence of not predicting: Low performance, maybe disasters.</p>
+<h3 id="Receding-horizen"><a href="#Receding-horizen" class="headerlink" title="Receding horizen"></a>Receding horizen</h3></li>
+</ul>
+<p>It means that we continually update our predictions and decision making to take account of the most recent target and measurement data.</p>
+<p><strong>One effect is that the prediction horizon is always relative to the current position and recedes away from the viewer as the viewer moves forward.</strong></p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/prediction.png" width="450" alt="图片名称" align="center"></p>
+<h4 id="Feedback-from-MPC"><a href="#Feedback-from-MPC" class="headerlink" title="Feedback from MPC"></a>Feedback from MPC</h4><p>In MPC, the continual update prediction and decision making based on the measurement data introduces the feedback. (<strong>Measurement introduces feedback.</strong>)</p>
+<ol>
+<li>Measurement is a core part of a feedback loop</li>
+<li>decision based on measurement are the second core part</li>
+</ol>
+<p>Predictive control incorporates both.</p>
+<h3 id="Modelling"><a href="#Modelling" class="headerlink" title="Modelling"></a>Modelling</h3><p>Modelling is a core part of prediction control. People can predict based on experience, same idea, in order to make prediction, the behaviors of a system should be clear and the model is required.</p>
+<p>However, here comes the problem, what is an appropriate prediction model?</p>
+<h4 id="Modelling-requirements"><a href="#Modelling-requirements" class="headerlink" title="Modelling requirements"></a>Modelling requirements</h4><ul>
+<li>Easy to form prediction - ideally linear</li>
+<li>Easy to identify model parameters</li>
+<li><p>Accurate prediction: steady-state, fast transients, mid-response…… </p>
+<p> <table><tr><td bgcolor="#F7DC6F" style="vertical-align:middle; text-align:center;">The simplest model gives accurate prediction is usually the best.</td></tr> </table></p>
+</li>
+</ul>
+<p>But it’s OK if the model is not that accurate, because we have feedback to deal with the small error. </p>
+<h3 id="Performance-index"><a href="#Performance-index" class="headerlink" title="Performance index"></a>Performance index</h3><p>We could give out descriptions about what constitutes good or bad, for example, we use SLOW, OSCILLATORY, UNSTABLE, IDEAL to describe the step response.</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/response.jpg" width="450" alt="图片名称" align="center"></p>
+<p>When we talk about performance index, we need to ask the following questions:</p>
+<h4 id="1-What-is-the-performance-index-for"><a href="#1-What-is-the-performance-index-for" class="headerlink" title="1. What is the performance index for?"></a>1. What is the performance index for?</h4><p>In order to decide which input trajectory, we need a precise numeric definition of ‘best’, so <strong>the performance index is a numerical definition of what is the best.</strong> However, it should be note that the performance index is still have some contradiction with real situation.</p>
+<h4 id="2-How-should-the-performance-index-be-designed"><a href="#2-How-should-the-performance-index-be-designed" class="headerlink" title="2. How should the performance index be designed?"></a>2. How should the performance index be designed?</h4><p>The index should be simple, you should only increase the complexity where the benefits is clear. For example:</p>
+<blockquote>
+<p>With the increase of the experience, people can do more complex activities and give out more challenging performance indices, because our internal model is better through experience.</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/lowandhigh.png" width="350" alt="图片名称" align="center"></p>
+<p><strong>Typically quadratic performance is used, because:</strong></p>
+<ul>
+<li>It give us well conditioned optimization</li>
+<li>Unique minimum</li>
+<li>smooth behaviours (unlike 1-norm or inf-norm)</li>
+</ul>
+<h4 id="3-How-should-we-make-trade-offs-between-optimal-and-safe-robust-performance"><a href="#3-How-should-we-make-trade-offs-between-optimal-and-safe-robust-performance" class="headerlink" title="3. How should we make trade offs between optimal and safe/robust performance?"></a>3. How should we make trade offs between optimal and safe/robust performance?</h4><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/lowandhigh1.png" width="350" alt="图片名称" align="center"></p>
+<h3 id="Degree-of-freedom-DOF"><a href="#Degree-of-freedom-DOF" class="headerlink" title="Degree of freedom (DOF)"></a>Degree of freedom (DOF)</h3><p>DOF describes the complexity of the input predictions, it is closely linked to the performance index. There is no point to use high DOF with a highly performance demanding if the model is poor, it’s just like asking a beginner to play like a master!</p>
+<p>  <table><tr><td bgcolor="#F7DC6F" style="vertical-align:middle; text-align:center;">The useful num of DOF is related to the prediction accuracy</td></tr> </table></p>
+<p>An ill-posed performance index is shown below:</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%89%B9%E6%B3%A8%202019-11-30%20102145.jpg" width="200" alt="图片名称" align="center"></p>
+<p><em>Try to fit a second order curve with one DOF, BAD!! One degree of freedom can only be applied to simple target</em></p>
+<p>In MPC, an ill-posed performance index means that <strong>a low prediction horizon (can not predict further events) compared to the system dynamic and use numerous DOF to optimal tracking with that horizon.</strong> With low prediction horizon, one cannot fully anticipate the consequence of ones actions, so the planned actions maybe poor.</p>
+<h3 id="Constraint-handling"><a href="#Constraint-handling" class="headerlink" title="Constraint handling"></a>Constraint handling</h3><p>One major advantage of predictive control is that <strong>it embeds constraints to strategy.</strong> It’s critical to getting effective and robust close-loop behavior. We should know that:</p>
+<ol>
+<li>The proposed input trajectory is optimal only if it satisfies constraints</li>
+<li>More typical control strategy treat constraints after thought (like PID)</li>
+</ol>
+<blockquote>
+<p><strong>Example: overshooting</strong></p>
+<p>In some situation, overshooting is a disaster (like the chemical tank level control, if overshooted, the chemical spills everywhere! ), it means we lost control of the system and make explosion.</p>
+</blockquote>
+<p>In MPC, the constraints (flow, power or speed limitations) are embedded, which means that it will not propose input flows that allow overshooting, the response time may become slower, but much more safer. In PC, the input is limited to 100% and will not allow earlier input choices which make the system unstable</p>
+<h3 id="Multivariable-MIMO"><a href="#Multivariable-MIMO" class="headerlink" title="Multivariable (MIMO)"></a>Multivariable (MIMO)</h3><p>In MIMO system, often <strong>changing one input changes all the outputs,</strong> therefore we need an control law consider all the I/Os. One advantage of MPC is that we consider about the interaction, although we need to express the algorithm in mathematical form.</p>
+<h2 id="How-MPC-works"><a href="#How-MPC-works" class="headerlink" title="How MPC works"></a>How MPC works</h2><h2 id="Mathematical-form-about-MPC"><a href="#Mathematical-form-about-MPC" class="headerlink" title="Mathematical form about MPC"></a>Mathematical form about MPC</h2><h3 id="Basic-of-MPC"><a href="#Basic-of-MPC" class="headerlink" title="Basic of MPC"></a>Basic of MPC</h3><p>The first thing we need to know that the implementation of MPC is usually in discrete time<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Meanwhile, due to the limitations of physical world, there are constrains:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned}{ll}{U_{\min } \leq u_{i}(k) \leq U_{\max }} & {\text { for all } i=1,2, \ldots, M \text { and } k=0,1,2, \ldots, \infty} \\ {X_{\min } \leq x_{i}(k) \leq X_{\max }} & {\text { for all } i=1,2, \ldots, N \text { and } k=0,1,2, \ldots, \infty}
+\end{aligned}
+\end{equation}</script><p>so in practical control system, we need to solve a constrained LQR problem, now let’s convert infinite-time limit to a $N$ step finite-time limit. Then our optimal problem becomes a set of linear equations with variables ${\mathrm{x}(1), \mathrm{x}(2), \ldots, \mathrm{x}(\mathrm{N}) ; \mathrm{u}(0), \mathrm{u}(1), \ldots, \mathrm{u}(\mathrm{N}-1)}$, the initial state is $x(0)=x_0$. Now we give out the goal of MPC</p>
+<p><strong>Goal:</strong>  find the best control sequence over a future horizon of $N$ steps</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned} 
+\min &\sum^{N-1}_{k=0}\left \| W^y(y_k-r(t)) \right \|^2_2+\left \| W^u(u_k-u_r(t)) \right \|^2_2\\
+s.t.\quad 
+&\mathrm{pridiction}\\
+&x_{k+1}=f(x_k,u_k)\\
+&y_k=g(x_k,u_k)\\        
+&\mathrm{constraints}\\
+&u_{\min}\leq u_k \leq u_{\max}\\
+&y_{\min}\leq y_k \leq y_{\max}\\
+&\mathrm{state\ feedback}\\
+&x_0=x(t)
+\end{aligned}
+\end{equation}</script><h3 id="Linear-MPC-equals-to-linear-state-feedback"><a href="#Linear-MPC-equals-to-linear-state-feedback" class="headerlink" title="Linear MPC (equals to linear state-feedback!)"></a>Linear MPC (equals to linear state-feedback!)</h3><h4 id="Unconstrained-case"><a href="#Unconstrained-case" class="headerlink" title="Unconstrained case"></a>Unconstrained case</h4><p>Let’s consider our linear prediction model:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left\{\begin{aligned} 
+x_{k+1} &=A x_{k}+B u_{k} \\ 
+y_{k} &=C x_{k} \end{aligned}\right.
+\quad\begin{array}{l}{x \in \mathbb{R}^{n}}
+\\ {u \in \mathbb{R}^{m}} 
+\\ {y \in \mathbb{R}^{p}}\end{array}
+\end{equation}</script><p>The relation between input and states is:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+x_{k}=A^{k} x_{0}+\sum_{j=0}^{k-1} A^{j} B u_{k-1-j}
+\end{equation}</script><p>and the performance index is (cost function, see ):</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+J\left(z, x_{0}\right)=x_{N}^{\prime} P x_{N}+\sum_{k=0}^{N-1} x_{k}^{\prime} Q x_{k}+u_{k}^{\prime} R u_{k} \quad \begin{aligned} R &=R^{\prime} \succ 0 \\ Q &=Q^{\prime} \succeq 0 \\ P &=P^{\prime} \succeq 0 \end{aligned} \quad z=\left[\begin{array}{c}{u_{0}} \\ {u_{1}} \\ {\vdots} \\ {u_{N-1}}\end{array}\right]
+\end{equation}</script><p><strong>Goal: </strong> find a sequence $z^*$ to minimize cost function $J$. See <a href="/2024/10/13/控制科学/控制理论/LQG_regulator/" title="LQG regulator">LQG regulator</a>. </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+J\left(z, x_{0}\right)=
+x_{0}^{\prime} Q x_{0}+\left[\begin{array}{c}{x_{1}} \\ {x_{2}} \\ {\vdots} \\ {x_{N-1}} \\ {x_{N}}\end{array}\right]^{\prime}\left[\begin{array}{ccccc}{Q} & {0} & {0} & {\cdots} & {0} \\ {0} & {Q} & {0} & {\cdots} & {0} \\ {\vdots} & {\vdots} & {\ddots} & {\vdots} & {\vdots} \\ {0} & {\cdots} & {0} & {Q} & {0} \\ {0} & {0} & {\cdots} & {0} & {P}\end{array}\right]\left[\begin{array}{c}{x_{1}} \\ {x_{2}} \\ {\vdots} \\ {x_{N-1}} \\ {x_{N}}\end{array}\right]\\
++\left[\begin{array}{c}{u_{0}} \\ {u_{1}} \\ {\vdots} \\ {u_{N-1}}\end{array}\right]\left[\begin{array}{cccc}{R} & {0} & {\cdots} & {0} \\ {0} & {R} & {\cdots} & {0} \\ {\vdots} & {\vdots} & {\ddots} & {\vdots} \\ {0} & {\cdots} & {0} & {R}\end{array}\right]\left[\begin{array}{c}{u_{0}} \\ {u_{1}} \\ {\vdots} \\ {u_{N-1}}\end{array}\right]
+\end{equation}</script><hr>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left[\begin{array}{c}{x_{1}} \\ {x_{2}} \\ {\vdots} \\ {x_{N}}\end{array}\right]=\left[\begin{array}{cccc}{B} & {0} & {\cdots} & {0} \\ {A B} & {B} & {\cdots} & {0} \\ {\vdots} & {\vdots} & {\ddots} & {\vdots} \\ {A^{N-1} B} & {A^{N-2} B} & {\ldots} & {B}\end{array}\right]\left[\begin{array}{c}{u_{0}} \\ {u_{1}} \\ {\vdots} \\ {u_{N-1}}\end{array}\right]+\left[\begin{array}{c}{A} \\ {A^{2}} \\ {\vdots} \\ {A^{N}}\end{array}\right] x_{0}
+\end{equation}</script><hr>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned} J\left(z, x_{0}\right) &=\left(\bar{S} z+\bar{T} x_{0}\right)^{\prime} \bar{Q}\left(\bar{S} z+\bar{T} x_{0}\right)+z^{\prime} \bar{R} z+x_{0}^{\prime} Q x_{0} \\ &=\frac{1}{2} z^{\prime} \underbrace{2\left(\bar{R}+\bar{S}^{\prime} \bar{Q} \bar{S}\right)}_{H} z+x_{0}^{\prime} \underbrace{2 \bar{T}^{\prime} \bar{Q} \bar{S}}_{F^{\prime}} z+\frac{1}{2} x_{0}^{\prime} \underbrace{2\left(Q+\bar{T}^{\prime} \bar{Q} \bar{T}\right)}_{Y} x_{0} \end{aligned}
+\end{equation}</script><p>Now let’s take a look at the cost function</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+J\left(z, x_{0}\right)=\frac{1}{2} z^{\prime} H z+x_{0}^{\prime} F^{\prime} z+\frac{1}{2} x_{0}^{\prime} Y x_{0}
+\end{equation}</script><p>the optimum is obtained by zeroing the gradient </p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\nabla_{z} J\left(z, x_{0}\right)=H z+F x_{0}=0
+\end{equation}</script><p>and hence the solution is:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+z^{*}=\left[\begin{array}{c}{u_{0}^{*}} \\ {u_{1}^{*}} \\ {\vdots} \\ {u_{N-1}^{*}}\end{array}\right]=-H^{-1} F x_{0}=-[I\ 0\ ...\ 0]H^{-1}Fx(t)=Kx(t)
+\end{equation}</script><blockquote>
+<p><strong>Unconstrained linear MPC = linear state-feedback! </strong></p>
+</blockquote>
+<h4 id="constrained-case"><a href="#constrained-case" class="headerlink" title="constrained case"></a>constrained case</h4><p>Still the prediction model above, this time we add input and output constraints to enforce, our control problem becomes</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{array}{cl}{\min _{z}} & {x_{N}^{\prime} P x_{N}+\sum^{N-1}_{k=0} x_{k}^{\prime} Q x_{k}+u_{k}^{\prime} R u_{k}} \\ {\text { s.t. }} & {u_{\min } \leq u_{k} \leq u_{\max }, k=0, \ldots, N-1} \\ {} & {y_{\min } \leq y_{k} \leq y_{\max }, k=1, \ldots, N}\end{array}
+\end{equation}</script><p>write as condensed form:</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{aligned} V\left(x_{0}\right)=\frac{1}{2} x_{0}^{\prime} Y x_{0}+& \min _{z} \frac{1}{2} z^{\prime} H z+x_{0}^{\prime} F^{\prime} z \\ \text { s.t. } & G z \leq W+S x_{0} \end{aligned}
+\end{equation}</script><p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/%E6%89%B9%E6%B3%A8%202019-11-27%20114036.jpg" width="400" alt="图片名称" align="center"></p>
+<ul>
+<li>Input constraints $u<em>{\min } \leq u</em>{k} \leq u_{\max }$</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left[\begin{array}{cccc}{1} & {0} & {\cdots} & {0} \\ {0} & {1} & {\cdots} & {0} \\ {\vdots} & {} & {\ddots} & {\vdots} \\ {0} & {\cdots} & {0} & {1} \\ {-1} & {0} & {\cdots} & {0} \\ {0} & {-1} & {\cdots} & {0} \\ {\vdots} & {} & {\ddots} & {\vdots} \\ {0} & {\cdots} & {0} & {-1}\end{array}\right] z \leq\left[\begin{array}{c}{u_{\max }} \\ {u_{\max }} \\ {\vdots} \\ {u_{\max }} \\ {-u_{\min }} \\ {-u_{\min }} \\ {\vdots} \\ {-u_{\min }}\end{array}\right] \quad z=\left[\begin{array}{c}{u_{0}} \\ {u_{1}} \\ {\vdots} \\ {u_{N-1}}\end{array}\right]
+\end{equation}</script><ul>
+<li>Output constraints $<br>y<em>{k}=C A^{k} x</em>{0}+\sum<em>{i=0}^{k-1} C A^{i} B u</em>{k-1-i} \leq y_{\max }, k=1, \ldots, N<br>$</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left[\begin{array}{cccc}{C B} & {0} & {\cdots} & {0} \\ {C A B} & {C B} & {\cdots} & {0} \\ {\vdots} & {} & {} & {\vdots} \\ {C A^{N-1} B} & {\cdots} & {C A B} & {C B}\end{array}\right] z \leq\left[\begin{array}{c}{y_{\max }} \\ {y_{\max }} \\ {\vdots} \\ {y_{\max }}\end{array}\right]-\left[\begin{array}{c}{C A} \\ {C A^{2}} \\ {\vdots} \\ {C A^{N}}\end{array}\right] x_{0}
+\end{equation}</script><h5 id="Linear-MPC-algorithm"><a href="#Linear-MPC-algorithm" class="headerlink" title="Linear MPC algorithm"></a>Linear MPC algorithm</h5><p>At each sampling time $t$:</p>
+<ul>
+<li>measure (or estimate) the current state $x(t)$</li>
+<li>Get the solution $z^<em>=\left[\begin{array}{c}{u_{0}^</em>} \ {u<em>{1}^*} \ {\vdots} \ {u</em>{N-1}^*}\end{array}\right]$ of the QP</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{equation}
+\left\{\begin{array}{cc}{\min _{z}} & {\frac{1}{2} z^{\prime} H z+x^{\prime}(t) F^{\prime} z} \\ {\text { s.t. }} & {G z \leq W+Sx(t)}\end{array}\right.
+\end{equation}</script><ul>
+<li>Apply only $u(t)=u^<em>_0$, discarding the remaining optimal inputs $u^</em><em>1,…,u^*</em>{N-1}$</li>
+</ul>
+<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><h3 id="Explicit-MPC-Control-of-a-Single-Input-Single-Output-Plant3"><a href="#Explicit-MPC-Control-of-a-Single-Input-Single-Output-Plant3" class="headerlink" title="Explicit MPC Control of a Single-Input-Single-Output Plant3"></a>Explicit MPC Control of a Single-Input-Single-Output Plant<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup></h3><p>This subsection is mainly a summarization about reference <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
+<h4 id="Plant-design"><a href="#Plant-design" class="headerlink" title="Plant design"></a>Plant design</h4><p> The linear open-loop dynamic model is a double integrator. </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plant = tf(<span class="number">1</span>,[<span class="number">1</span> <span class="number">0</span> <span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+<h4 id="MPC-design"><a href="#MPC-design" class="headerlink" title="MPC design"></a>MPC design</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Ts = <span class="number">0.1</span>;</span><br><span class="line">p = <span class="number">10</span>;</span><br><span class="line">m = <span class="number">3</span>;</span><br><span class="line">mpcobj = mpc(plant, Ts, p, m);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>P</code> sets the prediction horizon steps, specified as a positive integer. The product of <code>PredictionHorizon</code> and <code>Ts</code> is the prediction time; that is, <strong>how far the controller looks into the future. </strong></p>
+</li>
+<li><div><div class="fold_hider"><div class="close hider_title">`M`</div></div><div class="fold">
+<p>Control horizon, specified as one of the following:</p>
+<ul>
+<li>Positive integer, <em>m</em>, <strong>between <code>1</code> and <em>p</em></strong>, inclusive, where <em>p</em> is equal to <code>PredictionHorizon</code>. In this case, the controller computes <em>m</em> free control moves occurring at times <em>k</em> through <em>k</em>+<em>m</em>-1, and holds the controller output constant for the remaining prediction horizon steps from <em>k</em>+<em>m</em> through <em>k</em>+<em>p</em>-1. Here, <em>k</em> is the current control interval.</li>
+<li>Vector of positive integers [<em>m</em>1, <em>m</em>2, …], specifying the lengths of blocking intervals. By default the controller computes <em>M</em> blocks of free moves, where <em>M</em> is the number of blocking intervals. The first free move applies to times <em>k</em> through <em>k</em>+<em>m</em>1-1, the second free move applies from time <em>k</em>+<em>m</em>1 through <em>k</em>+<em>m</em>1+<em>m</em>2-1, and so on. Using block moves can improve the robustness of your controller. The sum of the values in <code>ControlHorizon</code> must match the prediction horizon <em>p</em>. If you specify a vector whose sum is:<ul>
+<li>Less than the prediction horizon, then the controller adds a blocking interval. The length of this interval is such that the sum of the interval lengths is <em>p</em>. For example, if <em>p</em>=<code>10</code> and you specify a control horizon of <code>ControlHorizon</code>=<code>[1 2 3]</code>, then the controller uses four intervals with lengths <code>[1 2 3 4]</code>.</li>
+<li>Greater than the prediction horizon, then the intervals are truncated until the sum of the interval lengths is equal to <em>p</em>. For example, if <em>p</em>=<code>10</code> and you specify a control horizon of <code>ControlHorizon</code>= <code>[1 2 3 6 7]</code>, then the controller uses four intervals with lengths <code>[1 2 3 4]</code>.</li>
+</ul>
+</li>
+</ul>
+
+</div></div>
+</li>
+</ul>
+<p>Specify actuator saturation limits as MV constraints. </p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mpcobj.MV = struct(<span class="string">'Min'</span>,<span class="number">-1</span>,<span class="string">'Max'</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="Generate-Explicit-MPC-Controller"><a href="#Generate-Explicit-MPC-Controller" class="headerlink" title="Generate Explicit MPC Controller"></a>Generate Explicit MPC Controller</h4><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://dl.acm.org/citation.cfm?id=3299491">Rakovi SV, Levine WS. Handbook of Model Predictive Control. Birkh&amp;#228;user Basel; 2018. </a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="http://cse.lab.imtlucca.it/~bemporad/mpc_course.html">A course from Alberto Bemporad</a><a href="#fnref:2" rev="footnote"> ↩</a></li><li id="fn:3"><a href="https://www.mathworks.com/help/mpc/ug/explicit-mpc-control-of-a-single-input-single-output-plant.html">Explicit MPC Control of a Single-Input-Single-Output Plant</a><a href="#fnref:3" rev="footnote"> ↩</a></li><li id="fn:4"><a href="https://www.youtube.com/watch?v=w_GA_7sNM3g&amp;list=PLs7mcKy_nInFEpygo_VrqDFCsQVnGaoy-&amp;index=2">A video course about MPC</a><a href="#fnref:4" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Important/" rel="tag"># Important</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/控制科学/控制理论/LQG_regulator/" rel="next" title="Linear Quadratic Gaussian Regulator">
+                <i class="fa fa-chevron-left"></i> Linear Quadratic Gaussian Regulator
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/控制科学/控制理论/Kalman_Filter/" rel="prev" title="Kalman Filter">
+                Kalman Filter <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-MPC"><span class="nav-number">1.</span> <span class="nav-text">Why MPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-is-MPC4"><span class="nav-number">2.</span> <span class="nav-text">What is MPC4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Main-components-Important"><span class="nav-number">2.1.</span> <span class="nav-text">Main components (Important)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prediction"><span class="nav-number">2.2.</span> <span class="nav-text">Prediction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Receding-horizen"><span class="nav-number">2.3.</span> <span class="nav-text">Receding horizen</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Feedback-from-MPC"><span class="nav-number">2.3.1.</span> <span class="nav-text">Feedback from MPC</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modelling"><span class="nav-number">2.4.</span> <span class="nav-text">Modelling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Modelling-requirements"><span class="nav-number">2.4.1.</span> <span class="nav-text">Modelling requirements</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Performance-index"><span class="nav-number">2.5.</span> <span class="nav-text">Performance index</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-What-is-the-performance-index-for"><span class="nav-number">2.5.1.</span> <span class="nav-text">1. What is the performance index for?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-How-should-the-performance-index-be-designed"><span class="nav-number">2.5.2.</span> <span class="nav-text">2. How should the performance index be designed?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-How-should-we-make-trade-offs-between-optimal-and-safe-robust-performance"><span class="nav-number">2.5.3.</span> <span class="nav-text">3. How should we make trade offs between optimal and safe/robust performance?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Degree-of-freedom-DOF"><span class="nav-number">2.6.</span> <span class="nav-text">Degree of freedom (DOF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constraint-handling"><span class="nav-number">2.7.</span> <span class="nav-text">Constraint handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multivariable-MIMO"><span class="nav-number">2.8.</span> <span class="nav-text">Multivariable (MIMO)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-MPC-works"><span class="nav-number">3.</span> <span class="nav-text">How MPC works</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mathematical-form-about-MPC"><span class="nav-number">4.</span> <span class="nav-text">Mathematical form about MPC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-of-MPC"><span class="nav-number">4.1.</span> <span class="nav-text">Basic of MPC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linear-MPC-equals-to-linear-state-feedback"><span class="nav-number">4.2.</span> <span class="nav-text">Linear MPC (equals to linear state-feedback!)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unconstrained-case"><span class="nav-number">4.2.1.</span> <span class="nav-text">Unconstrained case</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constrained-case"><span class="nav-number">4.2.2.</span> <span class="nav-text">constrained case</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Linear-MPC-algorithm"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">Linear MPC algorithm</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">5.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Explicit-MPC-Control-of-a-Single-Input-Single-Output-Plant3"><span class="nav-number">5.1.</span> <span class="nav-text">Explicit MPC Control of a Single-Input-Single-Output Plant3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Plant-design"><span class="nav-number">5.1.1.</span> <span class="nav-text">Plant design</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MPC-design"><span class="nav-number">5.1.2.</span> <span class="nav-text">MPC design</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Generate-Explicit-MPC-Controller"><span class="nav-number">5.1.3.</span> <span class="nav-text">Generate Explicit MPC Controller</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

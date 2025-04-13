@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en,zh-CN,default">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/feather.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="你站在桥上看风景，看风景的人在楼上看你。明月装饰了你的窗子，你装饰了别人的梦。——《断章》">
+<meta property="og:type" content="article">
+<meta property="og:title" content="递归">
+<meta property="og:url" content="http://sqduan.github.io/2024/10/13/计算机/算法/递归/index.html">
+<meta property="og:site_name" content="一隅">
+<meta property="og:description" content="你站在桥上看风景，看风景的人在楼上看你。明月装饰了你的窗子，你装饰了别人的梦。——《断章》">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/561e67d343f2ca828644095a67f39694628b730dfffa24b52af9cbc6e011f134-46-1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/34eae756ea7b9483956e2f18fec7642968e8f24d17234405bf7fcdecae55afbf-%E5%9B%BE%E7%89%872.png">
+<meta property="og:updated_time" content="2024-10-13T01:59:46.514Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="递归">
+<meta name="twitter:description" content="你站在桥上看风景，看风景的人在楼上看你。明月装饰了你的窗子，你装饰了别人的梦。——《断章》">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sqduan/hexoimg/master/561e67d343f2ca828644095a67f39694628b730dfffa24b52af9cbc6e011f134-46-1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="一隅" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="http://sqduan.github.io/2024/10/13/计算机/算法/递归/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>递归 | 一隅</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">一隅</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录生活</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://sqduan.github.io/2024/10/13/计算机/算法/递归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shiqi Duan">
+      <meta itemprop="description" content="Do Not Go Gentle Into That Good Night">
+      <meta itemprop="image" content="/images/header.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一隅">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">递归
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2024-10-13 09:59:46" itemprop="dateCreated datePublished" datetime="2024-10-13T09:59:46+08:00">2024-10-13</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机/算法和数据结构/" itemprop="url" rel="index"><span itemprop="name">算法和数据结构</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
+<p>你站在桥上看风景，看风景的人在楼上看你。明月装饰了你的窗子，你装饰了别人的梦。——《断章》</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="递归简介"><a href="#递归简介" class="headerlink" title="递归简介"></a>递归简介</h2><h3 id="递归组成"><a href="#递归组成" class="headerlink" title="递归组成"></a>递归组成</h3><p>递归由两部分组成：</p>
+<ol>
+<li>锚或者叫基例，顾名思义，它是产生集合中其他元素的基本元素（<strong>基例是递归调用链中最后一步，用于停止递归，可以避免陷入无限循环</strong>）</li>
+<li>构造规则，用于由基本元素或已有对象产生新对象的构造规则</li>
+</ol>
+<h3 id="递归的例子"><a href="#递归的例子" class="headerlink" title="递归的例子"></a>递归的例子</h3><p>二叉搜索树，比当前结果小，搜索左树，否则搜索右树。</p>
+<h3 id="递归优缺点"><a href="#递归优缺点" class="headerlink" title="递归优缺点"></a>递归优缺点</h3><p>优点：</p>
+<ol>
+<li>使程序简洁易读，当我们能够确定，大问题能划分为相似的小问题时，我们可以用递归</li>
+<li>递归在栈、树及图中广泛应用（我们可以使用循环，但较复杂）</li>
+<li>递归在排序、分治、贪心和动态规划中广泛使用</li>
+<li>递归一般是自底向上进行搜索，例如二叉树的前序遍历，递归过程是一路搜索到最下端，然后从叶子节点向上逐步返回</li>
+</ol>
+<p>缺点：<br>空间时间效率都不如迭代，递归调用过程会使用栈，所以空间消耗也要考虑进去。</p>
+<p>综上，当我们能够将大问题拆分为小问题，不在乎时间空间消耗，想要尽快编写一个解而不考虑效率， 可以使用递归。</p>
+<h3 id="递归的实现"><a href="#递归的实现" class="headerlink" title="递归的实现"></a>递归的实现</h3><p>注：这一部分涉及递归调用在c++中的实现，如果不需要了解递归过程中函数是如何调用的，可以跳过这一段，一句话来说递归是通过<strong>压栈入栈</strong>实现的。所以如果有需要栈实现的问题，也完全可以使用递归实现，例如<a href="https://leetcode-cn.com/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/">面试题06. 从尾到头打印链表</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">reversePrint</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!head)</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; a=reversePrint(head-&gt;next);</span><br><span class="line">    a.push_back(head-&gt;val);</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="不同的递归类型"><a href="#不同的递归类型" class="headerlink" title="不同的递归类型"></a>不同的递归类型</h2><h3 id="尾递归"><a href="#尾递归" class="headerlink" title="尾递归"></a>尾递归</h3><p>尾递归的定义是递归调用是递归函数的最后一条语句，并且在此之前也没有其他直接或间接递归调用，对于前面的状态不需要保存。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,n);</span><br><span class="line">    <span class="keyword">return</span> fun(n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fun(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的程序输出为3 2 1。</p>
+<p>如何理解对于前面的状态不需要保存呢？看上面的代码，我们知道递归调用是一个不断压栈的过程，而由于尾递归中递归是最后一条语句，返回后没有别的语句需要执行，因此直接出栈即可。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Push</th>
+<th style="text-align:center">Pop</th>
+<th style="text-align:center">Pop</th>
+<th style="text-align:center">Pop</th>
+<th style="text-align:center">Pop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fun(0)</td>
+<td style="text-align:center">return</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">fun(1)</td>
+<td style="text-align:center">执行prinf; Act f1</td>
+<td style="text-align:center">Act f1</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">fun(2)</td>
+<td style="text-align:center">执行prinf; Act f2</td>
+<td style="text-align:center">Act f2</td>
+<td style="text-align:center">Act f2</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">fun(3)</td>
+<td style="text-align:center">执行prinf; Act f3</td>
+<td style="text-align:center">Act f3</td>
+<td style="text-align:center">Act f3</td>
+<td style="text-align:center">Act f3</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">main</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="非尾递归"><a href="#非尾递归" class="headerlink" title="非尾递归"></a>非尾递归</h3><p>与尾递归相对应的是非尾递归，即递归不是函数中的最后一条语句，递归函数返回之后有一些遗留的东西需要处理。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    fun(n<span class="number">-1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>,n);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fun(<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">Push</th>
+<th style="text-align:center">Pop</th>
+<th style="text-align:center">Pop</th>
+<th style="text-align:center">Pop</th>
+<th style="text-align:center">Pop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fun(0)</td>
+<td style="text-align:center">return</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">fun(1)</td>
+<td style="text-align:center">Act f1</td>
+<td style="text-align:center">Act f1</td>
+<td style="text-align:center">执行printf(“1 “)</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">fun(2)</td>
+<td style="text-align:center">Act f2</td>
+<td style="text-align:center">Act f2</td>
+<td style="text-align:center">Act f2</td>
+<td style="text-align:center">执行printf(“2 “)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">fun(3)</td>
+<td style="text-align:center">Act f3</td>
+<td style="text-align:center">Act f3</td>
+<td style="text-align:center">Act f3</td>
+<td style="text-align:center">Act f3</td>
+<td style="text-align:center">执行printf(“3”)</td>
+</tr>
+<tr>
+<td style="text-align:center">main</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+<td style="text-align:center">Act m</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>输出结果为1 2 3，所以非尾递归可以用于倒序输出。</p>
+<p>注意：非尾递归转换为迭代形式，需要显式使用栈操作。</p>
+<p>一个容易迷惑的例子，看似是尾递归，实则是非尾递归：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fact</span><span class="params">(n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> n * fact(n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为在函数返回后，需要计算n * fact(n - 1)，因此以前的结果需要保留。计算过程分为如下两个部分：</p>
+<ul>
+<li>将递归函数逐层展开</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(5 * fact(4))</span><br><span class="line">(5 * (4 * fact(3))))</span><br><span class="line">...</span><br><span class="line">(5 * (4 * (3 * (2 * (1 * 1)))))) //完全展开</span><br></pre></td></tr></table></figure>
+<ul>
+<li>自底向上计算并合并结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(5 * (4 * (3 * (2 * 1)))))</span><br><span class="line">(5 * (4 * (3 * 2))))</span><br><span class="line">(5 * (4 * 6)))</span><br><span class="line">...</span><br><span class="line">120</span><br></pre></td></tr></table></figure>
+<p>所以普通的尾递归其实效率并不高。</p>
+<h2 id="常见递归算法"><a href="#常见递归算法" class="headerlink" title="常见递归算法"></a>常见递归算法</h2><h3 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h3><p>本节请参考</p>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p>回溯是深度优先搜索的一种，也是一种常用的暴力搜索方法，可以找出一部分或所有解，回溯法在最坏情况下复杂度为指数时间。应用场景在后续结果依赖于前面的选择。</p>
+<h4 id="回溯法要点"><a href="#回溯法要点" class="headerlink" title="回溯法要点"></a>回溯法要点</h4><p>回溯法本质上是递归的一种，所以在考虑的时候要从递归的特点入手，<strong>着重解决递归退出的条件</strong>。使用回溯的问题可以被视为一个多叉树，树的深度取决于给定元素的个数。一条从根节点到叶节点的路径即为一个可行解。本节将针对回溯法的要点与难点进行分析，并总结常见的回溯形式。</p>
+<h5 id="回溯法基本步骤"><a href="#回溯法基本步骤" class="headerlink" title="回溯法基本步骤"></a>回溯法基本步骤</h5><ul>
+<li>抽象问题，将问题转换为“排列、子集、组合”的一种</li>
+<li>画出递归树，找到状态变量(回溯函数的参数)<ul>
+<li>树的总深度（数组的长度，链表的长度）</li>
+<li>当前深度</li>
+<li>搜索集合</li>
+</ul>
+</li>
+<li>根据题意，确立结束条件</li>
+<li>找准选择列表(与函数参数相关),与第一步紧密关联※</li>
+<li>判断是否需要剪枝</li>
+<li>作出选择，递归调用，进入下一层</li>
+<li>撤销选择</li>
+</ul>
+<h5 id="回溯法基本框架"><a href="#回溯法基本框架" class="headerlink" title="回溯法基本框架"></a>回溯法基本框架</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">back_track</span><span class="params">(...)</span></span>&#123;</span><br><span class="line">    <span class="comment">//返回条件，指针不满足，超过边界等等</span></span><br><span class="line">    push_value();</span><br><span class="line">    sum -= root-&gt;val;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//添加答案</span></span><br><span class="line">    back_track(...);  <span class="comment">// 递归</span></span><br><span class="line">    </span><br><span class="line">    pop_value();  <span class="comment">//回溯</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="第一类，寻找全部解的回溯法"><a href="#第一类，寻找全部解的回溯法" class="headerlink" title="第一类，寻找全部解的回溯法"></a>第一类，寻找全部解的回溯法</h5><p>一 树或链表类：此类问题要求寻找树或链表中全部解或者统计解的个数，因此在找到解的时候，不能返回，需要对解进行记录，该类问题的回溯法算法流程如下：</p>
+<ul>
+<li>输入递推参数：当前节点root，目标值target，解空间ans，临时解temp_ans；</li>
+<li>判断终止条件：当root == nullptr时，返回</li>
+<li>进行递推工作<ul>
+<li>临时解更新，将当前root-&gt;val加入temp_ans；</li>
+<li>目标值更新，target = target - root-&gt;val；</li>
+<li>解空间更新，当 target 为 0（满足目标值）并且满足其他特定条件时，将此临时解加入解空间</li>
+<li>深度优先搜索，更新相关参数</li>
+<li>路径恢复，将root-&gt;val 从 temp_ans中弹出。</li>
+</ul>
+</li>
+</ul>
+<p>例题1 LeetCode面试题34 二叉树中和为某一值的路径</p>
+<p>二 一维数组类：此类问题要求寻找数组中全部解或统计解个数，该类问题的回溯法算法流程如下：</p>
+<ul>
+<li>输入递推参数：递归树深度或数组长度n，解空间ans，临时解temp_ans，当前深度first</li>
+<li>判断终止条件：当first == n，即搜索已经超过数组长度时</li>
+<li>进行递推工作<ul>
+<li>临时解更新，</li>
+</ul>
+</li>
+</ul>
+<h5 id="第二类，寻找解是否存在的回溯法"><a href="#第二类，寻找解是否存在的回溯法" class="headerlink" title="第二类，寻找解是否存在的回溯法"></a>第二类，寻找解是否存在的回溯法</h5><h5 id="剪枝处理"><a href="#剪枝处理" class="headerlink" title="剪枝处理"></a>剪枝处理</h5><p>剪枝一般出现在需要去除重复或者不符合条件的解的场合，参考LeetCode中非重复的全排列。剪枝过程包括如下几个流程：</p>
+<ul>
+<li>创建visited数组，用于判断当前节点是否已经访问</li>
+<li>对待处理的数组进行排序处理，从而保证能够通过num[i-1] 是否等于 num[i]确定是否需要剪枝</li>
+<li>递归时将visited置1，回溯时置0</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; curr, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; visited)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(curr.size() == nums.size())&#123; </span><br><span class="line">        ans.push_back(curr);       </span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;  <span class="comment">//for循环保证了搜索的广度</span></span><br><span class="line">        <span class="comment">//两个if进行减枝操作</span></span><br><span class="line">        <span class="keyword">if</span>(visited[i]) <span class="keyword">continue</span>;    <span class="comment">//如果已经访问过当前节点，则跳过，保证每次循环不会访问到重复节点   </span></span><br><span class="line">        <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] &amp;&amp; visited[i - <span class="number">1</span>] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">//如果当前节点和前一个节点相同，且没有访问前一个节点，那说明前一个节点必然会产生和当前节点相同的结论，跳过即可</span></span><br><span class="line">        curr.push_back(nums[i]);</span><br><span class="line">        visited[i] = <span class="number">1</span>;</span><br><span class="line">        backtrack(ans, nums, curr, visited);</span><br><span class="line">        curr.pop_back();</span><br><span class="line">        visited[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="回溯法常见应用："><a href="#回溯法常见应用：" class="headerlink" title="回溯法常见应用："></a>回溯法常见应用：</h4><h5 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h5><p>一. 组合，求$C_n^k$，这个模板也很常用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> k,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">int</span> n, </span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">int</span> first,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; &amp;ans,</span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp)</span></span>&#123;</span><br><span class="line">        <span class="comment">/********************关键代码*********************/</span></span><br><span class="line">        <span class="keyword">if</span>(temp.size() == k) &#123;</span><br><span class="line">            ans.push_back(temp);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=first;i&lt;=n;i++)&#123;    <span class="comment">//first 当前深度 </span></span><br><span class="line">            temp.push_back(i);</span><br><span class="line">            backtrack(k,n,i+<span class="number">1</span>,ans,temp);   <span class="comment">//i+1保证了组合始终是后向寻找，不会包含重复的，是i+1,不是first+1，也不需要利用visited数组判断某个元素是否访问，后向寻找保证了访问的唯一性</span></span><br><span class="line">            temp.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">combine</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans&#123;&#125;;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; temp&#123;&#125;;</span><br><span class="line">        backtrack(k,n,<span class="number">1</span>,ans,temp);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>正确理解上面的代码是很重要的，接下来我们将以图示的形式解释其中的关键部分：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=first;i&lt;=n;i++)&#123;</span><br><span class="line">    temp.push_back(i);</span><br><span class="line">    backtrack(k,n,i+<span class="number">1</span>,ans,temp);   <span class="comment">//i+1保证了组合始终是后向寻找，不会包含重复的，是i+1,不是first+1</span></span><br><span class="line">    temp.pop_back();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span></span><br><span class="line">          |</span><br><span class="line">-------------------------</span><br><span class="line">|   |   |   |   |   |   |       </span><br><span class="line"><span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span>      <span class="keyword">for</span>循环的作用，遍历当前搜索集合（广度）</span><br><span class="line">|</span><br><span class="line">---------------------          递归的作用，增加搜索树的深度（深度）</span><br><span class="line">|   |   |   |   |   |</span><br><span class="line"><span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line">        </span><br><span class="line">所以在回溯算法中，当考虑搜索的广度时，使用迭代；当考虑搜索深度时，使用递归</span><br></pre></td></tr></table></figure>
+<p>二. 可重复被选取的组合：LeetCode 39</p>
+<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的数字可以无限制重复被选取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入: candidates = [2,3,6,7], target = 7,</span><br><span class="line">所求解集为:</span><br><span class="line">[</span><br><span class="line">  [7],</span><br><span class="line">  [2,2,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>这种题目一看就是用回溯法，但是本题有一个条件，就是数字可以无限制重复被选取，这意味着我们在回溯的循环过程中，每一次回溯start都是<code>i</code>。另外求总和等于target，可以采用自顶向下的方法，即每次减去一个数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = start;</span><br><span class="line">     i &lt; nums.size() &amp;&amp; target - nums[i] &gt;= <span class="number">0</span>; i++) &#123;</span><br><span class="line">    path.push_back(nums[i]);</span><br><span class="line">    backtrack(i, target - nums[i]);   <span class="comment">//是i而不是i+1，如果是i+1会变成不重复的组合</span></span><br><span class="line">    path.pop_back();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在调用深度优先搜素时，必须先对nums进行排序，才能进行减枝处理。</p>
+<h5 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h5><p>一. 非减枝全排列</p>
+<p>给定一个<strong>没有重复</strong>数字的序列，返回其所有可能的全排列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,2,3]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [1,3,2],</span><br><span class="line">  [2,1,3],</span><br><span class="line">  [2,3,1],</span><br><span class="line">  [3,1,2],</span><br><span class="line">  [3,2,1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>思路：我们在写全排列问题时，一般是先确定一位，然后对剩下的子数组进行全排列，才能做到不重复也不遗漏，传统循环方式肯定是行不通的，时间复杂度过高。回溯法将问题转换为对树的搜索问题，通过<strong>深度优先遍历 + 状态重置（回溯） + 剪枝（可选）</strong>，实现全排列的搜索。</p>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/561e67d343f2ca828644095a67f39694628b730dfffa24b52af9cbc6e011f134-46-1.png" alt></p>
+<p>在每一层，我们都有若干条分支供我们选择。下一层的分支数比上一层少 1 ，因为每一层都会排定 1 个数，从这个角度，再来理解一下为什么要使用额外空间记录那些元素使用过；全部的“排列”正是在这棵递归树的所有叶子结点。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permute</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; result&#123;&#125;;  </span><br><span class="line">        <span class="keyword">int</span> n = nums.size();  <span class="comment">//树的深度，n个数就则树有n层</span></span><br><span class="line">        backtrack(n, result, nums, <span class="number">0</span>);   <span class="comment">//进行回溯，从第0层开始</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span> n,                          <span class="comment">//树深度</span></span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="built_in">vector</span>&lt;<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt;&gt;&amp; output,   <span class="comment">//总结果</span></span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums,              <span class="comment">//一条路径的结果</span></span></span></span><br><span class="line"><span class="function"><span class="params">                   <span class="keyword">int</span> first)</span></span>&#123;                     <span class="comment">//开始回溯的深度</span></span><br><span class="line">        <span class="keyword">if</span>(first == n) output.push_back(nums);     <span class="comment">//到达第n层，即已经进行了0～n-1层的递进，递进了n层</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = first; i&lt;n; i++)&#123;              <span class="comment">//i = 当前层数至最大层数</span></span><br><span class="line">            <span class="keyword">if</span>(i == first) &#123;</span><br><span class="line">                backtrack(n, output, nums, first+<span class="number">1</span>);   <span class="comment">//深度优先遍历</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                swap(nums[first],nums[i]);             <span class="comment">//采用交换的 方式，构造新的结果</span></span><br><span class="line">                <span class="comment">// temp.push_back(nun[i]);   [1,2]  -&gt; [1,2,3]  [1] -&gt; [1,2]</span></span><br><span class="line">                <span class="comment">// [1,2,3] -&gt; [1,3,2]</span></span><br><span class="line">                backtrack(n, output, nums, first+<span class="number">1</span>);   <span class="comment">//深度优先遍历</span></span><br><span class="line">                swap(nums[first],nums[i]);              <span class="comment">//重置 </span></span><br><span class="line">                <span class="comment">//temp.pop_back();           [1,2,3] -&gt; [1,2]    [1,2]-&gt;[1]  </span></span><br><span class="line">                <span class="comment">// [1,3,2] -&gt; [1,2,3]</span></span><br><span class="line">                </span><br><span class="line">                <span class="comment">//  [1] -&gt; [1,2] 递归，深度优先搜索 dfs    -&gt;      [1,2] -&gt;[1]  回溯</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>二. 剪枝全排列</p>
+<p>如果需要排除重复的情况，那么就是带有减枝的操作，如leetcode47及1079，非重复的全排列，题目如下：</p>
+<p>给定一个可包含重复数字的序列，返回所有不重复的全排列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,1,2]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [1,1,2],</span><br><span class="line">  [1,2,1],</span><br><span class="line">  [2,1,1]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong>这个模板很通用，记住</strong>（这个代码还需要多理解几次）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; ans, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; curr, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; visited)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr.size() == nums.size())&#123; </span><br><span class="line">            ans.push_back(curr);       </span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.size(); i++)&#123;  <span class="comment">//for循环保证了搜索的广度</span></span><br><span class="line">            <span class="comment">//两个if进行减枝操作</span></span><br><span class="line">            <span class="keyword">if</span>(visited[i]) <span class="keyword">continue</span>;    <span class="comment">//如果已经访问过当前节点，则跳过，保证每次循环不会访问到重复节点   </span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] == nums[i - <span class="number">1</span>] &amp;&amp; visited[i - <span class="number">1</span>] == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">//如果当前节点和前一个节点相同，且没有访问前一个节点，那说明前一个节点必然会产生和当前节点相同的结论，跳过即可</span></span><br><span class="line">            curr.push_back(nums[i]);</span><br><span class="line">            visited[i] = <span class="number">1</span>;</span><br><span class="line">            backtrack(ans, nums, curr, visited);</span><br><span class="line">            curr.pop_back();</span><br><span class="line">            visited[i] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span>;  <span class="comment">//执行完</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">permuteUnique</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        sort(nums.begin(), nums.end());   <span class="comment">//必须排序，才能判断nums[i]==nums[i-1]</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; ans;          </span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; curr;                 </span><br><span class="line">        <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">visited</span><span class="params">(nums.size(), <span class="number">0</span>)</span></span>;  <span class="comment">//是否访问的flag vector</span></span><br><span class="line">        backtrack(ans, nums, curr, visited);</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这里比较让人迷惑的是减枝条件判断的第三个条件，其解释如下：</p>
+<blockquote>
+<p>以 [2, 3, 3, 3] 中的 3 个 3 为例，相同的 3 个 3 有 6 个排列。我们只要保留 1 个就好了。</p>
+<p>它们的索引分列是：</p>
+<p>[1, 2, 3] （数组中的数组表示 3 这个元素在 [2, 3, 3, 3] 这个数组中的索引，在全排列中可能的“排列”，下同）<br>[1, 3, 2]<br>[2, 1, 3]<br>[2, 3, 1]<br>[3, 1, 2]<br>[3, 2, 1]<br>发现其实又是一个全排列问题。首先联系数组 used[i - 1] 的语义：used[i - 1] == true 表示索引 i 位置的前一个位置元素已经使用过。在 used[i - 1] == true 的时候全部 continue 掉，则只剩下了 used[i - 1] == false 的情况，即当前遍历的元素的之前的元素均未使用过，因此保留了 [3, 2, 1] 这种排列。</p>
+<p>作者：liweiwei1419<br>链接：<a href="https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/">https://leetcode-cn.com/problems/permutations-ii/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liwe-2/</a><br>来源：力扣（LeetCode）<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<p>三. 下一个排列</p>
+<p>四. 第K个排列</p>
+<p>给出集合<code>[1,2,3,…,n]</code>，其所有元素共有 <code>n!</code> 种排列。</p>
+<p>按大小顺序列出所有排列情况，并一一标记，当 n = 3 时, 所有排列如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;123&quot;</span><br><span class="line">&quot;132&quot;</span><br><span class="line">&quot;213&quot;</span><br><span class="line">&quot;231&quot;</span><br><span class="line">&quot;312&quot;</span><br><span class="line">&quot;321&quot;</span><br></pre></td></tr></table></figure>
+<p>给定 n 和 k，返回第 k 个排列。</p>
+<p><strong>思路</strong></p>
+<p>排列的每种情况均可以使用十进制或者二进制的形式进行表示，相当于使用掩码对排列进行操作：</p>
+<p>五. N皇后问题</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ChessBoard</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ChessBoard();</span><br><span class="line">    ChessBoard(<span class="keyword">int</span>);</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">findSolutions</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; ans&#123;&#125;;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; ans_temp;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> norm;</span><br><span class="line">    <span class="keyword">bool</span> *column, *leftDiagnoal, *rightDiagnoal;</span><br><span class="line">    <span class="keyword">int</span> *positionInRow, howMany;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">putQueen</span><span class="params">(<span class="keyword">int</span> row)</span></span>;</span><br><span class="line">    <span class="comment">//void printBoard(ostream&amp;);</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">initialization</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">ChessBoard::ChessBoard():</span><br><span class="line">    n&#123;<span class="number">8</span>&#125;,</span><br><span class="line">    norm&#123;n<span class="number">-1</span>&#125;&#123;</span><br><span class="line">    initialization();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ChessBoard::ChessBoard(<span class="keyword">int</span> _n):</span><br><span class="line">    n&#123;_n&#125;,</span><br><span class="line">    norm&#123;_n<span class="number">-1</span>&#125;&#123;</span><br><span class="line">    initialization();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ChessBoard::initialization</span><span class="params">()</span></span>&#123;</span><br><span class="line">    column = <span class="keyword">new</span> <span class="keyword">bool</span>[n];</span><br><span class="line">    leftDiagnoal = <span class="keyword">new</span> <span class="keyword">bool</span>[<span class="number">2</span>*n<span class="number">-1</span>];</span><br><span class="line">    rightDiagnoal = <span class="keyword">new</span> <span class="keyword">bool</span>[<span class="number">2</span>*n<span class="number">-1</span>];</span><br><span class="line">    positionInRow = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        column[i] = <span class="literal">true</span>;</span><br><span class="line">        positionInRow[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>*n<span class="number">-1</span>;i++)&#123;</span><br><span class="line">        leftDiagnoal[i] = <span class="literal">true</span>;</span><br><span class="line">        rightDiagnoal[i] = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="built_in">string</span> <span class="title">one_row</span><span class="params">(n,<span class="string">'.'</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        ans_temp.push_back(one_row);</span><br><span class="line">    &#125;</span><br><span class="line">    howMany = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ChessBoard::putQueen</span><span class="params">(<span class="keyword">int</span> row)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> col=<span class="number">0</span>;col&lt;n;col++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(column[col] == <span class="literal">true</span> &amp;&amp; rightDiagnoal[row + col] == <span class="literal">true</span> &amp;&amp; leftDiagnoal[row - col + norm] == <span class="literal">true</span>)&#123;   <span class="comment">//如果这个格子上可以放置皇后</span></span><br><span class="line">            </span><br><span class="line">            column[col] = <span class="literal">false</span>;</span><br><span class="line">            rightDiagnoal[row + col] = <span class="literal">false</span>;</span><br><span class="line">            leftDiagnoal[row - col + norm] = <span class="literal">false</span>;  <span class="comment">//放置皇后</span></span><br><span class="line">            ans_temp[row][col] = <span class="string">'Q'</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(row == n - <span class="number">1</span>)&#123;   <span class="comment">//已经放了8个皇后，得到一个结果</span></span><br><span class="line">                howMany ++;    <span class="comment">//这里记住不需要返回</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;v:ans_temp)&#123;</span><br><span class="line">                    <span class="built_in">cout</span> &lt;&lt; v &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                ans.push_back(ans_temp);   </span><br><span class="line">            &#125;</span><br><span class="line">            putQueen(row + <span class="number">1</span>);   <span class="comment">//放置下一行的皇后</span></span><br><span class="line">            column[col] = <span class="literal">true</span>;  <span class="comment">//将当前皇后拿起</span></span><br><span class="line">            rightDiagnoal[row + col] = <span class="literal">true</span>;</span><br><span class="line">            leftDiagnoal[row - col + norm] = <span class="literal">true</span>;</span><br><span class="line">            ans_temp[row][col] = <span class="string">'.'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ChessBoard::findSolutions</span><span class="params">()</span></span>&#123;</span><br><span class="line">    putQueen(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; howMany &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="子集"><a href="#子集" class="headerlink" title="子集"></a>子集</h5><p>子集(leetcode 78)</p>
+<p>给定一组<strong>不含重复元素</strong>的整数数组 <em>nums</em>，返回该数组所有可能的子集（幂集）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入: nums = [1,2,3]</span><br><span class="line">输出:</span><br><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [1],</span><br><span class="line">  [2],</span><br><span class="line">  [1,2,3],</span><br><span class="line">  [1,3],</span><br><span class="line">  [2,3],</span><br><span class="line">  [1,2],</span><br><span class="line">  []</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/sqduan/hexoimg/master/34eae756ea7b9483956e2f18fec7642968e8f24d17234405bf7fcdecae55afbf-%E5%9B%BE%E7%89%872.png" alt></p>
+<p>递归问题最重要的就是找到基例和构造规则，本题基例不难找，关键是构造规则比较麻烦</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">compute</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp;subset_set,</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp;now_set,<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(i&gt;=nums.size())&#123;   <span class="comment">//基例</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*这里没有搞清楚递归的过程！！！！！！！！！！！！！！！！！！！*/</span></span><br><span class="line">    now_set.push_back(nums[i]);     <span class="comment">//进入下一条路</span></span><br><span class="line">    subset_set.push_back(now_set);  </span><br><span class="line">    compute(subset_set,nums,now_set,i+<span class="number">1</span>);     <span class="comment">//本质上是二叉树前序遍历的过程</span></span><br><span class="line">    now_set.pop_back();  <span class="comment">//返回上一条路</span></span><br><span class="line">    compute(subset_set,nums,now_set,i+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; <span class="title">subsets</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;subset_set;<span class="comment">//保存最终结果</span></span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;now_set=&#123;&#125;;    <span class="comment">//保存临时结果</span></span><br><span class="line">        subset_set.push_back(now_set);      <span class="comment">//空集 </span></span><br><span class="line">        compute(subset_set,nums,now_set,<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> subset_set;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>这种题的一般思路就是一个元素一个元素往上加，先考虑集合中只有一个元素的情况，然后一个元素讨论清楚了，再考虑两个元素，一般两个元素就能找到回溯规律。</strong>本题可以等价为二叉树遍历的问题，子集中选不选择某个元素，就可以视作是yes or no问题，是一个典型的二分类。</p>
+<h3 id="分治法"><a href="#分治法" class="headerlink" title="分治法"></a>分治法</h3><p>在计算机科学中，分治法是构建基于多项分支递归的一种很重要的算法范式。字面上的解释是「分而治之」，就是把一个复杂的问题分成两个或更多的相同或相似的子问题，直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并。这个技巧是很多高效算法的基础，如排序算法（快速排序、归并排序）、傅立叶变换（快速傅立叶变换）。分治法的思路如下所示：</p>
+<pre class="mermaid">graph TB
+    node["原问题"]
+    node1["子问题"]
+    node2["子问题"]
+    node3["子问题的解"]
+    node4["子问题的解"]
+    node5["原问题的解"]
+
+    node-->node1
+    node-->node2
+    node1-->node3
+    node2-->node4
+    node3-->node5
+    node4-->node5</pre>
+
+
+
+<h4 id="分治法应用场景"><a href="#分治法应用场景" class="headerlink" title="分治法应用场景"></a>分治法应用场景</h4><p>分治法最适用于能够将大问题拆分成两个或多个相似子问题的场景。</p>
+<h2 id="递归使用步骤"><a href="#递归使用步骤" class="headerlink" title="递归使用步骤"></a>递归使用步骤</h2><p>递归使用过程中常见步骤如下：</p>
+<ul>
+<li>确定返回值的意义</li>
+<li>确定返回值是否需要保存</li>
+<li>确定基例</li>
+<li>确定递归构造规则</li>
+</ul>
+<h2 id="递归难点总结"><a href="#递归难点总结" class="headerlink" title="递归难点总结"></a>递归难点总结</h2><h3 id="使用递归时，尽可能保证递归体的简单性"><a href="#使用递归时，尽可能保证递归体的简单性" class="headerlink" title="使用递归时，尽可能保证递归体的简单性"></a>使用递归时，尽可能保证递归体的简单性</h3><p>由于递归可能涉及复杂的出入栈操作，因此在一定程度上会导致程序分析困难，所以应当尽可能保证递归体简洁性，保证一个递归操作只完成一个任务。例如LeetCode 面试题36：</p>
+<blockquote>
+<p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
+</blockquote>
+<p>思路比较简单，先创建一个vector，中序遍历保存所有节点，然后将节点依次相连即可。在编写代码过程中，我们将中序遍历单独写为一个递归函数，实现节点遍历及保存的功能。相关代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">// Definition for a Node.</span></span><br><span class="line"><span class="comment">class Node &#123;</span></span><br><span class="line"><span class="comment">public:</span></span><br><span class="line"><span class="comment">    int val;</span></span><br><span class="line"><span class="comment">    Node* left;</span></span><br><span class="line"><span class="comment">    Node* right;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node() &#123;&#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">        left = NULL;</span></span><br><span class="line"><span class="comment">        right = NULL;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    Node(int _val, Node* _left, Node* _right) &#123;</span></span><br><span class="line"><span class="comment">        val = _val;</span></span><br><span class="line"><span class="comment">        left = _left;</span></span><br><span class="line"><span class="comment">        right = _right;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">&#125;;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;Node*&gt; nodeVector&#123;&#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">inorder</span><span class="params">(Node* root)</span></span>&#123;    <span class="comment">//中序遍历保存节点，此外不作任何事情</span></span><br><span class="line">        <span class="keyword">if</span>(root!=<span class="literal">nullptr</span>)&#123;</span><br><span class="line">            inorder(root-&gt;left);</span><br><span class="line">            nodeVector.push_back(root);</span><br><span class="line">            inorder(root-&gt;right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function">Node* <span class="title">treeToDoublyList</span><span class="params">(Node* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">nullptr</span>) <span class="keyword">return</span> root;</span><br><span class="line">        inorder(root);</span><br><span class="line">        <span class="keyword">int</span> n = nodeVector.size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i &lt; n<span class="number">-1</span>;i++)&#123;   <span class="comment">//循环条件要保证循环体内索引不超过vector长度，如果循环体内有i+1，那么此处判断条件要写为n-1</span></span><br><span class="line">            nodeVector[i] -&gt; right  = nodeVector[i+<span class="number">1</span>];</span><br><span class="line">            nodeVector[i+<span class="number">1</span>] -&gt; left = nodeVector[i];</span><br><span class="line">        &#125;</span><br><span class="line">        nodeVector[<span class="number">0</span>]-&gt;left = nodeVector[n<span class="number">-1</span>];</span><br><span class="line">        nodeVector[n<span class="number">-1</span>]-&gt;right = nodeVector[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">return</span> nodeVector[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="递归与分治"><a href="#递归与分治" class="headerlink" title="递归与分治"></a>递归与分治</h3><p>递归实际上包含了分治的思想，将大问题逐步拆解成简单的小问题，因此我们在使用递归时，一个非常重要的步骤就是找到分治的方法。我们将以<a href="https://leetcode-cn.com/problems/hanota-lcci/"> 汉诺塔问题</a>对找到分治的过程进行总结。</p>
+<blockquote>
+<p>在经典汉诺塔问题中，有 3 根柱子及 N 个不同大小的穿孔圆盘，盘子可以滑入任意一根柱子。一开始，所有盘子自上而下按升序依次套在第一根柱子上(即每一个盘子只能放在更大的盘子上面)。移动圆盘时受到以下限制:<br>(1) 每次只能移动一个盘子;<br>(2) 盘子只能从柱子顶端滑出移到下一根柱子;<br>(3) 盘子只能叠在比它大的盘子上。</p>
+<p>请编写程序，用栈将所有盘子从第一根柱子移到最后一根柱子。</p>
+<p>输入：A = [2, 1, 0], B = [], C = []<br>输出：C = [2, 1, 0]</p>
+</blockquote>
+<p>考虑一个盘子，那么我们直接将盘子从A移动至C，即<code>C.push_back(A.pop_back());</code></p>
+<p>当有两个盘子时，我们首先将小盘子移动至B，然后将大盘子移动至C，最后将小盘子移动至C，这个过程为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">B.push_back(A.pop_back());</span><br><span class="line">C.push_back(A.pop_back());</span><br><span class="line">C.push_back(B.pop_back());</span><br></pre></td></tr></table></figure>
+<p>当有n个盘子时，我们可以将盘子分成两部分，n-1个小盘子先移动到B，然后将最后一个大盘子移动到C，最后将n-1个小盘子移动到C，这个过程可以写为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">move(n-1, A, C, B);           //n-1个小盘子移动到B</span><br><span class="line">C.push_back(A.back());    //将大盘子移动至C</span><br><span class="line">A.pop_back();</span><br><span class="line">move(n-1, B, A, C);</span><br></pre></td></tr></table></figure>
+<p>完整代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hanota</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; C)</span> </span>&#123;</span><br><span class="line">    move(A.size(),A,B,C);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">move</span><span class="params">(<span class="keyword">int</span> n,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; A, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; B, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; C)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>)&#123;</span><br><span class="line">        C.push_back(A.back());</span><br><span class="line">        A.pop_back();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    move(n<span class="number">-1</span>,A, C, B);</span><br><span class="line">    C.push_back(A.back());</span><br><span class="line">    A.pop_back();</span><br><span class="line">    move(n<span class="number">-1</span>,B, A, C);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><div id="footnotes"><hr><div id="footnotelist"><ol><li id="fn:1"><a href="https://www.google.com/books?hl=zh-CN&amp;lr=&amp;id=v-b0CAAAQBAJ&amp;oi=fnd&amp;pg=PR5&amp;dq=data+structure+and+algorithm+in+c%2B%2B&amp;ots=C_TqwgXHOv&amp;sig=IZJed9W71UYAYM77rjCoMFDgab0">Drozdek A. Data Structures and algorithms in C++[M]. Cengage Learning, 2012.</a><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><a href="https://leetcode-cn.com/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/">力扣46题解</a><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2024/10/13/计算机/算法/越位处理/" rel="next" title="溢出处理及负数表示">
+                <i class="fa fa-chevron-left"></i> 溢出处理及负数表示
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2024/10/13/计算机/算法/贪心算法/" rel="prev" title="贪心">
+                贪心 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/header.jpg" alt="Shiqi Duan">
+            
+              <p class="site-author-name" itemprop="name">Shiqi Duan</p>
+              <div class="site-description motion-element" itemprop="description">Do Not Go Gentle Into That Good Night</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">287</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:sqduan@mail.ustc.edu.cn" title="E-Mail &rarr; mailto:sqduan@mail.ustc.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://gitlab.com/sqduan" title="GitLab &rarr; https://gitlab.com/sqduan" rel="noopener" target="_blank"><i class="fa fa-fw fa-gitlab"></i>GitLab</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/duan-shi-qi-72/activities" title="知乎 &rarr; https://www.zhihu.com/people/duan-shi-qi-72/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                我的朋友们
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://mayi1996.top/" title="https://mayi1996.top/" rel="noopener" target="_blank">马亿</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhangchenyu.me/" title="https://zhangchenyu.me/" rel="noopener" target="_blank">张琛昱</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#递归简介"><span class="nav-number">1.</span> <span class="nav-text">递归简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归组成"><span class="nav-number">1.1.</span> <span class="nav-text">递归组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归的例子"><span class="nav-number">1.2.</span> <span class="nav-text">递归的例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归优缺点"><span class="nav-number">1.3.</span> <span class="nav-text">递归优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归的实现"><span class="nav-number">1.4.</span> <span class="nav-text">递归的实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不同的递归类型"><span class="nav-number">2.</span> <span class="nav-text">不同的递归类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#尾递归"><span class="nav-number">2.1.</span> <span class="nav-text">尾递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非尾递归"><span class="nav-number">2.2.</span> <span class="nav-text">非尾递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见递归算法"><span class="nav-number">3.</span> <span class="nav-text">常见递归算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度优先搜索"><span class="nav-number">3.1.</span> <span class="nav-text">深度优先搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯"><span class="nav-number">3.2.</span> <span class="nav-text">回溯</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#回溯法要点"><span class="nav-number">3.2.1.</span> <span class="nav-text">回溯法要点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#回溯法基本步骤"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">回溯法基本步骤</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#回溯法基本框架"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">回溯法基本框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第一类，寻找全部解的回溯法"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">第一类，寻找全部解的回溯法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二类，寻找解是否存在的回溯法"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">第二类，寻找解是否存在的回溯法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#剪枝处理"><span class="nav-number">3.2.1.5.</span> <span class="nav-text">剪枝处理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回溯法常见应用："><span class="nav-number">3.2.2.</span> <span class="nav-text">回溯法常见应用：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#组合"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">组合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#排列"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">排列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#子集"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">子集</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分治法"><span class="nav-number">3.3.</span> <span class="nav-text">分治法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分治法应用场景"><span class="nav-number">3.3.1.</span> <span class="nav-text">分治法应用场景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归使用步骤"><span class="nav-number">4.</span> <span class="nav-text">递归使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归难点总结"><span class="nav-number">5.</span> <span class="nav-text">递归难点总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用递归时，尽可能保证递归体的简单性"><span class="nav-number">5.1.</span> <span class="nav-text">使用递归时，尽可能保证递归体的简单性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归与分治"><span class="nav-number">5.2.</span> <span class="nav-text">递归与分治</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2025</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shiqi Duan</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.1.2</div>
+
+
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">|总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+        
+
+
+
+
+
+
+<div>
+<!-- 填写你的友盟代码 -->
+<script type="text/javascript">
+	var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+	document.write(unescape("%3Cspan id='cnzz_stat_icon_1278217259'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278217259' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<!-- 你的友盟代码 end -->
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="66,73,73" opacity="0.7" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<script type="text/x-mathjax-config">
+   MathJax.Hub.Config({
+       TeX: {equationNumbers: {autoNumber: ["AMS"], useLabelIds: true}},
+       "HTML-CSS": {linebreaks: {automatic: true}},
+       SVG: {linebreaks: {automatic: true}}
+   });
+</script>
+    
+  
+
+
+  
+<script>
+if ($('body').find('div.pdf').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      $('body').find('div.pdf').each(function(i, o) {
+        PDFObject.embed($(o).attr('target'), $(o), {
+          pdfOpenParams: {
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            pagemode: 'thumbs',
+            view: 'FitH'
+          },
+          PDFJS_URL: '/lib/pdf/web/viewer.html',
+          height: $(o).attr('height') || '600px'
+        });
+      });
+    },
+  });
+}
+</script>
+
+
+  
+<script>
+if ($('body').find('pre.mermaid').length) {
+  $.ajax({
+    type: 'GET',
+    url: '//cdn.jsdelivr.net/npm/mermaid@7.1.2/dist/mermaid.min.js',
+    dataType: 'script',
+    cache: true,
+    success: function() {
+      mermaid.initialize({
+        theme: 'forest',
+        logLevel: 3,
+        flowchart: { curve: 'linear' },
+        gantt: { axisFormat: '%m/%d/%Y' },
+        sequence: { actorMargin: 50 }
+      });
+    }
+  });
+}
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
